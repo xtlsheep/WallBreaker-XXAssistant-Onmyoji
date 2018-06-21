@@ -1,0 +1,155 @@
+{
+   "style" : "default",
+   "config" : "save_fast_yuhun.dat",
+   "width" : 1000,
+   "height" : 500,
+   "cancelscroll" : true,
+   "countdown" : 0,
+   "cancelname" : "返回",
+   "okname" : "开始",
+   "views" : [
+      {
+         "align" : "center",
+         "color" : "0,0,0",
+         "size" : "30",
+         "text" : "御魂十层",
+         "bg" : "255,255,255",
+         "type" : "Label"
+      },
+      {
+         "id" : "mode",
+         "list" : "单人模式,队长 - 野队三人队伍,队长 - 固定双人队伍,队员 - 野队,队员 - 固定队伍",
+         "select" : "0",
+         "size" : "30",
+         "type" : "ComboBox"
+      },
+	  {
+	      "align" : "left",
+	      "color" : "0,0,0",
+	      "size" : "30",
+	      "text" : "标记：",
+	      "bg" : "255,255,255",
+	      "type" : "Label"
+      },
+      {
+         "id" : "mark1",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "第一回合 - ",
+               "bg" : "255,255,255",
+               "type" : "Label",
+               "width" : 150
+            },
+            {
+               "id" : "round1",
+               "list" : "左  ,中  ,右  ,无",
+               "select" : "0",
+               "size" : "30",
+               "type" : "RadioGroup",
+               "orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 600
+            }
+         ]
+      },
+      {
+         "id" : "mark2",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "第二回合 - ",
+               "bg" : "255,255,255",
+               "type" : "Label",
+               "width" : 150
+            },
+            {
+               "id" : "round2",
+               "list" : "左  ,中  ,右  ,无",
+               "select" : "0",
+               "size" : "30",
+               "type" : "RadioGroup",
+               "orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 600
+            }
+         ]
+      },
+      {
+         "id" : "mark3",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "第三回合 - ",
+               "bg" : "255,255,255",
+               "type" : "Label",
+               "width" : 150
+            },
+            {
+               "id" : "round3",
+               "list" : "左  ,中  ,右  ,无",
+               "select" : "0",
+               "size" : "30",
+               "type" : "RadioGroup",
+               "orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 600
+            }
+         ]
+      },
+	  {
+	      "align" : "left",
+	      "color" : "0,0,0",
+	      "size" : "30",
+	      "text" : "",
+	      "bg" : "255,255,255",
+	      "type" : "Label"
+      },
+	  {
+          "id" : "line",
+          "type" : "Line",
+          "color" : "0,0,0",
+	      "height" : 2,
+          "width" : 940
+      },
+	  {
+	      "align" : "left",
+	      "color" : "0,0,0",
+	      "size" : "30",
+	      "text" : "快速模式Tip -",
+	      "bg" : "255,255,255",
+	      "type" : "Label"
+      },
+	  {
+	      "align" : "left",
+	      "color" : "0,0,0",
+	      "size" : "30",
+	      "text" : "战斗次数: 无限  /  智能突破: 关闭  /  悬赏封印: 拒绝  /  出战队伍: 锁定",
+	      "bg" : "255,255,255",
+	      "type" : "Label"
+      },
+	  {
+	      "align" : "left",
+	      "color" : "0,0,0",
+	      "size" : "30",
+	      "text" : "自动组队: 开启  /  重组队伍: 开启  /  接手队长: 关闭  /  自动邀请: 关闭",
+	      "bg" : "255,255,255",
+	      "type" : "Label"
+      }
+   ]
+}

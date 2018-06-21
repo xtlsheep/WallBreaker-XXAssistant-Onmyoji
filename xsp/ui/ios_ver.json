@@ -1,0 +1,21 @@
+{
+   "style" : "default",
+   "config" : "save_ios_ver.dat",
+   "width" : 500,
+   "height" : 180,
+   "cancelscroll" : true,
+   "countdown" : 0,
+   "cancelname" : "取消",
+   "okname" : "继续",
+   "views" : [
+      {
+         "id" : "ios_ver",
+         "list" : "ios-11.x   ,ios-others",
+         "select" : "0",
+         "size" : "35",
+         "type" : "RadioGroup",
+         "orientation" : "horizontal",
+         "color" : "0,0,0"
+      }
+   ]
+}

@@ -1,0 +1,82 @@
+{
+   "style" : "default",
+   "config" : "save_global.dat",
+   "width" : 1000,
+   "height" : 500,
+   "cancelscroll" : true,
+   "countdown" : 0,
+   "cancelname" : "结束",
+   "okname" : "开始",
+   "views" : [
+      {
+         "align" : "center",
+         "color" : "0,0,0",
+         "size" : "30",
+         "text" : "全局设置",
+         "bg" : "255,255,255",
+         "type" : "Label"
+      },
+      {
+         "align" : "left",
+         "color" : "0,0,0",
+         "size" : "30",
+         "text" : "悬赏封印 ：",
+         "bg" : "255,255,255",
+         "type" : "Label"
+      },
+      {
+         "id" : "_accept",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "id" : "offer_en",
+               "list" : "接受 -",
+               "select" : "0",
+               "size" : "30",
+               "type" : "CheckBoxGroup",
+               "orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 330
+            },
+            {
+               "id" : "offer_sel",
+               "list" : "勾玉,体力,樱饼,金币,零食",
+               "select" : "0@1@2",
+               "size" : "28",
+               "type" : "CheckBoxGroup",
+               "orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 650
+            }
+         ]
+      },
+	  {
+         "id" : "jjtp",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "id" : "jjtp_en",
+               "list" : "开启智能结界突破，间隔时间为 - ",
+               "select" : "",
+               "size" : "30",
+               "type" : "CheckBoxGroup",
+               "orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 670
+            },
+            {
+               "id" : "jjtp_interv",
+               "list" : "10分钟,20分钟,30分钟,60分钟",
+               "select" : "2",
+               "size" : "22",
+               "type" : "ComboBox",
+               "width" : 250
+            }
+         ]
+      }
+   ]
+}
