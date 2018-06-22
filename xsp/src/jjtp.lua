@@ -315,17 +315,18 @@ function house_lct_jjtp()
 end
 
 -- Main func
-function jjtp(mode, whr, round_time, refresh, solo_select, house_select, offer_arr)
-	print(string.format("模式：%s，五花肉：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)，战斗时间：%d，刷新：%d，个人突破：%s，阴阳寮突破：%s", mode, whr[1], whr[2], whr[3], whr[4], round_time, refresh, solo_select, house_select))
-	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 樱饼：%d 金币：%d 零食：%d)", offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6]))
+function jjtp(mode, whr, round_time, refresh, solo_select, house_select, lock, offer_arr)
+	print(string.format("模式：%s，五花肉：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)，战斗时间：%d，刷新：%d，个人突破：%s，阴阳寮突破：%s, 锁定: %d", 
+						mode, whr[1], whr[2], whr[3], whr[4], round_time, refresh, solo_select, house_select, lock))
+	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 樱饼：%d 金币：%d 零食：%d)", 
+						offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6]))
 	
 	if (mode == "个人") then
-		jjtp_solo(whr, round_time, refresh, solo_select, offer_arr)
+		jjtp_pri(whr, round_time, refresh, solo_select, lock, offer_arr)
 	end
 end
 
-function jjtp_solo(whr, round_time, refresh, solo_select, offer_arr)
-	locked = 0
+function jjtp_pri(whr, round_time, refresh, solo_select, lock, offer_arr)
 	time_cnt = 0
 	map = {}
 	winess = -1
@@ -361,10 +362,7 @@ function jjtp_solo(whr, round_time, refresh, solo_select, offer_arr)
 			x, y = solo_lct_jjtp()
 			if (x > -1) then
 				-- 锁定出战
-				if locked == 0 then
-					x, y = solo_lock()
-					locked = 1
-				end
+				lock_or_unlock(lock, "结界突破")
 				-- 分析地图
 				if (table.getn(map) == 0) then
 					map, winess, invalid = solo_analysis_map(solo_select)
@@ -478,7 +476,7 @@ function jjtp_solo(whr, round_time, refresh, solo_select, offer_arr)
 	return
 end
 
-function jjtp_house(whr, round_time, house_select)
+function jjtp_pub(whr, round_time, house_select)
 	disable_lock = 0
 	time_cnt = 0
 	

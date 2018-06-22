@@ -129,7 +129,7 @@ function yuhun_solo(mark, level, round, offer_arr, lock)
 				break
 			end
 			-- 八岐大蛇
-			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 ran_touch(0, 847, 443, 20, 10) break end -- 单人开始
+			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 single_start() break end -- 单人开始
 			-- 庭院
 			x, y = find_tansuo_from_tingyuan() if (x > -1) then break end
 			-- 探索

@@ -84,6 +84,15 @@
          ]
       },
 	  {
+         "id" : "lock",
+         "list" : "锁定出战阵容(建议开启)",
+         "select" : "0",
+         "size" : "30",
+         "type" : "CheckBoxGroup",
+         "orientation" : "horizontal",
+         "color" : "0,0,0"
+      },
+	  {
           "id" : "line",
           "type" : "Line",
           "color" : "0,0,0",

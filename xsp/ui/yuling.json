@@ -33,8 +33,34 @@
             },
             {
                "id" : "select",
-               "list" : "暗·神龙,暗·白藏主,暗·黑豹,暗·孔雀",
+               "list" : "暗·神龙       [星期二],暗·白藏主    [星期三],暗·黑豹       [星期四],暗·孔雀       [星期五]",
                "select" : "0",
+               "size" : "22",
+               "type" : "ComboBox",
+               "color" : "0,0,0",
+				"width" : 250
+            }
+         ]
+      },
+	  {
+         "id" : "level_",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "层数选择 -",
+               "bg" : "255,255,255",
+               "type" : "Label",
+               "width" : 670
+            },
+            {
+               "id" : "level",
+               "list" : "一层,二层,三层",
+               "select" : "2",
                "size" : "22",
                "type" : "ComboBox",
                "color" : "0,0,0",
@@ -52,7 +78,7 @@
                "align" : "left",
                "color" : "0,0,0",
                "size" : "30",
-               "text" : "嗔之阵 - ",
+               "text" : "战斗次数 - ",
                "bg" : "255,255,255",
                "type" : "Label",
                "width" : 670

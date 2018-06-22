@@ -114,7 +114,7 @@ function juexing_solo(element, mark, level, round, offer_arr, lock)
 				break
 			end
 			-- 觉醒材料
-			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 ran_touch(0, 847, 443, 20, 10) break end -- 单人开始
+			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 single_start() break end -- 单人开始
 			-- 庭院
 			x, y = find_tansuo_from_tingyuan() if (x > -1) then break end
 			-- 探索
@@ -418,8 +418,8 @@ function juexing_group_fix_captain(element, mark, level, round, offer_arr, lock,
 		end
 		
 		while (1) do
-			-- 一回目
-			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
+			-- 战
+			x, y = round_fight() if (x > -1) then juexing_mark_mark(mark) break end
 			mSleep(500)
 			-- 悬赏封印
 			x, y = find_offer(offer_arr) if (x > -1) then break end

@@ -257,6 +257,8 @@ function fast_tansuo_UI()
 		fast_UI()
 		return
 	end
+	
+	offer_arr = {0, 0, 0, 0, 0, 0}
 end
 
 function fast_jjtp_UI()
@@ -491,6 +493,12 @@ function jjtp_UI()
 		round_time = 0
 	end
 	
+	if (res_jjtp.lock == "0") then
+		lock = 1
+	else
+		lock = 0
+	end
+	
 	if (res_jjtp.refresh == "0") then
 		refresh = 3
 	elseif (res_jjtp.refresh == "1") then
@@ -527,7 +535,7 @@ function jjtp_UI()
 		return
 	end
 	
-	jjtp(mode, whr, round_time, refresh, solo_select, house_select, offer_arr)
+	jjtp(mode, whr, round_time, refresh, solo_select, house_select, lock, offer_arr)
 end
 
 function juexing_UI()
@@ -729,6 +737,7 @@ function yuling_UI()
 	end
 	
 	sel = -1
+	level = -1
 	round = -1
 	lock = -1
 	
@@ -740,6 +749,14 @@ function yuling_UI()
 		sel = "黑豹"
 	elseif (res_yuling.select == "3") then
 		sel = "孔雀"
+	end
+	
+	if (res_yuling.level == "0") then
+		level = 1
+	elseif (res_yuling.level == "1") then
+		level = 2
+	elseif (res_yuling.level == "2") then
+		level = 3
 	end
 	
 	if (res_yuling.round == "0") then
@@ -770,5 +787,5 @@ function yuling_UI()
 		return
 	end
 
-	yuling(sel, round, lock, offer_arr)
+	yuling(sel, level, round, lock, offer_arr)
 end

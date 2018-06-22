@@ -1,6 +1,6 @@
 --require "util"
 
--- Normal func
+-- Common func
 function show_win_fail(win_cnt, fail_cnt)
 	showHUD_ios_ver(ios_ver,hud_scene,string.format("战斗胜利 %d次 - 失败 %d次", win_cnt, fail_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 end
@@ -74,7 +74,7 @@ function level_select(level, init, lock, spec)
 	end
 	
 	-- 锁定
-	lock_and_unlock(lock, spec)
+	lock_or_unlock(lock, spec)
 end
 
 function getRandomList(length)
@@ -91,7 +91,7 @@ function getRandomList(length)
 	return temp
 end
 
-function lock_and_unlock(lock, spec)
+function lock_or_unlock(lock, spec)
 	x = -1 y = -1
 	if spec == "御魂" then
 		x1 = 638 y1 = 368 x2 = 640 y2 = 370
@@ -101,24 +101,78 @@ function lock_and_unlock(lock, spec)
 		x1 = 780 y1 = 376 x2 = 782 y2 = 378
 	elseif spec == "御灵" then
 		x1 = 552 y1 = 378 x2 = 554 y2 = 380
+	elseif spec == "结界突破" then
+		x1 = 917 y1 = 541 x2 = 919 y2 = 543
 	end
 	
-	if (lock == 1) then
-		x, y = findColor({x1, y1, x2, y2},
-			"0|0|0x735c41,11|1|0x2c2119,-11|0|0x2e231c,-1|5|0x291f19",
-			95, 0, 0, 0)
-		if x > -1 then
-			ran_touch(0, x, y, 3, 3)
+	if (spec == "御魂" or spec == "觉醒" or spec == "业原火") then
+		if (lock == 1) then
+			x, y = findColor({x1, y1, x2, y2},
+				"0|0|0x735c41,11|1|0x2c2119,-11|0|0x2e231c,-1|5|0x291f19",
+				95, 0, 0, 0)
+			if x > -1 then
+				ran_touch(0, x, y, 3, 3)
+			end
+		else
+			x, y = findColor({x1, y1, x2, y2},
+				"0|0|0x735d43,13|1|0x9b93cc,-13|1|0x9c92cc,0|7|0x201815",
+				95, 0, 0, 0)
+			if x > -1 then
+				ran_touch(0, x, y, 3, 3)
+			end
 		end
-	else
-		x, y = findColor({x1, y1, x2, y2},
-			"0|0|0x735d43,13|1|0x9b93cc,-13|1|0x9c92cc,0|7|0x201815",
-			95, 0, 0, 0)
-		if x > -1 then
-			ran_touch(0, x, y, 3, 3)
-		end
+		return x, y
 	end
-	return x, y
+
+	if (spec == "御灵") then
+		if (lock == 1) then
+			x, y = findColor({x1, y1, x2, y2},
+				"0|0|0x886d49,0|5|0x241911,-13|0|0x2f2318,15|0|0x2f2318",
+				95, 0, 0, 0)
+			if x > -1 then
+				ran_touch(0, x, y, 3, 3)
+			end
+		else
+			x, y = findColor({x1, y1, x2, y2},
+				"0|0|0x886e4a,0|7|0x1d150f,-17|0|0xb9adf4,17|0|0xb8aef2",
+				95, 0, 0, 0)
+			if x > -1 then
+				ran_touch(0, x, y, 3, 3)
+			end
+		end
+		return x, y
+	end
+	
+	if (spec == "结界突破") then
+		if (lock == 1) then
+			x, y = findColor({x1, y1, x2, y2},
+				"0|0|0x826745,0|5|0x1f150e,-13|0|0x2f2318,13|1|0x2f2318",
+				95, 0, 0, 0)
+			if x > -1 then
+				ran_touch(0, x, y, 3, 3)
+			end
+		else
+			x, y = findColor({x1, y1, x2, y2},
+				"0|0|0x866c49,0|7|0x1c150e,-16|0|0xb8acf1,16|0|0xb3aaec",
+				95, 0, 0, 0)
+			if x > -1 then
+				ran_touch(0, x, y, 3, 3)
+			end
+		end
+		return x, y
+	end
+end
+
+function single_start()
+	ran_touch(0, 845, 440, 30, 10) -- 挑战
+	mSleep(1000)
+	x, y = findColor({806, 441, 808, 443}, -- 挑战
+		"0|0|0xf3b25e,75|0|0xf3b25e",
+		95, 0, 0, 0)
+	if x > -1 then
+		return RET_ERR
+	end
+	return RET_OK
 end
 
 -- Locate func
@@ -556,5 +610,3 @@ function captain_team_set_auto_invite()
 	end
 	return x, y
 end
-
--- Other func

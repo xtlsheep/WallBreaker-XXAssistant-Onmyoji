@@ -11,18 +11,6 @@ function lct_yyh()
 	return x, y
 end
 
-function yyh_start()
-	ran_touch(0, 847, 442, 20, 5) -- 挑战
-	mSleep(1000)
-	x, y = findColor({806, 441, 808, 443}, -- 挑战
-		"0|0|0xf3b25e,75|0|0xf3b25e",
-		95, 0, 0, 0)
-	if x > -1 then
-		return RET_ERR
-	end
-	return RET_OK
-end
-
 -- Main func
 function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 	print(string.format("贪 %d, 嗔 %d, 痴 %d，锁定 %d", round_tan, round_chen, round_chi, lock))
@@ -43,6 +31,8 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 	
 	while (1) do
 		while (1) do
+			-- 战斗开始
+			x, y = round_fight() if (x > -1) then break end
 			mSleep(500)
 			-- 悬赏封印
 			x, y = find_offer(offer_arr) if (x > -1) then break end
@@ -94,7 +84,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 						ran_touch(0, 360, 160, 50, 10) -- 贪
 					end
 					ran_sleep(250)
-					ret = yyh_start()
+					ret = single_start()
 					if (ret == RET_ERR) then
 						end_tan = 1
 						break
@@ -108,7 +98,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 						ran_touch(0, 360, 250, 50, 10) -- 嗔
 					end
 					ran_sleep(250)
-					ret = yyh_start()
+					ret = single_start()
 					if (ret == RET_ERR) then
 						end_chen = 1
 						break
@@ -122,7 +112,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 						ran_touch(0, 360, 330, 50, 10) -- 痴
 					end
 					ran_sleep(250)
-					ret = yyh_start()
+					ret = single_start()
 					if (ret == RET_ERR) then
 						end_chi = 1
 						break
