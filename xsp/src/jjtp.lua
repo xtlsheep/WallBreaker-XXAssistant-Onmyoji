@@ -289,6 +289,13 @@ function find_whr(pos, whr)
 	end
 	if (whr[4] == 1) then
 		-- 御馔津原皮
+		x, y = findColor({x1, y1, x2, y2}, 
+			"0|0|0xfff8ef,13|-15|0x323440,18|-7|0xa07448,-4|15|0xfcfcf9,-19|-3|0xa78050,-17|9|0xe6b96a",
+			95, 0, 0, 0)
+		if x > -1 then
+			showHUD_ios_ver(ios_ver,hud_scene,"御馔津原Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			return RET_OK
+		end
 		-- 御馔津觉醒皮
 		x, y = findColor({x1, y1, x2, y2}, 
 			"0|0|0xffebdc,7|-4|0x59433a,4|-16|0x1f1110,17|-11|0x6b5a4b,-18|-5|0xfbd985,-9|11|0xdccec9",
@@ -298,6 +305,13 @@ function find_whr(pos, whr)
 			return RET_OK
 		end
 		-- 御馔津商店皮
+		x, y = findColor({x1, y1, x2, y2}, 
+			"0|0|0x2e322c,13|-3|0xc6c3d1,20|-1|0x91614b,-10|12|0xeecdb1,-17|12|0x555761,-2|26|0xffffff",
+			95, 0, 0, 0)
+		if x > -1 then
+			showHUD_ios_ver(ios_ver,hud_scene,"御馔津商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			return RET_OK
+		end
 	end
 	return RET_ERR
 end
