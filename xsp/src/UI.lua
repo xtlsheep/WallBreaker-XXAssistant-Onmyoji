@@ -117,19 +117,36 @@ function config_UI()
 		return
 	end
 	
-	if (res_config.select == "0") then
-		-- 八岐大蛇
-		baqidashe_UI()
-	elseif (res_config.select == "6") then
-		-- 结界突破
-		jjtp_UI()
-	elseif (res_config.select == "9") then
-		-- 觉醒
-		juexing_UI()
-	elseif (res_config.select == "4") then
-		yeyuanhuo_UI()
-	elseif (res_config.select == "7") then
-		yuling_UI()
+	-- 八岐大蛇
+	if (res_config.select == "0") 	   then baqidashe_UI()
+	-- 探索
+	elseif (res_config.select == "3")  then	tansuo_UI()
+	-- 结界突破
+	elseif (res_config.select == "6")  then jjtp_UI()
+	-- 觉醒
+	elseif (res_config.select == "9")  then juexing_UI()
+	-- 妖气
+	elseif (res_config.select == "12") then yqfy_UI()
+	-- 一键每日
+	elseif (res_config.select == "1")  then dailymission_UI()
+	-- 业原火
+	elseif (res_config.select == "4")  then yeyuanhuo_UI()
+	-- 御灵
+	elseif (res_config.select == "7")  then yuling_UI()
+	-- 百鬼
+	elseif (res_config.select == "10") then hundredghost_UI()
+	-- 副本组合
+	elseif (res_config.select == "13") then multimission_UI()
+	-- 世界喊话
+	elseif (res_config.select == "2")  then worldchannel_UI()
+	-- 普通召唤
+	elseif (res_config.select == "5")  then normalcall_UI()
+	-- 斗技荣耀
+	elseif (res_config.select == "8")  then arena_UI()
+	-- 悬赏查询
+	elseif (res_config.select == "11") then offerquery_UI()
+	-- 劲舞团
+	elseif (res_config.select == "14") then audition_UI()
 	end
 end
 
@@ -450,6 +467,21 @@ function baqidashe_UI()
 	yuhun(mode, role, group, mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
 end
 
+function tansuo_UI()
+local ui = fit_UI("tansuo.json", dev_width)
+	ret_tansuo, res_tansuo = showUI(ui)
+	if (ret_tansuo == 0) then
+		config_UI()
+		return
+	end
+
+	offer_arr = {}
+	ret_global, offer_arr = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
+end
+
 function jjtp_UI()
 	local ui = fit_UI("jjtp.json", dev_width)
 	ret_jjtp, res_jjtp = showUI(ui)
@@ -653,6 +685,36 @@ function juexing_UI()
 	juexing(mode, role, group, element, mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
 end
 
+function yqfy_UI()
+	local ui = fit_UI("yqfy.json", dev_width)
+	ret_yqfy, res_yqfy = showUI(ui)
+	if (ret_yqfy == 0) then
+		config_UI()
+		return
+	end
+	
+	offer_arr = {}
+	ret_global, offer_arr = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
+end
+
+function dailymission_UI()
+	local ui = fit_UI("dailymission.json", dev_width)
+	ret_dailymission, res_dailymission = showUI(ui)
+	if (ret_dailymission == 0) then
+		config_UI()
+		return
+	end
+	
+	offer_arr = {}
+	ret_global, offer_arr = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
+end
+
 function yeyuanhuo_UI()
 	local ui = fit_UI("yeyuanhuo.json", dev_width)
 	ret_yeyuanhuo, res_yeyuanhuo = showUI(ui)
@@ -788,4 +850,109 @@ function yuling_UI()
 	end
 
 	yuling(sel, level, round, lock, offer_arr)
+end
+
+function hundredghost_UI()
+	local ui = fit_UI("hundredghost.json", dev_width)
+	ret_hundredghost, res_hundredghost = showUI(ui)
+	if (ret_hundredghost == 0) then
+		config_UI()
+		return
+	end
+	
+	offer_arr = {}
+	ret_global, offer_arr = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
+end
+
+function multimission_UI()
+	local ui = fit_UI("multimission.json", dev_width)
+	ret_multimission, res_multimission = showUI(ui)
+	if (ret_multimission == 0) then
+		config_UI()
+		return
+	end
+	
+	offer_arr = {}
+	ret_global, offer_arr = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
+end
+
+function worldchannel_UI()
+	local ui = fit_UI("worldchannel.json", dev_width)
+	ret_worldchannel, res_worldchannel = showUI(ui)
+	if (ret_worldchannel == 0) then
+		config_UI()
+		return
+	end
+	
+	offer_arr = {}
+	ret_global, offer_arr = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
+end
+
+function normalcall_UI()
+	local ui = fit_UI("normalcall.json", dev_width)
+	ret_normalcall, res_normalcall = showUI(ui)
+	if (ret_normalcall == 0) then
+		config_UI()
+		return
+	end
+	
+	offer_arr = {}
+	ret_global, offer_arr = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
+end
+
+function arena_UI()
+	local ui = fit_UI("arena.json", dev_width)
+	ret_arena, res_arena = showUI(ui)
+	if (ret_arena == 0) then
+		config_UI()
+		return
+	end
+	
+	offer_arr = {}
+	ret_global, offer_arr = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
+end
+
+function offerquery_UI()
+	local ui = fit_UI("offerquery.json", dev_width)
+	ret_offerquery, res_offerquery = showUI(ui)
+	if (ret_offerquery == 0) then
+		config_UI()
+		return
+	end
+	
+	offer_arr = {}
+	ret_global, offer_arr = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
+end
+
+function audition_UI()
+	local ui = fit_UI("audition.json", dev_width)
+	ret_audition, res_audition = showUI(ui)
+	if (ret_audition == 0) then
+		config_UI()
+		return
+	end
+	
+	offer_arr = {}
+	ret_global, offer_arr = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
 end

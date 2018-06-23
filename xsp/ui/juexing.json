@@ -64,31 +64,6 @@
          ]
       },
       {
-         "id" : "mark",
-         "width" : 1000,
-         "height" : 50,
-         "type" : "LinearLayout",
-         "views" : [
-            {
-               "align" : "left",
-               "color" : "0,0,0",
-               "size" : "30",
-               "text" : "标记 - ",
-               "bg" : "255,255,255",
-               "type" : "Label",
-               "width" : 670
-            },
-            {
-               "id" : "mark",
-               "list" : "随机小怪,麒麟Boss,无",
-               "select" : "1",
-               "size" : "22",
-               "type" : "ComboBox",
-               "width" : 250
-            }
-         ]
-      },
-      {
          "id" : "round",
          "width" : 1000,
          "height" : 50,
@@ -110,6 +85,33 @@
                "size" : "22",
                "type" : "ComboBox",
                "width" : 250
+            }
+         ]
+      },
+	  {
+         "id" : "mark",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "标记 - ",
+               "bg" : "255,255,255",
+               "type" : "Label",
+               "width" : 450
+            },
+            {
+               "id" : "mark",
+               "list" : "随机小怪,麒麟Boss,无",
+               "select" : "2",
+               "size" : "30",
+               "type" : "RadioGroup",
+				"orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 600
             }
          ]
       },

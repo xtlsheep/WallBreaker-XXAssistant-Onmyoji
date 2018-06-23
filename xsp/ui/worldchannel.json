@@ -1,0 +1,20 @@
+{
+   "style" : "default",
+   "config" : "save_worldchannel.dat",
+   "width" : 1000,
+   "height" : 500,
+   "cancelscroll" : true,
+   "countdown" : 0,
+   "cancelname" : "返回",
+   "okname" : "继续",
+   "views" : [
+		{
+         "align" : "center",
+         "color" : "0,0,0",
+         "size" : "30",
+         "text" : "世界喊话",
+         "bg" : "255,255,255",
+         "type" : "Label"
+      }
+	]
+}

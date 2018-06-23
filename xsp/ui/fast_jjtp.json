@@ -1,0 +1,85 @@
+{
+	"style" : "default",
+	"config" : "save_fast_jjtp.dat",
+	"width" : 1000,
+	"height" : 500,
+	"cancelscroll" : true,
+	"countdown" : 0,
+	"cancelname" : "返回",
+	"okname" : "开始",
+	"views" : [
+		{
+         "align" : "center",
+         "color" : "0,0,0",
+         "size" : "30",
+         "text" : "快速突破",
+         "bg" : "255,255,255",
+         "type" : "Label"
+      },
+      {
+         "id" : "mode",
+         "list" : "个人突破,阴阳寮突破,个人突破 + 阴阳寮突破",
+         "select" : "2",
+         "size" : "30",
+         "type" : "ComboBox"
+      },
+	  {
+         "id" : "whr_",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "跳过特殊式神 -",
+               "bg" : "255,255,255",
+               "type" : "Label",
+               "width" : 340
+            },
+            {
+	            "id" : "whr",
+	            "list" : "彼岸花,小僧,日和坊,御馔津",
+	            "select" : "0@1@2",
+	            "size" : 30,
+	            "type" : "CheckBoxGroup",
+	            "orientation" : "horizontal",
+	            "color" : "0,0,0",
+	            "width" : 650
+            }
+         ]
+      },
+	  {
+          "id" : "line",
+          "type" : "Line",
+          "color" : "0,0,0",
+	      "height" : 2,
+          "width" : 940
+      },
+      {
+	      "align" : "left",
+	      "color" : "0,0,0",
+	      "size" : "30",
+	      "text" : "快速模式Tip -",
+	      "bg" : "255,255,255",
+	      "type" : "Label"
+      },
+	  {
+	      "align" : "left",
+	      "color" : "0,0,0",
+	      "size" : "30",
+	      "text" : "个人勋章 : 5 - 0  /  寮勋章    : 5 - 0  /  个人刷新 : 3次",
+	      "bg" : "255,255,255",
+	      "type" : "Label"
+      },
+	  {
+	      "align" : "left",
+	      "color" : "0,0,0",
+	      "size" : "30",
+	      "text" : "战斗限时 : 5分钟 /  出战队伍 : 锁定  /  悬赏封印 : 拒绝",
+	      "bg" : "255,255,255",
+	      "type" : "Label"
+      }
+	]
+}

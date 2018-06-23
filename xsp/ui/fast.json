@@ -48,13 +48,13 @@
             {
                "src" : "ouqi.jpg",
                "type" : "Image",
-               "width" : 230
+               "width" : 200
             }
          ]
       },
       {
          "id" : "select",
-         "list" : "御魂十层        ,探索章节        ,结界突破        ,觉醒十层",
+         "list" : "御魂十层        ,探索章节        ,快速突破        ,觉醒十层",
          "select" : "0",
          "size" : "30",
          "type" : "RadioGroup",

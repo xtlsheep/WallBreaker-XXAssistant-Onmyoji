@@ -32,7 +32,7 @@
          "type" : "Label"
       },
       {
-         "id" : "level",
+         "id" : "whr_",
          "width" : 1000,
          "height" : 50,
          "type" : "LinearLayout",
