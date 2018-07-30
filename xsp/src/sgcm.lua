@@ -1,6 +1,7 @@
 require "util"
 require "func"
 
+-- Util func
 function lct_sgcm()
 	x, y = findColor({668, 352, 675, 358}, -- 当前积分
 		"0|0|0xdfba67,-1|25|0xe2bd6c,-101|25|0xdfb564,-95|-11|0xfffded",

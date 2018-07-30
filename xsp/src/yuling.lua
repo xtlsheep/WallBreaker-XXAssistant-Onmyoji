@@ -1,6 +1,7 @@
 require "util"
 require "func"
 
+-- Util func
 function lct_yuling_all()
 	x, y = findColor({113, 157, 115, 169}, 
 		"0|0|0xe1d8c8,-29|204|0xe2d8c8,193|452|0x322610,416|450|0x161a0d",
@@ -67,7 +68,7 @@ function yuling(sel, level, round, lock, offer_arr)
 				return
 			end
 			-- 庭院
-			x, y = find_tansuo_from_tingyuan() if (x > -1) then break end
+			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 375, 590, 20, 20) break end -- 御灵
 			-- 御灵选择

@@ -5,12 +5,15 @@ require "jjtp"
 require "yeyuanhuo"
 require "yuling"
 
-function fit_UI(ui, width)
+-- Def
+dev_width = 640 -- iPhone 5s: 640 x 1136
+
+-- Util func
+function fit_UI(ui, width_in)
 	local content
 	local value
 	local json=require "JSON"
-	local w, h= getScreenSize() -- 获取设备分辨率
-	sf=w/width -- 当前分辨率/开发分辨率
+	sf=width/width_in -- 当前分辨率/开发分辨率
 	local function split(szFullString, szSeparator) -- split rect
 		local nFindStartIndex = 1
 		local nSplitIndex = 1
@@ -56,6 +59,7 @@ function fit_UI(ui, width)
 	return json:encode(value)
 end
 
+-- Portal func
 function ios_ver()
 	local ui = fit_UI("ios_ver.json", dev_width)
 	ret_ios_ver, res_ios_ver = showUI(ui)
@@ -288,7 +292,7 @@ function fast_jjtp_UI()
 	
 	offer_arr = {0, 0, 0, 0, 0, 0}
 	
-	jjtp(mode, whr, round_time, refresh, solo_select, house_select, offer_arr)
+	jjtp(mode, whr, round_time, refresh, pri_select, pub_select, offer_arr)
 end
 
 function fast_juexing_UI()
@@ -498,20 +502,37 @@ function jjtp_UI()
 		mode = "个人+阴阳寮"
 	end
 	
-	whr = {0, 0, 0, 0}
-	whr_sel = {}
-	for w in string.gmatch(res_jjtp.whr,"([^'@']+)") do
-		table.insert(whr_sel,w)
+	whr_solo_out = {0, 0, 0, 0}
+	whr_solo = {}
+	for w in string.gmatch(res_jjtp.whr_solo,"([^'@']+)") do
+		table.insert(whr_solo,w)
 	end
-	for i = 1, table.getn(whr_sel), 1 do
-		if (whr_sel[i] == "0") then
-			whr[1] = 1 -- 彼岸花
-		elseif (whr_sel[i] == "1") then
-			whr[2] = 1 -- 小僧
-		elseif (whr_sel[i] == "2") then
-			whr[3] = 1 -- 日和坊
-		elseif (whr_sel[i] == "3") then
-			whr[4] = 1 -- 御馔津
+	for i = 1, table.getn(whr_solo), 1 do
+		if (whr_solo[i] == "0") then
+			whr_solo_out[1] = 1 -- 彼岸花
+		elseif (whr_solo[i] == "1") then
+			whr_solo_out[2] = 1 -- 小僧
+		elseif (whr_solo[i] == "2") then
+			whr_solo_out[3] = 1 -- 日和坊
+		elseif (whr_solo[i] == "3") then
+			whr_solo_out[4] = 1 -- 御馔津
+		end
+	end
+	
+	whr_pub_out = {0, 0, 0, 0}
+	whr_pub = {}
+	for w in string.gmatch(res_jjtp.whr_pub,"([^'@']+)") do
+		table.insert(whr_pub,w)
+	end
+	for i = 1, table.getn(whr_pub), 1 do
+		if (whr_pub[i] == "0") then
+			whr_pub_out[1] = 1 -- 彼岸花
+		elseif (whr_pub[i] == "1") then
+			whr_pub_out[2] = 1 -- 小僧
+		elseif (whr_pub[i] == "2") then
+			whr_pub_out[3] = 1 -- 日和坊
+		elseif (whr_pub[i] == "3") then
+			whr_pub_out[4] = 1 -- 御馔津
 		end
 	end
 	
@@ -531,6 +552,7 @@ function jjtp_UI()
 		lock = 0
 	end
 	
+	refresh = 0
 	if (res_jjtp.refresh == "0") then
 		refresh = 3
 	elseif (res_jjtp.refresh == "1") then
@@ -539,26 +561,30 @@ function jjtp_UI()
 		refresh = 9
 	end
 	
-	if (res_jjtp.solo_select == "0") then
-		solo_select = "0_to_5"
-	elseif (res_jjtp.solo_select == "1") then
-		solo_select = "3_to_5"
-	elseif (res_jjtp.solo_select == "2") then
-		solo_select = "5_to_0"
-	elseif (res_jjtp.solo_select == "3") then
-		solo_select = "3_to_0"
-	elseif (res_jjtp.solo_select == "4") then
-		solo_select = "random"
+	if (res_jjtp.solo_sel == "0") then
+		solo_sel = "0_to_5"
+	elseif (res_jjtp.solo_sel == "1") then
+		solo_sel = "3_to_5"
+	elseif (res_jjtp.solo_sel == "2") then
+		solo_sel = "5_to_0"
+	elseif (res_jjtp.solo_sel == "3") then
+		solo_sel = "3_to_0"
+	elseif (res_jjtp.solo_sel == "4") then
+		solo_sel = "random"
 	end
 	
-	if (res_jjtp.house_select == "0") then
-		house_select = "5_to_0"
-	elseif (res_jjtp.house_select == "1") then
-		house_select = "3_to_0"
-	elseif (res_jjtp.house_select == "2") then
-		house_select = "1_to_0"
-	elseif (res_jjtp.house_select == "2") then
-		house_select = "random"
+	if (res_jjtp.pub_sel == "0") then
+		pub_sel = 5
+	elseif (res_jjtp.pub_sel == "1") then
+		pub_sel = 4
+	elseif (res_jjtp.pub_sel == "2") then
+		pub_sel = 3
+	elseif (res_jjtp.pub_sel == "3") then
+		pub_sel = 2
+	elseif (res_jjtp.pub_sel == "4") then
+		pub_sel = 1
+	elseif (res_jjtp.pub_sel == "5") then
+		pub_sel = 0
 	end
 	
 	offer_arr = {}
@@ -567,7 +593,7 @@ function jjtp_UI()
 		return
 	end
 	
-	jjtp(mode, whr, round_time, refresh, solo_select, house_select, lock, offer_arr)
+	jjtp(mode, whr_solo_out, whr_pub_out, round_time, refresh, solo_sel, pub_sel, lock, offer_arr)
 end
 
 function juexing_UI()

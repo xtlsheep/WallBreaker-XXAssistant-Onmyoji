@@ -1,6 +1,7 @@
 require "util"
 require "func"
 
+-- Util func
 function lct_yyh()
 	x, y = findColor({807, 439, 819, 441}, -- 业原火
 		"0|0|0xf3b25e,-59|-236|0xdd7cb3,-124|-168|0xf2faf9,-83|-142|0x2eae93",
@@ -122,7 +123,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 				end
 			end
 			-- 庭院
-			x, y = find_tansuo_from_tingyuan() if (x > -1) then break end
+			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) break end -- 御魂
 			-- 御魂

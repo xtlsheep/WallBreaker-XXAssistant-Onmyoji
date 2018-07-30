@@ -1,6 +1,6 @@
---require "util"
+require "util"
 
--- Common func
+-- Other func
 function show_win_fail(win_cnt, fail_cnt)
 	showHUD_ios_ver(ios_ver,hud_scene,string.format("战斗胜利 %d次 - 失败 %d次", win_cnt, fail_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 end
@@ -205,13 +205,13 @@ function handle_error(disconn_fin, real_8dashe, secret_vender)
 	return x, y
 end
 
-function find_tansuo_from_tingyuan()
+function enter_tansuo_from_tingyuan()
 	x, y = findColor({230, 125, 1136, 175},  -- 庭院探索灯笼
 		"0|0|0xffffdf,0|3|0xffffdd,4|3|0xffffe0,4|0|0xffffe4",
 		95, 0, 0, 0)
 	if x > -1 then
-		x_, y_ = findColor({997, 31, 1000, 34}, -- 邮件、聊天
-			"0|0|0xdfc7a1,86|11|0xe2c9a2,86|26|0x33262b,0|27|0x3d3132",
+		x_, y_ = findColor({389, 24, 392, 36},  -- 加成 勾玉 邮件 聊天
+			"0|0|0xfacc77,273|3|0xec4125,627|6|0xdfc7a1,705|11|0xa29c7b",
 			95, 0, 0, 0)
 		if x_ > -1 then
 			showHUD_ios_ver(ios_ver,hud_scene,"庭院",20,"0xff000000","0xffffffff",0,100,0,300,32)

@@ -32,34 +32,7 @@
          "type" : "Label"
       },
       {
-         "id" : "whr_",
-         "width" : 1000,
-         "height" : 50,
-         "type" : "LinearLayout",
-         "views" : [
-            {
-               "align" : "left",
-               "color" : "0,0,0",
-               "size" : "30",
-               "text" : "跳过特殊式神 -",
-               "bg" : "255,255,255",
-               "type" : "Label",
-               "width" : 340
-            },
-            {
-	            "id" : "whr",
-	            "list" : "彼岸花,小僧,日和坊,御馔津",
-	            "select" : "0@1@2",
-	            "size" : 30,
-	            "type" : "CheckBoxGroup",
-	            "orientation" : "horizontal",
-	            "color" : "0,0,0",
-	            "width" : 650
-            }
-         ]
-      },
-      {
-         "id" : "r_time",
+         "id" : "_round_time",
          "width" : 1000,
          "height" : 50,
          "type" : "LinearLayout",
@@ -83,7 +56,7 @@
             }
          ]
       },
-	  {
+      {
          "id" : "lock",
          "list" : "锁定出战阵容(建议开启)",
          "select" : "0",
@@ -92,14 +65,14 @@
          "orientation" : "horizontal",
          "color" : "0,0,0"
       },
-	  {
-          "id" : "line",
-          "type" : "Line",
-          "color" : "0,0,0",
-	      "height" : 2,
-          "width" : 940
+      {
+         "id" : "line",
+         "type" : "Line",
+         "color" : "0,0,0",
+         "height" : 2,
+         "width" : 940
       },
-	  {
+      {
          "align" : "left",
          "color" : "0,0,0",
          "size" : "30",
@@ -107,8 +80,35 @@
          "bg" : "255,255,255",
          "type" : "Label"
       },
-	  {
-         "id" : "s_select",
+      {
+         "id" : "_whr_solo",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "跳过特殊式神 -",
+               "bg" : "255,255,255",
+               "type" : "Label",
+               "width" : 340
+            },
+            {
+               "id" : "whr_solo",
+               "list" : "彼岸花,小僧,日和坊,御馔津",
+               "select" : "0@1@2",
+               "size" : 30,
+               "type" : "CheckBoxGroup",
+               "orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 650
+            }
+         ]
+      },
+      {
+         "id" : "solo_config",
          "width" : 1000,
          "height" : 50,
          "type" : "LinearLayout",
@@ -123,17 +123,17 @@
                "width" : 670
             },
             {
-               "id" : "solo_select",
-               "list" : "0 - 5 勋章,3 - 5 勋章,5 - 0 勋章,3 - 0 勋章,无",
-               "select" : "0",
+               "id" : "solo_sel",
+               "list" : "0 - 5 勋章,3 - 5 勋章,5 - 0 勋章,3 - 0 勋章,随机选择",
+               "select" : "2",
                "size" : "22",
                "type" : "ComboBox",
                "width" : 250
             }
          ]
       },
-	  {
-         "id" : "solo_refresh",
+      {
+         "id" : "refresh_solo",
          "width" : 1000,
          "height" : 50,
          "type" : "LinearLayout",
@@ -157,14 +157,14 @@
             }
          ]
       },
-	  {
-          "id" : "line",
-          "type" : "Line",
-          "color" : "0,0,0",
-	      "height" : 2,
-          "width" : 940
+      {
+         "id" : "line",
+         "type" : "Line",
+         "color" : "0,0,0",
+         "height" : 2,
+         "width" : 940
       },
-	  {
+      {
          "align" : "left",
          "color" : "0,0,0",
          "size" : "30",
@@ -172,8 +172,35 @@
          "bg" : "255,255,255",
          "type" : "Label"
       },
-	  {
-         "id" : "h_select",
+      {
+         "id" : "_whr_pub",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "跳过特殊式神 -",
+               "bg" : "255,255,255",
+               "type" : "Label",
+               "width" : 340
+            },
+            {
+               "id" : "whr_pub",
+               "list" : "彼岸花,小僧,日和坊,御馔津",
+               "select" : "0@1@2",
+               "size" : 30,
+               "type" : "CheckBoxGroup",
+               "orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 650
+            }
+         ]
+      },
+      {
+         "id" : "pub_config",
          "width" : 1000,
          "height" : 50,
          "type" : "LinearLayout",
@@ -188,8 +215,8 @@
                "width" : 670
             },
             {
-               "id" : "house_select",
-               "list" : "5 - 0 勋章,3 - 0 勋章,1 - 0 勋章,0勋章",
+               "id" : "pub_sel",
+               "list" : "5 - 0 勋章,4 - 0 勋章,3 - 0 勋章,2 - 0 勋章,1 - 0 勋章,0勋章",
                "select" : "0",
                "size" : "22",
                "type" : "ComboBox",

@@ -12,7 +12,7 @@
          "align" : "center",
          "color" : "0,0,0",
          "size" : "30",
-         "text" : "高级设置",
+         "text" : "高级选项",
          "bg" : "255,255,255",
          "type" : "Label"
       },
@@ -43,7 +43,7 @@
             {
                "src" : "gugu.jpeg",
                "type" : "Image",
-               "width" : 250
+               "width" : 230
             }
          ]
       }
