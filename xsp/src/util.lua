@@ -34,26 +34,27 @@ function showHUD_ios_ver(ios_ver,id,text,size,color,bg,pos,x,y,width,height)
 end
 
 function ran_interv()
-	t = math.random(100, 150)
+	local t = math.random(100, 150)
 	mSleep(t)
 end
 
 function ran_sleep(t)
-	t = t + 0.25*math.random(-t, t)
+	local t = t + 0.25*math.random(-t, t)
 	mSleep(t)
 end
 
 function show_point(x, y)
-	debug_button = createHUD()
+	local dbg_button = createHUD()
 	if x and y then
-		showHUD_ios_ver(ios_ver,debug_button, "", 1, "0xff000000", "button.png", 0, x-s, y-s, s*2, s*2)
+		showHUD_ios_ver(ios_ver,dbg_button, "", 1, "0xff000000", "button.png", 0, x-s, y-s, s*2, s*2)
 	end
 	mSleep(200)
-	hideHUD(debug_button)
+	hideHUD(dbg_button)
 	ran_interv()
 end
 
 function ran_touch(id, x, y, ran_x, ran_y)
+	local x_r, y_r
 	if ((x == nil) or (y == nil)) then
 		return
 	end
@@ -70,6 +71,7 @@ function ran_touch(id, x, y, ran_x, ran_y)
 end
 
 function ran_move(id ,x, y, x_l, y_l, ran)
+	local x1_r, y1_r, x2_r, y2_r
 	if ((x == nil) or (y == nil)) then
 		print("ran move: nil x or y")
 		return

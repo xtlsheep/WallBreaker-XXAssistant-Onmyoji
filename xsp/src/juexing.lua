@@ -3,7 +3,7 @@ require "func"
 
 -- Util func
 function lct_juexingtower()
-	x, y = findColor({233, 162, 235, 165}, -- 4个麒麟头部
+	local x, y = findColor({233, 162, 235, 165}, -- 4个麒麟头部
 		"0|0|0xb17880,238|12|0x56b083,478|30|0x358fe5,718|40|0xd378d5",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -13,7 +13,7 @@ function lct_juexingtower()
 end
 
 function lct_juexingelement()
-	x, y = findColor({226, 540, 228, 542}, -- 4个麒麟头部
+	local x, y = findColor({226, 540, 228, 542}, -- 4个麒麟头部
 		"0|0|0xb17684,187|10|0xbcedb5,385|2|0x3090e2,576|7|0xfcbbce",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -24,9 +24,10 @@ end
 
 function juexing_mark(mark)
 	mSleep(500)
-	cnt = math.random(2, 3)
-	pos_x = {488, 560, 653, 823, 1016}
-	pos_y = {140, 170, 210, 230, 240}
+	local cnt = math.random(2, 3)
+	local pos_x = {488, 560, 653, 823, 1016}
+	local pos_y = {140, 170, 210, 230, 240}
+	local pos
 	if (mark == "小怪") then
 		pos = math.random(1, 5)
 	end
@@ -73,15 +74,14 @@ function juexing(mode, role, group, element, mark, level, round, offer_arr, lock
 end
 
 function juexing_solo(element, mark, level, round, offer_arr, lock)
-	rd_cnt = 0
-	win_cnt = 0
-	fail_cnt = 0
-	x = -1
-	y = -1
-	init = 1
-	disconn_fin = 1
-	real_8dashe = 1
-	secret_vender = 1
+	local rd_cnt = 0
+	local win_cnt = 0
+	local fail_cnt = 0
+	local init = 1
+	local disconn_fin = 1
+	local real_8dashe = 1
+	local secret_vender = 1
+	local x, y
 	
 	while (1) do
 		if (round > 0) then
@@ -139,18 +139,17 @@ function juexing_solo(element, mark, level, round, offer_arr, lock)
 end
 
 function juexing_group_wild_member(element, mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain)
-	rd_cnt = 0
-	win_cnt = 0
-	fail_cnt = 0
-	time_cnt = 0
-	x = -1
-	y = -1
-	init = 1
-	wait_invite = 0
-	auto_grouped = -1
-	disconn_fin = 1
-	real_8dashe = 1
-	secret_vender = 1
+	local rd_cnt = 0
+	local win_cnt = 0
+	local fail_cnt = 0
+	local time_cnt = 0
+	local init = 1
+	local wait_invite = 0
+	local auto_grouped = -1
+	local disconn_fin = 1
+	local real_8dashe = 1
+	local secret_vender = 1
+	local x, y
 	
 	while (1) do
 		if (round > 0) then
@@ -244,15 +243,14 @@ function juexing_group_wild_member(element, mark, level, round, offer_arr, lock,
 end
 
 function juexing_group_wild_captain(element, mark, level, round, offer_arr, lock, captain_auto_group, fail_and_recreate)
-	rd_cnt = 0
-	win_cnt = 0
-	fail_cnt = 0
-	x = -1
-	y = -1
-	init = 1
-	disconn_fin = 1
-	real_8dashe = 1
-	secret_vender = 1
+	local rd_cnt = 0
+	local win_cnt = 0
+	local fail_cnt = 0
+	local init = 1
+	local disconn_fin = 1
+	local real_8dashe = 1
+	local secret_vender = 1
+	local x, y
 	
 	while (1) do
 		if (round > 0) then
@@ -330,16 +328,15 @@ function juexing_group_wild_captain(element, mark, level, round, offer_arr, lock
 end
 
 function juexing_group_fix_member(element, mark, level, round, offer_arr, member_auto_group, member_to_captain)
-	rd_cnt = 0
-	win_cnt = 0
-	fail_cnt = 0
-	x = -1
-	y = -1
-	init = 1
-	auto_grouped = -1
-	disconn_fin = 1
-	real_8dashe = 1
-	secret_vender = 1
+	local rd_cnt = 0
+	local win_cnt = 0
+	local fail_cnt = 0
+	local init = 1
+	local auto_grouped = -1
+	local disconn_fin = 1
+	local real_8dashe = 1
+	local secret_vender = 1
+	local x, y
 	
 	while (1) do
 		if (round > 0) then
@@ -399,17 +396,16 @@ function juexing_group_fix_member(element, mark, level, round, offer_arr, member
 end
 
 function juexing_group_fix_captain(element, mark, level, round, offer_arr, lock, captain_auto_group, auto_invite_first)
-	rd_cnt = 0
-	win_cnt = 0
-	fail_cnt = 0
-	time_cnt = 0
-	x = -1
-	y = -1
-	init = 1
-	invite = 1
-	disconn_fin = 1
-	real_8dashe = 1
-	secret_vender = 1
+	local rd_cnt = 0
+	local win_cnt = 0
+	local fail_cnt = 0
+	local time_cnt = 0
+	local init = 1
+	local invite = 1
+	local disconn_fin = 1
+	local real_8dashe = 1
+	local secret_vender = 1
+	local x, y
 	
 	while (1) do
 		if (round > 0) then

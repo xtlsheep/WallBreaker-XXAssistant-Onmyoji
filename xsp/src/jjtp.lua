@@ -2,27 +2,27 @@ require "util"
 require "func"
 
 -- Def
-solo_ana_x = {392, 698, 1002}
-solo_ana_y = {164, 284, 403}
-solo_ana_metal_x_diff = {169, 134, 99, 64, 28}
-solo_center_x = {300, 600, 900, 300, 600, 900, 300, 600, 900}
-solo_center_y = {135, 135, 135, 255, 255, 255, 375, 375, 375}
-solo_whr_x1 = {121, 426, 732, 121, 426, 732, 121, 426, 732}
-solo_whr_y1 = {205, 205, 205, 323, 323, 323, 445, 445, 445}
-solo_whr_x2 = {405, 711, 1017, 405, 711, 1017, 405, 711, 1017}
-solo_whr_y2 = {254, 254, 254, 376, 376, 376, 495, 495, 495}
-solo_fight_x = {333, 639, 942, 333, 639, 942, 333, 639, 942}
-solo_fight_y = {300, 300, 300, 420, 420, 420, 540, 540, 540}
+local solo_ana_x = {392, 698, 1002}
+local solo_ana_y = {164, 284, 403}
+local solo_ana_metal_x_diff = {169, 134, 99, 64, 28}
+local solo_center_x = {300, 600, 900, 300, 600, 900, 300, 600, 900}
+local solo_center_y = {135, 135, 135, 255, 255, 255, 375, 375, 375}
+local solo_whr_x1 = {121, 426, 732, 121, 426, 732, 121, 426, 732}
+local solo_whr_y1 = {205, 205, 205, 323, 323, 323, 445, 445, 445}
+local solo_whr_x2 = {405, 711, 1017, 405, 711, 1017, 405, 711, 1017}
+local solo_whr_y2 = {254, 254, 254, 376, 376, 376, 495, 495, 495}
+local solo_fight_x = {333, 639, 942, 333, 639, 942, 333, 639, 942}
+local solo_fight_y = {300, 300, 300, 420, 420, 420, 540, 540, 540}
 
-pub_ana_metal_x = {603, 904, 603, 904, 603, 904, 603, 904}
-pub_ana_metal_y1 = {130, 130, 250, 250, 370, 370, 490, 490}
-pub_ana_metal_y2 = {240, 240, 360, 360, 480, 480, 600, 600}
-pub_mid_metal_ff_x_diff = 100
-pub_mid_metal_ff_y_diff = -35
+local pub_ana_metal_x = {603, 904, 603, 904, 603, 904, 603, 904}
+local pub_ana_metal_y1 = {130, 130, 250, 250, 370, 370, 490, 490}
+local pub_ana_metal_y2 = {240, 240, 360, 360, 480, 480, 600, 600}
+local pub_mid_metal_ff_x_diff = 100
+local pub_mid_metal_ff_y_diff = -35
 
 -- Util func
 function solo_lct_jjtp()
-	x, y = findColor({140, 547, 142, 549},
+	local x, y = findColor({140, 547, 142, 549},
 		"0|0|0xf3b25e,4|-66|0xa6521e,139|-70|0x752907,589|-11|0xde3945",
 		95, 0, 0, 0)
 	return x, y
@@ -32,10 +32,11 @@ function solo_analyse_map(solo_sel)
 	-- 检测当前突破情况, return array and number
 	-- -1: 突破成功
 	-- 0 ~ 5: 勋章数量
-	map = {}
-	winess = 0
-	invalid= 0
-	index = 1
+	local map = {}
+	local winess = 0
+	local invalid= 0
+	local index = 1
+	local i, j, x, y
 	for i = 1, 3 do
 		for j = 1, 3 do
 			map[index] = "null"
@@ -84,7 +85,8 @@ function solo_analyse_map(solo_sel)
 end
 
 function solo_find_next_target_loop(map, ran_arr, exp1, exp2, exp3)
-	pos = -1
+	local i, k
+	local pos = -1
 	if (exp1 >= exp2) then
 		for k = exp1, exp2, exp3 do
 			for i = 1, 9 do
@@ -110,10 +112,11 @@ end
 function solo_find_next_target(map, solo_sel)
 	showHUD_ios_ver(ios_ver,hud_scene,"寻找突破目标",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	-- 找到下一个突破目标
-	ran_arr = {}
-	pos = -1
-	ret = RET_ERR
-	ran_arr = getRandomList(9)
+	local ran_arr = {}
+	local pos = -1
+	local ret = RET_ERR
+	local ran_arr = getRandomList(9)
+	local j
 	
 	if solo_sel == "0_to_5" then
 		ret, pos = solo_find_next_target_loop(map, ran_arr, 0, 5, 1)
@@ -136,6 +139,7 @@ function solo_find_next_target(map, solo_sel)
 end
 
 function solo_refresh(winess, invalid, refresh)
+	local x, y
 	if (winess >= refresh or invalid == 9) then
 		x, y = findColor({278, 480, 280, 482}, -- 刷新
 			"0|0|0x762906,-12|69|0xf3b25e,604|2|0xf3b25e,715|70|0x493625",
@@ -157,7 +161,7 @@ function solo_refresh(winess, invalid, refresh)
 end
 
 function solo_get_bonus()
-	x, y = findColor({605, 464, 607, 466},
+	local x, y = findColor({605, 464, 607, 466},
 		"0|0|0xbb3c1a,64|-6|0xd19118,-20|-63|0xcbb599,-37|-78|0xd73846,-339|84|0x79582e,-7|106|0x6a645c",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -168,8 +172,7 @@ function solo_get_bonus()
 end
 
 function solo_fight_start(pos)
-	x = RET_ERR 
-	y = RET_ERR
+	local x, y = RET_ERR
 	if (pos == -1) then
 		return x, y
 	end
@@ -190,7 +193,7 @@ function solo_check_ticket(pos)
 	end
 	
 	mSleep(1000)
-	x, y = findColor({solo_fight_x[pos]-1, solo_fight_y[pos]-1, solo_fight_x[pos]+1, solo_fight_y[pos]+1},
+	local x, y = findColor({solo_fight_x[pos]-1, solo_fight_y[pos]-1, solo_fight_x[pos]+1, solo_fight_y[pos]+1},
 		"0|0|0xf3b25e,-40|-2|0xf3b25e,38|2|0xf3b25e,73|1|0xcbb59c",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -200,7 +203,7 @@ function solo_check_ticket(pos)
 end
 
 function solo_quit_defense_record()
-	x, y = findColor({677, 105, 679, 107}, -- 防守记录
+	local x, y = findColor({677, 105, 679, 107}, -- 防守记录
 		"0|0|0xf3b25e,-37|2|0xcbb59c,-18|93|0xd6c9b9,-9|394|0xd6c9b9",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -210,7 +213,7 @@ function solo_quit_defense_record()
 end
 
 function solo_lock()
-	x, y = findColor({916, 541, 918, 543},
+	local x, y = findColor({916, 541, 918, 543},
 		"0|0|0x816645,-11|1|0x2f2318,14|0|0x2f2318",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -225,7 +228,7 @@ function solo_to_pub()
 end
 
 function pub_lct_jjtp()
-	x, y = findColor({346, 256, 348, 258}, -- 三个红条 突破记录
+	local x, y = findColor({346, 256, 348, 258}, -- 三个红条 突破记录
 		"0|0|0x8e0518,4|100|0x830516,9|234|0x870517,-238|329|0xcba97c",
 		95, 0, 0, 0)
 	return x, y
@@ -239,48 +242,49 @@ function pub_ff(x1, y1, x2, y2)
 end
 
 function pub_f5(x1, y1, x2, y2)
-	x, y = findColor({x1, y1, x2, y2},
+	local x, y = findColor({x1, y1, x2, y2},
 		"0|0|0xaba59f,-35|0|0xa5a099,-70|0|0xb3ada7,35|0|0xaba59f,70|0|0xa7a19b",
 		95, 0, 0, 0)
 	return x, y
 end
 
 function pub_f4(x1, y1, x2, y2)
-	x, y = findColor({x1, y1, x2, y2},
+	local x, y = findColor({x1, y1, x2, y2},
 		"0|0|0xb4afa9,-36|0|0xb7b1ab,-71|0|0xb5b0aa,35|0|0xb4afa9,69|0|0xb3a28d",
 		95, 0, 0, 0)
 	return x, y
 end
 
 function pub_f3(x1, y1, x2, y2)
-	x, y = findColor({x1, y1, x2, y2},
+	local x, y = findColor({x1, y1, x2, y2},
 		"0|0|0xaba59f,-35|0|0xa5a099,-70|0|0xb3ada7,35|0|0xb3a28c,70|0|0xb3a28c",
 		95, 0, 0, 0)
 	return x, y
 end
 
 function pub_f2(x1, y1, x2, y2)
-	x, y = findColor({x1, y1, x2, y2},
+	local x, y = findColor({x1, y1, x2, y2},
 		"0|0|0xb3a28d,-35|0|0xb5b0aa,-71|0|0xb5b0a9,35|0|0xb3a28d,71|0|0xb3a28d",
 		95, 0, 0, 0)
 	return x, y
 end
 
 function pub_f1(x1, y1, x2, y2)
-	x, y = findColor({x1, y1, x2, y2},
+	local x, y = findColor({x1, y1, x2, y2},
 		"0|0|0xb3a28d,-35|0|0xb3a28d,-71|0|0xb5b0a9,35|0|0xb3a28d,69|0|0xb3a28d",
 		95, 0, 0, 0)
 	return x, y
 end
 
 function pub_f0(x1, y1, x2, y2)
-	x, y = findColor({x1, y1, x2, y2},
+	local x, y = findColor({x1, y1, x2, y2},
 		"0|0|0xb3a28c,-35|0|0xb3a28c,-70|0|0xb3a28c,35|0|0xb3a28c,70|0|0xb3a28c",
 		95, 0, 0, 0)
 	return x, y
 end
 
 function pub_cnt_metal(x1, y1, x2, y2)
+	local x, y, x_f, y_f
 	x, y = pub_f5(x1, y1, x2, y2)
 	if x > -1 then
 		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
@@ -295,10 +299,8 @@ function pub_cnt_metal(x1, y1, x2, y2)
 		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
 						  x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
 		if x_f > -1 then
-			print(x)
 			return x, y, -1
 		end
-		print(x)
 		return x, y, 4
 	end
 	x, y = pub_f3(x1, y1, x2, y2)
@@ -341,6 +343,7 @@ function pub_cnt_metal(x1, y1, x2, y2)
 end
 
 function pub_ff_open()
+	local x, y
 	x, y = findColor({700, 40, 705, 465},
 		"0|0|0xedd185,-5|6|0xfaca57,16|-13|0xa83434,11|-23|0xa93232",
 		95, 0, 0, 0)
@@ -358,9 +361,10 @@ end
 
 function pub_analyse_map(pub_sel)
 	showHUD_ios_ver(ios_ver,hud_scene,"分析地图",20,"0xff000000","0xffffffff",0,100,0,300,32)
-	map = {}
-	coor_map_x = {}
-	coor_map_y = {}
+	local map = {}
+	local coor_map_x = {}
+	local coor_map_y = {}
+	local i
 	for i = 1, 8 do
 		coor_map_x[i], coor_map_y[i], map[i] = pub_cnt_metal(pub_ana_metal_x[i], pub_ana_metal_y1[i],
 			pub_ana_metal_x[i] + 5, pub_ana_metal_y2[i])
@@ -374,6 +378,7 @@ function pub_analyse_map(pub_sel)
 end
 
 function pub_find_next_target(map)
+	local i
 	for i = 1, 8 do
 		if map[i] ~= -1 then
 			return i
@@ -384,11 +389,12 @@ end
 
 function pub_refresh()
 	showHUD_ios_ver(ios_ver,hud_scene,"翻页",20,"0xff000000","0xffffffff",0,100,0,300,32)
-	x_ran = 725 + math.random(-100, 100)
-	y_ran = 500 + math.random(-50, 50)
-	x_interv = math.random(-6, 6)
-	y_interv = -20
-	steps = 15
+	local x_ran = 725 + math.random(-100, 100)
+	local y_ran = 500 + math.random(-50, 50)
+	local x_interv = math.random(-6, 6)
+	local y_interv = -20
+	local steps = 15
+	local i
 	
 	touchDown(0, x_ran, y_ran)
 	for i = 0, steps, 1 do
@@ -399,8 +405,7 @@ function pub_refresh()
 end
 
 function pub_find_start()
-	x = RET_ERR
-	y = RET_ERR
+	local x, y
 	x, y = findColor({645, 220, 647, 580},
 		"0|0|0xf3b25e,-54|-24|0x983c2e,-54|19|0x983d2e,52|-24|0x973c2e,52|19|0x983c2e",
 		95, 0, 0, 0)
@@ -417,6 +422,7 @@ function pub_find_start()
 end
 
 function pub_map_finished(map)
+	local i
 	for i = 1, 8, 1 do
 		if map[i] ~= -1 then
 			return RET_ERR
@@ -426,6 +432,7 @@ function pub_map_finished(map)
 end
 
 function find_whr(pos, whr, role)
+	local x, y, x1, x2, y1, y2
 	if (pos == -1) then
 		return RET_ERR
 	end
@@ -571,18 +578,19 @@ function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, l
 end
 
 function jjtp_solo(whr, round_time, refresh, solo_sel, lock, offer_arr)
-	time_cnt = 0
-	map = {}
-	winess = -1
-	invalid = -1
-	pos = -1
-	found_target = -1
-	found_whr = -1
-	win_cnt = 0
-	fail_cnt = 0
-	disconn_fin = 1
-	real_8dashe = 0
-	secret_vender = 0
+	local time_cnt = 0
+	local map = {}
+	local winess = -1
+	local invalid = -1
+	local pos = -1
+	local found_target = -1
+	local found_whr = -1
+	local win_cnt = 0
+	local fail_cnt = 0
+	local disconn_fin = 1
+	local real_8dashe = 0
+	local secret_vender = 0
+	local x, y
 	
 	if (round_time == 0) then
 		round_time = 999
@@ -716,18 +724,19 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, offer_arr)
 end
 
 function jjtp_pub(whr, round_time, pub_sel, lock, offer_arr)
-	map = {}
-	coor_map_x = {}
-	coor_map_y = {}
-	pos = -1
-	time_cnt = 0
-	win_cnt = 0
-	fail_cnt = 0
-	refresh = 0
-	page = 0
-	disconn_fin = 1
-	real_8dashe = 0
-	secret_vender = 0
+	local map = {}
+	local coor_map_x = {}
+	local coor_map_y = {}
+	local pos = -1
+	local time_cnt = 0
+	local win_cnt = 0
+	local fail_cnt = 0
+	local refresh = 0
+	local page = 0
+	local disconn_fin = 1
+	local real_8dashe = 0
+	local secret_vender = 0
+	local x, y
 	
 	while (1) do
 		while (1) do

@@ -12,7 +12,7 @@ DISABLE = 0
 print(os.date())
 init(0, 1)
 width,height = getScreenSize()
-s = height * 0.050 -- For util
+s = height * 0.050 -- util.lua
 setScreenScale(640, 1136) -- iPhone 5s
 print(string.format("width = %d, height = %d", width, height))
 math.randomseed(os.time())

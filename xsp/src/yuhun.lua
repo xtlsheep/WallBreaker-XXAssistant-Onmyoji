@@ -3,7 +3,7 @@ require "func"
 
 -- Util func
 function lct_yuhun()
-	x, y = findColor({57, 487, 60, 489}, -- 左边小路灯
+	local x, y = findColor({57, 487, 60, 489}, -- 左边小路灯
 		"0|0|0xffd821,0|-19|0xb24828,-1|-47|0xddd3bf,0|36|0x855021",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -13,7 +13,7 @@ function lct_yuhun()
 end
 
 function lct_8dashe()
-	x, y = findColor({998, 616, 999, 617}, -- 右下鳞片
+	local x, y = findColor({998, 616, 999, 617}, -- 右下鳞片
 		"0|0|0xfbe9bc,0|-34|0x040402,-1|-52|0xa46d91,10|-22|0x391f10",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -23,6 +23,7 @@ function lct_8dashe()
 end
 
 function yuhun_mark(position, multi)
+	local cnt, i
 	mSleep(500)
 	if (multi == 1) then
 		cnt = math.random(4, 6)
@@ -43,7 +44,7 @@ function yuhun_mark(position, multi)
 end
 
 function find_real8dashe()
-	x, y = findColor({27, 229, 34, 234}, -- 关闭箭头
+	local x, y = findColor({27, 229, 34, 234}, -- 关闭箭头
 		"0|0|0xcf893c,10|-11|0xcc883a,12|16|0xd49248,379|-16|0x847396",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -53,7 +54,7 @@ function find_real8dashe()
 end
 
 function lct_petfind()
-	x, y = findColor({829, 207, 831, 209}, -- 右边银色 发 宝
+	local x, y = findColor({829, 207, 831, 209}, -- 右边银色 发 宝
 		"0|0|0x7c7371,3|33|0xaea09b,-230|-55|0xf4e4b1,-370|-29|0xdbc788",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -82,15 +83,14 @@ function yuhun(mode, role, group, mark, level, round, offer_arr, lock, member_au
 end
 
 function yuhun_solo(mark, level, round, offer_arr, lock)
-	rd_cnt = 0
-	win_cnt = 0
-	fail_cnt = 0
-	x = -1
-	y = -1
-	init = 1
-	disconn_fin = 1
-	real_8dashe = 1
-	secret_vender = 1
+	local rd_cnt = 0
+	local win_cnt = 0
+	local fail_cnt = 0
+	local init = 1
+	local disconn_fin = 1
+	local real_8dashe = 1
+	local secret_vender = 1
+	local x, y
 	
 	while (1) do
 		if (round > 0) then
@@ -156,18 +156,17 @@ function yuhun_solo(mark, level, round, offer_arr, lock)
 end
 
 function yuhun_group_wild_member(mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain)
-	rd_cnt = 0
-	win_cnt = 0
-	fail_cnt = 0
-	time_cnt = 0
-	x = -1
-	y = -1
-	init = 1
-	wait_invite = 0
-	auto_grouped = -1
-	disconn_fin = 1
-	real_8dashe = 1
-	secret_vender = 1
+	local rd_cnt = 0
+	local win_cnt = 0
+	local fail_cnt = 0
+	local time_cnt = 0
+	local init = 1
+	local wait_invite = 0
+	local auto_grouped = -1
+	local disconn_fin = 1
+	local real_8dashe = 1
+	local secret_vender = 1
+	local x, y
 	
 	while (1) do
 		if (round > 0) then
@@ -267,15 +266,14 @@ function yuhun_group_wild_member(mark, level, round, offer_arr, lock, member_aut
 end
 
 function yuhun_group_wild_captain(mark, level, round, offer_arr, lock, captain_auto_group, fail_and_recreate)
-	rd_cnt = 0
-	win_cnt = 0
-	fail_cnt = 0
-	x = -1
-	y = -1
-	init = 1
-	disconn_fin = 1
-	real_8dashe = 1
-	secret_vender = 1
+	local rd_cnt = 0
+	local win_cnt = 0
+	local fail_cnt = 0
+	local init = 1
+	local disconn_fin = 1
+	local real_8dashe = 1
+	local secret_vender = 1
+	local x, y
 	
 	while (1) do
 		if (round > 0) then
@@ -361,16 +359,15 @@ function yuhun_group_wild_captain(mark, level, round, offer_arr, lock, captain_a
 end
 
 function yuhun_group_fix_member(mark, level, round, offer_arr, member_auto_group, member_to_captain)
-	rd_cnt = 0
-	win_cnt = 0
-	fail_cnt = 0
-	x = -1
-	y = -1
-	init = 1
-	auto_grouped = -1
-	disconn_fin = 1
-	real_8dashe = 1
-	secret_vender = 1
+	local rd_cnt = 0
+	local win_cnt = 0
+	local fail_cnt = 0
+	local init = 1
+	local auto_grouped = -1
+	local disconn_fin = 1
+	local real_8dashe = 1
+	local secret_vender = 1
+	local x, y
 	
 	while (1) do
 		if (round > 0) then
@@ -436,17 +433,16 @@ function yuhun_group_fix_member(mark, level, round, offer_arr, member_auto_group
 end
 
 function yuhun_group_fix_captain(mark, level, round, offer_arr, lock, captain_auto_group, auto_invite_first)
-	rd_cnt = 0
-	win_cnt = 0
-	fail_cnt = 0
-	time_cnt = 0
-	x = -1
-	y = -1
-	init = 1
-	invite = 1
-	disconn_fin = 1
-	real_8dashe = 1
-	secret_vender = 1
+	local rd_cnt = 0
+	local win_cnt = 0
+	local fail_cnt = 0
+	local time_cnt = 0
+	local init = 1
+	local invite = 1
+	local disconn_fin = 1
+	local real_8dashe = 1
+	local secret_vender = 1
+	local x, y
 	
 	while (1) do
 		if (round > 0) then

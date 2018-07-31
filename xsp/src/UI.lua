@@ -6,7 +6,7 @@ require "yeyuanhuo"
 require "yuling"
 
 -- Def
-dev_width = 640 -- iPhone 5s: 640 x 1136
+local dev_width = 640 -- iPhone 5s: 640 x 1136
 
 -- Util func
 function fit_UI(ui, width_in)
@@ -82,7 +82,7 @@ function portal_UI()
 	if (ret_portal == 0) then
 		return RET_ERR
 	end
-	portal_sel = res_portal.select
+	local portal_sel = res_portal.select
 	if (portal_sel == "0") then
 		fast_UI()
 	elseif (portal_sel == "1") then
@@ -101,7 +101,7 @@ function fast_UI()
 		portal_UI()
 		return
 	end
-	fast_sel = res_fast.select
+	local fast_sel = res_fast.select
 	if (fast_sel == "0") then
 		fast_yuhun_UI()
 	elseif (fast_sel == "1") then
@@ -180,8 +180,8 @@ function global_UI()
 		return RET_ERR, offer_arr
 	end
 	
-	offer_arr = {0, 0, 0, 0, 0, 0}
-	offer_sel = {}
+	local offer_arr = {0, 0, 0, 0, 0, 0}
+	local offer_sel = {}
 	
 	if res_global.offer_en == "0" then
 		offer_arr[0] = 1
@@ -214,6 +214,7 @@ function fast_yuhun_UI()
 		fast_UI()
 		return
 	end
+	local mode, role, group
 	
 	if (res_fast_yh.mode == "0") then
 		mode = "单人"
@@ -237,7 +238,7 @@ function fast_yuhun_UI()
 		group = "固定队"
 	end
 	
-	mark = {}
+	local mark = {}
 	mark[1] = res_fast_yh.round1
 	mark[2] = res_fast_yh.round2
 	mark[3] = res_fast_yh.round3
@@ -253,21 +254,22 @@ function fast_yuhun_UI()
 			mark[i] = "无"
 		end
 	end
-	offer_arr = {0, 0, 0, 0, 0, 0}
-	level = 10
-	round = 0
-	offer_en = 0
-	gouyu = 0
-	tili = 0
-	jinbi = 0
-	lingshi = 0
-	lock = 1
-	member_auto_group = 1
-	fail_and_group = 1
-	member_to_captain = 0
-	captain_auto_group = 1
-	auto_invite_first = 0
-	fail_and_recreate = 1
+	
+	local level = 10
+	local round = 0
+	local offer_en = 0
+	local gouyu = 0
+	local tili = 0
+	local jinbi = 0
+	local lingshi = 0
+	local lock = 1
+	local member_auto_group = 1
+	local fail_and_group = 1
+	local member_to_captain = 0
+	local captain_auto_group = 1
+	local auto_invite_first = 0
+	local fail_and_recreate = 1
+	local offer_arr = {0, 0, 0, 0, 0, 0}
 	yuhun(mode, role, group, mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
 end
 
@@ -290,6 +292,7 @@ function fast_jjtp_UI()
 		return
 	end
 	
+	local mode
 	if (res_fast_jjtp.mode == "0") then
 		mode = "个人"
 	elseif (res_fast_jjtp.mode == "1") then
@@ -298,8 +301,8 @@ function fast_jjtp_UI()
 		mode = "个人+阴阳寮"
 	end
 	
-	whr_out = {0, 0, 0, 0}
-	whr = {}
+	local whr_out = {0, 0, 0, 0}
+	local whr = {}
 	for w in string.gmatch(res_fast_jjtp.whr,"([^'@']+)") do
 		table.insert(whr,w)
 	end
@@ -314,14 +317,12 @@ function fast_jjtp_UI()
 			whr_out[4] = 1 -- 御馔津
 		end
 	end
-	round_time = 5
-	lock = 1
-	refresh = 3
-	solo_sel = "5_to_0"
-	pub_sel = 5
-	
-	offer_arr = {0, 0, 0, 0, 0, 0}
-	
+	local round_time = 5
+	local lock = 1
+	local refresh = 3
+	local solo_sel = "5_to_0"
+	local pub_sel = 5
+	local offer_arr = {0, 0, 0, 0, 0, 0}
 	jjtp(mode, whr_out, whr_out, round_time, refresh, solo_sel, pub_sel, lock, offer_arr)
 end
 
@@ -333,6 +334,7 @@ function fast_juexing_UI()
 		return
 	end
 	
+	local element
 	if (res_fast_jx.element == "0") then
 		element = "火"
 	elseif (res_fast_jx.element == "1") then
@@ -343,6 +345,7 @@ function fast_juexing_UI()
 		element = "雷"
 	end
 	
+	local mode, role, group
 	if (res_fast_jx.mode == "0") then
 		mode = "单人"
 		role = "无"
@@ -365,6 +368,7 @@ function fast_juexing_UI()
 		group = "固定队"
 	end
 	
+	local mark
 	if (res_fast_jx.mark == "0") then
 		mark = "小怪"
 	elseif (res_fast_jx.mark == "1") then
@@ -373,17 +377,16 @@ function fast_juexing_UI()
 		mark = "无"
 	end
 	
-	level = 10
-	round = 0
-	offer_arr = {0, 0, 0, 0, 0, 0}
-	lock = 1
-	member_auto_group = 1
-	fail_and_group = 1
-	member_to_captain = 0
-	captain_auto_group = 1
-	auto_invite_first = 0
-	fail_and_recreate = 1
-	
+	local level = 10
+	local round = 0
+	local lock = 1
+	local member_auto_group = 1
+	local fail_and_group = 1
+	local member_to_captain = 0
+	local captain_auto_group = 1
+	local auto_invite_first = 0
+	local fail_and_recreate = 1
+	local offer_arr = {0, 0, 0, 0, 0, 0}
 	juexing(mode, role, group, element, mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
 end
 
@@ -396,6 +399,7 @@ function baqidashe_UI()
 		return
 	end
 	
+	local mode, role, group
 	if (res_baqi.mode == "0") then
 		mode = "单人"
 		role = "无"
@@ -418,7 +422,7 @@ function baqidashe_UI()
 		group = "固定队"
 	end
 	
-	mark = {}
+	local mark = {}
 	mark[1] = res_baqi.round1
 	mark[2] = res_baqi.round2
 	mark[3] = res_baqi.round3
@@ -434,8 +438,9 @@ function baqidashe_UI()
 		end
 	end
 	
-	level = tonumber(res_baqi.level_select) + 1
+	local level = tonumber(res_baqi.level_select) + 1
 	
+	local round
 	if (res_baqi.round_times == "0") then
 		round = 10
 	elseif (res_baqi.round_times == "1") then
@@ -450,50 +455,56 @@ function baqidashe_UI()
 		round = 0
 	end
 	
+	local lock
 	if (res_baqi.lock == "0") then
 		lock = 1
 	else
 		lock = 0
 	end
 	
+	local member_auto_group
 	if (res_baqi.member_auto_group == "0") then
 		member_auto_group = 1
 	else
 		member_auto_group = 0
 	end
 	
+	local fail_and_group
 	if (res_baqi.fail_and_group == "0") then
 		fail_and_group = 1
 	else
 		fail_and_group = 0
 	end
 	
+	local member_to_captain
 	if (res_baqi.member_to_captain == "0") then
 		member_to_captain = 0
 	else
 		member_to_captain = 1
 	end
 	
+	local captain_auto_group
 	if (res_baqi.captain_auto_group == "0") then
 		captain_auto_group = 1
 	else
 		captain_auto_group = 0
 	end
 	
+	local auto_invite_first
 	if (res_baqi.auto_invite_first == "0") then
 		auto_invite_first = 1
 	else
 		auto_invite_first = 0
 	end
 	
+	local fail_and_recreate
 	if (res_baqi.fail_and_recreate == "0") then
 		fail_and_recreate = 1
 	else
 		fail_and_recreate = 0
 	end
 	
-	offer_arr = {}
-	ret_global, offer_arr = global_UI()
+	local ret_global, offer_arr = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -509,8 +520,7 @@ local ui = fit_UI("tansuo.json", dev_width)
 		return
 	end
 
-	offer_arr = {}
-	ret_global, offer_arr = global_UI()
+	local ret_global, offer_arr = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -524,6 +534,7 @@ function jjtp_UI()
 		return
 	end
 	
+	local mode
 	if (res_jjtp.mode == "0") then
 		mode = "个人"
 	elseif (res_jjtp.mode == "1") then
@@ -532,8 +543,8 @@ function jjtp_UI()
 		mode = "个人+阴阳寮"
 	end
 	
-	whr_solo_out = {0, 0, 0, 0}
-	whr_solo = {}
+	local whr_solo_out = {0, 0, 0, 0}
+	local whr_solo = {}
 	for w in string.gmatch(res_jjtp.whr_solo,"([^'@']+)") do
 		table.insert(whr_solo,w)
 	end
@@ -549,8 +560,8 @@ function jjtp_UI()
 		end
 	end
 	
-	whr_pub_out = {0, 0, 0, 0}
-	whr_pub = {}
+	local whr_pub_out = {0, 0, 0, 0}
+	local whr_pub = {}
 	for w in string.gmatch(res_jjtp.whr_pub,"([^'@']+)") do
 		table.insert(whr_pub,w)
 	end
@@ -566,6 +577,7 @@ function jjtp_UI()
 		end
 	end
 	
+	local round_time
 	if (res_jjtp.round_time == "0") then
 		round_time = 3
 	elseif (res_jjtp.round_time == "1") then
@@ -576,13 +588,14 @@ function jjtp_UI()
 		round_time = 0
 	end
 	
+	local lock
 	if (res_jjtp.lock == "0") then
 		lock = 1
 	else
 		lock = 0
 	end
 	
-	refresh = 0
+	local refresh
 	if (res_jjtp.refresh == "0") then
 		refresh = 3
 	elseif (res_jjtp.refresh == "1") then
@@ -591,6 +604,7 @@ function jjtp_UI()
 		refresh = 9
 	end
 	
+	local solo_sel, pub_sel
 	if (res_jjtp.solo_sel == "0") then
 		solo_sel = "0_to_5"
 	elseif (res_jjtp.solo_sel == "1") then
@@ -617,8 +631,7 @@ function jjtp_UI()
 		pub_sel = 0
 	end
 	
-	offer_arr = {}
-	ret_global, offer_arr = global_UI()
+	local ret_global, offer_arr = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -634,6 +647,7 @@ function juexing_UI()
 		return
 	end
 	
+	local element
 	if (res_juexing.element == "0") then
 		element = "火"
 	elseif (res_juexing.element == "1") then
@@ -644,6 +658,7 @@ function juexing_UI()
 		element = "雷"
 	end
 	
+	local mode, role, group
 	if (res_juexing.mode == "0") then
 		mode = "单人"
 		role = "无"
@@ -666,6 +681,7 @@ function juexing_UI()
 		group = "固定队"
 	end
 	
+	local mark
 	if (res_juexing.mark == "0") then
 		mark = "小怪"
 	elseif (res_juexing.mark == "1") then
@@ -674,8 +690,9 @@ function juexing_UI()
 		mark = "无"
 	end
 	
-	level = tonumber(res_juexing.level_select) + 1
+	local level = tonumber(res_juexing.level_select) + 1
 	
+	local round
 	if (res_juexing.round_times == "0") then
 		round = 10
 	elseif (res_juexing.round_times == "1") then
@@ -690,50 +707,56 @@ function juexing_UI()
 		round = 0
 	end
 	
+	local lock
 	if (res_juexing.lock == "0") then
 		lock = 1
 	else
 		lock = 0
 	end
 	
+	local member_auto_group
 	if (res_juexing.member_auto_group == "0") then
 		member_auto_group = 1
 	else
 		member_auto_group = 0
 	end
 	
+	local fail_and_group
 	if (res_juexing.fail_and_group == "0") then
 		fail_and_group = 1
 	else
 		fail_and_group = 0
 	end
 	
+	local member_to_captain
 	if (res_juexing.member_to_captain == "0") then
 		member_to_captain = 0
 	else
 		member_to_captain = 1
 	end
 	
+	local captain_auto_group
 	if (res_juexing.captain_auto_group == "0") then
 		captain_auto_group = 1
 	else
 		captain_auto_group = 0
 	end
 	
+	local auto_invite_first
 	if (res_juexing.auto_invite_first == "0") then
 		auto_invite_first = 1
 	else
 		auto_invite_first = 0
 	end
 	
+	local fail_and_recreate
 	if (res_juexing.fail_and_recreate == "0") then
 		fail_and_recreate = 1
 	else
 		fail_and_recreate = 0
 	end
 	
-	offer_arr = {}
-	ret_global, offer_arr = global_UI()
+	local ret_global, offer_arr = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -749,8 +772,7 @@ function yqfy_UI()
 		return
 	end
 	
-	offer_arr = {}
-	ret_global, offer_arr = global_UI()
+	local ret_global, offer_arr = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -764,8 +786,7 @@ function dailymission_UI()
 		return
 	end
 	
-	offer_arr = {}
-	ret_global, offer_arr = global_UI()
+	local ret_global, offer_arr = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -779,9 +800,9 @@ function yeyuanhuo_UI()
 		return
 	end
 	
-	round_tan = 0
-	round_chen = 0
-	round_chi = 0
+	local round_tan = 0
+	local round_chen = 0
+	local round_chi = 0
 	
 	if (res_yeyuanhuo.round_tan == "0") then
 		round_tan = 0
@@ -831,14 +852,14 @@ function yeyuanhuo_UI()
 		round_chi = 99999
 	end
 	
+	local lock
 	if (res_yeyuanhuo.lock == "0") then
 		lock = 1
 	else
 		lock = 0
 	end
 	
-	offer_arr = {}
-	ret_global, offer_arr = global_UI()
+	local ret_global, offer_arr = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -854,10 +875,10 @@ function yuling_UI()
 		return
 	end
 	
-	sel = -1
-	level = -1
-	round = -1
-	lock = -1
+	local sel = -1
+	local level = -1
+	local round = -1
+	local lock = -1
 	
 	if (res_yuling.select == "0") then
 		sel = "神龙"
@@ -899,8 +920,7 @@ function yuling_UI()
 		lock = 0
 	end
 	
-	offer_arr = {}
-	ret_global, offer_arr = global_UI()
+	local ret_global, offer_arr = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -916,8 +936,7 @@ function hundredghost_UI()
 		return
 	end
 	
-	offer_arr = {}
-	ret_global, offer_arr = global_UI()
+	local ret_global, offer_arr = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -931,8 +950,7 @@ function multimission_UI()
 		return
 	end
 	
-	offer_arr = {}
-	ret_global, offer_arr = global_UI()
+	local ret_global, offer_arr = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -946,8 +964,7 @@ function worldchannel_UI()
 		return
 	end
 	
-	offer_arr = {}
-	ret_global, offer_arr = global_UI()
+	local ret_global, offer_arr = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -961,8 +978,7 @@ function normalcall_UI()
 		return
 	end
 	
-	offer_arr = {}
-	ret_global, offer_arr = global_UI()
+	local ret_global, offer_arr = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -976,8 +992,7 @@ function arena_UI()
 		return
 	end
 	
-	offer_arr = {}
-	ret_global, offer_arr = global_UI()
+	local ret_global, offer_arr = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -991,8 +1006,7 @@ function offerquery_UI()
 		return
 	end
 	
-	offer_arr = {}
-	ret_global, offer_arr = global_UI()
+	local ret_global, offer_arr = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -1006,8 +1020,7 @@ function audition_UI()
 		return
 	end
 	
-	offer_arr = {}
-	ret_global, offer_arr = global_UI()
+	local ret_global, offer_arr = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end

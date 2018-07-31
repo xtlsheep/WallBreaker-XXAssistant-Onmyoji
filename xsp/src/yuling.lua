@@ -3,14 +3,14 @@ require "func"
 
 -- Util func
 function lct_yuling_all()
-	x, y = findColor({113, 157, 115, 169}, 
+	local x, y = findColor({113, 157, 115, 169}, 
 		"0|0|0xe1d8c8,-29|204|0xe2d8c8,193|452|0x322610,416|450|0x161a0d",
 		95, 0, 0, 0)
 	return x, y
 end
 
 function lct_yuling_single()
-	x, y = findColor({279, 464, 281, 466}, 
+	local x, y = findColor({279, 464, 281, 466}, 
 		"0|0|0x3a3e45,68|-1|0x3a3f46,132|-2|0x61476b,199|-1|0x6a543a",
 		95, 0, 0, 0)
 	return x, y
@@ -20,15 +20,14 @@ end
 function yuling(sel, level, round, lock, offer_arr)
 	print(string.format("种类 %s，层数 %d, 次数 %d，锁定 %d", sel, level, round, lock))
 	
-	rd = round
-	win_cnt = 0
-	fail_cnt = 0
-	init = 1
-	x = -1
-	y = -1
-	disconn_fin = 1
-	real_8dashe = 0
-	secret_vender = 0
+	local rd = round
+	local win_cnt = 0
+	local fail_cnt = 0
+	local init = 1
+	local disconn_fin = 1
+	local real_8dashe = 0
+	local secret_vender = 0
+	local x, y
 	
 	while (1) do
 		while (1) do

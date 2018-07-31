@@ -3,7 +3,7 @@ require "func"
 
 -- Util func
 function lct_yyh()
-	x, y = findColor({807, 439, 819, 441}, -- 业原火
+	local x, y = findColor({807, 439, 819, 441}, -- 业原火
 		"0|0|0xf3b25e,-59|-236|0xdd7cb3,-124|-168|0xf2faf9,-83|-142|0x2eae93",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -16,20 +16,19 @@ end
 function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 	print(string.format("贪 %d, 嗔 %d, 痴 %d，锁定 %d", round_tan, round_chen, round_chi, lock))
 	
-	rd_tan = round_tan
-	rd_chen = round_chen
-	rd_chi = round_chi
-	win_cnt = 0
-	fail_cnt = 0
-	end_tan = 0
-	end_chen = 0
-	end_chi = 0
-	x = -1
-	y = -1
-	disconn_fin = 1
-	real_8dashe = 0
-	secret_vender = 0
-	
+	local rd_tan = round_tan
+	local rd_chen = round_chen
+	local rd_chi = round_chi
+	local win_cnt = 0
+	local fail_cnt = 0
+	local end_tan = 0
+	local end_chen = 0
+	local end_chi = 0
+	local disconn_fin = 1
+	local real_8dashe = 0
+	local secret_vender = 0
+	local x, y
+
 	while (1) do
 		while (1) do
 			-- 战斗开始

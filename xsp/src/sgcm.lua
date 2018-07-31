@@ -3,7 +3,7 @@ require "func"
 
 -- Util func
 function lct_sgcm()
-	x, y = findColor({668, 352, 675, 358}, -- 当前积分
+	local x, y = findColor({668, 352, 675, 358}, -- 当前积分
 		"0|0|0xdfba67,-1|25|0xe2bd6c,-101|25|0xdfb564,-95|-11|0xfffded",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -13,7 +13,7 @@ function lct_sgcm()
 end
 
 function find_guiwang()
-	x, y = findColor({291, 188, 295, 192}, -- 鬼王中部
+	local x, y = findColor({291, 188, 295, 192}, -- 鬼王中部
 		"0|0|0xcec5bd,-37|-21|0xb1372a",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -31,7 +31,7 @@ function find_guiwang()
 end
 
 function lct_tired()
-	x, y = findColor({461, 325, 464, 327}, -- 茶
+	local x, y = findColor({461, 325, 464, 327}, -- 茶
 		"0|0|0x9cd52b,-19|-22|0x404354,26|-20|0x414457,-17|26|0x41445d",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -42,12 +42,12 @@ function lct_tired()
 end
 
 function sgcm_broadcast(friend, house)
-	x, y = findColor({108, 42, 116, 49}, --  集结邀请窗口
+	local str = nil
+	local pos = {}
+	local x, y = findColor({108, 42, 116, 49}, --  集结邀请窗口
 		"0|0|0x2f0606,553|63|0x9f876d,552|103|0xcbb59c",
 		95, 0, 0, 0)
-	str = nil
 	if x > -1 then
-		pos = {}
 		pos[1] = math.random(1, 2)
 		pos[2] = math.random(3, 4)
 		pos[3] = math.random(5, 6)
@@ -77,14 +77,14 @@ end
 
 function sgcm_mark()
 	-- 标记猫掌柜和草人
-	x, y = findColor({605, 145, 660, 197},
+	local x, y = findColor({605, 145, 660, 197},
 		"0|0|0xbc1b3f,0|-25|0xd90d4f,-18|-25|0xef45aa,19|-26|0xf556b6",
 		95, 0, 0, 0)
 	if x > -1 then
 		return
 	end
 	
-	ran = math.random(1, 100)
+	local ran = math.random(1, 100)
 	if (ran < 10) then
 		ran_touch(0, 530, 120, 3, 3) -- 猫掌柜
 	end
@@ -95,6 +95,7 @@ end
 
 -- Main func
 function super_ghost_cat_manager(direct_go)
+	local x, y
 	if (direct_go == 0) then
 		x, y = findColor({192, 239, 197, 500}, -- 弹窗中部
 			"0|0|0xd7b19e,-2|-23|0xd7c0ab,-1|26|0xd5a892,87|-12|0xd47c63",
@@ -117,10 +118,10 @@ function super_ghost_cat_manager(direct_go)
 		mSleep(3000)
 	end
 	
-	quit = 0
-	tired = 0
-	friend = 0
-	house = 0
+	local quit = 0
+	local tired = 0
+	local friend = 0
+	local house = 0
 	while (1) do
 		while (1) do
 			mSleep(500)
