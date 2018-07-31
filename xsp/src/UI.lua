@@ -290,9 +290,39 @@ function fast_jjtp_UI()
 		return
 	end
 	
+	if (res_fast_jjtp.mode == "0") then
+		mode = "个人"
+	elseif (res_fast_jjtp.mode == "1") then
+		mode = "阴阳寮"
+	elseif (res_fast_jjtp.mode == "2") then
+		mode = "个人+阴阳寮"
+	end
+	
+	whr_out = {0, 0, 0, 0}
+	whr = {}
+	for w in string.gmatch(res_fast_jjtp.whr,"([^'@']+)") do
+		table.insert(whr,w)
+	end
+	for i = 1, table.getn(whr), 1 do
+		if (whr[i] == "0") then
+			whr_out[1] = 1 -- 彼岸花
+		elseif (whr[i] == "1") then
+			whr_out[2] = 1 -- 小僧
+		elseif (whr[i] == "2") then
+			whr_out[3] = 1 -- 日和坊
+		elseif (whr[i] == "3") then
+			whr_out[4] = 1 -- 御馔津
+		end
+	end
+	round_time = 5
+	lock = 1
+	refresh = 3
+	solo_sel = "5_to_0"
+	pub_sel = 5
+	
 	offer_arr = {0, 0, 0, 0, 0, 0}
 	
-	jjtp(mode, whr, round_time, refresh, pri_select, pub_select, offer_arr)
+	jjtp(mode, whr_out, whr_out, round_time, refresh, solo_sel, pub_sel, lock, offer_arr)
 end
 
 function fast_juexing_UI()

@@ -17,6 +17,8 @@ solo_fight_y = {300, 300, 300, 420, 420, 420, 540, 540, 540}
 pub_ana_metal_x = {603, 904, 603, 904, 603, 904, 603, 904}
 pub_ana_metal_y1 = {130, 130, 250, 250, 370, 370, 490, 490}
 pub_ana_metal_y2 = {240, 240, 360, 360, 480, 480, 600, 600}
+pub_mid_metal_ff_x_diff = 100
+pub_mid_metal_ff_y_diff = -35
 
 -- Util func
 function solo_lct_jjtp()
@@ -230,8 +232,8 @@ function pub_lct_jjtp()
 end
 
 function pub_ff(x1, y1, x2, y2)
-	x, y = findColor({x1, y1, x2, y2},
-		"0|0|0xf3c460",
+	local x, y = findColor({x1, y1, x2, y2}, -- 右上角金色
+		"0|0|0xf8c958,-15|-10|0xf6c65d",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -278,7 +280,67 @@ function pub_f0(x1, y1, x2, y2)
 	return x, y
 end
 
-function pub_ff()
+function pub_cnt_metal(x1, y1, x2, y2)
+	x, y = pub_f5(x1, y1, x2, y2)
+	if x > -1 then
+		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
+						  x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
+		if x_f > -1 then
+			return x, y, -1
+		end
+		return x, y, 5
+	end
+	x, y = pub_f4(x1, y1, x2, y2)
+	if x > -1 then
+		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
+						  x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
+		if x_f > -1 then
+			print(x)
+			return x, y, -1
+		end
+		print(x)
+		return x, y, 4
+	end
+	x, y = pub_f3(x1, y1, x2, y2)
+	if x > -1 then
+		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
+						  x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
+		if x_f > -1 then
+			return x, y, -1
+		end
+		return x, y, 3
+	end
+	x, y = pub_f2(x1, y1, x2, y2)
+	if x > -1 then
+		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
+						  x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
+		if x_f > -1 then
+			return x, y, -1
+		end
+		return x, y, 2
+	end
+	x, y = pub_f1(x1, y1, x2, y2)
+	if x > -1 then
+		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
+						  x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
+		if x_f > -1 then
+			return x, y, -1
+		end
+		return x, y, 1
+	end
+	x, y = pub_f0(x1, y1, x2, y2)
+	if x > -1 then
+		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
+						  x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
+		if x_f > -1 then
+			return x, y, -1
+		end
+		return x, y, 0
+	end
+	return x, y, -1
+end
+
+function pub_ff_open()
 	x, y = findColor({700, 40, 705, 465},
 		"0|0|0xedd185,-5|6|0xfaca57,16|-13|0xa83434,11|-23|0xa93232",
 		95, 0, 0, 0)
@@ -292,34 +354,6 @@ function pub_ff()
 		return RET_OK
 	end
 	return RET_ERR
-end
-
-function pub_cnt_metal(x1, y1, x2, y2)	
-	x, y = pub_f5(x1, y1, x2, y2)
-	if x > -1 then
-		return x, y, 5
-	end
-	x, y = pub_f4(x1, y1, x2, y2)
-	if x > -1 then
-		return x, y, 4
-	end
-	x, y = pub_f3(x1, y1, x2, y2)
-	if x > -1 then
-		return x, y, 3
-	end
-	x, y = pub_f2(x1, y1, x2, y2)
-	if x > -1 then
-		return x, y, 2
-	end
-	x, y = pub_f1(x1, y1, x2, y2)
-	if x > -1 then
-		return x, y, 1
-	end
-	x, y = pub_f0(x1, y1, x2, y2)
-	if x > -1 then
-		return x, y, 0
-	end
-	return x, y, -1
 end
 
 function pub_analyse_map(pub_sel)
@@ -388,7 +422,7 @@ function pub_map_finished(map)
 			return RET_ERR
 		end
 	end
-	return RET_OK_OK
+	return RET_OK
 end
 
 function find_whr(pos, whr, role)
@@ -729,7 +763,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, offer_arr)
 						pub_refresh()
 						mSleep(500)
 					end
-					coor_map_x, coor_map_y, map = pub_analyse_map(pub_sel)
+					--coor_map_x, coor_map_y, map = pub_analyse_map(pub_sel)
 					refresh = 0
 				end
 				-- 点击目标
@@ -752,7 +786,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, offer_arr)
 			ret_f, x_f, y_f = pub_find_start()
 			if ret_f == RET_OK then
 				-- 失败的结界
-				ret = pub_ff()
+				ret = pub_ff_open()
 				if ret == RET_OK then
 					showHUD_ios_ver(ios_ver,hud_scene,"失败的结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					map[pos] = -1
