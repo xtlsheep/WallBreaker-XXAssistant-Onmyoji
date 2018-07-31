@@ -4,7 +4,9 @@ require "UI"
 -- Def
 RET_OK = 0
 RET_ERR = -1
-RET_ONE = 1
+RET_VALID = 1
+ENABLE = 1
+DISABLE = 0
 
 -- Init
 print(os.date())

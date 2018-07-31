@@ -58,7 +58,7 @@ function yuling(sel, level, round, lock, offer_arr)
 			if (x > -1) then
 				level_select(level, init, lock, "御灵")
 				init = 0
-				single_start()
+				solo_start()
 				break
 			end
 			-- 战斗准备

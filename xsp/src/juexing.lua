@@ -115,7 +115,7 @@ function juexing_solo(element, mark, level, round, offer_arr, lock)
 				break
 			end
 			-- 觉醒材料
-			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 single_start() break end -- 单人开始
+			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 solo_start() break end -- 单人开始
 			-- 庭院
 			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
 			-- 探索

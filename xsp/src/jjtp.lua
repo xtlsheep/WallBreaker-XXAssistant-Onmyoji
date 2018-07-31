@@ -110,7 +110,7 @@ function solo_find_next_target(map, solo_sel)
 	-- 找到下一个突破目标
 	ran_arr = {}
 	pos = -1
-	ret = -1
+	ret = RET_ERR
 	ran_arr = getRandomList(9)
 	
 	if solo_sel == "0_to_5" then
@@ -148,7 +148,7 @@ function solo_refresh(winess, invalid, refresh)
 		else
 			showHUD_ios_ver(ios_ver,hud_scene,"等待刷新",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			mSleep(10000)
-			return RET_ONE
+			return RET_VALID
 		end
 	end
 	return RET_ERR
@@ -166,8 +166,10 @@ function solo_get_bonus()
 end
 
 function solo_fight_start(pos)
+	x = RET_ERR 
+	y = RET_ERR
 	if (pos == -1) then
-		return -1, -1
+		return x, y
 	end
 	
 	x, y = findColor({solo_fight_x[pos]-1, solo_fight_y[pos]-1, solo_fight_x[pos]+1, solo_fight_y[pos]+1},
@@ -281,20 +283,18 @@ function pub_ff()
 		"0|0|0xedd185,-5|6|0xfaca57,16|-13|0xa83434,11|-23|0xa93232",
 		95, 0, 0, 0)
 	if x > -1 then
-		return 0
+		return RET_OK
 	end
 	x, y = findColor({1000, 40, 1005, 465},
 		"0|0|0xedd185,-5|6|0xfaca57,16|-13|0xa83434,11|-23|0xa93232",
 		95, 0, 0, 0)
 	if x > -1 then
-		return 0
+		return RET_OK
 	end
-	return -1
+	return RET_ERR
 end
 
-function pub_cnt_metal(x1, y1, x2, y2)
-	x, y = -1
-	
+function pub_cnt_metal(x1, y1, x2, y2)	
 	x, y = pub_f5(x1, y1, x2, y2)
 	if x > -1 then
 		return x, y, 5
@@ -345,7 +345,7 @@ function pub_find_next_target(map)
 			return i
 		end
 	end
-	return -1
+	return RET_ERR
 end
 
 function pub_refresh()
@@ -365,28 +365,30 @@ function pub_refresh()
 end
 
 function pub_find_start()
+	x = RET_ERR
+	y = RET_ERR
 	x, y = findColor({645, 220, 647, 580},
 		"0|0|0xf3b25e,-54|-24|0x983c2e,-54|19|0x983d2e,52|-24|0x973c2e,52|19|0x983c2e",
 		95, 0, 0, 0)
 	if x > -1 then
-		return 0, x, y
+		return RET_OK, x, y
 	end
 	x, y = findColor({945, 220, 947, 580},
 		"0|0|0xf3b25e,-54|-24|0x983c2e,-54|19|0x983d2e,52|-24|0x973c2e,52|19|0x983c2e",
 		95, 0, 0, 0)
 	if x > -1 then
-		return 0, x, y
+		return RET_OK, x, y
 	end
-	return -1, -1, -1
+	return RET_ERR, x, y
 end
 
 function pub_map_finished(map)
 	for i = 1, 8, 1 do
 		if map[i] ~= -1 then
-			return -1
+			return RET_ERR
 		end
 	end
-	return 0
+	return RET_OK_OK
 end
 
 function find_whr(pos, whr, role)
@@ -603,7 +605,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, offer_arr)
 			end
 			-- 五花肉
 			ret = find_whr(pos, whr, "solo")
-			if ret == 0 then
+			if ret == RET_OK then
 				ran_touch(0, 1095, 495, 10, 50) -- 右下空白
 				map[pos] = -1
 				pos = -1
@@ -714,7 +716,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, offer_arr)
 			if (x > 0) then
 				-- 翻页
 				ret = pub_map_finished(map)
-				if ret == 0 then
+				if ret == RET_OK then
 					pub_refresh()
 					map = {}
 					pos = -1
@@ -748,10 +750,10 @@ function jjtp_pub(whr, round_time, pub_sel, lock, offer_arr)
 			end
 			-- 进攻button检测
 			ret_f, x_f, y_f = pub_find_start()
-			if ret_f == 0 then
+			if ret_f == RET_OK then
 				-- 失败的结界
 				ret = pub_ff()
-				if ret == 0 then
+				if ret == RET_OK then
 					showHUD_ios_ver(ios_ver,hud_scene,"失败的结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					map[pos] = -1
 					pos = -1
@@ -765,7 +767,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, offer_arr)
 					break
 				else
 					ret_w = find_whr(pos, whr, "public")
-					if ret_w == 0 then
+					if ret_w == RET_OK then
 						ran_touch(0, 1095, 495, 10, 50) -- 右下空白
 						map[pos] = -1
 						pos = -1

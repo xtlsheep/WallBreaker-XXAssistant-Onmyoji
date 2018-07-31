@@ -85,7 +85,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 						ran_touch(0, 360, 160, 50, 10) -- 贪
 					end
 					ran_sleep(250)
-					ret = single_start()
+					ret = solo_start()
 					if (ret == RET_ERR) then
 						end_tan = 1
 						break
@@ -99,7 +99,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 						ran_touch(0, 360, 250, 50, 10) -- 嗔
 					end
 					ran_sleep(250)
-					ret = single_start()
+					ret = solo_start()
 					if (ret == RET_ERR) then
 						end_chen = 1
 						break
@@ -113,7 +113,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 						ran_touch(0, 360, 330, 50, 10) -- 痴
 					end
 					ran_sleep(250)
-					ret = single_start()
+					ret = solo_start()
 					if (ret == RET_ERR) then
 						end_chi = 1
 						break

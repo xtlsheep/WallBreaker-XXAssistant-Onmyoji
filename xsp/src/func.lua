@@ -23,7 +23,7 @@ end
 
 function level_select(level, init, lock, spec)
 	mSleep(500)
-	if (init == 1) then
+	if (init == ENABLE) then
 		showHUD_ios_ver(ios_ver,hud_scene,"层数 - 初始化",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		-- 选择层数
 		if (level == 1) then
@@ -92,7 +92,6 @@ function getRandomList(length)
 end
 
 function lock_or_unlock(lock, spec)
-	x = -1 y = -1
 	if spec == "御魂" then
 		x1 = 638 y1 = 368 x2 = 640 y2 = 370
 	elseif spec == "觉醒" then
@@ -106,7 +105,7 @@ function lock_or_unlock(lock, spec)
 	end
 	
 	if (spec == "御魂" or spec == "觉醒" or spec == "业原火") then
-		if (lock == 1) then
+		if (lock == ENABLE) then
 			x, y = findColor({x1, y1, x2, y2},
 				"0|0|0x735c41,11|1|0x2c2119,-11|0|0x2e231c,-1|5|0x291f19",
 				95, 0, 0, 0)
@@ -125,7 +124,7 @@ function lock_or_unlock(lock, spec)
 	end
 
 	if (spec == "御灵") then
-		if (lock == 1) then
+		if (lock == ENABLE) then
 			x, y = findColor({x1, y1, x2, y2},
 				"0|0|0x886d49,0|5|0x241911,-13|0|0x2f2318,15|0|0x2f2318",
 				95, 0, 0, 0)
@@ -163,7 +162,7 @@ function lock_or_unlock(lock, spec)
 	end
 end
 
-function single_start()
+function solo_start()
 	ran_touch(0, 845, 440, 30, 10) -- 挑战
 	mSleep(1000)
 	x, y = findColor({806, 441, 808, 443}, -- 挑战
@@ -177,7 +176,7 @@ end
 
 -- Locate func
 function handle_error(disconn_fin, real_8dashe, secret_vender)
-	if (disconn_fin == 1) then
+	if (disconn_fin == ENABLE) then
 		x, y = findColor({567, 376, 570, 379},
 			"0|0|0xf1b15d,-180|-164|0xbba48a,172|-162|0xc3ac93,-5|50|0xb59f85",
 			95, 0, 0, 0)
@@ -186,7 +185,7 @@ function handle_error(disconn_fin, real_8dashe, secret_vender)
 			ran_touch(0, x, y, 20, 10)
 		end
 	end
-	if (real_8dashe == 1) then
+	if (real_8dashe == ENABLE) then
 		x, y = findColor({804, 182, 806, 184}, -- 大蛇图案
 			"0|0|0x14fac5,-82|71|0x14fac5,-86|-69|0x14fac5,0|-16|0xffffff",
 			95, 0, 0, 0)
@@ -194,7 +193,7 @@ function handle_error(disconn_fin, real_8dashe, secret_vender)
 			ran_touch(0, 973, 110, 5, 5) -- x
 		end
 	end
-	if (secret_vender == 1) then
+	if (secret_vender == ENABLE) then
 		x, y = findColor({989, 348, 991, 350}, -- 神秘商人
 			"0|0|0xfdf6f5,-14|-23|0x6b4b4e,-20|92|0xe17871,52|79|0xfdfbfb",
 			95, 0, 0, 0)
@@ -296,8 +295,6 @@ function fight_ongoing()
 end
 
 function fight_success(mode)
-	x = -1
-	y = -1
 	cnt = math.random(1, 3)
 	if mode == "组队" then
 		x, y = findColor({417, 86, 426, 95}, -- 组队胜利的鼓
@@ -510,9 +507,6 @@ function captain_room_invite_init()
 	x, y = findColor({926, 533, 928, 535}, -- 灰色的开始战斗 离开队伍 队员1 2
 		"0|0|0xb0a9a1,-724|4|0xdf6851,-364|-216|0xa29b93,-62|-212|0xa29b93",
 		95, 0, 0, 0)
-	if x > -1 then
-		
-	end
 	return x, y
 end
 

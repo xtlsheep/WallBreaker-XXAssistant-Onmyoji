@@ -93,8 +93,6 @@ function sgcm_mark()
 	end
 end
 
-
-
 -- Main func
 function super_ghost_cat_manager(direct_go)
 	if (direct_go == 0) then
