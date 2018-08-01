@@ -1,0 +1,57 @@
+{
+   "style" : "default",
+   "config" : "save_portal.dat",
+   "width" : 1000,
+   "height" : 500,
+   "cancelscroll" : true,
+   "countdown" : 0,
+   "cancelname" : "取消",
+   "okname" : "继续",
+   "views" : [
+      {
+         "align" : "center",
+         "color" : "0,0,0",
+         "size" : "30",
+         "text" : "主菜单",
+         "bg" : "255,255,255",
+         "type" : "Label"
+      },
+      {
+         "id" : "portal_pic",
+         "width" : 1000,
+         "height" : 230,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "src" : "yanmo.jpg",
+               "type" : "Image",
+               "width" : 230
+            },
+            {
+               "src" : "taohua.jpg",
+               "type" : "Image",
+               "width" : 230
+            },
+            {
+               "src" : "shuwen.jpg",
+               "type" : "Image",
+               "width" : 230
+            },
+            {
+               "src" : "qingxingdeng.jpg",
+               "type" : "Image",
+               "width" : 230
+            }
+         ]
+      },
+      {
+         "id" : "select",
+         "list" : "快速开始        ,高级设置        ,统计数据        ,使用说明",
+         "select" : "0",
+         "size" : "30",
+         "type" : "RadioGroup",
+         "orientation" : "horizontal",
+         "color" : "0,0,0"
+      }
+   ]
+}

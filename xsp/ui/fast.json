@@ -17,14 +17,6 @@
          "type" : "Label"
       },
       {
-         "align" : "right",
-         "color" : "0,0,0",
-         "size" : "20",
-         "text" : "by - xtlsheep",
-         "bg" : "255,255,255",
-         "type" : "Label"
-      },
-      {
          "id" : "portal_pic",
          "width" : 1000,
          "height" : 230,

@@ -59,37 +59,37 @@ function fit_UI(ui, width_in)
 	return json:encode(value)
 end
 
--- Portal func
-function ios_ver()
-	local ui = fit_UI("ios_ver.json", dev_width)
-	ret_ios_ver, res_ios_ver = showUI(ui)
+-- Main func
+function portal()
+	local ui = fit_UI("portal.json", dev_width)
+	ret_portal, res_portal = showUI(ui)
 	
-	if (ret_ios_ver == 0) then
+	if (ret_portal == 0) then
 		return RET_ERR
 	end
 	
-	if (res_ios_ver.ios_ver == "1") then
+	if (res_portal.ios_ver == "1") then
 		return "ios_other"
-	elseif (res_ios_ver.ios_ver == "0") then
+	elseif (res_portal.ios_ver == "0") then
 		return "ios_11"
 	end
 	return RET_OK
 end
 
-function portal_UI()
-	local ui = fit_UI("portal.json", dev_width)
-	ret_portal, res_portal = showUI(ui)
-	if (ret_portal == 0) then
+function main_menu_UI()
+	local ui = fit_UI("main_menu.json", dev_width)
+	ret_main_menu, res_main_menu = showUI(ui)
+	if (ret_main_menu == 0) then
 		return RET_ERR
 	end
-	local portal_sel = res_portal.select
-	if (portal_sel == "0") then
+
+	if (res_main_menu.select == "0") then
 		fast_UI()
-	elseif (portal_sel == "1") then
+	elseif (res_main_menu.select == "1") then
 		config_UI()
-	elseif (portal_sel == "2") then
+	elseif (res_main_menu.select == "2") then
 		log_UI()
-	elseif (portal_sel == "3") then
+	elseif (res_main_menu.select == "3") then
 		spec_UI()
 	end
 end
@@ -98,7 +98,7 @@ function fast_UI()
 	local ui = fit_UI("fast.json", dev_width)
 	ret_fast, res_fast = showUI(ui)
 	if (ret_fast == 0) then
-		portal_UI()
+		main_menu_UI()
 		return
 	end
 	local fast_sel = res_fast.select
@@ -117,7 +117,7 @@ function config_UI()
 	local ui = fit_UI("config.json", dev_width)
 	ret_config, res_config = showUI(ui)
 	if (ret_config == 0) then
-		portal_UI()
+		main_menu_UI()
 		return
 	end
 	
@@ -132,7 +132,7 @@ function config_UI()
 	-- 妖气
 	elseif (res_config.select == "12") then yqfy_UI()
 	-- 一键每日
-	elseif (res_config.select == "1")  then dailymission_UI()
+	elseif (res_config.select == "1")  then multimission_UI()
 	-- 业原火
 	elseif (res_config.select == "4")  then yeyuanhuo_UI()
 	-- 御灵
@@ -140,7 +140,7 @@ function config_UI()
 	-- 百鬼
 	elseif (res_config.select == "10") then hundredghost_UI()
 	-- 副本组合
-	elseif (res_config.select == "13") then multimission_UI()
+	elseif (res_config.select == "13") then audition_UI()
 	-- 世界喊话
 	elseif (res_config.select == "2")  then worldchannel_UI()
 	-- 普通召唤
@@ -150,7 +150,7 @@ function config_UI()
 	-- 悬赏查询
 	elseif (res_config.select == "11") then offerquery_UI()
 	-- 劲舞团
-	elseif (res_config.select == "14") then audition_UI()
+	elseif (res_config.select == "14") then superghost_UI()
 	end
 end
 
@@ -158,7 +158,7 @@ function log_UI()
 	local ui = fit_UI("log.json", dev_width)
 	ret_log, res_log = showUI(ui)
 	if (ret_log == 0) then
-		portal_UI()
+		main_menu_UI()
 		return
 	end
 end
@@ -167,7 +167,7 @@ function spec_UI()
 	local ui = fit_UI("spec.json", dev_width)
 	ret_spec, res_spec = showUI(ui)
 	if (ret_spec == 0) then
-		portal_UI()
+		main_menu_UI()
 		return
 	end
 end
@@ -778,10 +778,10 @@ function yqfy_UI()
 	end
 end
 
-function dailymission_UI()
-	local ui = fit_UI("dailymission.json", dev_width)
-	ret_dailymission, res_dailymission = showUI(ui)
-	if (ret_dailymission == 0) then
+function multimission_UI()
+	local ui = fit_UI("multimission.json", dev_width)
+	ret_multimission, res_multimission = showUI(ui)
+	if (ret_multimission == 0) then
 		config_UI()
 		return
 	end
@@ -942,10 +942,10 @@ function hundredghost_UI()
 	end
 end
 
-function multimission_UI()
-	local ui = fit_UI("multimission.json", dev_width)
-	ret_multimission, res_multimission = showUI(ui)
-	if (ret_multimission == 0) then
+function audition_UI()
+	local ui = fit_UI("audition.json", dev_width)
+	ret_audition, res_audition = showUI(ui)
+	if (ret_audition == 0) then
 		config_UI()
 		return
 	end
@@ -1012,10 +1012,10 @@ function offerquery_UI()
 	end
 end
 
-function audition_UI()
-	local ui = fit_UI("audition.json", dev_width)
-	ret_audition, res_audition = showUI(ui)
-	if (ret_audition == 0) then
+function superghost_UI()
+	local ui = fit_UI("superghost.json", dev_width)
+	ret_superghost, res_superghost = showUI(ui)
+	if (ret_superghost == 0) then
 		config_UI()
 		return
 	end

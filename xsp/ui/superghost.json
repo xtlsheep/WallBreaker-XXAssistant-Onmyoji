@@ -1,6 +1,6 @@
 {
    "style" : "default",
-   "config" : "save_dailymission.dat",
+   "config" : "save_superghost.dat",
    "width" : 1000,
    "height" : 500,
    "cancelscroll" : true,
@@ -12,7 +12,15 @@
          "align" : "center",
          "color" : "0,0,0",
          "size" : "30",
-         "text" : "一键每日",
+         "text" : "超鬼王",
+         "bg" : "255,255,255",
+         "type" : "Label"
+      },
+	  {
+         "align" : "left",
+         "color" : "0,0,0",
+         "size" : "30",
+         "text" : "[功能开发中...]",
          "bg" : "255,255,255",
          "type" : "Label"
       }

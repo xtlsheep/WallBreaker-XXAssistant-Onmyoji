@@ -19,12 +19,12 @@ math.randomseed(os.time())
 math.random(1,10000)
 
 ---- Portal
-ios_ver = ios_ver()
+ios_ver = portal()
 if ios_ver ~= -1 then
 	if ios_ver == "ios_other" then
 		hud_scene = createHUD()
 	end
 
 	-- Main entrance
-	portal_UI()
+	main_menu_UI()
 end
