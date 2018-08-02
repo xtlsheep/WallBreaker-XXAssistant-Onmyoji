@@ -12,19 +12,20 @@ DISABLE = 0
 print(os.date())
 init(0, 1)
 width,height = getScreenSize()
-s = height * 0.050 -- util.lua
+ratio = 1136/height
+s = (height*0.050)*(ratio) -- util.lua button
 setScreenScale(640, 1136) -- iPhone 5s
 print(string.format("width = %d, height = %d", width, height))
 math.randomseed(os.time())
 math.random(1,10000)
 
 ---- Portal
-ios_ver = portal()
-if ios_ver ~= -1 then
-	if ios_ver == "ios_other" then
+HUD = portal()
+if HUD ~= -1 then
+	if HUD == "show" then
 		hud_scene = createHUD()
 	end
 
 	-- Main entrance
-	main_menu_UI()
+	mainmenu_UI()
 end

@@ -7,7 +7,7 @@ function lct_sgcm()
 		"0|0|0xdfba67,-1|25|0xe2bd6c,-101|25|0xdfb564,-95|-11|0xfffded",
 		95, 0, 0, 0)
 	if x > -1 then
-		showHUD_ios_ver(ios_ver,hud_scene,"超鬼王 - 猫掌柜",20,"0xff000000","0xffffffff",0,100,0,228,32)
+		HUD_show_or_hide(HUD,hud_scene,"超鬼王 - 猫掌柜",20,"0xff000000","0xffffffff",0,100,0,228,32)
 	end
 	return x, y
 end
@@ -35,7 +35,7 @@ function lct_tired()
 		"0|0|0x9cd52b,-19|-22|0x404354,26|-20|0x414457,-17|26|0x41445d",
 		95, 0, 0, 0)
 	if x > -1 then
-		showHUD_ios_ver(ios_ver,hud_scene,"疲劳度过高",20,"0xff000000","0xffffffff",0,100,0,228,32)
+		HUD_show_or_hide(HUD,hud_scene,"疲劳度过高",20,"0xff000000","0xffffffff",0,100,0,228,32)
 		ran_touch(0, 833, 171, 5, 5) -- ×
 	end
 	return x, y
@@ -54,11 +54,11 @@ function sgcm_broadcast(friend, house)
 		pos[4] = math.random(7, 8)
 		
 		if friend == 0 then
-			showHUD_ios_ver(ios_ver,hud_scene,"集结好友",20,"0xff000000","0xffffffff",0,100,0,228,32)
+			HUD_show_or_hide(HUD,hud_scene,"集结好友",20,"0xff000000","0xffffffff",0,100,0,228,32)
 			ran_touch(0, 362, 114, 20, 10) -- 好友
 			str = "friend"
 		elseif house == 0 then
-			showHUD_ios_ver(ios_ver,hud_scene,"集结寮友",20,"0xff000000","0xffffffff",0,100,0,228,32)
+			HUD_show_or_hide(HUD,hud_scene,"集结寮友",20,"0xff000000","0xffffffff",0,100,0,228,32)
 			ran_touch(0, 464, 115, 20, 10) -- 寮友
 			str = "house"
 		end
@@ -104,7 +104,7 @@ function super_ghost_cat_manager(direct_go)
 			return RET_ERR
 		end
 		
-		showHUD_ios_ver(ios_ver,hud_scene,"发现 超鬼王 - 猫掌柜",20,"0xff000000","0xffffffff",0,100,0,228,32)
+		HUD_show_or_hide(HUD,hud_scene,"发现 超鬼王 - 猫掌柜",20,"0xff000000","0xffffffff",0,100,0,228,32)
 		x_enter = -1
 		while (x_enter == -1) do
 			-- 悬赏封印
@@ -138,7 +138,7 @@ function super_ghost_cat_manager(direct_go)
 					break
 				end
 				if (quit == 1) then
-					showHUD_ios_ver(ios_ver,hud_scene,"退出超鬼王",20,"0xff000000","0xffffffff",0,100,0,228,32)
+					HUD_show_or_hide(HUD,hud_scene,"退出超鬼王",20,"0xff000000","0xffffffff",0,100,0,228,32)
 					ran_touch(0, 1043, 68, 5, 5) -- ×
 					ran_sleep(1000)
 					return RET_OK

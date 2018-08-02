@@ -87,12 +87,13 @@ function yuling(sel, level, round, lock, offer_arr)
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed(offer_arr)
+				keep_fight_failed("单人",offer_arr)
 				break
 			end
 			-- Handle error
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
+		break
 	end
 end

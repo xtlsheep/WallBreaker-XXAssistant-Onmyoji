@@ -36,7 +36,7 @@ function solo_analyse_map(solo_sel)
 	local winess = 0
 	local invalid= 0
 	local index = 1
-	local i, j, x, y
+	local x, y
 	for i = 1, 3 do
 		for j = 1, 3 do
 			map[index] = "null"
@@ -85,7 +85,6 @@ function solo_analyse_map(solo_sel)
 end
 
 function solo_find_next_target_loop(map, ran_arr, exp1, exp2, exp3)
-	local i, k
 	local pos = -1
 	if (exp1 >= exp2) then
 		for k = exp1, exp2, exp3 do
@@ -110,13 +109,12 @@ function solo_find_next_target_loop(map, ran_arr, exp1, exp2, exp3)
 end
 
 function solo_find_next_target(map, solo_sel)
-	showHUD_ios_ver(ios_ver,hud_scene,"寻找突破目标",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	HUD_show_or_hide(HUD,hud_scene,"寻找突破目标",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	-- 找到下一个突破目标
 	local ran_arr = {}
 	local pos = -1
 	local ret = RET_ERR
 	local ran_arr = getRandomList(9)
-	local j
 	
 	if solo_sel == "0_to_5" then
 		ret, pos = solo_find_next_target_loop(map, ran_arr, 0, 5, 1)
@@ -146,13 +144,13 @@ function solo_refresh(winess, invalid, refresh)
 			95, 0, 0, 0)
 		if x > -1 then
 			ran_sleep(1000)
-			showHUD_ios_ver(ios_ver,hud_scene,"刷新结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_scene,"刷新结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			ran_touch(0, 933, 481, 30, 10) -- 刷新
 			ran_sleep(500)
 			ran_touch(0, 674, 384, 30, 10) -- 确认
 			return RET_OK
 		else
-			showHUD_ios_ver(ios_ver,hud_scene,"等待刷新",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_scene,"等待刷新",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			mSleep(10000)
 			return RET_VALID
 		end
@@ -165,7 +163,7 @@ function solo_get_bonus()
 		"0|0|0xbb3c1a,64|-6|0xd19118,-20|-63|0xcbb599,-37|-78|0xd73846,-339|84|0x79582e,-7|106|0x6a645c",
 		95, 0, 0, 0)
 	if x > -1 then
-		showHUD_ios_ver(ios_ver,hud_scene,"领取奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_scene,"领取奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		ran_touch(0, 1095, 485, 20, 50) -- 左下空白
 	end
 	return x, y
@@ -181,7 +179,7 @@ function solo_fight_start(pos)
 		"0|0|0xf3b25e,-40|-2|0xf3b25e,38|2|0xf3b25e,73|1|0xcbb59c",
 		95, 0, 0, 0)
 	if x > -1 then
-		showHUD_ios_ver(ios_ver,hud_scene,string.format("突破目标 - %d", pos),20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_scene,string.format("突破目标 - %d", pos),20,"0xff000000","0xffffffff",0,100,0,300,32)
 		ran_touch(0, solo_fight_x[pos], solo_fight_y[pos], 30, 10) -- 进攻
 	end
 	return x, y
@@ -223,7 +221,7 @@ function solo_lock()
 end
 
 function solo_to_pub()
-	showHUD_ios_ver(ios_ver,hud_scene,"切换至阴阳寮突破",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	HUD_show_or_hide(HUD,hud_scene,"切换至阴阳寮突破",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	ran_touch(0, 1095, 300, 5, 5)
 end
 
@@ -360,11 +358,11 @@ function pub_ff_open()
 end
 
 function pub_analyse_map(pub_sel)
-	showHUD_ios_ver(ios_ver,hud_scene,"分析地图",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	HUD_show_or_hide(HUD,hud_scene,"分析地图",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	local map = {}
 	local coor_map_x = {}
 	local coor_map_y = {}
-	local i
+
 	for i = 1, 8 do
 		coor_map_x[i], coor_map_y[i], map[i] = pub_cnt_metal(pub_ana_metal_x[i], pub_ana_metal_y1[i],
 			pub_ana_metal_x[i] + 5, pub_ana_metal_y2[i])
@@ -378,7 +376,6 @@ function pub_analyse_map(pub_sel)
 end
 
 function pub_find_next_target(map)
-	local i
 	for i = 1, 8 do
 		if map[i] ~= -1 then
 			return i
@@ -388,20 +385,19 @@ function pub_find_next_target(map)
 end
 
 function pub_refresh()
-	showHUD_ios_ver(ios_ver,hud_scene,"翻页",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	HUD_show_or_hide(HUD,hud_scene,"翻页",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	local x_ran = 725 + math.random(-100, 100)
 	local y_ran = 500 + math.random(-50, 50)
 	local x_interv = math.random(-6, 6)
 	local y_interv = -20
 	local steps = 15
-	local i
 	
 	touchDown(0, x_ran, y_ran)
-	for i = 0, steps, 1 do
+	for i = 1, steps do
 		touchMove(0, x_ran+i*x_interv, y_ran+i*y_interv)
 		mSleep(25)
 	end
-	touchUp(0, x_ran+steps*y_interv, y_ran+steps*y_interv)
+	touchUp(0, x_ran+steps*x_interv, y_ran+steps*y_interv)
 end
 
 function pub_find_start()
@@ -422,7 +418,6 @@ function pub_find_start()
 end
 
 function pub_map_finished(map)
-	local i
 	for i = 1, 8, 1 do
 		if map[i] ~= -1 then
 			return RET_ERR
@@ -470,7 +465,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xf2deda,3|10|0xe1ab8e,9|-16|0x4b4a49,-6|-3|0x262728",
 			95, 0, 0, 0)
 		if x > -1 then
-			showHUD_ios_ver(ios_ver,hud_scene,"彼岸花原皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_scene,"彼岸花原皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 		-- 彼岸花觉醒皮
@@ -478,7 +473,7 @@ function find_whr(pos, whr, role)
 			"0|0|0x2b2331,0|4|0xf9e5d6,9|-1|0xb82321,19|4|0xdbdbe5",
 			95, 0, 0, 0)
 		if x > -1 then
-			showHUD_ios_ver(ios_ver,hud_scene,"彼岸花觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_scene,"彼岸花觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 		-- 彼岸花商店皮
@@ -486,7 +481,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xf9f7f5,-3|-13|0xdaced0,12|-1|0x741319,-2|9|0x941f26,-16|0|0xa88150,9|0|0x968e92",
 			95, 0, 0, 0)
 		if x > -1 then
-			showHUD_ios_ver(ios_ver,hud_scene,"彼岸花商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_scene,"彼岸花商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 	end
@@ -496,7 +491,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xfcfcfc,-14|6|0x323234,-14|-2|0x494a4c,-17|15|0xfcead9,-25|23|0xf3f2f1",
 			95, 0, 0, 0)
 		if x > -1 then
-			showHUD_ios_ver(ios_ver,hud_scene,"日和坊原皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_scene,"日和坊原皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 		-- 日和坊觉醒皮
@@ -504,7 +499,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xffd45a,-9|2|0x564f4f,-12|15|0xfef0da,-6|22|0xcbc5c4,-34|22|0x35302f",
 			95, 0, 0, 0)
 		if x > -1 then
-			showHUD_ios_ver(ios_ver,hud_scene,"日和坊觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_scene,"日和坊觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 	end
@@ -514,7 +509,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xfff8ef,13|-15|0x323440,18|-7|0xa07448,-4|15|0xfcfcf9,-19|-3|0xa78050,-17|9|0xe6b96a",
 			95, 0, 0, 0)
 		if x > -1 then
-			showHUD_ios_ver(ios_ver,hud_scene,"御馔津原Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_scene,"御馔津原Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 		-- 御馔津觉醒皮
@@ -522,7 +517,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xffebdc,7|-4|0x59433a,4|-16|0x1f1110,17|-11|0x6b5a4b,-18|-5|0xfbd985,-9|11|0xdccec9",
 			95, 0, 0, 0)
 		if x > -1 then
-			showHUD_ios_ver(ios_ver,hud_scene,"御馔津觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_scene,"御馔津觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 		-- 御馔津商店皮
@@ -530,7 +525,7 @@ function find_whr(pos, whr, role)
 			"0|0|0x2e322c,13|-3|0xc6c3d1,20|-1|0x91614b,-10|12|0xeecdb1,-17|12|0x555761,-2|26|0xffffff",
 			95, 0, 0, 0)
 		if x > -1 then
-			showHUD_ios_ver(ios_ver,hud_scene,"御馔津商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_scene,"御馔津商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 	end
@@ -540,7 +535,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xfbdbb9,1|8|0xfce1c2,4|5|0xfce0be,-10|5|0xfad9be,9|0|0x4e514d",
 			95, 0, 0, 0)
 		if x > -1 then
-			showHUD_ios_ver(ios_ver,hud_scene,"小僧原皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_scene,"小僧原皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 		-- 小僧觉醒皮
@@ -548,7 +543,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xd7d3d5,5|5|0xcccacc,15|-3|0x46494f,-17|13|0x4e534e",
 			95, 0, 0, 0)
 		if x > -1 then
-			showHUD_ios_ver(ios_ver,hud_scene,"小僧觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_scene,"小僧觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 		-- 小僧商店皮
@@ -556,7 +551,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xe4d9c3,10|13|0xbcd9da,-3|17|0xcfac69,-12|12|0x4c514d",
 			95, 0, 0, 0)
 		if x > -1 then
-			showHUD_ios_ver(ios_ver,hud_scene,"小僧商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_scene,"小僧商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 	end
@@ -702,7 +697,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, offer_arr)
 				fail_cnt = fail_cnt + 1
 				time_cnt = 0
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed(offer_arr)
+				keep_fight_failed("单人",offer_arr)
 				break
 			end
 			-- 战斗准备
@@ -797,7 +792,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, offer_arr)
 				-- 失败的结界
 				ret = pub_ff_open()
 				if ret == RET_OK then
-					showHUD_ios_ver(ios_ver,hud_scene,"失败的结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_scene,"失败的结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					map[pos] = -1
 					pos = -1
 					ran_touch(0, 1095, 495, 10, 50) -- 右下空白
@@ -805,7 +800,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, offer_arr)
 				end
 				-- 五花肉
 				if whr == {0, 0, 0, 0} then
-					showHUD_ios_ver(ios_ver,hud_scene,"进攻",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_scene,"进攻",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, x_f, y_f, 20, 5) -- 进攻
 					break
 				else
@@ -816,7 +811,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, offer_arr)
 						pos = -1
 						break
 					else
-						showHUD_ios_ver(ios_ver,hud_scene,"进攻",20,"0xff000000","0xffffffff",0,100,0,300,32)
+						HUD_show_or_hide(HUD,hud_scene,"进攻",20,"0xff000000","0xffffffff",0,100,0,300,32)
 						ran_touch(0, x_f, y_f, 20, 5) -- 进攻
 						break
 					end
@@ -854,7 +849,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, offer_arr)
 				map[pos] = -1
 				pos = -1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed(offer_arr)
+				keep_fight_failed("单人",offer_arr)
 				refresh = 1
 			end
 			-- 战斗准备

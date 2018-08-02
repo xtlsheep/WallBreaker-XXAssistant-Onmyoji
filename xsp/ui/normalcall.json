@@ -8,7 +8,7 @@
    "cancelname" : "返回",
    "okname" : "继续",
    "views" : [
-		{
+      {
          "align" : "center",
          "color" : "0,0,0",
          "size" : "30",
@@ -16,13 +16,61 @@
          "bg" : "255,255,255",
          "type" : "Label"
       },
-	  {
+      {
+         "id" : "call",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "召唤次数 -",
+               "bg" : "255,255,255",
+               "type" : "Label",
+				"width" : 670
+            },
+            {
+               "id" : "tickets",
+               "list" : "10,20,30,50,100,200,500,全部召唤",
+               "select" : "7",
+               "size" : "22",
+               "type" : "ComboBox",
+               "width" : 250
+            }
+         ]
+      },
+      {
          "align" : "left",
          "color" : "0,0,0",
          "size" : "30",
-         "text" : "[功能开发中...]",
+         "text" : "",
+         "bg" : "255,255,255",
+         "type" : "Label"
+      },
+      {
+         "id" : "line",
+         "type" : "Line",
+         "color" : "0,0,0",
+         "height" : 2,
+         "width" : 940
+      },
+      {
+         "align" : "left",
+         "color" : "0,0,0",
+         "size" : "30",
+         "text" : "Tips -",
+         "bg" : "255,255,255",
+         "type" : "Label"
+      },
+      {
+         "align" : "left",
+         "color" : "0,0,0",
+         "size" : "30",
+         "text" : "请从庭院手动进入召唤界面",
          "bg" : "255,255,255",
          "type" : "Label"
       }
-	]
+   ]
 }

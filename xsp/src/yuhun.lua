@@ -7,7 +7,7 @@ function lct_yuhun()
 		"0|0|0xffd821,0|-19|0xb24828,-1|-47|0xddd3bf,0|36|0x855021",
 		95, 0, 0, 0)
 	if x > -1 then
-		showHUD_ios_ver(ios_ver,hud_scene,"探索 - 御魂",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_scene,"探索 - 御魂",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -17,13 +17,13 @@ function lct_8dashe()
 		"0|0|0xfbe9bc,0|-34|0x040402,-1|-52|0xa46d91,10|-22|0x391f10",
 		95, 0, 0, 0)
 	if x > -1 then
-		showHUD_ios_ver(ios_ver,hud_scene,"御魂 - 八岐大蛇",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_scene,"御魂 - 八岐大蛇",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
 
 function yuhun_mark(position, multi)
-	local cnt, i
+	local cnt
 	mSleep(500)
 	if (multi == 1) then
 		cnt = math.random(4, 6)
@@ -58,7 +58,7 @@ function lct_petfind()
 		"0|0|0x7c7371,3|33|0xaea09b,-230|-55|0xf4e4b1,-370|-29|0xdbc788",
 		95, 0, 0, 0)
 	if x > -1 then
-		showHUD_ios_ver(ios_ver,hud_scene,"御魂 - 发现宝藏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_scene,"御魂 - 发现宝藏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -142,7 +142,7 @@ function yuhun_solo(mark, level, round, offer_arr, lock)
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed(offer_arr)
+				keep_fight_failed("单人",offer_arr)
 				break
 			end
 			-- 发现宝藏
@@ -193,10 +193,10 @@ function yuhun_group_wild_member(mark, level, round, offer_arr, lock, member_aut
 			x, y = lct_tansuo()
 			if (x > -1) then
 				if wait_invite == 0 then
-					showHUD_ios_ver(ios_ver,hud_scene,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_scene,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 180, 590, 20, 20) -- 御魂
 				else
-					showHUD_ios_ver(ios_ver,hud_scene,"探索 - 等待组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_scene,"探索 - 等待组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					x, y, auto_grouped = member_team_accept_invite(member_auto_group)
 					if x > -1 then
 						wait_invite = 0
@@ -254,7 +254,7 @@ function yuhun_group_wild_member(mark, level, round, offer_arr, lock, member_aut
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed(offer_arr)
+				keep_fight_failed("组队",offer_arr)
 				break
 			end
 			-- Error Handle
@@ -345,7 +345,7 @@ function yuhun_group_wild_captain(mark, level, round, offer_arr, lock, captain_a
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed(offer_arr)
+				keep_fight_failed("组队",offer_arr)
 				break
 			end
 			-- 发现宝藏
@@ -421,7 +421,7 @@ function yuhun_group_fix_member(mark, level, round, offer_arr, member_auto_group
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed(offer_arr)
+				keep_fight_failed("组队",offer_arr)
 				break
 			end
 			-- Handle error
@@ -525,7 +525,7 @@ function yuhun_group_fix_captain(mark, level, round, offer_arr, lock, captain_au
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed(offer_arr)
+				keep_fight_failed("组队",offer_arr)
 				break
 			end
 			-- 退出个人资料

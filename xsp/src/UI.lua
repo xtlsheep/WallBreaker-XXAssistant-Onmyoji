@@ -4,6 +4,7 @@ require "juexing"
 require "jjtp"
 require "yeyuanhuo"
 require "yuling"
+require "normalcall"
 
 -- Def
 local dev_width = 640 -- iPhone 5s: 640 x 1136
@@ -68,28 +69,28 @@ function portal()
 		return RET_ERR
 	end
 	
-	if (res_portal.ios_ver == "1") then
-		return "ios_other"
-	elseif (res_portal.ios_ver == "0") then
-		return "ios_11"
+	if (res_portal.HUD == "0") then
+		return "show"
+	elseif (res_portal.HUD == "1") then
+		return "hide"
 	end
 	return RET_OK
 end
 
-function main_menu_UI()
-	local ui = fit_UI("main_menu.json", dev_width)
-	ret_main_menu, res_main_menu = showUI(ui)
-	if (ret_main_menu == 0) then
+function mainmenu_UI()
+	local ui = fit_UI("mainmenu.json", dev_width)
+	ret_mainmenu, res_mainmenu = showUI(ui)
+	if (ret_mainmenu == 0) then
 		return RET_ERR
 	end
 
-	if (res_main_menu.select == "0") then
+	if (res_mainmenu.select == "0") then
 		fast_UI()
-	elseif (res_main_menu.select == "1") then
+	elseif (res_mainmenu.select == "1") then
 		config_UI()
-	elseif (res_main_menu.select == "2") then
+	elseif (res_mainmenu.select == "2") then
 		log_UI()
-	elseif (res_main_menu.select == "3") then
+	elseif (res_mainmenu.select == "3") then
 		spec_UI()
 	end
 end
@@ -98,7 +99,7 @@ function fast_UI()
 	local ui = fit_UI("fast.json", dev_width)
 	ret_fast, res_fast = showUI(ui)
 	if (ret_fast == 0) then
-		main_menu_UI()
+		mainmenu_UI()
 		return
 	end
 	local fast_sel = res_fast.select
@@ -117,7 +118,7 @@ function config_UI()
 	local ui = fit_UI("config.json", dev_width)
 	ret_config, res_config = showUI(ui)
 	if (ret_config == 0) then
-		main_menu_UI()
+		mainmenu_UI()
 		return
 	end
 	
@@ -158,7 +159,7 @@ function log_UI()
 	local ui = fit_UI("log.json", dev_width)
 	ret_log, res_log = showUI(ui)
 	if (ret_log == 0) then
-		main_menu_UI()
+		mainmenu_UI()
 		return
 	end
 end
@@ -167,7 +168,7 @@ function spec_UI()
 	local ui = fit_UI("spec.json", dev_width)
 	ret_spec, res_spec = showUI(ui)
 	if (ret_spec == 0) then
-		main_menu_UI()
+		mainmenu_UI()
 		return
 	end
 end
@@ -978,10 +979,31 @@ function normalcall_UI()
 		return
 	end
 	
+	local tickets
+	if res_normalcall.tickets == "0" then
+		tickets = 10
+	elseif res_normalcall.tickets == "1" then
+		tickets = 20
+	elseif res_normalcall.tickets == "2" then
+		tickets = 30
+	elseif res_normalcall.tickets == "3" then
+		tickets = 50
+	elseif res_normalcall.tickets == "4" then
+		tickets = 100
+	elseif res_normalcall.tickets == "5" then
+		tickets = 200
+	elseif res_normalcall.tickets == "6" then
+		tickets = 500
+	elseif res_normalcall.tickets == "7" then
+		tickets = 99999
+	end
+	
 	local ret_global, offer_arr = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
+
+	normalcall(tickets, offer_arr)
 end
 
 function arena_UI()

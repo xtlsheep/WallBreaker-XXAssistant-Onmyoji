@@ -7,7 +7,7 @@ function lct_yyh()
 		"0|0|0xf3b25e,-59|-236|0xdd7cb3,-124|-168|0xf2faf9,-83|-142|0x2eae93",
 		95, 0, 0, 0)
 	if x > -1 then
-		showHUD_ios_ver(ios_ver,hud_scene,"业原火",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_scene,"业原火",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -131,12 +131,13 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed(offer_arr)
+				keep_fight_failed("单人",offer_arr)
 				break
 			end
 			-- Handle error
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
+		break
 	end
 end

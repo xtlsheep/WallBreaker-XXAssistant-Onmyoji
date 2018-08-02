@@ -7,7 +7,7 @@ function lct_juexingtower()
 		"0|0|0xb17880,238|12|0x56b083,478|30|0x358fe5,718|40|0xd378d5",
 		95, 0, 0, 0)
 	if x > -1 then
-		showHUD_ios_ver(ios_ver,hud_scene,"探索 - 觉醒之塔",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_scene,"探索 - 觉醒之塔",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -17,7 +17,7 @@ function lct_juexingelement()
 		"0|0|0xb17684,187|10|0xbcedb5,385|2|0x3090e2,576|7|0xfcbbce",
 		95, 0, 0, 0)
 	if x > -1 then
-		showHUD_ios_ver(ios_ver,hud_scene,"探索 - 觉醒材料",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_scene,"探索 - 觉醒材料",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -127,7 +127,7 @@ function juexing_solo(element, mark, level, round, offer_arr, lock)
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed(offer_arr)
+				keep_fight_failed("单人",offer_arr)
 				break
 			end
 			-- Handle error
@@ -170,10 +170,10 @@ function juexing_group_wild_member(element, mark, level, round, offer_arr, lock,
 			x, y = lct_tansuo()
 			if (x > -1) then
 				if wait_invite == 0 then
-					showHUD_ios_ver(ios_ver,hud_scene,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_scene,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 90, 590, 20, 20) -- 觉醒
 				else
-					showHUD_ios_ver(ios_ver,hud_scene,"探索 - 等待组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_scene,"探索 - 等待组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					x, y, auto_grouped = member_team_accept_invite(member_auto_group)
 					if x > -1 then
 						wait_invite = 0
@@ -231,7 +231,7 @@ function juexing_group_wild_member(element, mark, level, round, offer_arr, lock,
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed(offer_arr)
+				keep_fight_failed("组队",offer_arr)
 				break
 			end
 			-- Error Handle
@@ -316,7 +316,7 @@ function juexing_group_wild_captain(element, mark, level, round, offer_arr, lock
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed(offer_arr)
+				keep_fight_failed("组队",offer_arr)
 				break
 			end
 			-- Handle error
@@ -384,7 +384,7 @@ function juexing_group_fix_member(element, mark, level, round, offer_arr, member
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed(offer_arr)
+				keep_fight_failed("组队",offer_arr)
 				break
 			end
 			-- Handle error
@@ -481,7 +481,7 @@ function juexing_group_fix_captain(element, mark, level, round, offer_arr, lock,
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed(offer_arr)
+				keep_fight_failed("组队",offer_arr)
 				break
 			end
 			-- 退出个人资料

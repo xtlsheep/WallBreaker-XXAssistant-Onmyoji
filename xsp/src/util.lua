@@ -27,9 +27,9 @@ function print(data, lastCount)
 	end
 end
 
-function showHUD_ios_ver(ios_ver,id,text,size,color,bg,pos,x,y,width,height)
-	if ios_ver == "ios_other" then
-		showHUD(id,text,size,color,bg,pos,x,y,width,height)
+function HUD_show_or_hide(HUD,id,text,size,color,bg,pos,x,y,width,height)
+	if HUD == "show" then
+		showHUD(id,text,size*(1/ratio),color,bg,pos,x,y,width,height)
 	end
 end
 
@@ -46,9 +46,9 @@ end
 function show_point(x, y)
 	local dbg_button = createHUD()
 	if x and y then
-		showHUD_ios_ver(ios_ver,dbg_button, "", 1, "0xff000000", "button.png", 0, x-s, y-s, s*2, s*2)
+		HUD_show_or_hide(HUD,dbg_button, "", 1, "0xff000000", "button.png", 0, x-s, y-s, s*2, s*2)
 	end
-	mSleep(200)
+	mSleep(250)
 	hideHUD(dbg_button)
 	ran_interv()
 end
