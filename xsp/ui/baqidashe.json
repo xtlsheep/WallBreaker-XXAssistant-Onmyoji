@@ -179,12 +179,12 @@
             }
          ]
       },
-	  {
-          "id" : "line",
-          "type" : "Line",
-          "color" : "0,0,0",
-	      "height" : 2,
-          "width" : 940
+      {
+         "id" : "line",
+         "type" : "Line",
+         "color" : "0,0,0",
+         "height" : 2,
+         "width" : 940
       },
       {
          "align" : "left",
@@ -221,12 +221,12 @@
          "orientation" : "horizontal",
          "color" : "0,0,0"
       },
-	  {
-          "id" : "line",
-          "type" : "Line",
-          "color" : "0,0,0",
-	      "height" : 2,
-          "width" : 940
+      {
+         "id" : "line",
+         "type" : "Line",
+         "color" : "0,0,0",
+         "height" : 2,
+         "width" : 940
       },
       {
          "align" : "left",
@@ -254,7 +254,7 @@
          "orientation" : "horizontal",
          "color" : "0,0,0"
       },
-	  {
+      {
          "id" : "fail_and_recreate",
          "list" : "失败后重新建立房间",
          "select" : "0",

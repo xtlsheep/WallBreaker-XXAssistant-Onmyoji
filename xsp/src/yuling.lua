@@ -94,6 +94,5 @@ function yuling(sel, level, round, lock, offer_arr)
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
-		break
 	end
 end

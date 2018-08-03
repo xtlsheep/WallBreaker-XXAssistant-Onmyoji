@@ -5,6 +5,7 @@ require "jjtp"
 require "yeyuanhuo"
 require "yuling"
 require "normalcall"
+require "tansuo"
 
 -- Def
 local dev_width = 640 -- iPhone 5s: 640 x 1136
@@ -318,6 +319,7 @@ function fast_jjtp_UI()
 			whr_out[4] = 1 -- 御馔津
 		end
 	end
+	
 	local round_time = 5
 	local lock = 1
 	local refresh = 3
@@ -521,10 +523,90 @@ local ui = fit_UI("tansuo.json", dev_width)
 		return
 	end
 
+	local mode, mark, hard, section, count_mode, win_round, sec_round
+	if res_tansuo.mode == "0" then
+		mode = "单人"
+	elseif res_tansuo.mode == "1" then
+		mode = "队长"
+	elseif res_tansuo.mode == "2" then
+		mode = "队员"
+	end
+	
+	local sel_tmp = {}
+	local sel = {0, 0, 0, 0}
+	for w in string.gmatch(res_tansuo.select,"([^'@']+)") do
+		table.insert(sel_tmp,w)
+	end
+	for i = 1, table.getn(sel_tmp), 1 do
+		if (sel_tmp[i] == "0") then
+			sel[1] = 1
+		elseif (sel_tmp[i] == "1") then
+			sel[2] = 1
+		elseif (sel_tmp[i] == "2") then
+			sel[3] = 1
+		elseif (sel_tmp[i] == "3") then
+			sel[4] = 1
+		end
+	end
+	
+	if res_tansuo.mark == "0" then
+		mark = "小怪"
+	elseif res_tansuo.mark == "1" then
+		mark = "大怪"
+	elseif res_tansuo.mark == "2" then
+		mark = "无"
+	end
+	
+	if res_tansuo.hard == "0" then
+		hard = "普通"
+	elseif res_tansuo.hard == "1" then
+		hard = "困难"
+	end
+	
+	section = tonumber(res_tansuo.section) + 1
+	
+	if res_tansuo.count_mode == "0" then
+		count_mode = "战斗"
+	elseif res_tansuo.count_mode == "1" then
+		coutn_mode = "章节"
+	end
+	
+	if res_tansuo.win_round == "0" then
+		win_round = 10
+	elseif res_tansuo.win_round == "1" then
+		win_round = 20
+	elseif res_tansuo.win_round == "2" then
+		win_round = 30
+	elseif res_tansuo.win_round == "3" then
+		win_round = 50
+	elseif res_tansuo.win_round == "4" then
+		win_round = 100
+	elseif res_tansuo.win_round == "5" then
+		win_round = 99999
+	end
+
+	if res_tansuo.sec_round == "0" then
+		sec_round = 1
+	elseif res_tansuo.sec_round == "1" then
+		sec_round = 2
+	elseif res_tansuo.sec_round == "2" then
+		sec_round = 3
+	elseif res_tansuo.sec_round == "3" then
+		sec_round = 5
+	elseif res_tansuo.sec_round == "4" then
+		sec_round = 10
+	elseif res_tansuo.sec_round == "5" then
+		sec_round = 50
+	elseif res_tansuo.sec_round == "6" then
+		sec_round = 99999
+	end
+
 	local ret_global, offer_arr = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
+	
+	tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round, offer_arr)
 end
 
 function jjtp_UI()
