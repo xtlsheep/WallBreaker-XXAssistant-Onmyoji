@@ -216,7 +216,7 @@ function yuhun_group_wild_member(mark, level, round, offer_arr, lock, member_aut
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success(mode) if (x > -1) then break end
+			x, y = fight_success("组队") if (x > -1) then break end
 			-- 胜利达摩
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
@@ -301,7 +301,7 @@ function yuhun_group_wild_captain(mark, level, round, offer_arr, lock, captain_a
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success(mode) if (x > -1) then break end
+			x, y = fight_success("组队") if (x > -1) then break end
 			-- 胜利达摩
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
@@ -395,7 +395,7 @@ function yuhun_group_fix_member(mark, level, round, offer_arr, member_auto_group
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success(mode) if (x > -1) then break end
+			x, y = fight_success("组队") if (x > -1) then break end
 			-- 胜利达摩
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
@@ -470,7 +470,7 @@ function yuhun_group_fix_captain(mark, level, round, offer_arr, lock, captain_au
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success(mode) if (x > -1) then break end
+			x, y = fight_success("组队") if (x > -1) then break end
 			-- 胜利达摩
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱

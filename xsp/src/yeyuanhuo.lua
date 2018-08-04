@@ -126,7 +126,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) break end -- 御魂
 			-- 御魂
-			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 845, 320, 50, 50) mSleep(500) break end -- 业原火
+			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 845, 320, 50, 50) break end -- 业原火
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt = fail_cnt + 1
@@ -135,6 +135,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 				break
 			end
 			-- Handle error
+			x, y = lct_8dashe() if x > -1 then  ran_touch(0, 928, 108, 5, 5) break end -- 八岐大蛇
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end

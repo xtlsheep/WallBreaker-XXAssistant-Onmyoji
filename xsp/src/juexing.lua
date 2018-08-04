@@ -193,7 +193,7 @@ function juexing_group_wild_member(element, mark, level, round, offer_arr, lock,
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success(mode) if (x > -1) then break end
+			x, y = fight_success("组队") if (x > -1) then break end
 			-- 胜利达摩
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
@@ -272,7 +272,7 @@ function juexing_group_wild_captain(element, mark, level, round, offer_arr, lock
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success(mode) if (x > -1) then break end
+			x, y = fight_success("组队") if (x > -1) then break end
 			-- 胜利达摩
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
@@ -358,7 +358,7 @@ function juexing_group_fix_member(element, mark, level, round, offer_arr, member
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success(mode) if (x > -1) then break end
+			x, y = fight_success("组队") if (x > -1) then break end
 			-- 胜利达摩
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
@@ -427,7 +427,7 @@ function juexing_group_fix_captain(element, mark, level, round, offer_arr, lock,
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success(mode) if (x > -1) then break end
+			x, y = fight_success("组队") if (x > -1) then break end
 			-- 胜利达摩
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱

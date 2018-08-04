@@ -152,7 +152,7 @@ function super_ghost_cat_manager(direct_go)
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then mSleep(3000) ran_touch(0, 530, 120, 3, 3) break end -- 猫掌柜
 			-- 战斗失败
-			x, y = fight_failed() if (x > -1) then break end
+			x, y = fight_failed("组队") if (x > -1) then break end
 			-- 战斗胜利
 			x, y = fight_success("组队") if (x > -1) then break end
 			-- 疲劳过高
