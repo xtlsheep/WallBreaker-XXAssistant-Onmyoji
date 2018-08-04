@@ -80,7 +80,7 @@ end
 function getRandomList(length)
 	local temp = {}
 	local chosen_list = {}
-
+	
 	for i = 1, length do
 		table.insert(chosen_list, i)
 	end
@@ -208,12 +208,12 @@ function handle_error(disconn_fin, real_8dashe, secret_vender)
 end
 
 function enter_tansuo_from_tingyuan()
-	local x, y = findColor({230, 125, 1136, 175},  -- 庭院探索灯笼
-		"0|0|0xffffdf,0|3|0xffffdd,4|3|0xffffe0,4|0|0xffffe4",
-		95, 0, 0, 0)
+	local x, y = findColor({230, 125, 1136, 175}, -- 庭院探索灯笼
+		"0|0|0xffffec,0|-2|0xffffec,0|2|0xffffd2,-2|0|0xffffe6,2|0|0xfffff1",
+		95, 1, 0, 0)
 	if x > -1 then
-		local x_, y_ = findColor({389, 24, 392, 36},  -- 加成 勾玉 邮件 聊天
-			"0|0|0xfacc77,273|3|0xec4125,627|6|0xdfc7a1,705|11|0xa29c7b",
+		local x_, y_ = findColor({392, 26, 394, 28}, -- 加成 金币 勾玉 邮件
+			"0|0|0xfad27c,45|-9|0xdcb156,211|3|0xea351d,626|5|0xdfc7a1",
 			95, 0, 0, 0)
 		if x_ > -1 then
 			HUD_show_or_hide(HUD,hud_scene,"庭院",20,"0xff000000","0xffffffff",0,100,0,300,32)
