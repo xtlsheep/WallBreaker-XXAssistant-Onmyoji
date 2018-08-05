@@ -22,8 +22,6 @@ function yuling(sel, level, round, lock, offer_arr)
 	print_offer_arr(offer_arr)
 	
 	local rd = round
-	local win_cnt = 0
-	local fail_cnt = 0
 	local init = 1
 	local disconn_fin = 1
 	local real_8dashe = 0

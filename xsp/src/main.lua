@@ -19,6 +19,10 @@ print(string.format("width = %d, height = %d", width, height))
 math.randomseed(os.time())
 math.random(1,10000)
 
+-- Global var
+win_cnt = 0
+fail_cnt = 0
+
 ---- Portal
 HUD = portal()
 if HUD ~= -1 then

@@ -668,8 +668,6 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action, offer_arr)
 	local pos = -1
 	local found_target = -1
 	local found_whr = -1
-	local win_cnt = 0
-	local fail_cnt = 0
 	local finish = 0
 	local wait = 0
 	local action_ = action
@@ -852,8 +850,6 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action, offer_arr)
 	local coor_map_y = {}
 	local pos = -1
 	local time_cnt = 0
-	local win_cnt = 0
-	local fail_cnt = 0
 	local refresh = 0
 	local page = 0
 	local finish = 0

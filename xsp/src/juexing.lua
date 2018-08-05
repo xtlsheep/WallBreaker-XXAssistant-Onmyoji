@@ -77,8 +77,6 @@ end
 
 function juexing_solo(element, mark, level, round, offer_arr, lock)
 	local rd_cnt = 0
-	local win_cnt = 0
-	local fail_cnt = 0
 	local init = 1
 	local disconn_fin = 1
 	local real_8dashe = 1
@@ -142,8 +140,6 @@ end
 
 function juexing_group_wild_member(element, mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain)
 	local rd_cnt = 0
-	local win_cnt = 0
-	local fail_cnt = 0
 	local time_cnt = 0
 	local init = 1
 	local wait_invite = 0
@@ -246,8 +242,6 @@ end
 
 function juexing_group_wild_captain(element, mark, level, round, offer_arr, lock, captain_auto_group, fail_and_recreate)
 	local rd_cnt = 0
-	local win_cnt = 0
-	local fail_cnt = 0
 	local init = 1
 	local disconn_fin = 1
 	local real_8dashe = 1
@@ -331,8 +325,6 @@ end
 
 function juexing_group_fix_member(element, mark, level, round, offer_arr, member_auto_group, member_to_captain)
 	local rd_cnt = 0
-	local win_cnt = 0
-	local fail_cnt = 0
 	local init = 1
 	local auto_grouped = -1
 	local disconn_fin = 1
@@ -399,8 +391,6 @@ end
 
 function juexing_group_fix_captain(element, mark, level, round, offer_arr, lock, captain_auto_group, auto_invite_first)
 	local rd_cnt = 0
-	local win_cnt = 0
-	local fail_cnt = 0
 	local time_cnt = 0
 	local init = 1
 	local invite = 1

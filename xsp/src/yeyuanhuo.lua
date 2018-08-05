@@ -20,8 +20,6 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 	local rd_tan = round_tan
 	local rd_chen = round_chen
 	local rd_chi = round_chi
-	local win_cnt = 0
-	local fail_cnt = 0
 	local end_tan = 0
 	local end_chen = 0
 	local end_chi = 0
