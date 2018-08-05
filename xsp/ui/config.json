@@ -19,7 +19,7 @@
 	  {
          "id" : "blank",
          "width" : 1000,
-         "height" : 20,
+         "height" : 30,
          "type" : "LinearLayout",
          "views" : []
       },

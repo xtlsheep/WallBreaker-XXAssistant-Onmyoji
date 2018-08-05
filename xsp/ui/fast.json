@@ -20,7 +20,7 @@
       {
          "id" : "blank",
          "width" : 1000,
-         "height" : 220,
+         "height" : 240,
          "type" : "LinearLayout",
          "views" : []
       },
@@ -40,7 +40,7 @@
             },
             {
                "id" : "select",
-               "list" : "                     ,                       ,                     ,            ",
+               "list" : "                      ,                        ,                     ,            ",
                "select" : "0",
                "size" : "30",
                "type" : "RadioGroup",
