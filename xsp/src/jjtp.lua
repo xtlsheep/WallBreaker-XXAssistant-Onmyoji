@@ -1023,8 +1023,6 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action, offer_arr)
 			x, y = half_damo() if (x > -1) then
 				win_cnt = win_cnt + 1
 				time_cnt = 0
-				-- map[pos] = -1
-				-- pos = -1
 				show_win_fail(win_cnt, fail_cnt)
 				keep_half_damo(offer_arr)
 				refresh = 1

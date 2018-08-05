@@ -982,18 +982,16 @@ function yuling_UI()
 	end
 	
 	if (res_yuling.round == "0") then
-		round = 0
-	elseif (res_yuling.round == "1") then
 		round = 10
-	elseif (res_yuling.round == "2") then
+	elseif (res_yuling.round == "1") then
 		round = 20
-	elseif (res_yuling.round == "3") then
+	elseif (res_yuling.round == "2") then
 		round = 30
-	elseif (res_yuling.round == "4") then
+	elseif (res_yuling.round == "3") then
 		round = 50
-	elseif (res_yuling.round == "5") then
+	elseif (res_yuling.round == "4") then
 		round = 100
-	elseif (res_yuling.round == "6") then
+	elseif (res_yuling.round == "5") then
 		round = 99999
 	end
 	
