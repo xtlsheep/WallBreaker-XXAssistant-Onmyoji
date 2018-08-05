@@ -89,3 +89,14 @@ function ran_move(id ,x, y, x_l, y_l, ran)
 	touchUp(id, x2_r, y2_r)
 	ran_interv()
 end
+
+function ran_move_steps(id ,x, y, x_ran, y_ran, x_interv, y_interv, steps)
+	x_ = x + math.random(-x_ran, x_ran)
+	y_ = y + math.random(-y_ran, y_ran)
+	touchDown(0, x_, y_)
+	for i = 1, steps do
+		touchMove(0, x_+i*x_interv, y_+i*y_interv)
+		mSleep(25)
+	end
+	touchUp(0, x_+steps*x_interv, y_+steps*y_interv)
+end

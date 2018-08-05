@@ -71,47 +71,47 @@ function level_select(level, init, lock, spec)
 		HUD_show_or_hide(HUD,hud_scene,"层数 - 初始化",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		-- 选择层数
 		if (level == 1) then
-			ran_move(0, 360, 150, 0, 200, 0) -- 向下拉
+			ran_move(0, 360, 150, 0, 200, 20) -- 向下拉
 			ran_sleep(500)
 			ran_touch(0, 360, 150, 120, 3) -- 第一排
 		elseif (level == 2) then
-			ran_move(0, 360, 150, 0, 200, 0)
+			ran_move(0, 360, 150, 0, 200, 20)
 			ran_sleep(500)
 			ran_touch(0, 360, 215, 120, 3) -- 第二排
 		elseif (level == 3) then
-			ran_move(0, 360, 150, 0, 200, 0)
+			ran_move(0, 360, 150, 0, 200, 20)
 			ran_sleep(500)
 			ran_touch(0, 360, 280, 120, 3) -- 第三排
 		elseif (level == 4) then
-			ran_move(0, 360, 150, 0, 200, 0)
+			ran_move(0, 360, 150, 0, 200, 20)
 			ran_sleep(500)
 			ran_touch(0, 360, 350, 120, 3) -- 第四排
 		elseif (level == 5) then
-			ran_move(0, 360, 150, 0, 200, 0) -- 向下拉
-			ran_sleep(500)
-			ran_move(0, 360, 280, 0, -100, 0) -- 向上拉
+			ran_move(0, 360, 150, 0, 200, 20) -- 向下拉
+			ran_sleep(1000)
+			ran_move(0, 360, 280, 0, -100, 10) -- 向上拉
 			ran_sleep(500)
 			ran_touch(0, 360, 150, 120, 3)
 		elseif (level == 6) then
-			ran_move(0, 360, 150, 0, 200, 0)
-			ran_sleep(500)
-			ran_move(0, 360, 280, 0, -100, 0)
+			ran_move(0, 360, 150, 0, 200, 20)
+			ran_sleep(1000)
+			ran_move(0, 360, 280, 0, -100, 10)
 			ran_sleep(500)
 			ran_touch(0, 360, 215, 120, 3)
 		elseif (level == 7) then
-			ran_move(0, 360, 350, 0, -200, 0)
+			ran_move(0, 360, 350, 0, -200, 20)
 			ran_sleep(500)
 			ran_touch(0, 360, 150, 120, 3)
 		elseif (level == 8) then
-			ran_move(0, 360, 350, 0, -200, 0)
+			ran_move(0, 360, 350, 0, -200, 20)
 			ran_sleep(500)
 			ran_touch(0, 360, 215, 120, 3)
 		elseif (level == 9) then
-			ran_move(0, 360, 350, 0, -200, 0)
+			ran_move(0, 360, 350, 0, -200, 20)
 			ran_sleep(500)
 			ran_touch(0, 360, 280, 120, 3)
 		else
-			ran_move(0, 360, 350, 0, -200, 0)
+			ran_move(0, 360, 350, 0, -200, 20)
 			ran_sleep(500)
 			ran_touch(0, 360, 350, 120, 3)
 		end

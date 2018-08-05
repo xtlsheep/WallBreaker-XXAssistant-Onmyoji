@@ -531,18 +531,15 @@ end
 
 function pub_refresh()
 	HUD_show_or_hide(HUD,hud_scene,"翻页",20,"0xff000000","0xffffffff",0,100,0,300,32)
-	local x_ran = 725 + math.random(-100, 100)
-	local y_ran = 500 + math.random(-50, 50)
+	local x = 725
+	local y = 500
+	local x_ran = 100
+	local y_ran = 50
 	local x_interv = math.random(-6, 6)
 	local y_interv = -20
 	local steps = 15
 	
-	touchDown(0, x_ran, y_ran)
-	for i = 1, steps do
-		touchMove(0, x_ran+i*x_interv, y_ran+i*y_interv)
-		mSleep(25)
-	end
-	touchUp(0, x_ran+steps*x_interv, y_ran+steps*y_interv)
+	ran_move_steps(0, x, y, x_ran, y_ran, x_interv, y_interv, steps)
 end
 
 function pub_find_button()

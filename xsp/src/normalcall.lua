@@ -24,18 +24,15 @@ function finish_call()
 end
 
 function tickets_call()
-	local x = 270 + math.random(-20, 20) -- to 870 +-20
-	local y = 240 -- to 240 +-60(4*15)
+	local x = 270
+	local y = 240
+	local x_ran = 20
+	local y_ran	= 10
 	local x_interv = 40
 	local y_interv = math.random(-4, 4)
 	local steps = 15
-	
-	touchDown(0, x, y)
-	for i = 1, steps do
-		touchMove(0, x+i*x_interv, y+i*y_interv)
-		mSleep(25)
-	end
-	touchUp(0, x+steps*x_interv, y+steps*y_interv)
+
+	ran_move_steps(0, x, y, x_ran, y_ran, x_interv, y_interv, steps)
 end
 
 -- Main func
