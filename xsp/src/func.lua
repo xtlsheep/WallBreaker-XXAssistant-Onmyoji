@@ -6,7 +6,8 @@ function show_win_fail(win_cnt, fail_cnt)
 end
 
 function find_offer(offer_arr)
-	local x, y = findColor({681, 167, 685, 171}, -- √ x 和 交接处
+	local x, y
+	x, y = findColor({681, 167, 685, 171}, -- √ x 和 交接处
 		"0|0|0xb39276,-1|29|0x9e7d62,71|209|0x50ad5b,74|295|0xd96c5a",
 		95, 0, 0, 0)
 	if (x > -1) then
@@ -14,8 +15,51 @@ function find_offer(offer_arr)
 			HUD_show_or_hide(HUD,hud_scene,"拒绝悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			ran_touch(0, 759, 460, 10, 10) -- 拒绝
 		else
-			HUD_show_or_hide(HUD,hud_scene,"接受悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			ran_touch(0, 759, 373, 10, 10) -- 接受
+			if offer_arr[2] == 1 then
+				x, y = findColor({614, 432, 616, 434},
+					"0|0|0xed4a36,11|-21|0x67457c,-13|9|0xc7a98b,-30|17|0x8647c8",
+					95, 0, 0, 0)
+				if x > -1 then
+					HUD_show_or_hide(HUD,hud_scene,"接受勾玉悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					ran_touch(0, 759, 373, 10, 10) -- 接受
+				end
+			end
+			if offer_arr[3] == 1 then
+				x, y = findColor({603, 415, 605, 417},
+					"0|0|0xe97c2b,20|-3|0x6a4586,-7|26|0x0c0e0a,-15|32|0x8e48da",
+					95, 0, 0, 0)
+				if x > -1 then
+					HUD_show_or_hide(HUD,hud_scene,"接受体力悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					ran_touch(0, 759, 373, 10, 10) -- 接受
+				end
+			end
+			if offer_arr[5] == 1 then
+				x, y = findColor({529, 451, 531, 453},
+					"0|0|0x8b3028,-11|-8|0xf37b62,-10|-19|0xfdfeff,-9|-39|0x69467f",
+					95, 0, 0, 0)
+				if x > -1 then
+					HUD_show_or_hide(HUD,hud_scene,"接受猫粮悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					ran_touch(0, 759, 373, 10, 10) -- 接受
+				end
+			end
+			if offer_arr[6] == 1 then
+				x, y = findColor({526, 444, 528, 446},
+					"0|0|0xf5acc0,17|0|0xb55345,-15|-23|0xfffcf5,-25|-33|0x5d4568",
+					95, 0, 0, 0)
+				if x > -1 then
+					HUD_show_or_hide(HUD,hud_scene,"接受狗粮悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					ran_touch(0, 759, 373, 10, 10) -- 接受
+				end
+			end
+			if offer_arr[4] == 1 then
+				x, y = findColor({607, 435, 609, 436},
+					"0|0|0x75671b,12|-5|0xead7ae,17|-21|0x44413c,-23|-24|0x464340",
+					95, 0, 0, 0)
+				if x > -1 then
+					HUD_show_or_hide(HUD,hud_scene,"接受金币悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					ran_touch(0, 759, 373, 10, 10) -- 接受
+				end
+			end
 		end
 	end
 	return x, y
@@ -176,7 +220,11 @@ function solo_start()
 	return RET_OK
 end
 
--- Locate func
+function print_offer_arr(offer_arr)
+	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 樱饼：%d 金币：%d 零食：%d)",
+			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6]))
+end
+
 function handle_error(disconn_fin, real_8dashe, secret_vender)
 	local x, y
 	if (disconn_fin == ENABLE) then
@@ -206,6 +254,8 @@ function handle_error(disconn_fin, real_8dashe, secret_vender)
 	end
 	return x, y
 end
+
+-- Locate func
 
 function enter_tansuo_from_tingyuan()
 	local x, y = findColor({230, 125, 1136, 175}, -- 庭院探索灯笼

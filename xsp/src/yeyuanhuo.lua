@@ -1,4 +1,4 @@
-require "util"
+ require "util"
 require "func"
 
 -- Util func
@@ -15,6 +15,7 @@ end
 -- Main func
 function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 	print(string.format("贪 %d, 嗔 %d, 痴 %d，锁定 %d", round_tan, round_chen, round_chi, lock))
+	print_offer_arr(offer_arr)
 	
 	local rd_tan = round_tan
 	local rd_chen = round_chen

@@ -40,8 +40,8 @@ end
 
 -- Main func
 function normalcall(tickets, offer_arr)
-	print(string.format("tickets: %d, 悬赏封印: %d(勾玉: %d 体力：%d 樱饼：%d 金币：%d 零食：%d)", tickets,
-			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6]))
+	print(string.format("召唤次数: %d", tickets))
+	print_offer_arr(offer_arr)
 	
 	local cnt = 0
 	local disconn_fin = 1

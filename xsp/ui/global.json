@@ -42,54 +42,13 @@
             },
             {
                "id" : "offer_sel",
-               "list" : "勾玉,体力,樱饼,金币,零食",
+               "list" : "勾玉,体力,金币,猫粮,狗粮",
                "select" : "0@1@2",
                "size" : "28",
                "type" : "CheckBoxGroup",
                "orientation" : "horizontal",
                "color" : "0,0,0",
                "width" : 650
-            }
-         ]
-      },
-	  {
-          "id" : "line",
-          "type" : "Line",
-          "color" : "0,0,0",
-	      "height" : 2,
-          "width" : 940
-      },
-	  {
-         "align" : "left",
-         "color" : "0,0,0",
-         "size" : "30",
-         "text" : "[功能开发中]智能突破[适用御魂/觉醒/探索/业原火(单人、野队模式)] :",
-         "bg" : "255,255,255",
-         "type" : "Label"
-      },
-	  {
-         "id" : "jjtp",
-         "width" : 1000,
-         "height" : 50,
-         "type" : "LinearLayout",
-         "views" : [
-            {
-               "id" : "jjtp_en",
-               "list" : "开启[间隔时间] - ",
-               "select" : "",
-               "size" : "30",
-               "type" : "CheckBoxGroup",
-               "orientation" : "horizontal",
-               "color" : "0,0,0",
-               "width" : 670
-            },
-            {
-               "id" : "jjtp_interv",
-               "list" : "10分钟,20分钟,30分钟,60分钟",
-               "select" : "2",
-               "size" : "22",
-               "type" : "ComboBox",
-               "width" : 250
             }
          ]
       }

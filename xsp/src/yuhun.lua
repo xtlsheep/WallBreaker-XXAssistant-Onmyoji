@@ -65,9 +65,11 @@ end
 
 -- Main func
 function yuhun(mode, role, group, mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
-	print(string.format("八岐大蛇 - 模式：%s，角色：%s，组队：%s，一层标记：%s 二层标记：%s 三层标记：%s，层数：%d，战斗次数：%d", mode, role, group, mark[1], mark[2], mark[3], level, round))
-	print(string.format("           悬赏封印：%d (勾玉：%d 体力：%d 樱饼：%d 金币：%d 零食：%d) 锁定出战：%d", offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6], lock))
-	print(string.format("           队员自动组队：%d，失败重新组队：%d，队员接手队长：%d，队长自动组队：%d，队长自动邀请：%d, 失败重新建队：%d", member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate))
+	print(string.format("八岐大蛇 - 模式：%s，角色：%s，组队：%s，一层标记：%s 二层标记：%s 三层标记：%s，层数：%d，战斗次数：%d，锁定出战：%d", 
+						mode, role, group, mark[1], mark[2], mark[3], level, round, lock))
+	print(string.format("队员自动组队：%d，失败重新组队：%d，队员接手队长：%d，队长自动组队：%d，队长自动邀请：%d, 失败重新建队：%d", 
+						member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate))
+	print_offer_arr(offer_arr)
 	
 	if (mode == "单人") then
 		yuhun_solo(mark, level, round, offer_arr, lock)

@@ -186,7 +186,7 @@ function global_UI()
 	local offer_sel = {}
 	
 	if res_global.offer_en == "0" then
-		offer_arr[0] = 1
+		offer_arr[1] = 1
 		for w in string.gmatch(res_global.offer_sel,"([^'@']+)") do
 			table.insert(offer_sel,w)
 		end
@@ -196,11 +196,11 @@ function global_UI()
 			elseif (offer_sel[i] == "1") then
 				offer_arr[3] = 1 -- 体力
 			elseif (offer_sel[i] == "2") then
-				offer_arr[4] = 1 -- 樱饼
+				offer_arr[4] = 1 -- 金币
 			elseif (offer_sel[i] == "3") then
-				offer_arr[5] = 1 -- 金币
+				offer_arr[5] = 1 -- 猫粮
 			elseif (offer_sel[i] == "3") then
-				offer_arr[5] = 1 -- 零食
+				offer_arr[5] = 1 -- 狗粮
 			end
 		end
 	end
