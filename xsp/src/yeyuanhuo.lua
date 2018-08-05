@@ -24,6 +24,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 	local end_tan = 0
 	local end_chen = 0
 	local end_chi = 0
+	local last_sel = 0
 	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
@@ -124,9 +125,9 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 			-- 庭院
 			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) break end -- 御魂
+			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) ran_sleep(1000) break end -- 御魂
 			-- 御魂
-			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 845, 320, 50, 50) break end -- 业原火
+			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 845, 320, 50, 50) ran_sleep(1000) break end -- 业原火
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt = fail_cnt + 1
