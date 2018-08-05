@@ -92,7 +92,7 @@ function mainmenu_UI()
 	elseif (res_mainmenu.select == "2") then
 		log_UI()
 	elseif (res_mainmenu.select == "3") then
-		spec_UI()
+		update_UI()
 	end
 end
 
@@ -123,36 +123,30 @@ function config_UI()
 		return
 	end
 	
-	-- 八岐大蛇
+	-- 御魂
 	if (res_config.select == "0") 	   then baqidashe_UI()
 	-- 探索
-	elseif (res_config.select == "3")  then	tansuo_UI()
+	elseif (res_config.select == "1")  then	tansuo_UI()
 	-- 结界突破
-	elseif (res_config.select == "6")  then jjtp_UI()
-	-- 觉醒
-	elseif (res_config.select == "9")  then juexing_UI()
-	-- 妖气
-	elseif (res_config.select == "12") then yqfy_UI()
-	-- 一键每日
-	elseif (res_config.select == "1")  then multimission_UI()
+	elseif (res_config.select == "2")  then jjtp_UI()
 	-- 业原火
-	elseif (res_config.select == "4")  then yeyuanhuo_UI()
+	elseif (res_config.select == "3")  then yeyuanhuo_UI()
 	-- 御灵
-	elseif (res_config.select == "7")  then yuling_UI()
-	-- 百鬼
-	elseif (res_config.select == "10") then hundredghost_UI()
+	elseif (res_config.select == "4") then yuling_UI()
+	-- 觉醒
+	elseif (res_config.select == "5")  then juexing_UI()
 	-- 副本组合
-	elseif (res_config.select == "13") then audition_UI()
+	elseif (res_config.select == "6")  then multimission_UI()
+	-- 百鬼夜行
+	elseif (res_config.select == "7")  then hundredghost_UI()
+	-- 妖气封印
+	elseif (res_config.select == "8") then yqfy_UI()
 	-- 世界喊话
-	elseif (res_config.select == "2")  then worldchannel_UI()
+	elseif (res_config.select == "9") then worldchannel_UI()
 	-- 普通召唤
-	elseif (res_config.select == "5")  then normalcall_UI()
-	-- 斗技荣耀
-	elseif (res_config.select == "8")  then arena_UI()
-	-- 悬赏查询
-	elseif (res_config.select == "11") then offerquery_UI()
-	-- 劲舞团
-	elseif (res_config.select == "14") then superghost_UI()
+	elseif (res_config.select == "10")  then normalcall_UI()
+	-- 超鬼王
+	elseif (res_config.select == "11")  then superghost_UI()
 	end
 end
 
@@ -165,10 +159,10 @@ function log_UI()
 	end
 end
 
-function spec_UI()
-	local ui = fit_UI("spec.json", dev_width)
-	ret_spec, res_spec = showUI(ui)
-	if (ret_spec == 0) then
+function update_UI()
+	local ui = fit_UI("update.json", dev_width)
+	ret_update, res_update = showUI(ui)
+	if (ret_update == 0) then
 		mainmenu_UI()
 		return
 	end

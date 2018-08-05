@@ -5,6 +5,7 @@
    "height" : 500,
    "cancelscroll" : true,
    "countdown" : 0,
+   "bg" : "fastdes.jpg",
    "cancelname" : "返回",
    "okname" : "继续",
    "views" : [
@@ -13,45 +14,41 @@
          "color" : "0,0,0",
          "size" : "30",
          "text" : "快速开始",
-         "bg" : "255,255,255",
-         "type" : "Label"
+         "type" : "Label",
+         "width" : 1000
       },
       {
-         "id" : "portal_pic",
+         "id" : "blank",
          "width" : 1000,
-         "height" : 230,
+         "height" : 220,
+         "type" : "LinearLayout",
+         "views" : []
+      },
+      {
+         "id" : "select_",
+         "width" : 1000,
+         "height" : 50,
          "type" : "LinearLayout",
          "views" : [
             {
-               "src" : "xuetong.jpg",
-               "type" : "Image",
-               "width" : 230
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : " ",
+               "type" : "Label",
+               "width" : 65
             },
             {
-               "src" : "gan.jpg",
-               "type" : "Image",
-               "width" : 230
-            },
-            {
-               "src" : "wocao.jpg",
-               "type" : "Image",
-               "width" : 230
-            },
-            {
-               "src" : "ouqi.jpg",
-               "type" : "Image",
-               "width" : 200
+               "id" : "select",
+               "list" : "                     ,                       ,                     ,            ",
+               "select" : "0",
+               "size" : "30",
+               "type" : "RadioGroup",
+               "orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 1000
             }
          ]
-      },
-      {
-         "id" : "select",
-         "list" : "御魂十层        ,探索章节        ,快速突破        ,觉醒十层",
-         "select" : "0",
-         "size" : "30",
-         "type" : "RadioGroup",
-         "orientation" : "horizontal",
-         "color" : "0,0,0"
       }
    ]
 }

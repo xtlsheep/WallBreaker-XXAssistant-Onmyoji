@@ -5,6 +5,7 @@
    "height" : 500,
    "cancelscroll" : true,
    "countdown" : 0,
+	"bg" : "bg.jpg",
    "cancelname" : "结束",
    "okname" : "开始",
    "views" : [
@@ -13,7 +14,6 @@
          "color" : "0,0,0",
          "size" : "30",
          "text" : "全局设置",
-         "bg" : "255,255,255",
          "type" : "Label"
       },
       {
@@ -21,7 +21,6 @@
          "color" : "0,0,0",
          "size" : "30",
          "text" : "悬赏封印 ：",
-         "bg" : "255,255,255",
          "type" : "Label"
       },
       {

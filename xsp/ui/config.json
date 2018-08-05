@@ -5,6 +5,7 @@
    "height" : 500,
    "cancelscroll" : true,
    "countdown" : 0,
+	"bg" : "configdes.jpg",
    "cancelname" : "返回",
    "okname" : "继续",
    "views" : [
@@ -12,30 +13,31 @@
          "align" : "center",
          "color" : "0,0,0",
          "size" : "30",
-         "text" : "高级选项",
-         "bg" : "255,255,255",
+         "text" : "高级设置",
          "type" : "Label"
+      },
+	  {
+         "id" : "blank",
+         "width" : 1000,
+         "height" : 20,
+         "type" : "LinearLayout",
+         "views" : []
       },
       {
          "id" : "config",
          "width" : 1000,
-         "height" : 300,
+         "height" : 200,
          "type" : "LinearLayout",
          "views" : [
             {
                "id" : "select",
-               "list" : "八岐大蛇      ,副本组合      ,世界喊话,探索章节      ,业原火          ,普通召唤,结界突破      ,御灵之境      ,斗技荣耀,觉醒麒麟      ,百鬼夜行      ,悬赏查询,妖气封印      ,劲舞团          ,超鬼王",
-               "select" : "0",
+				"list" : "                                ,                                ,                                ,                                ,                                ,                                ,                                ,                                ,                                ,                                ,                                ,                                ",
+				"select" : "0",
                "size" : "30",
                "type" : "RadioGroup",
                "orientation" : "horizontal",
                "color" : "0,0,0",
-               "width" : 680
-            },
-            {
-               "src" : "gugu.jpeg",
-               "type" : "Image",
-               "width" : 230
+               "width" : 1000
             }
          ]
       }

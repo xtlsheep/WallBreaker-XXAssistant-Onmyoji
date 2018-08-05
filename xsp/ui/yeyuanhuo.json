@@ -5,6 +5,7 @@
    "height" : 500,
    "cancelscroll" : true,
    "countdown" : 0,
+	"bg" : "bg.jpg",
    "cancelname" : "返回",
    "okname" : "继续",
    "views" : [
@@ -13,7 +14,6 @@
          "color" : "0,0,0",
          "size" : "30",
          "text" : "业原火",
-         "bg" : "255,255,255",
          "type" : "Label"
       },
       {
@@ -27,7 +27,6 @@
                "color" : "0,0,0",
                "size" : "30",
                "text" : "贪之阵 - ",
-               "bg" : "255,255,255",
                "type" : "Label",
                "width" : 670
             },
@@ -52,7 +51,6 @@
                "color" : "0,0,0",
                "size" : "30",
                "text" : "嗔之阵 - ",
-               "bg" : "255,255,255",
                "type" : "Label",
                "width" : 670
             },
@@ -77,7 +75,6 @@
                "color" : "0,0,0",
                "size" : "30",
                "text" : "痴之阵 - ",
-               "bg" : "255,255,255",
                "type" : "Label",
                "width" : 670
             },
