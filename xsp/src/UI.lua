@@ -546,7 +546,7 @@ local ui = fit_UI("tansuo.json", dev_width)
 	if res_tansuo.mark == "0" then
 		mark = "小怪"
 	elseif res_tansuo.mark == "1" then
-		mark = "大怪"
+		mark = "Boss"
 	elseif res_tansuo.mark == "2" then
 		mark = "无"
 	end

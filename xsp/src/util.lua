@@ -58,6 +58,8 @@ function ran_touch(id, x, y, ran_x, ran_y)
 	if ((x == nil) or (y == nil)) then
 		return
 	end
+	x_r = x
+	y_r = y
 	if (ran_x ~= 0 and ran_y ~=0) then
 		x_r = x + math.random(-ran_x, ran_x)
 		y_r = y + math.random(-ran_y, ran_y)

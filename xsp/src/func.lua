@@ -148,9 +148,11 @@ function lock_or_unlock(lock, spec)
 		x1 = 552 y1 = 378 x2 = 554 y2 = 380
 	elseif spec == "结界突破" then
 		x1 = 917 y1 = 551 x2 = 919 y2 = 553
+	elseif spec == "探索" then
+		x1 = 753 y1 = 574 x2 = 755 y2 = 576
 	end
 	
-	if (spec == "御魂" or spec == "觉醒" or spec == "业原火") then
+	if (spec == "御魂" or spec == "觉醒" or spec == "业原火" or spec == "探索") then
 		if (lock == ENABLE) then
 			x, y = findColor({x1, y1, x2, y2},
 				"0|0|0x735c41,11|1|0x2c2119,-11|0|0x2e231c,-1|5|0x291f19",
@@ -323,8 +325,8 @@ function round_three()
 end
 
 function round_fight()
-	local x, y = findColor({549, 307, 551, 319}, -- 字 战
-		"0|0|0xdcb47d,-13|20|0x020202,32|-4|0x030303,-13|-37|0x030303",
+	local x, y = findColor({534, 288, 536, 290},
+		"0|0|0x030303,44|-23|0x020202,84|81|0x020202,80|150|0x881509,-524|272|0x5d5575",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_scene,"战斗开始",20,"0xff000000","0xffffffff",0,100,0,300,32)

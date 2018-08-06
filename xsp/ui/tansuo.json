@@ -13,7 +13,7 @@
          "align" : "center",
          "color" : "0,0,0",
          "size" : "30",
-         "text" : "探索章节",
+         "text" : "探索章节[暂时仅支持账号解锁的最新章节]",
          "type" : "Label"
       },
       {
@@ -40,7 +40,7 @@
                "align" : "left",
                "color" : "0,0,0",
                "size" : "30",
-               "text" : "种类设定 -",
+               "text" : "种类设定 - [暂时仅支持金币、Boss]",
                "type" : "Label",
                "width" : 420
             },
@@ -118,7 +118,7 @@
                "align" : "left",
                "color" : "0,0,0",
                "size" : "30",
-               "text" : "目标章节 - ",
+               "text" : "目标章节 - [暂时选定无效]",
                "type" : "Label",
                "width" : 620
             },
@@ -142,7 +142,7 @@
                "align" : "left",
                "color" : "0,0,0",
                "size" : "30",
-               "text" : "限定方式 - ",
+               "text" : "限定方式 - [暂时选定无效]",
                "type" : "Label",
                "width" : 620
             },
@@ -166,7 +166,7 @@
                "align" : "left",
                "color" : "0,0,0",
                "size" : "30",
-               "text" : "战斗胜利次数 - ",
+               "text" : "战斗胜利次数 - [暂时选定无效]",
                "type" : "Label",
                "width" : 620
             },
@@ -190,7 +190,7 @@
                "align" : "left",
                "color" : "0,0,0",
                "size" : "30",
-               "text" : "章节通关次数 - ",
+               "text" : "章节通关次数 - [暂时选定无效]",
                "type" : "Label",
                "width" : 620
             },
