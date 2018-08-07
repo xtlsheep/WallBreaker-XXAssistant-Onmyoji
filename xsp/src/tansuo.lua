@@ -47,28 +47,36 @@ function quit_confirm()
 end
 
 function find_exp()
-	local x = -1
-	local y = -1
-	
-	x, y = findColor({0, 100, 1135, 550},
+	local x, y = findColor({0, 100, 1135, 550},
 		"0|0|0xb29773,-13|-4|0x2b6478,-7|8|0x831917",
 		95, 0, 0, 0)
-	if x > -1 then
-		return x, y
-	end
 	return x, y
 end
 
 function find_money()
-	
+	local x, y = findColor({0, 100, 1135, 550},
+		"0|0|0xdacb6f,5|-11|0xdfd082,12|-2|0xdaca71",
+		95, 0, 0, 0)
+	return x, y
 end
 
-function find_item()
-	
+function find_goods()
+	local x, y = findColor({0, 100, 1135, 550},
+		"0|0|0xf6db12,-10|-9|0xd62e22,-21|-15|0xce4428",
+		95, 0, 0, 0)
+	return x, y
 end
 
 function find_normal(x_f, y_f)
 	local x, y
+	if x_f == -1 and y_f == -1 then
+		local x, y = findColor({0, 100, 1135, 550},
+			"0|0|0xd2d4f9,8|15|0x232755,-3|-22|0xf3aeb8,-8|-5|0x5b6daa",
+			95, 1, 0, 0)
+		if x > -1 then
+			return x, y
+		end
+	end
 	local x, y = findColor({x_f-150, y_f-250, x_f, y_f},
 		"0|0|0xd2d4f9,8|15|0x232755,-3|-22|0xf3aeb8,-8|-5|0x5b6daa",
 		95, 1, 0, 0)
@@ -102,13 +110,28 @@ function find_target(sel)
 		if x_t > -1 then
 			return RET_VALID
 		end
-		keepScreen(true)
-		-- Exp
-		if sel[3] == 1 then
-			x_f, y_f = find_exp()
-		end
-		keepScreen(false)
-		if x_f > -1 then
+		
+		if sel[1]==1 or sel[2]==1 or sel[3]==1 then
+			keepScreen(true)
+			-- Exp
+			if sel[3] == 1 then
+				x_f, y_f = find_exp()
+			end
+			-- Money
+			if sel[2] == 1 and x_f == -1 then
+				x_f, y_f = find_money()
+			end
+			-- Goods
+			if sel[1] == 1 and x_f == -1 then
+				x_f, y_f = find_goods()
+			end
+			keepScreen(false)
+			if x_f > -1 then
+				keepScreen(true)
+				x_t, y_t = find_normal(x_f, y_f)
+				keepScreen(false)
+			end
+		else
 			keepScreen(true)
 			x_t, y_t = find_normal(x_f, y_f)
 			keepScreen(false)
@@ -261,7 +284,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 					end
 				elseif ret == RET_VALID then
 					if sel[4] == 1 then
-						mSleep(2000)
+						mSleep(1000)
 						x, y = find_boss()
 						if x > -1 then
 							ran_touch(0, x, y, 10, 10)
