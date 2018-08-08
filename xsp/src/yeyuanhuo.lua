@@ -13,9 +13,9 @@ function lct_yyh()
 end
 
 -- Main func
-function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
+function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 	print(string.format("贪 %d, 嗔 %d, 痴 %d，锁定 %d", round_tan, round_chen, round_chi, lock))
-	print_offer_arr(offer_arr)
+	print_offer_arr()
 	
 	local rd_tan = round_tan
 	local rd_chen = round_chen
@@ -35,7 +35,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 			x, y = round_fight() if (x > -1) then break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行
@@ -55,7 +55,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 					rd_chi = rd_chi - 1
 				end
 				show_win_fail(win_cnt, fail_cnt)
-				keep_half_damo(offer_arr)
+				keep_half_damo()
 				break
 			end
 			-- 战斗准备
@@ -131,7 +131,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed("单人",offer_arr)
+				keep_fight_failed("单人")
 				break
 			end
 			-- Handle error

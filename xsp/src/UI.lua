@@ -173,10 +173,9 @@ function global_UI()
 	ret_global, res_global = showUI(ui)
 	
 	if (ret_global == 0) then
-		return RET_ERR, offer_arr
+		return RET_ERR
 	end
 	
-	local offer_arr = {0, 0, 0, 0, 0, 0}
 	local offer_sel = {}
 	
 	if res_global.offer_en == "0" then
@@ -199,7 +198,7 @@ function global_UI()
 		end
 	end
 	
-	return RET_OK, offer_arr
+	return RET_OK
 end
 
 -- Fast
@@ -265,8 +264,8 @@ function fast_yuhun_UI()
 	local captain_auto_group = 1
 	local auto_invite_first = 0
 	local fail_and_recreate = 1
-	local offer_arr = {0, 0, 0, 0, 0, 0}
-	yuhun(mode, role, group, mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
+
+	yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
 end
 
 function fast_tansuo_UI()
@@ -276,8 +275,6 @@ function fast_tansuo_UI()
 		fast_UI()
 		return
 	end
-	
-	offer_arr = {0, 0, 0, 0, 0, 0}
 end
 
 function fast_jjtp_UI()
@@ -319,8 +316,7 @@ function fast_jjtp_UI()
 	local refresh = 3
 	local solo_sel = "5_to_0"
 	local pub_sel = 5
-	local offer_arr = {0, 0, 0, 0, 0, 0}
-	jjtp(mode, whr_out, whr_out, round_time, refresh, solo_sel, pub_sel, lock, offer_arr)
+	jjtp(mode, whr_out, whr_out, round_time, refresh, solo_sel, pub_sel, lock)
 end
 
 function fast_juexing_UI()
@@ -383,8 +379,7 @@ function fast_juexing_UI()
 	local captain_auto_group = 1
 	local auto_invite_first = 0
 	local fail_and_recreate = 1
-	local offer_arr = {0, 0, 0, 0, 0, 0}
-	juexing(mode, role, group, element, mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
+	juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
 end
 
 -- Config
@@ -501,12 +496,12 @@ function baqidashe_UI()
 		fail_and_recreate = 0
 	end
 	
-	local ret_global, offer_arr = global_UI()
+	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
 	
-	yuhun(mode, role, group, mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
+	yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
 end
 
 function tansuo_UI()
@@ -595,12 +590,12 @@ local ui = fit_UI("tansuo.json", dev_width)
 		sec_round = 99999
 	end
 
-	local ret_global, offer_arr = global_UI()
+	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
 	
-	tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round, offer_arr)
+	tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round)
 end
 
 function jjtp_UI()
@@ -708,12 +703,12 @@ function jjtp_UI()
 		pub_sel = 0
 	end
 	
-	local ret_global, offer_arr = global_UI()
+	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
 	
-	jjtp(mode, whr_solo_out, whr_pub_out, round_time, refresh, solo_sel, pub_sel, lock, offer_arr)
+	jjtp(mode, whr_solo_out, whr_pub_out, round_time, refresh, solo_sel, pub_sel, lock)
 end
 
 function juexing_UI()
@@ -833,12 +828,12 @@ function juexing_UI()
 		fail_and_recreate = 0
 	end
 	
-	local ret_global, offer_arr = global_UI()
+	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
 	
-	juexing(mode, role, group, element, mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
+	juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
 end
 
 function yqfy_UI()
@@ -849,7 +844,7 @@ function yqfy_UI()
 		return
 	end
 	
-	local ret_global, offer_arr = global_UI()
+	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -863,7 +858,7 @@ function multimission_UI()
 		return
 	end
 	
-	local ret_global, offer_arr = global_UI()
+	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -936,12 +931,12 @@ function yeyuanhuo_UI()
 		lock = 0
 	end
 	
-	local ret_global, offer_arr = global_UI()
+	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
 	
-	yeyuanhuo(round_tan, round_chen, round_chi, lock, offer_arr)
+	yeyuanhuo(round_tan, round_chen, round_chi, lock)
 end
 
 function yuling_UI()
@@ -995,12 +990,12 @@ function yuling_UI()
 		lock = 0
 	end
 	
-	local ret_global, offer_arr = global_UI()
+	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
 
-	yuling(sel, level, round, lock, offer_arr)
+	yuling(sel, level, round, lock)
 end
 
 function hundredghost_UI()
@@ -1011,7 +1006,7 @@ function hundredghost_UI()
 		return
 	end
 	
-	local ret_global, offer_arr = global_UI()
+	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -1025,7 +1020,7 @@ function audition_UI()
 		return
 	end
 	
-	local ret_global, offer_arr = global_UI()
+	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -1039,7 +1034,7 @@ function worldchannel_UI()
 		return
 	end
 	
-	local ret_global, offer_arr = global_UI()
+	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -1072,12 +1067,12 @@ function normalcall_UI()
 		tickets = 99999
 	end
 	
-	local ret_global, offer_arr = global_UI()
+	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
 
-	normalcall(tickets, offer_arr)
+	normalcall(tickets)
 end
 
 function arena_UI()
@@ -1088,7 +1083,7 @@ function arena_UI()
 		return
 	end
 	
-	local ret_global, offer_arr = global_UI()
+	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -1102,7 +1097,7 @@ function offerquery_UI()
 		return
 	end
 	
-	local ret_global, offer_arr = global_UI()
+	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
@@ -1116,7 +1111,7 @@ function superghost_UI()
 		return
 	end
 	
-	local ret_global, offer_arr = global_UI()
+	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end

@@ -5,7 +5,7 @@ function show_win_fail(win_cnt, fail_cnt)
 	HUD_show_or_hide(HUD,hud_scene,string.format("战斗胜利 %d次 - 失败 %d次", win_cnt, fail_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 end
 
-function find_offer(offer_arr)
+function find_offer()
 	local x, y
 	x, y = findColor({681, 167, 685, 171}, -- √ x 和 交接处
 		"0|0|0xb39276,-1|29|0x9e7d62,71|209|0x50ad5b,74|295|0xd96c5a",
@@ -222,7 +222,7 @@ function solo_start()
 	return RET_OK
 end
 
-function print_offer_arr(offer_arr)
+function print_offer_arr()
 	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 樱饼：%d 金币：%d 零食：%d)",
 			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6]))
 end
@@ -402,10 +402,10 @@ function half_damo()
 	return x, y
 end
 
-function keep_half_damo(offer_arr)
+function keep_half_damo()
 	local x, y
 	while (1) do
-		find_offer(offer_arr)
+		find_offer()
 		--captain_team_set_auto_invite(captain_auto_invite)
 		x, y = findColor({498, 529, 501, 532}, -- 达摩底部
 			"0|0|0x670a0b,20|22|0x320204,127|0|0x7e0e0e,159|7|0x6f290b",
@@ -441,11 +441,11 @@ function fight_failed(mode)
 	return x, y
 end
 
-function keep_fight_failed(mode,offer_arr)
+function keep_fight_failed(mode)
 	local x, y
 	if (mode == "单人") then
 		while (1) do
-			find_offer(offer_arr)
+			find_offer()
 			x, y = findColor({410, 130, 415, 135}, -- 失败的鼓
 				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
 				95, 0, 0, 0)
@@ -458,7 +458,7 @@ function keep_fight_failed(mode,offer_arr)
 		end
 	elseif (mode == "组队") then
 		while (1) do
-			find_offer(offer_arr)
+			find_offer()
 			x, y = findColor({410, 80, 415, 85}, -- 失败的鼓
 				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
 				95, 0, 0, 0)

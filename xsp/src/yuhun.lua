@@ -64,27 +64,27 @@ function lct_petfind()
 end
 
 -- Main func
-function yuhun(mode, role, group, mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
+function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
 	print(string.format("八岐大蛇 - 模式：%s，角色：%s，组队：%s，一层标记：%s 二层标记：%s 三层标记：%s，层数：%d，战斗次数：%d，锁定出战：%d", 
 						mode, role, group, mark[1], mark[2], mark[3], level, round, lock))
 	print(string.format("队员自动组队：%d，失败重新组队：%d，队员接手队长：%d，队长自动组队：%d，队长自动邀请：%d, 失败重新建队：%d", 
 						member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate))
-	print_offer_arr(offer_arr)
+	print_offer_arr()
 	
 	if (mode == "单人") then
-		yuhun_solo(mark, level, round, offer_arr, lock)
+		yuhun_solo(mark, level, round, lock)
 	elseif (mode == "组队" and role == "队员" and group == "野队") then
-		yuhun_group_wild_member(mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain)
+		yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
 	elseif (mode == "组队" and role == "队长" and group == "野队") then
-		yuhun_group_wild_captain(mark, level, round, offer_arr, lock, captain_auto_group, fail_and_recreate)
+		yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, fail_and_recreate)
 	elseif (mode == "组队" and role == "队员" and group == "固定队") then
-		yuhun_group_fix_member(mark, level, round, offer_arr, lock, member_auto_group, member_to_captain)
+		yuhun_group_fix_member(mark, level, round, lock, member_auto_group, member_to_captain)
 	elseif (mode == "组队" and role == "队长" and group == "固定队") then
-		yuhun_group_fix_captain(mark, level, round, offer_arr, lock, captain_auto_group, auto_invite_first)
+		yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, auto_invite_first)
 	end
 end
 
-function yuhun_solo(mark, level, round, offer_arr, lock)
+function yuhun_solo(mark, level, round, lock)
 	local rd_cnt = 0
 	local init = 1
 	local disconn_fin = 1
@@ -108,7 +108,7 @@ function yuhun_solo(mark, level, round, offer_arr, lock)
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 1) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 真八岐大蛇
 			x, y = find_real8dashe() if (x > -1) then break end
 			-- 拒绝组队
@@ -126,7 +126,7 @@ function yuhun_solo(mark, level, round, offer_arr, lock)
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_half_damo(offer_arr)
+				keep_half_damo()
 				break
 			end
 			-- 八岐大蛇
@@ -142,7 +142,7 @@ function yuhun_solo(mark, level, round, offer_arr, lock)
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed("单人",offer_arr)
+				keep_fight_failed("单人")
 				break
 			end
 			-- 发现宝藏
@@ -155,7 +155,7 @@ function yuhun_solo(mark, level, round, offer_arr, lock)
 	return RET_OK
 end
 
-function yuhun_group_wild_member(mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain)
+function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
 	local rd_cnt = 0
 	local time_cnt = 0
 	local init = 1
@@ -182,7 +182,7 @@ function yuhun_group_wild_member(mark, level, round, offer_arr, lock, member_aut
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 1) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 真八岐大蛇
 			x, y = find_real8dashe() if (x > -1) then break end
 			-- 拒绝邀请
@@ -223,7 +223,7 @@ function yuhun_group_wild_member(mark, level, round, offer_arr, lock, member_aut
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_half_damo(offer_arr)
+				keep_half_damo()
 				break
 			end
 			-- 组队寻找
@@ -252,7 +252,7 @@ function yuhun_group_wild_member(mark, level, round, offer_arr, lock, member_aut
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed("组队",offer_arr)
+				keep_fight_failed("组队")
 				break
 			end
 			-- Error Handle
@@ -263,7 +263,7 @@ function yuhun_group_wild_member(mark, level, round, offer_arr, lock, member_aut
 	return RET_OK
 end
 
-function yuhun_group_wild_captain(mark, level, round, offer_arr, lock, captain_auto_group, fail_and_recreate)
+function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, fail_and_recreate)
 	local rd_cnt = 0
 	local init = 1
 	local disconn_fin = 1
@@ -287,7 +287,7 @@ function yuhun_group_wild_captain(mark, level, round, offer_arr, lock, captain_a
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 1) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 真八岐大蛇
 			x, y = find_real8dashe() if (x > -1) then break end
 			-- 拒绝邀请
@@ -305,7 +305,7 @@ function yuhun_group_wild_captain(mark, level, round, offer_arr, lock, captain_a
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_half_damo(offer_arr)
+				keep_half_damo()
 				break
 			end
 			-- 失败继续邀请
@@ -341,7 +341,7 @@ function yuhun_group_wild_captain(mark, level, round, offer_arr, lock, captain_a
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed("组队",offer_arr)
+				keep_fight_failed("组队")
 				break
 			end
 			-- 发现宝藏
@@ -354,7 +354,7 @@ function yuhun_group_wild_captain(mark, level, round, offer_arr, lock, captain_a
 	return RET_OK
 end
 
-function yuhun_group_fix_member(mark, level, round, offer_arr, member_auto_group, member_to_captain)
+function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to_captain)
 	local rd_cnt = 0
 	local init = 1
 	local auto_grouped = -1
@@ -379,7 +379,7 @@ function yuhun_group_fix_member(mark, level, round, offer_arr, member_auto_group
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 1) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 真八岐大蛇
 			x, y = find_real8dashe() if (x > -1) then break end
 			-- 接受邀请
@@ -398,7 +398,7 @@ function yuhun_group_fix_member(mark, level, round, offer_arr, member_auto_group
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_half_damo(offer_arr)
+				keep_half_damo()
 				break
 			end
 			if (member_to_captain == 1) then
@@ -415,7 +415,7 @@ function yuhun_group_fix_member(mark, level, round, offer_arr, member_auto_group
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed("组队",offer_arr)
+				keep_fight_failed("组队")
 				break
 			end
 			-- Handle error
@@ -426,7 +426,7 @@ function yuhun_group_fix_member(mark, level, round, offer_arr, member_auto_group
 	return RET_OK
 end
 
-function yuhun_group_fix_captain(mark, level, round, offer_arr, lock, captain_auto_group, auto_invite_first)
+function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, auto_invite_first)
 	local rd_cnt = 0
 	local time_cnt = 0
 	local init = 1
@@ -452,7 +452,7 @@ function yuhun_group_fix_captain(mark, level, round, offer_arr, lock, captain_au
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 1) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 真八岐大蛇
 			x, y = find_real8dashe() if (x > -1) then break end
 			-- 拒绝邀请
@@ -470,7 +470,7 @@ function yuhun_group_fix_captain(mark, level, round, offer_arr, lock, captain_au
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_half_damo(offer_arr)
+				keep_half_damo()
 				break
 			end
 			-- 失败继续邀请
@@ -517,7 +517,7 @@ function yuhun_group_fix_captain(mark, level, round, offer_arr, lock, captain_au
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed("组队",offer_arr)
+				keep_fight_failed("组队")
 				break
 			end
 			-- 退出个人资料

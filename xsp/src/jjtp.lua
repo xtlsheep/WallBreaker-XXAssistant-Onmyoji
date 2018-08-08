@@ -591,22 +591,22 @@ function pub_to_solo()
 end
 
 -- Main func
-function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, lock, offer_arr)
-	print(string.format("模式：%s，五花肉-个人：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)，战斗时间：%d，刷新：%d，个人突破：%s，阴阳寮突破：%d, 锁定: %d",
-			mode, whr_solo[1], whr_solo[2], whr_solo[3], whr_solo[4], round_time, refresh, solo_sel, pub_sel, lock))
-	print(string.format("五花肉-阴阳寮：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d), 悬赏封印：%d (勾玉：%d 体力：%d 樱饼：%d 金币：%d 零食：%d)",
-			whr_pub[1], whr_pub[2], whr_pub[3], whr_pub[4], offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6]))
+function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, lock)
+	print(string.format("模式：%s，战斗时间：%d，刷新：%d，个人突破：%s，阴阳寮突破：%d, 锁定: %d", mode, round_time, refresh, solo_sel, pub_sel, lock))
+	print(string.format("五花肉-个人：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)", whr_solo[1], whr_solo[2], whr_solo[3], whr_solo[4]))
+	print(string.format("五花肉-阴阳寮：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)", whr_pub[1], whr_pub[2], whr_pub[3], whr_pub[4]))
+	print_offer_arr()
 	
 	local ret_solo, ret_pub
 	local action_solo, action_pub -- Quit Wait Switch
 	
 	if (mode == "个人") then
 		action_solo = "Quit"
-		jjtp_solo(whr_solo, round_time, refresh, solo_sel, lock, action_solo, offer_arr)
+		jjtp_solo(whr_solo, round_time, refresh, solo_sel, lock, action_solo)
 	elseif (mode == "阴阳寮") then
 		action_pub = "Wait"
-		jjtp_solo_to_pub(lock, offer_arr)
-		jjtp_pub(whr_pub, round_time, pub_sel, lock, action_pub, offer_arr)
+		jjtp_solo_to_pub(lock)
+		jjtp_pub(whr_pub, round_time, pub_sel, lock, action_pub)
 	elseif (mode == "个人+阴阳寮") then
 		action_solo = "Switch"
 		while (1) do
@@ -614,14 +614,14 @@ function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, l
 				return
 			end
 			
-			ret_solo = jjtp_solo(whr_solo, round_time, refresh, solo_sel, lock, action_solo, offer_arr)
+			ret_solo = jjtp_solo(whr_solo, round_time, refresh, solo_sel, lock, action_solo)
 			if ret_solo == "Finish" then
 				action_pub = "Wait"
 			elseif ret_solo == "Unfinish" then
 				action_pub = "Switch"
 			end
 			
-			ret_pub = jjtp_pub(whr_pub, round_time, pub_sel, lock, action_pub, offer_arr)
+			ret_pub = jjtp_pub(whr_pub, round_time, pub_sel, lock, action_pub)
 			if ret_pub == "Finish" then
 				action_solo = "Wait"
 			elseif ret_pub == "Unfinish" then
@@ -632,13 +632,13 @@ function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, l
 	return
 end
 
-function jjtp_solo_to_pub(lock, offer_arr)
+function jjtp_solo_to_pub(lock)
 	local x, y
 	while (1) do
 		while (1) do
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 个人突破
 			x, y = solo_lct_jjtp()
 			if (x > -1) then
@@ -657,7 +657,7 @@ function jjtp_solo_to_pub(lock, offer_arr)
 	end
 end
 
-function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action, offer_arr)
+function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 	local time_cnt = 0
 	local map = {}
 	local winess = -1
@@ -690,7 +690,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action, offer_arr)
 			print(string.format("winess %d, invalid %d, pos %d, found_target %d", winess, invalid, pos, found_target))
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 阴阳寮突破
 			x, y = pub_lct_jjtp() if x > -1 then quit_jjtp() break end
 			-- 个人突破
@@ -733,7 +733,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action, offer_arr)
 				ret = solo_refresh(winess, invalid, refresh)
 				if ret == RET_OK then
 					-- 悬赏封印
-					x, y = find_offer(offer_arr) if (x > -1) then break end
+					x, y = find_offer() if (x > -1) then break end
 					ran_touch(0, 933, 481, 30, 10) -- 刷新
 					ran_sleep(500)
 					ran_touch(0, 674, 384, 30, 10) -- 确认
@@ -809,7 +809,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action, offer_arr)
 				win_cnt = win_cnt + 1
 				time_cnt = 0
 				show_win_fail(win_cnt, fail_cnt)
-				keep_half_damo(offer_arr)
+				keep_half_damo()
 				break
 			end
 			-- 战斗失败
@@ -821,7 +821,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action, offer_arr)
 				fail_cnt = fail_cnt + 1
 				time_cnt = 0
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed("单人",offer_arr)
+				keep_fight_failed("单人")
 				break
 			end
 			-- 战斗准备
@@ -841,7 +841,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action, offer_arr)
 	end
 end
 
-function jjtp_pub(whr, round_time, pub_sel, lock, action, offer_arr)
+function jjtp_pub(whr, round_time, pub_sel, lock, action)
 	local map = {}
 	local coor_map_x = {}
 	local coor_map_y = {}
@@ -871,7 +871,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action, offer_arr)
 			
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 未开寮突
 			x, y = pub_unstart()
 			if x > -1 then
@@ -932,7 +932,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action, offer_arr)
 				end
 				if refresh > 0 then
 					for i = 1, page, 1 do
-						find_offer(offer_arr)
+						find_offer()
 						pub_refresh()
 						mSleep(500)
 					end
@@ -1017,7 +1017,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action, offer_arr)
 				win_cnt = win_cnt + 1
 				time_cnt = 0
 				show_win_fail(win_cnt, fail_cnt)
-				keep_half_damo(offer_arr)
+				keep_half_damo()
 				refresh = 1
 			end
 			-- 战斗失败
@@ -1027,7 +1027,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action, offer_arr)
 				map[pos] = -1
 				pos = -1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed("单人",offer_arr)
+				keep_fight_failed("单人")
 				refresh = 1
 			end
 			-- 战斗准备

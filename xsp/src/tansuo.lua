@@ -204,21 +204,21 @@ end
 
 
 -- Main func
-function tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round, offer_arr)
+function tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round)
 	print(string.format("模式: %s, 选择: 物品-%d,金币-%d,经验-%d,Boss-%d, 标记: %s, 难度: %s, 章节: %d, 限定: %s, 胜利: %s, 通关: %s",
 			mode, sel[1], sel[2], sel[3], sel[4], mark, hard, section, count_mode, win_round, sec_round))
-	print_offer_arr(offer_arr)
+	print_offer_arr()
 	
 	if mode == "单人" then
-		tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round, offer_arr)
+		tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round)
 	elseif mode == "队长" then
-		tansuo_captain(sel, mark, "困难", section, count_mode, win_round, sec_round, offer_arr)
+		tansuo_captain(sel, mark, "困难", section, count_mode, win_round, sec_round)
 	elseif mode == "队员" then
-		tansuo_member(sel, mark, offer_arr)
+		tansuo_member(sel, mark)
 	end
 end
 
-function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round, offer_arr)
+function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round)
 	local move_quit = math.random(6, 8)
 	local move_cnt = 0
 	local quit = 0
@@ -240,7 +240,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗胜利
@@ -251,7 +251,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			x, y = half_damo() if (x > -1) then
 				win_cnt = win_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_half_damo(offer_arr)
+				keep_half_damo()
 				break
 			end
 			-- 战斗准备
@@ -322,7 +322,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed("单人", offer_arr)
+				keep_fight_failed("单人")
 				break
 			end
 			-- 探索
@@ -336,7 +336,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 	return
 end
 
-function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_round, offer_arr)
+function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_round)
 	local move_quit = math.random(6, 8)
 	local move_cnt = 0
 	local quit = 0
@@ -358,7 +358,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗胜利
@@ -369,7 +369,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			x, y = half_damo() if (x > -1) then
 				win_cnt = win_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_half_damo(offer_arr)
+				keep_half_damo()
 				break
 			end
 			-- 战斗准备
@@ -446,10 +446,10 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			-- 庭院
 			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
 			-- 战斗失败
-			x, y = fight_failed("单人") if (x > -1) then
+			x, y = fight_failed("组队") if (x > -1) then
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed("单人", offer_arr)
+				keep_fight_failed("组队")
 				break
 			end
 			-- 探索
@@ -463,7 +463,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 	return
 end
 
-function tansuo_member(sel, mark, offer_arr)
+function tansuo_member(sel, mark)
 	while (1) do
 		while (1) do
 			-- 战
@@ -474,7 +474,7 @@ function tansuo_member(sel, mark, offer_arr)
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 接受邀请
 			x, y, auto_grouped = member_team_accept_invite(1) if (x > -1) then break end
 			-- 战斗胜利
@@ -485,7 +485,7 @@ function tansuo_member(sel, mark, offer_arr)
 			x, y = half_damo() if (x > -1) then
 				win_cnt = win_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_half_damo(offer_arr)
+				keep_half_damo()
 				break
 			end
 			-- 战斗准备
@@ -501,10 +501,10 @@ function tansuo_member(sel, mark, offer_arr)
 			-- 确认退出
 			x, y = quit_confirm() if x > -1 then ran_touch(0, x, y, 30, 5) break end
 			-- 战斗失败
-			x, y = fight_failed("单人") if (x > -1) then
+			x, y = fight_failed("组队") if (x > -1) then
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed("单人", offer_arr)
+				keep_fight_failed("组队")
 				break
 			end
 			break

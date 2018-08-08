@@ -55,27 +55,27 @@ function juexing_element(element)
 end
 
 -- Main func
-function juexing(mode, role, group, element, mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
+function juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
 	print(string.format("觉醒材料 - 模式：%s，角色：%s，组队：%s，类型：%s，标记：%s ，层数：%d，战斗次数：%d, 锁定出战：%d", 
 						mode, role, group, element, mark, level, round, lock))
 	print(string.format("队员自动组队：%d，失败重新组队：%d，队员接手队长：%d，队长自动组队：%d，队长自动邀请：%d, 失败重新建队：%d", 
 						member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate))
-	print_offer_arr(offer_arr)
+	print_offer_arr()
 	
 	if (mode == "单人") then
-		juexing_solo(element, mark, level, round, offer_arr, lock)
+		juexing_solo(element, mark, level, round, lock)
 	elseif (mode == "组队" and role == "队员" and group == "野队") then
-		juexing_group_wild_member(element, mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain)
+		juexing_group_wild_member(element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
 	elseif (mode == "组队" and role == "队长" and group == "野队") then
-		juexing_group_wild_captain(element, mark, level, round, offer_arr, lock, captain_auto_group, fail_and_recreate)
+		juexing_group_wild_captain(element, mark, level, round, lock, captain_auto_group, fail_and_recreate)
 	elseif (mode == "组队" and role == "队员" and group == "固定队") then
-		juexing_group_fix_member(element, mark, level, round, offer_arr, lock, member_auto_group, member_to_captain)
+		juexing_group_fix_member(element, mark, level, round, lock, member_auto_group, member_to_captain)
 	elseif (mode == "组队" and role == "队长" and group == "固定队") then
-		juexing_group_fix_captain(element, mark, level, round, offer_arr, lock, captain_auto_group, auto_invite_first)
+		juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, auto_invite_first)
 	end
 end
 
-function juexing_solo(element, mark, level, round, offer_arr, lock)
+function juexing_solo(element, mark, level, round, lock)
 	local rd_cnt = 0
 	local init = 1
 	local disconn_fin = 1
@@ -95,7 +95,7 @@ function juexing_solo(element, mark, level, round, offer_arr, lock)
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行
@@ -111,7 +111,7 @@ function juexing_solo(element, mark, level, round, offer_arr, lock)
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_half_damo(offer_arr)
+				keep_half_damo()
 				break
 			end
 			-- 觉醒材料
@@ -127,7 +127,7 @@ function juexing_solo(element, mark, level, round, offer_arr, lock)
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed("单人",offer_arr)
+				keep_fight_failed("单人")
 				break
 			end
 			-- Handle error
@@ -138,7 +138,7 @@ function juexing_solo(element, mark, level, round, offer_arr, lock)
 	return RET_OK
 end
 
-function juexing_group_wild_member(element, mark, level, round, offer_arr, lock, member_auto_group, fail_and_group, member_to_captain)
+function juexing_group_wild_member(element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
 	local rd_cnt = 0
 	local time_cnt = 0
 	local init = 1
@@ -161,7 +161,7 @@ function juexing_group_wild_member(element, mark, level, round, offer_arr, lock,
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 拒绝邀请
 			if (wait_invite == 0) then x, y = member_team_refuse_invite() if (x > -1) then break end end
 			-- 探索
@@ -200,7 +200,7 @@ function juexing_group_wild_member(element, mark, level, round, offer_arr, lock,
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_half_damo(offer_arr)
+				keep_half_damo()
 				break
 			end
 			-- 组队寻找
@@ -229,7 +229,7 @@ function juexing_group_wild_member(element, mark, level, round, offer_arr, lock,
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed("组队",offer_arr)
+				keep_fight_failed("组队")
 				break
 			end
 			-- Error Handle
@@ -240,7 +240,7 @@ function juexing_group_wild_member(element, mark, level, round, offer_arr, lock,
 	return RET_OK
 end
 
-function juexing_group_wild_captain(element, mark, level, round, offer_arr, lock, captain_auto_group, fail_and_recreate)
+function juexing_group_wild_captain(element, mark, level, round, lock, captain_auto_group, fail_and_recreate)
 	local rd_cnt = 0
 	local init = 1
 	local disconn_fin = 1
@@ -260,7 +260,7 @@ function juexing_group_wild_captain(element, mark, level, round, offer_arr, lock
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行
@@ -276,7 +276,7 @@ function juexing_group_wild_captain(element, mark, level, round, offer_arr, lock
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_half_damo(offer_arr)
+				keep_half_damo()
 				break
 			end
 			-- 失败继续邀请
@@ -312,7 +312,7 @@ function juexing_group_wild_captain(element, mark, level, round, offer_arr, lock
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed("组队",offer_arr)
+				keep_fight_failed("组队")
 				break
 			end
 			-- Handle error
@@ -323,7 +323,7 @@ function juexing_group_wild_captain(element, mark, level, round, offer_arr, lock
 	return RET_OK
 end
 
-function juexing_group_fix_member(element, mark, level, round, offer_arr, member_auto_group, member_to_captain)
+function juexing_group_fix_member(element, mark, level, round, member_auto_group, member_to_captain)
 	local rd_cnt = 0
 	local init = 1
 	local auto_grouped = -1
@@ -344,7 +344,7 @@ function juexing_group_fix_member(element, mark, level, round, offer_arr, member
 			x, y = round_fight() if (x > -1) then juexing_mark_mark(mark) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 接受邀请
 			x, y, auto_grouped = member_team_accept_invite(member_auto_group) if (x > -1) then break end
 			-- 战斗进行
@@ -361,7 +361,7 @@ function juexing_group_fix_member(element, mark, level, round, offer_arr, member
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_half_damo(offer_arr)
+				keep_half_damo()
 				break
 			end
 			if (member_to_captain == 1) then
@@ -378,7 +378,7 @@ function juexing_group_fix_member(element, mark, level, round, offer_arr, member
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed("组队",offer_arr)
+				keep_fight_failed("组队")
 				break
 			end
 			-- Handle error
@@ -389,7 +389,7 @@ function juexing_group_fix_member(element, mark, level, round, offer_arr, member
 	return RET_OK
 end
 
-function juexing_group_fix_captain(element, mark, level, round, offer_arr, lock, captain_auto_group, auto_invite_first)
+function juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, auto_invite_first)
 	local rd_cnt = 0
 	local time_cnt = 0
 	local init = 1
@@ -411,7 +411,7 @@ function juexing_group_fix_captain(element, mark, level, round, offer_arr, lock,
 			x, y = round_fight() if (x > -1) then juexing_mark_mark(mark) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行
@@ -427,7 +427,7 @@ function juexing_group_fix_captain(element, mark, level, round, offer_arr, lock,
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_half_damo(offer_arr)
+				keep_half_damo()
 				break
 			end
 			-- 失败继续邀请
@@ -473,7 +473,7 @@ function juexing_group_fix_captain(element, mark, level, round, offer_arr, lock,
 				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed("组队",offer_arr)
+				keep_fight_failed("组队")
 				break
 			end
 			-- 退出个人资料

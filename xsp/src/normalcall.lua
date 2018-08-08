@@ -36,9 +36,9 @@ function tickets_call()
 end
 
 -- Main func
-function normalcall(tickets, offer_arr)
+function normalcall(tickets)
 	print(string.format("召唤次数: %d", tickets))
-	print_offer_arr(offer_arr)
+	print_offer_arr()
 	
 	local cnt = 0
 	local disconn_fin = 1
@@ -49,6 +49,8 @@ function normalcall(tickets, offer_arr)
 	while (1) do
 		while (1) do
 			mSleep(500)
+			-- 悬赏封印
+			x, y = find_offer() if (x > -1) then break end
 			-- 完成召唤
 			if cnt >= tickets then
 				x, y = finish_call()

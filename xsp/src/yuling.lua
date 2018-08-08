@@ -17,9 +17,9 @@ function lct_yuling_single()
 end
 
 -- Main func
-function yuling(sel, level, round, lock, offer_arr)
+function yuling(sel, level, round, lock)
 	print(string.format("种类 %s，层数 %d, 次数 %d，锁定 %d", sel, level, round, lock))
-	print_offer_arr(offer_arr)
+	print_offer_arr()
 	
 	local rd = round
 	local init = 1
@@ -34,7 +34,7 @@ function yuling(sel, level, round, lock, offer_arr)
 			x, y = round_fight() if (x > -1) then break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer(offer_arr) if (x > -1) then break end
+			x, y = find_offer() if (x > -1) then break end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行
@@ -48,7 +48,7 @@ function yuling(sel, level, round, lock, offer_arr)
 				win_cnt = win_cnt + 1
 				rd = rd - 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_half_damo(offer_arr)
+				keep_half_damo()
 				break
 			end
 			-- 御灵
@@ -86,7 +86,7 @@ function yuling(sel, level, round, lock, offer_arr)
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed("单人",offer_arr)
+				keep_fight_failed("单人")
 				break
 			end
 			-- Handle error
