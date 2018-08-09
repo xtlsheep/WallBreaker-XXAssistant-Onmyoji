@@ -54,6 +54,13 @@
             }
          ]
       },
+	  {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "超鬼王 ：",
+               "type" : "Label"
+            },
       {
          "id" : "round",
          "width" : 1000,

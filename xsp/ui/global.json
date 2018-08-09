@@ -5,7 +5,7 @@
    "height" : 500,
    "cancelscroll" : true,
    "countdown" : 0,
-	"bg" : "bg.jpg",
+   "bg" : "bg.jpg",
    "cancelname" : "结束",
    "okname" : "开始",
    "views" : [
@@ -48,6 +48,290 @@
                "orientation" : "horizontal",
                "color" : "0,0,0",
                "width" : 650
+            }
+         ]
+      },
+      {
+         "id" : "line",
+         "type" : "Line",
+         "color" : "0,0,0",
+         "height" : 2,
+         "width" : 940
+      },
+      {
+         "align" : "left",
+         "color" : "0,0,0",
+         "size" : "30",
+         "text" : "超鬼王[御魂、觉醒、探索][组队模式将禁用自动组队] ：",
+         "type" : "Label"
+      },
+	  {
+         "align" : "left",
+         "color" : "0,0,0",
+         "size" : "30",
+         "text" : "[暂时不支持5,6星超鬼王，哪位大佬能给来个我5,6星的截图...感激不尽]",
+         "type" : "Label"
+      },
+      {
+         "id" : "sg_en_",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "功能启用 - ",
+               "type" : "Label",
+               "width" : 670
+            },
+            {
+               "id" : "sg_en",
+               "list" : "开启,停用",
+               "select" : "1",
+               "size" : "30",
+               "type" : "RadioGroup",
+               "orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 300
+            }
+         ]
+      },
+      {
+         "id" : "sg_force_",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "强力追击 - ",
+               "type" : "Label",
+               "width" : 670
+            },
+            {
+               "id" : "sg_force",
+               "list" : ">=  1星,>=  2星,>=  3星,>=  4星,>=  5星,       6星,不开启",
+               "select" : "4",
+               "size" : "22",
+               "type" : "ComboBox",
+               "width" : 250
+            }
+         ]
+      },
+      {
+         "id" : "sg_vibra_",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "震动提示 - [未测试]",
+               "type" : "Label",
+               "width" : 670
+            },
+            {
+               "id" : "sg_vibra",
+               "list" : ">=  1星,>=  2星,>=  3星,>=  4星,>=  5星,       6星,不开启",
+               "select" : "6",
+               "size" : "22",
+               "type" : "ComboBox",
+               "width" : 250
+            }
+         ]
+      },
+      {
+         "id" : "sg_mark_",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "标记 -  [开发中]：",
+               "type" : "Label",
+               "width" : 670
+            },
+            {
+               "id" : "sg_mark",
+               "list" : "Boss,  草人",
+               "select" : "0",
+               "size" : "28",
+               "type" : "CheckBoxGroup",
+               "orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 250
+            }
+         ]
+      },
+	  {
+         "align" : "left",
+         "color" : "0,0,0",
+         "size" : "30",
+         "text" : "[下面的设定也在开发中...暂时选定无效]",
+         "type" : "Label"
+      },
+      {
+         "id" : "sg_tired_6_",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "战斗疲劳后 [6星] -",
+               "type" : "Label",
+               "width" : 540
+            },
+            {
+               "id" : "sg_tired_6",
+               "list" : "集结,等待,喝茶",
+               "select" : "2",
+               "size" : "30",
+               "type" : "RadioGroup",
+               "orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 450
+            }
+         ]
+      },
+      {
+         "id" : "sg_tired_5_",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "战斗疲劳后 [5星] -",
+               "type" : "Label",
+               "width" : 540
+            },
+            {
+               "id" : "sg_tired_5",
+               "list" : "集结,等待,喝茶",
+               "select" : "2",
+               "size" : "30",
+               "type" : "RadioGroup",
+               "orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 450
+            }
+         ]
+      },
+      {
+         "id" : "sg_tired_4_",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "战斗疲劳后 [4星] -",
+               "type" : "Label",
+               "width" : 540
+            },
+            {
+               "id" : "sg_tired_4",
+               "list" : "集结,等待,喝茶",
+               "select" : "1",
+               "size" : "30",
+               "type" : "RadioGroup",
+               "orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 450
+            }
+         ]
+      },
+      {
+         "id" : "sg_tired_3_",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "战斗疲劳后 [3星] -",
+               "type" : "Label",
+               "width" : 540
+            },
+            {
+               "id" : "sg_tired_3",
+               "list" : "集结,等待,喝茶",
+               "select" : "1",
+               "size" : "30",
+               "type" : "RadioGroup",
+               "orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 450
+            }
+         ]
+      },
+      {
+         "id" : "sg_tired_2_",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "战斗疲劳后 [2星] -",
+               "type" : "Label",
+               "width" : 540
+            },
+            {
+               "id" : "sg_tired_2",
+               "list" : "集结,等待,喝茶",
+               "select" : "1",
+               "size" : "30",
+               "type" : "RadioGroup",
+               "orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 450
+            }
+         ]
+      },
+      {
+         "id" : "sg_tired_1_",
+         "width" : 1000,
+         "height" : 50,
+         "type" : "LinearLayout",
+         "views" : [
+            {
+               "align" : "left",
+               "color" : "0,0,0",
+               "size" : "30",
+               "text" : "战斗疲劳后 [1星] -",
+               "type" : "Label",
+               "width" : 540
+            },
+            {
+               "id" : "sg_tired_1",
+               "list" : "集结,等待,喝茶",
+               "select" : "1",
+               "size" : "30",
+               "type" : "RadioGroup",
+               "orientation" : "horizontal",
+               "color" : "0,0,0",
+               "width" : 450
             }
          ]
       }

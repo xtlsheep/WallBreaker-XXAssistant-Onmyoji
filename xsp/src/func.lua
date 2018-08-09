@@ -223,7 +223,7 @@ function solo_start()
 end
 
 function print_offer_arr()
-	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 樱饼：%d 金币：%d 零食：%d)",
+	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d)",
 			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6]))
 end
 

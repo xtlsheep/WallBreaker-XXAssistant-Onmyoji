@@ -5,7 +5,7 @@ require "jjtp"
 require "yeyuanhuo"
 require "yuling"
 require "normalcall"
-require "tansuo"
+require "sg_jiutun"
 
 -- Def
 local dev_width = 640 -- iPhone 5s: 640 x 1136
@@ -84,7 +84,7 @@ function mainmenu_UI()
 	if (ret_mainmenu == 0) then
 		return RET_ERR
 	end
-
+	
 	if (res_mainmenu.select == "0") then
 		fast_UI()
 	elseif (res_mainmenu.select == "1") then
@@ -125,27 +125,27 @@ function config_UI()
 	
 	-- 御魂
 	if (res_config.select == "0") 	   then baqidashe_UI()
-	-- 探索
+		-- 探索
 	elseif (res_config.select == "1")  then	tansuo_UI()
-	-- 结界突破
+		-- 结界突破
 	elseif (res_config.select == "2")  then jjtp_UI()
-	-- 业原火
+		-- 业原火
 	elseif (res_config.select == "3")  then yeyuanhuo_UI()
-	-- 御灵
+		-- 御灵
 	elseif (res_config.select == "4") then yuling_UI()
-	-- 觉醒
+		-- 觉醒
 	elseif (res_config.select == "5")  then juexing_UI()
-	-- 副本组合
+		-- 副本组合
 	elseif (res_config.select == "6")  then multimission_UI()
-	-- 百鬼夜行
+		-- 百鬼夜行
 	elseif (res_config.select == "7")  then hundredghost_UI()
-	-- 妖气封印
+		-- 妖气封印
 	elseif (res_config.select == "8") then yqfy_UI()
-	-- 世界喊话
+		-- 世界喊话
 	elseif (res_config.select == "9") then worldchannel_UI()
-	-- 普通召唤
+		-- 普通召唤
 	elseif (res_config.select == "10")  then normalcall_UI()
-	-- 超鬼王
+		-- 超鬼王
 	elseif (res_config.select == "11")  then superghost_UI()
 	end
 end
@@ -192,11 +192,41 @@ function global_UI()
 				offer_arr[4] = 1 -- 金币
 			elseif (offer_sel[i] == "3") then
 				offer_arr[5] = 1 -- 猫粮
-			elseif (offer_sel[i] == "3") then
-				offer_arr[5] = 1 -- 狗粮
+			elseif (offer_sel[i] == "4") then
+				offer_arr[6] = 1 -- 狗粮
 			end
 		end
 	end
+	
+	-- 超鬼王 - 酒吞
+	if res_global.sg_en == "0" then
+		sg_en = 1
+	else
+		sg_en = 0
+	end
+	
+	--sg_fight = tonumber(res_global.sg_fight) + 1
+	sg_force = tonumber(res_global.sg_force) + 1 if sg_force > 6 then sg_force = 0 end
+	sg_vibra = tonumber(res_global.sg_vibra) + 1 if sg_vibra > 6 then sg_vibra = 0 end
+	
+	local sg_mark_ = {}
+	for w in string.gmatch(res_global.sg_mark,"([^'@']+)") do
+		table.insert(sg_mark_,w)
+	end
+	for i = 1, table.getn(sg_mark_), 1 do
+		if (sg_mark_[i] == "0") then
+			sg_mark[1] = 1 -- Boss
+		elseif (sg_mark_[i] == "1") then
+			sg_mark[2] = 1 -- 草人
+		end
+	end
+	
+	if res_global.sg_tired_6 == "0" then sg_tired_6 = "集结" elseif res_global.sg_tired_6 == "1" then sg_tired_6 = "等待" elseif res_global.sg_tired_6 == "2" then sg_tired_6 = "喝茶" end
+	if res_global.sg_tired_5 == "0" then sg_tired_5 = "集结" elseif res_global.sg_tired_5 == "1" then sg_tired_5 = "等待" elseif res_global.sg_tired_5 == "2" then sg_tired_5 = "喝茶" end
+	if res_global.sg_tired_4 == "0" then sg_tired_4 = "集结" elseif res_global.sg_tired_4 == "1" then sg_tired_4 = "等待" elseif res_global.sg_tired_4 == "2" then sg_tired_4 = "喝茶" end
+	if res_global.sg_tired_3 == "0" then sg_tired_3 = "集结" elseif res_global.sg_tired_3 == "1" then sg_tired_3 = "等待" elseif res_global.sg_tired_3 == "2" then sg_tired_3 = "喝茶" end
+	if res_global.sg_tired_2 == "0" then sg_tired_2 = "集结" elseif res_global.sg_tired_2 == "1" then sg_tired_2 = "等待" elseif res_global.sg_tired_2 == "2" then sg_tired_2 = "喝茶" end
+	if res_global.sg_tired_1 == "0" then sg_tired_1 = "集结" elseif res_global.sg_tired_1 == "1" then sg_tired_1 = "等待" elseif res_global.sg_tired_1 == "2" then sg_tired_1 = "喝茶" end
 	
 	return RET_OK
 end
@@ -264,7 +294,7 @@ function fast_yuhun_UI()
 	local captain_auto_group = 1
 	local auto_invite_first = 0
 	local fail_and_recreate = 1
-
+	
 	yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
 end
 
@@ -505,13 +535,13 @@ function baqidashe_UI()
 end
 
 function tansuo_UI()
-local ui = fit_UI("tansuo.json", dev_width)
+	local ui = fit_UI("tansuo.json", dev_width)
 	ret_tansuo, res_tansuo = showUI(ui)
 	if (ret_tansuo == 0) then
 		config_UI()
 		return
 	end
-
+	
 	local mode, mark, hard, section, count_mode, win_round, sec_round
 	if res_tansuo.mode == "0" then
 		mode = "单人"
@@ -573,7 +603,7 @@ local ui = fit_UI("tansuo.json", dev_width)
 	elseif res_tansuo.win_round == "5" then
 		win_round = 99999
 	end
-
+	
 	if res_tansuo.sec_round == "0" then
 		sec_round = 1
 	elseif res_tansuo.sec_round == "1" then
@@ -589,7 +619,7 @@ local ui = fit_UI("tansuo.json", dev_width)
 	elseif res_tansuo.sec_round == "6" then
 		sec_round = 99999
 	end
-
+	
 	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
@@ -994,7 +1024,7 @@ function yuling_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
-
+	
 	yuling(sel, level, round, lock)
 end
 
@@ -1071,7 +1101,7 @@ function normalcall_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
-
+	
 	normalcall(tickets)
 end
 
@@ -1115,4 +1145,6 @@ function superghost_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
+	
+	sg_jiutun()
 end
