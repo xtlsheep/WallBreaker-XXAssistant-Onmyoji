@@ -341,7 +341,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 		
 		while (1) do
 			-- 战
-			x, y = round_fight() if (x > -1) then juexing_mark_mark(mark) break end
+			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
 			-- 悬赏封印
 			x, y = find_offer() if (x > -1) then break end
@@ -408,7 +408,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 		
 		while (1) do
 			-- 战
-			x, y = round_fight() if (x > -1) then juexing_mark_mark(mark) break end
+			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
 			-- 悬赏封印
 			x, y = find_offer() if (x > -1) then break end
