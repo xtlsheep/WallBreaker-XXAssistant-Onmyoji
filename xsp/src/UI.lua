@@ -531,6 +531,11 @@ function baqidashe_UI()
 		return
 	end
 	
+	if sg_en == 1 then
+		member_auto_group = 0
+		captain_auto_group = 0
+	end
+	
 	yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
 end
 
@@ -861,6 +866,11 @@ function juexing_UI()
 	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
+	end
+	
+	if sg_en == 1 then
+		member_auto_group = 0
+		captain_auto_group = 0
 	end
 	
 	juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)

@@ -11,8 +11,9 @@ function lct_sg_jiutun_window()
 		ran_touch(0, x+200, y, 50, 20) -- 点击弹窗
 		mSleep(1000)
 		sg_jiutun()
+		return RET_OK
 	end
-	return
+	return RET_ERR
 end
 
 function lct_sg_jiutun()
@@ -22,17 +23,29 @@ function lct_sg_jiutun()
 	return x, y
 end
 
-function cs_6()
-	return -1, -1
+function cs_6(left, top, right, bot)
+	x, y = findColor({left, top-35, right, bot-35},
+		"0|0|0xf5e5d5,-21|-21|0x6d4f59,7|15|0x524650",
+		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_scene,"发现 6星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	end
+	return x, y
 end
 
-function cs_5()
-	return -1, -1
+function cs_5(left, top, right, bot)
+	local x, y = findColor({left, top, right, bot},
+		"0|0|0xfc8a2a,11|0|0xfba23a,-23|-31|0x9b7b54",
+		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_scene,"发现 5星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	end
+	return x, y
 end
 
-function cs_4()
-	local x, y = findColor({136, 235, 138, 550},
-		"0|0|0xfbffa3,-6|0|0xf79f2e,17|-1|0xf39e33,1|-59|0xfbf9eb",
+function cs_4(left, top, right, bot)
+	local x, y = findColor({left, top, right, bot},
+		"0|0|0xf4a033,11|0|0xf49f33,-15|-26|0x906b87",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_scene,"发现 4星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -40,9 +53,9 @@ function cs_4()
 	return x, y
 end
 
-function cs_3()
-	local x, y = findColor({136, 235, 138, 550},
-		"0|0|0xf79d2f,-11|0|0xf69d2f,11|0|0xf79d2f,3|-56|0xfbf9ea",
+function cs_3(left, top, right, bot)
+	local x, y = findColor({left, top, right, bot},
+		"0|0|0xf6a031,11|0|0xf6a031,-22|-28|0x4e524e",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_scene,"发现 3星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -50,8 +63,8 @@ function cs_3()
 	return x, y
 end
 
-function cs_2()
-	local x, y = findColor({131, 235, 133, 550},
+function cs_2(left, top, right, bot)
+	local x, y = findColor({left, top, right, bot},
 		"0|0|0xf4a033,11|0|0xf49f33,-22|-59|0xdf4d4b",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -60,8 +73,8 @@ function cs_2()
 	return x, y
 end
 
-function cs_1()
-	local x, y = findColor({136, 235, 138, 550},
+function cs_1(left, top, right, bot)
+	local x, y = findColor({left, top, right, bot},
 		"0|0|0xf4a432,-28|-59|0xdf4d4b,-10|-2|0xa08b82",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -84,18 +97,19 @@ function find_guiwang()
 	local x = -1
 	local y = -1
 	local ret = -1
-	--	if sg_fight > 5 then x, y = cs_6() if x > -1 then return x, y, 6 end end
-	--	if sg_fight > 4 then x, y = cs_5() if x > -1 then return x, y, 5 end end
-	--	if sg_fight > 3 then x, y = cs_4() if x > -1 then return x, y, 4 end end
-	--	if sg_fight > 2 then x, y = cs_3() if x > -1 then return x, y, 3 end end
-	--	if sg_fight > 1 then x, y = cs_2() if x > -1 then return x, y, 2 end end
-	--	if sg_fight > 0 then x, y = cs_1() if x > -1 then return x, y, 1 end end
-	x, y = cs_6() if x > -1 then ret = check_blood(x, y) if ret == RET_OK then return x, y, 6 end end
-	x, y = cs_5() if x > -1 then ret = check_blood(x, y) if ret == RET_OK then return x, y, 5 end end
-	x, y = cs_4() if x > -1 then ret = check_blood(x, y) if ret == RET_OK then return x, y, 4 end end
-	x, y = cs_3() if x > -1 then ret = check_blood(x, y) if ret == RET_OK then return x, y, 3 end end
-	x, y = cs_2() if x > -1 then ret = check_blood(x, y) if ret == RET_OK then return x, y, 2 end end
-	x, y = cs_1() if x > -1 then ret = check_blood(x, y) if ret == RET_OK then return x, y, 1 end end
+	local top = {235, 350, 465}
+	local bottom = {240, 355, 470}
+	local left = 130
+	local right = 140
+	
+	for i = 1, 3 do
+		x, y = cs_1(left, top[i], right, bottom[i]) if x > -1 then ret = check_blood(x, y) if ret == RET_OK then return x, y, 1 end end
+		x, y = cs_2(left, top[i], right, bottom[i]) if x > -1 then ret = check_blood(x, y) if ret == RET_OK then return x, y, 2 end end
+		x, y = cs_3(left, top[i], right, bottom[i]) if x > -1 then ret = check_blood(x, y) if ret == RET_OK then return x, y, 3 end end
+		x, y = cs_4(left, top[i], right, bottom[i]) if x > -1 then ret = check_blood(x, y) if ret == RET_OK then return x, y, 4 end end
+		x, y = cs_5(left, top[i], right, bottom[i]) if x > -1 then ret = check_blood(x, y) if ret == RET_OK then return x, y, 5 end end
+		x, y = cs_6(left, top[i], right, bottom[i]) if x > -1 then ret = check_blood(x, y) if ret == RET_OK then return x, y, 6 end end
+	end
 	return x, y, 0
 end
 
@@ -194,10 +208,12 @@ function sg_jiutun()
 			-- 超鬼王页面
 			x, y = lct_sg_jiutun()
 			if x > -1 then
+				ran_sleep(500)
 				-- Check
 				x_f, y_f, star = find_guiwang()
 				if star > 0 then
 					if ready_to_go == 1 then
+						ran_sleep(500)
 						ran_touch(0, 1030, 540, 20, 20) -- 挑战
 						ready_to_go = 0
 						last_star = star
@@ -245,29 +261,3 @@ function sg_jiutun()
 	end
 	return
 end
-
--- 战斗限定json
---{
---   "id" : "sg_fight_",
---   "width" : 1000,
---   "height" : 50,
---   "type" : "LinearLayout",
---   "views" : [
---      {
---         "align" : "left",
---         "color" : "0,0,0",
---         "size" : "30",
---         "text" : "战斗限定 - ",
---         "type" : "Label",
---         "width" : 670
---      },
---      {
---         "id" : "sg_fight",
---         "list" : ">=  1星,>=  2星,>=  3星,>=  4星,>=  5星,       6星,",
---         "select" : "0",
---         "size" : "22",
---         "type" : "ComboBox",
---         "width" : 250
---      }
---   ]
---}

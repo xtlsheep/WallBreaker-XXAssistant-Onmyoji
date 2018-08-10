@@ -27,7 +27,6 @@ fail_cnt = 0
 offer_arr = {0, 0, 0, 0, 0, 0}
 -- 超鬼王 - 酒吞
 sg_en = 0
---sg_fight = 0
 sg_force = 0
 sg_vibra = 0
 sg_mark = {0, 0}

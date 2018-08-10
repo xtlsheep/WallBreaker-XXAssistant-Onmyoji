@@ -146,6 +146,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 	local init = 1
 	local wait_invite = 0
 	local auto_grouped = -1
+	local ret = -1
 	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
@@ -159,6 +160,8 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 		end
 		
 		while (1) do
+			-- 超鬼王
+			ret = lct_sg_jiutun_window() if ret == RET_OK then wait_invite = 0 end
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
@@ -170,7 +173,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			x, y = lct_tansuo()
 			if (x > -1) then
 				-- 超鬼王
-				lct_sg_jiutun_window()
+				ret = lct_sg_jiutun_window() if ret == RET_OK then wait_invite = 0 end
 				if wait_invite == 0 then
 					HUD_show_or_hide(HUD,hud_scene,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 90, 590, 20, 20) -- 觉醒
@@ -260,8 +263,6 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 		end
 		
 		while (1) do
-			-- 超鬼王
-			lct_sg_jiutun_window()
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
@@ -415,8 +416,6 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 		end
 		
 		while (1) do
-			-- 超鬼王
-			lct_sg_jiutun_window()
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
