@@ -233,7 +233,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round)
 	while (1) do
 		while (1) do
 			-- 超鬼王
-			lct_sg_jiutun_window()
+			lct_sg_window()
 			-- 战
 			x, y = round_fight() if x > -1 then tansuo_mark(mark) break end
 			-- 一回目
@@ -352,8 +352,6 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 	
 	while (1) do
 		while (1) do
-			-- 超鬼王
-			lct_sg_jiutun_window()
 			-- 战
 			x, y = round_fight() if x > -1 then tansuo_mark(mark) break end
 			-- 一回目
@@ -471,7 +469,7 @@ function tansuo_member(sel, mark)
 	while (1) do
 		while (1) do
 			-- 超鬼王
-			lct_sg_jiutun_window()
+			lct_sg_window()
 			-- 战
 			x, y = round_fight() if x > -1 then tansuo_mark(mark) break end
 			-- 一回目

@@ -101,7 +101,7 @@ function yuhun_solo(mark, level, round, lock)
 		
 		while (1) do
 			-- 超鬼王
-			lct_sg_jiutun_window()
+			lct_sg_window()
 			-- 一回目
 			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 0) break end
 			-- 二回目
@@ -177,7 +177,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 		
 		while (1) do
 			-- 超鬼王
-			ret = lct_sg_jiutun_window() if ret == RET_OK then wait_invite = 0 end
+			ret = lct_sg_window() if ret == RET_OK then wait_invite = 0 end
 			-- 一回目
 			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 0) break end
 			-- 二回目
@@ -195,7 +195,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			x, y = lct_tansuo()
 			if (x > -1) then
 				-- 超鬼王
-				ret = lct_sg_jiutun_window() if ret == RET_OK then wait_invite = 0 end
+				ret = lct_sg_window() if ret == RET_OK then wait_invite = 0 end
 				if wait_invite == 0 then
 					HUD_show_or_hide(HUD,hud_scene,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 180, 590, 20, 20) -- 御魂
@@ -378,7 +378,7 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 		
 		while (1) do
 			-- 超鬼王
-			lct_sg_jiutun_window()
+			lct_sg_window()
 			-- 一回目
 			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 0) break end
 			-- 二回目

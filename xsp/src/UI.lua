@@ -5,7 +5,7 @@ require "jjtp"
 require "yeyuanhuo"
 require "yuling"
 require "normalcall"
-require "sg_jiutun"
+require "superghost"
 
 -- Def
 local dev_width = 640 -- iPhone 5s: 640 x 1136
@@ -221,12 +221,12 @@ function global_UI()
 		end
 	end
 	
-	if res_global.sg_tired_6 == "0" then sg_tired_6 = "集结" elseif res_global.sg_tired_6 == "1" then sg_tired_6 = "等待" elseif res_global.sg_tired_6 == "2" then sg_tired_6 = "喝茶" end
-	if res_global.sg_tired_5 == "0" then sg_tired_5 = "集结" elseif res_global.sg_tired_5 == "1" then sg_tired_5 = "等待" elseif res_global.sg_tired_5 == "2" then sg_tired_5 = "喝茶" end
-	if res_global.sg_tired_4 == "0" then sg_tired_4 = "集结" elseif res_global.sg_tired_4 == "1" then sg_tired_4 = "等待" elseif res_global.sg_tired_4 == "2" then sg_tired_4 = "喝茶" end
-	if res_global.sg_tired_3 == "0" then sg_tired_3 = "集结" elseif res_global.sg_tired_3 == "1" then sg_tired_3 = "等待" elseif res_global.sg_tired_3 == "2" then sg_tired_3 = "喝茶" end
-	if res_global.sg_tired_2 == "0" then sg_tired_2 = "集结" elseif res_global.sg_tired_2 == "1" then sg_tired_2 = "等待" elseif res_global.sg_tired_2 == "2" then sg_tired_2 = "喝茶" end
-	if res_global.sg_tired_1 == "0" then sg_tired_1 = "集结" elseif res_global.sg_tired_1 == "1" then sg_tired_1 = "等待" elseif res_global.sg_tired_1 == "2" then sg_tired_1 = "喝茶" end
+	if res_global.sg_tired_6 == "0" then sg_tired[6] = "集结" elseif res_global.sg_tired_6 == "1" then sg_tired[6] = "等待" elseif res_global.sg_tired_6 == "2" then sg_tired[6] = "喝茶" end
+	if res_global.sg_tired_5 == "0" then sg_tired[5] = "集结" elseif res_global.sg_tired_5 == "1" then sg_tired[5] = "等待" elseif res_global.sg_tired_5 == "2" then sg_tired[5] = "喝茶" end
+	if res_global.sg_tired_4 == "0" then sg_tired[4] = "集结" elseif res_global.sg_tired_4 == "1" then sg_tired[4] = "等待" elseif res_global.sg_tired_4 == "2" then sg_tired[4] = "喝茶" end
+	if res_global.sg_tired_3 == "0" then sg_tired[3] = "集结" elseif res_global.sg_tired_3 == "1" then sg_tired[3] = "等待" elseif res_global.sg_tired_3 == "2" then sg_tired[3] = "喝茶" end
+	if res_global.sg_tired_2 == "0" then sg_tired[2] = "集结" elseif res_global.sg_tired_2 == "1" then sg_tired[2] = "等待" elseif res_global.sg_tired_2 == "2" then sg_tired[2] = "喝茶" end
+	if res_global.sg_tired_1 == "0" then sg_tired[1] = "集结" elseif res_global.sg_tired_1 == "1" then sg_tired[1] = "等待" elseif res_global.sg_tired_1 == "2" then sg_tired[1] = "喝茶" end
 	
 	return RET_OK
 end
@@ -1156,5 +1156,5 @@ function superghost_UI()
 		return
 	end
 	
-	sg_jiutun()
+	superghost()
 end

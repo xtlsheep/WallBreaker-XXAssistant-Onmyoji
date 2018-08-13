@@ -92,7 +92,7 @@ function juexing_solo(element, mark, level, round, lock)
 		
 		while (1) do
 			-- 超鬼王
-			lct_sg_jiutun_window()
+			lct_sg_window()
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
@@ -121,7 +121,7 @@ function juexing_solo(element, mark, level, round, lock)
 			-- 庭院
 			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 90, 590, 20, 20) break end -- 觉醒
+			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 90, 590, 20, 20) mSleep(1000) break end -- 觉醒
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 战斗失败
@@ -161,7 +161,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 		
 		while (1) do
 			-- 超鬼王
-			ret = lct_sg_jiutun_window() if ret == RET_OK then wait_invite = 0 end
+			ret = lct_sg_window() if ret == RET_OK then wait_invite = 0 end
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
@@ -173,10 +173,11 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			x, y = lct_tansuo()
 			if (x > -1) then
 				-- 超鬼王
-				ret = lct_sg_jiutun_window() if ret == RET_OK then wait_invite = 0 end
+				ret = lct_sg_window() if ret == RET_OK then wait_invite = 0 end
 				if wait_invite == 0 then
 					HUD_show_or_hide(HUD,hud_scene,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 90, 590, 20, 20) -- 觉醒
+					mSleep(1000)
 				else
 					HUD_show_or_hide(HUD,hud_scene,"探索 - 等待组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					x, y, auto_grouped = member_team_accept_invite(member_auto_group)
@@ -309,7 +310,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			-- 庭院
 			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 90, 590, 20, 20) break end -- 觉醒
+			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 90, 590, 20, 20) mSleep(1000) break end -- 觉醒
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 觉醒材料
@@ -348,7 +349,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 		
 		while (1) do
 			-- 超鬼王
-			lct_sg_jiutun_window()
+			lct_sg_window()
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
@@ -472,7 +473,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			-- 庭院
 			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 90, 590, 20, 20) break end -- 觉醒
+			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 90, 590, 20, 20) mSleep(1000) break end -- 觉醒
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 觉醒材料

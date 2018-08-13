@@ -25,17 +25,13 @@ fail_cnt = 0
 
 -- Global config
 offer_arr = {0, 0, 0, 0, 0, 0}
--- 超鬼王 - 酒吞
+
+-- 超鬼王
 sg_en = 0
 sg_force = 0
 sg_vibra = 0
 sg_mark = {0, 0}
-sg_tired_6 = 0
-sg_tired_5 = 0
-sg_tired_4 = 0
-sg_tired_3 = 0
-sg_tired_2 = 0
-sg_tired_1 = 0
+sg_tired = {0, 0, 0, 0, 0, 0}
 
 ---- Portal
 HUD = portal()
