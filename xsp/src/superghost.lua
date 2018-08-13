@@ -304,7 +304,7 @@ function superghost()
 				break
 			end
 			-- 集结
-			x, y = lct_sg_group() if x > -1 then sg_group_invite() mSleep(5*60*1000) break end
+			x, y = lct_sg_group() if x > -1 then ran_touch(0, 831, 173, 5, 5) ran_sleep(250) sg_group_invite() mSleep(5*60*1000) break end
 			-- 超鬼王页面
 			x, y = lct_sg_page()
 			if x > -1 then
