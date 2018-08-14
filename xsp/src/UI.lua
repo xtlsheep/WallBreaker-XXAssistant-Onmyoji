@@ -207,7 +207,6 @@ function global_UI()
 	
 	--sg_fight = tonumber(res_global.sg_fight) + 1
 	sg_force = tonumber(res_global.sg_force) + 1 if sg_force > 6 then sg_force = 0 end
-	sg_vibra = tonumber(res_global.sg_vibra) + 1 if sg_vibra > 6 then sg_vibra = 0 end
 	
 	local sg_mark_ = {}
 	for w in string.gmatch(res_global.sg_mark,"([^'@']+)") do

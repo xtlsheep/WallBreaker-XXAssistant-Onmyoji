@@ -29,7 +29,6 @@ offer_arr = {0, 0, 0, 0, 0, 0}
 -- 超鬼王
 sg_en = 0
 sg_force = 0
-sg_vibra = 0
 sg_mark = {0, 0}
 sg_tired = {0, 0, 0, 0, 0, 0}
 

@@ -10,14 +10,8 @@ function lct_sg_window()
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_scene,"发现超鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		ran_touch(0, x+200, y, 50, 20) -- 点击弹窗
-		mSleep(3000)
-		x_, y_ = lct_tansuo()
-		if x_ > -1 then
-			return RET_ERR
-		else
-			superghost()
-			return RET_OK
-		end
+		superghost()
+		return RET_OK
 	end
 	return RET_ERR
 end
@@ -189,7 +183,7 @@ function switch_force(star)
 		"0|0|0x402f11,177|-4|0x475ade,515|-399|0xe8d4cf,-419|-416|0x6d090c",
 		95, 0, 0, 0)
 	if x > -1 then
-		if star < sg_force then
+		if star < sg_force or sg_force == 0 then
 			ran_touch(0, x, y, 5, 5) -- 选择普通
 			return
 		end
@@ -266,7 +260,6 @@ function superghost()
 	if sg_en == 0 then
 		return
 	end
-	mSleep(1000)
 	
 	local x = -1
 	local y = -1
@@ -278,6 +271,8 @@ function superghost()
 	local ready_to_go = 0
 	local last_mark = ""
 	local tired_op = ""
+	local time_cnt_en = 1
+	local time_cnt = 0
 	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
@@ -297,18 +292,24 @@ function superghost()
 				tired_op = sg_tired[star]
 				if tired_op == "喝茶" then
 					ran_touch(0, x, y , 30, 10) -- 58勾
+					tired_op = ""
 				elseif tired_op == "等待" then
 					ran_touch(0, 831, 173, 5, 5) -- 关闭
 					mSleep(5*60*1000)
+					tired_op = ""
+				elseif tired_op == "集结" then
+					ran_touch(0, 831, 173, 5, 5) -- 关闭
 				end
 				break
 			end
 			-- 集结
-			x, y = lct_sg_group() if x > -1 then ran_touch(0, 831, 173, 5, 5) ran_sleep(250) sg_group_invite() mSleep(5*60*1000) break end
+			x, y = lct_sg_group() if x > -1 then sg_group_invite() mSleep(5*60*1000) tired_op = "" break end
 			-- 超鬼王页面
 			x, y = lct_sg_page()
 			if x > -1 then
 				ran_sleep(250)
+				-- Time cnt
+				time_cnt_en = 0
 				-- 进入集结
 				if (tired_op == "集结") then ran_touch(0, 880, 550, 10, 10) break end -- 集结
 				-- Check
@@ -335,6 +336,14 @@ function superghost()
 					return
 				end
 				break
+			else
+				if time_cnt_en == 1 then
+					time_cnt = time_cnt + 1
+					if time_cnt > 600 then
+						time_cnt = 0
+						return
+					end
+				end
 			end
 			-- 战斗进行
 			x, y = fight_ongoing() if (x > -1) then last_mark = mark_sg(last_mark) mSleep(3000) break end

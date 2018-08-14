@@ -62,7 +62,7 @@
          "align" : "left",
          "color" : "0,0,0",
          "size" : "30",
-         "text" : "超鬼王[适用于御魂、觉醒、探索的单人、队员模式][会禁用自动组队]:",
+         "text" : "超鬼王[适用御魂、觉醒、探索的单人、队员模式][自动禁用自动组队]:",
          "type" : "Label"
       },
       {
@@ -116,30 +116,6 @@
          ]
       },
       {
-         "id" : "sg_vibra_",
-         "width" : 1000,
-         "height" : 50,
-         "type" : "LinearLayout",
-         "views" : [
-            {
-               "align" : "left",
-               "color" : "0,0,0",
-               "size" : "30",
-               "text" : "震动提示 - [未测试]",
-               "type" : "Label",
-               "width" : 670
-            },
-            {
-               "id" : "sg_vibra",
-               "list" : ">=  1星,>=  2星,>=  3星,>=  4星,>=  5星,       6星,不开启",
-               "select" : "6",
-               "size" : "22",
-               "type" : "ComboBox",
-               "width" : 250
-            }
-         ]
-      },
-      {
          "id" : "sg_mark_",
          "width" : 1000,
          "height" : 50,
@@ -149,7 +125,7 @@
                "align" : "left",
                "color" : "0,0,0",
                "size" : "30",
-               "text" : "标记 -  [开发中]：",
+               "text" : "标记 -：",
                "type" : "Label",
                "width" : 670
             },
@@ -164,13 +140,6 @@
                "width" : 250
             }
          ]
-      },
-	  {
-         "align" : "left",
-         "color" : "0,0,0",
-         "size" : "30",
-         "text" : "[下面的设定也在开发中...暂时选定无效]",
-         "type" : "Label"
       },
       {
          "id" : "sg_tired_6_",
