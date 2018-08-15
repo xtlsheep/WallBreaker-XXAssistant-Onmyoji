@@ -198,35 +198,6 @@ function global_UI()
 		end
 	end
 	
-	-- 超鬼王 - 酒吞
-	if res_global.sg_en == "0" then
-		sg_en = 1
-	else
-		sg_en = 0
-	end
-	
-	--sg_fight = tonumber(res_global.sg_fight) + 1
-	sg_force = tonumber(res_global.sg_force) + 1 if sg_force > 6 then sg_force = 0 end
-	
-	local sg_mark_ = {}
-	for w in string.gmatch(res_global.sg_mark,"([^'@']+)") do
-		table.insert(sg_mark_,w)
-	end
-	for i = 1, table.getn(sg_mark_), 1 do
-		if (sg_mark_[i] == "0") then
-			sg_mark[1] = 1 -- Boss
-		elseif (sg_mark_[i] == "1") then
-			sg_mark[2] = 1 -- 草人
-		end
-	end
-	
-	if res_global.sg_tired_6 == "0" then sg_tired[6] = "集结" elseif res_global.sg_tired_6 == "1" then sg_tired[6] = "等待" elseif res_global.sg_tired_6 == "2" then sg_tired[6] = "喝茶" end
-	if res_global.sg_tired_5 == "0" then sg_tired[5] = "集结" elseif res_global.sg_tired_5 == "1" then sg_tired[5] = "等待" elseif res_global.sg_tired_5 == "2" then sg_tired[5] = "喝茶" end
-	if res_global.sg_tired_4 == "0" then sg_tired[4] = "集结" elseif res_global.sg_tired_4 == "1" then sg_tired[4] = "等待" elseif res_global.sg_tired_4 == "2" then sg_tired[4] = "喝茶" end
-	if res_global.sg_tired_3 == "0" then sg_tired[3] = "集结" elseif res_global.sg_tired_3 == "1" then sg_tired[3] = "等待" elseif res_global.sg_tired_3 == "2" then sg_tired[3] = "喝茶" end
-	if res_global.sg_tired_2 == "0" then sg_tired[2] = "集结" elseif res_global.sg_tired_2 == "1" then sg_tired[2] = "等待" elseif res_global.sg_tired_2 == "2" then sg_tired[2] = "喝茶" end
-	if res_global.sg_tired_1 == "0" then sg_tired[1] = "集结" elseif res_global.sg_tired_1 == "1" then sg_tired[1] = "等待" elseif res_global.sg_tired_1 == "2" then sg_tired[1] = "喝茶" end
-	
 	return RET_OK
 end
 
@@ -1154,6 +1125,4 @@ function superghost_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
-	
-	superghost()
 end

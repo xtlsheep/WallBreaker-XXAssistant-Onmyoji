@@ -183,7 +183,7 @@ function switch_force(star)
 		"0|0|0x402f11,177|-4|0x475ade,515|-399|0xe8d4cf,-419|-416|0x6d090c",
 		95, 0, 0, 0)
 	if x > -1 then
-		if star < sg_force or sg_force == 0 then
+		if star < sg_force then
 			ran_touch(0, x, y, 5, 5) -- 选择普通
 			return
 		end
@@ -253,8 +253,8 @@ end
 
 -- Main func
 function superghost()
-	print(string.format("超鬼王: %d 强力追击 %d 震动提醒 %d 标记 Boss %d 草人 %d 6星 %s 5星 %s 4星 %s 3星 %s 2星 %s 1星 %s",
-			sg_en, sg_force, sg_vibra, sg_mark[1], sg_mark[2], sg_tired[6], sg_tired[5], sg_tired[4], sg_tired[3], sg_tired[2], sg_tired[1]))
+	print(string.format("超鬼王: %d 强力追击 %d 标记 Boss %d 草人 %d 6星 %s 5星 %s 4星 %s 3星 %s 2星 %s 1星 %s",
+			sg_en, sg_force, sg_mark[1], sg_mark[2], sg_tired[6], sg_tired[5], sg_tired[4], sg_tired[3], sg_tired[2], sg_tired[1]))
 	print_offer_arr()
 	
 	if sg_en == 0 then
@@ -326,9 +326,6 @@ function superghost()
 					end
 					ran_touch(0, x_f+150, y_f, 50, 10) -- 选择鬼王
 					switch_force(star)
-					if sg_vibra > 0 then
-						vibrator(star, last_star)
-					end
 					ready_to_go = 1
 					break
 				else
