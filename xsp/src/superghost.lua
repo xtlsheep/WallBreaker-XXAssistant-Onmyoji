@@ -3,6 +3,7 @@ require "func"
 
 -- Util func
 function lct_sg_window()
+	-- 识别弹窗
 	local x, y, x_, y_
 	x, y = findColor({24, 200, 26, 450}, -- 弹窗箭头
 		"0|0|0xcc8b3b,254|-11|0xce765f,57|-23|0xe3d9ce,432|-24|0xdcd2c7",
@@ -17,13 +18,15 @@ function lct_sg_window()
 end
 
 function lct_sg_page()
-	local x, y = findColor({107, 73, 109, 75},  -- 超鬼王页面
+	-- 识别超鬼王页面
+	local x, y = findColor({107, 73, 109, 75},
 		"0|0|0x71090c,297|43|0x28090f,730|-60|0xc9ddee,935|17|0xe8d4cf",
 		95, 0, 0, 0)
 	return x, y
 end
 
-function lct_sg_tansuo()
+function lct_sg_in_tansuo()
+	-- 识别探索里的超鬼王[Maybe extend findColor area]
 	local x, y = findColor({450, 230, 600, 350},
 		"0|0|0xe4dfdd,-10|-133|0x423944,38|-174|0xeb635b,-67|-158|0xd9d0bf,-61|-37|0x4c3829",
 		95, 0, 0, 0)
@@ -31,13 +34,15 @@ function lct_sg_tansuo()
 end
 
 function lct_sg_group()
+	-- 识别超鬼王集结页面
 	local x, y = findColor({358, 89, 360, 91},
 		"0|0|0xeac89e,75|39|0xa26b4e,329|424|0xf3b25e,429|424|0xcbb59c",
 		95, 0, 0, 0)
 	return x, y
 end
 
-function mark_sg(last_mark)
+function sg_mark(last_mark)
+	-- 标记Boss&草人
 	local cnt = math.random(1, 2)
 	local x, y, x_, y_
 	if sg_mark[1] == 0 and sg_mark[2] == 0 then
@@ -56,7 +61,7 @@ function mark_sg(last_mark)
 			"0|0|0xaf0d0a,2|0|0xb10e0b,4|0|0xb30e0b,-569|-168|0xd6c4a1,-582|-176|0x211b0f",
 			80, 0, 0, 0)
 		if x > -1 then
-			x_, y_ = findColor({610, 140, 660, 170}, -- 标记箭头
+			x_, y_ = findColor({610, 140, 660, 170}, -- 箭头
 				"0|0|0xd41635,-7|0|0xc71e43,-22|-23|0xef45aa,15|-23|0xf65db9",
 				80, 0, 0, 0)
 			if x_ == -1 then
@@ -68,7 +73,7 @@ function mark_sg(last_mark)
 		end
 		return "草人"
 	elseif sg_mark[1] == 1 and sg_mark[2] == 1 then
-		x_, y_ = findColor({610, 140, 660, 170}, -- 标记箭头
+		x_, y_ = findColor({610, 140, 660, 170}, -- 箭头
 			"0|0|0xd41635,-7|0|0xc71e43,-22|-23|0xef45aa,15|-23|0xf65db9",
 			80, 0, 0, 0)
 		if x_ > -1 then
@@ -96,50 +101,57 @@ function mark_sg(last_mark)
 	return ""
 end
 
-function cs_6(left, top, right, bot)
+function check_6_star_sg(left, top, right, bot)
+	-- 识别6星
 	local x, y = findColor({left, top, right, bot},
 		"0|0|0xf4a033,-11|0|0xf49f33,-22|0|0xf4a033,-6|-11|0xf1492d",
 		95, 0, 0, 0)
 	return x, y
 end
 
-function cs_5(left, top, right, bot)
+function check_5_star_sg(left, top, right, bot)
+	-- 识别5星
 	local x, y = findColor({left, top, right, bot},
 		"0|0|0xf79d2f,-11|0|0xf69d2f,-23|-32|0xa47e50",
 		95, 0, 0, 0)
 	return x, y
 end
 
-function cs_4(left, top, right, bot)
+function check_4_star_sg(left, top, right, bot)
+	-- 识别4星
 	local x, y = findColor({left, top, right, bot},
 		"0|0|0xf4a033,11|0|0xf49f33,-15|-26|0x906b87",
 		95, 0, 0, 0)
 	return x, y
 end
 
-function cs_3(left, top, right, bot)
+function check_3_star_sg(left, top, right, bot)
+	-- 识别3星
 	local x, y = findColor({left, top, right, bot},
 		"0|0|0xf6a031,11|0|0xf6a031,-22|-28|0x4e524e",
 		95, 0, 0, 0)
 	return x, y
 end
 
-function cs_2(left, top, right, bot)
+function check_2_star_sg(left, top, right, bot)
+	-- 识别2星
 	local x, y = findColor({left, top, right, bot},
 		"0|0|0xf4a033,11|0|0xf49f33,-22|-59|0xdf4d4b",
 		95, 0, 0, 0)
 	return x, y
 end
 
-function cs_1(left, top, right, bot)
+function check_1_star_sg(left, top, right, bot)
+	-- 识别1星
 	local x, y = findColor({left, top, right, bot},
 		"0|0|0xf4a432,-28|-59|0xdf4d4b,-10|-2|0xa08b82",
 		95, 0, 0, 0)
 	return x, y
 end
 
-function check_start()
-	local x, y = findColor({1014, 539, 1016, 541}, -- 是否有挑战
+function check_sg_start()
+	-- 识别挑战button
+	local x, y = findColor({1014, 539, 1016, 541},
 		"0|0|0xe6d0a9,-30|-27|0xdcc8af,55|-27|0xe2cbaf,-8|11|0xccdfee",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -148,7 +160,8 @@ function check_start()
 	return RET_ERR
 end
 
-function find_guiwang()
+function find_sg()
+	-- 识别是否有可以攻打的超鬼王
 	local x = -1
 	local y = -1
 	local ret = -1
@@ -157,18 +170,20 @@ function find_guiwang()
 	local left = 130
 	local right = 140
 	
+	-- 第一栏到第三栏顺序寻找, 找到1~6星后会检查是否有挑战button
 	for i = 1, 3 do
-		x, y = cs_1(left, top[i], right, bottom[i]) if x > -1 then ret = check_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 1星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 1 end end
-		x, y = cs_2(left, top[i], right, bottom[i]) if x > -1 then ret = check_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 2星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 2 end end
-		x, y = cs_3(left, top[i], right, bottom[i]) if x > -1 then ret = check_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 3星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 3 end end
-		x, y = cs_4(left, top[i], right, bottom[i]) if x > -1 then ret = check_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 4星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 4 end end
-		x, y = cs_5(left, top[i], right, bottom[i]) if x > -1 then ret = check_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 5星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 5 end end
-		x, y = cs_6(left, top[i], right, bottom[i]) if x > -1 then ret = check_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 6星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 6 end end
+		x, y = check_1_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 1星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 1 end end
+		x, y = check_2_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 2星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 2 end end
+		x, y = check_3_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 3星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 3 end end
+		x, y = check_4_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 4星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 4 end end
+		x, y = check_5_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 5星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 5 end end
+		x, y = check_6_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 6星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 6 end end
 	end
 	return x, y, 0
 end
 
-function switch_force(star)
+function sg_switch_mode(star)
+	-- 普通或者强力追击切换
 	local x, y
 	x, y = findColor({706, 492, 708, 494},  -- 普通追击
 		"0|0|0x402f11,-182|-7|0x4354d1,333|-400|0xe8d4cf,-601|-419|0x71090c",
@@ -191,18 +206,8 @@ function switch_force(star)
 	return
 end
 
-function vibrator(star, last_star)
-	if last_star ~= star then
-		if star >= sg_vibra then
-			for i = 1, 3 do
-				vibrator()             --振动
-				mSleep(1000)           --持续 1 秒
-			end
-		end
-	end
-end
-
-function fight_failed_sg()
+function sg_fight_failed()
+	-- 战斗失败的超鬼王识别
 	local x, y = findColor({413, 104, 415, 106},
 		"0|0|0x514a5b,251|6|0xddd9cd,-135|-6|0xcdc59c,30|34|0x5b5265",
 		95, 0, 0, 0)
@@ -213,7 +218,8 @@ function fight_failed_sg()
 	return x, y
 end
 
-function keep_fight_failed_sg()
+function sg_keep_fight_failed()
+	-- 保持战斗失败的超鬼王识别
 	local x, y
 	while (1) do
 		find_offer()
@@ -230,6 +236,7 @@ function keep_fight_failed_sg()
 end
 
 function sg_tired_detect()
+	-- 识别疲劳窗口
 	local x, y = findColor({567, 418, 569, 420},
 		"0|0|0xf3b25e,-81|-109|0x414277,-9|0|0xeb3219",
 		95, 0, 0, 0)
@@ -240,6 +247,7 @@ function sg_tired_detect()
 end
 
 function sg_group_invite()
+	-- 邀请1 ~ 4位好友[Consider more options]
 	ran_touch(0, 450, 210, 20, 10) -- 1st
 	ran_sleep(250)
 	ran_touch(0, 700, 210, 20, 10) -- 2nd
@@ -266,9 +274,8 @@ function superghost()
 	local x_f = -1
 	local y_f = -1
 	local ret = 0
-	local last_star = 0
-	local star = 0
-	local ready_to_go = 0
+	local sg_curr = 0
+	local fight_en = 0
 	local last_mark = ""
 	local tired_op = ""
 	local time_cnt_en = 1
@@ -289,7 +296,7 @@ function superghost()
 			-- 疲劳溢出
 			x, y = sg_tired_detect()
 			if x > -1 then
-				tired_op = sg_tired[star]
+				tired_op = sg_tired[sg_curr] -- 获得当前星级的疲劳操作
 				if tired_op == "喝茶" then
 					ran_touch(0, x, y , 30, 10) -- 58勾
 					tired_op = ""
@@ -303,30 +310,28 @@ function superghost()
 				break
 			end
 			-- 集结
-			x, y = lct_sg_group() if x > -1 then sg_group_invite() mSleep(5*60*1000) tired_op = "" break end
+			x, y = lct_sg_group() if x > -1 then sg_group_invite() mSleep(5*60*1000) tired_op = "" break end -- 集结并等待5分钟 [Condiser more options]
 			-- 超鬼王页面
 			x, y = lct_sg_page()
 			if x > -1 then
-				ran_sleep(250)
 				-- Time cnt
-				time_cnt_en = 0
+				time_cnt_en = 0 -- 进入超鬼王页面则停止计时
 				-- 进入集结
-				if (tired_op == "集结") then ran_touch(0, 880, 550, 10, 10) break end -- 集结
-				-- Check
-				x_f, y_f, star = find_guiwang()
-				if star > 0 then
-					if ready_to_go == 1 then
-						ret = check_start()
+				if (tired_op == "集结") then ran_touch(0, 880, 550, 10, 10) break end -- 疲劳-集结
+				-- 寻找超鬼王
+				x_f, y_f, sg_curr = find_sg()
+				if sg_curr > 0 then
+					if fight_en == 1 then
+						ret = check_sg_start()
 						if ret == RET_OK then
 							ran_touch(0, 1030, 540, 20, 20) -- 挑战
-							last_star = star
 						end
-						ready_to_go = 0
+						fight_en = 0
 						break
 					end
-					ran_touch(0, x_f+150, y_f, 50, 10) -- 选择鬼王
-					switch_force(star)
-					ready_to_go = 1
+					ran_touch(0, x_f+150, y_f, 50, 10) -- 选择超鬼王
+					sg_switch_mode(sg_curr) -- 切换战斗模式
+					fight_en = 1
 					break
 				else
 					ran_touch(0, 1042, 93, 5, 5) -- 右上退出
@@ -334,23 +339,21 @@ function superghost()
 				end
 				break
 			else
+				-- 运行超鬼王之后检查3s,未识别到超鬼王页面则退出
 				if time_cnt_en == 1 then
 					time_cnt = time_cnt + 1
 					if time_cnt > 600 then
-						time_cnt = 0
 						return
 					end
 				end
 			end
 			-- 战斗进行
-			x, y = fight_ongoing() if (x > -1) then last_mark = mark_sg(last_mark) mSleep(3000) break end
+			x, y = fight_ongoing() if (x > -1) then last_mark = sg_mark(last_mark) mSleep(3000) break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗失败
-			x, y = fight_failed_sg() if (x > -1) then
-				fail_cnt = fail_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
-				keep_fight_failed_sg()
+			x, y = sg_fight_failed() if (x > -1) then
+				sg_keep_fight_failed()
 				break
 			end
 			-- 战斗胜利
@@ -359,13 +362,11 @@ function superghost()
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				win_cnt = win_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
 				keep_half_damo()
 				break
 			end
-			-- 探索の鬼王
-			x, y = lct_sg_tansuo() if x > -1 then ran_touch(0, x, y, 5, 5) break end
+			-- 探索の超鬼王
+			x, y = lct_sg_in_tansuo() if x > -1 then ran_touch(0, x, y, 5, 5) break end
 			-- Handle error
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
