@@ -5,7 +5,7 @@ require "jjtp"
 require "yeyuanhuo"
 require "yuling"
 require "normalcall"
-require "superghost"
+require "tansuo"
 
 -- Def
 local dev_width = 640 -- iPhone 5s: 640 x 1136
