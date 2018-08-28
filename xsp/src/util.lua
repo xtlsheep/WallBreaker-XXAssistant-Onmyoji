@@ -1,3 +1,27 @@
+function script_init()
+	local ret = getScreenDirection()
+	
+	if ret == 0 then
+		print("屏幕方向为竖屏, 默认Home键在右")
+		init("0", 1)
+		return
+	elseif ret == 1 then
+		ver = getOSType()
+		if ver == "iOS" then
+			print("屏幕方向为横屏，HOME键在右")
+		elseif ver == "android" then
+			print("屏幕方向为横屏")
+		end
+	elseif ret == 2 then
+		print("屏幕方向为横屏，HOME键在左")
+	else
+		print("屏幕方向Unknow")
+		lua_exit()
+	end
+	
+	init("0", ret)
+end
+
 function print(data, lastCount)
 	if type(data) ~= "table" then
 		--Value
@@ -77,12 +101,12 @@ function ran_move(id ,x, y, x_l, y_l, ran)
 	if ((x == nil) or (y == nil)) then
 		print("ran move: nil x or y")
 		return
-	end	
+	end
 	x1_r = x + math.random(0, ran)
 	y1_r = y + math.random(0, ran)
 	x2_r = x + x_l + math.random(0, ran)
 	y2_r = y + y_l + math.random(0, ran)
-
+	
 	ran_interv()
 	touchDown(id, x1_r, y1_r)
 	ran_interv()

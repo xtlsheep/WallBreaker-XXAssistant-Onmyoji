@@ -1,4 +1,3 @@
-require "util"
 require "yuhun"
 require "juexing"
 require "jjtp"
@@ -6,178 +5,297 @@ require "yeyuanhuo"
 require "yuling"
 require "normalcall"
 require "tansuo"
+require "X_ui"
 
--- Def
-local dev_width = 640 -- iPhone 5s: 640 x 1136
+-- UI init
+local width_UI = 1000
+local height_UI = 550
 
--- Util func
-function fit_UI(ui, width_in)
-	local content
-	local value
-	local json=require "JSON"
-	sf=width/width_in -- 当前分辨率/开发分辨率
-	local function split(szFullString, szSeparator) -- split rect
-		local nFindStartIndex = 1
-		local nSplitIndex = 1
-		local nSplitArray = {}
-		while true do
-			local nFindLastIndex = string.find(szFullString, szSeparator, nFindStartIndex)
-			if not nFindLastIndex then
-				nSplitArray[nSplitIndex] = string.sub(szFullString, nFindStartIndex, string.len(szFullString))
-				break
-			end
-			nSplitArray[nSplitIndex] = string.sub(szFullString, nFindStartIndex, nFindLastIndex - 1)
-			nFindStartIndex = nFindLastIndex + string.len(szSeparator)
-			nSplitIndex = nSplitIndex + 1
-		end
-		return nSplitArray
-	end
-	local function bltb(t) --遍历table修改
-		for k,v in pairs(t) do
-			if type(v)=='table' then
-				bltb(v) --递归调用到所有子table
-			else
-				if k=='size' then --字体按比例缩放
-					t[k]=math.ceil(v*sf)
-				elseif k=='rect' then --位置和大小按比例缩放
-					local arr={}
-					arr=split(v,',')
-					arr[1]=math.ceil(arr[1]*sf)
-					arr[2]=math.ceil(arr[2]*sf)
-					arr[3]=math.ceil(arr[3]*sf)
-					arr[4]=math.ceil(arr[4]*sf)
-					t[k]=arr[1]..','..arr[2]..','..arr[3]..','..arr[4]
-				elseif k=='width' then
-					t[k]=math.ceil(v*sf)
-				elseif k=='height' then
-					t[k]=math.ceil(v*sf)
-				end
-			end
-		end
-	end
-	content=getUIContent(ui)
-	value=json:decode(content)
-	bltb(value)
-	return json:encode(value)
-end
+-- Portal
+portal_ui = UI:new("portal.dat", width_UI, height_UI, "继续", "退出", "backGround.jpg")
+UI:Image(portal_ui, "title.png", "30,0,940,80")
+UI:Label(portal_ui, "left", "0,0,0", 30, "功能选择 - ", "30,90,300,55")
+UI:RadioGroup(portal_ui, "select", "高级选项    ,数据统计","0",30,"0,0,0","500,90,450,55")
+UI:Label(portal_ui, "left", "0,0,0", 30, "实时公告 - ", "30,140,300,55")
+UI:Image(portal_ui, "notice.png", "20,185,970,250")
+UI:fit(portal_ui)
 
--- Main func
-function portal()
-	local ui = fit_UI("portal.json", dev_width)
-	ret_portal, res_portal = showUI(ui)
-	
+-- Stats
+stats_ui = UI:new("stats.dat", width_UI, height_UI, "返回", "退出", "backGround.jpg")
+UI:Label(stats_ui, "center", "0,0,0", 30, "数据统计", "30,20,960,55")
+UI:fit(stats_ui)
+
+-- Config
+config_ui = UI:new("config.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(config_ui, "center", "0,0,0", 30, "高级选项", "30,20,960,55")
+UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,妖气封印    ,百鬼夜行    ,一键每日    ,副本组合    ,世界喊话    ,普通召唤    ,超鬼王        ,劲舞团        ,自动剧情    ,漫展漂移","0",30,"0,0,0","30,150,960,300")
+UI:fit(config_ui)
+
+-- 八岐大蛇
+bqds_ui = UI:new("bqds.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(bqds_ui, "center", "0,0,0", 30, "八岐大蛇", "30,20,960,55")
+UI:ComboBox(bqds_ui, "mode", "单人模式,队长 - 野队3人队伍,队长 - 固定2人队伍,队员 - 野队,队员 - 固定队", "0", 30, "20,100,960,60")
+UI:Label(bqds_ui, "left", "0,0,0", 30, "公共设置 - ", "20,180,300,60")
+UI:Label(bqds_ui, "left", "0,0,0", 30, "请选择御魂层数 - ", "20,240,300,60")
+UI:ComboBox(bqds_ui, "level", "一层,二层,三层,四层,五层,六层,七层,八层,九层,十层","9",23,"700,240,280,50")
+UI:Label(bqds_ui, "left", "0,0,0", 30, "请选择战斗次数 - ", "20,300,300,60")
+UI:ComboBox(bqds_ui, "round", "10次,20次,30次,50次,100次,无限次数","5",23,"700,300,280,50")
+UI:CheckBoxGroup(bqds_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,360,900,60")
+UI:Label(bqds_ui, "left", "0,0,0", 30, "标记 - ", "20,420,300,60")
+UI:Label(bqds_ui, "left", "0,0,0", 30, "第一回合 ~ ", "20,480,300,60")
+UI:RadioGroup(bqds_ui, "round1", "左  ,中  ,右  ,无","3",30,"0,0,0","500,480,500,60")
+UI:Label(bqds_ui, "left", "0,0,0", 30, "第二回合 ~ ", "20,540,300,60")
+UI:RadioGroup(bqds_ui, "round2", "左  ,中  ,右  ,无","3",30,"0,0,0","500,540,500,60")
+UI:Label(bqds_ui, "left", "0,0,0", 30, "第三回合 ~ ", "20,600,300,60")
+UI:RadioGroup(bqds_ui, "round3", "左  ,中  ,右  ,无","3",30,"0,0,0","500,600,500,60")
+UI:Line(bqds_ui, "line_common", "100,100,100", 2, 960, "20,660,960,2")
+UI:Label(bqds_ui, "left", "0,0,0", 30, "队员设置 - ", "20,670,900,60")
+UI:CheckBoxGroup(bqds_ui, "member_auto_group","接受自动组队","0",30,"0,0,0","20,730,900,60")
+UI:CheckBoxGroup(bqds_ui, "fail_and_group","失败后重新寻找队伍","0",30,"0,0,0","20,790,900,60")
+UI:CheckBoxGroup(bqds_ui, "member_to_captain","禁止队员接受队长","0",30,"0,0,0","20,850,900,60")
+UI:Line(bqds_ui, "line_common", "100,100,100", 2, 960, "20,910,960,2")
+UI:Label(bqds_ui, "left", "0,0,0", 30, "队长设置 - ", "20,920,900,60")
+UI:CheckBoxGroup(bqds_ui, "captain_auto_group","开启自动组队","0",30,"0,0,0","20,980,900,60")
+UI:CheckBoxGroup(bqds_ui, "auto_invite_first","固定队伍自动邀请第一位好友[取消则需在组队界面手动邀请]","0",30,"0,0,0","20,1040,980,60")
+UI:CheckBoxGroup(bqds_ui, "fail_and_recreate","失败后重新建立房间","0",30,"0,0,0","20,1100,900,60")
+UI:fit(bqds_ui)
+
+-- 探索章节
+tansuo_ui = UI:new("tansuo.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(tansuo_ui, "center", "0,0,0", 30, "探索章节[暂时仅支持账号解锁的最新章节]", "30,20,960,55")
+UI:ComboBox(tansuo_ui, "mode", "单人模式,组队 - 队长,组队 - 队员", "0", 30, "20,100,960,60")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗设置 - ", "20,180,300,60")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "加成识别 - ", "20,240,300,60")
+UI:CheckBoxGroup(tansuo_ui, "select","物品,金币,经验,Boss","2@3",30,"0,0,0","400,240,600,60")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动标记 - ", "20,300,300,60")
+UI:RadioGroup(tansuo_ui, "mark", "随机小怪   ,中间大怪   ,无","2",30,"0,0,0","400,300,600,60")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "难度选择 - ", "20,360,300,60")
+UI:RadioGroup(tansuo_ui, "hard", "普通                  ,困难[队长强制]","1",30,"0,0,0","400,360,600,60")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "目标章节[暂时无效] - ", "20,420,500,60")
+UI:ComboBox(tansuo_ui, "section", "第一章,第二章,第三章,第四章,第五章,第六章,第七章,第八章,第九章,第十章,第十一章,第十二章,第十三章,第十四章,第十五章,第十六章,第十七章,第十八章,第十九章,第二十章,第二十一章,第二十二章,第二十三章,第二十四章,第二十五章","24",23,"600,420,380,50")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "限定方式[暂时无效] - ", "20,480,500,60")
+UI:ComboBox(tansuo_ui, "count_mode", "战斗胜利次数,章节通关次数[强制Boss]","0",23,"600,480,380,50")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗胜利次数[暂时无效] - ", "20,540,500,60")
+UI:ComboBox(tansuo_ui, "win_round", "10次,20次,30次[组队寮任务],50次,100次,无限次","5",23,"600,540,380,50")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "章节通关次数[暂时无效] - ", "20,600,500,60")
+UI:ComboBox(tansuo_ui, "sec_round", "1次,2次,3次[每日任务],5次,10次,50次,无限次","2",23,"600,600,380,50")
+UI:fit(tansuo_ui)
+
+-- 结界突破
+jjtp_ui = UI:new("jjtp.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(jjtp_ui, "center", "0,0,0", 30, "结界突破", "30,20,960,55")
+UI:ComboBox(jjtp_ui, "mode", "个人突破,阴阳寮突破,个人突破 + 阴阳寮突破", "2", 30, "20,100,960,60")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "公共设置 - ", "20,180,300,60")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "战斗限时 - ", "20,240,300,60")
+UI:ComboBox(jjtp_ui, "round_time", "3分钟,5分钟,10分钟,不限时","1",23,"700,240,280,50")
+UI:CheckBoxGroup(jjtp_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,300,900,60")
+UI:Line(jjtp_ui, "line_common", "100,100,100", 2, 960, "20,360,960,2")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "个人突破设置 - ", "20,370,300,60")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,430,300,60")
+UI:CheckBoxGroup(jjtp_ui, "whr_solo","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,430,670,60")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "勋章选择 - ", "20,490,300,60")
+UI:ComboBox(jjtp_ui, "solo_sel", "0 - 5 勋章,3 - 5 勋章,5 - 0 勋章,3 - 0 勋章,随机选择","2",23,"700,490,280,50")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "胜场刷新 - ", "20,550,300,60")
+UI:ComboBox(jjtp_ui, "refresh", "3次,6次,9次","0",23,"700,550,280,50")
+UI:Line(jjtp_ui, "line_common", "100,100,100", 2, 960, "20,610,960,2")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "阴阳寮突破设置 - ", "20,620,300,60")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,680,300,60")
+UI:CheckBoxGroup(jjtp_ui, "whr_pub","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,680,670,60")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "勋章选择 - ", "20,740,300,60")
+UI:ComboBox(jjtp_ui, "pub_sel", "5 - 0 勋章,4 - 0 勋章,3 - 0 勋章,2 - 0 勋章,1 - 0 勋章,0勋章","0",23,"700,740,280,50")
+UI:fit(jjtp_ui)
+
+-- 觉醒麒麟
+juexing_ui = UI:new("juexing.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(juexing_ui, "center", "0,0,0", 30, "觉醒麒麟", "30,20,960,55")
+UI:ComboBox(juexing_ui, "mode", "单人模式,队长 - 野队3人队伍,队长 - 固定2人队伍,队员 - 野队,队员 - 固定队", "0", 30, "20,100,960,60")
+UI:ComboBox(juexing_ui, "element", "业火轮,风转符,水灵鲤,天雷鼓", "3", 30, "20,180,960,60")
+UI:Label(juexing_ui, "left", "0,0,0", 30, "公共设置 - ", "20,260,300,60")
+UI:Label(juexing_ui, "left", "0,0,0", 30, "请选择觉醒层数 - ", "20,320,300,60")
+UI:ComboBox(juexing_ui, "level", "一层,二层,三层,四层,五层,六层,七层,八层,九层,十层","9",23,"700,320,280,50")
+UI:Label(juexing_ui, "left", "0,0,0", 30, "请选择战斗次数 - ", "20,380,300,60")
+UI:ComboBox(juexing_ui, "round", "10次,20次,30次,50次,100次,无限次数","5",23,"700,380,280,50")
+UI:Label(juexing_ui, "left", "0,0,0", 30, "标记 - ", "20,440,300,60")
+UI:RadioGroup(juexing_ui, "mark", "随机小怪,麒麟Boss,无","2",30,"0,0,0","450,440,550,60")
+UI:CheckBoxGroup(juexing_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,500,900,60")
+UI:Line(juexing_ui, "line_common", "100,100,100", 2, 960, "20,560,960,2")
+UI:Label(juexing_ui, "left", "0,0,0", 30, "队员设置 - ", "20,570,900,60")
+UI:CheckBoxGroup(juexing_ui, "member_auto_group","接受自动组队","0",30,"0,0,0","20,630,900,60")
+UI:CheckBoxGroup(juexing_ui, "fail_and_group","失败后重新寻找队伍","0",30,"0,0,0","20,690,900,60")
+UI:CheckBoxGroup(juexing_ui, "member_to_captain","禁止队员接受队长","0",30,"0,0,0","20,750,900,60")
+UI:Line(juexing_ui, "line_common", "100,100,100", 2, 960, "20,810,960,2")
+UI:Label(juexing_ui, "left", "0,0,0", 30, "队长设置 - ", "20,820,900,60")
+UI:CheckBoxGroup(juexing_ui, "captain_auto_group","开启自动组队","0",30,"0,0,0","20,880,900,60")
+UI:CheckBoxGroup(juexing_ui, "auto_invite_first","固定队伍自动邀请第一位好友[取消则需在组队界面手动邀请]","0",30,"0,0,0","20,940,980,60")
+UI:CheckBoxGroup(juexing_ui, "fail_and_recreate","失败后重新建立房间","0",30,"0,0,0","20,1000,900,60")
+UI:fit(juexing_ui)
+
+-- 业原火
+yeyuanhuo_ui = UI:new("yeyuanhuo.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(yeyuanhuo_ui, "center", "0,0,0", 30, "业原火", "30,20,960,55")
+UI:Label(yeyuanhuo_ui, "left", "0,0,0", 30, "贪之阵 - ", "20,100,300,60")
+UI:ComboBox(yeyuanhuo_ui, "round_tan", "0次,10次,20次,30次,50次,100次,全部贪券","0",23,"700,100,280,50")
+UI:Label(yeyuanhuo_ui, "left", "0,0,0", 30, "嗔之阵 - ", "20,160,300,60")
+UI:ComboBox(yeyuanhuo_ui, "round_chen", "0次,10次,20次,30次,50次,100次,全部嗔券","0",23,"700,160,280,50")
+UI:Label(yeyuanhuo_ui, "left", "0,0,0", 30, "痴之阵 - ", "20,220,300,60")
+UI:ComboBox(yeyuanhuo_ui, "round_chi", "0次,10次,20次,30次,50次,100次,全部痴券","6",23,"700,220,280,50")
+UI:CheckBoxGroup(yeyuanhuo_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,280,900,60")
+UI:fit(yeyuanhuo_ui)
+
+-- 御灵之境
+yuling_ui = UI:new("yuling.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(yuling_ui, "center", "0,0,0", 30, "御灵之境", "30,20,960,55")
+UI:Label(yuling_ui, "left", "0,0,0", 30, "御灵选择 - ", "20,100,300,60")
+UI:ComboBox(yuling_ui, "select", "暗·神龙       [星期二],暗·白藏主    [星期三],暗·黑豹       [星期四],暗·孔雀       [星期五]","0",23,"650,100,330,50")
+UI:Label(yuling_ui, "left", "0,0,0", 30, "层数选择 - ", "20,160,300,60")
+UI:ComboBox(yuling_ui, "level", "一层,二层,三层","2",23,"650,160,330,50")
+UI:Label(yuling_ui, "left", "0,0,0", 30, "战斗次数 - ", "20,220,300,60")
+UI:ComboBox(yuling_ui, "round", "10次,20次,30次,50次,100次,全部御灵境之钥","5",23,"650,220,330,50")
+UI:CheckBoxGroup(yuling_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,280,900,60")
+UI:fit(yuling_ui)
+
+-- 妖气封印
+yqfy_ui = UI:new("yqfy.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(yqfy_ui, "center", "0,0,0", 30, "妖气封印", "30,20,960,55")
+UI:fit(yqfy_ui)
+
+-- 百鬼夜行
+hundredghost_ui = UI:new("hundredghost.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(hundredghost_ui, "center", "0,0,0", 30, "百鬼夜行", "30,20,960,55")
+UI:fit(hundredghost_ui)
+
+-- 一键每日
+dallymission_ui = UI:new("dallymission.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(dallymission_ui, "center", "0,0,0", 30, "一键每日", "30,20,960,55")
+UI:fit(dallymission_ui)
+
+-- 副本组合
+multimission_ui = UI:new("multimission.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(multimission_ui, "center", "0,0,0", 30, "副本组合", "30,20,960,55")
+UI:fit(multimission_ui)
+
+-- 世界喊话
+publicity_ui = UI:new("publicity.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(publicity_ui, "center", "0,0,0", 30, "世界喊话", "30,20,960,55")
+UI:fit(publicity_ui)
+
+-- 普通召唤
+normalcall_ui = UI:new("normalcall.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(normalcall_ui, "center", "0,0,0", 30, "普通召唤", "30,20,960,55")
+UI:Label(normalcall_ui, "left", "0,0,0", 30, "召唤次数 - ", "20,100,300,60")
+UI:ComboBox(normalcall_ui, "tickets", "10,20,30,50,100,200,500,全部召唤","7",23,"700,100,280,50")
+UI:Line(normalcall_ui, "line_common", "100,100,100", 2, 960, "20,160,960,2")
+UI:Label(normalcall_ui, "left", "0,0,0", 30, "Tips - ", "20,170,300,60")
+UI:Label(normalcall_ui, "left", "0,0,0", 30, "请从庭院手动进入召唤界面", "20,230,960,60")
+UI:fit(normalcall_ui)
+
+-- 超鬼王
+superghost_ui = UI:new("superghost.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(superghost_ui, "center", "0,0,0", 30, "超鬼王", "30,20,960,55")
+UI:fit(superghost_ui)
+
+-- 劲舞团
+audition_ui = UI:new("audition.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(audition_ui, "center", "0,0,0", 30, "劲舞团", "30,20,960,55")
+UI:fit(audition_ui)
+
+-- 自动剧情
+autostory_ui = UI:new("autostory.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(autostory_ui, "center", "0,0,0", 30, "自动剧情", "30,20,960,55")
+UI:fit(autostory_ui)
+
+-- 漫展漂移
+LBSGhostDriving_ui = UI:new("LBSGhostDriving.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(LBSGhostDriving_ui, "center", "0,0,0", 30, "漫展漂移", "30,20,960,55")
+UI:fit(LBSGhostDriving_ui)
+
+-- 全局设置
+global_ui = UI:new("global.dat", width_UI, height_UI, "开始", "退出", "backGround.jpg")
+UI:Label(global_ui, "center", "0,0,0", 30, "全局设置", "30,20,960,55")
+UI:CheckBoxGroup(global_ui, "HUD","可视化点击手势与运行辅助描述","0",30,"0,0,0","20,100,980,60")
+UI:CheckBoxGroup(global_ui, "offer_en","悬赏封印 - ","0",30,"0,0,0","20,160,300,60")
+UI:CheckBoxGroup(global_ui, "offer_sel","勾玉,体力,金币,猫粮,狗粮","0@1@2@3@4",30,"0,0,0","280,160,720,60")
+UI:fit(global_ui)
+
+-- Func
+function portal_UI()
+	ret_portal, res_portal = UI:show(portal_ui)
 	if (ret_portal == 0) then
 		return RET_ERR
 	end
 	
-	if (res_portal.HUD == "0") then
-		return "show"
-	elseif (res_portal.HUD == "1") then
-		return "hide"
-	end
-	return RET_OK
-end
-
-function mainmenu_UI()
-	local ui = fit_UI("mainmenu.json", dev_width)
-	ret_mainmenu, res_mainmenu = showUI(ui)
-	if (ret_mainmenu == 0) then
-		return RET_ERR
-	end
-	
-	if (res_mainmenu.select == "0") then
-		fast_UI()
-	elseif (res_mainmenu.select == "1") then
+	if (res_portal.select == "0") then
 		config_UI()
-	elseif (res_mainmenu.select == "2") then
-		log_UI()
-	elseif (res_mainmenu.select == "3") then
-		update_UI()
-	end
-end
-
-function fast_UI()
-	local ui = fit_UI("fast.json", dev_width)
-	ret_fast, res_fast = showUI(ui)
-	if (ret_fast == 0) then
-		mainmenu_UI()
-		return
-	end
-	local fast_sel = res_fast.select
-	if (fast_sel == "0") then
-		fast_yuhun_UI()
-	elseif (fast_sel == "1") then
-		fast_tansuo_UI()
-	elseif (fast_sel == "2") then
-		fast_jjtp_UI()
-	elseif (fast_sel == "3") then
-		fast_juexing_UI()
+	elseif (res_portal.select == "1") then
+		stats_UI()
 	end
 end
 
 function config_UI()
-	local ui = fit_UI("config.json", dev_width)
-	ret_config, res_config = showUI(ui)
+	ret_config, res_config = UI:show(config_ui)
 	if (ret_config == 0) then
-		mainmenu_UI()
+		portal_UI()
 		return
 	end
 	
-	-- 御魂
+	-- 八岐大蛇
 	if (res_config.select == "0") 	   then baqidashe_UI()
 		-- 探索
 	elseif (res_config.select == "1")  then	tansuo_UI()
 		-- 结界突破
 	elseif (res_config.select == "2")  then jjtp_UI()
+		-- 觉醒麒麟
+	elseif (res_config.select == "3")  then juexing_UI()
 		-- 业原火
-	elseif (res_config.select == "3")  then yeyuanhuo_UI()
-		-- 御灵
-	elseif (res_config.select == "4") then yuling_UI()
-		-- 觉醒
-	elseif (res_config.select == "5")  then juexing_UI()
-		-- 副本组合
-	elseif (res_config.select == "6")  then multimission_UI()
+	elseif (res_config.select == "4")  then yeyuanhuo_UI()
+		-- 御灵之境
+	elseif (res_config.select == "5")  then yuling_UI()
+		-- 妖气封印
+	elseif (res_config.select == "6")  then yqfy_UI()
 		-- 百鬼夜行
 	elseif (res_config.select == "7")  then hundredghost_UI()
-		-- 妖气封印
-	elseif (res_config.select == "8") then yqfy_UI()
+		-- 一键每日
+	elseif (res_config.select == "8")  then dallymission_UI()
+		-- 副本组合
+	elseif (res_config.select == "9")  then multimission_UI()
 		-- 世界喊话
-	elseif (res_config.select == "9") then worldchannel_UI()
+	elseif (res_config.select == "10")  then publicity_UI()
 		-- 普通召唤
-	elseif (res_config.select == "10")  then normalcall_UI()
+	elseif (res_config.select == "11")  then normalcall_UI()
 		-- 超鬼王
-	elseif (res_config.select == "11")  then superghost_UI()
+	elseif (res_config.select == "12")  then superghost_UI()
+		-- 劲舞团
+	elseif (res_config.select == "13")  then audition_UI()
+		-- 自动剧情
+	elseif (res_config.select == "14")  then autostory_UI()
+		-- 漫展漂移
+	elseif (res_config.select == "15")  then LBSGhostDriving_UI()
 	end
 end
 
-function log_UI()
-	local ui = fit_UI("log.json", dev_width)
-	ret_log, res_log = showUI(ui)
-	if (ret_log == 0) then
-		mainmenu_UI()
-		return
-	end
-end
-
-function update_UI()
-	local ui = fit_UI("update.json", dev_width)
-	ret_update, res_update = showUI(ui)
-	if (ret_update == 0) then
-		mainmenu_UI()
+function stats_UI()
+	ret_stats, res_stats = UI:show(stats_ui)
+	if (ret_stats == 1) then
+		portal_UI()
 		return
 	end
 end
 
 function global_UI()
-	local ui = fit_UI("global.json", dev_width)
-	ret_global, res_global = showUI(ui)
+	ret_global, res_global = UI:show(global_ui)
 	
 	if (ret_global == 0) then
 		return RET_ERR
 	end
 	
-	local offer_sel = {}
+	-- HUD
+	if res_global.HUD == "0" then
+		HUD = "show"
+		hud_scene = createHUD()
+	end
 	
+	-- 悬赏封印
+	local offer_sel = {}
 	if res_global.offer_en == "0" then
 		offer_arr[1] = 1
 		for w in string.gmatch(res_global.offer_sel,"([^'@']+)") do
@@ -201,191 +319,9 @@ function global_UI()
 	return RET_OK
 end
 
--- Fast
-function fast_yuhun_UI()
-	local ui = fit_UI("fast_yuhun.json", dev_width)
-	ret_fast_yh, res_fast_yh = showUI(ui)
-	if (ret_fast_yh == 0) then
-		fast_UI()
-		return
-	end
-	local mode, role, group
-	
-	if (res_fast_yh.mode == "0") then
-		mode = "单人"
-		role = "无"
-		group = "无"
-	elseif (res_fast_yh.mode == "1") then
-		mode = "组队"
-		role = "队长"
-		group = "野队"
-	elseif (res_fast_yh.mode == "2") then
-		mode = "组队"
-		role = "队长"
-		group = "固定队"
-	elseif (res_fast_yh.mode == "3") then
-		mode = "组队"
-		role = "队员"
-		group = "野队"
-	elseif (res_fast_yh.mode == "4") then
-		mode = "组队"
-		role = "队员"
-		group = "固定队"
-	end
-	
-	local mark = {}
-	mark[1] = res_fast_yh.round1
-	mark[2] = res_fast_yh.round2
-	mark[3] = res_fast_yh.round3
-	
-	for i = 1, 3  do
-		if (mark[i] == "0") then
-			mark[i] = "左"
-		elseif (mark[i] == "1") then
-			mark[i] = "中"
-		elseif (mark[i] == "2") then
-			mark[i] = "右"
-		elseif (mark[i] == "3") then
-			mark[i] = "无"
-		end
-	end
-	
-	local level = 10
-	local round = 0
-	local offer_en = 0
-	local gouyu = 0
-	local tili = 0
-	local jinbi = 0
-	local lingshi = 0
-	local lock = 1
-	local member_auto_group = 1
-	local fail_and_group = 1
-	local member_to_captain = 0
-	local captain_auto_group = 1
-	local auto_invite_first = 0
-	local fail_and_recreate = 1
-	
-	yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
-end
-
-function fast_tansuo_UI()
-	local ui = fit_UI("fast_tansuo.json", dev_width)
-	ret_fast_ts, res_fast_ts = showUI(ui)
-	if (ret_fast_ts == 0) then
-		fast_UI()
-		return
-	end
-end
-
-function fast_jjtp_UI()
-	local ui = fit_UI("fast_jjtp.json", dev_width)
-	ret_fast_jjtp, res_fast_jjtp = showUI(ui)
-	if (ret_fast_jjtp == 0) then
-		fast_UI()
-		return
-	end
-	
-	local mode
-	if (res_fast_jjtp.mode == "0") then
-		mode = "个人"
-	elseif (res_fast_jjtp.mode == "1") then
-		mode = "阴阳寮"
-	elseif (res_fast_jjtp.mode == "2") then
-		mode = "个人+阴阳寮"
-	end
-	
-	local whr_out = {0, 0, 0, 0}
-	local whr = {}
-	for w in string.gmatch(res_fast_jjtp.whr,"([^'@']+)") do
-		table.insert(whr,w)
-	end
-	for i = 1, table.getn(whr), 1 do
-		if (whr[i] == "0") then
-			whr_out[1] = 1 -- 彼岸花
-		elseif (whr[i] == "1") then
-			whr_out[2] = 1 -- 小僧
-		elseif (whr[i] == "2") then
-			whr_out[3] = 1 -- 日和坊
-		elseif (whr[i] == "3") then
-			whr_out[4] = 1 -- 御馔津
-		end
-	end
-	
-	local round_time = 5
-	local lock = 1
-	local refresh = 3
-	local solo_sel = "5_to_0"
-	local pub_sel = 5
-	jjtp(mode, whr_out, whr_out, round_time, refresh, solo_sel, pub_sel, lock)
-end
-
-function fast_juexing_UI()
-	local ui = fit_UI("fast_juexing.json", dev_width)
-	ret_fast_jx, res_fast_jx = showUI(ui)
-	if (ret_fast_jx == 0) then
-		fast_UI()
-		return
-	end
-	
-	local element
-	if (res_fast_jx.element == "0") then
-		element = "火"
-	elseif (res_fast_jx.element == "1") then
-		element = "风"
-	elseif (res_fast_jx.element == "2") then
-		element = "水"
-	elseif (res_fast_jx.element == "3") then
-		element = "雷"
-	end
-	
-	local mode, role, group
-	if (res_fast_jx.mode == "0") then
-		mode = "单人"
-		role = "无"
-		group = "无"
-	elseif (res_fast_jx.mode == "1") then
-		mode = "组队"
-		role = "队长"
-		group = "野队"
-	elseif (res_fast_jx.mode == "2") then
-		mode = "组队"
-		role = "队长"
-		group = "固定队"
-	elseif (res_fast_jx.mode == "3") then
-		mode = "组队"
-		role = "队员"
-		group = "野队"
-	elseif (res_fast_jx.mode == "4") then
-		mode = "组队"
-		role = "队员"
-		group = "固定队"
-	end
-	
-	local mark
-	if (res_fast_jx.mark == "0") then
-		mark = "小怪"
-	elseif (res_fast_jx.mark == "1") then
-		mark = "大怪"
-	elseif (res_fast_jx.mark == "2") then
-		mark = "无"
-	end
-	
-	local level = 10
-	local round = 0
-	local lock = 1
-	local member_auto_group = 1
-	local fail_and_group = 1
-	local member_to_captain = 0
-	local captain_auto_group = 1
-	local auto_invite_first = 0
-	local fail_and_recreate = 1
-	juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
-end
-
 -- Config
 function baqidashe_UI()
-	local ui = fit_UI("baqidashe.json", dev_width)
-	ret_baqi, res_baqi = showUI(ui)
+	ret_baqi, res_baqi = UI:show(bqds_ui)
 	if (ret_baqi == 0) then
 		config_UI()
 		return
@@ -430,20 +366,20 @@ function baqidashe_UI()
 		end
 	end
 	
-	local level = tonumber(res_baqi.level_select) + 1
+	local level = tonumber(res_baqi.level) + 1
 	
 	local round
-	if (res_baqi.round_times == "0") then
+	if (res_baqi.round == "0") then
 		round = 10
-	elseif (res_baqi.round_times == "1") then
+	elseif (res_baqi.round == "1") then
 		round = 20
-	elseif (res_baqi.round_times == "2") then
+	elseif (res_baqi.round == "2") then
 		round = 30
-	elseif (res_baqi.round_times == "3") then
+	elseif (res_baqi.round == "3") then
 		round = 50
-	elseif (res_baqi.round_times == "4") then
+	elseif (res_baqi.round == "4") then
 		round = 100
-	elseif (res_baqi.round_times == "5") then
+	elseif (res_baqi.round == "5") then
 		round = 0
 	end
 	
@@ -501,17 +437,11 @@ function baqidashe_UI()
 		return
 	end
 	
-	if sg_en == 1 then
-		member_auto_group = 0
-		captain_auto_group = 0
-	end
-	
 	yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
 end
 
 function tansuo_UI()
-	local ui = fit_UI("tansuo.json", dev_width)
-	ret_tansuo, res_tansuo = showUI(ui)
+	ret_tansuo, res_tansuo = UI:show(tansuo_ui)
 	if (ret_tansuo == 0) then
 		config_UI()
 		return
@@ -604,8 +534,7 @@ function tansuo_UI()
 end
 
 function jjtp_UI()
-	local ui = fit_UI("jjtp.json", dev_width)
-	ret_jjtp, res_jjtp = showUI(ui)
+	ret_jjtp, res_jjtp = UI:show(jjtp_ui)
 	if (ret_jjtp == 0) then
 		config_UI()
 		return
@@ -717,8 +646,7 @@ function jjtp_UI()
 end
 
 function juexing_UI()
-	local ui = fit_UI("juexing.json", dev_width)
-	ret_juexing, res_juexing = showUI(ui)
+	ret_juexing, res_juexing = UI:show(juexing_ui)
 	if (ret_juexing == 0) then
 		config_UI()
 		return
@@ -767,20 +695,20 @@ function juexing_UI()
 		mark = "无"
 	end
 	
-	local level = tonumber(res_juexing.level_select) + 1
+	local level = tonumber(res_juexing.level) + 1
 	
 	local round
-	if (res_juexing.round_times == "0") then
+	if (res_juexing.round == "0") then
 		round = 10
-	elseif (res_juexing.round_times == "1") then
+	elseif (res_juexing.round == "1") then
 		round = 20
-	elseif (res_juexing.round_times == "2") then
+	elseif (res_juexing.round == "2") then
 		round = 30
-	elseif (res_juexing.round_times == "3") then
+	elseif (res_juexing.round == "3") then
 		round = 50
-	elseif (res_juexing.round_times == "4") then
+	elseif (res_juexing.round == "4") then
 		round = 100
-	elseif (res_juexing.round_times == "5") then
+	elseif (res_juexing.round == "5") then
 		round = 0
 	end
 	
@@ -838,45 +766,11 @@ function juexing_UI()
 		return
 	end
 	
-	if sg_en == 1 then
-		member_auto_group = 0
-		captain_auto_group = 0
-	end
-	
 	juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
 end
 
-function yqfy_UI()
-	local ui = fit_UI("yqfy.json", dev_width)
-	ret_yqfy, res_yqfy = showUI(ui)
-	if (ret_yqfy == 0) then
-		config_UI()
-		return
-	end
-	
-	local ret_global = global_UI()
-	if (ret_global == RET_ERR) then
-		return
-	end
-end
-
-function multimission_UI()
-	local ui = fit_UI("multimission.json", dev_width)
-	ret_multimission, res_multimission = showUI(ui)
-	if (ret_multimission == 0) then
-		config_UI()
-		return
-	end
-	
-	local ret_global = global_UI()
-	if (ret_global == RET_ERR) then
-		return
-	end
-end
-
 function yeyuanhuo_UI()
-	local ui = fit_UI("yeyuanhuo.json", dev_width)
-	ret_yeyuanhuo, res_yeyuanhuo = showUI(ui)
+	ret_yeyuanhuo, res_yeyuanhuo = UI:show(yeyuanhuo_ui)
 	if (ret_yeyuanhuo == 0) then
 		config_UI()
 		return
@@ -950,8 +844,7 @@ function yeyuanhuo_UI()
 end
 
 function yuling_UI()
-	local ui = fit_UI("yuling.json", dev_width)
-	ret_yuling, res_yuling = showUI(ui)
+	ret_yuling, res_yuling = UI:show(yuling_ui)
 	if (ret_yuling == 0) then
 		config_UI()
 		return
@@ -1008,9 +901,21 @@ function yuling_UI()
 	yuling(sel, level, round, lock)
 end
 
+function yqfy_UI()
+	ret_yqfy, res_yqfy = UI:show(yqfy_ui)
+	if (ret_yqfy == 0) then
+		config_UI()
+		return
+	end
+	
+	local ret_global = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
+end
+
 function hundredghost_UI()
-	local ui = fit_UI("hundredghost.json", dev_width)
-	ret_hundredghost, res_hundredghost = showUI(ui)
+	ret_hundredghost, res_hundredghost = UI:show(hundredghost_ui)
 	if (ret_hundredghost == 0) then
 		config_UI()
 		return
@@ -1022,10 +927,9 @@ function hundredghost_UI()
 	end
 end
 
-function audition_UI()
-	local ui = fit_UI("audition.json", dev_width)
-	ret_audition, res_audition = showUI(ui)
-	if (ret_audition == 0) then
+function dallymission_UI()
+	ret_dallymission, res_dallymission = UI:show(dallymission_ui)
+	if (ret_dallymission == 0) then
 		config_UI()
 		return
 	end
@@ -1036,10 +940,22 @@ function audition_UI()
 	end
 end
 
-function worldchannel_UI()
-	local ui = fit_UI("worldchannel.json", dev_width)
-	ret_worldchannel, res_worldchannel = showUI(ui)
-	if (ret_worldchannel == 0) then
+function multimission_UI()
+	ret_multimission, res_multimission = UI:show(multimission_ui)
+	if (ret_multimission == 0) then
+		config_UI()
+		return
+	end
+	
+	local ret_global = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
+end
+
+function publicity_UI()
+	ret_publicity, res_publicity = UI:show(publicity_ui)
+	if (ret_publicity == 0) then
 		config_UI()
 		return
 	end
@@ -1051,8 +967,7 @@ function worldchannel_UI()
 end
 
 function normalcall_UI()
-	local ui = fit_UI("normalcall.json", dev_width)
-	ret_normalcall, res_normalcall = showUI(ui)
+	ret_normalcall, res_normalcall = UI:show(normalcall_ui)
 	if (ret_normalcall == 0) then
 		config_UI()
 		return
@@ -1085,9 +1000,34 @@ function normalcall_UI()
 	normalcall(tickets)
 end
 
-function arena_UI()
-	local ui = fit_UI("arena.json", dev_width)
-	ret_arena, res_arena = showUI(ui)
+function superghost_UI()
+	ret_superghost, res_superghost = UI:show(superghost_ui)
+	if (ret_superghost == 0) then
+		config_UI()
+		return
+	end
+	
+	local ret_global = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
+end
+
+function audition_UI()
+	ret_audition, res_audition = UI:show(audition_ui)
+	if (ret_audition == 0) then
+		config_UI()
+		return
+	end
+	
+	local ret_global = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
+end
+
+function autostory_UI()
+	ret_arena, res_arena = UI:show(autostory_ui)
 	if (ret_arena == 0) then
 		config_UI()
 		return
@@ -1099,9 +1039,8 @@ function arena_UI()
 	end
 end
 
-function offerquery_UI()
-	local ui = fit_UI("offerquery.json", dev_width)
-	ret_offerquery, res_offerquery = showUI(ui)
+function LBSGhostDriving_UI()
+	ret_offerquery, res_offerquery = UI:show(LBSGhostDriving_ui)
 	if (ret_offerquery == 0) then
 		config_UI()
 		return
@@ -1113,16 +1052,3 @@ function offerquery_UI()
 	end
 end
 
-function superghost_UI()
-	local ui = fit_UI("superghost.json", dev_width)
-	ret_superghost, res_superghost = showUI(ui)
-	if (ret_superghost == 0) then
-		config_UI()
-		return
-	end
-	
-	local ret_global = global_UI()
-	if (ret_global == RET_ERR) then
-		return
-	end
-end
