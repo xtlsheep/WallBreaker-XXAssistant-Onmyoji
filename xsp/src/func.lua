@@ -258,15 +258,14 @@ function handle_error(disconn_fin, real_8dashe, secret_vender)
 end
 
 -- Locate func
-
 function enter_tansuo_from_tingyuan()
 	local x, y = findColor({230, 125, 1136, 175}, -- 庭院探索灯笼
 		"0|0|0xffffec,0|-2|0xffffec,0|2|0xffffd2,-2|0|0xffffe6,2|0|0xfffff1",
 		95, 1, 0, 0)
 	if x > -1 then
-		local x_, y_ = findColor({392, 26, 394, 28}, -- 加成 金币 勾玉 邮件
-			"0|0|0xfad27c,45|-9|0xdcb156,211|3|0xea351d,626|5|0xdfc7a1",
-			95, 0, 0, 0)
+		local x_, y_ = findColor({1094, 35, 1096, 37}, -- 频道 邮件 加成
+			"0|0|0xa29c7b,-77|-4|0xdfc7a1,-701|-11|0xfad07a,-710|35|0xf37f5b",
+			90, 0, 0, 0)
 		if x_ > -1 then
 			HUD_show_or_hide(HUD,hud_scene,"庭院",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			ran_touch(0, x, y, 10, 10) -- 探索灯笼
