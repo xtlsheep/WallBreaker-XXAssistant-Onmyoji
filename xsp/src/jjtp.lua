@@ -79,6 +79,14 @@ function find_whr(pos, whr, role)
 			HUD_show_or_hide(HUD,hud_scene,"彼岸花商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
+		-- 彼岸花秘闻皮
+		x, y = findColor({x1, y1, x2, y2},
+			"0|0|0xfafaee,-10|-5|0x2c2733,-16|-2|0xa88050,-1|-8|0xf7f6e9,0|-15|0x776c73",
+			90, 0, 0, 0)
+		if x > -1 then
+			HUD_show_or_hide(HUD,hud_scene,"彼岸花秘闻皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			return RET_OK
+		end
 	end
 	if (whr[3] == 1) then
 		-- 日和坊原皮
@@ -180,44 +188,50 @@ function solo_analyse_map(solo_sel)
 	for i = 1, 3 do
 		for j = 1, 3 do
 			map[index] = "null"
-			x, y = findColor({solo_ana_x[j]-1, solo_ana_y[i]-1, solo_ana_x[j]+1, solo_ana_y[i]+1},
-				"0|0|0x686158",
-				95, 0, 0, 0)
+			-- Failed
+			x, y = findColor({solo_ana_x[j]-1, solo_ana_y[i]-41, solo_ana_x[j]+1, solo_ana_y[i]-39},
+				"0|0|0xf8c85b",
+				90, 0, 0, 0)
 			if x > -1 then
 				map[index] = -1
-				winess = winess + 1
+				invalid = invalid + 1
 			else
-				for k = 1, 5 do
-					x, y = findColor({solo_ana_x[j] - solo_ana_metal_x_diff[k] -1, solo_ana_y[i]-1,
-							solo_ana_x[j] - solo_ana_metal_x_diff[k] +1, solo_ana_y[i]+1},
-						"0|0|0xb3a28c",
-						95, 0, 0, 0)
-					if x > -1 then
-						map[index] = k - 1
-						break
+				-- Succeed
+				x, y = findColor({solo_ana_x[j]-1, solo_ana_y[i]-1, solo_ana_x[j]+1, solo_ana_y[i]+1},
+					"0|0|0x686158",
+					95, 0, 0, 0)
+				if x > -1 then
+					map[index] = -1
+					winess = winess + 1
+					invalid = invalid + 1
+				else
+					for k = 1, 5 do
+						x, y = findColor({solo_ana_x[j] - solo_ana_metal_x_diff[k] -1, solo_ana_y[i]-1,
+								solo_ana_x[j] - solo_ana_metal_x_diff[k] +1, solo_ana_y[i]+1},
+							"0|0|0xb3a28c",
+							95, 0, 0, 0)
+						if x > -1 then
+							map[index] = k - 1
+							break
+						end
+					end
+					if map[index] == "null" then
+						map[index] = 5
 					end
 				end
-				if map[index] == "null" then
-					map[index] = 5
+				if solo_sel == "3_to_5" then
+					if (map[index] < 3) then
+						map[index] = -1
+						invalid = invalid + 1
+					end
+				elseif solo_sel == "3_to_0" then
+					if (map[index] > 3) then
+						map[index] = -1
+						invalid = invalid + 1
+					end
 				end
 			end
 			index = index + 1
-		end
-	end
-	
-	invalid = winess
-	
-	for i = 1, 9 do
-		if solo_sel == "3_to_5" then
-			if (map[i] < 3) then
-				map[i] = -1
-				invalid = invalid + 1
-			end
-		elseif solo_sel == "3_to_0" then
-			if (map[i] > 3) then
-				map[i] = -1
-				invalid = invalid + 1
-			end
 		end
 	end
 	
@@ -725,9 +739,8 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				-- 锁定出战
 				lock_or_unlock(lock, "结界突破")
 				-- 分析地图
-				if (table.getn(map) == 0) and action_ ~= "Hold" then
+				if action_ ~= "Hold" then
 					map, winess, invalid = solo_analyse_map(solo_sel)
-					break
 				end
 				-- 刷新判断
 				ret = solo_refresh(winess, invalid, refresh)
@@ -801,8 +814,6 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				winess = winess + 1
-				invalid = invalid + 1
 				map[pos] = -1
 				pos = -1
 				found_target = -1
@@ -814,7 +825,6 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			end
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
-				invalid = invalid + 1
 				map[pos] = -1
 				pos = -1
 				found_target = -1

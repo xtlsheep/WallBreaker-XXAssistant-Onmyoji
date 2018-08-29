@@ -10,8 +10,8 @@ function lct_section_portal()
 end
 
 function lct_section()
-	local x, y = findColor({997, 29, 999, 31},
-		"0|0|0xdfc7a1,-386|-7|0x8fb060,-963|27|0xf0f5fb,88|538|0xcfccc7,-967|477|0x99345a",
+	local x, y = findColor({780, 9, 782, 11},
+		"0|0|0xe97b2b,195|486|0xe87a2a,216|21|0xdfc7a1,305|26|0xa29c7b",
 		95, 0, 0, 0)
 	return x, y
 end

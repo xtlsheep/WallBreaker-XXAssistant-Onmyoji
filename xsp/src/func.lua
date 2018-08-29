@@ -602,6 +602,7 @@ function captain_room_start_with_1_members()
 		"0|0|0xf3b25e,-60|-11|0xf3b25e,-63|13|0xf3b25e,65|2|0xf3b25e",
 		95, 0, 0, 0)
 	if x > -1 then
+		ran_sleep(1000)
 		ran_touch(0, x, y, 20, 10)
 	end
 	return x, y
@@ -616,6 +617,7 @@ function captain_room_start_with_2_members()
 			"0|0|0x31251a,24|-21|0x433527,34|-33|0xdbbf68,-8|-15|0xe1cd8d",
 			95, 0, 0, 0)
 		if x_ == -1 then
+			ran_sleep(1000)
 			ran_touch(0, x, y, 20, 10) -- 开始战斗
 		end
 	end
