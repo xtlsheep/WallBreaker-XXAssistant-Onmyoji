@@ -1,27 +1,3 @@
-function script_init()
-	local ret = getScreenDirection()
-	
-	if ret == 0 then
-		print("屏幕方向为竖屏, 默认Home键在右")
-		init("0", 1)
-		return
-	elseif ret == 1 then
-		ver = getOSType()
-		if ver == "iOS" then
-			print("屏幕方向为横屏，HOME键在右")
-		elseif ver == "android" then
-			print("屏幕方向为横屏")
-		end
-	elseif ret == 2 then
-		print("屏幕方向为横屏，HOME键在左")
-	else
-		print("屏幕方向Unknow")
-		lua_exit()
-	end
-	
-	init("0", ret)
-end
-
 function print(data, lastCount)
 	if type(data) ~= "table" then
 		--Value
@@ -49,6 +25,21 @@ function print(data, lastCount)
 		end
 		sysLog("}")
 	end
+end
+
+function getRandomList(length)
+	local temp = {}
+	local chosen_list = {}
+	
+	for i = 1, length do
+		table.insert(chosen_list, i)
+	end
+	for i = 1, length do
+		local r = math.random(1, #chosen_list)
+		temp[i] = chosen_list[r]
+		table.remove(chosen_list, r)
+	end
+	return temp
 end
 
 function HUD_show_or_hide(HUD,id,text,size,color,bg,pos,x,y,width,height)

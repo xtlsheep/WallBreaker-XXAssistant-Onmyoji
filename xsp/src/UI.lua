@@ -17,7 +17,7 @@ UI:Image(portal_ui, "title.png", "30,0,940,80")
 UI:Label(portal_ui, "left", "0,0,0", 30, "功能选择 - ", "30,90,300,55")
 UI:RadioGroup(portal_ui, "select", "高级选项    ,数据统计","0",30,"0,0,0","500,90,450,55")
 UI:Label(portal_ui, "left", "0,0,0", 30, "实时公告 - ", "30,140,300,55")
-UI:Image(portal_ui, "notice.png", "20,185,970,250")
+UI:Image(portal_ui, "notice.png", "20,200,970,250")
 UI:fit(portal_ui)
 
 -- Stats
@@ -213,8 +213,9 @@ UI:fit(LBSGhostDriving_ui)
 global_ui = UI:new("global.dat", width_UI, height_UI, "开始", "退出", "backGround.jpg")
 UI:Label(global_ui, "center", "0,0,0", 30, "全局设置", "30,20,960,55")
 UI:CheckBoxGroup(global_ui, "HUD","可视化点击手势与运行辅助描述","0",30,"0,0,0","20,100,980,60")
-UI:CheckBoxGroup(global_ui, "offer_en","悬赏封印 - ","0",30,"0,0,0","20,160,300,60")
-UI:CheckBoxGroup(global_ui, "offer_sel","勾玉,体力,金币,猫粮,狗粮","0@1@2@3@4",30,"0,0,0","280,160,720,60")
+UI:CheckBoxGroup(global_ui, "skill","自动关闭技能特写[适用于庭院界面运行脚本]","0",30,"0,0,0","20,160,980,60")
+UI:CheckBoxGroup(global_ui, "offer_en","悬赏封印 - ","0",30,"0,0,0","20,220,300,60")
+UI:CheckBoxGroup(global_ui, "offer_sel","勾玉,体力,金币,猫粮,狗粮","0@1@2@3@4",30,"0,0,0","280,220,720,60")
 UI:fit(global_ui)
 
 -- Func
@@ -292,6 +293,11 @@ function global_UI()
 	if res_global.HUD == "0" then
 		HUD = "show"
 		hud_scene = createHUD()
+	end
+	
+	-- 关闭特效
+	if res_global.skill == "0" then
+		disable_skill_feature()
 	end
 	
 	-- 悬赏封印

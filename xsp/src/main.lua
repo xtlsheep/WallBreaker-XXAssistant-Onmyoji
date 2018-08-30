@@ -27,6 +27,7 @@ fail_cnt = 0
 offer_arr = {0, 0, 0, 0, 0, 0}
 HUD = nil
 hud_scene = nil
+dis_skl_fea = 1
 
 -- 超鬼王
 --sg_en = 0

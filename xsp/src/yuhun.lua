@@ -132,7 +132,7 @@ function yuhun_solo(mark, level, round, lock)
 			-- 八岐大蛇
 			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 solo_start() break end -- 单人开始
 			-- 庭院
-			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) break end -- 御魂
 			-- 御魂
@@ -239,7 +239,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			-- 八岐大蛇
 			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 ran_touch(0, 573, 440, 20, 10) break end -- 组队开始
 			-- 庭院
-			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 355, 320, 50, 50) break end -- 八岐大蛇
 			-- 战斗失败
@@ -329,7 +329,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			-- 开始战斗
 			x, y = captain_room_start_with_2_members() if (x > -1) then break end
 			-- 庭院
-			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) break end -- 御魂
 			-- 御魂
@@ -505,7 +505,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, a
 			-- 开始战斗
 			x, y = captain_room_start_with_1_members() if (x > -1) then invite = 0 time_cnt = 0 break end
 			-- 庭院
-			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) break end -- 御魂
 			-- 御魂

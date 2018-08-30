@@ -1,8 +1,37 @@
 require "util"
 
 -- Other func
+function script_init()
+	local ret = getScreenDirection()
+	
+	if ret == 0 then
+		print("屏幕方向为竖屏, 默认Home键在右")
+		init("0", 1)
+		return
+	elseif ret == 1 then
+		ver = getOSType()
+		if ver == "iOS" then
+			print("屏幕方向为横屏，HOME键在右")
+		elseif ver == "android" then
+			print("屏幕方向为横屏")
+		end
+	elseif ret == 2 then
+		print("屏幕方向为横屏，HOME键在左")
+	else
+		print("屏幕方向Unknow")
+		lua_exit()
+	end
+	
+	init("0", ret)
+end
+
 function show_win_fail(win_cnt, fail_cnt)
 	HUD_show_or_hide(HUD,hud_scene,string.format("战斗胜利 %d次 - 失败 %d次", win_cnt, fail_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
+end
+
+function print_offer_arr()
+	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d)",
+			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6]))
 end
 
 function find_offer()
@@ -65,6 +94,36 @@ function find_offer()
 	return x, y
 end
 
+function handle_error(disconn_fin, real_8dashe, secret_vender)
+	local x, y
+	if (disconn_fin == ENABLE) then
+		x, y = findColor({567, 376, 570, 379},
+			"0|0|0xf1b15d,-180|-164|0xbba48a,172|-162|0xc3ac93,-5|50|0xb59f85",
+			95, 0, 0, 0)
+		if x > -1 then
+			HUD_show_or_hide(HUD,hud_scene,"断线期间结束战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			ran_touch(0, x, y, 20, 10)
+		end
+	end
+	if (real_8dashe == ENABLE) then
+		x, y = findColor({804, 182, 806, 184}, -- 大蛇图案
+			"0|0|0x14fac5,-82|71|0x14fac5,-86|-69|0x14fac5,0|-16|0xffffff",
+			95, 0, 0, 0)
+		if x > -1 then
+			ran_touch(0, 973, 110, 5, 5) -- x
+		end
+	end
+	if (secret_vender == ENABLE) then
+		x, y = findColor({989, 348, 991, 350}, -- 神秘商人
+			"0|0|0xfdf6f5,-14|-23|0x6b4b4e,-20|92|0xe17871,52|79|0xfdfbfb",
+			95, 0, 0, 0)
+		if x > -1 then
+			ran_touch(0, 40, 45, 5, 5) -- <
+		end
+	end
+	return x, y
+end
+
 function level_select(level, init, lock, spec)
 	mSleep(500)
 	if (init == ENABLE) then
@@ -119,21 +178,6 @@ function level_select(level, init, lock, spec)
 	
 	-- 锁定
 	lock_or_unlock(lock, spec)
-end
-
-function getRandomList(length)
-	local temp = {}
-	local chosen_list = {}
-	
-	for i = 1, length do
-		table.insert(chosen_list, i)
-	end
-	for i = 1, length do
-		local r = math.random(1, #chosen_list)
-		temp[i] = chosen_list[r]
-		table.remove(chosen_list, r)
-	end
-	return temp
 end
 
 function lock_or_unlock(lock, spec)
@@ -222,54 +266,36 @@ function solo_start()
 	return RET_OK
 end
 
-function print_offer_arr()
-	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d)",
-			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6]))
-end
-
-function handle_error(disconn_fin, real_8dashe, secret_vender)
-	local x, y
-	if (disconn_fin == ENABLE) then
-		x, y = findColor({567, 376, 570, 379},
-			"0|0|0xf1b15d,-180|-164|0xbba48a,172|-162|0xc3ac93,-5|50|0xb59f85",
-			95, 0, 0, 0)
-		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"断线期间结束战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			ran_touch(0, x, y, 20, 10)
-		end
-	end
-	if (real_8dashe == ENABLE) then
-		x, y = findColor({804, 182, 806, 184}, -- 大蛇图案
-			"0|0|0x14fac5,-82|71|0x14fac5,-86|-69|0x14fac5,0|-16|0xffffff",
-			95, 0, 0, 0)
-		if x > -1 then
-			ran_touch(0, 973, 110, 5, 5) -- x
-		end
-	end
-	if (secret_vender == ENABLE) then
-		x, y = findColor({989, 348, 991, 350}, -- 神秘商人
-			"0|0|0xfdf6f5,-14|-23|0x6b4b4e,-20|92|0xe17871,52|79|0xfdfbfb",
-			95, 0, 0, 0)
-		if x > -1 then
-			ran_touch(0, 40, 45, 5, 5) -- <
-		end
-	end
-	return x, y
-end
-
--- Locate func
-function enter_tansuo_from_tingyuan()
-	local x, y = findColor({230, 125, 1136, 175}, -- 庭院探索灯笼
-		"0|0|0xffffec,0|-2|0xffffec,0|2|0xffffd2,-2|0|0xffffe6,2|0|0xfffff1",
-		95, 1, 0, 0)
+function disable_skill_feature()
+	mSleep(1000)
+	local x, y, x_, y_
+	x, y = lct_tingyuan()
 	if x > -1 then
-		local x_, y_ = findColor({1094, 35, 1096, 37}, -- 频道 邮件 加成
-			"0|0|0xa29c7b,-77|-4|0xdfc7a1,-701|-11|0xfad07a,-710|35|0xf37f5b",
-			90, 0, 0, 0)
-		if x_ > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"庭院",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			ran_touch(0, x, y, 10, 10) -- 探索灯笼
+		if dis_skl_fea == 1 then
+			ran_touch(0, 51, 62, 20, 20)
+			ran_sleep(750)
+			ran_touch(0, 424, 343, 3, 3)
+			ran_sleep(750)
+			x_, y_ = findColor({199, 415, 201, 417},
+				"0|0|0xffffff,1|-12|0x4b5ee9,807|-320|0xe8d4cf",
+				95, 0, 0, 0)
+			if x_ > -1 then
+				ran_touch(0, x_, y_, 3, 3)
+				ran_sleep(750)
+			end
+			ran_touch(0, 1008, 97, 5, 5)
+			dis_skl_fea = 0
 		end
+	end
+end
+
+-- Locate & enter func
+function lct_tingyuan()
+	local x, y = findColor({1093, 35, 1095, 37},  -- 频道 邮件 加成
+		"0|0|0xa29c7b,-77|-4|0xdfc7a1,-703|10|0xfddc8a,-710|35|0xf37f5b",
+		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_scene,"庭院",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -279,6 +305,15 @@ function lct_tansuo()
 		"0|0|0xe0ecf9,-14|0|0xe6effa,4|-15|0xf0f5fb,34|-1|0x11215c",
 		95, 0, 0, 0)
 	return x, y
+end
+
+function tingyuan_enter_tansuo()
+	local x, y = findColor({230, 125, 1136, 175}, -- 庭院探索灯笼
+		"0|0|0xffffec,0|-2|0xffffec,0|2|0xffffd2,-2|0|0xffffe6,2|0|0xfffff1",
+		95, 1, 0, 0)
+	if x > -1 then
+		ran_touch(0, x, y, 10, 10) -- 探索灯笼
+	end
 end
 
 -- Fight func

@@ -117,7 +117,7 @@ function juexing_solo(element, mark, level, round, lock)
 			-- 觉醒材料
 			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 solo_start() break end -- 单人开始
 			-- 庭院
-			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 90, 590, 20, 20) mSleep(1000) break end -- 觉醒
 			-- 觉醒之塔
@@ -218,7 +218,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			-- 觉醒材料
 			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 ran_touch(0, 573, 440, 20, 10) break end -- 组队开始
 			-- 庭院
-			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 战斗失败
@@ -302,7 +302,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			-- 开始战斗
 			x, y = captain_room_start_with_1_members() if (x > -1) then break end
 			-- 庭院
-			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 90, 590, 20, 20) mSleep(1000) break end -- 觉醒
 			-- 觉醒之塔
@@ -463,7 +463,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			-- 开始战斗
 			x, y = captain_room_start_with_1_members() if (x > -1) then invite = 0 time_cnt = 0 break end
 			-- 庭院
-			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 90, 590, 20, 20) mSleep(1000) break end -- 觉醒
 			-- 觉醒之塔

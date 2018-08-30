@@ -122,7 +122,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 				end
 			end
 			-- 庭院
-			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) ran_sleep(1000) break end -- 御魂
 			-- 御魂

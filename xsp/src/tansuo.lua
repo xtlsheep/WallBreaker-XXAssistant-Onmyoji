@@ -317,7 +317,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round)
 			-- 确认退出
 			x, y = quit_confirm() if x > -1 then ran_touch(0, x, y, 30, 5) break end
 			-- 庭院
-			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt = fail_cnt + 1
@@ -444,7 +444,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			-- 组队界面
 			team_init()
 			-- 庭院
-			x, y = enter_tansuo_from_tingyuan() if (x > -1) then break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
 				fail_cnt = fail_cnt + 1
