@@ -176,60 +176,64 @@ function solo_lct_jjtp()
 	return x, y
 end
 
-function solo_analyse_map(solo_sel)
+function solo_analyse_map(solo_sel, map_)
 	-- 检测当前突破情况, return array and number
 	-- -1: 突破成功
 	-- 0 ~ 5: 勋章数量
-	local map = {}
+	local map = map_
 	local winess = 0
-	local invalid= 0
+	local invalid = 0
 	local index = 1
 	local x, y
 	for i = 1, 3 do
 		for j = 1, 3 do
-			map[index] = "null"
-			-- Failed
-			x, y = findColor({solo_ana_x[j]-1, solo_ana_y[i]-41, solo_ana_x[j]+1, solo_ana_y[i]-39},
-				"0|0|0xf8c85b",
-				90, 0, 0, 0)
-			if x > -1 then
+			if map[index] ~= -5 then
 				map[index] = -1
-				invalid = invalid + 1
-			else
-				-- Succeed
-				x, y = findColor({solo_ana_x[j]-1, solo_ana_y[i]-1, solo_ana_x[j]+1, solo_ana_y[i]+1},
-					"0|0|0x686158",
-					95, 0, 0, 0)
+				-- Failed
+				x, y = findColor({solo_ana_x[j]-1, solo_ana_y[i]-41, solo_ana_x[j]+1, solo_ana_y[i]-39},
+					"0|0|0xf8c85b",
+					90, 0, 0, 0)
 				if x > -1 then
 					map[index] = -1
-					winess = winess + 1
 					invalid = invalid + 1
 				else
-					for k = 1, 5 do
-						x, y = findColor({solo_ana_x[j] - solo_ana_metal_x_diff[k] -1, solo_ana_y[i]-1,
-								solo_ana_x[j] - solo_ana_metal_x_diff[k] +1, solo_ana_y[i]+1},
-							"0|0|0xb3a28c",
-							95, 0, 0, 0)
-						if x > -1 then
-							map[index] = k - 1
-							break
+					-- Succeed
+					x, y = findColor({solo_ana_x[j]-1, solo_ana_y[i]-1, solo_ana_x[j]+1, solo_ana_y[i]+1},
+						"0|0|0x686158",
+						95, 0, 0, 0)
+					if x > -1 then
+						map[index] = -1
+						winess = winess + 1
+						invalid = invalid + 1
+					else
+						for k = 1, 5 do
+							x, y = findColor({solo_ana_x[j] - solo_ana_metal_x_diff[k] -1, solo_ana_y[i]-1,
+									solo_ana_x[j] - solo_ana_metal_x_diff[k] +1, solo_ana_y[i]+1},
+								"0|0|0xb3a28c",
+								95, 0, 0, 0)
+							if x > -1 then
+								map[index] = k - 1
+								break
+							end
+						end
+						if map[index] == -1 then
+							map[index] = 5
 						end
 					end
-					if map[index] == "null" then
-						map[index] = 5
+					if solo_sel == "3_to_5" then
+						if (map[index] < 3) then
+							map[index] = -1
+							invalid = invalid + 1
+						end
+					elseif solo_sel == "3_to_0" then
+						if (map[index] > 3) then
+							map[index] = -1
+							invalid = invalid + 1
+						end
 					end
 				end
-				if solo_sel == "3_to_5" then
-					if (map[index] < 3) then
-						map[index] = -1
-						invalid = invalid + 1
-					end
-				elseif solo_sel == "3_to_0" then
-					if (map[index] > 3) then
-						map[index] = -1
-						invalid = invalid + 1
-					end
-				end
+			else 
+				invalid = invalid + 1
 			end
 			index = index + 1
 		end
@@ -740,7 +744,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				lock_or_unlock(lock, "结界突破")
 				-- 分析地图
 				if action_ ~= "Hold" then
-					map, winess, invalid = solo_analyse_map(solo_sel)
+					map, winess, invalid = solo_analyse_map(solo_sel, map)
 				end
 				-- 刷新判断
 				ret = solo_refresh(winess, invalid, refresh)
@@ -781,7 +785,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			ret = find_whr(pos, whr, "solo")
 			if ret == RET_OK then
 				jjtp_touch_blank()
-				map[pos] = -1
+				map[pos] = -5
 				pos = -1
 				found_target = -1
 				invalid = invalid + 1

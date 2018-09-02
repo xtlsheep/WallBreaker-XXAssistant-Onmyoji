@@ -234,6 +234,8 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 				keep_fight_failed("组队")
 				break
 			end
+			-- 退出个人资料
+			x, y = member_room_user_profile() if x > -1 then break end
 			-- Error Handle
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
@@ -317,6 +319,8 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 				keep_fight_failed("组队")
 				break
 			end
+			-- 退出个人资料
+			x, y = member_room_user_profile() if x > -1 then break end
 			-- Handle error
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
@@ -383,6 +387,8 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 				keep_fight_failed("组队")
 				break
 			end
+			-- 退出个人资料
+			x, y = member_room_user_profile() if x > -1 then break end
 			-- Handle error
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
@@ -479,7 +485,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 				break
 			end
 			-- 退出个人资料
-			member_room_user_profile() if (x > -1) then break end
+			x, y = member_room_user_profile() if x > -1 then break end
 			-- Handle error
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break

@@ -558,8 +558,15 @@ function member_room_find_start()
 end
 
 function member_room_user_profile()
-	local x, y = findColor({861, 509, 863, 511},
-		"0|0|0x715143,-22|-50|0xd7c0ab,0|24|0xac7d42,-29|18|0x8d857f",
+	local x, y
+	x, y = findColor({146, 338, 418, 537},
+		"0|0|0x9d4939,720|-1|0xac7e42,381|-153|0xf3b25e,546|-152|0xf3b25e",
+		95, 0, 0, 0)
+	if x > -1 then
+		ran_touch(0, 1100, 500, 20, 20) -- 右下空白
+	end
+	x, y = findColor({146, 338, 418, 537},
+		"0|0|0x9d4939,720|-1|0xac7e42,578|-151|0xf3b25e,742|-151|0xf3b25e",
 		95, 0, 0, 0)
 	if x > -1 then
 		ran_touch(0, 1100, 500, 20, 20) -- 右下空白
