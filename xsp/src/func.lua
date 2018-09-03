@@ -125,7 +125,7 @@ function handle_error(disconn_fin, real_8dashe, secret_vender)
 end
 
 function level_select(level, init, lock, spec)
-	mSleep(500)
+	mSleep(1000)
 	if (init == ENABLE) then
 		HUD_show_or_hide(HUD,hud_scene,"层数 - 初始化",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		-- 选择层数
@@ -169,7 +169,7 @@ function level_select(level, init, lock, spec)
 			ran_move(0, 360, 350, 0, -200, 20)
 			ran_sleep(500)
 			ran_touch(0, 360, 280, 120, 3)
-		else
+		elseif (level == 10) then
 			ran_move(0, 360, 350, 0, -200, 20)
 			ran_sleep(500)
 			ran_touch(0, 360, 350, 120, 3)
