@@ -251,21 +251,21 @@ end
 
 function skkm_change_all()
 	local x, y = findColor({26, 35, 28, 37},
-		"0|0|0xd6c4a1,68|-1|0xd6c4a1,130|-15|0xd6c4a1,19|556|0xffffff,30|558|0x3633b8",
+		"0|0|0xd6c4a1,69|-17|0xd6c4a1,19|556|0xffffff,31|559|0x3537b9",
 		95, 0, 0, 0)
 	return x, y
 end
 
 function skkm_change_N()
-	local  x, y = findColor({26, 35, 28, 37},
-		"0|0|0xd6c4a1,68|-1|0xd6c4a1,130|-15|0xd6c4a1,28|547|0xa3a1a5,33|523|0x563f2b",
+	local x, y = findColor({26, 35, 28, 37},
+		"0|0|0xd6c4a1,69|-17|0xd6c4a1,29|540|0x838386,34|523|0x563f2b",
 		95, 0, 0, 0)
 	return x, y
 end
 
 function skkm_change_egg()
 	local x, y = findColor({26, 35, 28, 37},
-		"0|0|0xd6c4a1,68|-1|0xd6c4a1,130|-15|0xd6c4a1,52|545|0x46afce,33|523|0x563f2b",
+		"0|0|0xd6c4a1,69|-17|0xd6c4a1,24|540|0x2d92b3,34|523|0x563f2b",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -425,6 +425,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				if x > -1 then
 					top_mid, top_right = full_exp_top()
 					if top_mid == 1 or top_right == 1 then
+						HUD_show_or_hide(HUD,hud_scene,"更换狗粮",20,"0xff000000","0xffffffff",0,100,0,300,32)
 						ran_sleep(500)
 						ran_touch(0, 350, 420, 30, 30) -- 更换式神
 						ran_sleep(500)
