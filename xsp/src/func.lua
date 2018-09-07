@@ -369,9 +369,9 @@ function round_fight()
 end
 
 function fight_ongoing()
-	local x, y = findColor({13, 560, 15, 562}, -- 云彩
-		"0|0|0x5d5678,-3|73|0x334738,28|74|0x322e48,49|75|0x373552",
-		95, 0, 0, 0)
+	local x, y = findColor({26, 36, 28, 38}, -- 云彩&返回
+"0|0|0xd6c4a1,-7|523|0x625a7c,-13|525|0x5b5374,-16|598|0x2f4633",
+80, 0, 0, 0)
 	if (x > -1) then
 		local x_1, y_1 = findColor({33, 513, 38, 517}, -- 指南针
 			"0|0|0x1c1816,2|-6|0xe6cc8f,6|-12|0xe5d497,-7|10|0xdfbc85",

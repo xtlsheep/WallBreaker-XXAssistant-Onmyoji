@@ -82,15 +82,15 @@ UI:ComboBox(tansuo_ui, "sec_round", "1次,2次,3次[每日任务],5次,10次,50�
 UI:Line(tansuo_ui, "line_common", "100,100,100", 2, 960, "20,660,960,2")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮设置 - ", "20,670,300,60")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "强制普攻 - ", "20,730,300,60")
-UI:RadioGroup(tansuo_ui, "hard", "开启      ,关闭","0",30,"0,0,0","600,730,400,60")
+UI:RadioGroup(tansuo_ui, "nor_attk", "开启      ,关闭","0",30,"0,0,0","600,730,400,60")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动更换 - ", "20,790,300,60")
-UI:RadioGroup(tansuo_ui, "hard", "开启      ,关闭","1",30,"0,0,0","600,790,400,60")
+UI:RadioGroup(tansuo_ui, "auto_change", "开启      ,关闭","1",30,"0,0,0","600,790,400,60")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "初始翻页 - ", "20,850,300,60")
-UI:ComboBox(tansuo_ui, "win_round", "第一页,第二页,第三页,第四页,第五页,第六页,第七页,第八页,第九页,第十页","0",23,"600,850,380,50")
+UI:ComboBox(tansuo_ui, "page_jump", "第一页,第二页,第三页,第四页,第五页,第六页,第七页,第八页,第九页,第十页","0",23,"600,850,380,50")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮类型 - ", "20,910,300,60")
-UI:RadioGroup(tansuo_ui, "hard", "N卡       ,素材","0",30,"0,0,0","600,910,400,60")
+UI:RadioGroup(tansuo_ui, "df_type", "N卡       ,素材","0",30,"0,0,0","600,910,400,60")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "素材类型 - ", "20,970,300,60")
-UI:CheckBoxGroup(tansuo_ui, "select","红蛋,白蛋,蓝蛋,黑蛋","1@2",30,"0,0,0","420,970,580,60")
+UI:CheckBoxGroup(tansuo_ui, "egg_color","红蛋,白蛋,蓝蛋,黑蛋","1@2",30,"0,0,0","420,970,580,60")
 UI:fit(tansuo_ui)
 
 -- 结界突破
@@ -543,12 +543,50 @@ function tansuo_UI()
 		sec_round = 99999
 	end
 	
+	local nor_attk, auto_change, page_jump, df_type, egg_color
+	if res_tansuo.nor_attk == "0" then
+		nor_attk = 1
+	elseif res_tansuo.nor_attk == "1" then
+		nor_attk = 0
+	end
+	
+	if res_tansuo.auto_change == "0" then
+		auto_change = 1
+	elseif res_tansuo.auto_change == "1" then
+		auto_change = 0
+	end
+	
+	page_jump = tonumber(res_tansuo.page_jump) + 1
+	
+	if res_tansuo.df_type == "0" then
+		df_type = "N"
+	elseif res_tansuo.df_type == "1" then
+		df_type = "Egg"
+	end
+	
+	local egg_color_ = {}
+	local egg_color = {0, 0, 0, 0}
+	for w in string.gmatch(res_tansuo.egg_color,"([^'@']+)") do
+		table.insert(egg_color_,w)
+	end
+	for i = 1, table.getn(egg_color_), 1 do
+		if (egg_color_[i] == "0") then
+			egg_color[1] = 1
+		elseif (egg_color_[i] == "1") then
+			egg_color[2] = 1
+		elseif (egg_color_[i] == "2") then
+			egg_color[3] = 1
+		elseif (egg_color_[i] == "3") then
+			egg_color[4] = 1
+		end
+	end
+	
 	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
 	
-	tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round)
+	tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
 end
 
 function jjtp_UI()
