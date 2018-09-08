@@ -98,7 +98,7 @@ end
 
 function find_boss()
 	local x, y = findColor({300, 100, 900, 200},
-		"0|0|0xfdf2e4,4|-41|0xedacb3,-10|-2|0xe9a7ae",
+		"0|0|0xb22e32,3|5|0xfffdf9,-7|-16|0x221108",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_scene,"发现Boss",20,"0xff000000","0xffffffff",0,100,0,300,32)
