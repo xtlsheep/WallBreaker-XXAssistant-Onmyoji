@@ -93,10 +93,10 @@ function ran_move(id ,x, y, x_l, y_l, ran)
 		print("ran move: nil x or y")
 		return
 	end
-	x1_r = x + math.random(0, ran)
-	y1_r = y + math.random(0, ran)
-	x2_r = x + x_l + math.random(0, ran)
-	y2_r = y + y_l + math.random(0, ran)
+	x1_r = x + math.random(-ran, ran)
+	y1_r = y + math.random(-ran, ran)
+	x2_r = x + x_l + math.random(-ran, ran)
+	y2_r = y + y_l + math.random(-ran, ran)
 	
 	ran_interv()
 	touchDown(id, x1_r, y1_r)

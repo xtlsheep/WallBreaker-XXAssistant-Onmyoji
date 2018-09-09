@@ -506,6 +506,16 @@ function keep_fight_failed(mode)
 	end
 end
 
+function auto_check()
+	local x, y = findColor({810, 606, 812, 608},
+		"0|0|0x2a1919,-15|19|0x291a19,-31|26|0xffffff,-28|20|0x03b9e9",
+		95, 0, 0, 0)
+	if x > -1 then
+		ran_touch(0, 55, 590, 20, 20)
+	end
+	return x, y
+end
+
 -- Member & Captain func
 function member_room_init()
 	local x, y = findColor({75, 181, 80, 185}, -- 左边红穗

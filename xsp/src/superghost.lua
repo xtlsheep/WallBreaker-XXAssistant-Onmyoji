@@ -365,6 +365,8 @@ function superghost()
 				keep_half_damo()
 				break
 			end
+			-- 自动检测
+			x, y = auto_check() if x > -1 then break end
 			-- 探索の超鬼王
 			x, y = lct_sg_in_tansuo() if x > -1 then ran_touch(0, x, y, 5, 5) break end
 			-- Handle error

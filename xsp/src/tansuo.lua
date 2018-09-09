@@ -5,7 +5,7 @@ require "func"
 function lct_section()
 	local x, y = findColor({777, 9, 779, 11},
 		"0|0|0xe97b2c,219|20|0xdfc7a1,308|25|0xa29c7b,198|486|0xe97c2d",
-		95, 0, 0, 0)
+		80, 0, 0, 0)
 	return x, y
 end
 
@@ -47,8 +47,8 @@ function tansuo_mark(mark)
 end
 
 function quit_confirm()
-	local x, y = findColor({688, 357, 690, 369},
-		"0|0|0xf3b25e,-203|-5|0xf3b25e,397|207|0x555452,-658|146|0x3f1525",
+	local x, y = findColor({688, 357, 690, 359},
+		"0|0|0xf3b25e,-287|-2|0xf3b25e,-654|-302|0x636567,-659|146|0x3e1524",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -70,7 +70,7 @@ end
 function find_goods()
 	local x, y = findColor({0, 100, 1135, 550},
 		"0|0|0xf6db12,-10|-9|0xd62e22,-21|-15|0xce4428",
-		95, 0, 0, 0)
+		80, 0, 0, 0)
 	return x, y
 end
 
@@ -528,6 +528,8 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			x, y = phy_check() if x > -1 then ran_touch(0, 1040, 350, 50, 50) break end -- 右下空白
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 1024, 533, 30, 10) break end -- Temporarily enter last section
+			-- 自动检测
+			x, y = auto_check() if x > -1 then break end
 			-- Handle error
 			x, y = lct_8dashe() if x > -1 then  ran_touch(0, 928, 108, 5, 5) break end -- 八岐大蛇
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
@@ -690,7 +692,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 						mSleep(1000)
 						x_, y_ = find_boss()
 						if x_ > -1 then
-							ran_touch(0, x, y, 10, 10)
+							ran_touch(0, x_, y_, 10, 10)
 							mSleep(1000)
 						end
 					end
@@ -741,6 +743,8 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			x, y = phy_check() if x > -1 then ran_touch(0, 1040, 350, 50, 50) break end -- 右下空白
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 1024, 533, 30, 10) break end -- Temporarily enter last section
+			-- 自动检测
+			x, y = auto_check() if x > -1 then break end
 			-- Handle error
 			x, y = lct_8dashe() if x > -1 then  ran_touch(0, 928, 108, 5, 5) break end -- 八岐大蛇
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
@@ -894,6 +898,8 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				keep_fight_failed("组队")
 				break
 			end
+			-- 自动检测
+			x, y = auto_check() if x > -1 then break end
 			break
 		end
 	end

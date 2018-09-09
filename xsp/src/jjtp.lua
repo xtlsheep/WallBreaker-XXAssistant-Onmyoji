@@ -846,6 +846,8 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 280, 590, 20, 20) break end -- 结界突破
+			-- 自动检测
+			x, y = auto_check() if x > -1 then break end
 			-- 退出防守记录
 			x, y = solo_quit_defense_record() if (x > -1) then break end
 			-- Handle error
@@ -1048,6 +1050,8 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			x, y = fight_ready() if (x > -1) then break end
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 280, 590, 20, 20) break end -- 结界突破
+			-- 自动检测
+			x, y = auto_check() if x > -1 then break end
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- Handle error
