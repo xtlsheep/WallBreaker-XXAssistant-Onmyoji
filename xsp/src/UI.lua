@@ -80,7 +80,7 @@ UI:ComboBox(tansuo_ui, "win_round", "10次,20次,30次[组队寮任务],50次,10
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "章节通关次数[暂时无效] - ", "20,600,500,60")
 UI:ComboBox(tansuo_ui, "sec_round", "1次,2次,3次[每日任务],5次,10次,50次,无限次","2",23,"600,600,380,50")
 UI:Line(tansuo_ui, "line_common", "100,100,100", 2, 960, "20,660,960,2")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮设置[Beta, 暂时试用于单人模式] - ", "20,670,900,60")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮设置[Beta, 请将狗粮队长放在阴阳师左前方] - ", "20,670,900,60")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "强制普攻 - ", "20,730,300,60")
 UI:RadioGroup(tansuo_ui, "nor_attk", "开启      ,关闭","0",30,"0,0,0","600,730,400,60")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动更换 - ", "20,790,300,60")

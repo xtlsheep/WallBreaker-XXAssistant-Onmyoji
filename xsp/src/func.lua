@@ -183,7 +183,7 @@ end
 function lock_or_unlock(lock, spec)
 	local x1, y1, x2, y2, x, y
 	if spec == "御魂" then
-		x1 = 638 y1 = 368 x2 = 640 y2 = 370
+		x1 = 638 y1 = 369 x2 = 640 y2 = 371
 	elseif spec == "觉醒" then
 		x1 = 638 y1 = 371 x2 = 640 y2 = 373
 	elseif spec == "业原火" then
@@ -193,7 +193,7 @@ function lock_or_unlock(lock, spec)
 	elseif spec == "结界突破" then
 		x1 = 917 y1 = 551 x2 = 919 y2 = 553
 	elseif spec == "探索" then
-		x1 = 753 y1 = 574 x2 = 755 y2 = 576
+		x1 = 750 y1 = 570 x2 = 760 y2 = 580
 	end
 	
 	if (spec == "御魂" or spec == "觉醒" or spec == "业原火" or spec == "探索") then
@@ -206,7 +206,7 @@ function lock_or_unlock(lock, spec)
 			end
 		else
 			x, y = findColor({x1, y1, x2, y2},
-				"0|0|0x735d43,13|1|0x9b93cc,-13|1|0x9c92cc,0|7|0x201815",
+				"0|0|0x725c40,0|-6|0x33271a,-13|1|0x9d93ce,13|1|0x9d95cd",
 				95, 0, 0, 0)
 			if x > -1 then
 				ran_touch(0, x, y, 3, 3)
@@ -370,8 +370,8 @@ end
 
 function fight_ongoing()
 	local x, y = findColor({26, 36, 28, 38}, -- 云彩&返回
-"0|0|0xd6c4a1,-7|523|0x625a7c,-13|525|0x5b5374,-16|598|0x2f4633",
-80, 0, 0, 0)
+		"0|0|0xd6c4a1,-7|523|0x625a7c,-13|525|0x5b5374,-16|598|0x2f4633",
+		80, 0, 0, 0)
 	if (x > -1) then
 		local x_1, y_1 = findColor({33, 513, 38, 517}, -- 指南针
 			"0|0|0x1c1816,2|-6|0xe6cc8f,6|-12|0xe5d497,-7|10|0xdfbc85",
