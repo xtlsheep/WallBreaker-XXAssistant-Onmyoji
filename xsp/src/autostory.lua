@@ -83,8 +83,7 @@ end
 function autostory()
 	print_offer_arr()
 	local time_cnt = 0
-	local x
-	local y
+	local x, y
 	
 	while (1) do
 		while (1) do

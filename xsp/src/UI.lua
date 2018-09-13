@@ -216,12 +216,15 @@ UI:fit(audition_ui)
 autostory_ui = UI:new("autostory.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 UI:Label(autostory_ui, "center", "0,0,0", 30, "自动剧情", "30,20,960,55")
 UI:Label(autostory_ui, "left", "0,0,0", 30, "Tips - ", "30,100,960,60")
-UI:Label(autostory_ui, "left", "0,0,0", 30, "请在庭院后或剧情中开启, 停顿10s+会自动移动场景", "30,160,960,60")
+UI:Label(autostory_ui, "left", "0,0,0", 30, "请在庭院后或剧情中使用, 停顿10s+会自动移动场景", "30,160,960,60")
 UI:fit(autostory_ui)
 
 -- 漫展漂移
 LBSGhostDriving_ui = UI:new("LBSGhostDriving.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 UI:Label(LBSGhostDriving_ui, "center", "0,0,0", 30, "漫展漂移", "30,20,960,55")
+UI:RadioGroup(LBSGhostDriving_ui, "round3", "左  ,中  ,右  ,无","3",30,"0,0,0","500,600,500,60")
+UI:Label(LBSGhostDriving_ui, "left", "0,0,0", 30, "Tips - ", "30,100,960,60")
+UI:Label(LBSGhostDriving_ui, "left", "0,0,0", 30, "请在漫展界面中使用", "30,160,960,60")
 UI:fit(LBSGhostDriving_ui)
 
 -- 全局设置

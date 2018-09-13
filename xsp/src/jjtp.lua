@@ -14,7 +14,7 @@ local solo_whr_y2 = {254, 254, 254, 376, 376, 376, 495, 495, 495}
 local solo_fight_x = {333, 639, 942, 333, 639, 942, 333, 639, 942}
 local solo_fight_y = {300, 300, 300, 420, 420, 420, 540, 540, 540}
 
-local pub_ana_metal_x = {603, 904, 603, 904, 603, 904, 603, 904}
+local pub_ana_metal_x = {540, 840, 540, 840, 540, 840, 540, 840}
 local pub_ana_metal_y1 = {130, 130, 250, 250, 370, 370, 490, 490}
 local pub_ana_metal_y2 = {240, 240, 360, 360, 480, 480, 600, 600}
 local pub_mid_metal_ff_x_diff = 100
@@ -42,14 +42,14 @@ function find_whr(pos, whr, role)
 	elseif (role == "public") then
 		mSleep(500)
 		if pos%2 == 1 then
-			x1 = 435
+			x1 = 375
 			y1 = 155
-			x2 = 715
+			x2 = 655
 			y2 = 610
 		else
-			x1 = 735
+			x1 = 675
 			y1 = 155
-			x2 = 1015
+			x2 = 955
 			y2 = 610
 		end
 	end
@@ -232,7 +232,7 @@ function solo_analyse_map(solo_sel, map_)
 						end
 					end
 				end
-			else 
+			else
 				invalid = invalid + 1
 			end
 			index = index + 1
@@ -383,14 +383,14 @@ function pub_unstart()
 		"0|0|0xe9d7d1,-503|110|0x4e4e4e,-585|147|0xd3cabc,-460|121|0xeaeaea",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"尚未开启寮突",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_scene,"寮突破未开启",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
 
 function pub_lct_jjtp()
-	local x, y = findColor({346, 256, 348, 258}, -- 三个红条 突破记录
-		"0|0|0x8e0518,4|100|0x830516,9|234|0x870517,-238|329|0xcba97c",
+	local x, y = findColor({78, 584, 80, 586}, -- 三个红条 突破记录
+		"0|0|0xc9a87b,228|-330|0x940719,229|-231|0x900618,227|-97|0x940719",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -562,14 +562,14 @@ end
 
 function pub_find_button()
 	local x, y
-	x, y = findColor({645, 220, 647, 580},
-		"0|0|0xf3b25e,-54|-24|0x983c2e,-54|19|0x983d2e,52|-24|0x973c2e,52|19|0x983c2e",
+	x, y = findColor({580, 220, 582, 580},
+		"0|0|0xf3b25e,-140|-4|0xf3b25e,-69|-5|0xcbb59c",
 		95, 0, 0, 0)
 	if x > -1 then
 		return RET_OK, x, y
 	end
-	x, y = findColor({945, 220, 947, 580},
-		"0|0|0xf3b25e,-54|-24|0x983c2e,-54|19|0x983d2e,52|-24|0x973c2e,52|19|0x983c2e",
+	x, y = findColor({880, 220, 882, 580},
+		"0|0|0xf3b25e,-140|-4|0xf3b25e,-69|-5|0xcbb59c",
 		95, 0, 0, 0)
 	if x > -1 then
 		return RET_OK, x, y
@@ -579,13 +579,13 @@ end
 
 function pub_find_ivld_button()
 	local x, y
-	x, y = findColor({645, 220, 647, 580},
+	x, y = findColor({585, 220, 587, 580},
 		"0|0|0xb0a9a1,-70|0|0xcbb59c,-101|0|0xf3b25e,-177|0|0xf3b25e",
 		95, 0, 0, 0)
 	if x > -1 then
 		return RET_OK
 	end
-	x, y = findColor({945, 220, 947, 580},
+	x, y = findColor({885, 220, 887, 580},
 		"0|0|0xb0a9a1,-70|0|0xcbb59c,-101|0|0xf3b25e,-177|0|0xf3b25e",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -863,8 +863,6 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 	local coor_map_y = {}
 	local pos = -1
 	local time_cnt = 0
-	local refresh = 0
-	local page = 0
 	local finish = 0
 	local wait = 0
 	local disconn_fin = 1
@@ -943,16 +941,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 					pub_refresh()
 					map = {}
 					pos = -1
-					page = page + 1
 					break
-				end
-				if refresh > 0 then
-					for i = 1, page, 1 do
-						find_offer()
-						pub_refresh()
-						mSleep(500)
-					end
-					refresh = 0
 				end
 				-- 点击目标
 				if pos ~= -1 then
@@ -998,7 +987,8 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				end
 				-- 五花肉
 				if whr == {0, 0, 0, 0} then
-					ran_touch(0, x_f, y_f, 20, 5) -- 进攻
+					HUD_show_or_hide(HUD,hud_scene,"进攻",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					ran_touch(0, x_f, y_f+20, 20, 5) -- 进攻
 					break
 				else
 					ret_w = find_whr(pos, whr, "public")
@@ -1008,7 +998,8 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 						pos = -1
 						break
 					else
-						ran_touch(0, x_f, y_f, 20, 5) -- 进攻
+						HUD_show_or_hide(HUD,hud_scene,"进攻",20,"0xff000000","0xffffffff",0,100,0,300,32)
+						ran_touch(0, x_f, y_f+20, 20, 5) -- 进攻
 						break
 					end
 				end
@@ -1034,7 +1025,6 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				time_cnt = 0
 				show_win_fail(win_cnt, fail_cnt)
 				keep_half_damo()
-				refresh = 1
 			end
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
@@ -1044,7 +1034,6 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				pos = -1
 				show_win_fail(win_cnt, fail_cnt)
 				keep_fight_failed("单人")
-				refresh = 1
 			end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
