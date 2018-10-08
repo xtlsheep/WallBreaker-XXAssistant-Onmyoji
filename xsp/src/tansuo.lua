@@ -26,12 +26,12 @@ end
 function tansuo_mark(mark)
 	mSleep(500)
 	local x, y
-	local cnt = math.random(2, 4)
-	local mark_ran = math.random(1, 3)
+	local cnt = math.random(1, 2)
+	local ran = math.random(1, 3)
 	if mark == "小怪" then
-		if mark_ran == 1 then
+		if ran == 1 then
 			x = 566 y = 126
-		elseif mark_ran == 2 then
+		elseif ran == 2 then
 			x = 697 y = 186
 		else
 			x = 861 y = 177

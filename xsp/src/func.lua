@@ -274,13 +274,11 @@ function disable_skill_feature()
 		if dis_skl_fea == 1 then
 			ran_touch(0, 51, 62, 20, 20)
 			ran_sleep(750)
-			ran_touch(0, 424, 343, 3, 3)
-			ran_sleep(750)
-			x_, y_ = findColor({199, 415, 201, 417},
-				"0|0|0xffffff,1|-12|0x4b5ee9,807|-320|0xe8d4cf",
+			x_, y_ = findColor({790, 492, 792, 493},
+				"0|0|0x4b5ee9,214|-395|0xe8d4cf,221|39|0xe3af75",
 				95, 0, 0, 0)
 			if x_ > -1 then
-				ran_touch(0, x_, y_, 3, 3)
+				ran_touch(0, x_, y_, 5, 5)
 				ran_sleep(750)
 			end
 			ran_touch(0, 1008, 97, 5, 5)
