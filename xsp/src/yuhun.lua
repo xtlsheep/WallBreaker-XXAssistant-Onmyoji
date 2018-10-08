@@ -23,8 +23,9 @@ function lct_8dashe()
 end
 
 function yuhun_mark(position)
-	local cnt = math.random(1, 2)
+	mSleep(1000)
 	ran_sleep(500)
+	local cnt = math.random(1, 2)
 	
 	for i = 1, cnt do
 		ran_interv()

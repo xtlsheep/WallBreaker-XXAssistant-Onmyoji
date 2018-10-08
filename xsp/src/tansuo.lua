@@ -24,7 +24,8 @@ function lct_section_prepare()
 end
 
 function tansuo_mark(mark)
-	mSleep(500)
+	mSleep(1000)
+	ran_sleep(500)
 	local x, y
 	local cnt = math.random(1, 2)
 	local ran = math.random(1, 3)

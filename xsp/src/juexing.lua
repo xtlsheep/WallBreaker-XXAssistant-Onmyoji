@@ -23,6 +23,7 @@ function lct_juexingelement()
 end
 
 function juexing_mark(mark)
+	mSleep(1000)
 	ran_sleep(500)
 	local cnt = math.random(1, 2)
 	local pos_x = {488, 560, 653, 823, 1016}
