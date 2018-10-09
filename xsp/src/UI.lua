@@ -19,6 +19,7 @@ UI:Label(portal_ui, "left", "0,0,0", 30, "功能选择 - ", "30,90,300,55")
 UI:RadioGroup(portal_ui, "select", "高级选项    ,数据统计","0",30,"0,0,0","500,90,450,55")
 UI:Label(portal_ui, "left", "0,0,0", 30, "实时公告 - ", "30,140,300,55")
 UI:Image(portal_ui, "notice.png", "20,200,970,250")
+UI:Label(portal_ui, "left", "0,0,0", 30, "由于叉叉出现版本bug, 平台版被自动转换成定制版, 请下载新的平台版[破壁者]阴阳师脚本, 版本号为1.0+. 定制版[版本号为0.2.6]将停止更新并于一周后下架", "120,250,800,150")
 UI:fit(portal_ui)
 
 -- Stats
