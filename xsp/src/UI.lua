@@ -6,6 +6,7 @@ require "yuling"
 require "normalcall"
 require "tansuo"
 require "autostory"
+require "yqfy"
 require "X_ui"
 
 -- UI init
@@ -87,7 +88,7 @@ UI:ComboBox(tansuo_ui, "win_round", "10次,20次,30次[组队寮任务],50次,10
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "章节通关次数[暂时无效] - ", "20,600,500,60")
 UI:ComboBox(tansuo_ui, "sec_round", "1次,2次,3次[每日任务],5次,10次,50次,无限次","2",23,"600,600,380,50")
 UI:Line(tansuo_ui, "line_common", "100,100,100", 2, 960, "20,660,960,2")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮设置[Beta, 请将狗粮队长放在阴阳师左前方] - ", "20,670,900,60")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮设置[狗粮队长位置为阴阳师左前方] - ", "20,670,900,60")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "强制普攻 - ", "20,730,300,60")
 UI:RadioGroup(tansuo_ui, "nor_attk", "开启      ,关闭","0",30,"0,0,0","600,730,400,60")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动更换 - ", "20,790,300,60")
@@ -176,6 +177,12 @@ UI:fit(yuling_ui)
 -- 妖气封印
 yqfy_ui = UI:new("yqfy.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 UI:Label(yqfy_ui, "center", "0,0,0", 30, "妖气封印", "30,20,960,55")
+UI:Label(yqfy_ui, "left", "0,0,0", 30, "妖气选择 - ", "20,100,300,60")
+UI:ComboBox(yqfy_ui, "sel", "跳跳哥哥,椒图,骨女,饿鬼,二口女,海坊主,鬼使黑,小松丸,日和坊","8",23,"650,100,330,50")
+UI:Label(yqfy_ui, "left", "0,0,0", 30, "战斗次数 - ", "20,160,300,60")
+UI:ComboBox(yqfy_ui, "round", "3次,5次,10次,20次,30次[不推荐...],50次[强烈不推荐...]","2",23,"650,160,330,50")
+UI:Label(yqfy_ui, "left", "0,0,0", 30, "战斗标记 - ", "20,220,300,60")
+UI:RadioGroup(yqfy_ui, "mark", "随机小怪,中间大怪,无","3",30,"0,0,0","500,220,500,60")
 UI:fit(yqfy_ui)
 
 -- 百鬼夜行
@@ -976,10 +983,55 @@ function yqfy_UI()
 		return
 	end
 	
+	local round, sel, mark
+	if res_yqfy.round == "0" then
+		round = 3
+	elseif res_yqfy.round == "1" then
+		round = 5
+	elseif res_yqfy.round == "2" then
+		round = 10
+	elseif res_yqfy.round == "3" then
+		round = 20
+	elseif res_yqfy.round == "4" then
+		round = 30
+	elseif res_yqfy.round == "5" then
+		round = 50
+	end
+	
+	if res_yqfy.sel == "0" then
+		sel = "跳跳哥哥"
+	elseif res_yqfy.sel == "1" then
+		sel = "椒图"
+	elseif res_yqfy.sel == "2" then
+		sel = "骨女"
+	elseif res_yqfy.sel == "3" then
+		sel = "饿鬼"
+	elseif res_yqfy.sel == "4" then
+		sel = "二口女"
+	elseif res_yqfy.sel == "5" then
+		sel = "海坊主"
+	elseif res_yqfy.sel == "6" then
+		sel = "鬼使黑"
+	elseif res_yqfy.sel == "7" then
+		sel = "小松丸"
+	elseif res_yqfy.sel == "8" then
+		sel = "日和坊"
+	end
+	
+	if (res_yqfy.mark == "0") then
+		mark = "小怪"
+	elseif (res_yqfy.mark == "1") then
+		mark = "大怪"
+	elseif (res_yqfy.mark == "2") then
+		mark = "无"
+	end
+	
 	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
+	
+	yqfy(round, sel, mark)
 end
 
 function hundredghost_UI()
