@@ -1,6 +1,6 @@
 require "util"
 
--- Other func
+-- Some func
 function script_init()
 	local ret = getScreenDirection()
 	
@@ -35,11 +35,11 @@ function print_offer_arr()
 end
 
 function find_offer()
-	local x, y
-	x, y = findColor({681, 167, 685, 171}, -- √ x 和 交接处
+	local x, y, x_, y_
+	x_, y_ = findColor({681, 167, 685, 171}, -- √ x 和 交接处
 		"0|0|0xb39276,-1|29|0x9e7d62,71|209|0x50ad5b,74|295|0xd96c5a",
 		95, 0, 0, 0)
-	if (x > -1) then
+	if (x_ > -1) then
 		if (offer_arr[1] == 0) then
 			HUD_show_or_hide(HUD,hud_scene,"拒绝悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			ran_touch(0, 759, 460, 10, 10) -- 拒绝
@@ -54,9 +54,9 @@ function find_offer()
 				end
 			end
 			if offer_arr[3] == 1 then
-				x, y = findColor({603, 415, 605, 417},
-					"0|0|0xe97c2b,20|-3|0x6a4586,-7|26|0x0c0e0a,-15|32|0x8e48da",
-					95, 0, 0, 0)
+				x, y = findColor({754, 376, 756, 378},
+					"0|0|0x55b260,2|83|0xdd725f,-157|68|0x0d0f0b,-151|39|0xe97a2b",
+					80, 0, 0, 0)
 				if x > -1 then
 					HUD_show_or_hide(HUD,hud_scene,"接受体力悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 759, 373, 10, 10) -- 接受
@@ -72,18 +72,18 @@ function find_offer()
 				end
 			end
 			if offer_arr[6] == 1 then
-				x, y = findColor({526, 444, 528, 446},
-					"0|0|0xf5acc0,17|0|0xb55345,-15|-23|0xfffcf5,-25|-33|0x5d4568",
-					95, 0, 0, 0)
+				x, y = findColor({754, 376, 756, 378},
+					"0|0|0x55b260,2|83|0xdd725f,-147|59|0x75671b,-243|44|0xfffbe9",
+					80, 0, 0, 0)
 				if x > -1 then
 					HUD_show_or_hide(HUD,hud_scene,"接受狗粮悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 759, 373, 10, 10) -- 接受
 				end
 			end
 			if offer_arr[4] == 1 then
-				x, y = findColor({607, 435, 609, 436},
-					"0|0|0x75671b,12|-5|0xead7ae,17|-21|0x44413c,-23|-24|0x464340",
-					95, 0, 0, 0)
+				x, y = findColor({754, 376, 756, 378},
+					"0|0|0x55b260,2|83|0xdd725f,-147|59|0x75671b,-166|48|0xddb64d",
+					80, 0, 0, 0)
 				if x > -1 then
 					HUD_show_or_hide(HUD,hud_scene,"接受金币悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 759, 373, 10, 10) -- 接受
@@ -91,7 +91,7 @@ function find_offer()
 			end
 		end
 	end
-	return x, y
+	return x_, y_
 end
 
 function handle_error(disconn_fin, real_8dashe, secret_vender)
