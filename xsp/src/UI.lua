@@ -522,7 +522,7 @@ function tansuo_UI()
 	if res_tansuo.count_mode == "0" then
 		count_mode = "战斗"
 	elseif res_tansuo.count_mode == "1" then
-		coutn_mode = "章节"
+		count_mode = "章节"
 	end
 	
 	if res_tansuo.win_round == "0" then
