@@ -13,6 +13,11 @@ require "X_ui"
 local width_UI = 1000
 local height_UI = 550
 
+-- Direction Error
+direct_err_ui = UI:new("portal.dat", 500, 250, "退出", "退出", "backGround.jpg")
+UI:Label(direct_err_ui, "left", "0,0,0", 30, "屏幕方向识别失败，请加群向作者反映此问题，谢谢~", "30,50,470,150")
+UI:fit(direct_err_ui)
+
 -- Portal
 portal_ui = UI:new("portal.dat", width_UI, height_UI, "继续", "退出", "backGround.jpg")
 UI:Image(portal_ui, "title.png", "30,0,940,80")
@@ -22,7 +27,6 @@ UI:Label(portal_ui, "left", "0,0,0", 30, "实时公告 - ", "30,140,300,55")
 UI:Image(portal_ui, "notice.png", "20,200,970,250")
 -- 公告
 local content, err = getCloudContent("WALLBREAKERREALTIMEANNOUCEMENT", "BDAB2A1E8229572B", "没有正确获取到公告信息")
--- print(string.format("getCloudContent return content = %s, err = %s", tostring(content), tostring(err)));
 if err == 0 then
 	UI:Label(portal_ui, "left", "0,0,0", 30, tostring(content), "120,250,800,150")
 end

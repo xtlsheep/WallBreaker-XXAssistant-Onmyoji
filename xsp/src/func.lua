@@ -19,6 +19,7 @@ function script_init()
 		print("屏幕方向为横屏，HOME键在左")
 	else
 		print("屏幕方向Unknow")
+		UI:show(direct_err_ui)
 		lua_exit()
 	end
 	
