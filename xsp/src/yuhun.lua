@@ -23,16 +23,16 @@ function lct_8dashe()
 end
 
 function yuhun_mark(position)
-	mSleep(1000)
+	mSleep(500)
 	ran_sleep(500)
-	local cnt = math.random(1, 2)
+	local cnt = math.random(2, 3)
 	
 	for i = 1, cnt do
 		ran_interv()
 		if (position == "左") then
 			ran_touch(0, 290, 150, 30, 10)
 		elseif (position == "中") then
-			ran_touch(0, 570, 150, 10, 10)
+			ran_touch(0, 570, 150, 20, 20)
 		elseif (position == "右") then
 			ran_touch(0, 830, 150, 30, 10)
 		end

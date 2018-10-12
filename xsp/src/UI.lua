@@ -28,7 +28,7 @@ UI:Image(portal_ui, "notice.png", "20,200,970,250")
 -- 公告
 local content, err = getCloudContent("WALLBREAKERREALTIMEANNOUCEMENT", "BDAB2A1E8229572B", "没有正确获取到公告信息")
 if err == 0 then
-	UI:Label(portal_ui, "left", "0,0,0", 30, tostring(content), "120,250,800,150")
+	UI:Label(portal_ui, "left", "0,0,0", 29, tostring(content), "110,250,800,180")
 end
 UI:fit(portal_ui)
 
