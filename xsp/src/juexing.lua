@@ -36,9 +36,9 @@ function juexing_mark(mark)
 	for i = 1, cnt do
 		ran_interv()
 		if (mark == "大怪") then
-			ran_touch(0, 722, 148, 10, 10)
+			ran_touch(0, 722, 148, 10, 30)
 		elseif (mark == "小怪") then
-			ran_touch(0, pos_x[pos], pos_y[pos], 5, 5)
+			ran_touch(0, pos_x[pos], pos_y[pos], 10, 10)
 		end
 	end
 end

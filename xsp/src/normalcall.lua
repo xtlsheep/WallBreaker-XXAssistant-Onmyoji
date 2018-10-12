@@ -29,7 +29,7 @@ function tickets_call()
 	local x_ran = 20
 	local y_ran	= 10
 	local x_interv = 40
-	local y_interv = math.random(-4, 4)
+	local y_interv = math.random(-3, 3)
 	local steps = 15
 
 	ran_move_steps(0, x, y, x_ran, y_ran, x_interv, y_interv, steps)

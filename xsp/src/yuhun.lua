@@ -30,11 +30,11 @@ function yuhun_mark(position)
 	for i = 1, cnt do
 		ran_interv()
 		if (position == "左") then
-			ran_touch(0, 290, 150, 10, 10)
+			ran_touch(0, 290, 150, 30, 10)
 		elseif (position == "中") then
-			ran_touch(0, 550, 150, 10, 10)
+			ran_touch(0, 570, 150, 10, 10)
 		elseif (position == "右") then
-			ran_touch(0, 830, 150, 10, 10)
+			ran_touch(0, 830, 150, 30, 10)
 		end
 	end
 end
@@ -237,7 +237,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			-- 八岐大蛇
 			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 ran_touch(0, 573, 440, 20, 10) break end -- 组队开始
 			-- 庭院
-			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
+			x, y = lct_tingyuan() if (x > -1) then mSleep(500) tingyuan_enter_tansuo() break end
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 355, 320, 50, 50) break end -- 八岐大蛇
 			-- 战斗失败

@@ -8,6 +8,7 @@ function lct_yyh()
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_scene,"业原火",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		mSleep(1000)
 	end
 	return x, y
 end
@@ -24,6 +25,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 	local end_chen = 0
 	local end_chi = 0
 	local last_sel = 0
+	local ran_wait = 0
 	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
@@ -76,6 +78,9 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			-- 业原火
 			x, y = lct_yyh()
 			if x > -1 then
+				ran_wait = math.random(3000, 5000)
+				HUD_show_or_hide(HUD,hud_scene,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
+				mSleep(ran_wait)
 				-- 锁定 or not
 				lock_or_unlock(lock, "业原火")
 				-- 贪

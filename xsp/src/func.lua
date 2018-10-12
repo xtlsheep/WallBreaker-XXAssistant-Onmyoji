@@ -306,6 +306,13 @@ function lct_tansuo()
 	return x, y
 end
 
+function lct_zudui()
+	local x, y = findColor({854, 100, 856, 102},
+		"0|0|0xea7d2b,205|12|0xe8d4cf,-797|19|0xecd982,202|87|0x8d7245",
+		90, 0, 0, 0)
+	return x, y
+end
+
 function tingyuan_enter_tansuo()
 	local x, y = findColor({230, 125, 1136, 175}, -- 庭院探索灯笼
 		"0|0|0xffffec,0|-2|0xffffec,0|2|0xffffd2,-2|0|0xffffe6,2|0|0xfffff1",
@@ -313,6 +320,16 @@ function tingyuan_enter_tansuo()
 	if x > -1 then
 		ran_touch(0, x, y, 10, 10) -- 探索灯笼
 	end
+end
+
+function tingyuan_enter_zudui()
+	local x, y = findColor({746, 13, 748, 15},
+		"0|0|0xe87b2a,-524|534|0xeae7e6,362|529|0xddcdc7",
+		90, 0, 0, 0)
+	if x > -1 then
+		ran_touch(0, 230, 560, 20, 20)
+	end
+	return x, y
 end
 
 -- Fight func

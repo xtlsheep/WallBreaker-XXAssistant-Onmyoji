@@ -38,11 +38,11 @@ function tansuo_mark(mark)
 			x = 861 y = 177
 		end
 		for i = 1, cnt do
-			ran_touch(0, x, y, 5, 5)
+			ran_touch(0, x, y, 10, 10)
 		end
 	elseif mark == "Boss" then
 		for i = 1, cnt do
-			ran_touch(0, 765, 60, 5, 5)
+			ran_touch(0, 765, 60, 10, 10)
 		end
 	end
 end
