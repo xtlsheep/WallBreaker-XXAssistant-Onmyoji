@@ -192,6 +192,11 @@ UI:fit(yqfy_ui)
 -- 百鬼夜行
 hundredghost_ui = UI:new("hundredghost.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 UI:Label(hundredghost_ui, "center", "0,0,0", 30, "百鬼夜行", "30,20,960,55")
+UI:Label(hundredghost_ui, "left", "0,0,0", 30, "战斗次数 - ", "20,100,300,60")
+UI:ComboBox(hundredghost_ui, "round", "3次,5次,10次,20次,30次,50次","4",23,"650,100,330,50")
+UI:Label(hundredghost_ui, "left", "0,0,0", 30, "豆子选择 - ", "20,160,300,60")
+UI:RadioGroup(hundredghost_ui, "num", "5 ~ 7", "8 ~ 10","1",30,"650,160,500,50")
+UI:CheckBoxGroup(hundredghost_ui, "invite","自动邀请好友","0",30,"0,0,0","20,220,900,60")
 UI:fit(hundredghost_ui)
 
 -- 一键每日
@@ -1044,11 +1049,40 @@ function hundredghost_UI()
 		config_UI()
 		return
 	end
-	
+
+    local round, num, invite
+    if res_hundredghost.round == "0" then
+        round = 3
+    elseif res_hundredghost.round == "1" then
+        round = 5
+    elseif res_hundredghost.round == "2" then
+        round = 10
+    elseif res_hundredghost.round == "3" then
+        round = 20
+    elseif res_hundredghost.round == "4" then
+        round = 30
+    elseif res_hundredghost.round == "5" then
+        round = 50
+    end
+
+    if res_hundredghost.num == "0" then
+        num = "5-7"
+    elseif res_hundredghost.num == "1" then
+        num = "8-10"
+    end
+
+    if res_hundredghost.invite == "0" then
+        invite = 1
+    else
+        invite = 0
+    end
+
 	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
+
+    hundredghost(round, num, invite)
 end
 
 function dallymission_UI()
