@@ -323,11 +323,11 @@ function tingyuan_enter_tansuo()
 end
 
 function tingyuan_enter_zudui()
-	local x, y = findColor({746, 13, 748, 15},
-		"0|0|0xe87b2a,-524|534|0xeae7e6,362|529|0xddcdc7",
-		90, 0, 0, 0)
+	local x, y = findColor({1093, 35, 1095, 37},
+		"0|0|0xa29c7b,-77|-4|0xdfc7a1,-703|10|0xfddc8a,-710|35|0xf37f5b",
+		95, 0, 0, 0)
 	if x > -1 then
-		ran_touch(0, 230, 560, 20, 20)
+		ran_touch(0, 230, 560, 20, 20) -- 组队
 	end
 	return x, y
 end

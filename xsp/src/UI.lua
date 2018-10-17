@@ -1,3 +1,4 @@
+require "X_ui"
 require "yuhun"
 require "juexing"
 require "jjtp"
@@ -7,7 +8,7 @@ require "normalcall"
 require "tansuo"
 require "autostory"
 require "yqfy"
-require "X_ui"
+require "hundredghost"
 
 -- UI init
 local width_UI = 1000
@@ -80,9 +81,9 @@ UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗设置 - ", "20,180,300,60")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "加成识别 - ", "20,240,300,60")
 UI:CheckBoxGroup(tansuo_ui, "select","物品,金币,经验,Boss","2@3",30,"0,0,0","420,240,580,60")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动标记 - ", "20,300,300,60")
-UI:RadioGroup(tansuo_ui, "mark", "随机小怪   ,中间大怪   ,无","2",30,"0,0,0","420,300,580,60")
+UI:RadioGroup(tansuo_ui, "mark", "随机小怪  ,中间大怪  ,无","2",30,"0,0,0","420,300,580,60")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "难度选择 - ", "20,360,300,60")
-UI:RadioGroup(tansuo_ui, "hard", "普通                  ,困难[队长强制]","1",30,"0,0,0","420,360,580,60")
+UI:RadioGroup(tansuo_ui, "hard", "普通              ,困难[队长强制]","1",30,"0,0,0","420,360,580,60")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "目标章节[暂时无效] - ", "20,420,500,60")
 UI:ComboBox(tansuo_ui, "section", "第一章,第二章,第三章,第四章,第五章,第六章,第七章,第八章,第九章,第十章,第十一章,第十二章,第十三章,第十四章,第十五章,第十六章,第十七章,第十八章,第十九章,第二十章,第二十一章,第二十二章,第二十三章,第二十四章,第二十五章","24",23,"600,420,380,50")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "限定方式[暂时无效] - ", "20,480,500,60")
@@ -194,8 +195,8 @@ hundredghost_ui = UI:new("hundredghost.dat", width_UI, height_UI, "继续", "返
 UI:Label(hundredghost_ui, "center", "0,0,0", 30, "百鬼夜行", "30,20,960,55")
 UI:Label(hundredghost_ui, "left", "0,0,0", 30, "战斗次数 - ", "20,100,300,60")
 UI:ComboBox(hundredghost_ui, "round", "3次,5次,10次,20次,30次,50次","4",23,"650,100,330,50")
-UI:Label(hundredghost_ui, "left", "0,0,0", 30, "豆子选择 - ", "20,160,300,60")
-UI:RadioGroup(hundredghost_ui, "num", "5 ~ 7", "8 ~ 10","1",30,"650,160,500,50")
+UI:Label(hundredghost_ui, "left", "0,0,0", 30, "豆子数量 - ", "20,160,300,60")
+UI:RadioGroup(hundredghost_ui, "num", "5 ~ 7    ,8 ~ 10","1",30,"0,0,0","650,160,330,60")
 UI:CheckBoxGroup(hundredghost_ui, "invite","自动邀请好友","0",30,"0,0,0","20,220,900,60")
 UI:fit(hundredghost_ui)
 
@@ -1049,40 +1050,40 @@ function hundredghost_UI()
 		config_UI()
 		return
 	end
-
-    local round, num, invite
-    if res_hundredghost.round == "0" then
-        round = 3
-    elseif res_hundredghost.round == "1" then
-        round = 5
-    elseif res_hundredghost.round == "2" then
-        round = 10
-    elseif res_hundredghost.round == "3" then
-        round = 20
-    elseif res_hundredghost.round == "4" then
-        round = 30
-    elseif res_hundredghost.round == "5" then
-        round = 50
-    end
-
-    if res_hundredghost.num == "0" then
-        num = "5-7"
-    elseif res_hundredghost.num == "1" then
-        num = "8-10"
-    end
-
-    if res_hundredghost.invite == "0" then
-        invite = 1
-    else
-        invite = 0
-    end
-
+	
+	local round, num, invite
+	if res_hundredghost.round == "0" then
+		round = 3
+	elseif res_hundredghost.round == "1" then
+		round = 5
+	elseif res_hundredghost.round == "2" then
+		round = 10
+	elseif res_hundredghost.round == "3" then
+		round = 20
+	elseif res_hundredghost.round == "4" then
+		round = 30
+	elseif res_hundredghost.round == "5" then
+		round = 50
+	end
+	
+	if res_hundredghost.num == "0" then
+		num = "5-7"
+	elseif res_hundredghost.num == "1" then
+		num = "8-10"
+	end
+	
+	if res_hundredghost.invite == "0" then
+		invite = 1
+	else
+		invite = 0
+	end
+	
 	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
-
-    hundredghost(round, num, invite)
+	
+	hundredghost(round, num, invite)
 end
 
 function dallymission_UI()

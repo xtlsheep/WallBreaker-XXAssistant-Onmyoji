@@ -37,7 +37,7 @@ function yqfy_mark(mark)
 	end
 end
 
-function yqfy_quit_deny()
+function yqfy_deny_quit()
 	local x, y = findColor({460, 382, 462, 384},
 		"0|0|0xdf6851,212|1|0xf3b25e,269|111|0x080807",
 		80, 0, 0, 0)
@@ -79,7 +79,7 @@ function yqfy(round, sel, mark)
 				if rd_cnt == round then
 					return
 				end
-				ran_wait = math.random(2000, 3000)
+				ran_wait = math.random(1000, 3000)
 				HUD_show_or_hide(HUD,hud_scene,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
 				mSleep(ran_wait)
 				tingyuan_enter_zudui()
@@ -89,7 +89,7 @@ function yqfy(round, sel, mark)
 			x, y = yqfy_queue() if x > -1 then break end
 			-- 妖气封印
 			x, y = lct_yqfy()
-			ran_sleep(1000)
+			ran_sleep(500)
 			if x > -1 then
 				if sel == "跳跳哥哥" then
 					ran_touch(0, 430, 230, 50, 10)
@@ -132,16 +132,22 @@ function yqfy(round, sel, mark)
 					ran_sleep(1000)
 					ran_touch(0, 680, 560, 50, 10)
 				end
-				ran_sleep(1000)
+				ran_sleep(500)
 				break
 			end
 			-- 组队
 			x, y = lct_zudui()
 			if (x > -1) then
 				HUD_show_or_hide(HUD,hud_scene,"组队",20,"0xff000000","0xffffffff",0,100,0,300,32)
-				ran_sleep(1000)
-				ran_touch(0, 220, 520, 50, 10)
-				ran_sleep(1000)
+				ran_sleep(500)
+				if linkage == 1 then
+					ran_move_steps(0, 230, 455, 20, 20, math.random(-3, 3), math.random(-26, -24), 12)
+					ran_sleep(1000)
+					ran_touch(0, 220, 145, 50, 10)
+				else
+					ran_touch(0, 220, 520, 50, 10)
+				end
+				ran_sleep(500)
 				break
 			end
 			-- 队员接手队长
@@ -171,7 +177,7 @@ function yqfy(round, sel, mark)
 				break
 			end
 			-- 取消退出
-			x, y = yqfy_quit_deny() if x > -1 then break end
+			x, y = yqfy_deny_quit() if x > -1 then break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- 自动检测
