@@ -25,20 +25,20 @@ function new_char()
 end
 
 function bypass_click()
-	local x, y = findColor({749, 468, 751, 470},
-		"0|0|0x745ae5,7|5|0x4a31dc,-9|11|0x7459e4,12|17|0x3331dc",
-		80, 0, 0, 0)
+	local x, y = findColor({748, 468, 750, 470},
+		"0|0|0x7555dd,-4|8|0x7d61e1,29|-4|0x3640ac",
+		70, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_scene,"跳过",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		ran_touch(0, x+40, y+10, 20, 20)
+		ran_touch(0, x+40, y+10, 20, 10)
 	end
 	return x, y
 end
 
 function speed_click()
-	local x, y = findColor({1037, 51, 1039, 53},
-		"0|0|0xd4ad85,-18|0|0xd4ad86,-10|-22|0x34232e,-13|21|0x31202f",
-		95, 0, 0, 0)
+	local x, y = findColor({1044, 49, 1046, 51},
+		"0|0|0xd3ac85,-19|0|0xd4ad86,-114|0|0x8e7967,-125|1|0xd1a882",
+		80, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_scene,"快进",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		ran_touch(0, x, y, 20, 20)
