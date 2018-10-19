@@ -48,48 +48,54 @@ function find_offer()
 			if offer_arr[2] == 1 then
 				x, y = findColor({614, 432, 616, 434},
 					"0|0|0xed4a36,11|-21|0x67457c,-13|9|0xc7a98b,-30|17|0x8647c8",
-					95, 0, 0, 0)
+					90, 0, 0, 0)
 				if x > -1 then
 					HUD_show_or_hide(HUD,hud_scene,"接受勾玉悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 759, 373, 10, 10) -- 接受
+					return x_, y_
 				end
 			end
 			if offer_arr[3] == 1 then
 				x, y = findColor({754, 376, 756, 378},
 					"0|0|0x55b260,2|83|0xdd725f,-157|68|0x0d0f0b,-151|39|0xe97a2b",
-					80, 0, 0, 0)
+					90, 0, 0, 0)
 				if x > -1 then
 					HUD_show_or_hide(HUD,hud_scene,"接受体力悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 759, 373, 10, 10) -- 接受
-				end
-			end
-			if offer_arr[5] == 1 then
-				x, y = findColor({529, 451, 531, 453},
-					"0|0|0x8b3028,-11|-8|0xf37b62,-10|-19|0xfdfeff,-9|-39|0x69467f",
-					95, 0, 0, 0)
-				if x > -1 then
-					HUD_show_or_hide(HUD,hud_scene,"接受猫粮悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					ran_touch(0, 759, 373, 10, 10) -- 接受
-				end
-			end
-			if offer_arr[6] == 1 then
-				x, y = findColor({754, 376, 756, 378},
-					"0|0|0x55b260,2|83|0xdd725f,-147|59|0x75671b,-243|44|0xfffbe9",
-					80, 0, 0, 0)
-				if x > -1 then
-					HUD_show_or_hide(HUD,hud_scene,"接受狗粮悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					ran_touch(0, 759, 373, 10, 10) -- 接受
+					return x_, y_
 				end
 			end
 			if offer_arr[4] == 1 then
 				x, y = findColor({754, 376, 756, 378},
 					"0|0|0x55b260,2|83|0xdd725f,-147|59|0x75671b,-166|48|0xddb64d",
-					80, 0, 0, 0)
+					90, 0, 0, 0)
 				if x > -1 then
 					HUD_show_or_hide(HUD,hud_scene,"接受金币悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 759, 373, 10, 10) -- 接受
+					return x_, y_
 				end
 			end
+			if offer_arr[5] == 1 then
+				x, y = findColor({529, 451, 531, 453},
+					"0|0|0x8b3028,-11|-8|0xf37b62,-10|-19|0xfdfeff,-9|-39|0x69467f",
+					90, 0, 0, 0)
+				if x > -1 then
+					HUD_show_or_hide(HUD,hud_scene,"接受猫粮悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					ran_touch(0, 759, 373, 10, 10) -- 接受
+					return x_, y_
+				end
+			end
+			if offer_arr[6] == 1 then
+				x, y = findColor({754, 376, 756, 378},
+					"0|0|0x55b260,2|83|0xdd725f,-147|59|0x75671b,-243|44|0xfffbe9",
+					90, 0, 0, 0)
+				if x > -1 then
+					HUD_show_or_hide(HUD,hud_scene,"接受狗粮悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					ran_touch(0, 759, 373, 10, 10) -- 接受
+					return x_, y_
+				end
+			end
+			ran_touch(0, 759, 460, 10, 10) -- 拒绝
 		end
 	end
 	return x_, y_
@@ -542,7 +548,9 @@ end
 
 function member_room_find()
 	ran_touch(0, 440, 559, 20, 10) -- 刷新
-	ran_sleep(750)
+	mSleep(250)
+	ran_interv()
+
 	local top = {195, 287, 376, 466}
 	local bottom = {200, 292, 381, 471}
 	local left = 935
@@ -694,13 +702,13 @@ end
 function member_team_accept_invite(auto)
 	local x, y = findColor({120, 200, 125, 450}, -- √
 		"0|0|0x57b361,15|-13|0x63bc6e,-2|-20|0x876f5b,17|8|0x87705c",
-		95, 0, 0, 0)
+		80, 0, 0, 0)
 	if x > -1 then
 		ran_sleep(100)
 		if (auto == 1) then
 			local x_auto, y_auto = findColor({205, 224, 210, 441}, -- 自动准备的按钮
 				"0|0|0xedc791,0|13|0x5ab565,8|19|0x51ad5b,17|9|0x5bb665",
-				95, 0, 0, 0)
+				80, 0, 0, 0)
 			if x_auto > -1 then
 				HUD_show_or_hide(HUD,hud_scene,"收到自动组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				ran_touch(0, x_auto, y_auto, 5, 5) -- 自动准备的按钮
