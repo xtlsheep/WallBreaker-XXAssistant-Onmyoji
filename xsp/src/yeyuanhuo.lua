@@ -81,6 +81,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 				ran_wait = math.random(3000, 5000)
 				HUD_show_or_hide(HUD,hud_scene,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
 				mSleep(ran_wait)
+				HUD_show_or_hide(HUD,hud_scene,string.format("业原火", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32) 
 				-- 锁定 or not
 				lock_or_unlock(lock, "业原火")
 				-- 贪

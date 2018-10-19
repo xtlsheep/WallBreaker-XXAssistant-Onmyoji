@@ -401,7 +401,7 @@ end
 
 function fight_success(mode)
 	local cnt, x, y
-	cnt = math.random(1, 3)
+	cnt = 3
 	if mode == "组队" then
 		x, y = findColor({417, 86, 426, 95}, -- 组队胜利的鼓
 			"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
