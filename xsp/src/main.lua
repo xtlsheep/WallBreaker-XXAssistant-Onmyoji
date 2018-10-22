@@ -13,11 +13,12 @@ width_dev = 640
 height_dev = 1136
 print(os.date())
 script_init()
-width,height = getScreenSize()
+width, height = getScreenSize()
+dpi = getScreenDPI()
 ratio = height_dev/height
 s = (height*0.050)*(ratio) -- util.lua button
 setScreenScale(width_dev, height_dev) -- iPhone 5s
-print(string.format("width = %d, height = %d", width, height))
+print(string.format("width = %d, height = %d, dpi = %d", width, height, dpi))
 math.randomseed(os.time())
 math.random(1,10000)
 

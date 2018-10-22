@@ -6,7 +6,9 @@ local width_dev, height_dev, width_cur, height_cur
 -- iPhone 5s: 640 x 1136
 width_dev = 640 
 height_dev = 1136
+dpi_dev = 320
 width_cur, height_cur = getScreenSize()
+dpi_cur = getScreenDPI()
 
 UI = {
 }
