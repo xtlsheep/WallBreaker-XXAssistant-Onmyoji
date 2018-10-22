@@ -347,6 +347,8 @@ function superghost()
 					end
 				end
 			end
+			-- 自动检测
+			x, y = auto_check() if x > -1 then break end
 			-- 战斗进行
 			x, y = fight_ongoing() if (x > -1) then last_mark = sg_mark(last_mark) mSleep(3000) break end
 			-- 战斗准备
@@ -365,8 +367,6 @@ function superghost()
 				keep_half_damo()
 				break
 			end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- 探索の超鬼王
 			x, y = lct_sg_in_tansuo() if x > -1 then ran_touch(0, x, y, 5, 5) break end
 			-- Handle error

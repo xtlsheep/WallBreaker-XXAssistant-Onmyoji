@@ -152,8 +152,6 @@ function yqfy(round, sel, mark)
 			end
 			-- 队员接手队长
 			x, y = member_room_find_start() if (x > -1) then ran_touch(0, 925, 535, 20, 10) break end -- 开始战斗
-			-- 战斗进行
-			x, y = fight_ongoing() if (x > -1) then break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then HUD_show_or_hide(HUD,hud_scene,"战斗准备",20,"0xff000000","0xffffffff",0,100,0,300,32) break end
 			-- 战斗胜利

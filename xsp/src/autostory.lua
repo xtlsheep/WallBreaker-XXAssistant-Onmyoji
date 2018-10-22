@@ -62,7 +62,7 @@ function eye_click()
 		"0|0|0xfcfcfc,-22|-8|0xcbd5dc,19|10|0xdce3e7,15|-39|0x2f2623,-18|32|0x473e48",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"开眼?",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_scene,"眼睛",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		ran_touch(0, x, y, 20, 20)
 	end
 	return x, y
@@ -88,8 +88,6 @@ function autostory()
 	while (1) do
 		while (1) do
 			mSleep(1000)
-			-- 跳过
-			x, y = bypass_click() if (x > -1) then time_cnt = 0 break end
 			-- 对话
 			x, y = diag_click() if (x > -1) then time_cnt = 0 break end
 			-- 新任务
@@ -98,7 +96,7 @@ function autostory()
 			x, y = speed_click() if (x > -1) then time_cnt = 0 break end
 			-- 战斗
 			x, y = fight_click() if (x > -1) then time_cnt = 0 break end
-			-- 开眼
+			-- 眼睛
 			x, y = eye_click() if (x > -1) then time_cnt = 0 break end
 			-- 问号
 			x, y = questionmark_click() if (x > -1) then time_cnt = 0 break end
@@ -106,8 +104,6 @@ function autostory()
 			x, y = auto_check() if (x > -1) then time_cnt = 0 break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then time_cnt = 0 break end
-			-- 战斗进行
-			x, y = fight_ongoing() if x > -1 then time_cnt = 0 break end
 			-- 战斗胜利
 			x, y = fight_success("单人") if (x > -1) then time_cnt = 0 break end
 			-- 胜利达摩
@@ -120,6 +116,10 @@ function autostory()
 				time_cnt = 0
 				break
 			end
+			-- 自动检测
+			x, y = auto_check() if x > -1 then break end
+			-- 跳过
+			x, y = bypass_click() if (x > -1) then time_cnt = 0 break end
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt = fail_cnt + 1
@@ -128,6 +128,7 @@ function autostory()
 				time_cnt = 0
 				break
 			end
+			
 			time_cnt = time_cnt + 1
 			if time_cnt > 20 then
 				HUD_show_or_hide(HUD,hud_scene,"移动",20,"0xff000000","0xffffffff",0,100,0,300,32)

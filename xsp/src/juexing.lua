@@ -99,8 +99,6 @@ function juexing_solo(element, mark, level, round, lock)
 			x, y = find_offer() if (x > -1) then break end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
-			-- 战斗进行
-			x, y = fight_ongoing() if (x > -1) then break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
@@ -191,8 +189,6 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 				end
 				break
 			end
-			-- 战斗进行
-			x, y = fight_ongoing() if (x > -1) then break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
@@ -272,8 +268,6 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			x, y = find_offer() if (x > -1) then break end
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
-			-- 战斗进行
-			x, y = fight_ongoing() if (x > -1) then break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
@@ -360,8 +354,6 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			x, y = find_offer() if (x > -1) then break end
 			-- 接受邀请
 			x, y, auto_grouped = member_team_accept_invite(member_auto_group) if (x > -1) then break end
-			-- 战斗进行
-			x, y = fight_ongoing() if (x > -1) then break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
@@ -431,8 +423,6 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			x, y = find_offer() if (x > -1) then break end
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
-			-- 战斗进行
-			x, y = fight_ongoing() if (x > -1) then break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利

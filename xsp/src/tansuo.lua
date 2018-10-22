@@ -359,6 +359,10 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			x, y = find_offer() if (x > -1) then break end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
+			-- 自动检测
+			x, y = auto_check() if x > -1 then break end
+			-- 自动检测
+			x, y = auto_check() if x > -1 then break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then
@@ -529,8 +533,6 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			x, y = phy_check() if x > -1 then ran_touch(0, 1040, 350, 50, 50) break end -- 右下空白
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 1024, 533, 30, 10) break end -- Temporarily enter last section
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- Handle error
 			x, y = lct_8dashe() if x > -1 then  ran_touch(0, 928, 108, 5, 5) break end -- 八岐大蛇
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
@@ -567,6 +569,8 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			x, y = find_offer() if (x > -1) then break end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
+			-- 自动检测
+			x, y = auto_check() if x > -1 then break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then
@@ -744,8 +748,6 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			x, y = phy_check() if x > -1 then ran_touch(0, 1040, 350, 50, 50) break end -- 右下空白
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 1024, 533, 30, 10) break end -- Temporarily enter last section
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- Handle error
 			x, y = lct_8dashe() if x > -1 then  ran_touch(0, 928, 108, 5, 5) break end -- 八岐大蛇
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
@@ -778,6 +780,8 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			x, y = find_offer() if (x > -1) then break end
 			-- 接受邀请
 			x, y, auto_grouped = member_team_accept_invite(1) if (x > -1) then break end
+			-- 自动检测
+			x, y = auto_check() if x > -1 then break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then

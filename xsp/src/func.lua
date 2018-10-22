@@ -529,9 +529,9 @@ function keep_fight_failed(mode)
 end
 
 function auto_check()
-	local x, y = findColor({810, 606, 812, 608},
-		"0|0|0x2a1919,-15|19|0x291a19,-31|26|0xffffff,-28|20|0x03b9e9",
-		95, 0, 0, 0)
+	local x, y = findColor({781, 631, 783, 633},
+		"0|0|0xffffff,15|-9|0x281918,29|-26|0x281a19,3|-6|0x03b9e9",
+		80, 0, 0, 0)
 	if x > -1 then
 		ran_touch(0, 55, 590, 20, 20)
 	end
@@ -550,7 +550,7 @@ function member_room_find()
 	ran_touch(0, 440, 559, 20, 10) -- 刷新
 	mSleep(250)
 	ran_interv()
-
+	
 	local top = {195, 287, 376, 466}
 	local bottom = {200, 292, 381, 471}
 	local left = 935

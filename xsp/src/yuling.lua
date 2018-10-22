@@ -41,8 +41,6 @@ function yuling(sel, level, round, lock)
 			x, y = find_offer() if (x > -1) then break end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
-			-- 战斗进行
-			x, y = fight_ongoing() if (x > -1) then break end
 			-- 战斗胜利
 			x, y = fight_success("单人") if (x > -1) then break end
 			-- 胜利达摩
