@@ -6,7 +6,7 @@ require "func"
 -- Mainfunc
 function hundredghost(round, num, invite)
 	print(string.format("次数 %d 豆子 %s 邀请 %d", round, num, invite))
-	print_offer_arr()
+	print_global_vars()
 	
 	local disconn_fin = 1
 	local real_8dashe = 0

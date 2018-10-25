@@ -23,7 +23,7 @@ end
 -- Main func
 function yuling(sel, level, round, lock)
 	print(string.format("种类 %s，层数 %d, 次数 %d，锁定 %d", sel, level, round, lock))
-	print_offer_arr()
+	print_global_vars()
 	
 	local rd = round
 	local init = 1

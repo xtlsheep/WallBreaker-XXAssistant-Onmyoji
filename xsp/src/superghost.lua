@@ -263,7 +263,7 @@ end
 function superghost()
 	print(string.format("超鬼王: %d 强力追击 %d 标记 Boss %d 草人 %d 6星 %s 5星 %s 4星 %s 3星 %s 2星 %s 1星 %s",
 			sg_en, sg_force, sg_mark[1], sg_mark[2], sg_tired[6], sg_tired[5], sg_tired[4], sg_tired[3], sg_tired[2], sg_tired[1]))
-	print_offer_arr()
+	print_global_vars()
 	
 	if sg_en == 0 then
 		return

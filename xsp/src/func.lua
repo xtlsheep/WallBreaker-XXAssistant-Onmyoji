@@ -30,9 +30,11 @@ function show_win_fail(win_cnt, fail_cnt)
 	HUD_show_or_hide(HUD,hud_scene,string.format("战斗胜利 %d次 - 失败 %d次", win_cnt, fail_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 end
 
-function print_offer_arr()
+function print_global_vars()
 	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d)",
 			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6]))
+	print(string.format("停留过长关闭buff %d(%d sec), 体力用尽关闭buff %d",
+			buff_idle_stop, buff_idle_stop_time, buff_usup_stop))
 end
 
 function find_offer()

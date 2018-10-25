@@ -613,7 +613,7 @@ function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, l
 	print(string.format("模式：%s，战斗时间：%d，刷新：%d，个人突破：%s，阴阳寮突破：%d, 锁定: %d", mode, round_time, refresh, solo_sel, pub_sel, lock))
 	print(string.format("五花肉-个人：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)", whr_solo[1], whr_solo[2], whr_solo[3], whr_solo[4]))
 	print(string.format("五花肉-阴阳寮：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)", whr_pub[1], whr_pub[2], whr_pub[3], whr_pub[4]))
-	print_offer_arr()
+	print_global_vars()
 	
 	local ret_solo, ret_pub
 	local action_solo, action_pub -- Quit Wait Switch

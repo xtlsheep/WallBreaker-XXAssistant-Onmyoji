@@ -66,7 +66,7 @@ end
 
 -- Main func
 function LBSGhostDriving(interv)
-	print_offer_arr()
+	print_global_vars()
 	local x, y
 	
 	while (1) do

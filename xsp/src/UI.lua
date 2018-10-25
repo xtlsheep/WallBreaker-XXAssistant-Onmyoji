@@ -254,9 +254,12 @@ UI:fit(LBSGhostDriving_ui)
 global_ui = UI:new("global.dat", width_UI, height_UI, "开始", "退出", "backGround.jpg")
 UI:Label(global_ui, "center", "0,0,0", 30, "全局设置", "30,20,960,55")
 UI:CheckBoxGroup(global_ui, "HUD","可视化点击手势与运行辅助描述","0",30,"0,0,0","20,100,980,60")
-UI:CheckBoxGroup(global_ui, "skill","自动关闭技能特写[仅适用于庭院运行，建议手动关闭并取消该选项]","0",30,"0,0,0","20,160,980,60")
+UI:CheckBoxGroup(global_ui, "skill","自动关闭技能特写[仅适用于庭院启动，建议手动关闭并取消该选项]","0",30,"0,0,0","20,160,980,60")
 UI:CheckBoxGroup(global_ui, "offer_en","悬赏封印 - ","0",30,"0,0,0","20,220,300,60")
 UI:CheckBoxGroup(global_ui, "offer_sel","勾玉,体力,金币,猫粮,狗粮","0@1@2@3@4",30,"0,0,0","280,220,720,60")
+UI:CheckBoxGroup(global_ui, "buff_usup_stop","体力用尽后自动关闭所有buff","0",30,"0,0,0","20,280,700,60")
+UI:CheckBoxGroup(global_ui, "buff_idle_stop","庭院或探索界面停留过久后自动关闭所有buff","0",30,"0,0,0","20,340,700,60")
+UI:ComboBox(global_ui, "buff_idle_stop_time", "15秒,30秒,45秒,1分钟,2分钟,5分钟","3",23,"750,340,230,50")
 UI:fit(global_ui)
 
 -- Func
@@ -361,6 +364,35 @@ function global_UI()
 				offer_arr[6] = 1 -- 狗粮
 			end
 		end
+	end
+	
+	-- Idle关闭buff
+	if res_global.buff_idle_stop_time == "0" then
+		buff_idle_stop_time = 15
+	elseif res_global.buff_idle_stop_time == "1" then
+		buff_idle_stop_time = 30
+	elseif res_global.buff_idle_stop_time == "2" then
+		buff_idle_stop_time = 45
+	elseif res_global.buff_idle_stop_time == "3" then
+		buff_idle_stop_time = 60
+	elseif res_global.buff_idle_stop_time == "4" then
+		buff_idle_stop_time = 120
+	elseif res_global.buff_idle_stop_time == "5" then
+		buff_idle_stop_time = 300
+	end
+	
+	if res_global.buff_idle_stop == "0" then
+		buff_idle_stop = 1
+	else
+		buff_idle_stop = 0
+		buff_idle_stop_time = 0
+	end
+	
+	-- Useup关闭buff
+	if res_global.buff_usup_stop == "0" then
+		buff_usup_stop = 1
+	else
+		buff_usup_stop = 0
 	end
 	
 	return RET_OK

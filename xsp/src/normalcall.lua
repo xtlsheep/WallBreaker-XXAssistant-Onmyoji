@@ -38,7 +38,7 @@ end
 -- Main func
 function normalcall(tickets)
 	print(string.format("召唤次数: %d", tickets))
-	print_offer_arr()
+	print_global_vars()
 	
 	local cnt = 0
 	local disconn_fin = 1

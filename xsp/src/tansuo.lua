@@ -308,7 +308,7 @@ function df_normal_attack(pos_1, pos_2, pos_3)
 	end
 end
 
-function sushi_check()()
+function sushi_check()
 	local x, y = findColor({916, 87, 918, 89},
 		"0|0|0xcbb59c,-1|40|0xcbb59c,-257|19|0xcbb59c",
 		95, 0, 0, 0)
@@ -321,7 +321,7 @@ function tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round
 			mode, sel[1], sel[2], sel[3], sel[4], mark, hard, section, count_mode, win_round, sec_round))
 	print(string.format("狗粮普攻 %d, 自动更换 %d, 初始翻页 %d, 狗粮类型 %s, 素材类型(红蛋 %d, 白蛋 %d, 蓝蛋 %d, 黑蛋 %d)",
 			nor_attk, auto_change, page_jump, df_type, egg_color[1], egg_color[2], egg_color[3], egg_color[4]))
-	print_offer_arr()
+	print_global_vars()
 	
 	if mode == "单人" then
 		tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)

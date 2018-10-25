@@ -51,7 +51,7 @@ end
 -- Main func
 function yqfy(round, sel, mark)
 	print(string.format("次数 %d 妖气 %s 标记 %s", round, sel, mark))
-	print_offer_arr()
+	print_global_vars()
 	
 	local ran_wait = 0
 	local rd_cnt = 0

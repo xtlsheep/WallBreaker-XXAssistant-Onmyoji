@@ -81,7 +81,7 @@ end
 
 -- Main func
 function autostory()
-	print_offer_arr()
+	print_global_vars()
 	local time_cnt = 0
 	local x, y
 	

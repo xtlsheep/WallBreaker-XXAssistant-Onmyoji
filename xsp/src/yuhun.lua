@@ -65,7 +65,7 @@ function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, f
 			mode, role, group, mark[1], mark[2], mark[3], level, round, lock))
 	print(string.format("队员自动组队：%d，失败重新组队：%d，队员接手队长：%d，队长自动组队：%d，队长自动邀请：%d, 失败重新建队：%d",
 			member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate))
-	print_offer_arr()
+	print_global_vars()
 	
 	if (mode == "单人") then
 		yuhun_solo(mark, level, round, lock)
