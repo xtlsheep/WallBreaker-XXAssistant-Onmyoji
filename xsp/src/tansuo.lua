@@ -532,7 +532,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			-- 御魂溢出
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 查看体力
-			x, y = sushi_check()() if x > -1 then right_bottom_click() break end -- 右下空白
+			x, y = sushi_check() if x > -1 then right_bottom_click() break end -- 右下空白
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 1024, 533, 30, 10) break end -- Temporarily enter last section
 			-- Handle error
@@ -750,7 +750,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			-- 御魂溢出
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 查看体力
-			x, y = sushi_check()() if x > -1 then right_bottom_click() break end -- 右下空白
+			x, y = sushi_check() if x > -1 then right_bottom_click() break end -- 右下空白
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 1024, 533, 30, 10) break end -- Temporarily enter last section
 			-- Handle error
@@ -911,7 +911,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			-- 御魂溢出
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 查看体力
-			x, y = sushi_check()() if x > -1 then right_bottom_click() break end -- 右下空白
+			x, y = sushi_check() if x > -1 then right_bottom_click() break end -- 右下空白
 			-- 自动检测
 			x, y = auto_check() if x > -1 then break end
 			break
