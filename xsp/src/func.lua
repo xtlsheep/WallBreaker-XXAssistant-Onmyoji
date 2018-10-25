@@ -408,7 +408,7 @@ function fight_ongoing()
 end
 
 function right_bottom_click()
-	right_bottom_click()
+	ran_touch(0, 1040, 350, 50, 50) -- 右下空白
 	return
 end
 
