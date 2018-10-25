@@ -718,13 +718,16 @@ function captain_room_start_with_2_members()
 end
 
 function member_team_accept_invite(auto)
-	local x, y = findColor({120, 200, 125, 450}, -- √
+	local x, y
+	local x_auto, y_auto
+	-- IOS
+	x, y = findColor({120, 200, 125, 450}, -- √
 		"0|0|0x57b361,15|-13|0x63bc6e,-2|-20|0x876f5b,17|8|0x87705c",
 		80, 0, 0, 0)
 	if x > -1 then
-		ran_sleep(100)
+		ran_interv()
 		if (auto == 1) then
-			local x_auto, y_auto = findColor({205, 224, 210, 441}, -- 自动准备的按钮
+			x_auto, y_auto = findColor({205, 225, 210, 440}, -- 自动准备的按钮
 				"0|0|0xedc791,0|13|0x5ab565,8|19|0x51ad5b,17|9|0x5bb665",
 				80, 0, 0, 0)
 			if x_auto > -1 then
@@ -735,7 +738,29 @@ function member_team_accept_invite(auto)
 		end
 		HUD_show_or_hide(HUD,hud_scene,"收到组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		ran_touch(0, x, y, 5, 5) -- √
+		return x, y, RET_ERR
 	end
+	
+	-- Android
+	x, y = findColor({120, 200, 125, 450},
+		"0|0|0x57b260,-82|-5|0xdc6958,-41|-4|0xdfceb5,1|-21|0xb7a796",
+		90, 0, 0, 0)
+	if x > -1 then
+		ran_sleep(100)
+		if (auto == 1) then
+			x_auto, y_auto = findColor({205, 225, 210, 440},
+				"0|0|0xefc594,0|13|0x5ab563,19|9|0x61bc6a,20|20|0xb7a896",
+				90, 0, 0, 0)
+			if x_auto > -1 then
+				HUD_show_or_hide(HUD,hud_scene,"收到自动组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				ran_touch(0, x_auto, y_auto, 5, 5) -- 自动准备的按钮
+				return x, y, RET_OK
+			end
+		end
+		HUD_show_or_hide(HUD,hud_scene,"收到组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		ran_touch(0, x, y, 5, 5) -- √
+	end
+	
 	return x, y, RET_ERR
 end
 
