@@ -213,7 +213,7 @@ function sg_fight_failed()
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_scene,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		ran_touch(0, 1040, 350, 50, 50) -- 右下空白
+		right_bottom_click() -- 右下空白
 	end
 	return x, y
 end
@@ -227,7 +227,7 @@ function sg_keep_fight_failed()
 			"0|0|0x514a5b,251|6|0xddd9cd,-135|-6|0xcdc59c,30|34|0x5b5265",
 			95, 0, 0, 0)
 		if x > -1 then
-			ran_touch(0, 1040, 350, 50, 50) -- 右下空白
+			right_bottom_click() -- 右下空白
 		elseif x == -1 then
 			return
 		end

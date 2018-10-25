@@ -405,6 +405,11 @@ function fight_ongoing()
 	return x, y
 end
 
+function right_bottom_click()
+	right_bottom_click()
+	return
+end
+
 function fight_success(mode)
 	local cnt, x, y
 	cnt = 3
@@ -415,7 +420,7 @@ function fight_success(mode)
 		if (x > -1) then
 			HUD_show_or_hide(HUD,hud_scene,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			for i = 1, cnt do
-				ran_touch(0, 1040, 350, 50, 50) -- 右下空白
+				right_bottom_click() -- 右下空白
 				ran_interv()
 			end
 		end
@@ -427,7 +432,7 @@ function fight_success(mode)
 		if (x > -1) then
 			HUD_show_or_hide(HUD,hud_scene,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			for i = 1, cnt do
-				ran_touch(0, 1040, 350, 50, 50) -- 右下空白
+				right_bottom_click() -- 右下空白
 				ran_interv()
 			end
 		end
@@ -442,7 +447,7 @@ function whole_damo()
 		95, 0, 0, 0)
 	if (x > -1) then
 		HUD_show_or_hide(HUD,hud_scene,"领取奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		ran_touch(0, 1040, 350, 50, 50) -- 右下空白
+		right_bottom_click() -- 右下空白
 	end
 	return x, y
 end
@@ -453,7 +458,7 @@ function half_damo()
 		95, 0, 0, 0)
 	if (x > -1) then
 		HUD_show_or_hide(HUD,hud_scene,"退出战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		ran_touch(0, 1040, 350, 50, 50) -- 右下空白
+		right_bottom_click() -- 右下空白
 	end
 	return x, y
 end
@@ -467,7 +472,7 @@ function keep_half_damo()
 			"0|0|0x670a0b,20|22|0x320204,127|0|0x7e0e0e,159|7|0x6f290b",
 			95, 0, 0, 0)
 		if x > -1 then
-			ran_touch(0, 1040, 350, 50, 50) -- 右下空白
+			right_bottom_click() -- 右下空白
 		elseif x == -1 then
 			return
 		end
@@ -483,7 +488,7 @@ function fight_failed(mode)
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_scene,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			ran_touch(0, 1040, 350, 50, 50) -- 右下空白
+			right_bottom_click() -- 右下空白
 		end
 	elseif (mode == "组队") then
 		x, y = findColor({410, 80, 415, 85}, -- 失败的鼓
@@ -491,7 +496,7 @@ function fight_failed(mode)
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_scene,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			ran_touch(0, 1040, 350, 50, 50) -- 右下空白
+			right_bottom_click() -- 右下空白
 		end
 	end
 	return x, y
@@ -506,7 +511,7 @@ function keep_fight_failed(mode)
 				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
 				95, 0, 0, 0)
 			if x > -1 then
-				ran_touch(0, 1040, 350, 50, 50) -- 右下空白
+				right_bottom_click() -- 右下空白
 			elseif x == -1 then
 				return
 			end
@@ -519,7 +524,7 @@ function keep_fight_failed(mode)
 				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
 				95, 0, 0, 0)
 			if x > -1 then
-				ran_touch(0, 1040, 350, 50, 50) -- 右下空白
+				right_bottom_click() -- 右下空白
 			elseif x == -1 then
 				return
 			end
@@ -534,6 +539,19 @@ function auto_check()
 		80, 0, 0, 0)
 	if x > -1 then
 		ran_touch(0, 55, 590, 20, 20)
+	end
+	return x, y
+end
+
+function yuhun_overflow()
+	local x, y = findColor({568, 376, 570, 378},
+		"0|0|0xf3b25e,-54|-24|0x973b2e,52|20|0x963b2e,179|-163|0xc6b096,-182|42|0xcab49a",
+		95, 0, 0, 0)
+	if x > -1 then
+		ran_touch(0, x, y, 20, 5)
+		mSleep(250)
+		ran_interv()
+		right_bottom_click()
 	end
 	return x, y
 end

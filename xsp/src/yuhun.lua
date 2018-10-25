@@ -139,6 +139,8 @@ function yuhun_solo(mark, level, round, lock)
 				keep_fight_failed("单人")
 				break
 			end
+			-- 御魂溢出
+			x, y = yuhun_overflow() if x > -1 then break end
 			-- 发现宝藏
 			x, y = lct_petfind() if (x > -1) then break end
 			-- 自动检测
@@ -249,6 +251,8 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 				keep_fight_failed("组队")
 				break
 			end
+			-- 御魂溢出
+			x, y = yuhun_overflow() if x > -1 then break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- 自动检测
@@ -340,6 +344,8 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 				keep_fight_failed("组队")
 				break
 			end
+			-- 御魂溢出
+			x, y = yuhun_overflow() if x > -1 then break end
 			-- 发现宝藏
 			x, y = lct_petfind() if (x > -1) then break end
 			-- 退出个人资料
@@ -416,6 +422,8 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 				keep_fight_failed("组队")
 				break
 			end
+			-- 御魂溢出
+			x, y = yuhun_overflow() if x > -1 then break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- 自动检测
@@ -520,6 +528,8 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, a
 				keep_fight_failed("组队")
 				break
 			end
+			-- 御魂溢出
+			x, y = yuhun_overflow() if x > -1 then break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- 发现宝藏
