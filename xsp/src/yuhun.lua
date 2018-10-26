@@ -83,6 +83,9 @@ end
 function yuhun_solo(mark, level, round, lock)
 	local rd_cnt = 0
 	local init = 1
+	local local_buff_idle_stop = 0
+	local tingyuan_time_cnt = 0
+	local tansuo_time_cnt = 0
 	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
@@ -119,16 +122,19 @@ function yuhun_solo(mark, level, round, lock)
 			x, y = half_damo() if (x > -1) then
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
+				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
 				keep_half_damo()
 				break
 			end
 			-- 八岐大蛇
 			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 solo_start() break end -- 单人开始
+			-- Idle buff stop
+			if local_buff_idle_stop == 1 then lct_buff(local_buff_idle_stop) local_buff_idle_stop = 0 break end
 			-- 庭院
-			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) break end -- 御魂
+			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end -- 御魂
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 355, 320, 50, 50) break end -- 八岐大蛇
 			-- 战斗失败
@@ -159,6 +165,9 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 	local init = 1
 	local wait_invite = 0
 	local auto_grouped = -1
+	local local_buff_idle_stop = 0
+	local tingyuan_time_cnt = 0
+	local tansuo_time_cnt = 0
 	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
@@ -185,6 +194,8 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			x, y = find_real8dashe() if (x > -1) then break end
 			-- 拒绝邀请
 			if (wait_invite == 0) then x, y = member_team_refuse_invite() if (x > -1) then break end end
+			-- Idle buff stop
+			if local_buff_idle_stop == 1 then lct_buff(local_buff_idle_stop) local_buff_idle_stop = 0 break end
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then
@@ -205,6 +216,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 						end
 					end
 				end
+				tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt)
 				break
 			end
 			-- 战斗准备
@@ -218,6 +230,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 				wait_invite = 1
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
+				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
 				keep_half_damo()
 				break
@@ -235,7 +248,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			-- 八岐大蛇
 			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 ran_touch(0, 573, 440, 20, 10) break end -- 组队开始
 			-- 庭院
-			x, y = lct_tingyuan() if (x > -1) then mSleep(500) tingyuan_enter_tansuo() break end
+			x, y = lct_tingyuan() if (x > -1) then mSleep(500) tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 355, 320, 50, 50) break end -- 八岐大蛇
 			-- 战斗失败
@@ -268,6 +281,9 @@ end
 function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, fail_and_recreate)
 	local rd_cnt = 0
 	local init = 1
+	local local_buff_idle_stop = 0
+	local tingyuan_time_cnt = 0
+	local tansuo_time_cnt = 0
 	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
@@ -304,6 +320,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = half_damo() if (x > -1) then
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
+				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
 				keep_half_damo()
 				break
@@ -328,10 +345,12 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = captain_room_create_public() if (x > -1) then break end
 			-- 开始战斗
 			x, y = captain_room_start_with_2_members() if (x > -1) then break end
+			-- Idle buff stop
+			if local_buff_idle_stop == 1 then lct_buff(local_buff_idle_stop) local_buff_idle_stop = 0 break end
 			-- 庭院
-			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) break end -- 御魂
+			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end -- 御魂
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 355, 320, 50, 50) break end -- 八岐大蛇
 			-- 八岐大蛇
@@ -364,6 +383,9 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 	local rd_cnt = 0
 	local init = 1
 	local auto_grouped = -1
+	local local_buff_idle_stop = 0
+	local tingyuan_time_cnt = 0
+	local tansuo_time_cnt = 0
 	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
@@ -401,6 +423,7 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 				wait_invite = 1
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
+				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
 				keep_half_damo()
 				break
@@ -422,6 +445,12 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 				keep_fight_failed("组队")
 				break
 			end
+			-- Idle buff stop
+			if local_buff_idle_stop == 1 then lct_buff(local_buff_idle_stop) local_buff_idle_stop = 0 break end
+			-- 庭院
+			x, y = lct_tingyuan() if x > -1 then tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
+			-- 探索
+			x, y = lct_tansuo() if x > -1 then tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end
 			-- 御魂溢出
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 退出个人资料
@@ -441,6 +470,9 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, a
 	local time_cnt = 0
 	local init = 1
 	local invite = 1
+	local local_buff_idle_stop = 0
+	local tingyuan_time_cnt = 0
+	local tansuo_time_cnt = 0
 	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
@@ -477,6 +509,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, a
 			x, y = half_damo() if (x > -1) then
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
+				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
 				keep_half_damo()
 				break
@@ -512,10 +545,12 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, a
 			end
 			-- 开始战斗
 			x, y = captain_room_start_with_1_members() if (x > -1) then invite = 0 time_cnt = 0 break end
+			-- Idle buff stop
+			if local_buff_idle_stop == 1 then lct_buff(local_buff_idle_stop) local_buff_idle_stop = 0 break end
 			-- 庭院
-			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) break end -- 御魂
+			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end -- 御魂
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 355, 320, 50, 50) break end -- 八岐大蛇
 			-- 八岐大蛇

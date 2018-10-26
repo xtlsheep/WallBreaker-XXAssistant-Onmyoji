@@ -79,6 +79,9 @@ end
 function juexing_solo(element, mark, level, round, lock)
 	local rd_cnt = 0
 	local init = 1
+	local local_buff_idle_stop = 0
+	local tingyuan_time_cnt = 0
+	local tansuo_time_cnt = 0
 	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
@@ -109,16 +112,19 @@ function juexing_solo(element, mark, level, round, lock)
 			x, y = half_damo() if (x > -1) then
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
+				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
 				keep_half_damo()
 				break
 			end
 			-- 觉醒材料
 			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 solo_start() break end -- 单人开始
+			-- Idle buff stop
+			if local_buff_idle_stop == 1 then lct_buff(local_buff_idle_stop) local_buff_idle_stop = 0 break end
 			-- 庭院
-			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 90, 590, 20, 20) mSleep(1000) break end -- 觉醒
+			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 90, 590, 20, 20) mSleep(1000) tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 战斗失败
@@ -146,6 +152,9 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 	local wait_invite = 0
 	local auto_grouped = -1
 	local ret = -1
+	local local_buff_idle_stop = 0
+	local tingyuan_time_cnt = 0
+	local tansuo_time_cnt = 0
 	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
@@ -166,6 +175,8 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			x, y = find_offer() if (x > -1) then break end
 			-- 拒绝邀请
 			if (wait_invite == 0) then x, y = member_team_refuse_invite() if (x > -1) then break end end
+			-- Idle buff stop
+			if local_buff_idle_stop == 1 then lct_buff(local_buff_idle_stop) local_buff_idle_stop = 0 break end
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then
@@ -187,6 +198,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 						end
 					end
 				end
+				tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt)
 				break
 			end
 			-- 战斗准备
@@ -200,6 +212,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 				wait_invite = 1
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
+				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
 				keep_half_damo()
 				break
@@ -217,7 +230,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			-- 觉醒材料
 			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 ran_touch(0, 573, 440, 20, 10) break end -- 组队开始
 			-- 庭院
-			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 战斗失败
@@ -248,6 +261,9 @@ end
 function juexing_group_wild_captain(element, mark, level, round, lock, captain_auto_group, fail_and_recreate)
 	local rd_cnt = 0
 	local init = 1
+	local local_buff_idle_stop = 0
+	local tingyuan_time_cnt = 0
+	local tansuo_time_cnt = 0
 	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
@@ -278,6 +294,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			x, y = half_damo() if (x > -1) then
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
+				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
 				keep_half_damo()
 				break
@@ -302,10 +319,12 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			x, y = captain_room_create_public() if (x > -1) then break end
 			-- 开始战斗
 			x, y = captain_room_start_with_1_members() if (x > -1) then break end
+			-- Idle buff stop
+			if local_buff_idle_stop == 1 then lct_buff(local_buff_idle_stop) local_buff_idle_stop = 0 break end
 			-- 庭院
-			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 90, 590, 20, 20) mSleep(1000) break end -- 觉醒
+			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 90, 590, 20, 20) mSleep(1000) tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end -- 觉醒
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 觉醒材料
@@ -334,6 +353,9 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 	local rd_cnt = 0
 	local init = 1
 	local auto_grouped = -1
+	local local_buff_idle_stop = 0
+	local tingyuan_time_cnt = 0
+	local tansuo_time_cnt = 0
 	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
@@ -365,6 +387,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 				wait_invite = 1
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
+				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
 				keep_half_damo()
 				break
@@ -386,6 +409,12 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 				keep_fight_failed("组队")
 				break
 			end
+			-- Idle buff stop
+			if local_buff_idle_stop == 1 then lct_buff(local_buff_idle_stop) local_buff_idle_stop = 0 break end
+			-- 庭院
+			x, y = lct_tingyuan() if x > -1 then tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
+			-- 探索
+			x, y = lct_tansuo() if x > -1 then tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end
 			-- 自动检测
 			x, y = auto_check() if x > -1 then break end
 			-- 退出个人资料
@@ -403,6 +432,9 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 	local time_cnt = 0
 	local init = 1
 	local invite = 1
+	local local_buff_idle_stop = 0
+	local tingyuan_time_cnt = 0
+	local tansuo_time_cnt = 0
 	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
@@ -433,6 +465,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			x, y = half_damo() if (x > -1) then
 				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
+				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
 				keep_half_damo()
 				break
@@ -467,10 +500,12 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			end
 			-- 开始战斗
 			x, y = captain_room_start_with_1_members() if (x > -1) then invite = 0 time_cnt = 0 break end
+			-- Idle buff stop
+			if local_buff_idle_stop == 1 then lct_buff(local_buff_idle_stop) local_buff_idle_stop = 0 break end
 			-- 庭院
-			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 90, 590, 20, 20) mSleep(1000) break end -- 觉醒
+			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 90, 590, 20, 20) mSleep(1000) tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end -- 觉醒
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 觉醒材料

@@ -296,6 +296,46 @@ function disable_skill_feature()
 	end
 end
 
+function tingyuan_idle_handle(tingyuan_time_cnt)
+	local time_cnt = 0
+	local local_buff_idle_stop = 0
+	local x, y
+	
+	x, y = lct_tingyuan() if x == -1 then return 0, 0 end
+	
+	-- Idle buff stop
+	if buff_idle_stop == 1 then
+		time_cnt = tingyuan_time_cnt + 1
+	end
+	if time_cnt*500 > buff_idle_stop_time*1000 then
+		ran_touch(0, 390, 55, 10, 10) -- 加成
+		local_buff_idle_stop = 1
+		buff_idle_stop = 0
+		time_cnt = 0
+	end
+	return time_cnt, local_buff_idle_stop
+end
+
+function tansuo_idle_handle(tansuo_time_cnt)
+	local time_cnt = 0
+	local local_buff_idle_stop = 0
+	local x, y
+	
+	x, y = lct_tansuo() if x == -1 then return 0, 0 end
+	
+	-- Idle buff stop
+	if buff_idle_stop == 1 then
+		time_cnt = tansuo_time_cnt + 1
+	end
+	if time_cnt*500 > buff_idle_stop_time*1000 then
+		ran_touch(0, 390, 50, 10, 5) -- 加成
+		local_buff_idle_stop = 1
+		buff_idle_stop = 0
+		time_cnt = 0
+	end
+	return time_cnt, local_buff_idle_stop
+end
+
 -- Locate & enter func
 function lct_tingyuan()
 	local x, y = findColor({1093, 35, 1095, 37},  -- 频道 邮件 加成
@@ -311,6 +351,9 @@ function lct_tansuo()
 	local x, y = findColor({43, 50, 47, 54}, -- 探索返回
 		"0|0|0xe0ecf9,-14|0|0xe6effa,4|-15|0xf0f5fb,34|-1|0x11215c",
 		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_scene,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	end
 	return x, y
 end
 
@@ -338,6 +381,29 @@ function tingyuan_enter_zudui()
 		ran_touch(0, 230, 560, 20, 20) -- 组队
 	end
 	return x, y
+end
+
+function lct_buff(stop)
+	local x, y, x_, y_
+	x, y = findColor({816, 469, 818, 471},
+		"0|0|0x46533c,26|-8|0xac7b42,12|11|0xc1ab93,-19|12|0x2b3516",
+		90, 0, 0, 0)
+	if x > -1 then
+		if stop == 1 then
+			HUD_show_or_hide(HUD,hud_scene,"关闭buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			for i = 1, 10 do
+				x_, y_ = findColor({794, 135, 796, 360},
+					"0|0|0x412e2b,5|-7|0xe4c197,-5|8|0xd8b389,0|-15|0x382826,-1|22|0xcbb59c",
+					90, 0, 0, 0)
+				if x_ > -1 then
+					ran_touch(0, x_, y_, 5, 5)
+				end
+				ran_interv()
+			end
+		end
+	end
+	ran_sleep(500)
+	right_bottom_click()
 end
 
 -- Fight func
