@@ -100,8 +100,6 @@ function autostory()
 			x, y = eye_click() if (x > -1) then time_cnt = 0 break end
 			-- 问号
 			x, y = questionmark_click() if (x > -1) then time_cnt = 0 break end
-			-- 自动
-			x, y = auto_check() if (x > -1) then time_cnt = 0 break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then time_cnt = 0 break end
 			-- 战斗胜利
@@ -116,8 +114,6 @@ function autostory()
 				time_cnt = 0
 				break
 			end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- 跳过
 			x, y = bypass_click() if (x > -1) then time_cnt = 0 break end
 			-- 战斗失败

@@ -347,8 +347,6 @@ function superghost()
 					end
 				end
 			end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- 战斗进行
 			x, y = fight_ongoing() if (x > -1) then last_mark = sg_mark(last_mark) mSleep(3000) break end
 			-- 战斗准备

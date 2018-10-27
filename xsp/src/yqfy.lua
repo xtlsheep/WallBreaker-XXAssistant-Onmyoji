@@ -178,8 +178,6 @@ function yqfy(round, sel, mark)
 			x, y = yqfy_deny_quit() if x > -1 then break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- Error Handle
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break

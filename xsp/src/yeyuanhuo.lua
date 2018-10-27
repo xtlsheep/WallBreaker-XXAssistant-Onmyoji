@@ -138,8 +138,6 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 				keep_fight_failed("单人")
 				break
 			end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- Handle error
 			x, y = lct_8dashe() if x > -1 then  ran_touch(0, 928, 108, 5, 5) break end -- 八岐大蛇
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end

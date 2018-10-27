@@ -91,8 +91,6 @@ function yuling(sel, level, round, lock)
 				keep_fight_failed("单人")
 				break
 			end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- Handle error
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break

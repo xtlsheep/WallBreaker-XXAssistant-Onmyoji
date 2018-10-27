@@ -363,10 +363,6 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			x, y = find_offer() if (x > -1) then break end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then
@@ -581,8 +577,6 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			x, y = find_offer() if (x > -1) then break end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then
@@ -801,8 +795,6 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			x, y = find_offer() if (x > -1) then break end
 			-- 接受邀请
 			x, y, auto_grouped = member_team_accept_invite(1) if (x > -1) then break end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then
@@ -935,8 +927,6 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			x, y = lct_tingyuan() if x > -1 then tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 探索
 			x, y = lct_tansuo() if x > -1 then tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			break
 		end
 	end

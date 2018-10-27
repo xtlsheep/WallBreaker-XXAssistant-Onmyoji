@@ -601,16 +601,6 @@ function keep_fight_failed(mode)
 	end
 end
 
-function auto_check()
-	local x, y = findColor({781, 631, 783, 633},
-		"0|0|0xffffff,15|-9|0x281918,29|-26|0x281a19,3|-6|0x03b9e9",
-		80, 0, 0, 0)
-	if x > -1 then
-		ran_touch(0, 55, 590, 20, 20)
-	end
-	return x, y
-end
-
 function yuhun_overflow()
 	local x, y = findColor({568, 376, 570, 378},
 		"0|0|0xf3b25e,-54|-24|0x973b2e,52|20|0x963b2e,179|-163|0xc6b096,-182|42|0xcab49a",
@@ -620,6 +610,7 @@ function yuhun_overflow()
 		mSleep(250)
 		ran_interv()
 		right_bottom_click()
+		mSleep(500)
 	end
 	return x, y
 end

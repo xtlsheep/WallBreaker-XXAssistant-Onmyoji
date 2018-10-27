@@ -28,13 +28,13 @@ function yuhun_mark(position)
 	local cnt = math.random(2, 3)
 	
 	for i = 1, cnt do
-		ran_interv()
+		ran_sleep(100)
 		if (position == "左") then
-			ran_touch(0, 290, 150, 30, 10)
+			ran_touch(0, 290, 150, 20, 10)
 		elseif (position == "中") then
-			ran_touch(0, 570, 150, 20, 20)
+			ran_touch(0, 570, 150, 20, 10)
 		elseif (position == "右") then
-			ran_touch(0, 830, 150, 30, 10)
+			ran_touch(0, 830, 150, 20, 10)
 		end
 	end
 end
@@ -149,8 +149,6 @@ function yuhun_solo(mark, level, round, lock)
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 发现宝藏
 			x, y = lct_petfind() if (x > -1) then break end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- Handle error
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
@@ -268,8 +266,6 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- Error Handle
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
@@ -369,8 +365,6 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = lct_petfind() if (x > -1) then break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- Handle error
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
@@ -455,8 +449,6 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- Handle error
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
@@ -569,8 +561,6 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, a
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- 发现宝藏
 			x, y = lct_petfind() if (x > -1) then break end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- Handle error
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break

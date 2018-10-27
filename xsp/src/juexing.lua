@@ -135,8 +135,6 @@ function juexing_solo(element, mark, level, round, lock)
 				keep_fight_failed("单人")
 				break
 			end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- Handle error
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
@@ -246,8 +244,6 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 				keep_fight_failed("组队")
 				break
 			end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Error Handle
@@ -337,8 +333,6 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 				keep_fight_failed("组队")
 				break
 			end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Handle error
@@ -415,8 +409,6 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			x, y = lct_tingyuan() if x > -1 then tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 探索
 			x, y = lct_tansuo() if x > -1 then tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Handle error
@@ -518,8 +510,6 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 				keep_fight_failed("组队")
 				break
 			end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Handle error

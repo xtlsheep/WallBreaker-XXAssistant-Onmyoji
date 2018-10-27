@@ -685,7 +685,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 	local found_whr = -1
 	local finish = 0
 	local wait = 0
-	local action_ = action
+	local action_solo = action
 	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
@@ -715,17 +715,17 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			x, y = solo_lct_jjtp()
 			if (x > -1) then
 				-- Action
-				if action_ == "Quit" then
+				if action_solo == "Quit" then
 					if finish == 1 then
 						quit_jjtp()
 						return "Finish"
 					end
-				elseif action_ == "Wait" then
+				elseif action_solo == "Wait" then
 					if finish == 1 then
 						solo_to_pub() -- Switch
 						return "Finish"
 					end
-				elseif action_ == "Switch" then
+				elseif action_solo == "Switch" then
 					if finish == 1 then
 						solo_to_pub() -- Switch
 						return "Finish"
@@ -734,7 +734,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 						solo_to_pub() -- Switch
 						return "Unfinish"
 					end
-				elseif action_ == "Hold" then
+				elseif action_solo == "Hold" then
 					if finish == 1 then
 						solo_to_pub() -- Switch
 						return "Finish"
@@ -743,7 +743,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				-- 锁定出战
 				lock_or_unlock(lock, "结界突破")
 				-- 分析地图
-				if action_ ~= "Hold" then
+				if action_solo ~= "Hold" then
 					map, winess, invalid = solo_analyse_map(solo_sel, map)
 				end
 				-- 刷新判断
@@ -760,8 +760,8 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 					pos = -1
 					found_target = -1
 					wait = 0
-					if action_ == "Hold" then
-						action_ = "Switch"
+					if action_solo == "Hold" then
+						action_solo = "Switch"
 					end
 				elseif ret == RET_VALID then
 					pos = -1
@@ -801,8 +801,6 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 					break
 				end
 			end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then
@@ -1004,8 +1002,6 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 					end
 				end
 			end
-			-- 自动检测
-			x, y = auto_check() if x > -1 then break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then
