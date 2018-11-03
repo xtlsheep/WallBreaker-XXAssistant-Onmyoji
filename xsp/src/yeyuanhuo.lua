@@ -70,12 +70,13 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			if (rd_chi <=0 ) then
 				end_chi = 1
 			end
-			if (end_tan == 1 and end_chen == 1 and end_chi == 1) then
-				return
-			end
 			-- 业原火
 			x, y = lct_yyh()
 			if x > -1 then
+				if (end_tan == 1 and end_chen == 1 and end_chi == 1) then
+					ran_touch(0, 930, 110, 5, 5) -- 退出业原火
+					return
+				end
 				ran_wait = math.random(3000, 5000)
 				HUD_show_or_hide(HUD,hud_scene,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
 				mSleep(ran_wait)

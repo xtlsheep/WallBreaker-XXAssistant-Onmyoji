@@ -196,7 +196,7 @@ function lock_or_unlock(lock, spec)
 	elseif spec == "觉醒" then
 		x1 = 638 y1 = 371 x2 = 640 y2 = 373
 	elseif spec == "业原火" then
-		x1 = 780 y1 = 376 x2 = 782 y2 = 378
+		x1 = 639 y1 = 369 x2 = 641 y2 = 371
 	elseif spec == "御灵" then
 		x1 = 552 y1 = 378 x2 = 554 y2 = 380
 	elseif spec == "结界突破" then
