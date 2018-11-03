@@ -33,6 +33,8 @@ offer_arr = {0, 0, 0, 0, 0, 0}
 buff_idle_stop = 0
 buff_idle_stop_time = 0
 buff_usup_stop = 0
+intel_jjtp_solo = 0
+intal_jjtp_pub = 0
 
 -- 超鬼王
 --sg_en = 0

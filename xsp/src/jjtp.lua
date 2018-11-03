@@ -616,7 +616,7 @@ function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, l
 	print_global_vars()
 	
 	local ret_solo, ret_pub
-	local action_solo, action_pub -- Quit Wait Switch
+	local action_solo, action_pub
 	
 	if (mode == "个人") then
 		action_solo = "Quit"
@@ -863,6 +863,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 	local time_cnt = 0
 	local finish = 0
 	local wait = 0
+	local action_pub = action
 	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
@@ -887,7 +888,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			-- 未开寮突
 			x, y = pub_unstart()
 			if x > -1 then
-				if action == "Wait" or action == "Quit" then
+				if action_pub == "Wait" then
 					quit_jjtp()
 				else
 					pub_to_solo()
@@ -900,30 +901,20 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			x, y = pub_lct_jjtp()
 			if (x > 0) then
 				-- Action
-				if action == "Quit" then
-					if finish == 1 then
-						quit_jjtp()
-						return "Finish"
-					end
-					if wait == 1 then
-						quit_jjtp()
-						return "Unfinish"
-					end
-				elseif action == "Wait" then
+				if action_pub == "Wait" then
 					if finish == 1 then
 						quit_jjtp()
 						return "Finish"
 					end
 					if wait == 1 then
 						HUD_show_or_hide(HUD,hud_scene,"突破冷却中",20,"0xff000000","0xffffffff",0,100,0,300,32)
-						--mSleep(math.random(4*60, 6*60)*1000)
 						mSleep(60*1000)
 						map = {}
 						pos = -1
 						wait = 0
 						break
 					end
-				elseif action == "Switch" then
+				elseif action_pub == "Switch" then
 					if finish == 1 then
 						pub_to_solo()
 						return "Finish"
@@ -966,7 +957,11 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			-- Invalid
 			ret_f = pub_find_ivld_button()
 			if ret_f == RET_OK then
-				wait = 1
+				if intel_jjtp_pub == 1 then
+					finish = 1
+				else
+					wait = 1
+				end
 				jjtp_touch_blank()
 				break
 			end
