@@ -54,7 +54,6 @@ function yqfy(round, sel, mark)
 	print_global_vars()
 	
 	local ran_wait = 0
-	local rd_cnt = 0
 	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
@@ -76,7 +75,7 @@ function yqfy(round, sel, mark)
 			-- 庭院
 			x, y = lct_tingyuan()
 			if (x > -1) then
-				if rd_cnt == round then
+				if yqfy_win_cnt >= round then
 					return
 				end
 				ran_wait = math.random(1000, 3000)
@@ -160,17 +159,17 @@ function yqfy(round, sel, mark)
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
+				yqfy_win_cnt = yqfy_win_cnt + 1
 				keep_half_damo()
 				break
 			end
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
-				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
+				yqfy_fail_cnt = yqfy_fail_cnt + 1
 				keep_fight_failed("组队")
 				break
 			end

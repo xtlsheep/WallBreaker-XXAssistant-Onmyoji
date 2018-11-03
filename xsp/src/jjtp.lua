@@ -690,11 +690,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 	local real_8dashe = 0
 	local secret_vender = 0
 	local x, y
-	
-	if (round_time == 0) then
-		round_time = 999
-	end
-	
+		
 	while (1) do
 		while (1) do
 			-- Debug
@@ -824,6 +820,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				win_cnt = win_cnt + 1
 				time_cnt = 0
 				show_win_fail(win_cnt, fail_cnt)
+				jjtp_win_cnt = jjtp_win_cnt + 1
 				keep_half_damo()
 				break
 			end
@@ -835,6 +832,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				fail_cnt = fail_cnt + 1
 				time_cnt = 0
 				show_win_fail(win_cnt, fail_cnt)
+				jjtp_fail_cnt = jjtp_fail_cnt + 1
 				keep_fight_failed("单人")
 				break
 			end
@@ -1017,6 +1015,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				win_cnt = win_cnt + 1
 				time_cnt = 0
 				show_win_fail(win_cnt, fail_cnt)
+				jjtp_win_cnt = jjtp_win_cnt + 1
 				keep_half_damo()
 			end
 			-- 战斗失败
@@ -1026,6 +1025,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				map[pos] = -1
 				pos = -1
 				show_win_fail(win_cnt, fail_cnt)
+				jjtp_fail_cnt = jjtp_fail_cnt + 1
 				keep_fight_failed("单人")
 			end
 			-- 战斗准备

@@ -10,7 +10,7 @@ require "autostory"
 require "yqfy"
 require "hundredghost"
 
--- UI init
+-- UI initm
 local width_UI = 1000
 local height_UI = 550
 
@@ -459,7 +459,7 @@ function baqidashe_UI()
 	elseif (res_baqi.round == "4") then
 		round = 100
 	elseif (res_baqi.round == "5") then
-		round = 0
+		round = 99999
 	end
 	
 	local lock
@@ -714,7 +714,7 @@ function jjtp_UI()
 	elseif (res_jjtp.round_time == "2") then
 		round_time = 10
 	elseif (res_jjtp.round_time == "3") then
-		round_time = 0
+		round_time = 99999
 	end
 	
 	local lock
@@ -832,7 +832,7 @@ function juexing_UI()
 	elseif (res_juexing.round == "4") then
 		round = 100
 	elseif (res_juexing.round == "5") then
-		round = 0
+		round = 99999
 	end
 	
 	local lock

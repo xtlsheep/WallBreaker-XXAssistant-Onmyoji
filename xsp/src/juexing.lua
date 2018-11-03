@@ -77,7 +77,6 @@ function juexing(mode, role, group, element, mark, level, round, lock, member_au
 end
 
 function juexing_solo(element, mark, level, round, lock)
-	local rd_cnt = 0
 	local init = 1
 	local local_buff_idle_stop = 0
 	local tingyuan_time_cnt = 0
@@ -88,12 +87,6 @@ function juexing_solo(element, mark, level, round, lock)
 	local x, y
 	
 	while (1) do
-		if (round > 0) then
-			if (rd_cnt >= round) then
-				return
-			end
-		end
-		
 		while (1) do
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
@@ -110,10 +103,10 @@ function juexing_solo(element, mark, level, round, lock)
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
 				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
+				juexing_win_cnt = juexing_win_cnt + 1
 				keep_half_damo()
 				break
 			end
@@ -129,9 +122,9 @@ function juexing_solo(element, mark, level, round, lock)
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
-				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
+				juexing_fail_cnt = juexing_fail_cnt + 1
 				keep_fight_failed("单人")
 				break
 			end
@@ -144,7 +137,6 @@ function juexing_solo(element, mark, level, round, lock)
 end
 
 function juexing_group_wild_member(element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
-	local rd_cnt = 0
 	local time_cnt = 0
 	local init = 1
 	local wait_invite = 0
@@ -159,12 +151,6 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 	local x, y
 	
 	while (1) do
-		if (round > 0) then
-			if (rd_cnt >= round) then
-				return
-			end
-		end
-		
 		while (1) do
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
@@ -208,10 +194,10 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
 				wait_invite = 1
-				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
 				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
+				juexing_win_cnt = juexing_win_cnt + 1
 				keep_half_damo()
 				break
 			end
@@ -238,9 +224,9 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 				else
 					wait_invite = 1
 				end
-				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
+				juexing_fail_cnt = juexing_fail_cnt + 1
 				keep_fight_failed("组队")
 				break
 			end
@@ -255,7 +241,6 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 end
 
 function juexing_group_wild_captain(element, mark, level, round, lock, captain_auto_group, fail_and_recreate)
-	local rd_cnt = 0
 	local init = 1
 	local local_buff_idle_stop = 0
 	local tingyuan_time_cnt = 0
@@ -266,12 +251,6 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 	local x, y
 	
 	while (1) do
-		if (round > 0) then
-			if (rd_cnt >= round) then
-				return
-			end
-		end
-		
 		while (1) do
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
@@ -288,10 +267,10 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
 				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
+				juexing_win_cnt = juexing_win_cnt + 1
 				keep_half_damo()
 				break
 			end
@@ -327,9 +306,9 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 ran_touch(0, 573, 440, 20, 10) break end -- 组队开始
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
-				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
+				juexing_fail_cnt = juexing_fail_cnt + 1
 				keep_fight_failed("组队")
 				break
 			end
@@ -344,7 +323,6 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 end
 
 function juexing_group_fix_member(element, mark, level, round, member_auto_group, member_to_captain)
-	local rd_cnt = 0
 	local init = 1
 	local auto_grouped = -1
 	local local_buff_idle_stop = 0
@@ -356,12 +334,6 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 	local x, y
 	
 	while (1) do
-		if (round > 0) then
-			if (rd_cnt >= round) then
-				return
-			end
-		end
-		
 		while (1) do
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
@@ -379,10 +351,10 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
 				wait_invite = 1
-				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
 				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
+				juexing_win_cnt = juexing_win_cnt + 1
 				keep_half_damo()
 				break
 			end
@@ -397,9 +369,9 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			x, y = member_room_quit() if (x > -1) then break end
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
-				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
+				juexing_fail_cnt = juexing_fail_cnt + 1
 				keep_fight_failed("组队")
 				break
 			end
@@ -420,7 +392,6 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 end
 
 function juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, auto_invite_first)
-	local rd_cnt = 0
 	local time_cnt = 0
 	local init = 1
 	local invite = 1
@@ -433,12 +404,6 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 	local x, y
 	
 	while (1) do
-		if (round > 0) then
-			if (rd_cnt >= round) then
-				return
-			end
-		end
-		
 		while (1) do
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
@@ -455,10 +420,10 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				rd_cnt = rd_cnt + 1
 				win_cnt = win_cnt + 1
 				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
+				juexing_win_cnt = juexing_win_cnt + 1
 				keep_half_damo()
 				break
 			end
@@ -504,9 +469,9 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 ran_touch(0, 573, 440, 20, 10) break end -- 组队开始
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
-				rd_cnt = rd_cnt + 1
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
+				juexing_fail_cnt = juexing_fail_cnt + 1
 				keep_fight_failed("组队")
 				break
 			end

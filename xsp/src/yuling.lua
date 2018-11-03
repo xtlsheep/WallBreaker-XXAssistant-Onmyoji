@@ -50,6 +50,7 @@ function yuling(sel, level, round, lock)
 				win_cnt = win_cnt + 1
 				rd = rd - 1
 				show_win_fail(win_cnt, fail_cnt)
+				yuling_win_cnt = yuling_win_cnt + 1
 				keep_half_damo()
 				break
 			end
@@ -88,6 +89,7 @@ function yuling(sel, level, round, lock)
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
+				yuling_fail_cnt = yuling_fail_cnt + 1
 				keep_fight_failed("单人")
 				break
 			end
