@@ -205,8 +205,8 @@ function team_invite()
 end
 
 function member_quit()
-	local x, y = findColor({51, 409, 53, 411},
-		"0|0|0xf8f9ee,-6|-21|0xcd3641,6|-18|0x473523",
+	local x, y = findColor({48, 422, 50, 424},
+		"0|0|0x503f2d,8|-16|0xf5f7e9,-3|-35|0xcd343f,12|-30|0x473523",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -334,9 +334,12 @@ function tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round
 end
 
 function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
-	local move_quit = math.random(6, 8)
+	local move_total = math.random(6, 8)
 	local move_cnt = 0
+	local scene_quit = 0
 	local quit = 0
+	local sec_cnt = 0
+	local found_boss = 0
 	local unlock = 0
 	local hard_sel = 0
 	local ret = RET_ERR
@@ -379,6 +382,24 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				win_cnt = win_cnt + 1
 				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
+				tansuo_win_cnt = tansuo_win_cnt + 1
+				if count_mode == "战斗" then
+					if tansuo_win_cnt >= win_round then
+						scene_quit = 1
+						quit = 1
+					end
+				end
+				if found_boss == 1 then
+					if count_mode == "章节" then
+						sec_cnt = sec_cnt + 1
+						if sec_cnt >= sec_round then
+							scene_quit = 1
+							quit = 1
+						end
+					end
+					found_boss = 0
+					scene_quit = 1
+				end
 				keep_half_damo()
 				break
 			end
@@ -471,7 +492,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 					break
 				end
 				-- Quit
-				if quit == 1 then
+				if scene_quit == 1 then
 					HUD_show_or_hide(HUD,hud_scene,"退出场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 45, 60, 10, 10) -- 左上退出
 					break
@@ -483,8 +504,8 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 					move_cnt = move_cnt + 1
 					HUD_show_or_hide(HUD,hud_scene,string.format("寻找ing... [移动%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 					tansuo_move()
-					if move_cnt >= move_quit then
-						quit = 1
+					if move_cnt >= move_total then
+						scene_quit = 1
 						break
 					end
 				elseif ret == RET_VALID then
@@ -495,13 +516,17 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 							ran_touch(0, x_, y_, 10, 10)
 						end
 					end
-					quit = 1
+					found_boss = 1
 				end
 				break
 			end
 			-- 探索章节
 			x, y = lct_section_portal()
 			if x > -1 then
+				if quit == 1 then
+					ran_touch(0, 930, 135, 5, 5) -- 退出章节
+					return
+				end
 				if hard_sel == 0 then
 					if hard == "普通" then
 						ran_touch(0, 300, 200, 20, 20) -- 普通
@@ -514,8 +539,8 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				HUD_show_or_hide(HUD,hud_scene,"进入场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				ran_touch(0, 840, 480, 30, 10) -- 探索
 				move_cnt = 0
-				move_quit = math.random(6, 8)
-				quit = 0
+				move_total = math.random(6, 8)
+				scene_quit = 0
 				mSleep(2000)
 				break
 			end
@@ -529,6 +554,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
+				tansuo_fail_cnt = tansuo_fail_cnt + 1
 				keep_fight_failed("单人")
 				break
 			end
@@ -548,9 +574,12 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 end
 
 function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
-	local move_quit = math.random(6, 8)
+	local move_total = math.random(6, 8)
 	local move_cnt = 0
+	local scene_quit = 0
 	local quit = 0
+	local sec_cnt = 0
+	local found_boss = 0
 	local unlock = 0
 	local hard_sel = 0
 	local ret = RET_ERR
@@ -593,6 +622,24 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				win_cnt = win_cnt + 1
 				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
+				tansuo_win_cnt = tansuo_win_cnt + 1
+				if count_mode == "战斗" then
+					if tansuo_win_cnt >= win_round then
+						scene_quit = 1
+						quit = 1
+					end
+				end
+				if found_boss == 1 then
+					if count_mode == "章节" then
+						sec_cnt = sec_cnt + 1
+						if sec_cnt >= sec_round then
+							scene_quit = 1
+							quit = 1
+						end
+					end
+					found_boss = 0
+					scene_quit = 1
+				end
 				keep_half_damo()
 				break
 			end
@@ -683,7 +730,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 					break
 				end
 				-- Quit
-				if quit == 1 then
+				if scene_quit == 1 then
 					HUD_show_or_hide(HUD,hud_scene,"退出场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 45, 60, 10, 10) -- 左上退出
 					break
@@ -695,8 +742,8 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 					move_cnt = move_cnt + 1
 					HUD_show_or_hide(HUD,hud_scene,string.format("寻找ing... [移动%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 					tansuo_move()
-					if move_cnt >= move_quit then
-						quit = 1
+					if move_cnt >= move_total then
+						scene_quit = 1
 						break
 					end
 				elseif ret == RET_VALID then
@@ -708,13 +755,17 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 							mSleep(1000)
 						end
 					end
-					quit = 1
+					found_boss = 1
 				end
 				break
 			end
 			-- 探索章节
 			x, y = lct_section_portal()
 			if x > -1 then
+				if quit == 1 then
+					ran_touch(0, 930, 135, 5, 5) -- 退出章节
+					return
+				end
 				if hard_sel == 0 then
 					if hard == "普通" then
 						ran_touch(0, 300, 200, 20, 20) -- 普通
@@ -732,11 +783,15 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			-- 继续邀请
 			x, y = team_invite()
 			if x > -1 then
-				ran_touch(0, x, y, 20, 5)
-				quit = 0
-				move_cnt = 0
-				move_quit = math.random(6, 8)
-				mSleep(5000)
+				if quit == 1 then
+					ran_touch(0, 465, 385, 20, 5)
+				else
+					ran_touch(0, x, y, 20, 5)
+					scene_quit = 0
+					move_cnt = 0
+					move_total = math.random(6, 8)
+					mSleep(5000)
+				end
 				break
 			end
 			-- 确认退出
@@ -751,6 +806,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			x, y = fight_failed("组队") if (x > -1) then
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
+				tansuo_fail_cnt = tansuo_fail_cnt + 1
 				keep_fight_failed("组队")
 				break
 			end
@@ -811,6 +867,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				win_cnt = win_cnt + 1
 				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
+				tansuo_win_cnt = tansuo_win_cnt + 1
 				keep_half_damo()
 				break
 			end
@@ -914,6 +971,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			x, y = fight_failed("组队") if (x > -1) then
 				fail_cnt = fail_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
+				tansuo_fail_cnt = tansuo_fail_cnt + 1
 				keep_fight_failed("组队")
 				break
 			end

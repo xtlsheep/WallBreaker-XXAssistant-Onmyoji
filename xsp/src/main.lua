@@ -27,12 +27,29 @@ linkage = 0
 HUD = nil
 hud_scene = nil
 dis_skl_fea = 1
+offer_arr = {0, 0, 0, 0, 0, 0}
+
 win_cnt = 0
 fail_cnt = 0
-offer_arr = {0, 0, 0, 0, 0, 0}
+yuhun_win_cnt = 0
+yuhun_fail_cnt = 0
+tansuo_win_cnt = 0
+tansuo_fail_cnt = 0
+jjtp_win_cnt = 0
+jjtp_fail_cnt = 0
+juexing_win_cnt = 0
+juexing_fail_cnt = 0
+yyh_win_cnt = 0
+yyh_fail_cnt = 0
+yuling_win_cnt = 0
+yuling_fail_cnt = 0
+yqfy_win_cnt = 0
+yqfy_fail_cnt = 0
+
+buff_usup_stop = 0
 buff_idle_stop = 0
 buff_idle_stop_time = 0
-buff_usup_stop = 0
+
 intel_jjtp_solo = 0
 intal_jjtp_pub = 0
 

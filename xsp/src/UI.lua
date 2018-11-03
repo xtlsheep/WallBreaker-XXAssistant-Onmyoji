@@ -85,13 +85,13 @@ UI:RadioGroup(tansuo_ui, "mark", "随机小怪  ,中间大怪  ,无","2",30,"0,0
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "难度选择 - ", "20,360,300,60")
 UI:RadioGroup(tansuo_ui, "hard", "普通                ,困难[队长强制]","1",30,"0,0,0","420,360,580,60")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "目标章节[暂时无效] - ", "20,420,500,60")
-UI:ComboBox(tansuo_ui, "section", "第一章,第二章,第三章,第四章,第五章,第六章,第七章,第八章,第九章,第十章,第十一章,第十二章,第十三章,第十四章,第十五章,第十六章,第十七章,第十八章,第十九章,第二十章,第二十一章,第二十二章,第二十三章,第二十四章,第二十五章","24",23,"600,420,380,50")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "限定方式[暂时无效] - ", "20,480,500,60")
+UI:ComboBox(tansuo_ui, "section", "第一章,第二章,第三章,第四章,第五章,第六章,第七章,第八章,第九章,第十章,第十一章,第十二章,第十三章,第十四章,第十五章,第十六章,第十七章,第十八章,第十九章,第二十章,第二十一章,第二十二章,第二十三章,第二十四章,第二十五章,第二十六章","25",23,"600,420,380,50")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "限定方式 - ", "20,480,500,60")
 UI:ComboBox(tansuo_ui, "count_mode", "战斗胜利次数,章节通关次数[强制Boss]","0",23,"600,480,380,50")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗胜利次数[暂时无效] - ", "20,540,500,60")
-UI:ComboBox(tansuo_ui, "win_round", "10次,20次,30次[组队寮任务],50次,100次,无限次","5",23,"600,540,380,50")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "章节通关次数[暂时无效] - ", "20,600,500,60")
-UI:ComboBox(tansuo_ui, "sec_round", "1次,2次,3次[每日任务],5次,10次,50次,无限次","2",23,"600,600,380,50")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗胜利次数 - ", "20,540,500,60")
+UI:ComboBox(tansuo_ui, "win_round", "3次,10次,20次,30次[组队寮任务],50次,100次,无限次","6",23,"600,540,380,50")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "章节通关次数 - ", "20,600,500,60")
+UI:ComboBox(tansuo_ui, "sec_round", "1次,2次,3次,5次,10次,50次,无限次","2",23,"600,600,380,50")
 UI:Line(tansuo_ui, "line_common", "100,100,100", 2, 960, "20,660,960,2")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮设置[狗粮队长位置为阴阳师左前方] - ", "20,670,900,60")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "强制普攻 - ", "20,730,300,60")
@@ -574,17 +574,23 @@ function tansuo_UI()
 		count_mode = "章节"
 	end
 	
+	if count_mode == "章节" then
+		sel[4] = 1 -- 强制boss
+	end
+	
 	if res_tansuo.win_round == "0" then
-		win_round = 10
+		win_round = 3
 	elseif res_tansuo.win_round == "1" then
-		win_round = 20
+		win_round = 10
 	elseif res_tansuo.win_round == "2" then
-		win_round = 30
+		win_round = 20
 	elseif res_tansuo.win_round == "3" then
-		win_round = 50
+		win_round = 30
 	elseif res_tansuo.win_round == "4" then
-		win_round = 100
+		win_round = 50
 	elseif res_tansuo.win_round == "5" then
+		win_round = 100
+	elseif res_tansuo.win_round == "6" then
 		win_round = 99999
 	end
 	
