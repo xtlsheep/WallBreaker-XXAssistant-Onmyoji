@@ -11,14 +11,15 @@ DISABLE = 0
 -- Init
 width_dev = 640
 height_dev = 1136
-print(os.date())
-script_init()
 width, height = getScreenSize()
+ver = getOSType()
 dpi = getScreenDPI()
-ratio = height_dev/height
-s = (height*0.050)*(ratio) -- util.lua button
+script_init()
 setScreenScale(width_dev, height_dev) -- iPhone 5s
-print(string.format("width = %d, height = %d, dpi = %d", width, height, dpi))
+ratio = height_dev/height
+s = (height*0.050)*(ratio)
+print(os.date())
+print(string.format("OS = %s, width = %d, height = %d, dpi = %d", ver, width, height, dpi))
 math.randomseed(os.time())
 math.random(1,10000)
 
@@ -51,7 +52,7 @@ buff_idle_stop = 0
 buff_idle_stop_time = 0
 
 intel_jjtp_solo = 0
-intal_jjtp_pub = 0
+intel_jjtp_pub = 0
 
 -- 超鬼王
 --sg_en = 0

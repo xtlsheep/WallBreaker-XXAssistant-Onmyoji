@@ -47,7 +47,7 @@ UI:fit(config_ui)
 -- 八岐大蛇
 bqds_ui = UI:new("bqds.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 UI:Label(bqds_ui, "center", "0,0,0", 30, "八岐大蛇", "30,20,960,55")
-UI:ComboBox(bqds_ui, "mode", "单人模式,队长 - 野队3人队伍,队长 - 固定2人队伍,队员 - 野队,队员 - 固定队", "0", 30, "20,100,960,60")
+UI:ComboBox(bqds_ui, "mode", "单人模式,队长 - 野队 2人队伍,队长 - 野队 3人队伍,队长 - 固定队 2人队伍,队长 - 固定队 3人队伍,队员 - 野队,队员 - 固定队", "0", 30, "20,100,960,60")
 UI:Label(bqds_ui, "left", "0,0,0", 30, "公共设置 - ", "20,180,300,60")
 UI:Label(bqds_ui, "left", "0,0,0", 30, "请选择御魂层数 - ", "20,240,300,60")
 UI:ComboBox(bqds_ui, "level", "一层,二层,三层,四层,五层,六层,七层,八层,九层,十层","9",23,"700,240,280,50")
@@ -133,7 +133,7 @@ UI:fit(jjtp_ui)
 -- 觉醒麒麟
 juexing_ui = UI:new("juexing.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 UI:Label(juexing_ui, "center", "0,0,0", 30, "觉醒麒麟", "30,20,960,55")
-UI:ComboBox(juexing_ui, "mode", "单人模式,队长 - 野队3人队伍,队长 - 固定2人队伍,队员 - 野队,队员 - 固定队", "0", 30, "20,100,960,60")
+UI:ComboBox(juexing_ui, "mode", "单人模式,队长 - 野队 2人队伍,队长 - 野队 3人队伍,队长 - 固定队 2人队伍,队长 - 固定队 3人队伍,队员 - 野队,队员 - 固定队", "0", 30, "20,100,960,60")
 UI:ComboBox(juexing_ui, "element", "业火轮,风转符,水灵鲤,天雷鼓", "3", 30, "20,180,960,60")
 UI:Label(juexing_ui, "left", "0,0,0", 30, "公共设置 - ", "20,260,300,60")
 UI:Label(juexing_ui, "left", "0,0,0", 30, "请选择觉醒层数 - ", "20,320,300,60")
@@ -414,16 +414,24 @@ function baqidashe_UI()
 	elseif (res_baqi.mode == "1") then
 		mode = "组队"
 		role = "队长"
-		group = "野队"
+		group = "野队2人"
 	elseif (res_baqi.mode == "2") then
 		mode = "组队"
 		role = "队长"
-		group = "固定队"
+		group = "野队3人"
 	elseif (res_baqi.mode == "3") then
+		mode = "组队"
+		role = "队长"
+		group = "固定队2人"
+	elseif (res_baqi.mode == "4") then
+		mode = "组队"
+		role = "队长"
+		group = "固定队3人"
+	elseif (res_baqi.mode == "5") then
 		mode = "组队"
 		role = "队员"
 		group = "野队"
-	elseif (res_baqi.mode == "4") then
+	elseif (res_baqi.mode == "6") then
 		mode = "组队"
 		role = "队员"
 		group = "固定队"
@@ -796,16 +804,24 @@ function juexing_UI()
 	elseif (res_juexing.mode == "1") then
 		mode = "组队"
 		role = "队长"
-		group = "野队"
+		group = "野队2人"
 	elseif (res_juexing.mode == "2") then
 		mode = "组队"
 		role = "队长"
-		group = "固定队"
+		group = "野队3人"
 	elseif (res_juexing.mode == "3") then
+		mode = "组队"
+		role = "队长"
+		group = "固定队2人"
+	elseif (res_juexing.mode == "4") then
+		mode = "组队"
+		role = "队长"
+		group = "固定队3人"
+	elseif (res_juexing.mode == "5") then
 		mode = "组队"
 		role = "队员"
 		group = "野队"
-	elseif (res_juexing.mode == "4") then
+	elseif (res_juexing.mode == "6") then
 		mode = "组队"
 		role = "队员"
 		group = "固定队"

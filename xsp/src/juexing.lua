@@ -67,12 +67,12 @@ function juexing(mode, role, group, element, mark, level, round, lock, member_au
 		juexing_solo(element, mark, level, round, lock)
 	elseif (mode == "组队" and role == "队员" and group == "野队") then
 		juexing_group_wild_member(element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
-	elseif (mode == "组队" and role == "队长" and group == "野队") then
-		juexing_group_wild_captain(element, mark, level, round, lock, captain_auto_group, fail_and_recreate)
+	elseif (mode == "组队" and role == "队长" and (group == "野队2人" or group == "野队3人")) then
+		juexing_group_wild_captain(element, mark, level, round, lock, captain_auto_group, fail_and_recreate, group)
 	elseif (mode == "组队" and role == "队员" and group == "固定队") then
 		juexing_group_fix_member(element, mark, level, round, lock, member_auto_group, member_to_captain)
-	elseif (mode == "组队" and role == "队长" and group == "固定队") then
-		juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, auto_invite_first)
+	elseif (mode == "组队" and role == "队长" and (group == "固定队2人" or gourp == "固定队3人")) then
+		juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, auto_invite_first, group)
 	end
 end
 
@@ -279,7 +279,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 	return RET_OK
 end
 
-function juexing_group_wild_captain(element, mark, level, round, lock, captain_auto_group, fail_and_recreate)
+function juexing_group_wild_captain(element, mark, level, round, lock, captain_auto_group, fail_and_recreate, group)
 	local init = 1
 	local local_buff_idle_stop = 0
 	local tingyuan_time_cnt = 0
@@ -353,7 +353,12 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			-- 创建公共队伍
 			x, y = captain_room_create_public() if (x > -1) then break end
 			-- 开始战斗
-			x, y = captain_room_start_with_2_members() if (x > -1) then break end
+			if group == "野队2人" then
+				x, y = captain_room_start_with_1_members() if (x > -1) then break end
+			end
+			if group == "野队3人" then
+				x, y = captain_room_start_with_2_members() if (x > -1) then break end
+			end
 			-- Idle buff stop
 			if local_buff_idle_stop == 1 then lct_buff(local_buff_idle_stop) local_buff_idle_stop = 0 break end
 			-- 庭院
@@ -471,7 +476,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 	return RET_OK
 end
 
-function juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, auto_invite_first)
+function juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, auto_invite_first, group)
 	local time_cnt = 0
 	local init = 1
 	local invite = 1
@@ -559,7 +564,12 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 				x, y = captain_room_invite_first() if (x > -1) then invite = 0 time_cnt = 0 break end
 			end
 			-- 开始战斗
-			x, y = captain_room_start_with_1_members() if (x > -1) then invite = 0 time_cnt = 0 break end
+			if gourp == "固定队2人" then
+				x, y = captain_room_start_with_1_members() if (x > -1) then invite = 0 time_cnt = 0 break end
+			end
+			if gourp == "固定队3人" then
+				x, y = captain_room_start_with_2_members() if (x > -1) then invite = 0 time_cnt = 0 break end
+			end
 			-- Idle buff stop
 			if local_buff_idle_stop == 1 then lct_buff(local_buff_idle_stop) local_buff_idle_stop = 0 break end
 			-- 庭院
