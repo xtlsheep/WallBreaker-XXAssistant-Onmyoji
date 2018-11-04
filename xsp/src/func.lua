@@ -615,6 +615,22 @@ function yuhun_overflow()
 	return x, y
 end
 
+function fight_head_gear()
+	local x, y = findColor({65, 120, 75, 310},
+		"0|0|0xedc790,-1|-13|0x372827,-11|9|0x3f3126,10|5|0xe9c38c",
+		90, 0, 0, 0)
+	if x > -1 then
+		ran_touch(0, x, y, 10, 10)
+		ran_sleep(250)
+		ran_touch(0, x + 150, y, 50, 10)
+		ran_sleep(250)
+		ran_touch(0, x + 150, y, 50, 10)
+		ran_sleep(250)
+		ran_touch(0, x, y, 10, 10)
+	end
+	return x, y
+end
+
 -- Member & Captain func
 function member_room_init()
 	local x, y = findColor({75, 181, 80, 185}, -- 左边红穗
@@ -697,9 +713,9 @@ function captain_room_init()
 end
 
 function captain_room_create_public()
-	local x, y = findColor({775, 522, 780, 527}, -- 创建取消
-		"0|0|0xf3b25e,-421|-1|0xdf6851,-64|0|0xcbb59c,-356|0|0xcbb59c",
-		95, 0, 0, 0)
+	local x, y = findColor({777, 524, 779, 526},
+		"0|0|0xf3b25e,-421|0|0xdf6851,282|-413|0x605755,-580|-471|0xe4768d",
+		90, 0, 0, 0)
 	if x > -1 then
 		mSleep(500)
 		local x_, y_ = findColor({273, 457, 275, 459}, -- 所有人选项
@@ -714,9 +730,9 @@ function captain_room_create_public()
 end
 
 function captain_room_create_private()
-	local x, y = findColor({775, 522, 780, 527}, -- 创建取消
-		"0|0|0xf3b25e,-421|-1|0xdf6851,-64|0|0xcbb59c,-356|0|0xcbb59c",
-		95, 0, 0, 0)
+	local x, y = findColor({777, 524, 779, 526},
+		"0|0|0xf3b25e,-421|0|0xdf6851,282|-413|0x605755,-580|-471|0xe4768d",
+		90, 0, 0, 0)
 	if x > -1 then
 		mSleep(500)
 		local x_, y_ = findColor({673, 457, 675, 459}, -- 不公开

@@ -53,6 +53,7 @@ function yqfy(round, sel, mark)
 	print(string.format("次数 %d 妖气 %s 标记 %s", round, sel, mark))
 	print_global_vars()
 	
+	local quit = 0
 	local ran_wait = 0
 	local disconn_fin = 1
 	local real_8dashe = 0
@@ -75,7 +76,7 @@ function yqfy(round, sel, mark)
 			-- 庭院
 			x, y = lct_tingyuan()
 			if (x > -1) then
-				if yqfy_win_cnt >= round then
+				if quit == 1 then
 					return
 				end
 				ran_wait = math.random(1000, 3000)
@@ -162,6 +163,9 @@ function yqfy(round, sel, mark)
 				win_cnt = win_cnt + 1
 				show_win_fail(win_cnt, fail_cnt)
 				yqfy_win_cnt = yqfy_win_cnt + 1
+				if yqfy_win_cnt >= round then
+					quit = 1
+				end
 				keep_half_damo()
 				break
 			end

@@ -18,9 +18,9 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 	print(string.format("贪 %d, 嗔 %d, 痴 %d，锁定 %d", round_tan, round_chen, round_chi, lock))
 	print_global_vars()
 	
-	local rd_tan = round_tan
-	local rd_chen = round_chen
-	local rd_chi = round_chi
+	local cnt_tan = 0
+	local cnt_chen = 0
+	local cnt_chi = 0
 	local end_tan = 0
 	local end_chen = 0
 	local end_chi = 0
@@ -48,11 +48,11 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			x, y = half_damo() if (x > -1) then
 				win_cnt = win_cnt + 1
 				if (last_sel == "tan") then
-					rd_tan = rd_tan - 1
+					cnt_tan = cnt_tan + 1
 				elseif (last_sel == "chen") then
-					rd_chen = rd_chen - 1
+					cnt_chen = cnt_chen + 1
 				elseif (last_sel == "chi") then
-					rd_chi = rd_chi - 1
+					cnt_chi = cnt_chi + 1
 				end
 				show_win_fail(win_cnt, fail_cnt)
 				yyh_win_cnt = yyh_win_cnt + 1
@@ -62,13 +62,13 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 退出
-			if (rd_tan <= 0) then
+			if (cnt_tan >= round_tan) then
 				end_tan = 1
 			end
-			if (rd_chen <= 0) then
+			if (cnt_chen >= round_chen) then
 				end_chen = 1
 			end
-			if (rd_chi <=0 ) then
+			if (cnt_chi >= round_chi ) then
 				end_chi = 1
 			end
 			-- 业原火
@@ -85,7 +85,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 				-- 锁定 or not
 				lock_or_unlock(lock, "业原火")
 				-- 贪
-				if (end_tan ~= 1 and rd_tan > 0) then
+				if (end_tan ~= 1 and cnt_tan < round_tan) then
 					if (last_sel ~= "tan") then
 						ran_touch(0, 360, 160, 50, 10) -- 贪
 					end
@@ -99,7 +99,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 					break
 				end
 				-- 嗔
-				if (end_chen ~= 1 and rd_chen > 0) then
+				if (end_chen ~= 1 and cnt_chen < round_chen) then
 					if (last_sel ~= "chen") then
 						ran_touch(0, 360, 250, 50, 10) -- 嗔
 					end
@@ -113,7 +113,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 					break
 				end
 				-- 痴
-				if (end_chi ~= 1 and rd_chi > 0) then
+				if (end_chi ~= 1 and cnt_chi < round_chi) then
 					if (last_sel ~= "chi") then
 						ran_touch(0, 360, 330, 50, 10) -- 痴
 					end

@@ -25,7 +25,7 @@ function yuling(sel, level, round, lock)
 	print(string.format("种类 %s，层数 %d, 次数 %d，锁定 %d", sel, level, round, lock))
 	print_global_vars()
 	
-	local rd = round
+	local quit = 0
 	local init = 1
 	local disconn_fin = 1
 	local real_8dashe = 0
@@ -51,6 +51,9 @@ function yuling(sel, level, round, lock)
 				rd = rd - 1
 				show_win_fail(win_cnt, fail_cnt)
 				yuling_win_cnt = yuling_win_cnt + 1
+				if yuling_win_cnt >= round then
+					quit = 1
+				end
 				keep_half_damo()
 				break
 			end
@@ -64,10 +67,6 @@ function yuling(sel, level, round, lock)
 			end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
-			-- 退出
-			if (rd <= 0) then
-				return
-			end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 探索
@@ -75,6 +74,10 @@ function yuling(sel, level, round, lock)
 			-- 御灵选择
 			x, y = lct_yuling_all()
 			if (x > -1) then
+				if quit == 1 then
+					ran_touch(0, 930, 110, 5, 5)
+					return
+				end
 				if (sel == "神龙") then
 					ran_touch(0, 230, 240, 20, 20)
 				elseif (sel == "白藏主") then

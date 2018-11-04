@@ -52,7 +52,7 @@ UI:Label(bqds_ui, "left", "0,0,0", 30, "公共设置 - ", "20,180,300,60")
 UI:Label(bqds_ui, "left", "0,0,0", 30, "请选择御魂层数 - ", "20,240,300,60")
 UI:ComboBox(bqds_ui, "level", "一层,二层,三层,四层,五层,六层,七层,八层,九层,十层","9",23,"700,240,280,50")
 UI:Label(bqds_ui, "left", "0,0,0", 30, "请选择战斗次数 - ", "20,300,300,60")
-UI:ComboBox(bqds_ui, "round", "10次,20次,30次,50次,100次,无限次数","5",23,"700,300,280,50")
+UI:ComboBox(bqds_ui, "round", "3次,10次,20次,30次,50次,100次,无限次数","6",23,"700,300,280,50")
 UI:CheckBoxGroup(bqds_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,360,900,60")
 UI:Label(bqds_ui, "left", "0,0,0", 30, "标记 - ", "20,420,300,60")
 UI:Label(bqds_ui, "left", "0,0,0", 30, "第一回合 ~ ", "20,480,300,60")
@@ -139,7 +139,7 @@ UI:Label(juexing_ui, "left", "0,0,0", 30, "公共设置 - ", "20,260,300,60")
 UI:Label(juexing_ui, "left", "0,0,0", 30, "请选择觉醒层数 - ", "20,320,300,60")
 UI:ComboBox(juexing_ui, "level", "一层,二层,三层,四层,五层,六层,七层,八层,九层,十层","9",23,"700,320,280,50")
 UI:Label(juexing_ui, "left", "0,0,0", 30, "请选择战斗次数 - ", "20,380,300,60")
-UI:ComboBox(juexing_ui, "round", "10次,20次,30次,50次,100次,无限次数","5",23,"700,380,280,50")
+UI:ComboBox(juexing_ui, "round", "3次,10次,20次,30次,50次,100次,无限次数","6",23,"700,380,280,50")
 UI:Label(juexing_ui, "left", "0,0,0", 30, "标记 - ", "20,440,300,60")
 UI:RadioGroup(juexing_ui, "mark", "随机小怪,麒麟Boss,无","2",30,"0,0,0","450,440,550,60")
 UI:CheckBoxGroup(juexing_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,500,900,60")
@@ -449,16 +449,18 @@ function baqidashe_UI()
 	
 	local round
 	if (res_baqi.round == "0") then
-		round = 10
+		round = 3
 	elseif (res_baqi.round == "1") then
-		round = 20
+		round = 10
 	elseif (res_baqi.round == "2") then
-		round = 30
+		round = 20
 	elseif (res_baqi.round == "3") then
-		round = 50
+		round = 30
 	elseif (res_baqi.round == "4") then
-		round = 100
+		round = 50
 	elseif (res_baqi.round == "5") then
+		round = 100
+		elseif (res_baqi.round == "6") then
 		round = 99999
 	end
 	
@@ -822,16 +824,18 @@ function juexing_UI()
 	
 	local round
 	if (res_juexing.round == "0") then
-		round = 10
+		round = 3
 	elseif (res_juexing.round == "1") then
-		round = 20
+		round = 10
 	elseif (res_juexing.round == "2") then
-		round = 30
+		round = 20
 	elseif (res_juexing.round == "3") then
-		round = 50
+		round = 30
 	elseif (res_juexing.round == "4") then
-		round = 100
+		round = 50
 	elseif (res_juexing.round == "5") then
+		round = 100
+	elseif (res_juexing.round == "6") then
 		round = 99999
 	end
 	
