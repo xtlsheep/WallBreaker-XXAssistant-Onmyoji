@@ -125,7 +125,7 @@ function juexing_solo(element, mark, level, round, lock)
 				init = 0 
 				solo_start() 
 				break 
-			end -- 单人开始
+			end
 			-- Idle buff stop
 			if local_buff_idle_stop == 1 then lct_buff(local_buff_idle_stop) local_buff_idle_stop = 0 break end
 			-- 庭院

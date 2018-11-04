@@ -85,6 +85,7 @@ function yuhun_solo(mark, level, round, lock)
 	local local_buff_idle_stop = 0
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
+	local quit = 0
 	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
@@ -117,11 +118,23 @@ function yuhun_solo(mark, level, round, lock)
 				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
 				yuhun_win_cnt = yuhun_win_cnt + 1
+				if yuhun_win_cnt >= round then
+					quit = 1
+				end	
 				keep_half_damo()
 				break
 			end
 			-- 八岐大蛇
-			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 solo_start() break end -- 单人开始
+			x, y = lct_8dashe() 
+			if (x > -1) then
+				if quit == 1 then
+					ran_touch(0, 930, 110, 5, 5)
+					return
+				end
+				level_select(level, init, lock, "御魂") 
+				init = 0 solo_start() 
+				break 
+			end
 			-- Idle buff stop
 			if local_buff_idle_stop == 1 then lct_buff(local_buff_idle_stop) local_buff_idle_stop = 0 break end
 			-- 庭院
@@ -158,10 +171,12 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 	local local_buff_idle_stop = 0
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
+	local quit = 0
+	local group_quit = 0
 	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
-	local x, y
+	local x, y, x_, y_
 	
 	while (1) do
 		while (1) do
@@ -183,6 +198,9 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then
+				if quit == 1 then
+					return
+				end
 				if wait_invite == 0 then
 					HUD_show_or_hide(HUD,hud_scene,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 180, 590, 20, 20) -- 御魂
@@ -216,6 +234,12 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
 				yuhun_win_cnt = yuhun_win_cnt + 1
+				if yuhun_win_cnt >= round -1 then
+					group_quit = 1
+				end
+				if yuhun_win_cnt >= round then
+					quit = 1
+				end
 				keep_half_damo()
 				break
 			end
@@ -250,6 +274,20 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			end
 			-- 御魂溢出
 			x, y = yuhun_overflow() if x > -1 then break end
+			-- 战斗进行
+			x, y = fight_ongoing()
+			if x > -1 then
+				if group_quit == 1 then
+					x_, y_ = fight_head_gear()
+					if x_ > -1 then
+						group_quit = 0
+					end
+				end
+				break
+			end
+			-- 停止邀请
+			x, y = captain_team_win_invite() if (x > -1) then ran_touch(0, 460, 385, 20, 10) break end
+			x, y = captain_team_lost_invite() if (x > -1) then ran_touch(0, 462, 383, 20, 10) break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Error Handle
@@ -265,6 +303,8 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 	local local_buff_idle_stop = 0
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
+	local quit = 0
+	local group_quit = 0
 	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
@@ -297,6 +337,12 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
 				yuhun_win_cnt = yuhun_win_cnt + 1
+				if yuhun_win_cnt >= round -1 then
+					group_quit = 1
+				end
+				if yuhun_win_cnt >= round then
+					quit = 1
+				end
 				keep_half_damo()
 				break
 			end
@@ -311,9 +357,22 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 				break
 			end
 			-- 自动邀请
-			if (captain_auto_group == 1) then x, y = captain_team_set_auto_invite() if (x > -1) then break end end
+			if (captain_auto_group == 1 and quit == 0) then
+				x, y = captain_team_set_auto_invite()
+				if (x > -1) then
+					break 
+				end 
+			end
 			-- 邀请队友
-			x, y = captain_team_win_invite() if (x > -1) then ran_touch(0, 674, 385, 20, 10) break end -- 确定
+			x, y = captain_team_win_invite() 
+			if (x > -1) then
+				if quit == 1 then
+					ran_touch(0, 460, 385, 20, 10)
+				else
+					ran_touch(0, 674, 385, 20, 10)
+				end
+				break 
+			end
 			-- 创建初始化
 			x, y = captain_room_init() if (x > -1) then break end -- 创建队伍
 			-- 创建公共队伍
@@ -325,7 +384,15 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end -- 御魂
+			x, y = lct_tansuo() 
+			if (x > -1) then 
+				if quit == 1 then
+					return
+				end
+				ran_touch(0, 180, 590, 20, 20) 
+				tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) 
+				break 
+			end
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 355, 320, 50, 50) break end -- 八岐大蛇
 			-- 八岐大蛇
@@ -340,6 +407,17 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			end
 			-- 御魂溢出
 			x, y = yuhun_overflow() if x > -1 then break end
+			-- 战斗进行
+			x, y = fight_ongoing()
+			if x > -1 then
+				if group_quit == 1 then
+					x_, y_ = fight_head_gear()
+					if x_ > -1 then
+						group_quit = 0
+					end
+				end
+				break
+			end
 			-- 发现宝藏
 			x, y = lct_petfind() if (x > -1) then break end
 			-- 退出个人资料
@@ -436,6 +514,8 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, a
 	local local_buff_idle_stop = 0
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
+	local quit = 0
+	local group_quit = 0
 	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
@@ -468,16 +548,36 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, a
 				local_buff_idle_stop = 0
 				show_win_fail(win_cnt, fail_cnt)
 				yuhun_win_cnt = yuhun_win_cnt + 1
+				if yuhun_win_cnt >= round -1 then
+					group_quit = 1
+				end
+				if yuhun_win_cnt >= round then
+					quit = 1
+				end
 				keep_half_damo()
 				break
 			end
 			-- 失败继续邀请
 			x, y = captain_team_lost_invite() if (x > -1) then ran_touch(0, 673, 384, 20, 10) invite = 0 time_cnt = 0 break end -- 确定
 			-- 自动邀请
-			if (captain_auto_group == 1) then x, y = captain_team_set_auto_invite() if (x > -1) then break end end
+			if (captain_auto_group == 1 and quit == 0) then 
+				x, y = captain_team_set_auto_invite() 
+				if (x > -1) then
+					break 
+				end 
+			end
 			-- 邀请队友
-			x, y = captain_team_win_invite()
-			if (x > -1) then ran_touch(0, 674, 385, 20, 10) invite = 0 time_cnt = 0 break end -- 确定
+			x, y = captain_team_win_invite() 
+			if (x > -1) then
+				if quit == 1 then
+					ran_touch(0, 460, 385, 20, 10)
+				else
+					ran_touch(0, 674, 385, 20, 10) 
+					invite = 0 
+					time_cnt = 0
+				end
+				break 
+			end
 			-- 创建初始化
 			x, y = captain_room_init()
 			-- 创建私人队伍
@@ -507,7 +607,15 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, a
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end -- 御魂
+			x, y = lct_tansuo() 
+			if (x > -1) then
+				if quit == 1 then
+					return
+				end
+				ran_touch(0, 180, 590, 20, 20)
+				tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) 
+				break 
+			end
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 355, 320, 50, 50) break end -- 八岐大蛇
 			-- 八岐大蛇
@@ -522,6 +630,17 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, a
 			end
 			-- 御魂溢出
 			x, y = yuhun_overflow() if x > -1 then break end
+			-- 战斗进行
+			x, y = fight_ongoing()
+			if x > -1 then
+				if group_quit == 1 then
+					x_, y_ = fight_head_gear()
+					if x_ > -1 then
+						group_quit = 0
+					end
+				end
+				break
+			end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- 发现宝藏
