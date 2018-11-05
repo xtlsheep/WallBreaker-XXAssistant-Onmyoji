@@ -105,6 +105,14 @@ function find_whr(pos, whr, role)
 			HUD_show_or_hide(HUD,hud_scene,"日和坊觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
+		-- 日和坊商店皮
+		x, y = findColor({x1, y1, x2, y2},
+			"0|0|0xf9f1e3,-13|-8|0x453a3d,-20|-3|0x2e2628,-16|0|0xfaf4eb,14|-10|0xfcf8ee",
+			95, 0, 0, 0)
+		if x > -1 then
+			HUD_show_or_hide(HUD,hud_scene,"日和坊商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			return RET_OK
+		end
 	end
 	if (whr[4] == 1) then
 		-- 御馔津原皮
@@ -690,7 +698,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 	local real_8dashe = 0
 	local secret_vender = 0
 	local x, y
-		
+	
 	while (1) do
 		while (1) do
 			-- Debug
