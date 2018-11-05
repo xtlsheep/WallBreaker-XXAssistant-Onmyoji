@@ -10,264 +10,26 @@ require "autostory"
 require "yqfy"
 require "hundredghost"
 
--- UI initm
+-- UI init
 local width_UI = 1000
 local height_UI = 550
 
--- Direction Error
-direct_err_ui = UI:new("portal.dat", 500, 250, "退出", "退出", "backGround.jpg")
-UI:Label(direct_err_ui, "left", "0,0,0", 30, "屏幕方向识别失败，请加群向作者反映此问题，谢谢~", "30,50,470,150")
-UI:fit(direct_err_ui)
-
--- Portal
-portal_ui = UI:new("portal.dat", width_UI, height_UI, "继续", "退出", "backGround.jpg")
-UI:Image(portal_ui, "title.png", "30,0,940,80")
-UI:Label(portal_ui, "left", "0,0,0", 30, "功能选择 - ", "30,90,300,55")
-UI:RadioGroup(portal_ui, "select", "高级选项    ,数据统计","0",30,"0,0,0","500,90,450,55")
-UI:Label(portal_ui, "left", "0,0,0", 30, "实时公告 - ", "30,140,300,55")
-UI:Image(portal_ui, "notice.png", "20,200,970,250")
--- 公告
-local content, err = getCloudContent("WALLBREAKERREALTIMEANNOUCEMENT", "BDAB2A1E8229572B", "没有正确获取到公告信息")
-if err == 0 then
-	UI:Label(portal_ui, "left", "0,0,0", 29, tostring(content), "110,250,800,180")
-end
-UI:fit(portal_ui)
-
--- Stats
-stats_ui = UI:new("stats.dat", width_UI, height_UI, "返回", "退出", "backGround.jpg")
-UI:Label(stats_ui, "center", "0,0,0", 30, "数据统计", "30,20,960,55")
-UI:fit(stats_ui)
-
--- Config
-config_ui = UI:new("config.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-UI:Label(config_ui, "center", "0,0,0", 30, "高级选项", "30,20,960,55")
-UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,妖气封印    ,百鬼夜行    ,一键每日    ,副本组合    ,世界喊话    ,普通召唤    ,超鬼王        ,劲舞团        ,自动剧情    ,漫展漂移","0",30,"0,0,0","30,150,960,300")
-UI:fit(config_ui)
-
--- 八岐大蛇
-bqds_ui = UI:new("bqds.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-UI:Label(bqds_ui, "center", "0,0,0", 30, "八岐大蛇", "30,20,960,55")
-UI:ComboBox(bqds_ui, "mode", "单人模式,队长 - 野队 2人队伍,队长 - 野队 3人队伍,队长 - 固定队 2人队伍,队长 - 固定队 3人队伍,队员 - 野队,队员 - 固定队", "0", 30, "20,100,960,60")
-UI:Label(bqds_ui, "left", "0,0,0", 30, "公共设置 - ", "20,180,300,60")
-UI:Label(bqds_ui, "left", "0,0,0", 30, "请选择御魂层数 - ", "20,240,300,60")
-UI:ComboBox(bqds_ui, "level", "一层,二层,三层,四层,五层,六层,七层,八层,九层,十层","9",23,"700,240,280,50")
-UI:Label(bqds_ui, "left", "0,0,0", 30, "请选择战斗次数 - ", "20,300,300,60")
-UI:ComboBox(bqds_ui, "round", "3次,10次,20次,30次,50次,100次,无限次数","6",23,"700,300,280,50")
-UI:CheckBoxGroup(bqds_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,360,900,60")
-UI:Label(bqds_ui, "left", "0,0,0", 30, "标记 - ", "20,420,300,60")
-UI:Label(bqds_ui, "left", "0,0,0", 30, "第一回合 ~ ", "20,480,300,60")
-UI:RadioGroup(bqds_ui, "round1", "左  ,中  ,右  ,无","3",30,"0,0,0","500,480,500,60")
-UI:Label(bqds_ui, "left", "0,0,0", 30, "第二回合 ~ ", "20,540,300,60")
-UI:RadioGroup(bqds_ui, "round2", "左  ,中  ,右  ,无","3",30,"0,0,0","500,540,500,60")
-UI:Label(bqds_ui, "left", "0,0,0", 30, "第三回合 ~ ", "20,600,300,60")
-UI:RadioGroup(bqds_ui, "round3", "左  ,中  ,右  ,无","3",30,"0,0,0","500,600,500,60")
-UI:Line(bqds_ui, "line_common", "100,100,100", 2, 960, "20,660,960,2")
-UI:Label(bqds_ui, "left", "0,0,0", 30, "队员设置 - ", "20,670,900,60")
-UI:CheckBoxGroup(bqds_ui, "member_auto_group","接受自动组队","0",30,"0,0,0","20,730,900,60")
-UI:CheckBoxGroup(bqds_ui, "fail_and_group","失败后重新寻找队伍","0",30,"0,0,0","20,790,900,60")
-UI:CheckBoxGroup(bqds_ui, "member_to_captain","禁止队员接手队长","0",30,"0,0,0","20,850,900,60")
-UI:Line(bqds_ui, "line_common", "100,100,100", 2, 960, "20,910,960,2")
-UI:Label(bqds_ui, "left", "0,0,0", 30, "队长设置 - ", "20,920,900,60")
-UI:CheckBoxGroup(bqds_ui, "captain_auto_group","开启自动组队","0",30,"0,0,0","20,980,900,60")
-UI:CheckBoxGroup(bqds_ui, "captain_auto_invite","固定队伍自动邀请第一位","0",30,"0,0,0","20,1040,500,60")
-UI:ComboBox(bqds_ui, "auto_invite_zone", "本区好友,最近组队,跨区好友","0",23,"700,1040,280,50")
-UI:CheckBoxGroup(bqds_ui, "fail_and_recreate","失败后重新建立房间","0",30,"0,0,0","20,1100,900,60")
-UI:fit(bqds_ui)
-
--- 探索章节
-tansuo_ui = UI:new("tansuo.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-UI:Label(tansuo_ui, "center", "0,0,0", 30, "探索章节[暂时仅支持账号解锁的最新章节]", "30,20,960,55")
-UI:ComboBox(tansuo_ui, "mode", "单人模式,组队 - 队长,组队 - 队员", "0", 30, "20,100,960,60")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗设置 - ", "20,180,300,60")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "加成识别 - ", "20,240,300,60")
-UI:CheckBoxGroup(tansuo_ui, "select","物品,金币,经验,Boss","2@3",30,"0,0,0","420,240,580,60")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动标记 - ", "20,300,300,60")
-UI:RadioGroup(tansuo_ui, "mark", "随机小怪  ,中间大怪  ,无","2",30,"0,0,0","420,300,580,60")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "难度选择 - ", "20,360,300,60")
-UI:RadioGroup(tansuo_ui, "hard", "普通                ,困难[队长强制]","1",30,"0,0,0","420,360,580,60")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "目标章节[暂时无效] - ", "20,420,500,60")
-UI:ComboBox(tansuo_ui, "section", "第一章,第二章,第三章,第四章,第五章,第六章,第七章,第八章,第九章,第十章,第十一章,第十二章,第十三章,第十四章,第十五章,第十六章,第十七章,第十八章,第十九章,第二十章,第二十一章,第二十二章,第二十三章,第二十四章,第二十五章,第二十六章","25",23,"600,420,380,50")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "限定方式 - ", "20,480,500,60")
-UI:ComboBox(tansuo_ui, "count_mode", "战斗胜利次数,章节通关次数[强制Boss]","0",23,"600,480,380,50")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗胜利次数 - ", "20,540,500,60")
-UI:ComboBox(tansuo_ui, "win_round", "3次,10次,20次,30次[组队寮任务],50次,100次,无限次","6",23,"600,540,380,50")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "章节通关次数 - ", "20,600,500,60")
-UI:ComboBox(tansuo_ui, "sec_round", "1次,2次,3次,5次,10次,50次,无限次","2",23,"600,600,380,50")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "队长自动邀请 - ", "20,660,500,60")
-UI:ComboBox(tansuo_ui, "captain_auto_invite", "不使用自动邀请,第一位阴阳寮寮友,第一位本区好友,第一位跨区好友","0",23,"600,660,380,50")
-UI:Line(tansuo_ui, "line_common", "100,100,100", 2, 960, "20,720,960,2")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮设置[狗粮队长位置为阴阳师左前方] - ", "20,730,900,60")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "强制普攻 - ", "20,790,300,60")
-UI:RadioGroup(tansuo_ui, "nor_attk", "开启            ,关闭","0",30,"0,0,0","600,790,400,60")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动更换 - ", "20,850,300,60")
-UI:RadioGroup(tansuo_ui, "auto_change", "开启            ,关闭","1",30,"0,0,0","600,850,400,60")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "初始翻页 - ", "20,910,300,60")
-UI:ComboBox(tansuo_ui, "page_jump", "第一页,第二页,第三页,第四页,第五页,第六页,第七页,第八页,第九页,第十页","0",23,"600,910,380,50")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮类型 - ", "20,970,300,60")
-UI:RadioGroup(tansuo_ui, "df_type", "N卡             ,素材","0",30,"0,0,0","600,970,400,60")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "素材类型[暂时无效] - ", "20,1030,300,60")
-UI:CheckBoxGroup(tansuo_ui, "egg_color","红蛋,白蛋,蓝蛋,黑蛋","1@2",30,"0,0,0","470,1030,580,60")
-UI:fit(tansuo_ui)
-
--- 结界突破
-jjtp_ui = UI:new("jjtp.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-UI:Label(jjtp_ui, "center", "0,0,0", 30, "结界突破", "30,20,960,55")
-UI:ComboBox(jjtp_ui, "mode", "个人突破,阴阳寮突破,个人突破 + 阴阳寮突破", "2", 30, "20,100,960,60")
-UI:Label(jjtp_ui, "left", "0,0,0", 30, "公共设置 - ", "20,180,300,60")
-UI:Label(jjtp_ui, "left", "0,0,0", 30, "战斗限时 - ", "20,240,300,60")
-UI:ComboBox(jjtp_ui, "round_time", "3分钟,5分钟,10分钟,不限时","1",23,"700,240,280,50")
-UI:CheckBoxGroup(jjtp_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,300,900,60")
-UI:Line(jjtp_ui, "line_common", "100,100,100", 2, 960, "20,360,960,2")
-UI:Label(jjtp_ui, "left", "0,0,0", 30, "个人突破设置 - ", "20,370,300,60")
-UI:Label(jjtp_ui, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,430,300,60")
-UI:CheckBoxGroup(jjtp_ui, "whr_solo","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,430,670,60")
-UI:Label(jjtp_ui, "left", "0,0,0", 30, "勋章选择 - ", "20,490,300,60")
-UI:ComboBox(jjtp_ui, "solo_sel", "0 - 5 勋章,3 - 5 勋章,5 - 0 勋章,3 - 0 勋章,随机选择","2",23,"700,490,280,50")
-UI:Label(jjtp_ui, "left", "0,0,0", 30, "胜场刷新 - ", "20,550,300,60")
-UI:ComboBox(jjtp_ui, "refresh", "3次,6次,9次","0",23,"700,550,280,50")
-UI:Line(jjtp_ui, "line_common", "100,100,100", 2, 960, "20,610,960,2")
-UI:Label(jjtp_ui, "left", "0,0,0", 30, "阴阳寮突破设置 - ", "20,620,300,60")
-UI:Label(jjtp_ui, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,680,300,60")
-UI:CheckBoxGroup(jjtp_ui, "whr_pub","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,680,670,60")
-UI:Label(jjtp_ui, "left", "0,0,0", 30, "勋章选择 - ", "20,740,300,60")
-UI:ComboBox(jjtp_ui, "pub_sel", "5 - 0 勋章,4 - 0 勋章,3 - 0 勋章,2 - 0 勋章,1 - 0 勋章,0勋章","0",23,"700,740,280,50")
-UI:fit(jjtp_ui)
-
--- 觉醒麒麟
-juexing_ui = UI:new("juexing.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-UI:Label(juexing_ui, "center", "0,0,0", 30, "觉醒麒麟", "30,20,960,55")
-UI:ComboBox(juexing_ui, "mode", "单人模式,队长 - 野队 2人队伍,队长 - 野队 3人队伍,队长 - 固定队 2人队伍,队长 - 固定队 3人队伍,队员 - 野队,队员 - 固定队", "0", 30, "20,100,960,60")
-UI:ComboBox(juexing_ui, "element", "业火轮,风转符,水灵鲤,天雷鼓", "3", 30, "20,180,960,60")
-UI:Label(juexing_ui, "left", "0,0,0", 30, "公共设置 - ", "20,260,300,60")
-UI:Label(juexing_ui, "left", "0,0,0", 30, "请选择觉醒层数 - ", "20,320,300,60")
-UI:ComboBox(juexing_ui, "level", "一层,二层,三层,四层,五层,六层,七层,八层,九层,十层","9",23,"700,320,280,50")
-UI:Label(juexing_ui, "left", "0,0,0", 30, "请选择战斗次数 - ", "20,380,300,60")
-UI:ComboBox(juexing_ui, "round", "3次,10次,20次,30次,50次,100次,无限次数","6",23,"700,380,280,50")
-UI:Label(juexing_ui, "left", "0,0,0", 30, "标记 - ", "20,440,300,60")
-UI:RadioGroup(juexing_ui, "mark", "随机小怪,麒麟Boss,无","2",30,"0,0,0","450,440,550,60")
-UI:CheckBoxGroup(juexing_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,500,900,60")
-UI:Line(juexing_ui, "line_common", "100,100,100", 2, 960, "20,560,960,2")
-UI:Label(juexing_ui, "left", "0,0,0", 30, "队员设置 - ", "20,570,900,60")
-UI:CheckBoxGroup(juexing_ui, "member_auto_group","接受自动组队","0",30,"0,0,0","20,630,900,60")
-UI:CheckBoxGroup(juexing_ui, "fail_and_group","失败后重新寻找队伍","0",30,"0,0,0","20,690,900,60")
-UI:CheckBoxGroup(juexing_ui, "member_to_captain","禁止队员接手队长","0",30,"0,0,0","20,750,900,60")
-UI:Line(juexing_ui, "line_common", "100,100,100", 2, 960, "20,810,960,2")
-UI:Label(juexing_ui, "left", "0,0,0", 30, "队长设置 - ", "20,820,900,60")
-UI:CheckBoxGroup(juexing_ui, "captain_auto_group","开启自动组队","0",30,"0,0,0","20,880,900,60")
-UI:CheckBoxGroup(juexing_ui, "captain_auto_invite","固定队伍自动邀请第一位","0",30,"0,0,0","20,940,500,60")
-UI:ComboBox(juexing_ui, "auto_invite_zone", "本区好友,最近组队,跨区好友","0",23,"700,940,280,50")
-UI:CheckBoxGroup(juexing_ui, "fail_and_recreate","失败后重新建立房间","0",30,"0,0,0","20,1000,900,60")
-UI:fit(juexing_ui)
-
--- 业原火
-yeyuanhuo_ui = UI:new("yeyuanhuo.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-UI:Label(yeyuanhuo_ui, "center", "0,0,0", 30, "业原火", "30,20,960,55")
-UI:Label(yeyuanhuo_ui, "left", "0,0,0", 30, "贪之阵 - ", "20,100,300,60")
-UI:ComboBox(yeyuanhuo_ui, "round_tan", "0次,10次,20次,30次,50次,100次,全部贪券","0",23,"700,100,280,50")
-UI:Label(yeyuanhuo_ui, "left", "0,0,0", 30, "嗔之阵 - ", "20,160,300,60")
-UI:ComboBox(yeyuanhuo_ui, "round_chen", "0次,10次,20次,30次,50次,100次,全部嗔券","0",23,"700,160,280,50")
-UI:Label(yeyuanhuo_ui, "left", "0,0,0", 30, "痴之阵 - ", "20,220,300,60")
-UI:ComboBox(yeyuanhuo_ui, "round_chi", "0次,10次,20次,30次,50次,100次,全部痴券","6",23,"700,220,280,50")
-UI:CheckBoxGroup(yeyuanhuo_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,280,900,60")
-UI:fit(yeyuanhuo_ui)
-
--- 御灵之境
-yuling_ui = UI:new("yuling.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-UI:Label(yuling_ui, "center", "0,0,0", 30, "御灵之境", "30,20,960,55")
-UI:Label(yuling_ui, "left", "0,0,0", 30, "御灵选择 - ", "20,100,300,60")
-UI:ComboBox(yuling_ui, "select", "暗·神龙       [星期二],暗·白藏主    [星期三],暗·黑豹       [星期四],暗·孔雀       [星期五]","0",23,"650,100,330,50")
-UI:Label(yuling_ui, "left", "0,0,0", 30, "层数选择 - ", "20,160,300,60")
-UI:ComboBox(yuling_ui, "level", "一层,二层,三层","2",23,"650,160,330,50")
-UI:Label(yuling_ui, "left", "0,0,0", 30, "战斗次数 - ", "20,220,300,60")
-UI:ComboBox(yuling_ui, "round", "10次,20次,30次,50次,100次,全部御灵境之钥","5",23,"650,220,330,50")
-UI:CheckBoxGroup(yuling_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,280,900,60")
-UI:fit(yuling_ui)
-
--- 妖气封印
-yqfy_ui = UI:new("yqfy.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-UI:Label(yqfy_ui, "center", "0,0,0", 30, "妖气封印", "30,20,960,55")
-UI:Label(yqfy_ui, "left", "0,0,0", 30, "妖气选择 - ", "20,100,300,60")
-UI:ComboBox(yqfy_ui, "sel", "跳跳哥哥,椒图,骨女,饿鬼,二口女,海坊主,鬼使黑,小松丸,日和坊","8",23,"650,100,330,50")
-UI:Label(yqfy_ui, "left", "0,0,0", 30, "战斗次数 - ", "20,160,300,60")
-UI:ComboBox(yqfy_ui, "round", "3次,5次,10次,20次,30次[不推荐...],50次[强烈不推荐...]","2",23,"650,160,330,50")
-UI:Label(yqfy_ui, "left", "0,0,0", 30, "战斗标记 - ", "20,220,300,60")
-UI:RadioGroup(yqfy_ui, "mark", "随机小怪,中间大怪,无","2",30,"0,0,0","450,220,550,60")
-UI:fit(yqfy_ui)
-
--- 百鬼夜行
-hundredghost_ui = UI:new("hundredghost.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-UI:Label(hundredghost_ui, "center", "0,0,0", 30, "百鬼夜行", "30,20,960,55")
-UI:Label(hundredghost_ui, "left", "0,0,0", 30, "战斗次数 - ", "20,100,300,60")
-UI:ComboBox(hundredghost_ui, "round", "3次,5次,10次,20次,30次,50次","4",23,"650,100,330,50")
-UI:Label(hundredghost_ui, "left", "0,0,0", 30, "豆子数量 - ", "20,160,300,60")
-UI:RadioGroup(hundredghost_ui, "num", "5 ~ 7,8 ~ 10","1",30,"0,0,0","650,160,330,60")
-UI:CheckBoxGroup(hundredghost_ui, "invite","自动邀请好友","0",30,"0,0,0","20,220,900,60")
-UI:fit(hundredghost_ui)
-
--- 一键每日
-dallymission_ui = UI:new("dallymission.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-UI:Label(dallymission_ui, "center", "0,0,0", 30, "一键每日", "30,20,960,55")
-UI:fit(dallymission_ui)
-
--- 副本组合
-multimission_ui = UI:new("multimission.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-UI:Label(multimission_ui, "center", "0,0,0", 30, "副本组合", "30,20,960,55")
-UI:fit(multimission_ui)
-
--- 世界喊话
-publicity_ui = UI:new("publicity.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-UI:Label(publicity_ui, "center", "0,0,0", 30, "世界喊话", "30,20,960,55")
-UI:fit(publicity_ui)
-
--- 普通召唤
-normalcall_ui = UI:new("normalcall.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-UI:Label(normalcall_ui, "center", "0,0,0", 30, "普通召唤", "30,20,960,55")
-UI:Label(normalcall_ui, "left", "0,0,0", 30, "召唤次数 - ", "20,100,300,60")
-UI:ComboBox(normalcall_ui, "tickets", "10,20,30,50,100,200,500,全部召唤","7",23,"700,100,280,50")
-UI:Line(normalcall_ui, "line_common", "100,100,100", 2, 960, "20,160,960,2")
-UI:Label(normalcall_ui, "left", "0,0,0", 30, "Tips - ", "20,170,300,60")
-UI:Label(normalcall_ui, "left", "0,0,0", 30, "请从庭院手动进入召唤界面", "20,230,960,60")
-UI:fit(normalcall_ui)
-
--- 超鬼王
-superghost_ui = UI:new("superghost.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-UI:Label(superghost_ui, "center", "0,0,0", 30, "超鬼王", "30,20,960,55")
-UI:fit(superghost_ui)
-
--- 劲舞团
-audition_ui = UI:new("audition.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-UI:Label(audition_ui, "center", "0,0,0", 30, "劲舞团", "30,20,960,55")
-UI:fit(audition_ui)
-
--- 自动剧情
-autostory_ui = UI:new("autostory.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-UI:Label(autostory_ui, "center", "0,0,0", 30, "自动剧情", "30,20,960,55")
-UI:Label(autostory_ui, "left", "0,0,0", 30, "Tips - ", "30,100,960,60")
-UI:Label(autostory_ui, "left", "0,0,0", 30, "请在庭院或剧情中使用, 停顿10s+会自动移动场景", "30,160,960,60")
-UI:fit(autostory_ui)
-
--- 漫展漂移
-LBSGhostDriving_ui = UI:new("LBSGhostDriving.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-UI:Label(LBSGhostDriving_ui, "center", "0,0,0", 30, "漫展漂移", "30,20,960,55")
-UI:RadioGroup(LBSGhostDriving_ui, "round3", "左 ,中 ,右 ,无","3",30,"0,0,0","500,600,500,60")
-UI:Label(LBSGhostDriving_ui, "left", "0,0,0", 30, "Tips - ", "30,100,960,60")
-UI:Label(LBSGhostDriving_ui, "left", "0,0,0", 30, "请在漫展界面中使用", "30,160,960,60")
-UI:fit(LBSGhostDriving_ui)
-
--- 全局设置
-global_ui = UI:new("global.dat", width_UI, height_UI, "开始", "退出", "backGround.jpg")
-UI:Label(global_ui, "center", "0,0,0", 30, "全局设置", "30,20,960,55")
-UI:CheckBoxGroup(global_ui, "HUD","可视化点击手势与运行辅助描述","0",30,"0,0,0","20,100,980,60")
-UI:CheckBoxGroup(global_ui, "skill","自动关闭技能特写[仅适用于庭院启动，建议手动关闭并取消该选项]","0",30,"0,0,0","20,160,980,60")
-UI:CheckBoxGroup(global_ui, "offer_en","悬赏封印 - ","0",30,"0,0,0","20,220,300,60")
-UI:CheckBoxGroup(global_ui, "offer_sel","勾玉,体力,金币,猫粮,狗粮","0@1@2@3@4",30,"0,0,0","280,220,720,60")
-UI:CheckBoxGroup(global_ui, "buff_usup_stop","体力用尽后自动关闭所有buff","0",30,"0,0,0","20,280,700,60")
-UI:CheckBoxGroup(global_ui, "buff_idle_stop","庭院或探索界面停留过久后自动关闭所有buff","0",30,"0,0,0","20,340,700,60")
-UI:ComboBox(global_ui, "buff_idle_stop_time", "15秒,30秒,45秒,1分钟,2分钟,5分钟","3",23,"750,340,230,50")
-UI:fit(global_ui)
-
 -- Func
 function portal_UI()
+	-- Portal
+	portal_ui = UI:new("portal.dat", width_UI, height_UI, "继续", "退出", "backGround.jpg")
+	UI:Image(portal_ui, "title.png", "30,0,940,80")
+	UI:Label(portal_ui, "left", "0,0,0", 30, "功能选择 - ", "30,90,300,55")
+	UI:RadioGroup(portal_ui, "select", "高级选项    ,数据统计","0",30,"0,0,0","500,90,450,55")
+	UI:Label(portal_ui, "left", "0,0,0", 30, "实时公告 - ", "30,140,300,55")
+	UI:Image(portal_ui, "notice.png", "20,200,970,250")
+	-- 公告
+	local content, err = getCloudContent("WALLBREAKERREALTIMEANNOUCEMENT", "BDAB2A1E8229572B", "没有正确获取到公告信息")
+	if err == 0 then
+		UI:Label(portal_ui, "left", "0,0,0", 29, tostring(content), "110,250,800,180")
+	end
+	UI:fit(portal_ui)
+	
 	ret_portal, res_portal = UI:show(portal_ui)
 	if (ret_portal == 0) then
 		return RET_ERR
@@ -281,6 +43,12 @@ function portal_UI()
 end
 
 function config_UI()
+	-- Config
+	config_ui = UI:new("config.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+	UI:Label(config_ui, "center", "0,0,0", 30, "高级选项", "30,20,960,55")
+	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,妖气封印    ,百鬼夜行    ,一键每日    ,副本组合    ,世界喊话    ,普通召唤    ,超鬼王        ,劲舞团        ,自动剧情    ,漫展漂移","0",30,"0,0,0","30,150,960,300")
+	UI:fit(config_ui)
+	
 	ret_config, res_config = UI:show(config_ui)
 	if (ret_config == 0) then
 		portal_UI()
@@ -323,6 +91,11 @@ function config_UI()
 end
 
 function stats_UI()
+	-- Stats
+	stats_ui = UI:new("stats.dat", width_UI, height_UI, "返回", "退出", "backGround.jpg")
+	UI:Label(stats_ui, "center", "0,0,0", 30, "数据统计", "30,20,960,55")
+	UI:fit(stats_ui)
+	
 	ret_stats, res_stats = UI:show(stats_ui)
 	if (ret_stats == 1) then
 		portal_UI()
@@ -331,6 +104,18 @@ function stats_UI()
 end
 
 function global_UI()
+	-- 全局设置
+global_ui = UI:new("global.dat", width_UI, height_UI, "开始", "退出", "backGround.jpg")
+UI:Label(global_ui, "center", "0,0,0", 30, "全局设置", "30,20,960,55")
+UI:CheckBoxGroup(global_ui, "HUD","可视化点击手势与运行辅助描述","0",30,"0,0,0","20,100,980,60")
+UI:CheckBoxGroup(global_ui, "skill","自动关闭技能特写[仅适用于庭院启动，建议手动关闭并取消该选项]","0",30,"0,0,0","20,160,980,60")
+UI:CheckBoxGroup(global_ui, "offer_en","悬赏封印 - ","0",30,"0,0,0","20,220,300,60")
+UI:CheckBoxGroup(global_ui, "offer_sel","勾玉,体力,金币,猫粮,狗粮","0@1@2@3@4",30,"0,0,0","280,220,720,60")
+UI:CheckBoxGroup(global_ui, "buff_usup_stop","体力用尽后自动关闭所有buff","0",30,"0,0,0","20,280,700,60")
+UI:CheckBoxGroup(global_ui, "buff_idle_stop","庭院或探索界面停留过久后自动关闭所有buff","0",30,"0,0,0","20,340,700,60")
+UI:ComboBox(global_ui, "buff_idle_stop_time", "15秒,30秒,45秒,1分钟,2分钟,5分钟","3",23,"750,340,230,50")
+UI:fit(global_ui)
+
 	ret_global, res_global = UI:show(global_ui)
 	
 	if (ret_global == 0) then
@@ -404,6 +189,36 @@ end
 
 -- Config
 function baqidashe_UI()
+	-- 八岐大蛇
+	bqds_ui = UI:new("bqds.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+	UI:Label(bqds_ui, "center", "0,0,0", 30, "八岐大蛇", "30,20,960,55")
+	UI:ComboBox(bqds_ui, "mode", "单人模式,队长 - 野队 2人队伍,队长 - 野队 3人队伍,队长 - 固定队 2人队伍,队长 - 固定队 3人队伍,队员 - 野队,队员 - 固定队", "0", 30, "20,100,960,60")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "公共设置 - ", "20,180,300,60")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "请选择御魂层数 - ", "20,240,300,60")
+	UI:ComboBox(bqds_ui, "level", "一层,二层,三层,四层,五层,六层,七层,八层,九层,十层","9",23,"700,240,280,50")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "请选择战斗次数 - ", "20,300,300,60")
+	UI:ComboBox(bqds_ui, "round", "3次,10次,20次,30次,50次,100次,无限次数","6",23,"700,300,280,50")
+	UI:CheckBoxGroup(bqds_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,360,900,60")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "标记 - ", "20,420,300,60")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "第一回合 ~ ", "20,480,300,60")
+	UI:RadioGroup(bqds_ui, "round1", "左  ,中  ,右  ,无","3",30,"0,0,0","500,480,500,60")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "第二回合 ~ ", "20,540,300,60")
+	UI:RadioGroup(bqds_ui, "round2", "左  ,中  ,右  ,无","3",30,"0,0,0","500,540,500,60")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "第三回合 ~ ", "20,600,300,60")
+	UI:RadioGroup(bqds_ui, "round3", "左  ,中  ,右  ,无","3",30,"0,0,0","500,600,500,60")
+	UI:Line(bqds_ui, "line_common", "100,100,100", 2, 960, "20,660,960,2")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "队员设置 - ", "20,670,900,60")
+	UI:CheckBoxGroup(bqds_ui, "member_auto_group","接受自动组队","0",30,"0,0,0","20,730,900,60")
+	UI:CheckBoxGroup(bqds_ui, "fail_and_group","失败后重新寻找队伍","0",30,"0,0,0","20,790,900,60")
+	UI:CheckBoxGroup(bqds_ui, "member_to_captain","禁止队员接手队长","0",30,"0,0,0","20,850,900,60")
+	UI:Line(bqds_ui, "line_common", "100,100,100", 2, 960, "20,910,960,2")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "队长设置 - ", "20,920,900,60")
+	UI:CheckBoxGroup(bqds_ui, "captain_auto_group","开启自动组队","0",30,"0,0,0","20,980,900,60")
+	UI:CheckBoxGroup(bqds_ui, "captain_auto_invite","固定队伍自动邀请第一位","0",30,"0,0,0","20,1040,500,60")
+	UI:ComboBox(bqds_ui, "auto_invite_zone", "本区好友,最近组队,跨区好友","0",23,"700,1040,280,50")
+	UI:CheckBoxGroup(bqds_ui, "fail_and_recreate","失败后重新建立房间","0",30,"0,0,0","20,1100,900,60")
+	UI:fit(bqds_ui)
+	
 	ret_baqi, res_baqi = UI:show(bqds_ui)
 	if (ret_baqi == 0) then
 		config_UI()
@@ -472,7 +287,7 @@ function baqidashe_UI()
 		round = 50
 	elseif (res_baqi.round == "5") then
 		round = 100
-		elseif (res_baqi.round == "6") then
+	elseif (res_baqi.round == "6") then
 		round = 99999
 	end
 	
@@ -543,6 +358,41 @@ function baqidashe_UI()
 end
 
 function tansuo_UI()
+	-- 探索章节
+	tansuo_ui = UI:new("tansuo.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+	UI:Label(tansuo_ui, "center", "0,0,0", 30, "探索章节[暂时仅支持账号解锁的最新章节]", "30,20,960,55")
+	UI:ComboBox(tansuo_ui, "mode", "单人模式,组队 - 队长,组队 - 队员", "0", 30, "20,100,960,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗设置 - ", "20,180,300,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "加成识别 - ", "20,240,300,60")
+	UI:CheckBoxGroup(tansuo_ui, "select","物品,金币,经验,Boss","2@3",30,"0,0,0","420,240,580,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动标记 - ", "20,300,300,60")
+	UI:RadioGroup(tansuo_ui, "mark", "随机小怪  ,中间大怪  ,无","2",30,"0,0,0","420,300,580,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "难度选择 - ", "20,360,300,60")
+	UI:RadioGroup(tansuo_ui, "hard", "普通                ,困难[队长强制]","1",30,"0,0,0","420,360,580,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "目标章节[暂时无效] - ", "20,420,500,60")
+	UI:ComboBox(tansuo_ui, "section", "第一章,第二章,第三章,第四章,第五章,第六章,第七章,第八章,第九章,第十章,第十一章,第十二章,第十三章,第十四章,第十五章,第十六章,第十七章,第十八章,第十九章,第二十章,第二十一章,第二十二章,第二十三章,第二十四章,第二十五章,第二十六章","25",23,"600,420,380,50")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "限定方式 - ", "20,480,500,60")
+	UI:ComboBox(tansuo_ui, "count_mode", "战斗胜利次数,章节通关次数[强制Boss]","0",23,"600,480,380,50")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗胜利次数 - ", "20,540,500,60")
+	UI:ComboBox(tansuo_ui, "win_round", "3次,10次,20次,30次[组队寮任务],50次,100次,无限次","6",23,"600,540,380,50")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "章节通关次数 - ", "20,600,500,60")
+	UI:ComboBox(tansuo_ui, "sec_round", "1次,2次,3次,5次,10次,50次,无限次","2",23,"600,600,380,50")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "队长自动邀请 - ", "20,660,500,60")
+	UI:ComboBox(tansuo_ui, "captain_auto_invite", "不使用自动邀请,第一位阴阳寮寮友,第一位本区好友,第一位跨区好友","0",23,"600,660,380,50")
+	UI:Line(tansuo_ui, "line_common", "100,100,100", 2, 960, "20,720,960,2")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮设置[狗粮队长位置为阴阳师左前方] - ", "20,730,900,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "强制普攻 - ", "20,790,300,60")
+	UI:RadioGroup(tansuo_ui, "nor_attk", "开启            ,关闭","0",30,"0,0,0","600,790,400,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动更换 - ", "20,850,300,60")
+	UI:RadioGroup(tansuo_ui, "auto_change", "开启            ,关闭","1",30,"0,0,0","600,850,400,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "初始翻页 - ", "20,910,300,60")
+	UI:ComboBox(tansuo_ui, "page_jump", "第一页,第二页,第三页,第四页,第五页,第六页,第七页,第八页,第九页,第十页","0",23,"600,910,380,50")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮类型 - ", "20,970,300,60")
+	UI:RadioGroup(tansuo_ui, "df_type", "N卡             ,素材","0",30,"0,0,0","600,970,400,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "素材类型[暂时无效] - ", "20,1030,300,60")
+	UI:CheckBoxGroup(tansuo_ui, "egg_color","红蛋,白蛋,蓝蛋,黑蛋","1@2",30,"0,0,0","470,1030,580,60")
+	UI:fit(tansuo_ui)
+	
 	ret_tansuo, res_tansuo = UI:show(tansuo_ui)
 	if (ret_tansuo == 0) then
 		config_UI()
@@ -695,6 +545,30 @@ function tansuo_UI()
 end
 
 function jjtp_UI()
+	-- 结界突破
+jjtp_ui = UI:new("jjtp.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(jjtp_ui, "center", "0,0,0", 30, "结界突破", "30,20,960,55")
+UI:ComboBox(jjtp_ui, "mode", "个人突破,阴阳寮突破,个人突破 + 阴阳寮突破", "2", 30, "20,100,960,60")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "公共设置 - ", "20,180,300,60")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "战斗限时 - ", "20,240,300,60")
+UI:ComboBox(jjtp_ui, "round_time", "3分钟,5分钟,10分钟,不限时","1",23,"700,240,280,50")
+UI:CheckBoxGroup(jjtp_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,300,900,60")
+UI:Line(jjtp_ui, "line_common", "100,100,100", 2, 960, "20,360,960,2")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "个人突破设置 - ", "20,370,300,60")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,430,300,60")
+UI:CheckBoxGroup(jjtp_ui, "whr_solo","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,430,670,60")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "勋章选择 - ", "20,490,300,60")
+UI:ComboBox(jjtp_ui, "solo_sel", "0 - 5 勋章,3 - 5 勋章,5 - 0 勋章,3 - 0 勋章,随机选择","2",23,"700,490,280,50")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "胜场刷新 - ", "20,550,300,60")
+UI:ComboBox(jjtp_ui, "refresh", "3次,6次,9次","0",23,"700,550,280,50")
+UI:Line(jjtp_ui, "line_common", "100,100,100", 2, 960, "20,610,960,2")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "阴阳寮突破设置 - ", "20,620,300,60")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,680,300,60")
+UI:CheckBoxGroup(jjtp_ui, "whr_pub","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,680,670,60")
+UI:Label(jjtp_ui, "left", "0,0,0", 30, "勋章选择 - ", "20,740,300,60")
+UI:ComboBox(jjtp_ui, "pub_sel", "5 - 0 勋章,4 - 0 勋章,3 - 0 勋章,2 - 0 勋章,1 - 0 勋章,0勋章","0",23,"700,740,280,50")
+UI:fit(jjtp_ui)
+
 	ret_jjtp, res_jjtp = UI:show(jjtp_ui)
 	if (ret_jjtp == 0) then
 		config_UI()
@@ -807,6 +681,33 @@ function jjtp_UI()
 end
 
 function juexing_UI()
+	-- 觉醒麒麟
+juexing_ui = UI:new("juexing.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(juexing_ui, "center", "0,0,0", 30, "觉醒麒麟", "30,20,960,55")
+UI:ComboBox(juexing_ui, "mode", "单人模式,队长 - 野队 2人队伍,队长 - 野队 3人队伍,队长 - 固定队 2人队伍,队长 - 固定队 3人队伍,队员 - 野队,队员 - 固定队", "0", 30, "20,100,960,60")
+UI:ComboBox(juexing_ui, "element", "业火轮,风转符,水灵鲤,天雷鼓", "3", 30, "20,180,960,60")
+UI:Label(juexing_ui, "left", "0,0,0", 30, "公共设置 - ", "20,260,300,60")
+UI:Label(juexing_ui, "left", "0,0,0", 30, "请选择觉醒层数 - ", "20,320,300,60")
+UI:ComboBox(juexing_ui, "level", "一层,二层,三层,四层,五层,六层,七层,八层,九层,十层","9",23,"700,320,280,50")
+UI:Label(juexing_ui, "left", "0,0,0", 30, "请选择战斗次数 - ", "20,380,300,60")
+UI:ComboBox(juexing_ui, "round", "3次,10次,20次,30次,50次,100次,无限次数","6",23,"700,380,280,50")
+UI:Label(juexing_ui, "left", "0,0,0", 30, "标记 - ", "20,440,300,60")
+UI:RadioGroup(juexing_ui, "mark", "随机小怪,麒麟Boss,无","2",30,"0,0,0","450,440,550,60")
+UI:CheckBoxGroup(juexing_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,500,900,60")
+UI:Line(juexing_ui, "line_common", "100,100,100", 2, 960, "20,560,960,2")
+UI:Label(juexing_ui, "left", "0,0,0", 30, "队员设置 - ", "20,570,900,60")
+UI:CheckBoxGroup(juexing_ui, "member_auto_group","接受自动组队","0",30,"0,0,0","20,630,900,60")
+UI:CheckBoxGroup(juexing_ui, "fail_and_group","失败后重新寻找队伍","0",30,"0,0,0","20,690,900,60")
+UI:CheckBoxGroup(juexing_ui, "member_to_captain","禁止队员接手队长","0",30,"0,0,0","20,750,900,60")
+UI:Line(juexing_ui, "line_common", "100,100,100", 2, 960, "20,810,960,2")
+UI:Label(juexing_ui, "left", "0,0,0", 30, "队长设置 - ", "20,820,900,60")
+UI:CheckBoxGroup(juexing_ui, "captain_auto_group","开启自动组队","0",30,"0,0,0","20,880,900,60")
+UI:CheckBoxGroup(juexing_ui, "captain_auto_invite","固定队伍自动邀请第一位","0",30,"0,0,0","20,940,500,60")
+UI:ComboBox(juexing_ui, "auto_invite_zone", "本区好友,最近组队,跨区好友","0",23,"700,940,280,50")
+UI:CheckBoxGroup(juexing_ui, "fail_and_recreate","失败后重新建立房间","0",30,"0,0,0","20,1000,900,60")
+UI:fit(juexing_ui)
+
+
 	ret_juexing, res_juexing = UI:show(juexing_ui)
 	if (ret_juexing == 0) then
 		config_UI()
@@ -950,6 +851,18 @@ function juexing_UI()
 end
 
 function yeyuanhuo_UI()
+	-- 业原火
+yeyuanhuo_ui = UI:new("yeyuanhuo.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(yeyuanhuo_ui, "center", "0,0,0", 30, "业原火", "30,20,960,55")
+UI:Label(yeyuanhuo_ui, "left", "0,0,0", 30, "贪之阵 - ", "20,100,300,60")
+UI:ComboBox(yeyuanhuo_ui, "round_tan", "0次,10次,20次,30次,50次,100次,全部贪券","0",23,"700,100,280,50")
+UI:Label(yeyuanhuo_ui, "left", "0,0,0", 30, "嗔之阵 - ", "20,160,300,60")
+UI:ComboBox(yeyuanhuo_ui, "round_chen", "0次,10次,20次,30次,50次,100次,全部嗔券","0",23,"700,160,280,50")
+UI:Label(yeyuanhuo_ui, "left", "0,0,0", 30, "痴之阵 - ", "20,220,300,60")
+UI:ComboBox(yeyuanhuo_ui, "round_chi", "0次,10次,20次,30次,50次,100次,全部痴券","6",23,"700,220,280,50")
+UI:CheckBoxGroup(yeyuanhuo_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,280,900,60")
+UI:fit(yeyuanhuo_ui)
+
 	ret_yeyuanhuo, res_yeyuanhuo = UI:show(yeyuanhuo_ui)
 	if (ret_yeyuanhuo == 0) then
 		config_UI()
@@ -1024,6 +937,19 @@ function yeyuanhuo_UI()
 end
 
 function yuling_UI()
+	-- 御灵之境
+yuling_ui = UI:new("yuling.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(yuling_ui, "center", "0,0,0", 30, "御灵之境", "30,20,960,55")
+UI:Label(yuling_ui, "left", "0,0,0", 30, "御灵选择 - ", "20,100,300,60")
+UI:ComboBox(yuling_ui, "select", "暗·神龙       [星期二],暗·白藏主    [星期三],暗·黑豹       [星期四],暗·孔雀       [星期五]","0",23,"650,100,330,50")
+UI:Label(yuling_ui, "left", "0,0,0", 30, "层数选择 - ", "20,160,300,60")
+UI:ComboBox(yuling_ui, "level", "一层,二层,三层","2",23,"650,160,330,50")
+UI:Label(yuling_ui, "left", "0,0,0", 30, "战斗次数 - ", "20,220,300,60")
+UI:ComboBox(yuling_ui, "round", "10次,20次,30次,50次,100次,全部御灵境之钥","5",23,"650,220,330,50")
+UI:CheckBoxGroup(yuling_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,280,900,60")
+UI:fit(yuling_ui)
+
+
 	ret_yuling, res_yuling = UI:show(yuling_ui)
 	if (ret_yuling == 0) then
 		config_UI()
@@ -1082,6 +1008,17 @@ function yuling_UI()
 end
 
 function yqfy_UI()
+	-- 妖气封印
+yqfy_ui = UI:new("yqfy.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(yqfy_ui, "center", "0,0,0", 30, "妖气封印", "30,20,960,55")
+UI:Label(yqfy_ui, "left", "0,0,0", 30, "妖气选择 - ", "20,100,300,60")
+UI:ComboBox(yqfy_ui, "sel", "跳跳哥哥,椒图,骨女,饿鬼,二口女,海坊主,鬼使黑,小松丸,日和坊","8",23,"650,100,330,50")
+UI:Label(yqfy_ui, "left", "0,0,0", 30, "战斗次数 - ", "20,160,300,60")
+UI:ComboBox(yqfy_ui, "round", "3次,5次,10次,20次,30次[不推荐...],50次[强烈不推荐...]","2",23,"650,160,330,50")
+UI:Label(yqfy_ui, "left", "0,0,0", 30, "战斗标记 - ", "20,220,300,60")
+UI:RadioGroup(yqfy_ui, "mark", "随机小怪,中间大怪,无","2",30,"0,0,0","450,220,550,60")
+UI:fit(yqfy_ui)
+
 	ret_yqfy, res_yqfy = UI:show(yqfy_ui)
 	if (ret_yqfy == 0) then
 		config_UI()
@@ -1140,6 +1077,16 @@ function yqfy_UI()
 end
 
 function hundredghost_UI()
+	-- 百鬼夜行
+hundredghost_ui = UI:new("hundredghost.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(hundredghost_ui, "center", "0,0,0", 30, "百鬼夜行", "30,20,960,55")
+UI:Label(hundredghost_ui, "left", "0,0,0", 30, "战斗次数 - ", "20,100,300,60")
+UI:ComboBox(hundredghost_ui, "round", "3次,5次,10次,20次,30次,50次","4",23,"650,100,330,50")
+UI:Label(hundredghost_ui, "left", "0,0,0", 30, "豆子数量 - ", "20,160,300,60")
+UI:RadioGroup(hundredghost_ui, "num", "5 ~ 7,8 ~ 10","1",30,"0,0,0","650,160,330,60")
+UI:CheckBoxGroup(hundredghost_ui, "invite","自动邀请好友","0",30,"0,0,0","20,220,900,60")
+UI:fit(hundredghost_ui)
+
 	ret_hundredghost, res_hundredghost = UI:show(hundredghost_ui)
 	if (ret_hundredghost == 0) then
 		config_UI()
@@ -1182,6 +1129,11 @@ function hundredghost_UI()
 end
 
 function dallymission_UI()
+	-- 一键每日
+dallymission_ui = UI:new("dallymission.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(dallymission_ui, "center", "0,0,0", 30, "一键每日", "30,20,960,55")
+UI:fit(dallymission_ui)
+
 	ret_dallymission, res_dallymission = UI:show(dallymission_ui)
 	if (ret_dallymission == 0) then
 		config_UI()
@@ -1195,6 +1147,11 @@ function dallymission_UI()
 end
 
 function multimission_UI()
+	-- 副本组合
+multimission_ui = UI:new("multimission.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(multimission_ui, "center", "0,0,0", 30, "副本组合", "30,20,960,55")
+UI:fit(multimission_ui)
+
 	ret_multimission, res_multimission = UI:show(multimission_ui)
 	if (ret_multimission == 0) then
 		config_UI()
@@ -1208,6 +1165,11 @@ function multimission_UI()
 end
 
 function publicity_UI()
+	-- 世界喊话
+publicity_ui = UI:new("publicity.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(publicity_ui, "center", "0,0,0", 30, "世界喊话", "30,20,960,55")
+UI:fit(publicity_ui)
+
 	ret_publicity, res_publicity = UI:show(publicity_ui)
 	if (ret_publicity == 0) then
 		config_UI()
@@ -1221,6 +1183,16 @@ function publicity_UI()
 end
 
 function normalcall_UI()
+	-- 普通召唤
+normalcall_ui = UI:new("normalcall.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(normalcall_ui, "center", "0,0,0", 30, "普通召唤", "30,20,960,55")
+UI:Label(normalcall_ui, "left", "0,0,0", 30, "召唤次数 - ", "20,100,300,60")
+UI:ComboBox(normalcall_ui, "tickets", "10,20,30,50,100,200,500,全部召唤","7",23,"700,100,280,50")
+UI:Line(normalcall_ui, "line_common", "100,100,100", 2, 960, "20,160,960,2")
+UI:Label(normalcall_ui, "left", "0,0,0", 30, "Tips - ", "20,170,300,60")
+UI:Label(normalcall_ui, "left", "0,0,0", 30, "请从庭院手动进入召唤界面", "20,230,960,60")
+UI:fit(normalcall_ui)
+
 	ret_normalcall, res_normalcall = UI:show(normalcall_ui)
 	if (ret_normalcall == 0) then
 		config_UI()
@@ -1255,6 +1227,11 @@ function normalcall_UI()
 end
 
 function superghost_UI()
+	-- 超鬼王
+superghost_ui = UI:new("superghost.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(superghost_ui, "center", "0,0,0", 30, "超鬼王", "30,20,960,55")
+UI:fit(superghost_ui)
+
 	ret_superghost, res_superghost = UI:show(superghost_ui)
 	if (ret_superghost == 0) then
 		config_UI()
@@ -1268,6 +1245,11 @@ function superghost_UI()
 end
 
 function audition_UI()
+	-- 劲舞团
+audition_ui = UI:new("audition.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(audition_ui, "center", "0,0,0", 30, "劲舞团", "30,20,960,55")
+UI:fit(audition_ui)
+
 	ret_audition, res_audition = UI:show(audition_ui)
 	if (ret_audition == 0) then
 		config_UI()
@@ -1281,6 +1263,13 @@ function audition_UI()
 end
 
 function autostory_UI()
+	-- 自动剧情
+autostory_ui = UI:new("autostory.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(autostory_ui, "center", "0,0,0", 30, "自动剧情", "30,20,960,55")
+UI:Label(autostory_ui, "left", "0,0,0", 30, "Tips - ", "30,100,960,60")
+UI:Label(autostory_ui, "left", "0,0,0", 30, "请在庭院或剧情中使用, 停顿10s+会自动移动场景", "30,160,960,60")
+UI:fit(autostory_ui)
+
 	ret_arena, res_arena = UI:show(autostory_ui)
 	if (ret_arena == 0) then
 		config_UI()
@@ -1296,6 +1285,14 @@ function autostory_UI()
 end
 
 function LBSGhostDriving_UI()
+	-- 漫展漂移
+LBSGhostDriving_ui = UI:new("LBSGhostDriving.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+UI:Label(LBSGhostDriving_ui, "center", "0,0,0", 30, "漫展漂移", "30,20,960,55")
+UI:RadioGroup(LBSGhostDriving_ui, "round3", "左 ,中 ,右 ,无","3",30,"0,0,0","500,600,500,60")
+UI:Label(LBSGhostDriving_ui, "left", "0,0,0", 30, "Tips - ", "30,100,960,60")
+UI:Label(LBSGhostDriving_ui, "left", "0,0,0", 30, "请在漫展界面中使用", "30,160,960,60")
+UI:fit(LBSGhostDriving_ui)
+
 	ret_offerquery, res_offerquery = UI:show(LBSGhostDriving_ui)
 	if (ret_offerquery == 0) then
 		config_UI()
@@ -1306,5 +1303,51 @@ function LBSGhostDriving_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
+end
+
+function settlement_UI()
+	end_time = mTime()
+	dura_time = end_time - start_time
+	dura_hour = (dura_time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+	dura_min = (dura_time % (1000 * 60 * 60)) / (1000 * 60)
+	dura_sec = (dura_time % (1000 * 60)) / 1000
+	print(string.format("运行时间 - %d小时, %d分钟, %d秒", dura_hour, dura_min, dura_sec))
+
+	settlement_ui = UI:new("settlement.dat", width_UI, height_UI, "退出", "重新启动", "backGround.jpg")
+	UI:Label(settlement_ui, "center", "0,0,0", 30, "战斗结算", "30,20,960,55")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("启动时刻 -	%s", start_date), "30,100,960,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("运行时间 -	%d小时, %d分钟, %d秒", dura_hour, dura_min, dura_sec), "30,160,960,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, "御魂:", "30,220,200,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", yuhun_win_cnt), "220,220,80,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, "-", "300,220,10,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", yuhun_fail_cnt), "365,220,135,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, "探索:", "500,220,200,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", tansuo_win_cnt), "700,220,80,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, "-", "780,220,10,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", tansuo_fail_cnt), "865,220,135,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, "突破:", "30,280,200,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", jjtp_win_cnt), "220,280,80,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, "-", "300,280,10,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", jjtp_fail_cnt), "365,280,135,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, "觉醒:", "500,280,200,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", juexing_win_cnt), "700,280,80,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, "-", "780,280,10,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", juexing_fail_cnt), "865,280,135,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, "业原火:", "30,340,200,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", yyh_win_cnt), "220,340,80,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, "-", "300,340,10,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", yyh_fail_cnt), "365,340,135,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, "御灵:", "500,340,200,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", yuling_win_cnt), "700,340,80,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, "-", "780,340,10,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", yuling_fail_cnt), "865,340,135,60")
+	
+	ret_settlement, res_settlement = UI:show(settlement_ui)
+	if (ret_settlement == 0) then
+		lua_restart()
+	else
+		lua_exit()
+	end
+	return
 end
 

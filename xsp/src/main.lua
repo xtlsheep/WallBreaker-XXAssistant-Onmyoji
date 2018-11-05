@@ -9,7 +9,9 @@ ENABLE = 1
 DISABLE = 0
 
 -- Init
-print(os.date())
+start_date = os.date()
+start_time = mTime()
+print(start_date)
 width_dev = 640
 height_dev = 1136
 width, height = getScreenSize()
@@ -62,3 +64,4 @@ intel_jjtp_pub = 0
 
 -- Portal
 portal_UI()
+settlement_UI()

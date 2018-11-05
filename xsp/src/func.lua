@@ -2,6 +2,11 @@ require "util"
 
 -- Some func
 function script_init()
+	-- Direction Error
+	direct_err_ui = UI:new("portal.dat", 500, 250, "退出", "退出", "backGround.jpg")
+	UI:Label(direct_err_ui, "left", "0,0,0", 30, "屏幕方向识别失败，请加群向作者反映此问题，谢谢~", "30,50,470,150")
+	UI:fit(direct_err_ui)
+	
 	local ret = getScreenDirection()
 	
 	if ret == 0 then
@@ -24,6 +29,11 @@ function script_init()
 	end
 	
 	init("0", ret)
+end
+
+function onBeforeUserExit()
+	settlement_UI()
+	lua_exit()
 end
 
 function show_win_fail(win_cnt, fail_cnt)
