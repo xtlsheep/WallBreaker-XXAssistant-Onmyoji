@@ -56,11 +56,11 @@ function juexing_element(element)
 end
 
 -- Main func
-function juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
+function juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
 	print(string.format("觉醒材料 - 模式：%s，角色：%s，组队：%s，类型：%s，标记：%s ，层数：%d，战斗次数：%d, 锁定出战：%d",
 			mode, role, group, element, mark, level, round, lock))
-	print(string.format("队员自动组队：%d，失败重新组队：%d，队员接手队长：%d，队长自动组队：%d，队长自动邀请：%d, 失败重新建队：%d",
-			member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate))
+	print(string.format("队员自动组队：%d，失败重新组队：%d，队员接手队长：%d，队长自动组队：%d，队长自动邀请：%d, 自动邀请区域 %s, 失败重新建队：%d",
+			member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate))
 	print_global_vars()
 	
 	if (mode == "单人") then
@@ -71,8 +71,8 @@ function juexing(mode, role, group, element, mark, level, round, lock, member_au
 		juexing_group_wild_captain(element, mark, level, round, lock, captain_auto_group, fail_and_recreate, group)
 	elseif (mode == "组队" and role == "队员" and group == "固定队") then
 		juexing_group_fix_member(element, mark, level, round, lock, member_auto_group, member_to_captain)
-	elseif (mode == "组队" and role == "队长" and (group == "固定队2人" or gourp == "固定队3人")) then
-		juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, auto_invite_first, group)
+	elseif (mode == "组队" and role == "队长" and (group == "固定队2人" or group == "固定队3人")) then
+		juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
 	end
 end
 
@@ -321,7 +321,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 				keep_half_damo()
 				break
 			end
-			-- 失败继续邀请
+			-- 失败邀请
 			x, y = captain_team_lost_invite()
 			if (x > -1) then
 				if (fail_and_recreate == 1) then
@@ -338,7 +338,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 					break 
 				end 
 			end
-			-- 邀请队友
+			-- 胜利邀请
 			x, y = captain_team_win_invite() 
 			if (x > -1) then
 				if quit == 1 then
@@ -476,7 +476,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 	return RET_OK
 end
 
-function juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, auto_invite_first, group)
+function juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
 	local time_cnt = 0
 	local init = 1
 	local invite = 1
@@ -489,6 +489,14 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 	local real_8dashe = 1
 	local secret_vender = 1
 	local x, y
+	
+	if auto_invite_zone == "好友" then
+		invite_zone = 1
+	elseif auto_invite_zone == "最近" then
+		invite_zone = 2
+	elseif auto_invite_zone == "跨区" then
+		invite_zone = 3
+	end
 	
 	while (1) do
 		while (1) do
@@ -520,7 +528,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 				keep_half_damo()
 				break
 			end
-			-- 失败继续邀请
+			-- 失败邀请
 			x, y = captain_team_lost_invite() if (x > -1) then ran_touch(0, 673, 384, 20, 10) invite = 0 time_cnt = 0 break end -- 确定
 			-- 自动邀请
 			if (captain_auto_group == 1 and quit == 0) then 
@@ -529,7 +537,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 					break 
 				end 
 			end
-			-- 邀请队友
+			-- 胜利邀请
 			x, y = captain_team_win_invite() 
 			if (x > -1) then
 				if quit == 1 then
@@ -553,15 +561,15 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 				if (time_cnt > math.random(8, 12)) then
 					invite = 1
 				end
-				if (auto_invite_first == 1 and invite == 1) then
+				if (captain_auto_invite == 1 and invite == 1) then
 					ran_touch(0, 565, 320, 50, 50) -- 邀请初始化
 					x, y = captain_room_invite_init() if (x > -1) then break end
 				end
 				break
 			end
 			-- 邀请第一个好友
-			if (auto_invite_first == 1 and invite == 1) then
-				x, y = captain_room_invite_first() if (x > -1) then invite = 0 time_cnt = 0 break end
+			if (captain_auto_invite == 1 and invite == 1) then
+				x, y = captain_room_invite_first(invite_zone) if (x > -1) then invite = 0 time_cnt = 0 break end
 			end
 			-- 开始战斗
 			if gourp == "固定队2人" then

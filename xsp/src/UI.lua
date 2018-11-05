@@ -65,11 +65,12 @@ UI:Line(bqds_ui, "line_common", "100,100,100", 2, 960, "20,660,960,2")
 UI:Label(bqds_ui, "left", "0,0,0", 30, "队员设置 - ", "20,670,900,60")
 UI:CheckBoxGroup(bqds_ui, "member_auto_group","接受自动组队","0",30,"0,0,0","20,730,900,60")
 UI:CheckBoxGroup(bqds_ui, "fail_and_group","失败后重新寻找队伍","0",30,"0,0,0","20,790,900,60")
-UI:CheckBoxGroup(bqds_ui, "member_to_captain","禁止队员接受队长","0",30,"0,0,0","20,850,900,60")
+UI:CheckBoxGroup(bqds_ui, "member_to_captain","禁止队员接手队长","0",30,"0,0,0","20,850,900,60")
 UI:Line(bqds_ui, "line_common", "100,100,100", 2, 960, "20,910,960,2")
 UI:Label(bqds_ui, "left", "0,0,0", 30, "队长设置 - ", "20,920,900,60")
 UI:CheckBoxGroup(bqds_ui, "captain_auto_group","开启自动组队","0",30,"0,0,0","20,980,900,60")
-UI:CheckBoxGroup(bqds_ui, "auto_invite_first","固定队伍自动邀请第一位好友[取消则需在组队界面手动邀请]","0",30,"0,0,0","20,1040,980,60")
+UI:CheckBoxGroup(bqds_ui, "captain_auto_invite","固定队伍自动邀请第一位","0",30,"0,0,0","20,1040,500,60")
+UI:ComboBox(bqds_ui, "auto_invite_zone", "本区好友,最近组队,跨区好友","0",23,"700,1040,280,50")
 UI:CheckBoxGroup(bqds_ui, "fail_and_recreate","失败后重新建立房间","0",30,"0,0,0","20,1100,900,60")
 UI:fit(bqds_ui)
 
@@ -92,18 +93,20 @@ UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗胜利次数 - ", "20,540,500,60
 UI:ComboBox(tansuo_ui, "win_round", "3次,10次,20次,30次[组队寮任务],50次,100次,无限次","6",23,"600,540,380,50")
 UI:Label(tansuo_ui, "left", "0,0,0", 30, "章节通关次数 - ", "20,600,500,60")
 UI:ComboBox(tansuo_ui, "sec_round", "1次,2次,3次,5次,10次,50次,无限次","2",23,"600,600,380,50")
-UI:Line(tansuo_ui, "line_common", "100,100,100", 2, 960, "20,660,960,2")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮设置[狗粮队长位置为阴阳师左前方] - ", "20,670,900,60")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "强制普攻 - ", "20,730,300,60")
-UI:RadioGroup(tansuo_ui, "nor_attk", "开启            ,关闭","0",30,"0,0,0","600,730,400,60")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动更换 - ", "20,790,300,60")
-UI:RadioGroup(tansuo_ui, "auto_change", "开启            ,关闭","1",30,"0,0,0","600,790,400,60")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "初始翻页 - ", "20,850,300,60")
-UI:ComboBox(tansuo_ui, "page_jump", "第一页,第二页,第三页,第四页,第五页,第六页,第七页,第八页,第九页,第十页","0",23,"600,850,380,50")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮类型 - ", "20,910,300,60")
-UI:RadioGroup(tansuo_ui, "df_type", "N卡             ,素材","0",30,"0,0,0","600,910,400,60")
-UI:Label(tansuo_ui, "left", "0,0,0", 30, "素材类型[暂时无效] - ", "20,970,300,60")
-UI:CheckBoxGroup(tansuo_ui, "egg_color","红蛋,白蛋,蓝蛋,黑蛋","1@2",30,"0,0,0","420,970,580,60")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "队长自动邀请 - ", "20,660,500,60")
+UI:ComboBox(tansuo_ui, "captain_auto_invite", "不使用自动邀请,第一位阴阳寮寮友,第一位本区好友,第一位跨区好友","0",23,"600,660,380,50")
+UI:Line(tansuo_ui, "line_common", "100,100,100", 2, 960, "20,720,960,2")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮设置[狗粮队长位置为阴阳师左前方] - ", "20,730,900,60")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "强制普攻 - ", "20,790,300,60")
+UI:RadioGroup(tansuo_ui, "nor_attk", "开启            ,关闭","0",30,"0,0,0","600,790,400,60")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动更换 - ", "20,850,300,60")
+UI:RadioGroup(tansuo_ui, "auto_change", "开启            ,关闭","1",30,"0,0,0","600,850,400,60")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "初始翻页 - ", "20,910,300,60")
+UI:ComboBox(tansuo_ui, "page_jump", "第一页,第二页,第三页,第四页,第五页,第六页,第七页,第八页,第九页,第十页","0",23,"600,910,380,50")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮类型 - ", "20,970,300,60")
+UI:RadioGroup(tansuo_ui, "df_type", "N卡             ,素材","0",30,"0,0,0","600,970,400,60")
+UI:Label(tansuo_ui, "left", "0,0,0", 30, "素材类型[暂时无效] - ", "20,1030,300,60")
+UI:CheckBoxGroup(tansuo_ui, "egg_color","红蛋,白蛋,蓝蛋,黑蛋","1@2",30,"0,0,0","470,1030,580,60")
 UI:fit(tansuo_ui)
 
 -- 结界突破
@@ -147,11 +150,12 @@ UI:Line(juexing_ui, "line_common", "100,100,100", 2, 960, "20,560,960,2")
 UI:Label(juexing_ui, "left", "0,0,0", 30, "队员设置 - ", "20,570,900,60")
 UI:CheckBoxGroup(juexing_ui, "member_auto_group","接受自动组队","0",30,"0,0,0","20,630,900,60")
 UI:CheckBoxGroup(juexing_ui, "fail_and_group","失败后重新寻找队伍","0",30,"0,0,0","20,690,900,60")
-UI:CheckBoxGroup(juexing_ui, "member_to_captain","禁止队员接受队长","0",30,"0,0,0","20,750,900,60")
+UI:CheckBoxGroup(juexing_ui, "member_to_captain","禁止队员接手队长","0",30,"0,0,0","20,750,900,60")
 UI:Line(juexing_ui, "line_common", "100,100,100", 2, 960, "20,810,960,2")
 UI:Label(juexing_ui, "left", "0,0,0", 30, "队长设置 - ", "20,820,900,60")
 UI:CheckBoxGroup(juexing_ui, "captain_auto_group","开启自动组队","0",30,"0,0,0","20,880,900,60")
-UI:CheckBoxGroup(juexing_ui, "auto_invite_first","固定队伍自动邀请第一位好友[取消则需在组队界面手动邀请]","0",30,"0,0,0","20,940,980,60")
+UI:CheckBoxGroup(juexing_ui, "captain_auto_invite","固定队伍自动邀请第一位","0",30,"0,0,0","20,940,500,60")
+UI:ComboBox(juexing_ui, "auto_invite_zone", "本区好友,最近组队,跨区好友","0",23,"700,940,280,50")
 UI:CheckBoxGroup(juexing_ui, "fail_and_recreate","失败后重新建立房间","0",30,"0,0,0","20,1000,900,60")
 UI:fit(juexing_ui)
 
@@ -507,11 +511,20 @@ function baqidashe_UI()
 		captain_auto_group = 0
 	end
 	
-	local auto_invite_first
-	if (res_baqi.auto_invite_first == "0") then
-		auto_invite_first = 1
+	local captain_auto_invite
+	if (res_baqi.captain_auto_invite == "0") then
+		captain_auto_invite = 1
 	else
-		auto_invite_first = 0
+		captain_auto_invite = 0
+	end
+	
+	local auto_invite_zone
+	if (res_baqi.auto_invite_zone == "0") then
+		auto_invite_zone = "好友"
+	elseif (res_baqi.auto_invite_zone == "1") then
+		auto_invite_zone = "最近"
+	elseif(res_baqi.auto_invite_zone == "2") then
+		auto_invite_zone = "跨区"
 	end
 	
 	local fail_and_recreate
@@ -526,7 +539,7 @@ function baqidashe_UI()
 		return
 	end
 	
-	yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
+	yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
 end
 
 function tansuo_UI()
@@ -576,6 +589,10 @@ function tansuo_UI()
 		hard = "困难"
 	end
 	
+	if mode == "队长" then
+		hard = "困难"
+	end
+	
 	section = tonumber(res_tansuo.section) + 1
 	
 	if res_tansuo.count_mode == "0" then
@@ -618,6 +635,17 @@ function tansuo_UI()
 		sec_round = 50
 	elseif res_tansuo.sec_round == "6" then
 		sec_round = 99999
+	end
+	
+	local captain_auto_invite
+	if res_tansuo.captain_auto_invite == "0" then
+		captain_auto_invite = "禁用"
+	elseif res_tansuo.captain_auto_invite == "1" then
+		captain_auto_invite = "寮友"
+	elseif res_tansuo.captain_auto_invite == "2" then
+		captain_auto_invite = "好友"
+	elseif res_tansuo.captain_auto_invite == "3" then
+		captain_auto_invite = "跨区"
 	end
 	
 	local nor_attk, auto_change, page_jump, df_type, egg_color
@@ -663,7 +691,7 @@ function tansuo_UI()
 		return
 	end
 	
-	tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
+	tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
 end
 
 function jjtp_UI()
@@ -890,11 +918,20 @@ function juexing_UI()
 		captain_auto_group = 0
 	end
 	
-	local auto_invite_first
-	if (res_juexing.auto_invite_first == "0") then
-		auto_invite_first = 1
+	local captain_auto_invite
+	if (res_juexing.captain_auto_invite == "0") then
+		captain_auto_invite = 1
 	else
-		auto_invite_first = 0
+		captain_auto_invite = 0
+	end
+	
+	local auto_invite_zone
+	if (res_juexing.auto_invite_zone == "0") then
+		auto_invite_zone = "好友"
+	elseif (res_juexing.auto_invite_zone == "1") then
+		auto_invite_zone = "最近"
+	elseif(res_juexing.auto_invite_zone == "2") then
+		auto_invite_zone = "跨区"
 	end
 	
 	local fail_and_recreate
@@ -909,7 +946,7 @@ function juexing_UI()
 		return
 	end
 	
-	juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, auto_invite_first, fail_and_recreate)
+	juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
 end
 
 function yeyuanhuo_UI()

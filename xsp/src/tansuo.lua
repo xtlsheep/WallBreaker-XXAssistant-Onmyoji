@@ -317,9 +317,9 @@ function sushi_check()
 end
 
 -- Main func
-function tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
-	print(string.format("模式: %s, 选择: 物品-%d,金币-%d,经验-%d,Boss-%d, 标记: %s, 难度: %s, 章节: %d, 限定: %s, 胜利: %s, 通关: %s",
-			mode, sel[1], sel[2], sel[3], sel[4], mark, hard, section, count_mode, win_round, sec_round))
+function tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
+	print(string.format("模式: %s, 选择: 物品-%d,金币-%d,经验-%d,Boss-%d, 标记: %s, 难度: %s, 章节: %d, 限定: %s, 胜利: %s, 通关: %s, 邀请 %s",
+			mode, sel[1], sel[2], sel[3], sel[4], mark, hard, section, count_mode, win_round, sec_round, captain_auto_invite))
 	print(string.format("狗粮普攻 %d, 自动更换 %d, 初始翻页 %d, 狗粮类型 %s, 素材类型(红蛋 %d, 白蛋 %d, 蓝蛋 %d, 黑蛋 %d)",
 			nor_attk, auto_change, page_jump, df_type, egg_color[1], egg_color[2], egg_color[3], egg_color[4]))
 	print_global_vars()
@@ -327,7 +327,7 @@ function tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round
 	if mode == "单人" then
 		tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
 	elseif mode == "队长" then
-		tansuo_captain(sel, mark, "困难", section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
+		tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
 	elseif mode == "队员" then
 		tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg_color)
 	end
@@ -573,7 +573,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 	return
 end
 
-function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
+function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
 	local move_total = math.random(6, 8)
 	local move_cnt = 0
 	local scene_quit = 0
@@ -588,10 +588,19 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 	local local_buff_idle_stop = 0
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
+	local invite_zone = -1
 	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
 	local x, y, x_, y_
+	
+	if captain_auto_invite == "寮友" then
+		invite_zone = 1
+	elseif captain_auto_invite == "好友" then
+		invite_zone = 2
+	elseif captain_auto_invite == "跨区" then
+		invite_zone = 3
+	end
 	
 	while (1) do
 		while (1) do
@@ -780,6 +789,10 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				mSleep(2000)
 				break
 			end
+			-- 邀请第一个好友
+			if (captain_auto_invite ~= "禁用") then
+				x, y = captain_room_invite_first(invite_zone) if (x > -1) then mSleep(3000) break end
+			end
 			-- 继续邀请
 			x, y = team_invite()
 			if x > -1 then
@@ -849,8 +862,6 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			mSleep(500)
 			-- 悬赏封印
 			x, y = find_offer() if (x > -1) then break end
-			-- 接受邀请
-			x, y, auto_grouped = member_team_accept_invite(1) if (x > -1) then break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then
@@ -871,6 +882,23 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				keep_half_damo()
 				break
 			end
+			-- 探索场景
+			x, y = lct_section()
+			if x > -1 then
+				-- Unlock
+				if unlock == 0 then
+					lock_or_unlock(0, "探索")
+					unlock = 1
+					break
+				end
+				x_, y_ = member_quit()
+				if x_ == -1 then
+					ran_touch(0, 47, 56, 5, 5) -- 左上退出
+				end
+				break
+			end
+			-- 接受邀请
+			x, y, auto_grouped = member_team_accept_invite(1) if (x > -1) then break end
 			-- 自动狗粮
 			if auto_change == 0 then
 				-- 战斗准备
@@ -949,21 +977,6 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 					x_, y_ = fight_ready() if (x_ > -1) then break end
 					break
 				end
-			end
-			-- 探索场景
-			x, y = lct_section()
-			if x > -1 then
-				-- Unlock
-				if unlock == 0 then
-					lock_or_unlock(0, "探索")
-					unlock = 1
-					break
-				end
-				x_, y_ = member_quit()
-				if x_ == -1 then
-					ran_touch(0, 47, 56, 5, 5) -- 左上退出
-				end
-				break
 			end
 			-- 确认退出
 			x, y = quit_confirm() if x > -1 then ran_touch(0, x, y, 30, 5) break end

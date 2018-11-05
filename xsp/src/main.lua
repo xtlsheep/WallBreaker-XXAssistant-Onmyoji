@@ -9,6 +9,7 @@ ENABLE = 1
 DISABLE = 0
 
 -- Init
+print(os.date())
 width_dev = 640
 height_dev = 1136
 width, height = getScreenSize()
@@ -18,7 +19,6 @@ script_init()
 setScreenScale(width_dev, height_dev) -- iPhone 5s
 ratio = height_dev/height
 s = (height*0.050)*(ratio)
-print(os.date())
 print(string.format("OS = %s, width = %d, height = %d, dpi = %d", ver, width, height, dpi))
 math.randomseed(os.time())
 math.random(1,10000)
