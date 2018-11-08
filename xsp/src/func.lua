@@ -1,12 +1,7 @@
 require "util"
 
 -- Some func
-function script_init()
-	-- Direction Error
-	direct_err_ui = UI:new("portal.dat", 500, 250, "退出", "退出", "backGround.jpg")
-	UI:Label(direct_err_ui, "left", "0,0,0", 30, "屏幕方向识别失败，请加群向作者反映此问题，谢谢~", "30,50,470,150")
-	UI:fit(direct_err_ui)
-	
+function direction_init()
 	local ret = getScreenDirection()
 	
 	if ret == 0 then
@@ -14,7 +9,6 @@ function script_init()
 		init("0", 1)
 		return
 	elseif ret == 1 then
-		ver = getOSType()
 		if ver == "iOS" then
 			print("屏幕方向为横屏，HOME键在右")
 		elseif ver == "android" then
@@ -24,7 +18,6 @@ function script_init()
 		print("屏幕方向为横屏，HOME键在左")
 	else
 		print("屏幕方向Unknow")
-		UI:show(direct_err_ui)
 		lua_exit()
 	end
 	
@@ -33,7 +26,6 @@ end
 
 function onBeforeUserExit()
 	settlement_UI()
-	lua_exit()
 end
 
 function show_win_fail(win_cnt, fail_cnt)

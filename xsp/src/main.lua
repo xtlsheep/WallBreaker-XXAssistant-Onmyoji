@@ -17,7 +17,7 @@ height_dev = 1136
 width, height = getScreenSize()
 ver = getOSType()
 dpi = getScreenDPI()
-script_init()
+direction_init()
 setScreenScale(width_dev, height_dev) -- iPhone 5s
 ratio = height_dev/height
 s = (height*0.050)*(ratio)
