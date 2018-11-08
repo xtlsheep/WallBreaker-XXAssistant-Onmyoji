@@ -46,7 +46,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				win_cnt = win_cnt + 1
+				win_cnt.global = win_cnt.global + 1
 				if (last_sel == "tan") then
 					cnt_tan = cnt_tan + 1
 				elseif (last_sel == "chen") then
@@ -54,7 +54,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 				elseif (last_sel == "chi") then
 					cnt_chi = cnt_chi + 1
 				end
-				show_win_fail(win_cnt, fail_cnt)
+				show_win_fail(win_cnt.global, fail_cnt.global)
 				yyh_win_cnt = yyh_win_cnt + 1
 				keep_half_damo()
 				break
@@ -135,8 +135,8 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 845, 320, 50, 50) ran_sleep(1000) break end -- 业原火
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
-				fail_cnt = fail_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
+				fail_cnt.global = fail_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
 				yyh_fail_cnt = yyh_fail_cnt + 1
 				keep_fight_failed("单人")
 				break

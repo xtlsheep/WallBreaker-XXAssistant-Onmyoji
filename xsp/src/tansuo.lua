@@ -379,12 +379,12 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				win_cnt = win_cnt + 1
+				win_cnt.global = win_cnt.global + 1
 				local_buff_idle_stop = 0
-				show_win_fail(win_cnt, fail_cnt)
-				tansuo_win_cnt = tansuo_win_cnt + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.tansuo = win_cnt.tansuo + 1
 				if count_mode == "战斗" then
-					if tansuo_win_cnt >= win_round then
+					if win_cnt.tansuo >= win_round then
 						scene_quit = 1
 						quit = 1
 					end
@@ -552,9 +552,9 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
-				fail_cnt = fail_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
-				tansuo_fail_cnt = tansuo_fail_cnt + 1
+				fail_cnt.global = fail_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				fail_cnt.tansuo = fail_cnt.tansuo + 1
 				keep_fight_failed("单人")
 				break
 			end
@@ -628,12 +628,12 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				win_cnt = win_cnt + 1
+				win_cnt.global = win_cnt.global + 1
 				local_buff_idle_stop = 0
-				show_win_fail(win_cnt, fail_cnt)
-				tansuo_win_cnt = tansuo_win_cnt + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.tansuo = win_cnt.tansuo + 1
 				if count_mode == "战斗" then
-					if tansuo_win_cnt >= win_round then
+					if win_cnt.tansuo >= win_round then
 						scene_quit = 1
 						quit = 1
 					end
@@ -817,9 +817,9 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
-				fail_cnt = fail_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
-				tansuo_fail_cnt = tansuo_fail_cnt + 1
+				fail_cnt.global = fail_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				fail_cnt.tansuo = fail_cnt.tansuo + 1
 				keep_fight_failed("组队")
 				break
 			end
@@ -875,10 +875,10 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				win_cnt = win_cnt + 1
+				win_cnt.global = win_cnt.global + 1
 				local_buff_idle_stop = 0
-				show_win_fail(win_cnt, fail_cnt)
-				tansuo_win_cnt = tansuo_win_cnt + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.tansuo = win_cnt.tansuo + 1
 				keep_half_damo()
 				break
 			end
@@ -982,9 +982,9 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			x, y = quit_confirm() if x > -1 then ran_touch(0, x, y, 30, 5) break end
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
-				fail_cnt = fail_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
-				tansuo_fail_cnt = tansuo_fail_cnt + 1
+				fail_cnt.global = fail_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				fail_cnt.tansuo = fail_cnt.tansuo + 1
 				keep_fight_failed("组队")
 				break
 			end

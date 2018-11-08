@@ -114,11 +114,11 @@ function yuhun_solo(mark, level, round, lock)
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				win_cnt = win_cnt + 1
+				win_cnt.global = win_cnt.global + 1
 				local_buff_idle_stop = 0
-				show_win_fail(win_cnt, fail_cnt)
-				yuhun_win_cnt = yuhun_win_cnt + 1
-				if yuhun_win_cnt >= round then
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.yuhun = win_cnt.yuhun + 1
+				if win_cnt.yuhun >= round then
 					quit = 1
 				end	
 				keep_half_damo()
@@ -145,9 +145,9 @@ function yuhun_solo(mark, level, round, lock)
 			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 355, 320, 50, 50) break end -- 八岐大蛇
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
-				fail_cnt = fail_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
-				yuhun_fail_cnt = yuhun_fail_cnt + 1
+				fail_cnt.global = fail_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				fail_cnt.yuhun = fail_cnt.yuhun + 1
 				keep_fight_failed("单人")
 				break
 			end
@@ -230,14 +230,14 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
 				wait_invite = 1
-				win_cnt = win_cnt + 1
+				win_cnt.global = win_cnt.global + 1
 				local_buff_idle_stop = 0
-				show_win_fail(win_cnt, fail_cnt)
-				yuhun_win_cnt = yuhun_win_cnt + 1
-				if yuhun_win_cnt >= round -1 then
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.yuhun = win_cnt.yuhun + 1
+				if win_cnt.yuhun >= round -1 then
 					group_quit = 1
 				end
-				if yuhun_win_cnt >= round then
+				if win_cnt.yuhun >= round then
 					quit = 1
 				end
 				keep_half_damo()
@@ -266,9 +266,9 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 				else
 					wait_invite = 1
 				end
-				fail_cnt = fail_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
-				yuhun_fail_cnt = yuhun_fail_cnt + 1
+				fail_cnt.global = fail_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				fail_cnt.yuhun = fail_cnt.yuhun + 1
 				keep_fight_failed("组队")
 				break
 			end
@@ -333,14 +333,14 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				win_cnt = win_cnt + 1
+				win_cnt.global = win_cnt.global + 1
 				local_buff_idle_stop = 0
-				show_win_fail(win_cnt, fail_cnt)
-				yuhun_win_cnt = yuhun_win_cnt + 1
-				if yuhun_win_cnt >= round -1 then
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.yuhun = win_cnt.yuhun + 1
+				if win_cnt.yuhun >= round -1 then
 					group_quit = 1
 				end
-				if yuhun_win_cnt >= round then
+				if win_cnt.yuhun >= round then
 					quit = 1
 				end
 				keep_half_damo()
@@ -404,9 +404,9 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 ran_touch(0, 573, 440, 20, 10) break end -- 组队开始
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
-				fail_cnt = fail_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
-				yuhun_fail_cnt = yuhun_fail_cnt + 1
+				fail_cnt.global = fail_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				fail_cnt.yuhun = fail_cnt.yuhun + 1
 				keep_fight_failed("组队")
 				break
 			end
@@ -470,10 +470,10 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
 				wait_invite = 1
-				win_cnt = win_cnt + 1
+				win_cnt.global = win_cnt.global + 1
 				local_buff_idle_stop = 0
-				show_win_fail(win_cnt, fail_cnt)
-				yuhun_win_cnt = yuhun_win_cnt + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.yuhun = win_cnt.yuhun + 1
 				keep_half_damo()
 				break
 			end
@@ -488,9 +488,9 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			x, y = member_room_quit() if (x > -1) then break end
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
-				fail_cnt = fail_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
-				yuhun_fail_cnt = yuhun_fail_cnt + 1
+				fail_cnt.global = fail_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				fail_cnt.yuhun = fail_cnt.yuhun + 1
 				keep_fight_failed("组队")
 				break
 			end
@@ -558,14 +558,14 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				win_cnt = win_cnt + 1
+				win_cnt.global = win_cnt.global + 1
 				local_buff_idle_stop = 0
-				show_win_fail(win_cnt, fail_cnt)
-				yuhun_win_cnt = yuhun_win_cnt + 1
-				if yuhun_win_cnt >= round -1 then
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.yuhun = win_cnt.yuhun + 1
+				if win_cnt.yuhun >= round -1 then
 					group_quit = 1
 				end
-				if yuhun_win_cnt >= round then
+				if win_cnt.yuhun >= round then
 					quit = 1
 				end
 				keep_half_damo()
@@ -641,9 +641,9 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 ran_touch(0, 573, 440, 20, 10) break end -- 组队开始
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
-				fail_cnt = fail_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
-				yuhun_fail_cnt = yuhun_fail_cnt + 1
+				fail_cnt.global = fail_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				fail_cnt.yuhun = fail_cnt.yuhun + 1
 				keep_fight_failed("组队")
 				break
 			end

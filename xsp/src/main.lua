@@ -9,9 +9,9 @@ ENABLE = 1
 DISABLE = 0
 
 -- Init
-start_date = os.date()
+system_date = os.date()
 start_time = mTime()
-print(start_date)
+print(system_date)
 width_dev = 640
 height_dev = 1136
 width, height = getScreenSize()
@@ -30,24 +30,13 @@ linkage = 0
 HUD = nil
 hud_scene = nil
 dis_skl_fea = 1
+show_settlement = 0
 offer_arr = {0, 0, 0, 0, 0, 0}
 
-win_cnt = 0
-fail_cnt = 0
-yuhun_win_cnt = 0
-yuhun_fail_cnt = 0
-tansuo_win_cnt = 0
-tansuo_fail_cnt = 0
-jjtp_win_cnt = 0
-jjtp_fail_cnt = 0
-juexing_win_cnt = 0
-juexing_fail_cnt = 0
-yyh_win_cnt = 0
-yyh_fail_cnt = 0
-yuling_win_cnt = 0
-yuling_fail_cnt = 0
-yqfy_win_cnt = 0
-yqfy_fail_cnt = 0
+win_cnt = {global = 0, yuhun = 0, tansuo = 0, jjtp = 0, juexing = 0, yyh = 0, yuling = 0, yqfy = 0,
+	yuhun_total = 0, tansuo_total = 0, jjtp_total = 0, juexing_total = 0, yyh_total = 0, yuling_total = 0, yqfy_total = 0}
+fail_cnt = {global = 0, yuhun = 0, tansuo = 0, jjtp = 0, juexing = 0, yyh = 0, yuling = 0, yqfy = 0,
+	yuhun_total = 0, tansuo_total = 0, jjtp_total = 0, juexing_total = 0, yyh_total = 0, yuling_total = 0, yqfy_total = 0}
 
 buff_usup_stop = 0
 buff_idle_stop = 0
@@ -64,4 +53,3 @@ intel_jjtp_pub = 0
 
 -- Portal
 portal_UI()
-settlement_UI()

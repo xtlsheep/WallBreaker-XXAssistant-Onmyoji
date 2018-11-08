@@ -104,11 +104,11 @@ function juexing_solo(element, mark, level, round, lock)
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				win_cnt = win_cnt + 1
+				win_cnt.global = win_cnt.global + 1
 				local_buff_idle_stop = 0
-				show_win_fail(win_cnt, fail_cnt)
-				juexing_win_cnt = juexing_win_cnt + 1
-				if juexing_win_cnt >= round then
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.juexing = win_cnt.juexing + 1
+				if win_cnt.juexing >= round then
 					quit = 1
 				end				
 				keep_half_damo()
@@ -136,9 +136,9 @@ function juexing_solo(element, mark, level, round, lock)
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
-				fail_cnt = fail_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
-				juexing_fail_cnt = juexing_fail_cnt + 1
+				fail_cnt.global = fail_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				fail_cnt.juexing = fail_cnt.juexing + 1
 				keep_fight_failed("单人")
 				break
 			end
@@ -213,14 +213,14 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
 				wait_invite = 1
-				win_cnt = win_cnt + 1
+				win_cnt.global = win_cnt.global + 1
 				local_buff_idle_stop = 0
-				show_win_fail(win_cnt, fail_cnt)
-				juexing_win_cnt = juexing_win_cnt + 1
-				if juexing_win_cnt >= round -1 then
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.juexing = win_cnt.juexing + 1
+				if win_cnt.juexing >= round -1 then
 					group_quit = 1
 				end
-				if juexing_win_cnt >= round then
+				if win_cnt.juexing >= round then
 					quit = 1
 				end
 				keep_half_damo()
@@ -249,9 +249,9 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 				else
 					wait_invite = 1
 				end
-				fail_cnt = fail_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
-				juexing_fail_cnt = juexing_fail_cnt + 1
+				fail_cnt.global = fail_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				fail_cnt.juexing = fail_cnt.juexing + 1
 				keep_fight_failed("组队")
 				break
 			end
@@ -308,14 +308,14 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				win_cnt = win_cnt + 1
+				win_cnt.global = win_cnt.global + 1
 				local_buff_idle_stop = 0
-				show_win_fail(win_cnt, fail_cnt)
-				juexing_win_cnt = juexing_win_cnt + 1
-				if juexing_win_cnt >= round -1 then
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.juexing = win_cnt.juexing + 1
+				if win_cnt.juexing >= round -1 then
 					group_quit = 1
 				end
-				if juexing_win_cnt >= round then
+				if win_cnt.juexing >= round then
 					quit = 1
 				end
 				keep_half_damo()
@@ -380,9 +380,9 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 ran_touch(0, 573, 440, 20, 10) break end -- 组队开始
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
-				fail_cnt = fail_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
-				juexing_fail_cnt = juexing_fail_cnt + 1
+				fail_cnt.global = fail_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				fail_cnt.juexing = fail_cnt.juexing + 1
 				keep_fight_failed("组队")
 				break
 			end
@@ -436,10 +436,10 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
 				wait_invite = 1
-				win_cnt = win_cnt + 1
+				win_cnt.global = win_cnt.global + 1
 				local_buff_idle_stop = 0
-				show_win_fail(win_cnt, fail_cnt)
-				juexing_win_cnt = juexing_win_cnt + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.juexing = win_cnt.juexing + 1
 				keep_half_damo()
 				break
 			end
@@ -454,9 +454,9 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			x, y = member_room_quit() if (x > -1) then break end
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
-				fail_cnt = fail_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
-				juexing_fail_cnt = juexing_fail_cnt + 1
+				fail_cnt.global = fail_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				fail_cnt.juexing = fail_cnt.juexing + 1
 				keep_fight_failed("组队")
 				break
 			end
@@ -515,14 +515,14 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				win_cnt = win_cnt + 1
+				win_cnt.global = win_cnt.global + 1
 				local_buff_idle_stop = 0
-				show_win_fail(win_cnt, fail_cnt)
-				juexing_win_cnt = juexing_win_cnt + 1
-				if juexing_win_cnt >= round -1 then
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.juexing = win_cnt.juexing + 1
+				if win_cnt.juexing >= round -1 then
 					group_quit = 1
 				end
-				if juexing_win_cnt >= round then
+				if win_cnt.juexing >= round then
 					quit = 1
 				end
 				keep_half_damo()
@@ -599,9 +599,9 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 ran_touch(0, 573, 440, 20, 10) break end -- 组队开始
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
-				fail_cnt = fail_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
-				juexing_fail_cnt = juexing_fail_cnt + 1
+				fail_cnt.global = fail_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				fail_cnt.juexing = fail_cnt.juexing + 1
 				keep_fight_failed("组队")
 				break
 			end

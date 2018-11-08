@@ -47,11 +47,11 @@ function yuling(sel, level, round, lock)
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				win_cnt = win_cnt + 1
+				win_cnt.global = win_cnt.global + 1
 				rd = rd - 1
-				show_win_fail(win_cnt, fail_cnt)
-				yuling_win_cnt = yuling_win_cnt + 1
-				if yuling_win_cnt >= round then
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.yuling = win_cnt.yuling + 1
+				if win_cnt.yuling >= round then
 					quit = 1
 				end
 				keep_half_damo()
@@ -90,9 +90,9 @@ function yuling(sel, level, round, lock)
 			end
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
-				fail_cnt = fail_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
-				yuling_fail_cnt = yuling_fail_cnt + 1
+				fail_cnt.global = fail_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				fail_cnt.yuling = fail_cnt.yuling + 1
 				keep_fight_failed("单人")
 				break
 			end
