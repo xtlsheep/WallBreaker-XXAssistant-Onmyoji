@@ -54,18 +54,13 @@ function ran_interv()
 end
 
 function ran_sleep(t)
-	local t = t + 0.25*math.random(-t, t)
+	local t = t + 0.2*math.random(-t, t)
 	mSleep(t)
 end
 
-function show_point(x, y)
-	local dbg_button = createHUD()
-	if x and y then
-		HUD_show_or_hide(HUD,dbg_button, "", 1, "0xff000000", "button.png", 0, x-s, y-s, s*2, s*2)
-	end
-	mSleep(250)
-	hideHUD(dbg_button)
-	ran_interv()
+function show_point(x, y, interv)
+	HUD_show_or_hide(HUD,button, "", 1, "0xff000000", "button.png", 0, x-s, y-s, s*2, s*2)
+	mSleep(interv)
 end
 
 function ran_touch(id, x, y, ran_x, ran_y)
@@ -79,41 +74,85 @@ function ran_touch(id, x, y, ran_x, ran_y)
 		x_r = x + math.random(-ran_x, ran_x)
 		y_r = y + math.random(-ran_y, ran_y)
 	end
-	ran_interv()
-	show_point(x_r, y_r)
-	touchDown(id, x_r, y_r)
-	ran_interv()
-	touchUp(id, x_r, y_r)
-	ran_interv()
-end
-
-function ran_move(id ,x, y, x_l, y_l, ran)
-	local x1_r, y1_r, x2_r, y2_r
-	if ((x == nil) or (y == nil)) then
-		print("ran move: nil x or y")
-		return
-	end
-	x1_r = x + math.random(-ran, ran)
-	y1_r = y + math.random(-ran, ran)
-	x2_r = x + x_l + math.random(-ran, ran)
-	y2_r = y + y_l + math.random(-ran, ran)
 	
+	button = createHUD()
+	show_point(x_r, y_r, 250)
+	hideHUD(button)
 	ran_interv()
-	touchDown(id, x1_r, y1_r)
-	ran_interv()
-	touchMove(id, x2_r, y2_r)
-	ran_interv()
-	touchUp(id, x2_r, y2_r)
-	ran_interv()
+	touchDown(id, x_r, y_r)
+	ran_sleep(200)
+	touchUp(id, x_r, y_r)
 end
 
-function ran_move_steps(id ,x, y, x_ran, y_ran, x_interv, y_interv, steps)
-	x_ = x + math.random(-x_ran, x_ran)
-	y_ = y + math.random(-y_ran, y_ran)
-	touchDown(0, x_, y_)
-	for i = 1, steps do
-		touchMove(0, x_+i*x_interv, y_+i*y_interv)
-		mSleep(25)
+function ran_move_curve(id, start_point_X, start_point_Y, end_point_X, end_point_Y, ran)
+	local function bezier_interpolation(t, init_points, init_points_num)
+		local curve_X_tmp = {}
+		local curve_Y_tmp = {}
+		
+		for i = 1, init_points_num - 1 do
+			for j = 0, init_points_num - i - 1 do
+				if i == 1 then
+					curve_X_tmp[j+1] = init_points[j+1].X*(1-t) + init_points[j+2].X*t
+					curve_Y_tmp[j+1] = init_points[j+1].Y*(1-t) + init_points[j+2].Y*t
+				else
+					curve_X_tmp[j+1] = curve_X_tmp[j+1]*(1-t) + curve_X_tmp[j+2]*t
+					curve_Y_tmp[j+1] = curve_Y_tmp[j+1]*(1-t) + curve_Y_tmp[j+2]*t
+				end
+			end
+		end
+		return math.floor(curve_X_tmp[1]), math.floor(curve_Y_tmp[1])
 	end
-	touchUp(0, x_+steps*x_interv, y_+steps*y_interv)
+	
+	local start_X_ran, start_Y_ran, end_X_ran, end_Y_ran
+	local step, t
+	local curve_X = {}
+	local curve_Y = {}
+	local init_points
+	local mid_point_X, mid_point_Y
+	local control_point_X, control_point_Y
+	local ran_X, ran_Y
+	local distance, distance_X, distance_Y
+	local curve_points
+	
+	start_X_ran = start_point_X + math.random(-ran, ran)
+	start_Y_ran = start_point_Y + math.random(-ran, ran)
+	end_X_ran = end_point_X + math.random(-ran, ran)
+	end_Y_ran = end_point_Y + math.random(-ran, ran)
+	print(string.format("start point (%d, %d) - end point (%d, %d)", start_X_ran, start_Y_ran, end_X_ran, end_Y_ran))
+	
+	mid_point_X = math.abs(start_X_ran + end_X_ran)/2
+	mid_point_Y = math.abs(start_Y_ran + end_Y_ran)/2
+	print(string.format("mid point (%d, %d)", mid_point_X, mid_point_Y))
+	
+	distance_X = math.abs(start_X_ran - end_X_ran)
+	distance_Y = math.abs(start_Y_ran - end_Y_ran)
+	distance = math.sqrt(distance_X^2 + distance_Y^2)
+	print(string.format("distance %d(X - %d, Y - %d)", distance, distance_X, distance_Y))
+	
+	ran_control = distance/6
+	control_point_X = math.floor(mid_point_X + math.random(-ran_control, ran_control))
+	control_point_Y = math.floor(mid_point_Y + math.random(-ran_control, ran_control))
+	print(string.format("control point (%d, %d)", control_point_X, control_point_Y))
+	
+	init_points = {{X = start_X_ran, Y = start_Y_ran}, {X = control_point_X, Y = control_point_Y}, {X = end_X_ran, Y = end_Y_ran}}
+	
+	curve_points = math.floor(distance/25)
+	step = 1/curve_points
+	t = 0
+	
+	for i = 0, curve_points - 1 do
+		curve_X[i+1], curve_Y[i+1] = bezier_interpolation(t, init_points, 3)
+		t = t + step
+	end
+	
+	button = createHUD()
+	touchDown(id, curve_X[1], curve_Y[1])
+	show_point(curve_X[1], curve_Y[1], 150)
+	for i = 2, curve_points - 1 do
+		show_point(curve_X[i], curve_Y[i], 10)
+		touchMove(id, curve_X[i], curve_Y[i])
+	end
+	show_point(curve_X[curve_points], curve_Y[curve_points], 150)
+	touchUp(id, curve_X[curve_points], curve_Y[curve_points])
+	hideHUD(button)
 end
