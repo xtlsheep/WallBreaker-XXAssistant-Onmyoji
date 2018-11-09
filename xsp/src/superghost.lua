@@ -9,7 +9,7 @@ function lct_sg_window()
 		"0|0|0xcc8b3b,254|-11|0xce765f,57|-23|0xe3d9ce,432|-24|0xdcd2c7",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"发现超鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"发现超鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		ran_touch(0, x+200, y, 50, 20) -- 点击弹窗
 		superghost()
 		return RET_OK
@@ -172,12 +172,12 @@ function find_sg()
 	
 	-- 第一栏到第三栏顺序寻找, 找到1~6星后会检查是否有挑战button
 	for i = 1, 3 do
-		x, y = check_1_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 1星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 1 end end
-		x, y = check_2_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 2星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 2 end end
-		x, y = check_3_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 3星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 3 end end
-		x, y = check_4_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 4星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 4 end end
-		x, y = check_5_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 5星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 5 end end
-		x, y = check_6_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_scene,"发现 6星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 6 end end
+		x, y = check_1_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_dscrpt,"发现 1星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 1 end end
+		x, y = check_2_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_dscrpt,"发现 2星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 2 end end
+		x, y = check_3_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_dscrpt,"发现 3星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 3 end end
+		x, y = check_4_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_dscrpt,"发现 4星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 4 end end
+		x, y = check_5_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_dscrpt,"发现 5星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 5 end end
+		x, y = check_6_star_sg(left, top[i], right, bottom[i]) if x > -1 then ret = check_sg_start(x, y) if ret == RET_OK then HUD_show_or_hide(HUD,hud_dscrpt,"发现 6星鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32) return x, y, 6 end end
 	end
 	return x, y, 0
 end
@@ -212,7 +212,7 @@ function sg_fight_failed()
 		"0|0|0x514a5b,251|6|0xddd9cd,-135|-6|0xcdc59c,30|34|0x5b5265",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		right_bottom_click() -- 右下空白
 	end
 	return x, y
@@ -241,7 +241,7 @@ function sg_tired_detect()
 		"0|0|0xf3b25e,-81|-109|0x414277,-9|0|0xeb3219",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"疲劳溢出",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"疲劳溢出",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end

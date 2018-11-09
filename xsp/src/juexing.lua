@@ -7,7 +7,7 @@ function lct_juexingtower()
 		"0|0|0xb17880,238|12|0x56b083,478|30|0x358fe5,718|40|0xd378d5",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"探索 - 觉醒之塔",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"探索 - 觉醒之塔",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -17,7 +17,7 @@ function lct_juexingelement()
 		"0|0|0xb17684,187|10|0xbcedb5,385|2|0x3090e2,576|7|0xfcbbce",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"探索 - 觉醒材料",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"探索 - 觉醒材料",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -184,11 +184,11 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 					return
 				end
 				if wait_invite == 0 then
-					HUD_show_or_hide(HUD,hud_scene,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 90, 590, 20, 20) -- 觉醒
 					mSleep(1000)
 				else
-					HUD_show_or_hide(HUD,hud_scene,"探索 - 等待组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,"探索 - 等待组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					x, y, auto_grouped = member_team_accept_invite(member_auto_group)
 					if x > -1 then
 						wait_invite = 0

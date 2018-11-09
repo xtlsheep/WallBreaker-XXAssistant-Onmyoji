@@ -102,7 +102,7 @@ function find_boss()
 		"0|0|0xb22e32,3|5|0xfffdf9,-7|-16|0x221108",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"发现Boss",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"发现Boss",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -199,7 +199,7 @@ function team_invite()
 		"0|0|0xf3b25e,-212|2|0xdf6851,323|-352|0x5c5242,-630|-330|0x626467",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"继续邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"继续邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -471,7 +471,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				if x > -1 then
 					top_mid, top_right = full_exp_top()
 					if top_mid == 1 or top_right == 1 then
-						HUD_show_or_hide(HUD,hud_scene,"更换狗粮",20,"0xff000000","0xffffffff",0,100,0,300,32)
+						HUD_show_or_hide(HUD,hud_dscrpt,"更换狗粮",20,"0xff000000","0xffffffff",0,100,0,300,32)
 						ran_sleep(500)
 						ran_touch(0, 350, 420, 30, 30) -- 更换式神
 						ran_sleep(500)
@@ -493,7 +493,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				end
 				-- Quit
 				if scene_quit == 1 then
-					HUD_show_or_hide(HUD,hud_scene,"退出场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,"退出场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 45, 60, 10, 10) -- 左上退出
 					break
 				end
@@ -502,7 +502,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				if ret == RET_ERR then
 					-- Move
 					move_cnt = move_cnt + 1
-					HUD_show_or_hide(HUD,hud_scene,string.format("寻找ing... [移动%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,string.format("寻找ing... [移动%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 					tansuo_move()
 					if move_cnt >= move_total then
 						scene_quit = 1
@@ -536,7 +536,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 					ran_sleep(500)
 					hard_sel = 1
 				end
-				HUD_show_or_hide(HUD,hud_scene,"进入场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				HUD_show_or_hide(HUD,hud_dscrpt,"进入场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				ran_touch(0, 840, 480, 30, 10) -- 探索
 				move_cnt = 0
 				move_total = math.random(6, 8)
@@ -720,7 +720,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				if x > -1 then
 					bot_left, bot_right = full_exp_bot()
 					if bot_left == 1 or bot_right == 1 then
-						HUD_show_or_hide(HUD,hud_scene,"更换狗粮",20,"0xff000000","0xffffffff",0,100,0,300,32)
+						HUD_show_or_hide(HUD,hud_dscrpt,"更换狗粮",20,"0xff000000","0xffffffff",0,100,0,300,32)
 						ran_touch(0, 350, 420, 30, 30) -- 更换式神
 						break
 					end
@@ -740,7 +740,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				end
 				-- Quit
 				if scene_quit == 1 then
-					HUD_show_or_hide(HUD,hud_scene,"退出场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,"退出场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 45, 60, 10, 10) -- 左上退出
 					break
 				end
@@ -749,7 +749,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				if ret == RET_ERR then
 					-- Move
 					move_cnt = move_cnt + 1
-					HUD_show_or_hide(HUD,hud_scene,string.format("寻找ing... [移动%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,string.format("寻找ing... [移动%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 					tansuo_move()
 					if move_cnt >= move_total then
 						scene_quit = 1
@@ -784,7 +784,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 					ran_sleep(500)
 					hard_sel = 1
 				end
-				HUD_show_or_hide(HUD,hud_scene,"邀请队员",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				HUD_show_or_hide(HUD,hud_dscrpt,"邀请队员",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				ran_touch(0, 580, 480, 30, 10) -- 组队
 				mSleep(2000)
 				break
@@ -967,7 +967,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				if x > -1 then
 					top_mid, top_right = full_exp_top()
 					if top_mid == 1 or top_right == 1 then
-						HUD_show_or_hide(HUD,hud_scene,"更换狗粮",20,"0xff000000","0xffffffff",0,100,0,300,32)
+						HUD_show_or_hide(HUD,hud_dscrpt,"更换狗粮",20,"0xff000000","0xffffffff",0,100,0,300,32)
 						ran_sleep(500)
 						ran_touch(0, 350, 420, 30, 30) -- 更换式神
 						ran_sleep(500)

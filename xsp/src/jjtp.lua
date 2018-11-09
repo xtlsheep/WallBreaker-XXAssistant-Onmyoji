@@ -60,7 +60,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xf2deda,3|10|0xe1ab8e,9|-16|0x4b4a49,-6|-3|0x262728",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"彼岸花原皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"彼岸花原皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 		-- 彼岸花觉醒皮
@@ -68,7 +68,7 @@ function find_whr(pos, whr, role)
 			"0|0|0x2b2331,0|4|0xf9e5d6,9|-1|0xb82321,19|4|0xdbdbe5",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"彼岸花觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"彼岸花觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 		-- 彼岸花商店皮
@@ -76,7 +76,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xf9f7f5,-3|-13|0xdaced0,12|-1|0x741319,-2|9|0x941f26,-16|0|0xa88150,9|0|0x968e92",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"彼岸花商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"彼岸花商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 		-- 彼岸花秘闻皮
@@ -84,7 +84,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xfafaee,-10|-5|0x2c2733,-16|-2|0xa88050,-1|-8|0xf7f6e9,0|-15|0x776c73",
 			90, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"彼岸花秘闻皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"彼岸花秘闻皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 	end
@@ -94,7 +94,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xfcfcfc,-14|6|0x323234,-14|-2|0x494a4c,-17|15|0xfcead9,-25|23|0xf3f2f1",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"日和坊原皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"日和坊原皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 		-- 日和坊觉醒皮
@@ -102,7 +102,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xffd45a,-9|2|0x564f4f,-12|15|0xfef0da,-6|22|0xcbc5c4,-34|22|0x35302f",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"日和坊觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"日和坊觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 		-- 日和坊商店皮
@@ -110,7 +110,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xf9f1e3,-13|-8|0x453a3d,-20|-3|0x2e2628,-16|0|0xfaf4eb,14|-10|0xfcf8ee",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"日和坊商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"日和坊商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 	end
@@ -120,7 +120,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xfff8ef,13|-15|0x323440,18|-7|0xa07448,-4|15|0xfcfcf9,-19|-3|0xa78050,-17|9|0xe6b96a",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"御馔津原Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"御馔津原Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 		-- 御馔津觉醒皮
@@ -128,7 +128,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xffebdc,7|-4|0x59433a,4|-16|0x1f1110,17|-11|0x6b5a4b,-18|-5|0xfbd985,-9|11|0xdccec9",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"御馔津觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"御馔津觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 		-- 御馔津商店皮
@@ -136,7 +136,7 @@ function find_whr(pos, whr, role)
 			"0|0|0x2e322c,13|-3|0xc6c3d1,20|-1|0x91614b,-10|12|0xeecdb1,-17|12|0x555761,-2|26|0xffffff",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"御馔津商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"御馔津商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 	end
@@ -146,7 +146,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xfbdbb9,1|8|0xfce1c2,4|5|0xfce0be,-10|5|0xfad9be,9|0|0x4e514d",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"小僧原皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"小僧原皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 		-- 小僧觉醒皮
@@ -154,7 +154,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xd7d3d5,5|5|0xcccacc,15|-3|0x46494f,-17|13|0x4e534e",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"小僧觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"小僧觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 		-- 小僧商店皮
@@ -162,7 +162,7 @@ function find_whr(pos, whr, role)
 			"0|0|0xe4d9c3,10|13|0xbcd9da,-3|17|0xcfac69,-12|12|0x4c514d",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"小僧商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"小僧商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		end
 	end
@@ -275,7 +275,7 @@ function solo_find_next_target_loop(map, ran_arr, exp1, exp2, exp3)
 end
 
 function solo_find_next_target(map, solo_sel)
-	HUD_show_or_hide(HUD,hud_scene,"寻找突破目标",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	HUD_show_or_hide(HUD,hud_dscrpt,"寻找突破目标",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	-- 找到下一个突破目标
 	local ran_arr = {}
 	local pos = -1
@@ -309,10 +309,10 @@ function solo_refresh(winess, invalid, refresh)
 			"0|0|0x762906,-12|69|0xf3b25e,604|2|0xf3b25e,715|70|0x493625",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"刷新结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"刷新结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
 		else
-			HUD_show_or_hide(HUD,hud_scene,"等待刷新",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"等待刷新",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_VALID
 		end
 	end
@@ -324,7 +324,7 @@ function solo_get_bonus()
 		"0|0|0xbb3c1a,64|-6|0xd19118,-20|-63|0xcbb599,-37|-78|0xd73846,-339|84|0x79582e,-7|106|0x6a645c",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"领取奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"领取奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		ran_touch(0, 1095, 485, 20, 50) -- 左下空白
 	end
 	return x, y
@@ -340,7 +340,7 @@ function solo_fight_start(pos)
 		"0|0|0xf3b25e,-40|-2|0xf3b25e,38|2|0xf3b25e,73|1|0xcbb59c",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,string.format("突破目标 - %d", pos),20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,string.format("突破目标 - %d", pos),20,"0xff000000","0xffffffff",0,100,0,300,32)
 		ran_touch(0, solo_fight_x[pos], solo_fight_y[pos], 30, 10) -- 进攻
 	end
 	return x, y
@@ -382,7 +382,7 @@ function solo_lock()
 end
 
 function solo_to_pub()
-	HUD_show_or_hide(HUD,hud_scene,"切换至阴阳寮突破",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	HUD_show_or_hide(HUD,hud_dscrpt,"切换至阴阳寮突破",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	ran_touch(0, 1095, 300, 10, 10)
 end
 
@@ -391,7 +391,7 @@ function pub_unstart()
 		"0|0|0xe9d7d1,-503|110|0x4e4e4e,-585|147|0xd3cabc,-460|121|0xeaeaea",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"寮突破未开启",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"寮突破未开启",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -529,7 +529,7 @@ function pub_ff_open()
 end
 
 function pub_analyse_map(pub_sel)
-	HUD_show_or_hide(HUD,hud_scene,"分析地图",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	HUD_show_or_hide(HUD,hud_dscrpt,"分析地图",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	local map = {-1, -1, -1, -1, -1, -1, -1, -1}
 	local coor_map_x = {}
 	local coor_map_y = {}
@@ -556,7 +556,7 @@ function pub_find_next_target(map)
 end
 
 function pub_refresh()
-	HUD_show_or_hide(HUD,hud_scene,"翻页",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	HUD_show_or_hide(HUD,hud_dscrpt,"翻页",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	local x = 725
 	local y = 500
 	local x_ran = 100
@@ -612,7 +612,7 @@ function pub_map_finished(map)
 end
 
 function pub_to_solo()
-	HUD_show_or_hide(HUD,hud_scene,"切换至个人突破",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	HUD_show_or_hide(HUD,hud_dscrpt,"切换至个人突破",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	ran_touch(0, 1095, 200, 10, 10)
 end
 
@@ -913,7 +913,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 						return "Finish"
 					end
 					if wait == 1 then
-						HUD_show_or_hide(HUD,hud_scene,"突破冷却中",20,"0xff000000","0xffffffff",0,100,0,300,32)
+						HUD_show_or_hide(HUD,hud_dscrpt,"突破冷却中",20,"0xff000000","0xffffffff",0,100,0,300,32)
 						mSleep(60*1000)
 						map = {}
 						pos = -1
@@ -978,7 +978,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				-- 失败的结界
 				ret = pub_ff_open()
 				if ret == RET_OK then
-					HUD_show_or_hide(HUD,hud_scene,"失败的结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,"失败的结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					map[pos] = -1
 					pos = -1
 					jjtp_touch_blank()
@@ -986,7 +986,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				end
 				-- 五花肉
 				if whr == {0, 0, 0, 0} then
-					HUD_show_or_hide(HUD,hud_scene,"进攻",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,"进攻",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, x_f, y_f+20, 20, 5) -- 进攻
 					break
 				else
@@ -997,7 +997,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 						pos = -1
 						break
 					else
-						HUD_show_or_hide(HUD,hud_scene,"进攻",20,"0xff000000","0xffffffff",0,100,0,300,32)
+						HUD_show_or_hide(HUD,hud_dscrpt,"进攻",20,"0xff000000","0xffffffff",0,100,0,300,32)
 						ran_touch(0, x_f, y_f+20, 20, 5) -- 进攻
 						break
 					end

@@ -14,7 +14,7 @@ function yqfy_queue()
 		"0|0|0xf7f2df,12|1|0x4d0c0c,362|378|0x151311,251|441|0xf3b25e,497|443|0xb0a9a1",
 		90, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"妖气封印 - 匹配中",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"妖气封印 - 匹配中",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -80,7 +80,7 @@ function yqfy(round, sel, mark)
 					return
 				end
 				ran_wait = math.random(1000, 3000)
-				HUD_show_or_hide(HUD,hud_scene,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
+				HUD_show_or_hide(HUD,hud_dscrpt,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
 				mSleep(ran_wait)
 				tingyuan_enter_zudui()
 				break
@@ -138,7 +138,7 @@ function yqfy(round, sel, mark)
 			-- 组队
 			x, y = lct_zudui()
 			if (x > -1) then
-				HUD_show_or_hide(HUD,hud_scene,"组队",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				HUD_show_or_hide(HUD,hud_dscrpt,"组队",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				ran_sleep(500)
 				if linkage == 1 then
 					ran_move_steps(0, 230, 455, 20, 20, math.random(-3, 3), math.random(-26, -24), 12)
@@ -153,7 +153,7 @@ function yqfy(round, sel, mark)
 			-- 队员接手队长
 			x, y = member_room_find_start() if (x > -1) then ran_touch(0, 925, 535, 20, 10) break end -- 开始战斗
 			-- 战斗准备
-			x, y = fight_ready() if (x > -1) then HUD_show_or_hide(HUD,hud_scene,"战斗准备",20,"0xff000000","0xffffffff",0,100,0,300,32) break end
+			x, y = fight_ready() if (x > -1) then HUD_show_or_hide(HUD,hud_dscrpt,"战斗准备",20,"0xff000000","0xffffffff",0,100,0,300,32) break end
 			-- 战斗胜利
 			x, y = fight_success("组队") if (x > -1) then break end
 			-- 胜利达摩

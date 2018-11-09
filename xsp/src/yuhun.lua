@@ -7,7 +7,7 @@ function lct_yuhun()
 		"0|0|0xffd821,0|-19|0xb24828,-1|-47|0xddd3bf,0|36|0x855021",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"探索 - 御魂",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"探索 - 御魂",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -17,7 +17,7 @@ function lct_8dashe()
 		"0|0|0xfbe9bc,0|-34|0x040402,-1|-52|0xa46d91,10|-22|0x391f10",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"御魂 - 八岐大蛇",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"御魂 - 八岐大蛇",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -54,7 +54,7 @@ function lct_petfind()
 		"0|0|0x7c7371,3|33|0xaea09b,-230|-55|0xf4e4b1,-370|-29|0xdbc788",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"御魂 - 发现宝藏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"御魂 - 发现宝藏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -202,10 +202,10 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 					return
 				end
 				if wait_invite == 0 then
-					HUD_show_or_hide(HUD,hud_scene,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 180, 590, 20, 20) -- 御魂
 				else
-					HUD_show_or_hide(HUD,hud_scene,"探索 - 等待组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,"探索 - 等待组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					x, y, auto_grouped = member_team_accept_invite(member_auto_group)
 					if x > -1 then
 						wait_invite = 0

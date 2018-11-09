@@ -28,7 +28,7 @@ math.random(1,10000)
 
 -- Global
 HUD = nil
-hud_scene = nil
+hud_dscrpt = nil
 linkage = 0
 show_settlement = 0
 offer_arr = {0, 0, 0, 0, 0, 0}

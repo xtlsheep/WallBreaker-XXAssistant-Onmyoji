@@ -80,7 +80,7 @@ function normalcall(tickets)
 				x, y = five_tickets()
 				if x > -1 then
 					cnt = cnt + 5
-					HUD_show_or_hide(HUD,hud_scene,string.format("召唤票数 ~= %d", cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,string.format("召唤票数 ~= %d", cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_interv()
 					tickets_call()
 					break

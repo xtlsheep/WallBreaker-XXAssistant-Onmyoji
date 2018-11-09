@@ -7,7 +7,7 @@ function lct_yyh()
 		"0|0|0xf3b25e,-59|-236|0xdd7cb3,-124|-168|0xf2faf9,-83|-142|0x2eae93",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"业原火",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"业原火",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		mSleep(1000)
 	end
 	return x, y
@@ -79,9 +79,9 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 					return
 				end
 				ran_wait = math.random(3000, 5000)
-				HUD_show_or_hide(HUD,hud_scene,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
+				HUD_show_or_hide(HUD,hud_dscrpt,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
 				mSleep(ran_wait)
-				HUD_show_or_hide(HUD,hud_scene,string.format("业原火", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32) 
+				HUD_show_or_hide(HUD,hud_dscrpt,string.format("业原火", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32) 
 				-- 锁定 or not
 				lock_or_unlock(lock, "业原火")
 				-- 贪

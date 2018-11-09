@@ -29,7 +29,7 @@ function onBeforeUserExit()
 end
 
 function show_win_fail(win_cnt, fail_cnt)
-	HUD_show_or_hide(HUD,hud_scene,string.format("战斗胜利 %d次 - 失败 %d次", win_cnt, fail_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
+	HUD_show_or_hide(HUD,hud_dscrpt,string.format("战斗胜利 %d次 - 失败 %d次", win_cnt, fail_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 end
 
 function print_global_vars()
@@ -46,7 +46,7 @@ function find_offer()
 		95, 0, 0, 0)
 	if (x_ > -1) then
 		if (offer_arr[1] == 0) then
-			HUD_show_or_hide(HUD,hud_scene,"拒绝悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"拒绝悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			ran_touch(0, 759, 460, 10, 10) -- 拒绝
 		else
 			if offer_arr[2] == 1 then
@@ -54,7 +54,7 @@ function find_offer()
 					"0|0|0xed4a36,11|-21|0x67457c,-13|9|0xc7a98b,-30|17|0x8647c8",
 					90, 0, 0, 0)
 				if x > -1 then
-					HUD_show_or_hide(HUD,hud_scene,"接受勾玉悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,"接受勾玉悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 759, 373, 10, 10) -- 接受
 					return x_, y_
 				end
@@ -64,7 +64,7 @@ function find_offer()
 					"0|0|0x55b260,2|83|0xdd725f,-157|68|0x0d0f0b,-151|39|0xe97a2b",
 					90, 0, 0, 0)
 				if x > -1 then
-					HUD_show_or_hide(HUD,hud_scene,"接受体力悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,"接受体力悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 759, 373, 10, 10) -- 接受
 					return x_, y_
 				end
@@ -74,7 +74,7 @@ function find_offer()
 					"0|0|0x55b260,2|83|0xdd725f,-147|59|0x75671b,-166|48|0xddb64d",
 					90, 0, 0, 0)
 				if x > -1 then
-					HUD_show_or_hide(HUD,hud_scene,"接受金币悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,"接受金币悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 759, 373, 10, 10) -- 接受
 					return x_, y_
 				end
@@ -84,7 +84,7 @@ function find_offer()
 					"0|0|0x8b3028,-11|-8|0xf37b62,-10|-19|0xfdfeff,-9|-39|0x69467f",
 					90, 0, 0, 0)
 				if x > -1 then
-					HUD_show_or_hide(HUD,hud_scene,"接受猫粮悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,"接受猫粮悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 759, 373, 10, 10) -- 接受
 					return x_, y_
 				end
@@ -94,7 +94,7 @@ function find_offer()
 					"0|0|0x55b260,2|83|0xdd725f,-147|59|0x75671b,-243|44|0xfffbe9",
 					90, 0, 0, 0)
 				if x > -1 then
-					HUD_show_or_hide(HUD,hud_scene,"接受狗粮悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,"接受狗粮悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, 759, 373, 10, 10) -- 接受
 					return x_, y_
 				end
@@ -112,7 +112,7 @@ function handle_error(disconn_fin, real_8dashe, secret_vender)
 			"0|0|0xf1b15d,-180|-164|0xbba48a,172|-162|0xc3ac93,-5|50|0xb59f85",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"断线期间结束战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"断线期间结束战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			ran_touch(0, x, y, 20, 10)
 		end
 	end
@@ -138,7 +138,7 @@ end
 function level_select(level, init, lock, spec)
 	mSleep(1000)
 	if (init == ENABLE) then
-		HUD_show_or_hide(HUD,hud_scene,"层数 - 初始化",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"层数 - 初始化",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		-- 选择层数
 		if (level == 1) then
 			ran_move(0, 360, 150, 0, 200, 20) -- 向下拉
@@ -421,7 +421,7 @@ function lct_tingyuan()
 		"0|0|0xa29c7b,-77|-4|0xdfc7a1,-703|10|0xfddc8a,-710|35|0xf37f5b",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"庭院",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"庭院",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -431,7 +431,7 @@ function lct_tansuo()
 		"0|0|0xe0ecf9,-14|0|0xe6effa,4|-15|0xf0f5fb,34|-1|0x11215c",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -469,7 +469,7 @@ function lct_buff(stop)
 		90, 0, 0, 0)
 	if x > -1 then
 		if stop == 1 then
-			HUD_show_or_hide(HUD,hud_scene,"关闭buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"关闭buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			for i = 1, 10 do
 				x_, y_ = findColor({794, 135, 796, 360},
 					"0|0|0x412e2b,5|-7|0xe4c197,-5|8|0xd8b389,0|-15|0x382826,-1|22|0xcbb59c",
@@ -491,7 +491,7 @@ function fight_ready()
 		"0|0|0xe5c288,-62|17|0xebd19e,61|18|0xf0d8a9",
 		95, 0, 0, 0)
 	if (x > -1) then
-		-- HUD_show_or_hide(HUD,hud_scene,"战斗准备",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		-- HUD_show_or_hide(HUD,hud_dscrpt,"战斗准备",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		ran_touch(0, 1040, 493, 30, 30) -- 准备的鼓
 	end
 	return x, y
@@ -502,7 +502,7 @@ function round_one()
 		"0|0|0x272420,0|-14|0xd9ba91,0|17|0xead0a3,126|10|0xdeaa70",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"第一回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"第一回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -512,7 +512,7 @@ function round_two()
 		"0|0|0xdcc096,-1|-11|0x272420,1|7|0x272420,124|11|0xdea86c",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"第二回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"第二回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -522,7 +522,7 @@ function round_three()
 		"0|0|0x272420,0|-13|0x272420,1|11|0x272420,126|14|0xdda669",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"第三回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"第三回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -532,7 +532,7 @@ function round_fight()
 		"0|0|0x030303,44|-23|0x020202,84|81|0x020202,80|150|0x881509,-524|272|0x5d5575",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"战斗开始",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"战斗开始",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -565,7 +565,7 @@ function fight_success(mode)
 			"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
 			95, 0, 0, 0)
 		if (x > -1) then
-			HUD_show_or_hide(HUD,hud_scene,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			for i = 1, cnt do
 				right_bottom_click() -- 右下空白
 				ran_interv()
@@ -577,7 +577,7 @@ function fight_success(mode)
 			"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
 			95, 0, 0, 0)
 		if (x > -1) then
-			HUD_show_or_hide(HUD,hud_scene,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			for i = 1, cnt do
 				right_bottom_click() -- 右下空白
 				ran_interv()
@@ -593,7 +593,7 @@ function whole_damo()
 		"0|0|0xaa7b2a,-52|61|0x340204,1|61|0x3b0305,76|55|0x370204",
 		95, 0, 0, 0)
 	if (x > -1) then
-		HUD_show_or_hide(HUD,hud_scene,"领取奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"领取奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		right_bottom_click() -- 右下空白
 	end
 	return x, y
@@ -604,7 +604,7 @@ function half_damo()
 		"0|0|0x670a0b,20|22|0x320204,127|0|0x7e0e0e,159|7|0x6f290b",
 		95, 0, 0, 0)
 	if (x > -1) then
-		HUD_show_or_hide(HUD,hud_scene,"退出战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"退出战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		right_bottom_click() -- 右下空白
 	end
 	return x, y
@@ -634,7 +634,7 @@ function fight_failed(mode)
 			"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			right_bottom_click() -- 右下空白
 		end
 	elseif (mode == "组队") then
@@ -642,7 +642,7 @@ function fight_failed(mode)
 			"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			right_bottom_click() -- 右下空白
 		end
 	end
@@ -738,7 +738,7 @@ function member_room_find()
 			"0|0|0xe2bc54,-20|-12|0xefda8a,40|-14|0x744827,-1|14|0x754b2b",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_scene,"寻找队伍",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"寻找队伍",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			ran_touch(0, x, y, 10, 5) -- 加入
 			return
 		end
@@ -750,7 +750,7 @@ function member_room_quit()
 		"0|0|0xf3b25e,66|1|0xf3b25e,-146|1|0xdf6851,-278|0|0xdf6851",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"退出队伍",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"退出队伍",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		ran_touch(0, x, y, 20, 10) -- 确定
 	end
 	return x, y
@@ -785,7 +785,7 @@ function captain_room_init()
 		"0|0|0xf3b25e,133|-325|0xa52729,128|-362|0x8d7245,127|-327|0xead49c",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"创建队伍",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"创建队伍",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		ran_touch(0, x, y, 20, 10)
 	end
 	return x, y
@@ -912,12 +912,12 @@ function member_team_accept_invite(auto)
 					"0|0|0xedc791,0|13|0x5ab565,8|19|0x51ad5b,17|9|0x5bb665",
 					90, 0, 0, 0)
 				if x_auto > -1 then
-					HUD_show_or_hide(HUD,hud_scene,"收到自动组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,"收到自动组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, x_auto, y_auto, 5, 5) -- 自动准备的按钮
 					return x, y, RET_OK
 				end
 			end
-			HUD_show_or_hide(HUD,hud_scene,"收到组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"收到组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			ran_touch(0, x, y, 5, 5) -- √
 			return x, y, RET_ERR
 		end
@@ -932,12 +932,12 @@ function member_team_accept_invite(auto)
 					"0|0|0xefc594,0|13|0x5ab563,19|9|0x61bc6a,20|20|0xb7a896",
 					90, 0, 0, 0)
 				if x_auto > -1 then
-					HUD_show_or_hide(HUD,hud_scene,"收到自动组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_dscrpt,"收到自动组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_touch(0, x_auto, y_auto, 5, 5) -- 自动准备的按钮
 					return x, y, RET_OK
 				end
 			end
-			HUD_show_or_hide(HUD,hud_scene,"收到组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_dscrpt,"收到组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			ran_touch(0, x, y, 5, 5) -- √
 		end
 	end
@@ -949,7 +949,7 @@ function member_team_refuse_invite()
 		"0|0|0xdc6d5a,2|-19|0x866c57,-21|2|0x846b55,21|1|0x856c56",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_scene,"拒绝组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_dscrpt,"拒绝组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		ran_touch(0, x, y, 10, 10)
 		mSleep(500)
 	end
