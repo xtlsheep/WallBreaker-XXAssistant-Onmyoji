@@ -282,19 +282,16 @@ function disable_skill_feature()
 	local x, y, x_, y_
 	x, y = lct_tingyuan()
 	if x > -1 then
-		if dis_skl_fea == 1 then
-			ran_touch(0, 51, 62, 20, 20)
+		ran_touch(0, 51, 62, 20, 20)
+		ran_sleep(750)
+		x_, y_ = findColor({790, 492, 792, 493},
+			"0|0|0x4b5ee9,214|-395|0xe8d4cf,221|39|0xe3af75",
+			95, 0, 0, 0)
+		if x_ > -1 then
+			ran_touch(0, x_, y_, 5, 5)
 			ran_sleep(750)
-			x_, y_ = findColor({790, 492, 792, 493},
-				"0|0|0x4b5ee9,214|-395|0xe8d4cf,221|39|0xe3af75",
-				95, 0, 0, 0)
-			if x_ > -1 then
-				ran_touch(0, x_, y_, 5, 5)
-				ran_sleep(750)
-			end
-			ran_touch(0, 1008, 97, 5, 5)
-			dis_skl_fea = 0
 		end
+		ran_touch(0, 1008, 97, 5, 5)
 	end
 end
 
@@ -336,6 +333,86 @@ function tansuo_idle_handle(tansuo_time_cnt)
 		time_cnt = 0
 	end
 	return time_cnt, local_buff_idle_stop
+end
+
+function stats_read()
+	local stats_time = {first_date = "Unknown", total_dura = 0, last_date = "Unknown", last_dura = 0}
+	local win_cnt_last = {yuhun = 0, tansuo = 0, jjtp = 0, juexing = 0, yyh = 0, yuling = 0}
+	local fail_cnt_last = {yuhun = 0, tansuo = 0, jjtp = 0, juexing = 0, yyh = 0, yuling = 0}
+	local win_cnt_total = {yuhun = 0, tansuo = 0, jjtp = 0, juexing = 0, yyh = 0, yuling = 0}
+	local fail_cnt_total = {yuhun = 0, tansuo = 0, jjtp = 0, juexing = 0, yyh = 0, yuling = 0}
+	
+	stats_time.first_date = getStringConfig("script_first_start_date", "Unknown")
+	stats_time.total_dura = getNumberConfig("script_total_run_duration", 0)
+	stats_time.last_date = getStringConfig("script_last_start_date", "Unknown")
+	stats_time.last_dura = getNumberConfig("script_last_run_duration", 0)
+	
+	win_cnt_last.yuhun = getNumberConfig("last_win_cnt_yuhun", 0)
+	win_cnt_last.tansuo = getNumberConfig("last_win_cnt_tansuo", 0)
+	win_cnt_last.jjtp = getNumberConfig("last_win_cnt_jjtp", 0)
+	win_cnt_last.juexing = getNumberConfig("last_win_cnt_juexing", 0)
+	win_cnt_last.yyh = getNumberConfig("last_win_cnt_yyh", 0)
+	win_cnt_last.yuling = getNumberConfig("last_win_cnt_yuling", 0)
+	fail_cnt_last.yuhun = getNumberConfig("last_fail_cnt_yuhun", 0)
+	fail_cnt_last.tansuo = getNumberConfig("last_fail_cnt_tansuo", 0)
+	fail_cnt_last.jjtp = getNumberConfig("last_fail_cnt_jjtp", 0)
+	fail_cnt_last.juexing = getNumberConfig("last_fail_cnt_juexing", 0)
+	fail_cnt_last.yyh = getNumberConfig("last_fail_cnt_yyh", 0)
+	fail_cnt_last.yuling = getNumberConfig("last_fail_cnt_yuling", 0)
+	win_cnt_total.yuhun = getNumberConfig("total_win_cnt_yuhun", 0)
+	win_cnt_total.tansuo = getNumberConfig("total_win_cnt_tansuo", 0)
+	win_cnt_total.jjtp = getNumberConfig("total_win_cnt_jjtp", 0)
+	win_cnt_total.juexing = getNumberConfig("total_win_cnt_juexing", 0)
+	win_cnt_total.yyh = getNumberConfig("total_win_cnt_yyh", 0)
+	win_cnt_total.yuling = getNumberConfig("total_win_cnt_yuling", 0)
+	fail_cnt_total.yuhun = getNumberConfig("total_fail_cnt_yuhun", 0)
+	fail_cnt_total.tansuo = getNumberConfig("total_fail_cnt_tansuo", 0)
+	fail_cnt_total.jjtp = getNumberConfig("total_fail_cnt_jjtp", 0)
+	fail_cnt_total.juexing = getNumberConfig("total_fail_cnt_juexing", 0)
+	fail_cnt_total.yyh = getNumberConfig("total_fail_cnt_yyh", 0)
+	fail_cnt_total.yuling = getNumberConfig("total_fail_cnt_yuling", 0)
+	
+	return stats_time, win_cnt_last, fail_cnt_last, win_cnt_total, fail_cnt_total
+end
+
+function stats_write()
+	local end_time
+	local stats_time, win_cnt_last, fail_cnt_last, win_cnt_total, fail_cnt_total = stats_read()
+	
+	if win_cnt.global ~= 0 or fail_cnt.global ~= 0 then
+		if stats_time.first_date == "Unknown" then
+			setStringConfig("script_first_start_date", system_date)
+		end
+		end_time = mTime()
+		setNumberConfig("script_total_run_duration", (stats_time.total_dura + end_time - start_time))
+		setStringConfig("script_last_start_date", system_date)
+		setNumberConfig("script_last_run_duration", (end_time - start_time))
+		
+		setNumberConfig("last_win_cnt_yuhun", win_cnt.yuhun)
+		setNumberConfig("last_win_cnt_tansuo", win_cnt.tansuo)
+		setNumberConfig("last_win_cnt_jjtp", win_cnt.jjtp)
+		setNumberConfig("last_win_cnt_juexing", win_cnt.juexing)
+		setNumberConfig("last_win_cnt_yyh", win_cnt.yyh)
+		setNumberConfig("last_win_cnt_yuling", win_cnt.yuling)
+		setNumberConfig("last_fail_cnt_yuhun", fail_cnt.yuhun)
+		setNumberConfig("last_fail_cnt_tansuo", fail_cnt.tansuo)
+		setNumberConfig("last_fail_cnt_jjtp", fail_cnt.jjtp)
+		setNumberConfig("last_fail_cnt_juexing", fail_cnt.juexing)
+		setNumberConfig("last_fail_cnt_yyh", fail_cnt.yyh)
+		setNumberConfig("last_fail_cnt_yuling", fail_cnt.yuling)
+		setNumberConfig("total_win_cnt_yuhun", (win_cnt_total.yuhun + win_cnt.yuhun))
+		setNumberConfig("total_win_cnt_tansuo", (win_cnt_total.tansuo + win_cnt.tansuo))
+		setNumberConfig("total_win_cnt_jjtp", (win_cnt_total.jjtp + win_cnt.jjtp))
+		setNumberConfig("total_win_cnt_juexing", (win_cnt_total.juexing + win_cnt.juexing))
+		setNumberConfig("total_win_cnt_yyh", (win_cnt_total.yyh + win_cnt.yyh))
+		setNumberConfig("total_win_cnt_yuling", (win_cnt_total.yuling + win_cnt.yuling))
+		setNumberConfig("total_fail_cnt_yuhun", (fail_cnt_total.yuhun + fail_cnt.yuhun))
+		setNumberConfig("total_fail_cnt_tansuo", (fail_cnt_total.tansuo + fail_cnt.tansuo))
+		setNumberConfig("total_fail_cnt_jjtp", (fail_cnt_total.jjtp + fail_cnt.jjtp))
+		setNumberConfig("total_fail_cnt_juexing", (fail_cnt_total.juexing + fail_cnt.juexing))
+		setNumberConfig("total_fail_cnt_yyh", (fail_cnt_total.yyh + fail_cnt.yyh))
+		setNumberConfig("total_fail_cnt_yuling", (fail_cnt_total.yuling + fail_cnt.yuling))
+	end
 end
 
 -- Locate & enter func

@@ -59,7 +59,7 @@ function ran_sleep(t)
 end
 
 function show_point(x, y, interv)
-	HUD_show_or_hide(HUD,button, "", 1, "0xff000000", "button.png", 0, x-s, y-s, s*2, s*2)
+	HUD_show_or_hide(HUD,hud_button, "", 1, "0xff000000", "button.png", 0, x-s, y-s, s*2, s*2)
 	mSleep(interv)
 end
 
@@ -75,9 +75,9 @@ function ran_touch(id, x, y, ran_x, ran_y)
 		y_r = y + math.random(-ran_y, ran_y)
 	end
 	
-	button = createHUD()
+	hud_button = createHUD()
 	show_point(x_r, y_r, 250)
-	hideHUD(button)
+	hideHUD(hud_button)
 	ran_interv()
 	touchDown(id, x_r, y_r)
 	ran_sleep(200)
@@ -145,7 +145,7 @@ function ran_move_curve(id, start_point_X, start_point_Y, end_point_X, end_point
 		t = t + step
 	end
 	
-	button = createHUD()
+	hud_button = createHUD()
 	touchDown(id, curve_X[1], curve_Y[1])
 	show_point(curve_X[1], curve_Y[1], 150)
 	for i = 2, curve_points - 1 do
@@ -154,5 +154,5 @@ function ran_move_curve(id, start_point_X, start_point_Y, end_point_X, end_point
 	end
 	show_point(curve_X[curve_points], curve_Y[curve_points], 150)
 	touchUp(id, curve_X[curve_points], curve_Y[curve_points])
-	hideHUD(button)
+	hideHUD(hud_button)
 end
