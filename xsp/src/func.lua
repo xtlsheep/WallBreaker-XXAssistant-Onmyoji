@@ -136,54 +136,72 @@ function handle_error(disconn_fin, real_8dashe, secret_vender)
 end
 
 function level_select(level, init, lock, spec)
+	local function find_level_five()
+		local x, y = findColor({340, 120, 360, 360},
+			"0|0|0x312e2a,-11|-9|0x403c37,-14|-3|0x37332f,-17|0|0x534e49,-1|-7|0x49443f,2|5|0x4c4842,-9|7|0x4f4b45",
+			80, 0, 1, 0)
+		if x > -1 then
+			ran_touch(0, x, y, 50, 10)
+		end
+	end
+	
+	local function find_level_six()
+		local x, y = findColor({340, 120, 360, 360},
+			"0|0|0x4a4540,-6|-9|0x2f2b27,-17|-7|0x383530,-17|8|0x3f3b36,-10|7|0x423e39,-6|7|0x413d38,-1|8|0x4b4741,-1|4|0x2c2824",
+			80, 0, 1, 0)
+		if x > -1 then
+			ran_touch(0, x, y, 50, 10)
+		end
+	end
+	
 	mSleep(1000)
 	if (init == ENABLE) then
 		HUD_show_or_hide(HUD,hud_dscrpt,"层数 - 初始化",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		-- 选择层数
 		if (level == 1) then
-			ran_move(0, 360, 150, 0, 200, 20) -- 向下拉
-			ran_sleep(500)
-			ran_touch(0, 360, 150, 120, 3) -- 第一排
+			ran_move_curve(0, 360, 150, 360, 400, 50, 10) -- 向下拉
+			ran_sleep(750)
+			ran_touch(0, 360, 150, 50, 10) -- 第一排
 		elseif (level == 2) then
-			ran_move(0, 360, 150, 0, 200, 20)
-			ran_sleep(500)
-			ran_touch(0, 360, 215, 120, 3) -- 第二排
+			ran_move_curve(0, 360, 150, 360, 400, 50, 10)
+			ran_sleep(750)
+			ran_touch(0, 360, 215, 50, 10) -- 第二排
 		elseif (level == 3) then
-			ran_move(0, 360, 150, 0, 200, 20)
-			ran_sleep(500)
-			ran_touch(0, 360, 280, 120, 3) -- 第三排
+			ran_move_curve(0, 360, 150, 360, 400, 50, 10)
+			ran_sleep(750)
+			ran_touch(0, 360, 280, 50, 10) -- 第三排
 		elseif (level == 4) then
-			ran_move(0, 360, 150, 0, 200, 20)
-			ran_sleep(500)
-			ran_touch(0, 360, 350, 120, 3) -- 第四排
+			ran_move_curve(0, 360, 150, 360, 400, 50, 10)
+			ran_sleep(750)
+			ran_touch(0, 360, 350, 50, 10) -- 第四排
 		elseif (level == 5) then
-			ran_move(0, 360, 150, 0, 200, 20) -- 向下拉
-			ran_sleep(1000)
-			ran_move(0, 360, 280, 0, -100, 10) -- 向上拉
-			ran_sleep(500)
-			ran_touch(0, 360, 150, 120, 3)
+			ran_move_curve(0, 360, 150, 360, 400, 50, 10) -- 向下拉
+			ran_sleep(750)
+			ran_move_curve(0, 360, 300, 360, 150, 50, 10) -- 向上拉
+			ran_sleep(750)
+			find_level_five()
 		elseif (level == 6) then
-			ran_move(0, 360, 150, 0, 200, 20)
-			ran_sleep(1000)
-			ran_move(0, 360, 280, 0, -100, 10)
-			ran_sleep(500)
-			ran_touch(0, 360, 215, 120, 3)
+			ran_move_curve(0, 360, 150, 360, 400, 50, 10) -- 向下拉
+			ran_sleep(750)
+			ran_move_curve(0, 360, 300, 360, 150, 50, 10) -- 向上拉
+			ran_sleep(750)
+			find_level_six()
 		elseif (level == 7) then
-			ran_move(0, 360, 350, 0, -200, 20)
-			ran_sleep(500)
-			ran_touch(0, 360, 150, 120, 3)
+			ran_move_curve(0, 360, 350, 360, 100, 50, 10) -- 向上拉
+			ran_sleep(750)
+			ran_touch(0, 360, 150, 50, 10)
 		elseif (level == 8) then
-			ran_move(0, 360, 350, 0, -200, 20)
-			ran_sleep(500)
-			ran_touch(0, 360, 215, 120, 3)
+			ran_move_curve(0, 360, 350, 360, 100, 50, 10)
+			ran_sleep(750)
+			ran_touch(0, 360, 215, 50, 10)
 		elseif (level == 9) then
-			ran_move(0, 360, 350, 0, -200, 20)
-			ran_sleep(500)
-			ran_touch(0, 360, 280, 120, 3)
+			ran_move_curve(0, 360, 350, 360, 100, 50, 10)
+			ran_sleep(750)
+			ran_touch(0, 360, 280, 50, 10)
 		elseif (level == 10) then
-			ran_move(0, 360, 350, 0, -200, 20)
-			ran_sleep(500)
-			ran_touch(0, 360, 350, 120, 3)
+			ran_move_curve(0, 360, 350, 360, 100, 50, 10)
+			ran_sleep(750)
+			ran_touch(0, 360, 350, 50, 10)
 		end
 	end
 	

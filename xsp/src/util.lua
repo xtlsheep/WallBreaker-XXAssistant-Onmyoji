@@ -84,7 +84,7 @@ function ran_touch(id, x, y, ran_x, ran_y)
 	touchUp(id, x_r, y_r)
 end
 
-function ran_move_curve(id, start_point_X, start_point_Y, end_point_X, end_point_Y, ran)
+function ran_move_curve(id, start_point_X, start_point_Y, end_point_X, end_point_Y, ran_x, ran_y)
 	local function bezier_interpolation(t, init_points, init_points_num)
 		local curve_X_tmp = {}
 		local curve_Y_tmp = {}
@@ -114,10 +114,10 @@ function ran_move_curve(id, start_point_X, start_point_Y, end_point_X, end_point
 	local distance, distance_X, distance_Y
 	local curve_points
 	
-	start_X_ran = start_point_X + math.random(-ran, ran)
-	start_Y_ran = start_point_Y + math.random(-ran, ran)
-	end_X_ran = end_point_X + math.random(-ran, ran)
-	end_Y_ran = end_point_Y + math.random(-ran, ran)
+	start_X_ran = start_point_X + math.random(-ran_x, ran_x)
+	start_Y_ran = start_point_Y + math.random(-ran_y, ran_y)
+	end_X_ran = end_point_X + math.random(-ran_x, ran_x)
+	end_Y_ran = end_point_Y + math.random(-ran_y, ran_y)
 	print(string.format("start point (%d, %d) - end point (%d, %d)", start_X_ran, start_Y_ran, end_X_ran, end_Y_ran))
 	
 	mid_point_X = math.abs(start_X_ran + end_X_ran)/2

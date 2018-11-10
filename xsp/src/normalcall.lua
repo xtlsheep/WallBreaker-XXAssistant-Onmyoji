@@ -23,18 +23,6 @@ function finish_call()
 	return x, y
 end
 
-function tickets_call()
-	local x = 270
-	local y = 240
-	local x_ran = 20
-	local y_ran	= 10
-	local x_interv = 40
-	local y_interv = math.random(-3, 3)
-	local steps = 15
-
-	ran_move_steps(0, x, y, x_ran, y_ran, x_interv, y_interv, steps)
-end
-
 -- Main func
 function normalcall(tickets)
 	print(string.format("召唤次数: %d", tickets))
@@ -82,7 +70,7 @@ function normalcall(tickets)
 					cnt = cnt + 5
 					HUD_show_or_hide(HUD,hud_dscrpt,string.format("召唤票数 ~= %d", cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_interv()
-					tickets_call()
+					ran_move_curve(0, 270, 235, 875, 235, 20, 20)
 					break
 				end
 				-- 完成召唤

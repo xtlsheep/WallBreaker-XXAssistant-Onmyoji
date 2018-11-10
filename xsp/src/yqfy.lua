@@ -93,43 +93,47 @@ function yqfy(round, sel, mark)
 			if x > -1 then
 				if sel == "跳跳哥哥" then
 					ran_touch(0, 430, 230, 50, 10)
-					ran_sleep(1000)
+					ran_sleep(750)
 					ran_touch(0, 680, 560, 50, 10)
 				elseif sel == "椒图" then
 					ran_touch(0, 430, 290, 50, 10)
-					ran_sleep(1000)
+					ran_sleep(750)
 					ran_touch(0, 680, 560, 50, 10)
 				elseif sel == "骨女" then
 					ran_touch(0, 430, 350, 50, 10)
-					ran_sleep(1000)
+					ran_sleep(750)
 					ran_touch(0, 680, 560, 50, 10)
 				elseif sel == "饿鬼" then
 					ran_touch(0, 430, 410, 50, 10)
-					ran_sleep(1000)
+					ran_sleep(750)
 					ran_touch(0, 680, 560, 50, 10)
 				elseif sel == "二口女" then
 					ran_touch(0, 430, 470, 50, 10)
-					ran_sleep(1000)
+					ran_sleep(750)
 					ran_touch(0, 680, 560, 50, 10)
 				elseif sel == "海坊主" then
-					ran_move_steps(0, 430, 470, 20, 20, math.random(-3, 3), math.random(-17, -15), 15)
+					ran_move_curve(0, 430, 470, 430, 230, 50, 10)
+					ran_sleep(750)
 					ran_touch(0, 430, 310, 50, 10)
-					ran_sleep(1000)
+					ran_sleep(750)
 					ran_touch(0, 680, 560, 50, 10)
 				elseif sel == "鬼使黑" then
-					ran_move_steps(0, 430, 470, 20, 20, math.random(-3, 3), math.random(-17, -15), 15)
+					ran_move_curve(0, 430, 470, 430, 230, 50, 10)
+					ran_sleep(750)
 					ran_touch(0, 430, 370, 50, 10)
-					ran_sleep(1000)
+					ran_sleep(750)
 					ran_touch(0, 680, 560, 50, 10)
 				elseif sel == "小松丸" then
-					ran_move_steps(0, 430, 470, 20, 20, math.random(-3, 3), math.random(-17, -15), 15)
+					ran_move_curve(0, 430, 470, 430, 230, 50, 10)
+					ran_sleep(750)
 					ran_touch(0, 430, 430, 50, 10)
-					ran_sleep(1000)
+					ran_sleep(750)
 					ran_touch(0, 680, 560, 50, 10)
 				elseif sel == "日和坊" then
-					ran_move_steps(0, 430, 470, 20, 20, math.random(-3, 3), math.random(-17, -15), 15)
+					ran_move_curve(0, 430, 470, 430, 230, 50, 10)
+					ran_sleep(750)
 					ran_touch(0, 430, 490, 50, 10)
-					ran_sleep(1000)
+					ran_sleep(750)
 					ran_touch(0, 680, 560, 50, 10)
 				end
 				ran_sleep(500)
@@ -141,13 +145,13 @@ function yqfy(round, sel, mark)
 				HUD_show_or_hide(HUD,hud_dscrpt,"组队",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				ran_sleep(500)
 				if linkage == 1 then
-					ran_move_steps(0, 230, 455, 20, 20, math.random(-3, 3), math.random(-26, -24), 12)
-					ran_sleep(1000)
+					ran_move_curve(0, 220, 520, 220, 130, 50, 10)
+					ran_sleep(750)
 					ran_touch(0, 220, 145, 50, 10)
 				else
 					ran_touch(0, 220, 520, 50, 10)
 				end
-				ran_sleep(500)
+				ran_sleep(750)
 				break
 			end
 			-- 队员接手队长
