@@ -459,7 +459,7 @@ function pub_cnt_metal(x1, y1, x2, y2)
 		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
 			x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
 		if x_f > -1 then
-			return x, y, -1
+			return x, y, -5
 		end
 		return x, y, 5
 	end
@@ -468,7 +468,7 @@ function pub_cnt_metal(x1, y1, x2, y2)
 		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
 			x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
 		if x_f > -1 then
-			return x, y, -1
+			return x, y, -5
 		end
 		return x, y, 4
 	end
@@ -477,7 +477,7 @@ function pub_cnt_metal(x1, y1, x2, y2)
 		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
 			x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
 		if x_f > -1 then
-			return x, y, -1
+			return x, y, -5
 		end
 		return x, y, 3
 	end
@@ -486,7 +486,7 @@ function pub_cnt_metal(x1, y1, x2, y2)
 		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
 			x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
 		if x_f > -1 then
-			return x, y, -1
+			return x, y, -5
 		end
 		return x, y, 2
 	end
@@ -495,7 +495,7 @@ function pub_cnt_metal(x1, y1, x2, y2)
 		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
 			x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
 		if x_f > -1 then
-			return x, y, -1
+			return x, y, -5
 		end
 		return x, y, 1
 	end
@@ -504,7 +504,7 @@ function pub_cnt_metal(x1, y1, x2, y2)
 		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
 			x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
 		if x_f > -1 then
-			return x, y, -1
+			return x, y, -5
 		end
 		return x, y, 0
 	end
@@ -548,7 +548,7 @@ end
 
 function pub_find_next_target(map)
 	for i = 1, 8 do
-		if map[i] ~= -1 then
+		if map[i] ~= -1 and map[i] ~= -5 then
 			return i
 		end
 	end
@@ -565,7 +565,7 @@ function pub_refresh()
 	local y_interv = -20
 	local steps = 15
 	
-	ran_move_steps(0, x, y, x_ran, y_ran, x_interv, y_interv, steps)
+	ran_move_curve(0, 800, 500, 800, 150, 100, 20)
 end
 
 function pub_find_button()
@@ -603,6 +603,15 @@ function pub_find_ivld_button()
 end
 
 function pub_map_finished(map)
+	for i = 1, 8, 1 do
+		if map[i] ~= -1 and map[i] ~= -5 then
+			return RET_ERR
+		end
+	end
+	return RET_OK
+end
+
+function pub_map_ivld(map)
 	for i = 1, 8, 1 do
 		if map[i] ~= -1 then
 			return RET_ERR
@@ -951,7 +960,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				-- 分析地图
 				if (table.getn(map) == 0) then
 					coor_map_x, coor_map_y, map = pub_analyse_map(pub_sel)
-					ret = pub_map_finished(map)
+					ret = pub_map_ivld(map)
 					if ret == RET_OK then
 						finish = 1
 						break
