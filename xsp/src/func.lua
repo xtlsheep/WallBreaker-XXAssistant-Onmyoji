@@ -29,7 +29,7 @@ function onBeforeUserExit()
 end
 
 function show_win_fail(win_cnt, fail_cnt)
-	HUD_show_or_hide(HUD,hud_dscrpt,string.format("战斗胜利 %d次 - 失败 %d次", win_cnt, fail_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
+	HUD_show_or_hide(HUD,hud_info,string.format("战斗胜利 %d次 - 失败 %d次", win_cnt, fail_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 end
 
 function print_global_vars()
@@ -46,16 +46,16 @@ function find_offer()
 		95, 0, 0, 0)
 	if (x_ > -1) then
 		if (offer_arr[1] == 0) then
-			HUD_show_or_hide(HUD,hud_dscrpt,"拒绝悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			ran_touch(0, 759, 460, 10, 10) -- 拒绝
+			HUD_show_or_hide(HUD,hud_info,"拒绝悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			random_touch(0, 759, 460, 10, 10) -- 拒绝
 		else
 			if offer_arr[2] == 1 then
 				x, y = findColor({614, 432, 616, 434},
 					"0|0|0xed4a36,11|-21|0x67457c,-13|9|0xc7a98b,-30|17|0x8647c8",
 					90, 0, 0, 0)
 				if x > -1 then
-					HUD_show_or_hide(HUD,hud_dscrpt,"接受勾玉悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					ran_touch(0, 759, 373, 10, 10) -- 接受
+					HUD_show_or_hide(HUD,hud_info,"接受勾玉悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_touch(0, 759, 373, 10, 10) -- 接受
 					return x_, y_
 				end
 			end
@@ -64,8 +64,8 @@ function find_offer()
 					"0|0|0x55b260,2|83|0xdd725f,-157|68|0x0d0f0b,-151|39|0xe97a2b",
 					90, 0, 0, 0)
 				if x > -1 then
-					HUD_show_or_hide(HUD,hud_dscrpt,"接受体力悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					ran_touch(0, 759, 373, 10, 10) -- 接受
+					HUD_show_or_hide(HUD,hud_info,"接受体力悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_touch(0, 759, 373, 10, 10) -- 接受
 					return x_, y_
 				end
 			end
@@ -74,8 +74,8 @@ function find_offer()
 					"0|0|0x55b260,2|83|0xdd725f,-147|59|0x75671b,-166|48|0xddb64d",
 					90, 0, 0, 0)
 				if x > -1 then
-					HUD_show_or_hide(HUD,hud_dscrpt,"接受金币悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					ran_touch(0, 759, 373, 10, 10) -- 接受
+					HUD_show_or_hide(HUD,hud_info,"接受金币悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_touch(0, 759, 373, 10, 10) -- 接受
 					return x_, y_
 				end
 			end
@@ -84,8 +84,8 @@ function find_offer()
 					"0|0|0x8b3028,-11|-8|0xf37b62,-10|-19|0xfdfeff,-9|-39|0x69467f",
 					90, 0, 0, 0)
 				if x > -1 then
-					HUD_show_or_hide(HUD,hud_dscrpt,"接受猫粮悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					ran_touch(0, 759, 373, 10, 10) -- 接受
+					HUD_show_or_hide(HUD,hud_info,"接受猫粮悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_touch(0, 759, 373, 10, 10) -- 接受
 					return x_, y_
 				end
 			end
@@ -94,12 +94,12 @@ function find_offer()
 					"0|0|0x55b260,2|83|0xdd725f,-147|59|0x75671b,-243|44|0xfffbe9",
 					90, 0, 0, 0)
 				if x > -1 then
-					HUD_show_or_hide(HUD,hud_dscrpt,"接受狗粮悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					ran_touch(0, 759, 373, 10, 10) -- 接受
+					HUD_show_or_hide(HUD,hud_info,"接受狗粮悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_touch(0, 759, 373, 10, 10) -- 接受
 					return x_, y_
 				end
 			end
-			ran_touch(0, 759, 460, 10, 10) -- 拒绝
+			random_touch(0, 759, 460, 10, 10) -- 拒绝
 		end
 	end
 	return x_, y_
@@ -112,8 +112,8 @@ function handle_error(disconn_fin, real_8dashe, secret_vender)
 			"0|0|0xf1b15d,-180|-164|0xbba48a,172|-162|0xc3ac93,-5|50|0xb59f85",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_dscrpt,"断线期间结束战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			ran_touch(0, x, y, 20, 10)
+			HUD_show_or_hide(HUD,hud_info,"断线期间结束战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			random_touch(0, x, y, 20, 10)
 		end
 	end
 	if (real_8dashe == ENABLE) then
@@ -121,7 +121,7 @@ function handle_error(disconn_fin, real_8dashe, secret_vender)
 			"0|0|0x14fac5,-82|71|0x14fac5,-86|-69|0x14fac5,0|-16|0xffffff",
 			95, 0, 0, 0)
 		if x > -1 then
-			ran_touch(0, 973, 110, 5, 5) -- x
+			random_touch(0, 973, 110, 5, 5) -- x
 		end
 	end
 	if (secret_vender == ENABLE) then
@@ -129,7 +129,7 @@ function handle_error(disconn_fin, real_8dashe, secret_vender)
 			"0|0|0xfdf6f5,-14|-23|0x6b4b4e,-20|92|0xe17871,52|79|0xfdfbfb",
 			95, 0, 0, 0)
 		if x > -1 then
-			ran_touch(0, 40, 45, 5, 5) -- <
+			random_touch(0, 40, 45, 5, 5) -- <
 		end
 	end
 	return x, y
@@ -141,7 +141,7 @@ function level_select(level, init, lock, spec)
 			"0|0|0x312e2a,-11|-9|0x403c37,-14|-3|0x37332f,-17|0|0x534e49,-1|-7|0x49443f,2|5|0x4c4842,-9|7|0x4f4b45",
 			80, 0, 1, 0)
 		if x > -1 then
-			ran_touch(0, x, y, 50, 10)
+			random_touch(0, x, y, 50, 10)
 		end
 	end
 	
@@ -150,58 +150,58 @@ function level_select(level, init, lock, spec)
 			"0|0|0x4a4540,-6|-9|0x2f2b27,-17|-7|0x383530,-17|8|0x3f3b36,-10|7|0x423e39,-6|7|0x413d38,-1|8|0x4b4741,-1|4|0x2c2824",
 			80, 0, 1, 0)
 		if x > -1 then
-			ran_touch(0, x, y, 50, 10)
+			random_touch(0, x, y, 50, 10)
 		end
 	end
 	
 	mSleep(1000)
 	if (init == ENABLE) then
-		HUD_show_or_hide(HUD,hud_dscrpt,"层数 - 初始化",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"层数 - 初始化",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		-- 选择层数
 		if (level == 1) then
-			ran_move_curve(0, 360, 150, 360, 400, 50, 10) -- 向下拉
-			ran_sleep(750)
-			ran_touch(0, 360, 150, 50, 10) -- 第一排
+			random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
+			random_sleep(750)
+			random_touch(0, 360, 150, 50, 10) -- 第一排
 		elseif (level == 2) then
-			ran_move_curve(0, 360, 150, 360, 400, 50, 10)
-			ran_sleep(750)
-			ran_touch(0, 360, 215, 50, 10) -- 第二排
+			random_move(0, 360, 150, 360, 400, 50, 10)
+			random_sleep(750)
+			random_touch(0, 360, 215, 50, 10) -- 第二排
 		elseif (level == 3) then
-			ran_move_curve(0, 360, 150, 360, 400, 50, 10)
-			ran_sleep(750)
-			ran_touch(0, 360, 280, 50, 10) -- 第三排
+			random_move(0, 360, 150, 360, 400, 50, 10)
+			random_sleep(750)
+			random_touch(0, 360, 280, 50, 10) -- 第三排
 		elseif (level == 4) then
-			ran_move_curve(0, 360, 150, 360, 400, 50, 10)
-			ran_sleep(750)
-			ran_touch(0, 360, 350, 50, 10) -- 第四排
+			random_move(0, 360, 150, 360, 400, 50, 10)
+			random_sleep(750)
+			random_touch(0, 360, 350, 50, 10) -- 第四排
 		elseif (level == 5) then
-			ran_move_curve(0, 360, 150, 360, 400, 50, 10) -- 向下拉
-			ran_sleep(750)
-			ran_move_curve(0, 360, 300, 360, 150, 50, 10) -- 向上拉
-			ran_sleep(750)
+			random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
+			random_sleep(750)
+			random_move(0, 360, 300, 360, 150, 50, 10) -- 向上拉
+			random_sleep(750)
 			find_level_five()
 		elseif (level == 6) then
-			ran_move_curve(0, 360, 150, 360, 400, 50, 10) -- 向下拉
-			ran_sleep(750)
-			ran_move_curve(0, 360, 300, 360, 150, 50, 10) -- 向上拉
-			ran_sleep(750)
+			random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
+			random_sleep(750)
+			random_move(0, 360, 300, 360, 150, 50, 10) -- 向上拉
+			random_sleep(750)
 			find_level_six()
 		elseif (level == 7) then
-			ran_move_curve(0, 360, 350, 360, 100, 50, 10) -- 向上拉
-			ran_sleep(750)
-			ran_touch(0, 360, 150, 50, 10)
+			random_move(0, 360, 350, 360, 100, 50, 10) -- 向上拉
+			random_sleep(750)
+			random_touch(0, 360, 150, 50, 10)
 		elseif (level == 8) then
-			ran_move_curve(0, 360, 350, 360, 100, 50, 10)
-			ran_sleep(750)
-			ran_touch(0, 360, 215, 50, 10)
+			random_move(0, 360, 350, 360, 100, 50, 10)
+			random_sleep(750)
+			random_touch(0, 360, 215, 50, 10)
 		elseif (level == 9) then
-			ran_move_curve(0, 360, 350, 360, 100, 50, 10)
-			ran_sleep(750)
-			ran_touch(0, 360, 280, 50, 10)
+			random_move(0, 360, 350, 360, 100, 50, 10)
+			random_sleep(750)
+			random_touch(0, 360, 280, 50, 10)
 		elseif (level == 10) then
-			ran_move_curve(0, 360, 350, 360, 100, 50, 10)
-			ran_sleep(750)
-			ran_touch(0, 360, 350, 50, 10)
+			random_move(0, 360, 350, 360, 100, 50, 10)
+			random_sleep(750)
+			random_touch(0, 360, 350, 50, 10)
 		end
 	end
 	
@@ -231,14 +231,14 @@ function lock_or_unlock(lock, spec)
 				"0|0|0x735c41,11|1|0x2c2119,-11|0|0x2e231c,-1|5|0x291f19",
 				95, 0, 0, 0)
 			if x > -1 then
-				ran_touch(0, x, y, 3, 3)
+				random_touch(0, x, y, 3, 3)
 			end
 		else
 			x, y = findColor({x1, y1, x2, y2},
 				"0|0|0x725c40,0|-6|0x33271a,-13|1|0x9d93ce,13|1|0x9d95cd",
 				95, 0, 0, 0)
 			if x > -1 then
-				ran_touch(0, x, y, 3, 3)
+				random_touch(0, x, y, 3, 3)
 			end
 		end
 		return x, y
@@ -250,14 +250,14 @@ function lock_or_unlock(lock, spec)
 				"0|0|0x886d49,0|5|0x241911,-13|0|0x2f2318,15|0|0x2f2318",
 				95, 0, 0, 0)
 			if x > -1 then
-				ran_touch(0, x, y, 3, 3)
+				random_touch(0, x, y, 3, 3)
 			end
 		else
 			x, y = findColor({x1, y1, x2, y2},
 				"0|0|0x886e4a,0|7|0x1d150f,-17|0|0xb9adf4,17|0|0xb8aef2",
 				95, 0, 0, 0)
 			if x > -1 then
-				ran_touch(0, x, y, 3, 3)
+				random_touch(0, x, y, 3, 3)
 			end
 		end
 		return x, y
@@ -269,14 +269,14 @@ function lock_or_unlock(lock, spec)
 				"0|0|0x826745,0|5|0x1f150e,-13|0|0x2f2318,13|1|0x2f2318",
 				95, 0, 0, 0)
 			if x > -1 then
-				ran_touch(0, x, y, 3, 3)
+				random_touch(0, x, y, 3, 3)
 			end
 		else
 			x, y = findColor({x1, y1, x2, y2},
 				"0|0|0x866c49,0|7|0x1c150e,-16|0|0xb8acf1,16|0|0xb3aaec",
 				95, 0, 0, 0)
 			if x > -1 then
-				ran_touch(0, x, y, 3, 3)
+				random_touch(0, x, y, 3, 3)
 			end
 		end
 		return x, y
@@ -284,7 +284,7 @@ function lock_or_unlock(lock, spec)
 end
 
 function solo_start()
-	ran_touch(0, 845, 440, 30, 10) -- 挑战
+	random_touch(0, 845, 440, 30, 10) -- 挑战
 	mSleep(1000)
 	local x, y = findColor({806, 441, 808, 443}, -- 挑战
 		"0|0|0xf3b25e,75|0|0xf3b25e",
@@ -300,16 +300,16 @@ function disable_skill_feature()
 	local x, y, x_, y_
 	x, y = lct_tingyuan()
 	if x > -1 then
-		ran_touch(0, 51, 62, 20, 20)
-		ran_sleep(750)
+		random_touch(0, 51, 62, 20, 20)
+		random_sleep(750)
 		x_, y_ = findColor({790, 492, 792, 493},
 			"0|0|0x4b5ee9,214|-395|0xe8d4cf,221|39|0xe3af75",
 			95, 0, 0, 0)
 		if x_ > -1 then
-			ran_touch(0, x_, y_, 5, 5)
-			ran_sleep(750)
+			random_touch(0, x_, y_, 5, 5)
+			random_sleep(750)
 		end
-		ran_touch(0, 1008, 97, 5, 5)
+		random_touch(0, 1008, 97, 5, 5)
 	end
 end
 
@@ -325,7 +325,7 @@ function tingyuan_idle_handle(tingyuan_time_cnt)
 		time_cnt = tingyuan_time_cnt + 1
 	end
 	if time_cnt*500 > buff_idle_stop_time*1000 then
-		ran_touch(0, 390, 55, 10, 10) -- 加成
+		random_touch(0, 390, 55, 10, 10) -- 加成
 		local_buff_idle_stop = 1
 		buff_idle_stop = 0
 		time_cnt = 0
@@ -345,7 +345,7 @@ function tansuo_idle_handle(tansuo_time_cnt)
 		time_cnt = tansuo_time_cnt + 1
 	end
 	if time_cnt*500 > buff_idle_stop_time*1000 then
-		ran_touch(0, 390, 50, 10, 5) -- 加成
+		random_touch(0, 390, 50, 10, 5) -- 加成
 		local_buff_idle_stop = 1
 		buff_idle_stop = 0
 		time_cnt = 0
@@ -439,7 +439,7 @@ function lct_tingyuan()
 		"0|0|0xa29c7b,-77|-4|0xdfc7a1,-703|10|0xfddc8a,-710|35|0xf37f5b",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"庭院",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"庭院",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -449,7 +449,7 @@ function lct_tansuo()
 		"0|0|0xe0ecf9,-14|0|0xe6effa,4|-15|0xf0f5fb,34|-1|0x11215c",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -466,7 +466,7 @@ function tingyuan_enter_tansuo()
 		"0|0|0xffffec,0|-2|0xffffec,0|2|0xffffd2,-2|0|0xffffe6,2|0|0xfffff1",
 		95, 1, 0, 0)
 	if x > -1 then
-		ran_touch(0, x, y, 10, 10) -- 探索灯笼
+		random_touch(0, x, y, 10, 10) -- 探索灯笼
 	end
 end
 
@@ -475,7 +475,7 @@ function tingyuan_enter_zudui()
 		"0|0|0xa29c7b,-77|-4|0xdfc7a1,-703|10|0xfddc8a,-710|35|0xf37f5b",
 		95, 0, 0, 0)
 	if x > -1 then
-		ran_touch(0, 230, 560, 20, 20) -- 组队
+		random_touch(0, 230, 560, 20, 20) -- 组队
 	end
 	return x, y
 end
@@ -487,20 +487,20 @@ function lct_buff(stop)
 		90, 0, 0, 0)
 	if x > -1 then
 		if stop == 1 then
-			HUD_show_or_hide(HUD,hud_dscrpt,"关闭buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_info,"关闭buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			for i = 1, 10 do
 				x_, y_ = findColor({794, 135, 796, 360},
 					"0|0|0x412e2b,5|-7|0xe4c197,-5|8|0xd8b389,0|-15|0x382826,-1|22|0xcbb59c",
 					90, 0, 0, 0)
 				if x_ > -1 then
-					ran_touch(0, x_, y_, 5, 5)
+					random_touch(0, x_, y_, 5, 5)
 				end
-				ran_interv()
+				random_sleep(150)
 			end
 		end
 	end
-	ran_sleep(500)
-	right_bottom_click()
+	random_sleep(500)
+	lower_right_blank_click()
 end
 
 -- Fight func
@@ -509,8 +509,8 @@ function fight_ready()
 		"0|0|0xe5c288,-62|17|0xebd19e,61|18|0xf0d8a9",
 		95, 0, 0, 0)
 	if (x > -1) then
-		-- HUD_show_or_hide(HUD,hud_dscrpt,"战斗准备",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		ran_touch(0, 1040, 493, 30, 30) -- 准备的鼓
+		-- HUD_show_or_hide(HUD,hud_info,"战斗准备",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		random_touch(0, 1040, 493, 30, 30) -- 准备的鼓
 	end
 	return x, y
 end
@@ -520,7 +520,7 @@ function round_one()
 		"0|0|0x272420,0|-14|0xd9ba91,0|17|0xead0a3,126|10|0xdeaa70",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"第一回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"第一回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -530,7 +530,7 @@ function round_two()
 		"0|0|0xdcc096,-1|-11|0x272420,1|7|0x272420,124|11|0xdea86c",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"第二回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"第二回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -540,7 +540,7 @@ function round_three()
 		"0|0|0x272420,0|-13|0x272420,1|11|0x272420,126|14|0xdda669",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"第三回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"第三回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -550,7 +550,7 @@ function round_fight()
 		"0|0|0x030303,44|-23|0x020202,84|81|0x020202,80|150|0x881509,-524|272|0x5d5575",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"战斗开始",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"战斗开始",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -564,14 +564,14 @@ function fight_ongoing()
 			"0|0|0x1c1816,2|-6|0xe6cc8f,6|-12|0xe5d497,-7|10|0xdfbc85",
 			95, 0, 0, 0)
 		if (x_1 > -1) then
-			ran_touch(0, 36, 514, 10, 10) -- 指南针
+			random_touch(0, 36, 514, 10, 10) -- 指南针
 		end
 	end
 	return x, y
 end
 
-function right_bottom_click()
-	ran_touch(0, 1040, 350, 50, 50) -- 右下空白
+function lower_right_blank_click()
+	random_touch(0, 1040, 350, 50, 50)
 	return
 end
 
@@ -583,10 +583,10 @@ function fight_success(mode)
 			"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
 			95, 0, 0, 0)
 		if (x > -1) then
-			HUD_show_or_hide(HUD,hud_dscrpt,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			for i = 1, cnt do
-				right_bottom_click() -- 右下空白
-				ran_interv()
+				lower_right_blank_click()
+				random_sleep(150)
 			end
 		end
 		return x, y
@@ -595,10 +595,10 @@ function fight_success(mode)
 			"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
 			95, 0, 0, 0)
 		if (x > -1) then
-			HUD_show_or_hide(HUD,hud_dscrpt,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			for i = 1, cnt do
-				right_bottom_click() -- 右下空白
-				ran_interv()
+				lower_right_blank_click()
+				random_sleep(150)
 			end
 		end
 		return x, y
@@ -611,8 +611,8 @@ function whole_damo()
 		"0|0|0xaa7b2a,-52|61|0x340204,1|61|0x3b0305,76|55|0x370204",
 		95, 0, 0, 0)
 	if (x > -1) then
-		HUD_show_or_hide(HUD,hud_dscrpt,"领取奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		right_bottom_click() -- 右下空白
+		HUD_show_or_hide(HUD,hud_info,"领取奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		lower_right_blank_click()
 	end
 	return x, y
 end
@@ -622,8 +622,8 @@ function half_damo()
 		"0|0|0x670a0b,20|22|0x320204,127|0|0x7e0e0e,159|7|0x6f290b",
 		95, 0, 0, 0)
 	if (x > -1) then
-		HUD_show_or_hide(HUD,hud_dscrpt,"退出战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		right_bottom_click() -- 右下空白
+		HUD_show_or_hide(HUD,hud_info,"退出战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		lower_right_blank_click()
 	end
 	return x, y
 end
@@ -637,11 +637,11 @@ function keep_half_damo()
 			"0|0|0x670a0b,20|22|0x320204,127|0|0x7e0e0e,159|7|0x6f290b",
 			95, 0, 0, 0)
 		if x > -1 then
-			right_bottom_click() -- 右下空白
+			lower_right_blank_click()
 		elseif x == -1 then
 			return
 		end
-		mSleep(500)
+        random_sleep(150)
 	end
 end
 
@@ -652,16 +652,16 @@ function fight_failed(mode)
 			"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_dscrpt,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			right_bottom_click() -- 右下空白
+			HUD_show_or_hide(HUD,hud_info,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			lower_right_blank_click()
 		end
 	elseif (mode == "组队") then
 		x, y = findColor({410, 80, 415, 85}, -- 失败的鼓
 			"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_dscrpt,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			right_bottom_click() -- 右下空白
+			HUD_show_or_hide(HUD,hud_info,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			lower_right_blank_click()
 		end
 	end
 	return x, y
@@ -676,11 +676,11 @@ function keep_fight_failed(mode)
 				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
 				95, 0, 0, 0)
 			if x > -1 then
-				right_bottom_click() -- 右下空白
+				lower_right_blank_click()
 			elseif x == -1 then
 				return
 			end
-			mSleep(500)
+            random_sleep(150)
 		end
 	elseif (mode == "组队") then
 		while (1) do
@@ -689,11 +689,11 @@ function keep_fight_failed(mode)
 				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
 				95, 0, 0, 0)
 			if x > -1 then
-				right_bottom_click() -- 右下空白
+				lower_right_blank_click()
 			elseif x == -1 then
 				return
 			end
-			mSleep(500)
+			random_sleep(150)
 		end
 	end
 end
@@ -703,11 +703,9 @@ function yuhun_overflow()
 		"0|0|0xf3b25e,-54|-24|0x973b2e,52|20|0x963b2e,179|-163|0xc6b096,-182|42|0xcab49a",
 		95, 0, 0, 0)
 	if x > -1 then
-		ran_touch(0, x, y, 20, 5)
-		mSleep(250)
-		ran_interv()
-		right_bottom_click()
-		mSleep(500)
+		random_touch(0, x, y, 20, 5)
+		random_sleep(1000)
+		lower_right_blank_click()
 	end
 	return x, y
 end
@@ -717,13 +715,13 @@ function fight_head_gear()
 		"0|0|0xedc790,-1|-13|0x372827,-11|9|0x3f3126,10|5|0xe9c38c",
 		90, 0, 0, 0)
 	if x > -1 then
-		ran_touch(0, x, y, 10, 10)
-		ran_sleep(250)
-		ran_touch(0, x + 150, y, 50, 10)
-		ran_sleep(250)
-		ran_touch(0, x + 150, y, 50, 10)
-		ran_sleep(250)
-		ran_touch(0, x, y, 10, 10)
+		random_touch(0, x, y, 10, 10)
+		random_sleep(250)
+		random_touch(0, x + 150, y, 50, 10)
+		random_sleep(250)
+		random_touch(0, x + 150, y, 50, 10)
+		random_sleep(250)
+		random_touch(0, x, y, 10, 10)
 	end
 	return x, y
 end
@@ -737,9 +735,8 @@ function member_room_init()
 end
 
 function member_room_find()
-	ran_touch(0, 440, 559, 20, 10) -- 刷新
-	mSleep(250)
-	ran_interv()
+	random_touch(0, 440, 559, 20, 10) -- 刷新
+    random_sleep(300)
 	
 	local top = {195, 287, 376, 466}
 	local bottom = {200, 292, 381, 471}
@@ -756,8 +753,8 @@ function member_room_find()
 			"0|0|0xe2bc54,-20|-12|0xefda8a,40|-14|0x744827,-1|14|0x754b2b",
 			95, 0, 0, 0)
 		if x > -1 then
-			HUD_show_or_hide(HUD,hud_dscrpt,"寻找队伍",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			ran_touch(0, x, y, 10, 5) -- 加入
+			HUD_show_or_hide(HUD,hud_info,"寻找队伍",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			random_touch(0, x, y, 10, 5) -- 加入
 			return
 		end
 	end
@@ -768,8 +765,8 @@ function member_room_quit()
 		"0|0|0xf3b25e,66|1|0xf3b25e,-146|1|0xdf6851,-278|0|0xdf6851",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"退出队伍",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		ran_touch(0, x, y, 20, 10) -- 确定
+		HUD_show_or_hide(HUD,hud_info,"退出队伍",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		random_touch(0, x, y, 20, 10) -- 确定
 	end
 	return x, y
 end
@@ -787,13 +784,13 @@ function member_room_user_profile()
 		"0|0|0x9d4939,720|-1|0xac7e42,381|-153|0xf3b25e,546|-152|0xf3b25e",
 		95, 0, 0, 0)
 	if x > -1 then
-		ran_touch(0, 1100, 500, 20, 20) -- 右下空白
+		random_touch(0, 1100, 500, 20, 20)
 	end
 	x, y = findColor({146, 338, 418, 537},
 		"0|0|0x9d4939,720|-1|0xac7e42,578|-151|0xf3b25e,742|-151|0xf3b25e",
 		95, 0, 0, 0)
 	if x > -1 then
-		ran_touch(0, 1100, 500, 20, 20) -- 右下空白
+		random_touch(0, 1100, 500, 20, 20)
 	end
 	return x, y
 end
@@ -803,8 +800,8 @@ function captain_room_init()
 		"0|0|0xf3b25e,133|-325|0xa52729,128|-362|0x8d7245,127|-327|0xead49c",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"创建队伍",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		ran_touch(0, x, y, 20, 10)
+		HUD_show_or_hide(HUD,hud_info,"创建队伍",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		random_touch(0, x, y, 20, 10)
 	end
 	return x, y
 end
@@ -819,9 +816,9 @@ function captain_room_create_public()
 			"0|0|0x402f11",
 			95, 0, 0, 0)
 		if x_ > -1 then
-			ran_touch(0, x_, y_, 3, 3)
+			random_touch(0, x_, y_, 3, 3)
 		end
-		ran_touch(0, x, y, 20, 10) -- 创建
+		random_touch(0, x, y, 20, 10) -- 创建
 	end
 	return x, y
 end
@@ -836,9 +833,9 @@ function captain_room_create_private()
 			"0|0|0x402f11",
 			95, 0, 0, 0)
 		if x_ > -1 then
-			ran_touch(0, x_, y_, 3, 3)
+			random_touch(0, x_, y_, 3, 3)
 		end
-		ran_touch(0, x, y, 20, 10) -- 创建
+		random_touch(0, x, y, 20, 10) -- 创建
 	end
 	return x, y
 end
@@ -862,28 +859,28 @@ function captain_room_invite_first(invite_zone)
 				"0|0|0x8a553f,-46|-13|0xa36b4e,36|-13|0xa26b4e,-93|-22|0xe2758c,479|-33|0xf4e0da",
 				95, 0, 0, 0)
 			if x_ > -1 then
-				ran_touch(0, x_, y_, 20, 5)
+				random_touch(0, x_, y_, 20, 5)
 			end
 		elseif invite_zone == 2 then
 			x_, y_ = findColor({464, 94, 466, 96},
 				"0|0|0x8b5640,-44|-15|0xa1694e,39|-16|0xa26b4e,-192|-25|0xe77c94,378|-37|0xf5e0d9",
 				95, 0, 0, 0)
 			if x_ > -1 then
-				ran_touch(0, x_, y_, 20, 5)
+				random_touch(0, x_, y_, 20, 5)
 			end
 		elseif invite_zone == 3 then
 			x_, y_ = findColor({564, 94, 566, 96},
 				"0|0|0x8a563e,-41|-16|0xa36b4e,43|-17|0xa26b4e,-293|-25|0xe2758c,279|-36|0xf4e0da",
 				95, 0, 0, 0)
 			if x_ > -1 then
-				ran_touch(0, x_, y_, 20, 5)
+				random_touch(0, x_, y_, 20, 5)
 			end
 		end
 		mSleep(1000)
-		ran_sleep(250)
-		ran_touch(0, 440, 205, 40, 20) -- 第一位好友
-		ran_sleep(250)
-		ran_touch(0, x, y, 20, 10) -- 邀请
+		random_sleep(250)
+		random_touch(0, 440, 205, 40, 20) -- 第一位好友
+		random_sleep(250)
+		random_touch(0, x, y, 20, 10) -- 邀请
 	end
 	return x, y
 end
@@ -893,8 +890,8 @@ function captain_room_start_with_1_members()
 		"0|0|0xf3b25e,-60|-11|0xf3b25e,-63|13|0xf3b25e,65|2|0xf3b25e",
 		95, 0, 0, 0)
 	if x > -1 then
-		ran_sleep(1000)
-		ran_touch(0, x, y, 20, 10)
+		random_sleep(1000)
+		random_touch(0, x, y, 20, 10)
 	end
 	return x, y
 end
@@ -908,8 +905,8 @@ function captain_room_start_with_2_members()
 			"0|0|0x31251a,24|-21|0x433527,34|-33|0xdbbf68,-8|-15|0xe1cd8d",
 			95, 0, 0, 0)
 		if x_ == -1 then
-			ran_sleep(1000)
-			ran_touch(0, x, y, 20, 10) -- 开始战斗
+			random_sleep(1000)
+			random_touch(0, x, y, 20, 10) -- 开始战斗
 		end
 	end
 	return x, y
@@ -924,19 +921,19 @@ function member_team_accept_invite(auto)
 			"0|0|0x56b361,19|9|0x866f5a,-93|-16|0xdd6c59,-102|-5|0x826952",
 			95, 0, 0, 0)
 		if x > -1 then
-			ran_interv()
+			random_sleep(150)
 			if (auto == 1) then
 				x_auto, y_auto = findColor({205, 225, 210, 460}, -- 自动准备的按钮
 					"0|0|0xedc791,0|13|0x5ab565,8|19|0x51ad5b,17|9|0x5bb665",
 					90, 0, 0, 0)
 				if x_auto > -1 then
-					HUD_show_or_hide(HUD,hud_dscrpt,"收到自动组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					ran_touch(0, x_auto, y_auto, 5, 5) -- 自动准备的按钮
+					HUD_show_or_hide(HUD,hud_info,"收到自动组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_touch(0, x_auto, y_auto, 5, 5) -- 自动准备的按钮
 					return x, y, RET_OK
 				end
 			end
-			HUD_show_or_hide(HUD,hud_dscrpt,"收到组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			ran_touch(0, x, y, 5, 5) -- √
+			HUD_show_or_hide(HUD,hud_info,"收到组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			random_touch(0, x, y, 5, 5) -- √
 			return x, y, RET_ERR
 		end
 	elseif ver == "android" then
@@ -944,19 +941,19 @@ function member_team_accept_invite(auto)
 			"0|0|0x58b360,17|10|0xb7a796,-83|-5|0xdd6e5d,-104|-3|0xb49f87",
 			95, 0, 0, 0)
 		if x > -1 then
-			ran_interv()
+			random_sleep(150)
 			if (auto == 1) then
 				x_auto, y_auto = findColor({205, 225, 210, 440},
 					"0|0|0xefc594,0|13|0x5ab563,19|9|0x61bc6a,20|20|0xb7a896",
 					90, 0, 0, 0)
 				if x_auto > -1 then
-					HUD_show_or_hide(HUD,hud_dscrpt,"收到自动组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					ran_touch(0, x_auto, y_auto, 5, 5) -- 自动准备的按钮
+					HUD_show_or_hide(HUD,hud_info,"收到自动组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_touch(0, x_auto, y_auto, 5, 5) -- 自动准备的按钮
 					return x, y, RET_OK
 				end
 			end
-			HUD_show_or_hide(HUD,hud_dscrpt,"收到组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			ran_touch(0, x, y, 5, 5) -- √
+			HUD_show_or_hide(HUD,hud_info,"收到组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			random_touch(0, x, y, 5, 5) -- √
 		end
 	end
 	return x, y, RET_ERR
@@ -967,8 +964,8 @@ function member_team_refuse_invite()
 		"0|0|0xdc6d5a,2|-19|0x866c57,-21|2|0x846b55,21|1|0x856c56",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"拒绝组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		ran_touch(0, x, y, 10, 10)
+		HUD_show_or_hide(HUD,hud_info,"拒绝组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		random_touch(0, x, y, 10, 10)
 		mSleep(500)
 	end
 	return x, y
@@ -993,7 +990,7 @@ function captain_team_set_auto_invite()
 		"0|0|0x73604d,-85|65|0xdf6851,74|65|0xcbb59c,226|66|0xf3b25e",
 		95, 0, 0, 0)
 	if x > -1 then
-		ran_touch(0, x, y, 3, 3) -- 勾选
+		random_touch(0, x, y, 3, 3) -- 勾选
 	end
 	return x, y
 end

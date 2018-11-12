@@ -14,25 +14,24 @@ function yqfy_queue()
 		"0|0|0xf7f2df,12|1|0x4d0c0c,362|378|0x151311,251|441|0xf3b25e,497|443|0xb0a9a1",
 		90, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"妖气封印 - 匹配中",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"妖气封印 - 匹配中",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
 
 function yqfy_mark(mark)
-	mSleep(1000)
-	ran_sleep(500)
+	random_sleep(500)
 	local pos = math.random(1, 3)
-	local cnt = math.random(1, 2)
+	local cnt = math.random(2, 3)
 	local pos_x = {350, 550, 750}
 	local pos_y = {200, 200, 200}
 	
 	for i = 1, cnt do
-		ran_interv()
+		random_sleep(150)
 		if mark == "大怪" then
-			ran_touch(0, 555, 75, 10, 30)
+			random_touch(0, 555, 75, 10, 30)
 		elseif (mark == "小怪") then
-			ran_touch(0, pos_x[pos], pos_y[pos], 10, 10)
+			random_touch(0, pos_x[pos], pos_y[pos], 10, 10)
 		end
 	end
 end
@@ -42,8 +41,8 @@ function yqfy_deny_quit()
 		"0|0|0xdf6851,212|1|0xf3b25e,269|111|0x080807",
 		80, 0, 0, 0)
 	if x > -1 then
-		ran_sleep(500)
-		ran_touch(0, x, y, 30, 10)
+		random_sleep(500)
+		random_touch(0, x, y, 30, 10)
 	end
 	return x, y
 end
@@ -80,7 +79,7 @@ function yqfy(round, sel, mark)
 					return
 				end
 				ran_wait = math.random(1000, 3000)
-				HUD_show_or_hide(HUD,hud_dscrpt,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
+				HUD_show_or_hide(HUD,hud_info,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
 				mSleep(ran_wait)
 				tingyuan_enter_zudui()
 				break
@@ -89,75 +88,75 @@ function yqfy(round, sel, mark)
 			x, y = yqfy_queue() if x > -1 then break end
 			-- 妖气封印
 			x, y = lct_yqfy()
-			ran_sleep(500)
+			random_sleep(500)
 			if x > -1 then
 				if sel == "跳跳哥哥" then
-					ran_touch(0, 430, 230, 50, 10)
-					ran_sleep(750)
-					ran_touch(0, 680, 560, 50, 10)
+					random_touch(0, 430, 230, 50, 10)
+					random_sleep(750)
+					random_touch(0, 680, 560, 50, 10)
 				elseif sel == "椒图" then
-					ran_touch(0, 430, 290, 50, 10)
-					ran_sleep(750)
-					ran_touch(0, 680, 560, 50, 10)
+					random_touch(0, 430, 290, 50, 10)
+					random_sleep(750)
+					random_touch(0, 680, 560, 50, 10)
 				elseif sel == "骨女" then
-					ran_touch(0, 430, 350, 50, 10)
-					ran_sleep(750)
-					ran_touch(0, 680, 560, 50, 10)
+					random_touch(0, 430, 350, 50, 10)
+					random_sleep(750)
+					random_touch(0, 680, 560, 50, 10)
 				elseif sel == "饿鬼" then
-					ran_touch(0, 430, 410, 50, 10)
-					ran_sleep(750)
-					ran_touch(0, 680, 560, 50, 10)
+					random_touch(0, 430, 410, 50, 10)
+					random_sleep(750)
+					random_touch(0, 680, 560, 50, 10)
 				elseif sel == "二口女" then
-					ran_touch(0, 430, 470, 50, 10)
-					ran_sleep(750)
-					ran_touch(0, 680, 560, 50, 10)
+					random_touch(0, 430, 470, 50, 10)
+					random_sleep(750)
+					random_touch(0, 680, 560, 50, 10)
 				elseif sel == "海坊主" then
-					ran_move_curve(0, 430, 470, 430, 230, 50, 10)
-					ran_sleep(750)
-					ran_touch(0, 430, 310, 50, 10)
-					ran_sleep(750)
-					ran_touch(0, 680, 560, 50, 10)
+					random_move(0, 430, 470, 430, 230, 50, 10)
+					random_sleep(750)
+					random_touch(0, 430, 310, 50, 10)
+					random_sleep(750)
+					random_touch(0, 680, 560, 50, 10)
 				elseif sel == "鬼使黑" then
-					ran_move_curve(0, 430, 470, 430, 230, 50, 10)
-					ran_sleep(750)
-					ran_touch(0, 430, 370, 50, 10)
-					ran_sleep(750)
-					ran_touch(0, 680, 560, 50, 10)
+					random_move(0, 430, 470, 430, 230, 50, 10)
+					random_sleep(750)
+					random_touch(0, 430, 370, 50, 10)
+					random_sleep(750)
+					random_touch(0, 680, 560, 50, 10)
 				elseif sel == "小松丸" then
-					ran_move_curve(0, 430, 470, 430, 230, 50, 10)
-					ran_sleep(750)
-					ran_touch(0, 430, 430, 50, 10)
-					ran_sleep(750)
-					ran_touch(0, 680, 560, 50, 10)
+					random_move(0, 430, 470, 430, 230, 50, 10)
+					random_sleep(750)
+					random_touch(0, 430, 430, 50, 10)
+					random_sleep(750)
+					random_touch(0, 680, 560, 50, 10)
 				elseif sel == "日和坊" then
-					ran_move_curve(0, 430, 470, 430, 230, 50, 10)
-					ran_sleep(750)
-					ran_touch(0, 430, 490, 50, 10)
-					ran_sleep(750)
-					ran_touch(0, 680, 560, 50, 10)
+					random_move(0, 430, 470, 430, 230, 50, 10)
+					random_sleep(750)
+					random_touch(0, 430, 490, 50, 10)
+					random_sleep(750)
+					random_touch(0, 680, 560, 50, 10)
 				end
-				ran_sleep(500)
+				random_sleep(500)
 				break
 			end
 			-- 组队
 			x, y = lct_zudui()
 			if (x > -1) then
-				HUD_show_or_hide(HUD,hud_dscrpt,"组队",20,"0xff000000","0xffffffff",0,100,0,300,32)
-				ran_sleep(500)
+				HUD_show_or_hide(HUD,hud_info,"组队",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				random_sleep(500)
 				if linkage == 1 then
-					ran_move_curve(0, 220, 520, 220, 130, 50, 10)
-					ran_sleep(750)
-					ran_touch(0, 220, 145, 50, 10)
+					random_move(0, 220, 520, 220, 130, 50, 10)
+					random_sleep(750)
+					random_touch(0, 220, 145, 50, 10)
 				else
-					ran_touch(0, 220, 520, 50, 10)
+					random_touch(0, 220, 520, 50, 10)
 				end
-				ran_sleep(750)
+				random_sleep(750)
 				break
 			end
 			-- 队员接手队长
-			x, y = member_room_find_start() if (x > -1) then ran_touch(0, 925, 535, 20, 10) break end -- 开始战斗
+			x, y = member_room_find_start() if (x > -1) then random_touch(0, 925, 535, 20, 10) break end -- 开始战斗
 			-- 战斗准备
-			x, y = fight_ready() if (x > -1) then HUD_show_or_hide(HUD,hud_dscrpt,"战斗准备",20,"0xff000000","0xffffffff",0,100,0,300,32) break end
+			x, y = fight_ready() if (x > -1) then HUD_show_or_hide(HUD,hud_info,"战斗准备",20,"0xff000000","0xffffffff",0,100,0,300,32) break end
 			-- 战斗胜利
 			x, y = fight_success("组队") if (x > -1) then break end
 			-- 胜利达摩

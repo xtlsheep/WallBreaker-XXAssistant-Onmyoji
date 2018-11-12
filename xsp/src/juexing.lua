@@ -7,7 +7,7 @@ function lct_juexingtower()
 		"0|0|0xb17880,238|12|0x56b083,478|30|0x358fe5,718|40|0xd378d5",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"探索 - 觉醒之塔",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"探索 - 觉醒之塔",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -17,15 +17,14 @@ function lct_juexingelement()
 		"0|0|0xb17684,187|10|0xbcedb5,385|2|0x3090e2,576|7|0xfcbbce",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"探索 - 觉醒材料",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"探索 - 觉醒材料",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
 
 function juexing_mark(mark)
-	mSleep(1000)
-	ran_sleep(500)
-	local cnt = math.random(1, 2)
+	random_sleep(500)
+	local cnt = math.random(2, 3)
 	local pos_x = {488, 560, 653, 823, 1016}
 	local pos_y = {140, 170, 210, 230, 240}
 	local pos
@@ -34,24 +33,24 @@ function juexing_mark(mark)
 	end
 	
 	for i = 1, cnt do
-		ran_interv()
+		random_sleep(150)
 		if (mark == "大怪") then
-			ran_touch(0, 722, 148, 10, 30)
+			random_touch(0, 722, 148, 10, 30)
 		elseif (mark == "小怪") then
-			ran_touch(0, pos_x[pos], pos_y[pos], 10, 10)
+			random_touch(0, pos_x[pos], pos_y[pos], 10, 10)
 		end
 	end
 end
 
 function juexing_element(element)
 	if (element == "火") then
-		ran_touch(0, 225, 300, 20, 20)
+		random_touch(0, 225, 300, 20, 20)
 	elseif (element == "风") then
-		ran_touch(0, 465, 300, 20, 20)
+		random_touch(0, 465, 300, 20, 20)
 	elseif (element == "水") then
-		ran_touch(0, 700, 300, 20, 20)
+		random_touch(0, 700, 300, 20, 20)
 	elseif (element == "雷") then
-		ran_touch(0, 950, 300, 20, 20)
+		random_touch(0, 950, 300, 20, 20)
 	end
 end
 
@@ -118,7 +117,7 @@ function juexing_solo(element, mark, level, round, lock)
 			x, y = lct_juexingelement()
 			if (x > -1) then
 				if quit == 1 then
-					ran_touch(0, 930, 110, 5, 5)
+					random_touch(0, 930, 110, 5, 5)
 					return
 				end
 				level_select(level, init, lock, "觉醒") 
@@ -131,7 +130,7 @@ function juexing_solo(element, mark, level, round, lock)
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 90, 590, 20, 20) mSleep(1000) tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end
+			x, y = lct_tansuo() if (x > -1) then random_touch(0, 90, 590, 20, 20) mSleep(1000) tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 战斗失败
@@ -184,11 +183,11 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 					return
 				end
 				if wait_invite == 0 then
-					HUD_show_or_hide(HUD,hud_dscrpt,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					ran_touch(0, 90, 590, 20, 20) -- 觉醒
+					HUD_show_or_hide(HUD,hud_info,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_touch(0, 90, 590, 20, 20) -- 觉醒
 					mSleep(1000)
 				else
-					HUD_show_or_hide(HUD,hud_dscrpt,"探索 - 等待组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_info,"探索 - 等待组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					x, y, auto_grouped = member_team_accept_invite(member_auto_group)
 					if x > -1 then
 						wait_invite = 0
@@ -230,14 +229,14 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			x, y = member_room_init() if (x > -1) then member_room_find() break end
 			-- 队员接手队长
 			if (member_to_captain == 1) then
-				x, y = member_room_find_start() if (x > -1) then ran_touch(0, 925, 535, 20, 10) break end -- 开始战斗
+				x, y = member_room_find_start() if (x > -1) then random_touch(0, 925, 535, 20, 10) break end -- 开始战斗
 			else
-				x, y = member_room_find_start() if (x > -1) then ran_touch(0, 205, 535, 20, 10) break end -- 离开队伍
+				x, y = member_room_find_start() if (x > -1) then random_touch(0, 205, 535, 20, 10) break end -- 离开队伍
 			end
 			-- 离开确认
 			x, y = member_room_quit() if (x > -1) then wait_invite = 0 break end
 			-- 觉醒材料
-			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 ran_touch(0, 573, 440, 20, 10) break end -- 组队开始
+			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 random_touch(0, 573, 440, 20, 10) break end -- 组队开始
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 觉醒之塔
@@ -267,8 +266,8 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 				break
 			end
 			-- 停止邀请
-			x, y = captain_team_win_invite() if (x > -1) then ran_touch(0, 460, 385, 20, 10) break end
-			x, y = captain_team_lost_invite() if (x > -1) then ran_touch(0, 462, 383, 20, 10) break end
+			x, y = captain_team_win_invite() if (x > -1) then random_touch(0, 460, 385, 20, 10) break end
+			x, y = captain_team_lost_invite() if (x > -1) then random_touch(0, 462, 383, 20, 10) break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Error Handle
@@ -325,9 +324,9 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			x, y = captain_team_lost_invite()
 			if (x > -1) then
 				if (fail_and_recreate == 1) then
-					ran_touch(0, 462, 383, 20, 10) -- 取消
+					random_touch(0, 462, 383, 20, 10) -- 取消
 				else
-					ran_touch(0, 673, 384, 20, 10) -- 确定
+					random_touch(0, 673, 384, 20, 10) -- 确定
 				end
 				break
 			end
@@ -342,9 +341,9 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			x, y = captain_team_win_invite() 
 			if (x > -1) then
 				if quit == 1 then
-					ran_touch(0, 460, 385, 20, 10)
+					random_touch(0, 460, 385, 20, 10)
 				else
-					ran_touch(0, 674, 385, 20, 10)
+					random_touch(0, 674, 385, 20, 10)
 				end
 				break 
 			end
@@ -369,7 +368,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 				if quit == 1 then
 					return
 				end
-				ran_touch(0, 90, 590, 20, 20) 
+				random_touch(0, 90, 590, 20, 20) 
 				mSleep(1000) 
 				tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) 
 				break
@@ -377,7 +376,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 觉醒材料
-			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 ran_touch(0, 573, 440, 20, 10) break end -- 组队开始
+			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 random_touch(0, 573, 440, 20, 10) break end -- 组队开始
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
@@ -444,12 +443,12 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 				break
 			end
 			if (member_to_captain == 1) then
-				x, y = member_room_find_start() if (x > -1) then ran_touch(0, 925, 535, 20, 10) break end -- 开始战斗
+				x, y = member_room_find_start() if (x > -1) then random_touch(0, 925, 535, 20, 10) break end -- 开始战斗
 			else
-				x, y = member_room_find_start() if (x > -1) then ran_touch(0, 205, 535, 20, 10) break end -- 离开队伍
+				x, y = member_room_find_start() if (x > -1) then random_touch(0, 205, 535, 20, 10) break end -- 离开队伍
 			end
 			-- 离开队伍
-			x, y = member_room_find_start() if (x > -1) then ran_touch(0, 205, 535, 20, 10) break end -- 离开队伍
+			x, y = member_room_find_start() if (x > -1) then random_touch(0, 205, 535, 20, 10) break end -- 离开队伍
 			-- 离开确认
 			x, y = member_room_quit() if (x > -1) then break end
 			-- 战斗失败
@@ -529,7 +528,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 				break
 			end
 			-- 失败邀请
-			x, y = captain_team_lost_invite() if (x > -1) then ran_touch(0, 673, 384, 20, 10) invite = 0 time_cnt = 0 break end -- 确定
+			x, y = captain_team_lost_invite() if (x > -1) then random_touch(0, 673, 384, 20, 10) invite = 0 time_cnt = 0 break end -- 确定
 			-- 自动邀请
 			if (captain_auto_group == 1 and quit == 0) then 
 				x, y = captain_team_set_auto_invite() 
@@ -541,9 +540,9 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			x, y = captain_team_win_invite() 
 			if (x > -1) then
 				if quit == 1 then
-					ran_touch(0, 460, 385, 20, 10)
+					random_touch(0, 460, 385, 20, 10)
 				else
-					ran_touch(0, 674, 385, 20, 10) 
+					random_touch(0, 674, 385, 20, 10) 
 					invite = 0 
 					time_cnt = 0
 				end
@@ -562,7 +561,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 					invite = 1
 				end
 				if (captain_auto_invite == 1 and invite == 1) then
-					ran_touch(0, 565, 320, 50, 50) -- 邀请初始化
+					random_touch(0, 565, 320, 50, 50) -- 邀请初始化
 					x, y = captain_room_invite_init() if (x > -1) then break end
 				end
 				break
@@ -588,7 +587,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 				if quit == 1 then
 					return
 				end
-				ran_touch(0, 90, 590, 20, 20) 
+				random_touch(0, 90, 590, 20, 20) 
 				mSleep(1000) 
 				tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) 
 				break
@@ -596,7 +595,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 觉醒材料
-			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 ran_touch(0, 573, 440, 20, 10) break end -- 组队开始
+			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 random_touch(0, 573, 440, 20, 10) break end -- 组队开始
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1

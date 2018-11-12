@@ -21,7 +21,7 @@ function single_ticket()
 		"0|0|0xd7d9d8,0|-9|0xffffff,-5|8|0xf9f9f9,6|8|0xf8f8f8,0|-61|0xffffff",
 		95, 0, 0, 0)
 	if x > -1 then
-		ran_touch(0, x, y, 30, 30)
+		random_touch(0, x, y, 30, 30)
 	end
 	return x, y
 end
@@ -53,23 +53,23 @@ function normalcall(tickets)
 			if cnt >= tickets then
 				x, y = finish_call()
 				if x > -1 then
-					ran_touch(0, 448, 576, 30, 10) -- 确定
+					random_touch(0, 448, 576, 30, 10) -- 确定
 					break
 				end
 				x, y = lct_call_house()
 				if x > -1 then
-					ran_touch(0, 52, 27, 10, 10) -- 返回
+					random_touch(0, 52, 27, 10, 10) -- 返回
 					return
 				end
 			else
 				-- 召唤小屋
 				x, y = lct_call_house()
 				if x > -1 then
-					ran_touch(0, 230, 543, 20, 20) -- 点击白票
+					random_touch(0, 230, 543, 20, 20) -- 点击白票
 					mSleep(1000)
 					x_, y_ = lct_call_house()
 					if x_ > -1 then
-						ran_touch(0, 52, 27, 10, 10) -- 返回
+						random_touch(0, 52, 27, 10, 10) -- 返回
 						return
 					end
 					break
@@ -78,15 +78,14 @@ function normalcall(tickets)
 				x, y = five_tickets()
 				if x > -1 then
 					cnt = cnt + 5
-					HUD_show_or_hide(HUD,hud_dscrpt,string.format("召唤票数 ~= %d", cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
-					ran_interv()
-					ran_move_curve(0, 270, 235, 900, 235, 20, 20)
+					HUD_show_or_hide(HUD,hud_info,string.format("召唤票数 ~= %d", cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_move(0, 270, 235, 900, 235, 20, 20)
 					break
 				end
 				-- 单张白票
 				x, y = single_ticket() if x > -1 then break end
 				-- 完成召唤
-				x, y = finish_call() if x > -1 then ran_touch(0, 688, 576, 30, 10) break end -- 再次召唤
+				x, y = finish_call() if x > -1 then random_touch(0, 688, 576, 30, 10) break end -- 再次召唤
 			end
 			break
 		end

@@ -191,7 +191,7 @@ function global_UI()
 	-- HUD
 	if res_global.HUD == "0" then
 		HUD = "show"
-		hud_dscrpt = createHUD()
+		hud_info = createHUD()
 	end
 	
 	-- 关闭特效

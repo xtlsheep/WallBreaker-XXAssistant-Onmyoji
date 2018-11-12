@@ -28,7 +28,7 @@ math.random(1,10000)
 
 -- Global
 HUD = nil
-hud_dscrpt = nil
+hud_info = nil
 hud_button = nil
 linkage = 0
 show_settlement = 0

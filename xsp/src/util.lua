@@ -48,12 +48,7 @@ function HUD_show_or_hide(HUD,id,text,size,color,bg,pos,x,y,width,height)
 	end
 end
 
-function ran_interv()
-	local t = math.random(100, 150)
-	mSleep(t)
-end
-
-function ran_sleep(t)
+function random_sleep(t)
 	local t = t + 0.2*math.random(-t, t)
 	mSleep(t)
 end
@@ -63,7 +58,7 @@ function show_point(x, y, interv)
 	mSleep(interv)
 end
 
-function ran_touch(id, x, y, ran_x, ran_y)
+function random_touch(id, x, y, ran_x, ran_y)
 	local x_r, y_r
 	if ((x == nil) or (y == nil)) then
 		return
@@ -78,13 +73,13 @@ function ran_touch(id, x, y, ran_x, ran_y)
 	hud_button = createHUD()
 	show_point(x_r, y_r, 250)
 	hideHUD(hud_button)
-	ran_interv()
+	random_sleep(150)
 	touchDown(id, x_r, y_r)
-	ran_sleep(200)
+	random_sleep(200)
 	touchUp(id, x_r, y_r)
 end
 
-function ran_move_curve(id, start_point_X, start_point_Y, end_point_X, end_point_Y, ran_x, ran_y)
+function random_move(id, start_point_X, start_point_Y, end_point_X, end_point_Y, ran_x, ran_y)
 	local function bezier_interpolation(t, init_points, init_points_num)
 		local curve_X_tmp = {}
 		local curve_Y_tmp = {}
@@ -110,7 +105,6 @@ function ran_move_curve(id, start_point_X, start_point_Y, end_point_X, end_point
 	local init_points
 	local mid_point_X, mid_point_Y
 	local control_point_X, control_point_Y
-	local ran_X, ran_Y
 	local distance, distance_X, distance_Y
 	local curve_points
 	

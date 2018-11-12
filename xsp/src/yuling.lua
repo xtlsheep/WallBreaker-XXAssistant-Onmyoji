@@ -16,10 +16,6 @@ function lct_yuling_single()
 	return x, y
 end
 
-function yuling_mark()
-
-end
-
 -- Main func
 function yuling(sel, level, round, lock)
 	print(string.format("种类 %s，层数 %d, 次数 %d，锁定 %d", sel, level, round, lock))
@@ -70,22 +66,22 @@ function yuling(sel, level, round, lock)
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 375, 590, 20, 20) break end -- 御灵
+			x, y = lct_tansuo() if (x > -1) then random_touch(0, 375, 590, 20, 20) break end -- 御灵
 			-- 御灵选择
 			x, y = lct_yuling_all()
 			if (x > -1) then
 				if quit == 1 then
-					ran_touch(0, 930, 110, 5, 5)
+					random_touch(0, 930, 110, 5, 5)
 					return
 				end
 				if (sel == "神龙") then
-					ran_touch(0, 230, 240, 20, 20)
+					random_touch(0, 230, 240, 20, 20)
 				elseif (sel == "白藏主") then
-					ran_touch(0, 470, 240, 20, 20)
+					random_touch(0, 470, 240, 20, 20)
 				elseif (sel == "黑豹") then
-					ran_touch(0, 700, 240, 20, 20)
+					random_touch(0, 700, 240, 20, 20)
 				elseif (sel == "孔雀") then
-					ran_touch(0, 950, 240, 20, 20)
+					random_touch(0, 950, 240, 20, 20)
 				end
 			end
 			-- 战斗失败

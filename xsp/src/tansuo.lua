@@ -24,25 +24,24 @@ function lct_exploration_prepare()
 end
 
 function tansuo_mark(mark)
-	mSleep(1000)
-	ran_sleep(500)
+	random_sleep(500)
 	local x, y
-	local cnt = math.random(1, 2)
+	local cnt = math.random(2, 3)
 	local ran = math.random(1, 3)
 	if mark == "小怪" then
 		if ran == 1 then
 			x = 566 y = 126
 		elseif ran == 2 then
 			x = 697 y = 186
-		else
+		elseif ran == 3 then
 			x = 861 y = 177
 		end
 		for i = 1, cnt do
-			ran_touch(0, x, y, 10, 10)
+			random_touch(0, x, y, 10, 10)
 		end
 	elseif mark == "Boss" then
 		for i = 1, cnt do
-			ran_touch(0, 765, 60, 10, 10)
+			random_touch(0, 765, 60, 10, 10)
 		end
 	end
 end
@@ -102,7 +101,7 @@ function find_boss()
 		"0|0|0xb22e32,3|5|0xfffdf9,-7|-16|0x221108",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"发现Boss",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"发现Boss",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -145,7 +144,7 @@ function find_target(sel)
 			keepScreen(false)
 		end
 		if x_t > -1 then
-			ran_touch(0, x_t, y_t, 0, 0)
+			random_touch(0, x_t, y_t, 0, 0)
 			mSleep(1000)
 			return RET_OK
 		end
@@ -160,7 +159,7 @@ function team_init()
 		"0|0|0xe8d4cf,-601|-2|0xeac89e,-499|-8|0xa26b4e,-399|-5|0xa26b4e",
 		95, 0, 0, 0)
 	if x > -1 then
-		ran_touch(0, 464, 116, 10, 5) -- 好友
+		random_touch(0, 464, 116, 10, 5) -- 好友
 		return
 	end
 	x, y = findColor({928, 132, 930, 134},
@@ -168,16 +167,16 @@ function team_init()
 		95, 0, 0, 0)
 	if x > -1 then
 		mSleep(5000)
-		ran_touch(0, 464, 116, 10, 5) -- 好友
+		random_touch(0, 464, 116, 10, 5) -- 好友
 		return
 	end
 	x, y = findColor({928, 132, 930, 134},
 		"0|0|0xe8d4cf,-500|0|0xeac89e,-603|-4|0xa26b4e,-399|-1|0xa26b4e",
 		95, 0, 0, 0)
 	if x > -1 then
-		ran_touch(0, 444, 210, 30, 10) -- 第一个好友
+		random_touch(0, 444, 210, 30, 10) -- 第一个好友
 		mSleep(500)
-		ran_touch(0, 690, 510, 20, 10) -- 邀请
+		random_touch(0, 690, 510, 20, 10) -- 邀请
 		mSleep(5000)
 	end
 	return x, y
@@ -188,7 +187,7 @@ function team_invite()
 		"0|0|0xf3b25e,-212|2|0xdf6851,323|-352|0x5c5242,-630|-330|0x626467",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"继续邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"继续邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -275,25 +274,25 @@ function df_normal_attack(pos_1, pos_2, pos_3)
 			"0|0|0x096297,7|9|0x0a5d8f",
 			80, 0, 0, 0)
 		if x > -1 then
-			ran_touch(0, 875, 595, 10, 10)
+			random_touch(0, 875, 595, 10, 10)
 		end
 	end
-	ran_sleep(500)
+	random_sleep(500)
 	if pos_2 == 1 then
 		x, y = findColor({928, 611, 930, 613},
 			"0|0|0x0b6da8,8|12|0x096095",
 			80, 0, 0, 0)
 		if x > -1 then
-			ran_touch(0, 975, 595, 10, 10)
+			random_touch(0, 975, 595, 10, 10)
 		end
 	end
-	ran_sleep(500)
+	random_sleep(500)
 	if pos_3 == 1 then
 		x, y = findColor({1032, 616, 1034, 618},
 			"0|0|0x066dab,16|18|0x09598a",
 			80, 0, 0, 0)
 		if x > -1 then
-			ran_touch(0, 1075, 595, 10, 10)
+			random_touch(0, 1075, 595, 10, 10)
 		end
 	end
 end
@@ -400,17 +399,17 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				-- 更换式神
 				x, y = skkm_change_all()
 				if x > -1 then
-					ran_touch(0, 65, 585, 10, 10) -- 全部
+					random_touch(0, 65, 585, 10, 10) -- 全部
 					break
 				end
 				x, y = skkm_change_sel()
 				if x > -1 then
 					if df_type == "N" then
-						ran_touch(0, 155, 300, 5, 5) -- N
+						random_touch(0, 155, 300, 5, 5) -- N
 					elseif df_type == "Egg" then
-						ran_touch(0, 60, 285, 5, 5) -- 素材
+						random_touch(0, 60, 285, 5, 5) -- 素材
 					end
-					ran_sleep(750)
+					random_sleep(750)
 					break
 				end
 				-- N卡
@@ -419,17 +418,17 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump do
 							find_offer()
-							ran_move_curve(0 ,800, 520, 300, 520, 20, 20) -- 翻页
-							ran_sleep(500)
+							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
+							random_sleep(500)
 						end
 					end
 					if top_right == 1 then
-						ran_move_curve(0, 200, 500, 200, 250, 20, 20)
-						ran_sleep(1000)
+						random_move(0, 200, 500, 200, 250, 20, 20)
+						random_sleep(1000)
 					end
 					if top_mid == 1 then
-						ran_move_curve(0, 870, 500, 570, 250, 20, 20)
-						ran_sleep(1000)
+						random_move(0, 870, 500, 570, 250, 20, 20)
+						random_sleep(1000)
 					end
 					fight_ready()
 					top_mid = 0
@@ -442,17 +441,17 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump do
 							find_offer()
-							ran_move_curve(0 ,800, 520, 300, 520, 20, 20) -- 翻页
-							ran_sleep(500)
+							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
+							random_sleep(500)
 						end
 					end
 					if top_right == 1 then
-						ran_move_curve(0, 200, 500, 200, 250, 20, 20)
-						ran_sleep(1000)
+						random_move(0, 200, 500, 200, 250, 20, 20)
+						random_sleep(1000)
 					end
 					if top_mid == 1 then
-						ran_move_curve(0, 870, 500, 570, 250, 20, 20)
-						ran_sleep(1000)
+						random_move(0, 870, 500, 570, 250, 20, 20)
+						random_sleep(1000)
 					end
 					fight_ready()
 					top_mid = 0
@@ -464,13 +463,13 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				if x > -1 then
 					top_mid, top_right = full_exp_top()
 					if top_mid == 1 or top_right == 1 then
-						HUD_show_or_hide(HUD,hud_dscrpt,"更换狗粮",20,"0xff000000","0xffffffff",0,100,0,300,32)
-						ran_sleep(500)
-						ran_touch(0, 350, 420, 30, 30) -- 更换式神
-						ran_sleep(500)
+						HUD_show_or_hide(HUD,hud_info,"更换狗粮",20,"0xff000000","0xffffffff",0,100,0,300,32)
+						random_sleep(500)
+						random_touch(0, 350, 420, 30, 30) -- 更换式神
+						random_sleep(500)
 						break
 					end
-					ran_sleep(500)
+					random_sleep(500)
 					x_, y_ = fight_ready() if (x_ > -1) then break end
 					break
 				end
@@ -486,8 +485,8 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				end
 				-- Quit
 				if scene_quit == 1 then
-					HUD_show_or_hide(HUD,hud_dscrpt,"退出场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					ran_touch(0, 45, 60, 10, 10) -- 左上退出
+					HUD_show_or_hide(HUD,hud_info,"退出场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_touch(0, 45, 60, 10, 10) -- 左上退出
 					break
 				end
 				-- 寻找
@@ -495,8 +494,8 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				if ret == RET_ERR then
 					-- Move
 					move_cnt = move_cnt + 1
-					HUD_show_or_hide(HUD,hud_dscrpt,string.format("寻找ing... [移动%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
-					ran_move_curve(0 ,950, 400, 200, 400, 50, 50) -- 场景移动
+					HUD_show_or_hide(HUD,hud_info,string.format("寻找ing... [移动%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_move(0 ,950, 400, 200, 400, 50, 50) -- 场景移动
 					if move_cnt >= move_total then
 						scene_quit = 1
 						break
@@ -506,7 +505,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 						mSleep(1000)
 						x_, y_ = find_boss()
 						if x_ > -1 then
-							ran_touch(0, x_, y_, 10, 10)
+							random_touch(0, x_, y_, 10, 10)
 							mSleep(1000)
 						end
 					end
@@ -518,20 +517,20 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			x, y = lct_exploration_portal()
 			if x > -1 then
 				if quit == 1 then
-					ran_touch(0, 930, 135, 5, 5) -- 退出章节
+					random_touch(0, 930, 135, 5, 5) -- 退出章节
 					return
 				end
 				if hard_sel == 0 then
 					if hard == "普通" then
-						ran_touch(0, 300, 200, 20, 20) -- 普通
+						random_touch(0, 300, 200, 20, 20) -- 普通
 					elseif hard == "困难" then
-						ran_touch(0, 420, 200, 20, 20) -- 困难
+						random_touch(0, 420, 200, 20, 20) -- 困难
 					end
-					ran_sleep(500)
+					random_sleep(500)
 					hard_sel = 1
 				end
-				HUD_show_or_hide(HUD,hud_dscrpt,"进入场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
-				ran_touch(0, 840, 480, 30, 10) -- 探索
+				HUD_show_or_hide(HUD,hud_info,"进入场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				random_touch(0, 840, 480, 30, 10) -- 探索
 				move_cnt = 0
 				move_total = math.random(5, 6)
 				scene_quit = 0
@@ -539,7 +538,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				break
 			end
 			-- 确认退出
-			x, y = quit_confirm() if x > -1 then ran_touch(0, x, y, 30, 5) break end
+			x, y = quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
 			-- Idle buff stop
 			if local_buff_idle_stop == 1 then lct_buff(local_buff_idle_stop) local_buff_idle_stop = 0 break end
 			-- 庭院
@@ -555,11 +554,11 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			-- 御魂溢出
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 查看体力
-			x, y = sushi_check() if x > -1 then right_bottom_click() break end -- 右下空白
+			x, y = sushi_check() if x > -1 then lower_right_blank_click() break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 1024, 533, 30, 10) tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end -- Temporarily enter last section
+			x, y = lct_tansuo() if (x > -1) then random_touch(0, 1024, 533, 30, 10) tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end -- Temporarily enter last section
 			-- Handle error
-			x, y = lct_8dashe() if x > -1 then  ran_touch(0, 928, 108, 5, 5) break end -- 八岐大蛇
+			x, y = lct_8dashe() if x > -1 then  random_touch(0, 928, 108, 5, 5) break end -- 八岐大蛇
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
@@ -654,17 +653,17 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				-- 更换式神
 				x, y = skkm_change_all()
 				if x > -1 then
-					ran_touch(0, 65, 585, 10, 10) -- 全部
+					random_touch(0, 65, 585, 10, 10) -- 全部
 					break
 				end
 				x, y = skkm_change_sel()
 				if x > -1 then
 					if df_type == "N" then
-						ran_touch(0, 155, 300, 5, 5) -- N
+						random_touch(0, 155, 300, 5, 5) -- N
 					elseif df_type == "Egg" then
-						ran_touch(0, 60, 285, 5, 5) -- 素材
+						random_touch(0, 60, 285, 5, 5) -- 素材
 					end
-					ran_sleep(750)
+					random_sleep(750)
 					break
 				end
 				-- N卡
@@ -673,17 +672,17 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 					if bot_left == 1 or bot_right == 1 then
 						for i = 1, page_jump do
 							find_offer()
-							ran_move_curve(0 ,800, 520, 300, 520, 20, 20) -- 翻页
-							ran_sleep(500)
+							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
+							random_sleep(500)
 						end
 					end
 					if bot_right == 1 then
-						ran_move_curve(0, 200, 500, 300, 250, 20, 20)
-						ran_sleep(1000)
+						random_move(0, 200, 500, 300, 250, 20, 20)
+						random_sleep(1000)
 					end
 					if bot_left == 1 then
-						ran_move_curve(0, 870, 500, 830, 250, 20, 20)
-						ran_sleep(1000)
+						random_move(0, 870, 500, 830, 250, 20, 20)
+						random_sleep(1000)
 					end
 					fight_ready()
 					bot_right = 0
@@ -696,17 +695,17 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 					if bot_left == 1 or bot_right == 1 then
 						for i = 1, page_jump do
 							find_offer()
-							ran_move_curve(0 ,800, 520, 300, 520, 20, 20) -- 翻页
-							ran_sleep(500)
+							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
+							random_sleep(500)
 						end
 					end
 					if bot_right == 1 then
-						ran_move_curve(0, 200, 500, 300, 250, 20, 20)
-						ran_sleep(1000)
+						random_move(0, 200, 500, 300, 250, 20, 20)
+						random_sleep(1000)
 					end
 					if bot_left == 1 then
-						ran_move_curve(0, 870, 500, 830, 250, 20, 20)
-						ran_sleep(1000)
+						random_move(0, 870, 500, 830, 250, 20, 20)
+						random_sleep(1000)
 					end
 					fight_ready()
 					bot_right = 0
@@ -718,11 +717,11 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				if x > -1 then
 					bot_left, bot_right = full_exp_bot()
 					if bot_left == 1 or bot_right == 1 then
-						HUD_show_or_hide(HUD,hud_dscrpt,"更换狗粮",20,"0xff000000","0xffffffff",0,100,0,300,32)
-						ran_touch(0, 350, 420, 30, 30) -- 更换式神
+						HUD_show_or_hide(HUD,hud_info,"更换狗粮",20,"0xff000000","0xffffffff",0,100,0,300,32)
+						random_touch(0, 350, 420, 30, 30) -- 更换式神
 						break
 					end
-					ran_sleep(500)
+					random_sleep(500)
 					x_, y_ = fight_ready() if (x_ > -1) then break end
 					break
 				end
@@ -738,8 +737,8 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				end
 				-- Quit
 				if scene_quit == 1 then
-					HUD_show_or_hide(HUD,hud_dscrpt,"退出场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					ran_touch(0, 45, 60, 10, 10) -- 左上退出
+					HUD_show_or_hide(HUD,hud_info,"退出场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_touch(0, 45, 60, 10, 10) -- 左上退出
 					break
 				end
 				-- 寻找
@@ -747,8 +746,8 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				if ret == RET_ERR then
 					-- Move
 					move_cnt = move_cnt + 1
-					HUD_show_or_hide(HUD,hud_dscrpt,string.format("寻找ing... [移动%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
-					ran_move_curve(0 ,950, 400, 200, 400, 50, 50) -- 场景移动
+					HUD_show_or_hide(HUD,hud_info,string.format("寻找ing... [移动%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_move(0 ,950, 400, 200, 400, 50, 50) -- 场景移动
 					if move_cnt >= move_total then
 						scene_quit = 1
 						break
@@ -758,7 +757,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 						mSleep(1000)
 						x_, y_ = find_boss()
 						if x_ > -1 then
-							ran_touch(0, x_, y_, 10, 10)
+							random_touch(0, x_, y_, 10, 10)
 							mSleep(1000)
 						end
 					end
@@ -770,20 +769,20 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			x, y = lct_exploration_portal()
 			if x > -1 then
 				if quit == 1 then
-					ran_touch(0, 930, 135, 5, 5) -- 退出章节
+					random_touch(0, 930, 135, 5, 5) -- 退出章节
 					return
 				end
 				if hard_sel == 0 then
 					if hard == "普通" then
-						ran_touch(0, 300, 200, 20, 20) -- 普通
+						random_touch(0, 300, 200, 20, 20) -- 普通
 					elseif hard == "困难" then
-						ran_touch(0, 420, 200, 20, 20) -- 困难
+						random_touch(0, 420, 200, 20, 20) -- 困难
 					end
-					ran_sleep(500)
+					random_sleep(500)
 					hard_sel = 1
 				end
-				HUD_show_or_hide(HUD,hud_dscrpt,"邀请队员",20,"0xff000000","0xffffffff",0,100,0,300,32)
-				ran_touch(0, 580, 480, 30, 10) -- 组队
+				HUD_show_or_hide(HUD,hud_info,"邀请队员",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				random_touch(0, 580, 480, 30, 10) -- 组队
 				mSleep(2000)
 				break
 			end
@@ -795,9 +794,9 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			x, y = team_invite()
 			if x > -1 then
 				if quit == 1 then
-					ran_touch(0, 465, 385, 20, 5)
+					random_touch(0, 465, 385, 20, 5)
 				else
-					ran_touch(0, x, y, 20, 5)
+					random_touch(0, x, y, 20, 5)
 					scene_quit = 0
 					move_cnt = 0
 					move_total = math.random(5, 6)
@@ -806,7 +805,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				break
 			end
 			-- 确认退出
-			x, y = quit_confirm() if x > -1 then ran_touch(0, x, y, 30, 5) break end
+			x, y = quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
 			-- 组队界面
 			x, y = team_init() if x > -1 then break end
 			-- Idle buff stop
@@ -824,11 +823,11 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			-- 御魂溢出
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 查看体力
-			x, y = sushi_check() if x > -1 then right_bottom_click() break end -- 右下空白
+			x, y = sushi_check() if x > -1 then lower_right_blank_click() break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 1024, 533, 30, 10) tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end -- Temporarily enter last section
+			x, y = lct_tansuo() if (x > -1) then random_touch(0, 1024, 533, 30, 10) tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end -- Temporarily enter last section
 			-- Handle error
-			x, y = lct_8dashe() if x > -1 then  ran_touch(0, 928, 108, 5, 5) break end -- 八岐大蛇
+			x, y = lct_8dashe() if x > -1 then  random_touch(0, 928, 108, 5, 5) break end -- 八岐大蛇
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
@@ -891,7 +890,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				end
 				x_, y_ = member_quit()
 				if x_ == -1 then
-					ran_touch(0, 47, 56, 5, 5) -- 左上退出
+					random_touch(0, 47, 56, 5, 5) -- 左上退出
 				end
 				break
 			end
@@ -905,17 +904,17 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				-- 更换式神
 				x, y = skkm_change_all()
 				if x > -1 then
-					ran_touch(0, 65, 585, 10, 10) -- 全部
+					random_touch(0, 65, 585, 10, 10) -- 全部
 					break
 				end
 				x, y = skkm_change_sel()
 				if x > -1 then
 					if df_type == "N" then
-						ran_touch(0, 155, 300, 5, 5) -- N
+						random_touch(0, 155, 300, 5, 5) -- N
 					elseif df_type == "Egg" then
-						ran_touch(0, 60, 285, 5, 5) -- 素材
+						random_touch(0, 60, 285, 5, 5) -- 素材
 					end
-					ran_sleep(750)
+					random_sleep(750)
 					break
 				end
 				-- N卡
@@ -924,17 +923,17 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump do
 							find_offer()
-							ran_move_curve(0 ,800, 520, 300, 520, 20, 20) -- 翻页
-							ran_sleep(500)
+							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
+							random_sleep(500)
 						end
 					end
 					if top_right == 1 then
-						ran_move_curve(0, 200, 500, 200, 250, 20, 20)
-						ran_sleep(1000)
+						random_move(0, 200, 500, 200, 250, 20, 20)
+						random_sleep(1000)
 					end
 					if top_mid == 1 then
-						ran_move_curve(0, 870, 500, 570, 250, 20, 20)
-						ran_sleep(1000)
+						random_move(0, 870, 500, 570, 250, 20, 20)
+						random_sleep(1000)
 					end
 					fight_ready()
 					top_mid = 0
@@ -947,17 +946,17 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump do
 							find_offer()
-							ran_move_curve(0 ,800, 520, 300, 520, 20, 20) -- 翻页
-							ran_sleep(500)
+							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
+							random_sleep(500)
 						end
 					end
 					if top_right == 1 then
-						ran_move_curve(0, 200, 500, 200, 250, 20, 20)
-						ran_sleep(1000)
+						random_move(0, 200, 500, 200, 250, 20, 20)
+						random_sleep(1000)
 					end
 					if top_mid == 1 then
-						ran_move_curve(0, 870, 500, 570, 250, 20, 20)
-						ran_sleep(1000)
+						random_move(0, 870, 500, 570, 250, 20, 20)
+						random_sleep(1000)
 					end
 					fight_ready()
 					top_mid = 0
@@ -969,19 +968,19 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				if x > -1 then
 					top_mid, top_right = full_exp_top()
 					if top_mid == 1 or top_right == 1 then
-						HUD_show_or_hide(HUD,hud_dscrpt,"更换狗粮",20,"0xff000000","0xffffffff",0,100,0,300,32)
-						ran_sleep(500)
-						ran_touch(0, 350, 420, 30, 30) -- 更换式神
-						ran_sleep(500)
+						HUD_show_or_hide(HUD,hud_info,"更换狗粮",20,"0xff000000","0xffffffff",0,100,0,300,32)
+						random_sleep(500)
+						random_touch(0, 350, 420, 30, 30) -- 更换式神
+						random_sleep(500)
 						break
 					end
-					ran_sleep(500)
+					random_sleep(500)
 					x_, y_ = fight_ready() if (x_ > -1) then break end
 					break
 				end
 			end
 			-- 确认退出
-			x, y = quit_confirm() if x > -1 then ran_touch(0, x, y, 30, 5) break end
+			x, y = quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
@@ -993,7 +992,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			-- 御魂溢出
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 查看体力
-			x, y = sushi_check() if x > -1 then right_bottom_click() break end -- 右下空白
+			x, y = sushi_check() if x > -1 then lower_right_blank_click() break end
 			-- Idle buff stop
 			if local_buff_idle_stop == 1 then lct_buff(local_buff_idle_stop) local_buff_idle_stop = 0 break end
 			-- 庭院

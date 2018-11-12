@@ -7,7 +7,7 @@ function lct_yuhun()
 		"0|0|0xffd821,0|-19|0xb24828,-1|-47|0xddd3bf,0|36|0x855021",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"探索 - 御魂",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"探索 - 御魂",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -17,24 +17,24 @@ function lct_8dashe()
 		"0|0|0xfbe9bc,0|-34|0x040402,-1|-52|0xa46d91,10|-22|0x391f10",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"御魂 - 八岐大蛇",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"御魂 - 八岐大蛇",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
 
 function yuhun_mark(position)
 	mSleep(500)
-	ran_sleep(500)
-	local cnt = math.random(3, 4)
+	random_sleep(500)
+	local cnt = math.random(2, 3)
 	
 	for i = 1, cnt do
-		ran_sleep(100)
+		random_sleep(150)
 		if (position == "左") then
-			ran_touch(0, 290, 150, 20, 10)
+			random_touch(0, 290, 150, 20, 10)
 		elseif (position == "中") then
-			ran_touch(0, 570, 150, 20, 10)
+			random_touch(0, 570, 150, 20, 10)
 		elseif (position == "右") then
-			ran_touch(0, 830, 150, 20, 10)
+			random_touch(0, 830, 150, 20, 10)
 		end
 	end
 end
@@ -44,7 +44,7 @@ function find_real8dashe()
 		"0|0|0xcf893c,10|-11|0xcc883a,12|16|0xd49248,379|-16|0x847396",
 		95, 0, 0, 0)
 	if x > -1 then
-		ran_touch(0, x, y, 5, 5)
+		random_touch(0, x, y, 5, 5)
 	end
 	return x, y
 end
@@ -54,7 +54,7 @@ function lct_petfind()
 		"0|0|0x7c7371,3|33|0xaea09b,-230|-55|0xf4e4b1,-370|-29|0xdbc788",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"御魂 - 发现宝藏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"御魂 - 发现宝藏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -128,7 +128,7 @@ function yuhun_solo(mark, level, round, lock)
 			x, y = lct_8dashe() 
 			if (x > -1) then
 				if quit == 1 then
-					ran_touch(0, 930, 110, 5, 5)
+					random_touch(0, 930, 110, 5, 5)
 					return
 				end
 				level_select(level, init, lock, "御魂") 
@@ -140,9 +140,9 @@ function yuhun_solo(mark, level, round, lock)
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end -- 御魂
+			x, y = lct_tansuo() if (x > -1) then random_touch(0, 180, 590, 20, 20) tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) break end -- 御魂
 			-- 御魂
-			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 355, 320, 50, 50) break end -- 八岐大蛇
+			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) break end -- 八岐大蛇
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
@@ -202,10 +202,10 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 					return
 				end
 				if wait_invite == 0 then
-					HUD_show_or_hide(HUD,hud_dscrpt,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					ran_touch(0, 180, 590, 20, 20) -- 御魂
+					HUD_show_or_hide(HUD,hud_info,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_touch(0, 180, 590, 20, 20) -- 御魂
 				else
-					HUD_show_or_hide(HUD,hud_dscrpt,"探索 - 等待组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_info,"探索 - 等待组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					x, y, auto_grouped = member_team_accept_invite(member_auto_group)
 					if x > -1 then
 						wait_invite = 0
@@ -247,18 +247,18 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			x, y = member_room_init() if (x > -1) then member_room_find() break end
 			-- 队员接手队长
 			if (member_to_captain == 1) then
-				x, y = member_room_find_start() if (x > -1) then ran_touch(0, 925, 535, 20, 10) break end -- 开始战斗
+				x, y = member_room_find_start() if (x > -1) then random_touch(0, 925, 535, 20, 10) break end -- 开始战斗
 			else
-				x, y = member_room_find_start() if (x > -1) then ran_touch(0, 205, 535, 20, 10) break end -- 离开队伍
+				x, y = member_room_find_start() if (x > -1) then random_touch(0, 205, 535, 20, 10) break end -- 离开队伍
 			end
 			-- 离开确认
 			x, y = member_room_quit() if (x > -1) then wait_invite = 0 break end
 			-- 八岐大蛇
-			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 ran_touch(0, 573, 440, 20, 10) break end -- 组队开始
+			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 random_touch(0, 573, 440, 20, 10) break end -- 组队开始
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then mSleep(500) tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 御魂
-			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 355, 320, 50, 50) break end -- 八岐大蛇
+			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) break end -- 八岐大蛇
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
 				if (fail_and_group == 1) then
@@ -286,8 +286,8 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 				break
 			end
 			-- 停止邀请
-			x, y = captain_team_win_invite() if (x > -1) then ran_touch(0, 460, 385, 20, 10) break end
-			x, y = captain_team_lost_invite() if (x > -1) then ran_touch(0, 462, 383, 20, 10) break end
+			x, y = captain_team_win_invite() if (x > -1) then random_touch(0, 460, 385, 20, 10) break end
+			x, y = captain_team_lost_invite() if (x > -1) then random_touch(0, 462, 383, 20, 10) break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Error Handle
@@ -350,9 +350,9 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = captain_team_lost_invite()
 			if (x > -1) then
 				if (fail_and_recreate == 1) then
-					ran_touch(0, 462, 383, 20, 10) -- 取消
+					random_touch(0, 462, 383, 20, 10) -- 取消
 				else
-					ran_touch(0, 673, 384, 20, 10) -- 确定
+					random_touch(0, 673, 384, 20, 10) -- 确定
 				end
 				break
 			end
@@ -367,9 +367,9 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = captain_team_win_invite() 
 			if (x > -1) then
 				if quit == 1 then
-					ran_touch(0, 460, 385, 20, 10)
+					random_touch(0, 460, 385, 20, 10)
 				else
-					ran_touch(0, 674, 385, 20, 10)
+					random_touch(0, 674, 385, 20, 10)
 				end
 				break 
 			end
@@ -394,14 +394,14 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 				if quit == 1 then
 					return
 				end
-				ran_touch(0, 180, 590, 20, 20) 
+				random_touch(0, 180, 590, 20, 20) 
 				tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) 
 				break 
 			end
 			-- 御魂
-			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 355, 320, 50, 50) break end -- 八岐大蛇
+			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) break end -- 八岐大蛇
 			-- 八岐大蛇
-			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 ran_touch(0, 573, 440, 20, 10) break end -- 组队开始
+			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 random_touch(0, 573, 440, 20, 10) break end -- 组队开始
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
@@ -478,12 +478,12 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 				break
 			end
 			if (member_to_captain == 1) then
-				x, y = member_room_find_start() if (x > -1) then ran_touch(0, 925, 535, 20, 10) break end -- 开始战斗
+				x, y = member_room_find_start() if (x > -1) then random_touch(0, 925, 535, 20, 10) break end -- 开始战斗
 			else
-				x, y = member_room_find_start() if (x > -1) then ran_touch(0, 205, 535, 20, 10) break end -- 离开队伍
+				x, y = member_room_find_start() if (x > -1) then random_touch(0, 205, 535, 20, 10) break end -- 离开队伍
 			end
 			-- 离开队伍
-			x, y = member_room_find_start() if (x > -1) then ran_touch(0, 205, 535, 20, 10) break end -- 离开队伍
+			x, y = member_room_find_start() if (x > -1) then random_touch(0, 205, 535, 20, 10) break end -- 离开队伍
 			-- 离开确认
 			x, y = member_room_quit() if (x > -1) then break end
 			-- 战斗失败
@@ -572,7 +572,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 				break
 			end
 			-- 失败邀请
-			x, y = captain_team_lost_invite() if (x > -1) then ran_touch(0, 673, 384, 20, 10) invite = 0 time_cnt = 0 break end -- 确定
+			x, y = captain_team_lost_invite() if (x > -1) then random_touch(0, 673, 384, 20, 10) invite = 0 time_cnt = 0 break end -- 确定
 			-- 自动邀请
 			if (captain_auto_group == 1 and quit == 0) then 
 				x, y = captain_team_set_auto_invite() 
@@ -584,9 +584,9 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			x, y = captain_team_win_invite() 
 			if (x > -1) then
 				if quit == 1 then
-					ran_touch(0, 460, 385, 20, 10)
+					random_touch(0, 460, 385, 20, 10)
 				else
-					ran_touch(0, 674, 385, 20, 10) 
+					random_touch(0, 674, 385, 20, 10) 
 					invite = 0 
 					time_cnt = 0
 				end
@@ -605,7 +605,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 					invite = 1
 				end
 				if (captain_auto_invite == 1 and invite == 1) then
-					ran_touch(0, 565, 320, 50, 50) -- 邀请初始化
+					random_touch(0, 565, 320, 50, 50) -- 邀请初始化
 					x, y = captain_room_invite_init() if (x > -1) then break end
 				end
 				break
@@ -631,14 +631,14 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 				if quit == 1 then
 					return
 				end
-				ran_touch(0, 180, 590, 20, 20)
+				random_touch(0, 180, 590, 20, 20)
 				tansuo_time_cnt, local_buff_idle_stop = tansuo_idle_handle(tansuo_time_cnt) 
 				break 
 			end
 			-- 御魂
-			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 355, 320, 50, 50) break end -- 八岐大蛇
+			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) break end -- 八岐大蛇
 			-- 八岐大蛇
-			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 ran_touch(0, 573, 440, 20, 10) break end -- 组队开始
+			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 random_touch(0, 573, 440, 20, 10) break end -- 组队开始
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1

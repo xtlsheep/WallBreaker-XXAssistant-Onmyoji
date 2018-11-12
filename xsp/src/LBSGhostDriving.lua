@@ -7,7 +7,7 @@ function main_page()
 		"0|0|0xe4d9c2,124|-375|0xe9d7d1,123|-391|0x673039,96|-406|0xe1d9d1,-363|-37|0xc4b2a3",
 		95, 0, 0, 0)
 	if x > -1 then
-		ran_touch(0, x, y, 20, 20)
+		random_touch(0, x, y, 20, 20)
 	end
 	return x, y
 end
@@ -17,7 +17,7 @@ function create_team()
 		"0|0|0xf3b25e,125|-1|0xcbb59c,337|37|0xe5dac4,462|-340|0xe9d7d1",
 		95, 0, 0, 0)
 	if x > -1 then
-		ran_touch(0, x, y, 20, 20)
+		random_touch(0, x, y, 20, 20)
 		
 	end
 	return x, y
@@ -29,7 +29,7 @@ function leave_team(interv)
 		95, 0, 0, 0)
 	if x > -1 then
 		mSleep(interv*1000)
-		ran_touch(0, x, y, 20, 20)
+		random_touch(0, x, y, 20, 20)
 	end
 	return x, y
 end
@@ -39,7 +39,7 @@ function leave_confirm()
 		"0|0|0xf3b25e,-64|-4|0xf3b25e,53|-2|0xf3b25e,-165|-2|0xdf6851",
 		95, 0, 0, 0)
 	if x > -1 then
-		ran_touch(0, x, y, 20, 20)
+		random_touch(0, x, y, 20, 20)
 	end
 	return x, y
 end
@@ -49,7 +49,7 @@ function cancel_invite()
 		"0|0|0xdf6851,240|1|0xf3b25e,118|1|0xcbb59c",
 		95, 0, 0, 0)
 	if x > -1 then
-		ran_touch(0, x, y, 20, 20)
+		random_touch(0, x, y, 20, 20)
 	end
 	return x, y
 end
@@ -59,7 +59,7 @@ function pop_up()
 		"0|0|0xa19a8a,-453|-133|0xcbb59c,-462|-7|0xcbb59c,124|-377|0xa49894",
 		95, 0, 0, 0)
 	if x > -1 then
-		ran_touch(0, x, y, 20, 20)
+		random_touch(0, x, y, 20, 20)
 	end
 	return x, y
 end

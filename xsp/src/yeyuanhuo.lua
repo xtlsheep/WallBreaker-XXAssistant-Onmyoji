@@ -7,7 +7,7 @@ function lct_yyh()
 		"0|0|0xf3b25e,-59|-236|0xdd7cb3,-124|-168|0xf2faf9,-83|-142|0x2eae93",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_dscrpt,"业原火",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"业原火",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		mSleep(1000)
 	end
 	return x, y
@@ -75,21 +75,21 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			x, y = lct_yyh()
 			if x > -1 then
 				if (end_tan == 1 and end_chen == 1 and end_chi == 1) then
-					ran_touch(0, 930, 110, 5, 5) -- 退出业原火
+					random_touch(0, 930, 110, 5, 5) -- 退出业原火
 					return
 				end
 				ran_wait = math.random(3000, 5000)
-				HUD_show_or_hide(HUD,hud_dscrpt,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
+				HUD_show_or_hide(HUD,hud_info,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
 				mSleep(ran_wait)
-				HUD_show_or_hide(HUD,hud_dscrpt,string.format("业原火", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32) 
+				HUD_show_or_hide(HUD,hud_info,string.format("业原火", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32) 
 				-- 锁定 or not
 				lock_or_unlock(lock, "业原火")
 				-- 贪
 				if (end_tan ~= 1 and cnt_tan < round_tan) then
 					if (last_sel ~= "tan") then
-						ran_touch(0, 360, 160, 50, 10) -- 贪
+						random_touch(0, 360, 160, 50, 10) -- 贪
 					end
-					ran_sleep(250)
+					random_sleep(250)
 					ret = solo_start()
 					if (ret == RET_ERR) then
 						end_tan = 1
@@ -101,9 +101,9 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 				-- 嗔
 				if (end_chen ~= 1 and cnt_chen < round_chen) then
 					if (last_sel ~= "chen") then
-						ran_touch(0, 360, 250, 50, 10) -- 嗔
+						random_touch(0, 360, 250, 50, 10) -- 嗔
 					end
-					ran_sleep(250)
+					random_sleep(250)
 					ret = solo_start()
 					if (ret == RET_ERR) then
 						end_chen = 1
@@ -115,9 +115,9 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 				-- 痴
 				if (end_chi ~= 1 and cnt_chi < round_chi) then
 					if (last_sel ~= "chi") then
-						ran_touch(0, 360, 330, 50, 10) -- 痴
+						random_touch(0, 360, 330, 50, 10) -- 痴
 					end
-					ran_sleep(250)
+					random_sleep(250)
 					ret = solo_start()
 					if (ret == RET_ERR) then
 						end_chi = 1
@@ -130,9 +130,9 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then ran_touch(0, 180, 590, 20, 20) ran_sleep(1000) break end -- 御魂
+			x, y = lct_tansuo() if (x > -1) then random_touch(0, 180, 590, 20, 20) random_sleep(1000) break end -- 御魂
 			-- 御魂
-			x, y = lct_yuhun() if (x > -1) then ran_touch(0, 845, 320, 50, 50) ran_sleep(1000) break end -- 业原火
+			x, y = lct_yuhun() if (x > -1) then random_touch(0, 845, 320, 50, 50) random_sleep(1000) break end -- 业原火
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
@@ -142,7 +142,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 				break
 			end
 			-- Handle error
-			x, y = lct_8dashe() if x > -1 then  ran_touch(0, 928, 108, 5, 5) break end -- 八岐大蛇
+			x, y = lct_8dashe() if x > -1 then  random_touch(0, 928, 108, 5, 5) break end -- 八岐大蛇
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
