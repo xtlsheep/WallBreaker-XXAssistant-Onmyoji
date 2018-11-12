@@ -2,21 +2,21 @@ require "util"
 require "func"
 
 -- Util func
-function lct_section()
+function lct_exploration()
 	local x, y = findColor({777, 9, 779, 11},
-		"0|0|0xe97b2c,219|20|0xdfc7a1,308|25|0xa29c7b,198|486|0xe97c2d",
-		80, 0, 0, 0)
+		"0|0|0xe97b2b,-738|48|0xe7f0fa,-713|46|0x24306f,220|20|0xdfc7a1,309|26|0xa29c7b,308|18|0xdfc7a1,-746|497|0x98335a",
+		95, 0, 0, 0)
 	return x, y
 end
 
-function lct_section_portal()
+function lct_exploration_portal()
 	local x, y = findColor({928, 132, 930, 134},
 		"0|0|0xe9d6d0,-41|-22|0x493625,-673|312|0x404359,-606|320|0xe0bd5f",
 		95, 0, 0, 0)
 	return x, y
 end
 
-function lct_section_prepare()
+function lct_exploration_prepare()
 	local x, y = findColor({27, 35, 29, 37},
 		"0|0|0xd6c4a1,4|468|0x98335a,92|570|0xfefbe5,25|552|0xf6c990",
 		95, 0, 0, 0)
@@ -146,23 +146,12 @@ function find_target(sel)
 		end
 		if x_t > -1 then
 			ran_touch(0, x_t, y_t, 0, 0)
+			mSleep(1000)
 			return RET_OK
 		end
 		mSleep(250)
 	end
 	return RET_ERR
-end
-
-function tansuo_move()
-	x = 630 -- to 255/105 +- 30
-	y = 530 -- to 530     +- 50
-	x_ran = 30
-	y_ran = 50
-	x_interv = -30
-	y_interv = math.random(-3, 3)
-	steps = math.random(10, 15)
-	
-	ran_move_steps(0 ,x, y, x_ran, y_ran, x_interv, y_interv, steps)
 end
 
 function team_init()
@@ -252,29 +241,29 @@ function full_exp_bot()
 end
 
 function skkm_change_all()
-	local x, y = findColor({26, 35, 28, 37},
-		"0|0|0xd6c4a1,69|-17|0xd6c4a1,19|556|0xffffff,31|559|0x3537b9",
+	local x, y = findColor({44, 592, 46, 594},
+		"0|0|0xffffff,122|20|0x4e3221,105|39|0x3e2d1c,851|22|0x391c12,759|31|0x493321",
 		95, 0, 0, 0)
 	return x, y
 end
 
 function skkm_change_N()
-	local x, y = findColor({26, 35, 28, 37},
-		"0|0|0xd6c4a1,69|-17|0xd6c4a1,29|540|0x838386,34|523|0x563f2b",
+	local x, y = findColor({54, 577, 56, 579},
+		"0|0|0x87878a,10|18|0xdfdedd,95|54|0x3e2d1c,841|37|0x391c12,749|46|0x493321",
 		95, 0, 0, 0)
 	return x, y
 end
 
 function skkm_change_egg()
-	local x, y = findColor({26, 35, 28, 37},
-		"0|0|0xd6c4a1,69|-17|0xd6c4a1,24|540|0x2d92b3,34|523|0x563f2b",
+	local x, y = findColor({49, 575, 51, 577},
+		"0|0|0x2b90b1,28|6|0x46aece,100|56|0x3e2d1c,846|39|0x391c12,754|48|0x493321",
 		95, 0, 0, 0)
 	return x, y
 end
 
 function skkm_change_sel()
-	local x, y = findColor({42, 296, 44, 298},
-		"0|0|0x2c92b3,91|11|0x828285,170|48|0x0d5cb1,244|110|0x860dc2",
+	local x, y = findColor({78, 282, 80, 284},
+		"0|0|0x48b0cf,69|7|0x7e7d81,152|51|0x0e5eb2,218|121|0x8d13c5,269|206|0xe9732e,287|298|0xfd2639",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -334,7 +323,7 @@ function tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round
 end
 
 function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
-	local move_total = math.random(6, 8)
+	local move_total = math.random(5, 6)
 	local move_cnt = 0
 	local scene_quit = 0
 	local quit = 0
@@ -417,27 +406,29 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				x, y = skkm_change_sel()
 				if x > -1 then
 					if df_type == "N" then
-						ran_touch(0, 140, 320, 5, 5) -- N
+						ran_touch(0, 155, 300, 5, 5) -- N
 					elseif df_type == "Egg" then
-						ran_touch(0, 55, 305, 5, 5) -- 素材
+						ran_touch(0, 60, 285, 5, 5) -- 素材
 					end
+					ran_sleep(750)
 					break
 				end
 				-- N卡
 				x, y = skkm_change_N()
 				if x > -1 then
-					ran_sleep(1000)
-					for i = 1, page_jump-1 do
-						find_offer()
-						ran_move_steps(0 ,760, 515, 50, 50, -30, math.random(-3, 3), 15) -- 翻页
-						ran_sleep(500)
+					if top_right == 1 or top_mid == 1 then
+						for i = 1, page_jump do
+							find_offer()
+							ran_move_curve(0 ,800, 520, 300, 520, 20, 20) -- 翻页
+							ran_sleep(500)
+						end
 					end
 					if top_right == 1 then
-						ran_move_steps(0 ,420, 510, 10, 10, math.random(-18, -16), math.random(-16, -14), 15)
+						ran_move_curve(0, 200, 500, 200, 250, 20, 20)
 						ran_sleep(1000)
 					end
 					if top_mid == 1 then
-						ran_move_steps(0 ,650, 510, 10, 10, math.random(-6, -5), math.random(-16, -14), 14)
+						ran_move_curve(0, 870, 500, 570, 250, 20, 20)
 						ran_sleep(1000)
 					end
 					fight_ready()
@@ -448,26 +439,28 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				-- 素材
 				x, y = skkm_change_egg()
 				if x > -1 then
-					for i = 1, page_jump do
-						find_offer()
-						ran_move_steps(0 ,760, 515, 50, 50, -30, math.random(-3, 3), 15) -- 翻页
-						ran_sleep(250)
+					if top_right == 1 or top_mid == 1 then
+						for i = 1, page_jump do
+							find_offer()
+							ran_move_curve(0 ,800, 520, 300, 520, 20, 20) -- 翻页
+							ran_sleep(500)
+						end
 					end
 					if top_right == 1 then
-						ran_move_steps(0 ,420, 510, 10, 10, math.random(-18, -16), math.random(-16, -14), 15)
+						ran_move_curve(0, 200, 500, 200, 250, 20, 20)
 						ran_sleep(1000)
 					end
 					if top_mid == 1 then
-						ran_move_steps(0 ,650, 510, 10, 10, math.random(-6, -5), math.random(-16, -14), 14)
+						ran_move_curve(0, 870, 500, 570, 250, 20, 20)
 						ran_sleep(1000)
 					end
+					fight_ready()
 					top_mid = 0
 					top_right = 0
-					fight_ready()
 					break
 				end
 				-- 探索预备
-				x, y = lct_section_prepare()
+				x, y = lct_exploration_prepare()
 				if x > -1 then
 					top_mid, top_right = full_exp_top()
 					if top_mid == 1 or top_right == 1 then
@@ -483,7 +476,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				end
 			end
 			-- 探索场景
-			x, y = lct_section()
+			x, y = lct_exploration()
 			if x > -1 then
 				-- Unlock
 				if unlock == 0 then
@@ -503,7 +496,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 					-- Move
 					move_cnt = move_cnt + 1
 					HUD_show_or_hide(HUD,hud_dscrpt,string.format("寻找ing... [移动%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
-					tansuo_move()
+					ran_move_curve(0 ,950, 400, 200, 400, 50, 50) -- 场景移动
 					if move_cnt >= move_total then
 						scene_quit = 1
 						break
@@ -514,6 +507,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 						x_, y_ = find_boss()
 						if x_ > -1 then
 							ran_touch(0, x_, y_, 10, 10)
+							mSleep(1000)
 						end
 					end
 					found_boss = 1
@@ -521,7 +515,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				break
 			end
 			-- 探索章节
-			x, y = lct_section_portal()
+			x, y = lct_exploration_portal()
 			if x > -1 then
 				if quit == 1 then
 					ran_touch(0, 930, 135, 5, 5) -- 退出章节
@@ -539,7 +533,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				HUD_show_or_hide(HUD,hud_dscrpt,"进入场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				ran_touch(0, 840, 480, 30, 10) -- 探索
 				move_cnt = 0
-				move_total = math.random(6, 8)
+				move_total = math.random(5, 6)
 				scene_quit = 0
 				mSleep(2000)
 				break
@@ -574,7 +568,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 end
 
 function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
-	local move_total = math.random(6, 8)
+	local move_total = math.random(5, 6)
 	local move_cnt = 0
 	local scene_quit = 0
 	local quit = 0
@@ -666,57 +660,61 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				x, y = skkm_change_sel()
 				if x > -1 then
 					if df_type == "N" then
-						ran_touch(0, 140, 320, 5, 5) -- N
+						ran_touch(0, 155, 300, 5, 5) -- N
 					elseif df_type == "Egg" then
-						ran_touch(0, 55, 305, 5, 5) -- 素材
+						ran_touch(0, 60, 285, 5, 5) -- 素材
 					end
+					ran_sleep(750)
 					break
 				end
 				-- N卡
 				x, y = skkm_change_N()
 				if x > -1 then
-					ran_sleep(1000)
-					for i = 1, page_jump-1 do
-						find_offer()
-						ran_move_steps(0 ,760, 515, 50, 50, -30, math.random(-3, 3), 15) -- 翻页
-						ran_sleep(500)
+					if bot_left == 1 or bot_right == 1 then
+						for i = 1, page_jump do
+							find_offer()
+							ran_move_curve(0 ,800, 520, 300, 520, 20, 20) -- 翻页
+							ran_sleep(500)
+						end
 					end
 					if bot_right == 1 then
-						ran_move_steps(0 ,420, 510, 10, 10, math.random(-9, -8), math.random(-17, -16), 15)
+						ran_move_curve(0, 200, 500, 300, 250, 20, 20)
 						ran_sleep(1000)
 					end
-					if  bot_left == 1 then
-						ran_move_steps(0 ,650, 510, 10, 10, math.random(11, 13), math.random(-17, -16), 15)
+					if bot_left == 1 then
+						ran_move_curve(0, 870, 500, 830, 250, 20, 20)
 						ran_sleep(1000)
 					end
 					fight_ready()
-					top_mid = 0
-					top_right = 0
+					bot_right = 0
+					bot_left = 0
 					break
 				end
 				-- 素材
 				x, y = skkm_change_egg()
 				if x > -1 then
-					for i = 1, page_jump do
-						find_offer()
-						ran_move_steps(0 ,760, 515, 50, 50, -30, math.random(-3, 3), 15) -- 翻页
-						ran_sleep(250)
+					if bot_left == 1 or bot_right == 1 then
+						for i = 1, page_jump do
+							find_offer()
+							ran_move_curve(0 ,800, 520, 300, 520, 20, 20) -- 翻页
+							ran_sleep(500)
+						end
 					end
 					if bot_right == 1 then
-						ran_move_steps(0 ,420, 510, 10, 10, math.random(-9, -8), math.random(-17, -16), 15)
+						ran_move_curve(0, 200, 500, 300, 250, 20, 20)
 						ran_sleep(1000)
 					end
 					if bot_left == 1 then
-						ran_move_steps(0 ,650, 510, 10, 10, math.random(11, 13), math.random(-17, -16), 15)
+						ran_move_curve(0, 870, 500, 830, 250, 20, 20)
 						ran_sleep(1000)
 					end
-					top_mid = 0
-					top_right = 0
 					fight_ready()
+					bot_right = 0
+					bot_left = 0
 					break
 				end
 				-- 探索预备
-				x, y = lct_section_prepare()
+				x, y = lct_exploration_prepare()
 				if x > -1 then
 					bot_left, bot_right = full_exp_bot()
 					if bot_left == 1 or bot_right == 1 then
@@ -730,7 +728,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				end
 			end
 			-- 探索场景
-			x, y = lct_section()
+			x, y = lct_exploration()
 			if x > -1 then
 				-- Unlock
 				if unlock == 0 then
@@ -750,7 +748,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 					-- Move
 					move_cnt = move_cnt + 1
 					HUD_show_or_hide(HUD,hud_dscrpt,string.format("寻找ing... [移动%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
-					tansuo_move()
+					ran_move_curve(0 ,950, 400, 200, 400, 50, 50) -- 场景移动
 					if move_cnt >= move_total then
 						scene_quit = 1
 						break
@@ -769,7 +767,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				break
 			end
 			-- 探索章节
-			x, y = lct_section_portal()
+			x, y = lct_exploration_portal()
 			if x > -1 then
 				if quit == 1 then
 					ran_touch(0, 930, 135, 5, 5) -- 退出章节
@@ -802,7 +800,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 					ran_touch(0, x, y, 20, 5)
 					scene_quit = 0
 					move_cnt = 0
-					move_total = math.random(6, 8)
+					move_total = math.random(5, 6)
 					mSleep(5000)
 				end
 				break
@@ -883,7 +881,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				break
 			end
 			-- 探索场景
-			x, y = lct_section()
+			x, y = lct_exploration()
 			if x > -1 then
 				-- Unlock
 				if unlock == 0 then
@@ -913,27 +911,29 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				x, y = skkm_change_sel()
 				if x > -1 then
 					if df_type == "N" then
-						ran_touch(0, 140, 320, 5, 5) -- N
+						ran_touch(0, 155, 300, 5, 5) -- N
 					elseif df_type == "Egg" then
-						ran_touch(0, 55, 305, 5, 5) -- 素材
+						ran_touch(0, 60, 285, 5, 5) -- 素材
 					end
+					ran_sleep(750)
 					break
 				end
 				-- N卡
 				x, y = skkm_change_N()
 				if x > -1 then
-					ran_sleep(1000)
-					for i = 1, page_jump-1 do
-						find_offer()
-						ran_move_steps(0 ,760, 515, 50, 50, -30, math.random(-3, 3), 15) -- 翻页
-						ran_sleep(500)
+					if top_right == 1 or top_mid == 1 then
+						for i = 1, page_jump do
+							find_offer()
+							ran_move_curve(0 ,800, 520, 300, 520, 20, 20) -- 翻页
+							ran_sleep(500)
+						end
 					end
 					if top_right == 1 then
-						ran_move_steps(0 ,420, 510, 10, 10, math.random(-18, -16), math.random(-16, -14), 15)
+						ran_move_curve(0, 200, 500, 200, 250, 20, 20)
 						ran_sleep(1000)
 					end
 					if top_mid == 1 then
-						ran_move_steps(0 ,650, 510, 10, 10, math.random(-6, -5), math.random(-16, -14), 14)
+						ran_move_curve(0, 870, 500, 570, 250, 20, 20)
 						ran_sleep(1000)
 					end
 					fight_ready()
@@ -944,26 +944,28 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				-- 素材
 				x, y = skkm_change_egg()
 				if x > -1 then
-					for i = 1, page_jump do
-						find_offer()
-						ran_move_steps(0 ,760, 515, 50, 50, -30, math.random(-3, 3), 15) -- 翻页
-						ran_sleep(250)
+					if top_right == 1 or top_mid == 1 then
+						for i = 1, page_jump do
+							find_offer()
+							ran_move_curve(0 ,800, 520, 300, 520, 20, 20) -- 翻页
+							ran_sleep(500)
+						end
 					end
 					if top_right == 1 then
-						ran_move_steps(0 ,420, 510, 10, 10, math.random(-18, -16), math.random(-16, -14), 15)
+						ran_move_curve(0, 200, 500, 200, 250, 20, 20)
 						ran_sleep(1000)
 					end
 					if top_mid == 1 then
-						ran_move_steps(0 ,650, 510, 10, 10, math.random(-6, -5), math.random(-16, -14), 14)
+						ran_move_curve(0, 870, 500, 570, 250, 20, 20)
 						ran_sleep(1000)
 					end
+					fight_ready()
 					top_mid = 0
 					top_right = 0
-					fight_ready()
 					break
 				end
 				-- 探索预备
-				x, y = lct_section_prepare()
+				x, y = lct_exploration_prepare()
 				if x > -1 then
 					top_mid, top_right = full_exp_top()
 					if top_mid == 1 or top_right == 1 then

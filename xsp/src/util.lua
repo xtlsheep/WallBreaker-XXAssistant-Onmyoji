@@ -118,21 +118,21 @@ function ran_move_curve(id, start_point_X, start_point_Y, end_point_X, end_point
 	start_Y_ran = start_point_Y + math.random(-ran_y, ran_y)
 	end_X_ran = end_point_X + math.random(-ran_x, ran_x)
 	end_Y_ran = end_point_Y + math.random(-ran_y, ran_y)
-	print(string.format("start point (%d, %d) - end point (%d, %d)", start_X_ran, start_Y_ran, end_X_ran, end_Y_ran))
+	--print(string.format("start point (%d, %d) - end point (%d, %d)", start_X_ran, start_Y_ran, end_X_ran, end_Y_ran))
 	
 	mid_point_X = math.abs(start_X_ran + end_X_ran)/2
 	mid_point_Y = math.abs(start_Y_ran + end_Y_ran)/2
-	print(string.format("mid point (%d, %d)", mid_point_X, mid_point_Y))
+	--print(string.format("mid point (%d, %d)", mid_point_X, mid_point_Y))
 	
 	distance_X = math.abs(start_X_ran - end_X_ran)
 	distance_Y = math.abs(start_Y_ran - end_Y_ran)
 	distance = math.sqrt(distance_X^2 + distance_Y^2)
-	print(string.format("distance %d(X - %d, Y - %d)", distance, distance_X, distance_Y))
+	--print(string.format("distance %d(X - %d, Y - %d)", distance, distance_X, distance_Y))
 	
 	ran_control = distance/6
 	control_point_X = math.floor(mid_point_X + math.random(-ran_control, ran_control))
 	control_point_Y = math.floor(mid_point_Y + math.random(-ran_control, ran_control))
-	print(string.format("control point (%d, %d)", control_point_X, control_point_Y))
+	--print(string.format("control point (%d, %d)", control_point_X, control_point_Y))
 	
 	init_points = {{X = start_X_ran, Y = start_Y_ran}, {X = control_point_X, Y = control_point_Y}, {X = end_X_ran, Y = end_Y_ran}}
 	

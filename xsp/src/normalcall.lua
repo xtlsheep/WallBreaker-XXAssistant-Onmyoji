@@ -16,6 +16,16 @@ function five_tickets()
 	return x, y
 end
 
+function single_ticket()
+	local x, y = findColor({269, 234, 877, 240},
+		"0|0|0xd7d9d8,0|-9|0xffffff,-5|8|0xf9f9f9,6|8|0xf8f8f8,0|-61|0xffffff",
+		95, 0, 0, 0)
+	if x > -1 then
+		ran_touch(0, x, y, 30, 30)
+	end
+	return x, y
+end
+
 function finish_call()
 	local x, y = findColor({565, 591, 567, 593},
 		"0|0|0x46372a,-2|-34|0x332a36,-64|-15|0xf3b25e,61|-16|0xf3b25e,241|23|0x87715f",
@@ -70,9 +80,11 @@ function normalcall(tickets)
 					cnt = cnt + 5
 					HUD_show_or_hide(HUD,hud_dscrpt,string.format("召唤票数 ~= %d", cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 					ran_interv()
-					ran_move_curve(0, 270, 235, 875, 235, 20, 20)
+					ran_move_curve(0, 270, 235, 900, 235, 20, 20)
 					break
 				end
+				-- 单张白票
+				x, y = single_ticket() if x > -1 then break end
 				-- 完成召唤
 				x, y = finish_call() if x > -1 then ran_touch(0, 688, 576, 30, 10) break end -- 再次召唤
 			end
