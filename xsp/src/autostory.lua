@@ -108,8 +108,8 @@ function autostory()
 			x, y = whole_damo() if (x > -1) then time_cnt = 0 break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
-				win_cnt = win_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
+				win_cnt.global = win_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
 				keep_half_damo()
 				time_cnt = 0
 				break
@@ -118,8 +118,8 @@ function autostory()
 			x, y = bypass_click() if (x > -1) then time_cnt = 0 break end
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
-				fail_cnt = fail_cnt + 1
-				show_win_fail(win_cnt, fail_cnt)
+				fail_cnt.global = fail_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
 				keep_fight_failed("单人")
 				time_cnt = 0
 				break
