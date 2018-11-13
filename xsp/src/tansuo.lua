@@ -138,7 +138,7 @@ function find_target(sel)
 			if sel[1] == 1 and x_f == -1 then
 				x_f, y_f = find_goods()
 				if x_f > -1 then
-					HUD_show_or_hide(HUD,hud_info,"找到掉落加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_info,"找到物品加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				end
 			end
 			keepScreen(false)
@@ -738,7 +738,6 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			-- 探索场景
 			x, y = lct_exploration()
 			if x > -1 then
-				invited = 0
 				-- Unlock
 				if unlock == 0 then
 					lock_or_unlock(0, "探索")
@@ -810,6 +809,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 					scene_quit = 0
 					move_cnt = 0
 					move_total = math.random(5, 6)
+					mSleep(5000)
 				end
 				break
 			end

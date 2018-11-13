@@ -860,6 +860,7 @@ function captain_room_invite_first(invite_zone)
 				95, 0, 0, 0)
 			if x_ > -1 then
 				random_touch(0, x_, y_, 20, 5)
+				mSleep(1000)
 			end
 		elseif invite_zone == 2 then
 			x_, y_ = findColor({464, 94, 466, 96},
@@ -867,6 +868,7 @@ function captain_room_invite_first(invite_zone)
 				95, 0, 0, 0)
 			if x_ > -1 then
 				random_touch(0, x_, y_, 20, 5)
+				mSleep(1000)
 			end
 		elseif invite_zone == 3 then
 			x_, y_ = findColor({564, 94, 566, 96},
@@ -874,26 +876,35 @@ function captain_room_invite_first(invite_zone)
 				95, 0, 0, 0)
 			if x_ > -1 then
 				random_touch(0, x_, y_, 20, 5)
+				mSleep(1000)
 			end
 		end
-		mSleep(1000)
-		random_sleep(250)
-		x__, y__ = findColor({452, 201, 454, 204},
-			"0|0|0xeac7a0,234|310|0xf3b25e,-7|307|0xdf6851,-181|-132|0xe2758c",
-			95, 0, 0, 0)
-		if x__ > -1 then
-			random_touch(0, 440, 205, 40, 20) -- 第一位好友
-		end
-		x__, y__ = findColor({452, 201, 454, 204},
-			"0|0|0xa3d0ce,234|310|0xf3b25e,-7|307|0xdf6851,-181|-132|0xe2758c",
-			95, 0, 0, 0)
-		if x__ > -1 then
-			random_touch(0, 440, 205, 40, 20) -- 第一位好友
+		
+		for i = 1, 3 do
 			random_sleep(250)
-			random_touch(0, 440, 205, 40, 20) -- 第一位好友
+			-- 已选中
+			x__, y__ = findColor({452, 201, 454, 204},
+				"0|0|0xa3d0ce,234|310|0xf3b25e,-7|307|0xdf6851,-181|-132|0xe2758c",
+				95, 0, 0, 0)
+			if x__ > -1 then
+				random_touch(0, 440, 205, 40, 20) -- 第一位好友
+				random_sleep(250)
+				random_touch(0, 440, 205, 40, 20) -- 第一位好友
+				random_sleep(250)
+				random_touch(0, x, y, 20, 10) -- 邀请
+				return x, y
+			end
+			-- 未选中
+			x__, y__ = findColor({452, 201, 454, 204},
+				"0|0|0xeac7a0,234|310|0xf3b25e,-7|307|0xdf6851,-181|-132|0xe2758c",
+				95, 0, 0, 0)
+			if x__ > -1 then
+				random_touch(0, 440, 205, 40, 20) -- 第一位好友
+				random_sleep(250)
+				random_touch(0, x, y, 20, 10) -- 邀请
+				return x, y
+			end
 		end
-		random_sleep(250)
-		random_touch(0, x, y, 20, 10) -- 邀请
 	end
 	return x, y
 end
