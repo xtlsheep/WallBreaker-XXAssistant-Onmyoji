@@ -768,7 +768,14 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			end
 			-- 邀请第一个好友
 			if (captain_auto_invite ~= "禁用") then
-				x, y = captain_room_invite_first(invite_zone) if (x > -1) then mSleep(2500) break end
+				x, y = captain_room_invite_first(invite_zone) 
+				if (x > -1) then 
+					scene_quit = 0
+					move_cnt = 0
+					move_total = math.random(5, 6)
+					mSleep(3000) 
+					break 
+				end
 			end
 			-- 继续邀请
 			x, y = team_invite()
