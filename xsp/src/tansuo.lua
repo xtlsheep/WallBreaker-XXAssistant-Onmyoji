@@ -162,35 +162,6 @@ function find_target(sel)
 	return RET_ERR
 end
 
-function team_init()
-	local x, y
-	x, y = findColor({928, 132, 930, 134},
-		"0|0|0xe8d4cf,-601|-2|0xeac89e,-499|-8|0xa26b4e,-399|-5|0xa26b4e",
-		95, 0, 0, 0)
-	if x > -1 then
-		random_touch(0, 464, 116, 10, 5) -- 好友
-		return
-	end
-	x, y = findColor({928, 132, 930, 134},
-		"0|0|0xe9d6d0,-604|-6|0xa26b4e,-501|-5|0xa26b4e,-397|-3|0xa26b4e",
-		95, 0, 0, 0)
-	if x > -1 then
-		mSleep(5000)
-		random_touch(0, 464, 116, 10, 5) -- 好友
-		return
-	end
-	x, y = findColor({928, 132, 930, 134},
-		"0|0|0xe8d4cf,-500|0|0xeac89e,-603|-4|0xa26b4e,-399|-1|0xa26b4e",
-		95, 0, 0, 0)
-	if x > -1 then
-		random_touch(0, 444, 210, 30, 10) -- 第一个好友
-		mSleep(500)
-		random_touch(0, 690, 510, 20, 10) -- 邀请
-		mSleep(5000)
-	end
-	return x, y
-end
-
 function team_invite()
 	local x, y = findColor({672, 383, 674, 385},
 		"0|0|0xf3b25e,-212|2|0xdf6851,323|-352|0x5c5242,-630|-330|0x626467",
@@ -815,8 +786,6 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			end
 			-- 确认退出
 			x, y = quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
-			-- 组队界面
-			x, y = team_init() if x > -1 then break end
 			-- Idle buff stop
 			if local_buff_idle_stop == 1 then lct_buff(local_buff_idle_stop) local_buff_idle_stop = 0 break end
 			-- 庭院
