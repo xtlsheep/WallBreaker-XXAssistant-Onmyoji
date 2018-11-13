@@ -509,7 +509,7 @@ function fight_ready()
 		"0|0|0xe5c288,-62|17|0xebd19e,61|18|0xf0d8a9",
 		95, 0, 0, 0)
 	if (x > -1) then
-		-- HUD_show_or_hide(HUD,hud_info,"战斗准备",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"战斗开始",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		random_touch(0, 1040, 493, 30, 30) -- 准备的鼓
 	end
 	return x, y
@@ -641,7 +641,7 @@ function keep_half_damo()
 		elseif x == -1 then
 			return
 		end
-        random_sleep(150)
+		random_sleep(150)
 	end
 end
 
@@ -680,7 +680,7 @@ function keep_fight_failed(mode)
 			elseif x == -1 then
 				return
 			end
-            random_sleep(150)
+			random_sleep(150)
 		end
 	elseif (mode == "组队") then
 		while (1) do
@@ -736,7 +736,7 @@ end
 
 function member_room_find()
 	random_touch(0, 440, 559, 20, 10) -- 刷新
-    random_sleep(300)
+	random_sleep(300)
 	
 	local top = {195, 287, 376, 466}
 	local bottom = {200, 292, 381, 471}
@@ -848,7 +848,7 @@ function captain_room_invite_init()
 end
 
 function captain_room_invite_first(invite_zone)
-	local x, y, x_, y_
+	local x, y, x_, y_, x__, y__
 	x, y = findColor({687, 511, 689, 513},
 		"0|0|0xf3b25e,-241|-3|0xdf6851,-417|-444|0xe17189,156|-454|0xf5e0d9,127|-404|0xa68e78",
 		95, 0, 0, 0)
@@ -878,7 +878,20 @@ function captain_room_invite_first(invite_zone)
 		end
 		mSleep(1000)
 		random_sleep(250)
-		random_touch(0, 440, 205, 40, 20) -- 第一位好友
+		x__, y__ = findColor({452, 201, 454, 204},
+			"0|0|0xeac7a0,234|310|0xf3b25e,-7|307|0xdf6851,-181|-132|0xe2758c",
+			95, 0, 0, 0)
+		if x__ > -1 then
+			random_touch(0, 440, 205, 40, 20) -- 第一位好友
+		end
+		x__, y__ = findColor({452, 201, 454, 204},
+			"0|0|0xa3d0ce,234|310|0xf3b25e,-7|307|0xdf6851,-181|-132|0xe2758c",
+			95, 0, 0, 0)
+		if x__ > -1 then
+			random_touch(0, 440, 205, 40, 20) -- 第一位好友
+			random_sleep(250)
+			random_touch(0, 440, 205, 40, 20) -- 第一位好友
+		end
 		random_sleep(250)
 		random_touch(0, x, y, 20, 10) -- 邀请
 	end

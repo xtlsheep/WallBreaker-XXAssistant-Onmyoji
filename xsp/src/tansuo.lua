@@ -3,8 +3,8 @@ require "func"
 
 -- Util func
 function lct_exploration()
-	local x, y = findColor({777, 9, 779, 11},
-		"0|0|0xe97b2b,-738|48|0xe7f0fa,-713|46|0x24306f,220|20|0xdfc7a1,309|26|0xa29c7b,308|18|0xdfc7a1,-746|497|0x98335a",
+	local x, y = findColor({770, 5, 790, 15},
+		"0|0|0xe97b2b,-746|49|0xf0f5fb,-729|48|0x313583,305|26|0xa29c7b,305|19|0xdfc7a1",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -100,9 +100,6 @@ function find_boss()
 	local x, y = findColor({200, 100, 900, 300},
 		"0|0|0xb22e32,3|5|0xfffdf9,-7|-16|0x221108",
 		95, 0, 0, 0)
-	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,"发现Boss",20,"0xff000000","0xffffffff",0,100,0,300,32)
-	end
 	return x, y
 end
 
@@ -112,9 +109,12 @@ function find_target(sel)
 	local x_t = -1
 	local y_t = -1
 	
+	HUD_show_or_hide(HUD,hud_info,"寻找ing...",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	
 	for i = 1, 5 do
 		x_t, y_t = find_boss()
 		if x_t > -1 then
+			HUD_show_or_hide(HUD,hud_info,"发现Boss",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_VALID
 		end
 		
@@ -123,14 +123,23 @@ function find_target(sel)
 			-- Exp
 			if sel[3] == 1 then
 				x_f, y_f = find_exp()
+				if x_f > -1 then
+					HUD_show_or_hide(HUD,hud_info,"找到经验加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				end
 			end
 			-- Money
 			if sel[2] == 1 and x_f == -1 then
 				x_f, y_f = find_money()
+				if x_f > -1 then
+					HUD_show_or_hide(HUD,hud_info,"找到金币加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				end
 			end
 			-- Goods
 			if sel[1] == 1 and x_f == -1 then
 				x_f, y_f = find_goods()
+				if x_f > -1 then
+					HUD_show_or_hide(HUD,hud_info,"找到掉落加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				end
 			end
 			keepScreen(false)
 			if x_f > -1 then
@@ -494,7 +503,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				if ret == RET_ERR then
 					-- Move
 					move_cnt = move_cnt + 1
-					HUD_show_or_hide(HUD,hud_info,string.format("寻找ing... [移动%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_info,string.format("场景移动[%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_move(0 ,950, 400, 200, 400, 50, 50) -- 场景移动
 					if move_cnt >= move_total then
 						scene_quit = 1
@@ -729,6 +738,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			-- 探索场景
 			x, y = lct_exploration()
 			if x > -1 then
+				invited = 0
 				-- Unlock
 				if unlock == 0 then
 					lock_or_unlock(0, "探索")
@@ -746,7 +756,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				if ret == RET_ERR then
 					-- Move
 					move_cnt = move_cnt + 1
-					HUD_show_or_hide(HUD,hud_info,string.format("寻找ing... [移动%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_info,string.format("场景移动[%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_move(0 ,950, 400, 200, 400, 50, 50) -- 场景移动
 					if move_cnt >= move_total then
 						scene_quit = 1
@@ -788,7 +798,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			end
 			-- 邀请第一个好友
 			if (captain_auto_invite ~= "禁用") then
-				x, y = captain_room_invite_first(invite_zone) if (x > -1) then mSleep(3000) break end
+				x, y = captain_room_invite_first(invite_zone) if (x > -1) then mSleep(2500) break end
 			end
 			-- 继续邀请
 			x, y = team_invite()
@@ -800,7 +810,6 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 					scene_quit = 0
 					move_cnt = 0
 					move_total = math.random(5, 6)
-					mSleep(5000)
 				end
 				break
 			end
