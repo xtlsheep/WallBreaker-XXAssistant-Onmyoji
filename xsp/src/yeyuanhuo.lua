@@ -55,7 +55,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 					cnt_chi = cnt_chi + 1
 				end
 				show_win_fail(win_cnt.global, fail_cnt.global)
-				yyh_win_cnt = yyh_win_cnt + 1
+				win_cnt.yyh = win_cnt.yyh + 1
 				keep_half_damo()
 				break
 			end
@@ -137,7 +137,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
-				yyh_fail_cnt = yyh_fail_cnt + 1
+				fail_cnt.yyh = fail_cnt.yyh + 1
 				keep_fight_failed("单人")
 				break
 			end
