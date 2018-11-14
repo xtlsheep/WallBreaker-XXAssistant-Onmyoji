@@ -798,11 +798,11 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_idle_stop = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 战斗失败
-			x, y = fight_failed("组队") if (x > -1) then
+			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.tansuo = fail_cnt.tansuo + 1
-				keep_fight_failed("组队")
+				keep_fight_failed("单人")
 				break
 			end
 			-- 御魂溢出
@@ -967,11 +967,11 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			-- 确认退出
 			x, y = quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
 			-- 战斗失败
-			x, y = fight_failed("组队") if (x > -1) then
+			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.tansuo = fail_cnt.tansuo + 1
-				keep_fight_failed("组队")
+				keep_fight_failed("单人")
 				break
 			end
 			-- 御魂溢出
