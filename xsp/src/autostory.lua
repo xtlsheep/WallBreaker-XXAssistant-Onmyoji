@@ -79,6 +79,16 @@ function questionmark_click()
 	return x, y
 end
 
+function close_channel()
+	local x, y = findColor({578, 316, 580, 319},
+		"0|0|0xc0ae8e,11|-32|0x513e2a,10|36|0x523e2a,-575|-294|0x76553e",
+		95, 0, 0, 0)
+	if x > -1 then
+		random_touch(0, x, y, 5, 5)
+	end
+	return x, y
+end
+
 -- Main func
 function autostory()
 	print_global_vars()
@@ -124,7 +134,6 @@ function autostory()
 				time_cnt = 0
 				break
 			end
-			
 			time_cnt = time_cnt + 1
 			if time_cnt > 20 then
 				HUD_show_or_hide(HUD,hud_info,"移动",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -132,6 +141,8 @@ function autostory()
 				mSleep(1000)
 				time_cnt = 0
 			end
+			-- 关闭频道
+			x, y = close_channel() if x > -1 then break end
 			break
 		end
 	end
