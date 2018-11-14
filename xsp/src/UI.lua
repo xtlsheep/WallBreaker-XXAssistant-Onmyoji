@@ -175,8 +175,8 @@ function global_UI()
 	UI:Label(global_ui, "center", "0,0,0", 30, "全局设置", "30,20,960,55")
 	UI:CheckBoxGroup(global_ui, "offer_en","悬赏封印 - ","0",30,"0,0,0","20,100,300,60")
 	UI:CheckBoxGroup(global_ui, "offer_sel","勾玉,体力,金币,猫粮,狗粮","0@1@2@3@4",30,"0,0,0","280,100,720,60")
-	UI:CheckBoxGroup(global_ui, "buff_idle_stop","庭院或探索界面停留过久后自动关闭所有buff","0",30,"0,0,0","20,160,700,60")
-	UI:ComboBox(global_ui, "buff_idle_stop_time", "15秒,30秒,45秒,1分钟,2分钟,5分钟","3",23,"750,160,230,50")
+	UI:CheckBoxGroup(global_ui, "buff_stop_idle","庭院或探索界面停留过久后自动关闭所有buff","0",30,"0,0,0","20,160,700,60")
+	UI:ComboBox(global_ui, "buff_stop_idle_time", "15秒,30秒,45秒,1分钟,2分钟,5分钟","3",23,"750,160,230,50")
 	UI:CheckBoxGroup(global_ui, "buff_stop_useup","体力用尽后自动关闭所有buff[暂时无效]","0",30,"0,0,0","20,220,700,60")
 	UI:CheckBoxGroup(global_ui, "HUD","可视化点击手势与运行辅助描述","0",30,"0,0,0","20,280,980,60")
 	UI:CheckBoxGroup(global_ui, "skill","自动关闭技能特写[建议手动关闭]","0",30,"0,0,0","20,340,980,60")
@@ -222,25 +222,25 @@ function global_UI()
 	end
 	
 	-- Idle关闭buff
-	if res_global.buff_idle_stop_time == "0" then
-		buff_idle_stop_time = 15
-	elseif res_global.buff_idle_stop_time == "1" then
-		buff_idle_stop_time = 30
-	elseif res_global.buff_idle_stop_time == "2" then
-		buff_idle_stop_time = 45
-	elseif res_global.buff_idle_stop_time == "3" then
-		buff_idle_stop_time = 60
-	elseif res_global.buff_idle_stop_time == "4" then
-		buff_idle_stop_time = 120
-	elseif res_global.buff_idle_stop_time == "5" then
-		buff_idle_stop_time = 300
+	if res_global.buff_stop_idle_time == "0" then
+		buff_stop_idle_time = 15
+	elseif res_global.buff_stop_idle_time == "1" then
+		buff_stop_idle_time = 30
+	elseif res_global.buff_stop_idle_time == "2" then
+		buff_stop_idle_time = 45
+	elseif res_global.buff_stop_idle_time == "3" then
+		buff_stop_idle_time = 60
+	elseif res_global.buff_stop_idle_time == "4" then
+		buff_stop_idle_time = 120
+	elseif res_global.buff_stop_idle_time == "5" then
+		buff_stop_idle_time = 300
 	end
 	
-	if res_global.buff_idle_stop == "0" then
-		buff_idle_stop = 1
+	if res_global.buff_stop_idle == "0" then
+		buff_stop_idle = 1
 	else
-		buff_idle_stop = 0
-		buff_idle_stop_time = 0
+		buff_stop_idle = 0
+		buff_stop_idle_time = 0
 	end
 	
 	-- Usup关闭buff

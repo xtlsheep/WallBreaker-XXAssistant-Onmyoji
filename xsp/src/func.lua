@@ -36,7 +36,7 @@ function print_global_vars()
 	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d)",
 			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6]))
 	print(string.format("停留过长关闭buff %d(%d sec), 体力用尽关闭buff %d",
-			buff_idle_stop, buff_idle_stop_time, buff_stop_useup))
+			buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
 end
 
 function find_offer()
@@ -315,42 +315,42 @@ end
 
 function tingyuan_idle_handle(tingyuan_time_cnt)
 	local time_cnt = 0
-	local local_buff_idle_stop = 0
+	local local_buff_stop_idle = 0
 	local x, y
 	
 	x, y = lct_tingyuan() if x == -1 then return 0, 0 end
 	
 	-- Idle buff stop
-	if buff_idle_stop == 1 then
+	if buff_stop_idle == 1 then
 		time_cnt = tingyuan_time_cnt + 1
 	end
-	if time_cnt*500 > buff_idle_stop_time*1000 then
+	if time_cnt*500 > buff_stop_idle_time*1000 then
 		random_touch(0, 390, 55, 10, 10) -- 加成
-		local_buff_idle_stop = 1
-		buff_idle_stop = 0
+		local_buff_stop_idle = 1
+		buff_stop_idle = 0
 		time_cnt = 0
 	end
-	return time_cnt, local_buff_idle_stop
+	return time_cnt, local_buff_stop_idle
 end
 
 function tansuo_idle_handle(tansuo_time_cnt)
 	local time_cnt = 0
-	local local_buff_idle_stop = 0
+	local local_buff_stop_idle = 0
 	local x, y
 	
 	x, y = lct_tansuo() if x == -1 then return 0, 0 end
 	
 	-- Idle buff stop
-	if buff_idle_stop == 1 then
+	if buff_stop_idle == 1 then
 		time_cnt = tansuo_time_cnt + 1
 	end
-	if time_cnt*500 > buff_idle_stop_time*1000 then
+	if time_cnt*500 > buff_stop_idle_time*1000 then
 		random_touch(0, 390, 50, 10, 5) -- 加成
-		local_buff_idle_stop = 1
-		buff_idle_stop = 0
+		local_buff_stop_idle = 1
+		buff_stop_idle = 0
 		time_cnt = 0
 	end
-	return time_cnt, local_buff_idle_stop
+	return time_cnt, local_buff_stop_idle
 end
 
 function stats_read()
