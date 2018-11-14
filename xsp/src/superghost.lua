@@ -1,6 +1,12 @@
 require "util"
 require "func"
 
+-- 超鬼王Global
+sg_en = 0
+sg_force = 0
+sg_mark = {0, 0}
+sg_tired = {0, 0, 0, 0, 0, 0}
+
 -- Util func
 function lct_sg_window()
 	-- 识别弹窗

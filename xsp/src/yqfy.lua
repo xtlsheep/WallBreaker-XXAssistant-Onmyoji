@@ -143,11 +143,11 @@ function yqfy(round, sel, mark)
 			if (x > -1) then
 				HUD_show_or_hide(HUD,hud_info,"组队",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				random_sleep(500)
-				if linkage == 1 then
+				if linkage == "Enable" then
 					random_move(0, 220, 520, 220, 130, 50, 10)
 					random_sleep(750)
 					random_touch(0, 220, 145, 50, 10)
-				else
+				elseif linkage == "Disable" then
 					random_touch(0, 220, 520, 50, 10)
 				end
 				random_sleep(750)

@@ -24,7 +24,7 @@ function portal_UI()
 	UI:Label(portal_ui, "left", "0,0,0", 30, "实时公告 - ", "30,140,300,55")
 	UI:Image(portal_ui, "notice.png", "20,200,970,250")
 	-- 公告
-	local content, err = getCloudContent("WALLBREAKERREALTIMEANNOUCEMENT", "BDAB2A1E8229572B", "没有正确获取到公告信息")
+	local content, err = getCloudContent("WALL_BREAKER_ANNOUNCEMENT", "", "没有正确获取到公告信息")
 	if err == 0 then
 		UI:Label(portal_ui, "left", "0,0,0", 29, tostring(content), "110,250,800,180")
 	end
@@ -177,7 +177,7 @@ function global_UI()
 	UI:CheckBoxGroup(global_ui, "offer_sel","勾玉,体力,金币,猫粮,狗粮","0@1@2@3@4",30,"0,0,0","280,100,720,60")
 	UI:CheckBoxGroup(global_ui, "buff_idle_stop","庭院或探索界面停留过久后自动关闭所有buff","0",30,"0,0,0","20,160,700,60")
 	UI:ComboBox(global_ui, "buff_idle_stop_time", "15秒,30秒,45秒,1分钟,2分钟,5分钟","3",23,"750,160,230,50")
-	UI:CheckBoxGroup(global_ui, "buff_usup_stop","体力用尽后自动关闭所有buff[暂时无效]","0",30,"0,0,0","20,220,700,60")
+	UI:CheckBoxGroup(global_ui, "buff_stop_useup","体力用尽后自动关闭所有buff[暂时无效]","0",30,"0,0,0","20,220,700,60")
 	UI:CheckBoxGroup(global_ui, "HUD","可视化点击手势与运行辅助描述","0",30,"0,0,0","20,280,980,60")
 	UI:CheckBoxGroup(global_ui, "skill","自动关闭技能特写[建议手动关闭]","0",30,"0,0,0","20,340,980,60")
 	UI:fit(global_ui)
@@ -244,18 +244,18 @@ function global_UI()
 	end
 	
 	-- Usup关闭buff
-	if res_global.buff_usup_stop == "0" then
-		buff_usup_stop = 1
+	if res_global.buff_stop_useup == "0" then
+		buff_stop_useup = 1
 	else
-		buff_usup_stop = 0
+		buff_stop_useup = 0
 	end
 	
-	show_settlement = 1
+	settlement_enable = 1
 	return RET_OK
 end
 
 function settlement_UI()
-	if show_settlement == 0 then
+	if settlement_enable == 0 then
 		return
 	end
 
