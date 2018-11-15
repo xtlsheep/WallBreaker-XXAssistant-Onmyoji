@@ -328,7 +328,6 @@ function tingyuan_idle_handle(tingyuan_time_cnt)
 		random_touch(0, 390, 55, 10, 10) -- 加成
 		local_buff_stop_idle = 1
 		buff_stop_idle = 0
-		time_cnt = 0
 	end
 	return time_cnt, local_buff_stop_idle
 end
@@ -348,7 +347,6 @@ function tansuo_idle_handle(tansuo_time_cnt)
 		random_touch(0, 390, 50, 10, 5) -- 加成
 		local_buff_stop_idle = 1
 		buff_stop_idle = 0
-		time_cnt = 0
 	end
 	return time_cnt, local_buff_stop_idle
 end
@@ -471,10 +469,20 @@ function tingyuan_enter_tansuo()
 end
 
 function tingyuan_enter_zudui()
+	local x, y
+	-- 缩起的卷轴
+	x, y = findColor({1083, 545, 1085, 547},
+		"0|0|0xe0d0cb,12|-15|0xecc891,-3|28|0x7e2513,-31|57|0xd4b17f",
+		95, 0, 0, 0)
+	if x > -1 then
+		random_touch(0, x, y, 10, 10)
+	end
+	-- 打开的卷轴
 	local x, y = findColor({1093, 35, 1095, 37},
 		"0|0|0xa29c7b,-77|-4|0xdfc7a1,-703|10|0xfddc8a,-710|35|0xf37f5b",
 		95, 0, 0, 0)
 	if x > -1 then
+		random_sleep(250)
 		random_touch(0, 230, 560, 20, 20) -- 组队
 	end
 	return x, y
@@ -710,8 +718,8 @@ function yuhun_overflow()
 	return x, y
 end
 
-function fight_head_gear()
-	local x, y = findColor({65, 120, 75, 310},
+function fight_stop_auto_group()
+	local x, y = findColor({65, 120, 75, 310}, -- 有√的头像
 		"0|0|0xedc790,-1|-13|0x372827,-11|9|0x3f3126,10|5|0xe9c38c",
 		90, 0, 0, 0)
 	if x > -1 then

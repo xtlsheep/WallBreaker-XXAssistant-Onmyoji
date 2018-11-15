@@ -240,7 +240,7 @@ function global_UI()
 		buff_stop_idle = 1
 	else
 		buff_stop_idle = 0
-		buff_stop_idle_time = 0
+		buff_stop_idle_time = 99999
 	end
 	
 	-- Usup关闭buff

@@ -278,7 +278,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			x, y = fight_ongoing()
 			if x > -1 then
 				if group_quit == 1 then
-					x_, y_ = fight_head_gear()
+					x_, y_ = fight_stop_auto_group()
 					if x_ > -1 then
 						group_quit = 0
 					end
@@ -416,7 +416,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = fight_ongoing()
 			if x > -1 then
 				if group_quit == 1 then
-					x_, y_ = fight_head_gear()
+					x_, y_ = fight_stop_auto_group()
 					if x_ > -1 then
 						group_quit = 0
 					end
@@ -653,7 +653,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			x, y = fight_ongoing()
 			if x > -1 then
 				if group_quit == 1 then
-					x_, y_ = fight_head_gear()
+					x_, y_ = fight_stop_auto_group()
 					if x_ > -1 then
 						group_quit = 0
 					end

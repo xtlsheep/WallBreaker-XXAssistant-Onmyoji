@@ -258,7 +258,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			x, y = fight_ongoing()
 			if x > -1 then
 				if group_quit == 1 then
-					x_, y_ = fight_head_gear()
+					x_, y_ = fight_stop_auto_group()
 					if x_ > -1 then
 						group_quit = 0
 					end
@@ -389,7 +389,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			x, y = fight_ongoing()
 			if x > -1 then
 				if group_quit == 1 then
-					x_, y_ = fight_head_gear()
+					x_, y_ = fight_stop_auto_group()
 					if x_ > -1 then
 						group_quit = 0
 					end
@@ -608,7 +608,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			x, y = fight_ongoing()
 			if x > -1 then
 				if group_quit == 1 then
-					x_, y_ = fight_head_gear()
+					x_, y_ = fight_stop_auto_group()
 					if x_ > -1 then
 						group_quit = 0
 					end
