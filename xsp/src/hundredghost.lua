@@ -17,7 +17,7 @@ function hundredghost(round, num, invite)
 		while(1) do
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer() if x > -1 then break end
+			x, y = receive_offer() if x > -1 then break end
 			-- Error Handle
 			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break

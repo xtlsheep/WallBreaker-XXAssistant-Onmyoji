@@ -101,7 +101,7 @@ function yuhun_solo(mark, level, round, lock)
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3]) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer() if (x > -1) then break end
+			x, y = receive_offer() if (x > -1) then break end
 			-- 真八岐大蛇
 			x, y = find_real8dashe() if (x > -1) then break end
 			-- 拒绝组队
@@ -188,7 +188,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3]) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer() if (x > -1) then break end
+			x, y = receive_offer() if (x > -1) then break end
 			-- 真八岐大蛇
 			x, y = find_real8dashe() if (x > -1) then break end
 			-- 拒绝邀请
@@ -320,7 +320,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3]) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer() if (x > -1) then break end
+			x, y = receive_offer() if (x > -1) then break end
 			-- 真八岐大蛇
 			x, y = find_real8dashe() if (x > -1) then break end
 			-- 拒绝邀请
@@ -456,7 +456,7 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3]) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer() if (x > -1) then break end
+			x, y = receive_offer() if (x > -1) then break end
 			-- 真八岐大蛇
 			x, y = find_real8dashe() if (x > -1) then break end
 			-- 接受邀请
@@ -545,7 +545,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3]) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer() if (x > -1) then break end
+			x, y = receive_offer() if (x > -1) then break end
 			-- 真八岐大蛇
 			x, y = find_real8dashe() if (x > -1) then break end
 			-- 拒绝邀请

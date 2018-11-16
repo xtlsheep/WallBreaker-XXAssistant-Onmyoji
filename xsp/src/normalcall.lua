@@ -48,7 +48,7 @@ function normalcall(tickets)
 		while (1) do
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer() if (x > -1) then break end
+			x, y = receive_offer() if (x > -1) then break end
 			-- 完成召唤
 			if cnt >= tickets then
 				x, y = finish_call()

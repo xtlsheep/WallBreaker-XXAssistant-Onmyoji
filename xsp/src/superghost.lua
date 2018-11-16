@@ -228,7 +228,7 @@ function sg_keep_fight_failed()
 	-- 保持战斗失败的超鬼王识别
 	local x, y
 	while (1) do
-		find_offer()
+		receive_offer()
 		x, y = findColor({413, 104, 415, 106},
 			"0|0|0x514a5b,251|6|0xddd9cd,-135|-6|0xcdc59c,30|34|0x5b5265",
 			95, 0, 0, 0)
@@ -298,7 +298,7 @@ function superghost()
 			-- 弹窗
 			lct_sg_window()
 			-- 悬赏封印
-			x, y = find_offer() if (x > -1) then break end
+			x, y = receive_offer() if (x > -1) then break end
 			-- 疲劳溢出
 			x, y = sg_tired_detect()
 			if x > -1 then

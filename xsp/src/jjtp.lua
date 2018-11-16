@@ -673,7 +673,7 @@ function jjtp_solo_to_pub(lock)
 		while (1) do
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer() if (x > -1) then break end
+			x, y = receive_offer() if (x > -1) then break end
 			-- 个人突破
 			x, y = solo_lct_jjtp()
 			if (x > -1) then
@@ -721,7 +721,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			print(string.format("winess %d, invalid %d, pos %d, found_target %d", winess, invalid, pos, found_target))
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer() if (x > -1) then break end
+			x, y = receive_offer() if (x > -1) then break end
 			-- 阴阳寮突破
 			x, y = pub_lct_jjtp() if x > -1 then quit_jjtp() break end
 			-- 个人突破
@@ -763,7 +763,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				ret = solo_refresh(winess, invalid, refresh)
 				if ret == RET_OK then
 					-- 悬赏封印
-					x, y = find_offer() if (x > -1) then break end
+					x, y = receive_offer() if (x > -1) then break end
 					random_touch(0, 933, 481, 30, 10) -- 刷新
 					random_sleep(500)
 					random_touch(0, 674, 384, 30, 10) -- 确认
@@ -899,7 +899,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer() if (x > -1) then break end
+			x, y = receive_offer() if (x > -1) then break end
 			-- 未开寮突
 			x, y = pub_unstart()
 			if x > -1 then

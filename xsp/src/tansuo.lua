@@ -331,7 +331,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer() if (x > -1) then break end
+			x, y = receive_offer() if (x > -1) then break end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行
@@ -397,7 +397,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump -1 do
-							find_offer()
+							receive_offer()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -420,7 +420,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump - 1 do
-							find_offer()
+							receive_offer()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -585,7 +585,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer() if (x > -1) then break end
+			x, y = receive_offer() if (x > -1) then break end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行
@@ -651,7 +651,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				if x > -1 then
 					if bot_left == 1 or bot_right == 1 then
 						for i = 1, page_jump -1 do
-							find_offer()
+							receive_offer()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -674,7 +674,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				if x > -1 then
 					if bot_left == 1 or bot_right == 1 then
 						for i = 1, page_jump - 1 do
-							find_offer()
+							receive_offer()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -843,7 +843,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer() if (x > -1) then break end
+			x, y = receive_offer() if (x > -1) then break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then
@@ -907,7 +907,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump -1 do
-							find_offer()
+							receive_offer()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -930,7 +930,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump - 1 do
-							find_offer()
+							receive_offer()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
