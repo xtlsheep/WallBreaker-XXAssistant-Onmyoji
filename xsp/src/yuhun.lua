@@ -512,7 +512,7 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 	return RET_OK
 end
 
-function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, gourp)
+function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
 	local time_cnt = 0
 	local init = 1
 	local invite = 1
@@ -615,10 +615,10 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 				x, y = captain_room_invite_first(invite_zone) if (x > -1) then invite = 0 time_cnt = 0 break end
 			end
 			-- 开始战斗
-			if gourp == "固定队2人" then
+			if group == "固定队2人" then
 				x, y = captain_room_start_with_1_members() if (x > -1) then invite = 0 time_cnt = 0 break end
 			end
-			if gourp == "固定队3人" then
+			if group == "固定队3人" then
 				x, y = captain_room_start_with_2_members() if (x > -1) then invite = 0 time_cnt = 0 break end
 			end
 			-- Idle buff stop
