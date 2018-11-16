@@ -571,10 +571,10 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 				x, y = captain_room_invite_first(invite_zone) if (x > -1) then invite = 0 time_cnt = 0 break end
 			end
 			-- 开始战斗
-			if gourp == "固定队2人" then
+			if group == "固定队2人" then
 				x, y = captain_room_start_with_1_members() if (x > -1) then invite = 0 time_cnt = 0 break end
 			end
-			if gourp == "固定队3人" then
+			if group == "固定队3人" then
 				x, y = captain_room_start_with_2_members() if (x > -1) then invite = 0 time_cnt = 0 break end
 			end
 			-- Idle buff stop
