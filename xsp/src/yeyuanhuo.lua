@@ -37,7 +37,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			x, y = round_fight() if (x > -1) then break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer() if (x > -1) then break end
+			x, y = receive_offer() if (x > -1) then break end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗胜利

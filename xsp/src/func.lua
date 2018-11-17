@@ -1,7 +1,7 @@
 require "util"
 
 -- Some func
-function direction_init()
+function screen_dire_init()
 	local ret = getScreenDirection()
 	
 	if ret == 0 then
@@ -39,7 +39,7 @@ function print_global_vars()
 			buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
 end
 
-function find_offer()
+function receive_offer()
 	local x, y, x_, y_
 	x_, y_ = findColor({681, 167, 685, 171}, -- √ x 和 交接处
 		"0|0|0xb39276,-1|29|0x9e7d62,71|209|0x50ad5b,74|295|0xd96c5a",
@@ -135,164 +135,9 @@ function handle_error(disconn_fin, real_8dashe, secret_vender)
 	return x, y
 end
 
-function level_select(level, init, lock, spec)
-	local function find_level_five()
-		local x, y = findColor({340, 120, 360, 360},
-			"0|0|0x312e2a,-11|-9|0x403c37,-14|-3|0x37332f,-17|0|0x534e49,-1|-7|0x49443f,2|5|0x4c4842,-9|7|0x4f4b45",
-			80, 0, 1, 0)
-		if x > -1 then
-			random_touch(0, x, y, 50, 10)
-		end
-	end
-	
-	local function find_level_six()
-		local x, y = findColor({340, 120, 360, 360},
-			"0|0|0x4a4540,-6|-9|0x2f2b27,-17|-7|0x383530,-17|8|0x3f3b36,-10|7|0x423e39,-6|7|0x413d38,-1|8|0x4b4741,-1|4|0x2c2824",
-			80, 0, 1, 0)
-		if x > -1 then
-			random_touch(0, x, y, 50, 10)
-		end
-	end
-	
-	mSleep(1000)
-	if (init == ENABLE) then
-		HUD_show_or_hide(HUD,hud_info,"层数 - 初始化",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		-- 选择层数
-		if (level == 1) then
-			random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
-			random_sleep(750)
-			random_touch(0, 360, 150, 50, 10) -- 第一排
-		elseif (level == 2) then
-			random_move(0, 360, 150, 360, 400, 50, 10)
-			random_sleep(750)
-			random_touch(0, 360, 215, 50, 10) -- 第二排
-		elseif (level == 3) then
-			random_move(0, 360, 150, 360, 400, 50, 10)
-			random_sleep(750)
-			random_touch(0, 360, 280, 50, 10) -- 第三排
-		elseif (level == 4) then
-			random_move(0, 360, 150, 360, 400, 50, 10)
-			random_sleep(750)
-			random_touch(0, 360, 350, 50, 10) -- 第四排
-		elseif (level == 5) then
-			random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
-			random_sleep(750)
-			random_move(0, 360, 300, 360, 150, 50, 10) -- 向上拉
-			random_sleep(750)
-			find_level_five()
-		elseif (level == 6) then
-			random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
-			random_sleep(750)
-			random_move(0, 360, 300, 360, 150, 50, 10) -- 向上拉
-			random_sleep(750)
-			find_level_six()
-		elseif (level == 7) then
-			random_move(0, 360, 350, 360, 100, 50, 10) -- 向上拉
-			random_sleep(750)
-			random_touch(0, 360, 150, 50, 10)
-		elseif (level == 8) then
-			random_move(0, 360, 350, 360, 100, 50, 10)
-			random_sleep(750)
-			random_touch(0, 360, 215, 50, 10)
-		elseif (level == 9) then
-			random_move(0, 360, 350, 360, 100, 50, 10)
-			random_sleep(750)
-			random_touch(0, 360, 280, 50, 10)
-		elseif (level == 10) then
-			random_move(0, 360, 350, 360, 100, 50, 10)
-			random_sleep(750)
-			random_touch(0, 360, 350, 50, 10)
-		end
-	end
-	
-	-- 锁定
-	lock_or_unlock(lock, spec)
-end
-
-function lock_or_unlock(lock, spec)
-	local x1, y1, x2, y2, x, y
-	if spec == "御魂" then
-		x1 = 638 y1 = 369 x2 = 640 y2 = 371
-	elseif spec == "觉醒" then
-		x1 = 638 y1 = 371 x2 = 640 y2 = 373
-	elseif spec == "业原火" then
-		x1 = 639 y1 = 369 x2 = 641 y2 = 371
-	elseif spec == "御灵" then
-		x1 = 552 y1 = 378 x2 = 554 y2 = 380
-	elseif spec == "结界突破" then
-		x1 = 917 y1 = 551 x2 = 919 y2 = 553
-	elseif spec == "探索" then
-		x1 = 750 y1 = 570 x2 = 760 y2 = 580
-	end
-	
-	if (spec == "御魂" or spec == "觉醒" or spec == "业原火" or spec == "探索") then
-		if (lock == ENABLE) then
-			x, y = findColor({x1, y1, x2, y2},
-				"0|0|0x735c41,11|1|0x2c2119,-11|0|0x2e231c,-1|5|0x291f19",
-				95, 0, 0, 0)
-			if x > -1 then
-				random_touch(0, x, y, 3, 3)
-			end
-		else
-			x, y = findColor({x1, y1, x2, y2},
-				"0|0|0x725c40,0|-6|0x33271a,-13|1|0x9d93ce,13|1|0x9d95cd",
-				95, 0, 0, 0)
-			if x > -1 then
-				random_touch(0, x, y, 3, 3)
-			end
-		end
-		return x, y
-	end
-	
-	if (spec == "御灵") then
-		if (lock == ENABLE) then
-			x, y = findColor({x1, y1, x2, y2},
-				"0|0|0x886d49,0|5|0x241911,-13|0|0x2f2318,15|0|0x2f2318",
-				95, 0, 0, 0)
-			if x > -1 then
-				random_touch(0, x, y, 3, 3)
-			end
-		else
-			x, y = findColor({x1, y1, x2, y2},
-				"0|0|0x886e4a,0|7|0x1d150f,-17|0|0xb9adf4,17|0|0xb8aef2",
-				95, 0, 0, 0)
-			if x > -1 then
-				random_touch(0, x, y, 3, 3)
-			end
-		end
-		return x, y
-	end
-	
-	if (spec == "结界突破") then
-		if (lock == ENABLE) then
-			x, y = findColor({x1, y1, x2, y2},
-				"0|0|0x826745,0|5|0x1f150e,-13|0|0x2f2318,13|1|0x2f2318",
-				95, 0, 0, 0)
-			if x > -1 then
-				random_touch(0, x, y, 3, 3)
-			end
-		else
-			x, y = findColor({x1, y1, x2, y2},
-				"0|0|0x866c49,0|7|0x1c150e,-16|0|0xb8acf1,16|0|0xb3aaec",
-				95, 0, 0, 0)
-			if x > -1 then
-				random_touch(0, x, y, 3, 3)
-			end
-		end
-		return x, y
-	end
-end
-
-function solo_start()
-	random_touch(0, 845, 440, 30, 10) -- 挑战
-	mSleep(1000)
-	local x, y = findColor({806, 441, 808, 443}, -- 挑战
-		"0|0|0xf3b25e,75|0|0xf3b25e",
-		95, 0, 0, 0)
-	if x > -1 then
-		return RET_ERR
-	end
-	return RET_OK
+function lower_right_blank_click()
+    random_touch(0, 1040, 350, 50, 50)
+    return
 end
 
 function disable_skill_feature()
@@ -346,7 +191,7 @@ function out_of_sushi()
 			while(1) do
 				mSleep(500)
 				-- 悬赏封印
-				x, y = find_offer() if x > -1 then break end
+				x, y = receive_offer() if x > -1 then break end
 				-- 八岐大蛇
 				x, y = lct_8dashe() if x > -1 then random_touch(0, 930, 110, 5, 5) break end
 				-- 创建队伍
@@ -417,6 +262,29 @@ function tansuo_idle_handle(tansuo_time_cnt)
 		buff_stop_idle = 0
 	end
 	return time_cnt, local_buff_stop_idle
+end
+
+function stop_buff()
+    local x, y, x_, y_
+    x, y = findColor({816, 469, 818, 471},
+        "0|0|0x46533c,26|-8|0xac7b42,12|11|0xc1ab93,-19|12|0x2b3516",
+        90, 0, 0, 0)
+    if x > -1 then
+        if stop == 1 then
+            HUD_show_or_hide(HUD,hud_info,"关闭buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
+            for i = 1, 10 do
+                x_, y_ = findColor({794, 135, 796, 360},
+                    "0|0|0x412e2b,5|-7|0xe4c197,-5|8|0xd8b389,0|-15|0x382826,-1|22|0xcbb59c",
+                    90, 0, 0, 0)
+                if x_ > -1 then
+                    random_touch(0, x_, y_, 5, 5)
+                end
+                random_sleep(150)
+            end
+        end
+    end
+    random_sleep(500)
+    lower_right_blank_click()
 end
 
 function stats_read()
@@ -514,9 +382,6 @@ function lct_tansuo()
 	local x, y = findColor({43, 50, 47, 54}, -- 探索返回
 		"0|0|0xe0ecf9,-14|0|0xe6effa,4|-15|0xf0f5fb,34|-1|0x11215c",
 		95, 0, 0, 0)
-	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
-	end
 	return x, y
 end
 
@@ -557,6 +422,166 @@ function tingyuan_enter_zudui()
 end
 
 -- Fight func
+function level_select(level, init, lock, spec)
+    local function find_fifth_level()
+        local x, y = findColor({340, 120, 360, 360},
+            "0|0|0x312e2a,-11|-9|0x403c37,-14|-3|0x37332f,-17|0|0x534e49,-1|-7|0x49443f,2|5|0x4c4842,-9|7|0x4f4b45",
+            80, 0, 1, 0)
+        if x > -1 then
+            random_touch(0, x, y, 50, 10)
+        end
+    end
+
+    local function find_sixth_level()
+        local x, y = findColor({340, 120, 360, 360},
+            "0|0|0x4a4540,-6|-9|0x2f2b27,-17|-7|0x383530,-17|8|0x3f3b36,-10|7|0x423e39,-6|7|0x413d38,-1|8|0x4b4741,-1|4|0x2c2824",
+            80, 0, 1, 0)
+        if x > -1 then
+            random_touch(0, x, y, 50, 10)
+        end
+    end
+
+    mSleep(1000)
+    if (init == ENABLE) then
+        HUD_show_or_hide(HUD,hud_info,"层数 - 初始化",20,"0xff000000","0xffffffff",0,100,0,300,32)
+        -- 选择层数
+        if (level == 1) then
+            random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
+            random_sleep(750)
+            random_touch(0, 360, 150, 50, 10) -- 第一排
+        elseif (level == 2) then
+            random_move(0, 360, 150, 360, 400, 50, 10)
+            random_sleep(750)
+            random_touch(0, 360, 215, 50, 10) -- 第二排
+        elseif (level == 3) then
+            random_move(0, 360, 150, 360, 400, 50, 10)
+            random_sleep(750)
+            random_touch(0, 360, 280, 50, 10) -- 第三排
+        elseif (level == 4) then
+            random_move(0, 360, 150, 360, 400, 50, 10)
+            random_sleep(750)
+            random_touch(0, 360, 350, 50, 10) -- 第四排
+        elseif (level == 5) then
+            random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
+            random_sleep(750)
+            random_move(0, 360, 300, 360, 150, 50, 10) -- 向上拉
+            random_sleep(750)
+            find_fifth_level()
+        elseif (level == 6) then
+            random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
+            random_sleep(750)
+            random_move(0, 360, 300, 360, 150, 50, 10) -- 向上拉
+            random_sleep(750)
+            find_sixth_level()
+        elseif (level == 7) then
+            random_move(0, 360, 350, 360, 100, 50, 10) -- 向上拉
+            random_sleep(750)
+            random_touch(0, 360, 150, 50, 10)
+        elseif (level == 8) then
+            random_move(0, 360, 350, 360, 100, 50, 10)
+            random_sleep(750)
+            random_touch(0, 360, 215, 50, 10)
+        elseif (level == 9) then
+            random_move(0, 360, 350, 360, 100, 50, 10)
+            random_sleep(750)
+            random_touch(0, 360, 280, 50, 10)
+        elseif (level == 10) then
+            random_move(0, 360, 350, 360, 100, 50, 10)
+            random_sleep(750)
+            random_touch(0, 360, 350, 50, 10)
+        end
+    end
+
+    -- 锁定
+    lock_or_unlock(lock, spec)
+end
+
+function lock_or_unlock(lock, spec)
+    local x1, y1, x2, y2, x, y
+    if spec == "??" then
+        x1 = 638 y1 = 369 x2 = 640 y2 = 371
+    elseif spec == "??" then
+        x1 = 638 y1 = 371 x2 = 640 y2 = 373
+    elseif spec == "???" then
+        x1 = 639 y1 = 369 x2 = 641 y2 = 371
+    elseif spec == "??" then
+        x1 = 552 y1 = 378 x2 = 554 y2 = 380
+    elseif spec == "????" then
+        x1 = 917 y1 = 551 x2 = 919 y2 = 553
+    elseif spec == "??" then
+        x1 = 750 y1 = 570 x2 = 760 y2 = 580
+    end
+
+    if (spec == "??" or spec == "??" or spec == "???" or spec == "??") then
+        if (lock == ENABLE) then
+            x, y = findColor({x1, y1, x2, y2},
+                "0|0|0x735c41,11|1|0x2c2119,-11|0|0x2e231c,-1|5|0x291f19",
+                95, 0, 0, 0)
+            if x > -1 then
+                random_touch(0, x, y, 3, 3)
+            end
+        else
+            x, y = findColor({x1, y1, x2, y2},
+                "0|0|0x725c40,0|-6|0x33271a,-13|1|0x9d93ce,13|1|0x9d95cd",
+                95, 0, 0, 0)
+            if x > -1 then
+                random_touch(0, x, y, 3, 3)
+            end
+        end
+        return x, y
+    end
+
+    if (spec == "??") then
+        if (lock == ENABLE) then
+            x, y = findColor({x1, y1, x2, y2},
+                "0|0|0x886d49,0|5|0x241911,-13|0|0x2f2318,15|0|0x2f2318",
+                95, 0, 0, 0)
+            if x > -1 then
+                random_touch(0, x, y, 3, 3)
+            end
+        else
+            x, y = findColor({x1, y1, x2, y2},
+                "0|0|0x886e4a,0|7|0x1d150f,-17|0|0xb9adf4,17|0|0xb8aef2",
+                95, 0, 0, 0)
+            if x > -1 then
+                random_touch(0, x, y, 3, 3)
+            end
+        end
+        return x, y
+    end
+    
+    if (spec == "????") then
+        if (lock == ENABLE) then
+            x, y = findColor({x1, y1, x2, y2},
+                "0|0|0x826745,0|5|0x1f150e,-13|0|0x2f2318,13|1|0x2f2318",
+                95, 0, 0, 0)
+            if x > -1 then
+                random_touch(0, x, y, 3, 3)
+            end
+        else
+            x, y = findColor({x1, y1, x2, y2},
+                "0|0|0x866c49,0|7|0x1c150e,-16|0|0xb8acf1,16|0|0xb3aaec",
+                95, 0, 0, 0)
+            if x > -1 then
+                random_touch(0, x, y, 3, 3)
+            end
+        end
+        return x, y
+    end
+end
+
+function solo_start()
+    random_touch(0, 845, 440, 30, 10) -- 挑战
+    mSleep(1000)
+    local x, y = findColor({806, 441, 808, 443}, -- 挑战
+        "0|0|0xf3b25e,75|0|0xf3b25e",
+        95, 0, 0, 0)
+    if x > -1 then
+        return RET_ERR
+    end
+    return RET_OK
+end
+
 function fight_ready()
 	local x, y = findColor({1035, 596, 1039, 599}, -- 准备的鼓的棒槌
 		"0|0|0xe5c288,-62|17|0xebd19e,61|18|0xf0d8a9",
@@ -623,11 +648,6 @@ function fight_ongoing()
 	return x, y
 end
 
-function lower_right_blank_click()
-	random_touch(0, 1040, 350, 50, 50)
-	return
-end
-
 function fight_success(mode)
 	local cnt, x, y
 	cnt = 3
@@ -684,7 +704,7 @@ end
 function keep_half_damo()
 	local x, y
 	while (1) do
-		find_offer()
+		receive_offer()
 		--captain_team_set_auto_invite(captain_auto_invite)
 		x, y = findColor({498, 529, 501, 532}, -- 达摩底部
 			"0|0|0x670a0b,20|22|0x320204,127|0|0x7e0e0e,159|7|0x6f290b",
@@ -724,7 +744,7 @@ function keep_fight_failed(mode)
 	local x, y
 	if (mode == "单人") then
 		while (1) do
-			find_offer()
+			receive_offer()
 			x, y = findColor({410, 130, 415, 135}, -- 失败的鼓
 				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
 				95, 0, 0, 0)
@@ -737,7 +757,7 @@ function keep_fight_failed(mode)
 		end
 	elseif (mode == "组队") then
 		while (1) do
-			find_offer()
+			receive_offer()
 			x, y = findColor({410, 80, 415, 85}, -- 失败的鼓
 				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
 				95, 0, 0, 0)

@@ -71,7 +71,7 @@ function yqfy(round, sel, mark)
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			mSleep(500)
 			-- 悬赏封印
-			x, y = find_offer() if (x > -1) then break end
+			x, y = receive_offer() if (x > -1) then break end
 			-- 庭院
 			x, y = lct_tingyuan()
 			if (x > -1) then

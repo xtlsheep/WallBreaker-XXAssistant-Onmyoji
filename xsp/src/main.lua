@@ -14,7 +14,7 @@ start_time = mTime()
 ver = getOSType()
 width, height = getScreenSize()
 dpi = getScreenDPI()
-direction_init()
+screen_dire_init()
 width_dev = 640
 height_dev = 1136
 ratio = height_dev/height
