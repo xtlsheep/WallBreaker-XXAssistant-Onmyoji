@@ -126,7 +126,7 @@ function juexing_solo(element, mark, level, round, lock)
 				break 
 			end
 			-- Idle buff stop
-			if local_buff_stop_idle == 1 then lct_buff(local_buff_stop_idle) local_buff_stop_idle = 0 break end
+			if local_buff_stop_idle == 1 then stop_buff() local_buff_stop_idle = 0 break end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_stop_idle = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 探索
@@ -142,7 +142,9 @@ function juexing_solo(element, mark, level, round, lock)
 				break
 			end
 			-- Handle error
-			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			-- 体力不足
+			x, y = out_of_sushi()
 			break
 		end
 	end
@@ -175,7 +177,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			-- 拒绝邀请
 			if (wait_invite == 0) then x, y = member_team_refuse_invite() if (x > -1) then break end end
 			-- Idle buff stop
-			if local_buff_stop_idle == 1 then lct_buff(local_buff_stop_idle) local_buff_stop_idle = 0 break end
+			if local_buff_stop_idle == 1 then stop_buff() local_buff_stop_idle = 0 break end
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then
@@ -270,8 +272,10 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			x, y = captain_team_lost_invite() if (x > -1) then random_touch(0, 462, 383, 20, 10) break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
-			-- Error Handle
-			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			-- Handle error
+			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			-- 体力不足
+			x, y = out_of_sushi()
 			break
 		end
 	end
@@ -348,7 +352,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 				break 
 			end
 			-- 创建初始化
-			x, y = captain_room_init() if (x > -1) then break end -- 创建队伍
+			x, y = captain_room_create_init() if (x > -1) then break end -- 创建队伍
 			-- 创建公共队伍
 			x, y = captain_room_create_public() if (x > -1) then break end
 			-- 开始战斗
@@ -359,7 +363,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 				x, y = captain_room_start_with_2_members() if (x > -1) then break end
 			end
 			-- Idle buff stop
-			if local_buff_stop_idle == 1 then lct_buff(local_buff_stop_idle) local_buff_stop_idle = 0 break end
+			if local_buff_stop_idle == 1 then stop_buff() local_buff_stop_idle = 0 break end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_stop_idle = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 探索
@@ -399,7 +403,9 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Handle error
-			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			-- 体力不足
+			x, y = out_of_sushi()
 			break
 		end
 	end
@@ -460,7 +466,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 				break
 			end
 			-- Idle buff stop
-			if local_buff_stop_idle == 1 then lct_buff(local_buff_stop_idle) local_buff_stop_idle = 0 break end
+			if local_buff_stop_idle == 1 then stop_buff() local_buff_stop_idle = 0 break end
 			-- 庭院
 			x, y = lct_tingyuan() if x > -1 then tingyuan_time_cnt, local_buff_stop_idle = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 探索
@@ -468,7 +474,9 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Handle error
-			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			-- 体力不足
+			x, y = out_of_sushi()
 			break
 		end
 	end
@@ -549,7 +557,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 				break 
 			end
 			-- 创建初始化
-			x, y = captain_room_init()
+			x, y = captain_room_create_init()
 			-- 创建私人队伍
 			x, y = captain_room_create_private()
 			-- 邀请初始化
@@ -578,7 +586,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 				x, y = captain_room_start_with_2_members() if (x > -1) then invite = 0 time_cnt = 0 break end
 			end
 			-- Idle buff stop
-			if local_buff_stop_idle == 1 then lct_buff(local_buff_stop_idle) local_buff_stop_idle = 0 break end
+			if local_buff_stop_idle == 1 then stop_buff() local_buff_stop_idle = 0 break end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_stop_idle = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 探索
@@ -618,7 +626,9 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Handle error
-			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			-- 体力不足
+			x, y = out_of_sushi()
 			break
 		end
 	end

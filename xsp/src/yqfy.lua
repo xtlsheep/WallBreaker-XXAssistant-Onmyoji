@@ -185,7 +185,7 @@ function yqfy(round, sel, mark)
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Error Handle
-			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
 	end

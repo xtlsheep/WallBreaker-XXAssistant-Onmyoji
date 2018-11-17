@@ -374,7 +374,7 @@ function superghost()
 			-- 探索の超鬼王
 			x, y = lct_sg_in_tansuo() if x > -1 then random_touch(0, x, y, 5, 5) break end
 			-- Handle error
-			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
 	end

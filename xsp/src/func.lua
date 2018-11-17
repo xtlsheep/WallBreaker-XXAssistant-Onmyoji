@@ -313,6 +313,74 @@ function disable_skill_feature()
 	end
 end
 
+function stop_buff()
+	local x, y, x_, y_
+	x, y = findColor({816, 469, 818, 471},
+		"0|0|0x46533c,26|-8|0xac7b42,12|11|0xc1ab93,-19|12|0x2b3516",
+		90, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"关闭buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		for i = 1, 10 do
+			x_, y_ = findColor({794, 135, 796, 360},
+				"0|0|0x412e2b,5|-7|0xe4c197,-5|8|0xd8b389,0|-15|0x382826,-1|22|0xcbb59c",
+				90, 0, 0, 0)
+			if x_ > -1 then
+				random_touch(0, x_, y_, 5, 5)
+			end
+			random_sleep(150)
+		end
+	end
+	random_sleep(500)
+	lower_right_blank_click()
+end
+
+function out_of_sushi()
+	local x, y, x_, y_
+	x_, y_ = findColor({831, 171, 833, 173},
+		"0|0|0xe8d4cf,-277|246|0xed4f3c,-313|138|0xeb7d30,-326|170|0x9446e7",
+		95, 0, 0, 0)
+	if x_ > -1 then
+		random_touch(0, x_, y_, 5, 5)
+		
+		while (1) do
+			while(1) do
+				mSleep(500)
+				-- 悬赏封印
+				x, y = find_offer() if x > -1 then break end
+				-- 八岐大蛇
+				x, y = lct_8dashe() if x > -1 then random_touch(0, 930, 110, 5, 5) break end
+				-- 创建队伍
+				x, y = captain_room_create_window() if x > -1 then random_touch(0, 355, 525, 20, 10) break end
+				-- 组队
+				x, y = lct_zudui() if x > -1 then random_touch(0, 1060, 110, 5, 5) break end
+				-- 探索场景
+				x, y = lct_tansuo_scene() if x > -1 then random_touch(0, 45, 60, 5, 5) break end
+				-- 退出场景
+				x, y = scene_quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
+				-- 探索章节
+				x, y = lct_tansuo_portal() if x > -1 then random_touch(0, 930, 135, 5, 5) break end
+				-- 探索
+				x, y = lct_tansuo()
+				if x > -1 then
+					random_touch(0, 390, 50, 5, 5)
+					random_sleep(1000)
+					stop_buff()
+					lua_exit()
+				end
+				-- 庭院
+				x, y = lct_tingyuan()
+				if x > -1 then
+					random_touch(0, 380, 60, 5, 5)
+					random_sleep(1000)
+					stop_buff()
+					lua_exit()
+				end
+				break
+			end
+		end
+	end
+end
+
 function tingyuan_idle_handle(tingyuan_time_cnt)
 	local time_cnt = 0
 	local local_buff_stop_idle = 0
@@ -486,29 +554,6 @@ function tingyuan_enter_zudui()
 		random_touch(0, 230, 560, 20, 20) -- 组队
 	end
 	return x, y
-end
-
-function lct_buff(stop)
-	local x, y, x_, y_
-	x, y = findColor({816, 469, 818, 471},
-		"0|0|0x46533c,26|-8|0xac7b42,12|11|0xc1ab93,-19|12|0x2b3516",
-		90, 0, 0, 0)
-	if x > -1 then
-		if stop == 1 then
-			HUD_show_or_hide(HUD,hud_info,"关闭buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			for i = 1, 10 do
-				x_, y_ = findColor({794, 135, 796, 360},
-					"0|0|0x412e2b,5|-7|0xe4c197,-5|8|0xd8b389,0|-15|0x382826,-1|22|0xcbb59c",
-					90, 0, 0, 0)
-				if x_ > -1 then
-					random_touch(0, x_, y_, 5, 5)
-				end
-				random_sleep(150)
-			end
-		end
-	end
-	random_sleep(500)
-	lower_right_blank_click()
 end
 
 -- Fight func
@@ -803,7 +848,7 @@ function member_room_user_profile()
 	return x, y
 end
 
-function captain_room_init()
+function captain_room_create_init()
 	local x, y = findColor({925, 555, 937, 567}, -- 创建队伍 and 右边红穗
 		"0|0|0xf3b25e,133|-325|0xa52729,128|-362|0x8d7245,127|-327|0xead49c",
 		95, 0, 0, 0)
@@ -814,10 +859,15 @@ function captain_room_init()
 	return x, y
 end
 
-function captain_room_create_public()
+function captain_room_create_window()
 	local x, y = findColor({777, 524, 779, 526},
 		"0|0|0xf3b25e,-421|0|0xdf6851,282|-413|0x605755,-580|-471|0xe4768d",
 		90, 0, 0, 0)
+	return x, y
+end
+
+function captain_room_create_public()
+	local x, y = captain_room_create_window()
 	if x > -1 then
 		mSleep(500)
 		local x_, y_ = findColor({273, 457, 275, 459}, -- 所有人选项
@@ -832,9 +882,7 @@ function captain_room_create_public()
 end
 
 function captain_room_create_private()
-	local x, y = findColor({777, 524, 779, 526},
-		"0|0|0xf3b25e,-421|0|0xdf6851,282|-413|0x605755,-580|-471|0xe4768d",
-		90, 0, 0, 0)
+	local x, y = captain_room_create_window()
 	if x > -1 then
 		mSleep(500)
 		local x_, y_ = findColor({673, 457, 675, 459}, -- 不公开

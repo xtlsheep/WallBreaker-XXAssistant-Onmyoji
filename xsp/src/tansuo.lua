@@ -2,21 +2,21 @@ require "util"
 require "func"
 
 -- Util func
-function lct_exploration()
+function lct_tansuo_scene()
 	local x, y = findColor({770, 5, 790, 15},
 		"0|0|0xe97b2b,-746|49|0xf0f5fb,-729|48|0x313583,305|26|0xa29c7b,305|19|0xdfc7a1",
 		95, 0, 0, 0)
 	return x, y
 end
 
-function lct_exploration_portal()
+function lct_tansuo_portal()
 	local x, y = findColor({928, 132, 930, 134},
 		"0|0|0xe9d6d0,-41|-22|0x493625,-673|312|0x404359,-606|320|0xe0bd5f",
 		95, 0, 0, 0)
 	return x, y
 end
 
-function lct_exploration_prepare()
+function lct_tansuo_prepare()
 	local x, y = findColor({27, 35, 29, 37},
 		"0|0|0xd6c4a1,4|468|0x98335a,92|570|0xfefbe5,25|552|0xf6c990",
 		95, 0, 0, 0)
@@ -46,7 +46,7 @@ function tansuo_mark(mark)
 	end
 end
 
-function quit_confirm()
+function scene_quit_confirm()
 	local x, y = findColor({688, 357, 690, 359},
 		"0|0|0xf3b25e,-287|-2|0xf3b25e,-654|-302|0x636567,-659|146|0x3e1524",
 		95, 0, 0, 0)
@@ -439,7 +439,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 					break
 				end
 				-- 探索预备
-				x, y = lct_exploration_prepare()
+				x, y = lct_tansuo_prepare()
 				if x > -1 then
 					top_mid, top_right = full_exp_top()
 					if top_mid == 1 or top_right == 1 then
@@ -455,7 +455,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				end
 			end
 			-- 探索场景
-			x, y = lct_exploration()
+			x, y = lct_tansuo_scene()
 			if x > -1 then
 				-- Unlock
 				if unlock == 0 then
@@ -494,7 +494,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				break
 			end
 			-- 探索章节
-			x, y = lct_exploration_portal()
+			x, y = lct_tansuo_portal()
 			if x > -1 then
 				if quit == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
@@ -518,9 +518,9 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				break
 			end
 			-- 确认退出
-			x, y = quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
+			x, y = scene_quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
 			-- Idle buff stop
-			if local_buff_stop_idle == 1 then lct_buff(local_buff_stop_idle) local_buff_stop_idle = 0 break end
+			if local_buff_stop_idle == 1 then stop_buff() local_buff_stop_idle = 0 break end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_stop_idle = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 战斗失败
@@ -538,8 +538,9 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then random_touch(0, 1024, 533, 30, 10) tansuo_time_cnt, local_buff_stop_idle = tansuo_idle_handle(tansuo_time_cnt) break end -- Temporarily enter last section
 			-- Handle error
-			x, y = lct_8dashe() if x > -1 then  random_touch(0, 928, 108, 5, 5) break end -- 八岐大蛇
-			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			-- 体力不足
+			x, y = out_of_sushi()
 			break
 		end
 	end
@@ -693,7 +694,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 					break
 				end
 				-- 探索预备
-				x, y = lct_exploration_prepare()
+				x, y = lct_tansuo_prepare()
 				if x > -1 then
 					bot_left, bot_right = full_exp_bot()
 					if bot_left == 1 or bot_right == 1 then
@@ -707,7 +708,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				end
 			end
 			-- 探索场景
-			x, y = lct_exploration()
+			x, y = lct_tansuo_scene()
 			if x > -1 then
 				-- Unlock
 				if unlock == 0 then
@@ -746,7 +747,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				break
 			end
 			-- 探索章节
-			x, y = lct_exploration_portal()
+			x, y = lct_tansuo_portal()
 			if x > -1 then
 				if quit == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
@@ -792,9 +793,9 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				break
 			end
 			-- 确认退出
-			x, y = quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
+			x, y = scene_quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
 			-- Idle buff stop
-			if local_buff_stop_idle == 1 then lct_buff(local_buff_stop_idle) local_buff_stop_idle = 0 break end
+			if local_buff_stop_idle == 1 then stop_buff() local_buff_stop_idle = 0 break end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_stop_idle = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 战斗失败
@@ -812,8 +813,9 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then random_touch(0, 1024, 533, 30, 10) tansuo_time_cnt, local_buff_stop_idle = tansuo_idle_handle(tansuo_time_cnt) break end -- Temporarily enter last section
 			-- Handle error
-			x, y = lct_8dashe() if x > -1 then  random_touch(0, 928, 108, 5, 5) break end -- 八岐大蛇
-			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			-- 体力不足
+			x, y = out_of_sushi()
 			break
 		end
 	end
@@ -865,7 +867,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				break
 			end
 			-- 探索场景
-			x, y = lct_exploration()
+			x, y = lct_tansuo_scene()
 			if x > -1 then
 				-- Unlock
 				if unlock == 0 then
@@ -949,7 +951,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 					break
 				end
 				-- 探索预备
-				x, y = lct_exploration_prepare()
+				x, y = lct_tansuo_prepare()
 				if x > -1 then
 					top_mid, top_right = full_exp_top()
 					if top_mid == 1 or top_right == 1 then
@@ -965,7 +967,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				end
 			end
 			-- 确认退出
-			x, y = quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
+			x, y = scene_quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
@@ -979,11 +981,13 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			-- 查看体力
 			x, y = sushi_check() if x > -1 then lower_right_blank_click() break end
 			-- Idle buff stop
-			if local_buff_stop_idle == 1 then lct_buff(local_buff_stop_idle) local_buff_stop_idle = 0 break end
+			if local_buff_stop_idle == 1 then stop_buff() local_buff_stop_idle = 0 break end
 			-- 庭院
 			x, y = lct_tingyuan() if x > -1 then tingyuan_time_cnt, local_buff_stop_idle = tingyuan_idle_handle(tingyuan_time_cnt) break end
 			-- 探索
 			x, y = lct_tansuo() if x > -1 then tansuo_time_cnt, local_buff_stop_idle = tansuo_idle_handle(tansuo_time_cnt) break end
+			-- 体力不足
+			x, y = out_of_sushi()
 			break
 		end
 	end

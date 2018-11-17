@@ -864,7 +864,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			-- 退出防守记录
 			x, y = solo_quit_defense_record() if (x > -1) then break end
 			-- Handle error
-			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
 	end
@@ -1052,7 +1052,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- Handle error
-			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
 	end

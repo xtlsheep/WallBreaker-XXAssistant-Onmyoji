@@ -19,7 +19,7 @@ function hundredghost(round, num, invite)
 			-- 悬赏封印
 			x, y = find_offer() if x > -1 then break end
 			-- Error Handle
-			handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
 	end
