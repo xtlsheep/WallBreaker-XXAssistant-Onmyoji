@@ -208,7 +208,7 @@ function out_of_sushi()
 				x, y = lct_tansuo()
 				if x > -1 then
 					random_touch(0, 390, 50, 5, 5)
-					random_sleep(1000)
+					mSleep(1500)
 					stop_buff()
 					lua_exit()
 				end
@@ -216,7 +216,7 @@ function out_of_sushi()
 				x, y = lct_tingyuan()
 				if x > -1 then
 					random_touch(0, 380, 60, 5, 5)
-					random_sleep(1000)
+					mSleep(1500)
 					stop_buff()
 					lua_exit()
 				end
@@ -226,65 +226,40 @@ function out_of_sushi()
 	end
 end
 
-function tingyuan_idle_handle(tingyuan_time_cnt)
+function idle_at_tingyuan(idle_time_cnt)
 	local time_cnt = 0
 	local local_buff_stop_idle = 0
 	local x, y
-	
-	x, y = lct_tingyuan() if x == -1 then return 0, 0 end
-	
+
 	-- Idle buff stop
 	if buff_stop_idle == 1 then
-		time_cnt = tingyuan_time_cnt + 1
+		time_cnt = idle_time_cnt + 1
 	end
 	if time_cnt*500 > buff_stop_idle_time*1000 then
-		random_touch(0, 390, 55, 10, 10) -- 加成
-		local_buff_stop_idle = 1
+		random_touch(0, 390, 50, 10, 10) -- 加成
+		mSleep(1500)
+		stop_buff()
 		buff_stop_idle = 0
 	end
-	return time_cnt, local_buff_stop_idle
+	return time_cnt
 end
 
-function tansuo_idle_handle(tansuo_time_cnt)
+function idle_at_tansuo(idle_time_cnt)
 	local time_cnt = 0
 	local local_buff_stop_idle = 0
 	local x, y
-	
-	x, y = lct_tansuo() if x == -1 then return 0, 0 end
-	
+
 	-- Idle buff stop
 	if buff_stop_idle == 1 then
-		time_cnt = tansuo_time_cnt + 1
+		time_cnt = idle_time_cnt + 1
 	end
 	if time_cnt*500 > buff_stop_idle_time*1000 then
-		random_touch(0, 390, 50, 10, 5) -- 加成
-		local_buff_stop_idle = 1
+		random_touch(0, 390, 60, 10, 5) -- 加成
+		mSleep(1500)
+		stop_buff()
 		buff_stop_idle = 0
 	end
-	return time_cnt, local_buff_stop_idle
-end
-
-function stop_buff()
-    local x, y, x_, y_
-    x, y = findColor({816, 469, 818, 471},
-        "0|0|0x46533c,26|-8|0xac7b42,12|11|0xc1ab93,-19|12|0x2b3516",
-        90, 0, 0, 0)
-    if x > -1 then
-        if stop == 1 then
-            HUD_show_or_hide(HUD,hud_info,"关闭buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
-            for i = 1, 10 do
-                x_, y_ = findColor({794, 135, 796, 360},
-                    "0|0|0x412e2b,5|-7|0xe4c197,-5|8|0xd8b389,0|-15|0x382826,-1|22|0xcbb59c",
-                    90, 0, 0, 0)
-                if x_ > -1 then
-                    random_touch(0, x_, y_, 5, 5)
-                end
-                random_sleep(150)
-            end
-        end
-    end
-    random_sleep(500)
-    lower_right_blank_click()
+	return time_cnt
 end
 
 function stats_read()

@@ -313,9 +313,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 	local ret = RET_ERR
 	local top_mid = 0
 	local top_right = 0
-	local local_buff_stop_idle = 0
 	local tingyuan_time_cnt = 0
-	local tansuo_time_cnt = 0
 	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
@@ -347,8 +345,8 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
+				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
-				local_buff_stop_idle = 0
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.tansuo = win_cnt.tansuo + 1
 				if count_mode == "战斗" then
@@ -519,10 +517,8 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			end
 			-- 确认退出
 			x, y = scene_quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
-			-- Idle buff stop
-			if local_buff_stop_idle == 1 then stop_buff() local_buff_stop_idle = 0 break end
 			-- 庭院
-			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_stop_idle = tingyuan_idle_handle(tingyuan_time_cnt) break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
@@ -536,7 +532,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			-- 查看体力
 			x, y = sushi_check() if x > -1 then lower_right_blank_click() break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then random_touch(0, 1024, 533, 30, 10) tansuo_time_cnt, local_buff_stop_idle = tansuo_idle_handle(tansuo_time_cnt) break end -- Temporarily enter last section
+			x, y = lct_tansuo() if (x > -1) then random_touch(0, 1024, 533, 30, 10) break end -- Temporarily enter last section
 			-- Handle error
 			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
@@ -559,9 +555,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 	local ret = RET_ERR
 	local bot_left = 0
 	local bot_right = 0
-	local local_buff_stop_idle = 0
 	local tingyuan_time_cnt = 0
-	local tansuo_time_cnt = 0
 	local invite_zone = -1
 	local disconn_fin = 1
 	local real_8dashe = 0
@@ -602,8 +596,8 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
+				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
-				local_buff_stop_idle = 0
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.tansuo = win_cnt.tansuo + 1
 				if count_mode == "战斗" then
@@ -794,10 +788,8 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			end
 			-- 确认退出
 			x, y = scene_quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
-			-- Idle buff stop
-			if local_buff_stop_idle == 1 then stop_buff() local_buff_stop_idle = 0 break end
 			-- 庭院
-			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt, local_buff_stop_idle = tingyuan_idle_handle(tingyuan_time_cnt) break end
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
@@ -811,7 +803,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			-- 查看体力
 			x, y = sushi_check() if x > -1 then lower_right_blank_click() break end
 			-- 探索
-			x, y = lct_tansuo() if (x > -1) then random_touch(0, 1024, 533, 30, 10) tansuo_time_cnt, local_buff_stop_idle = tansuo_idle_handle(tansuo_time_cnt) break end -- Temporarily enter last section
+			x, y = lct_tansuo() if (x > -1) then random_touch(0, 1024, 533, 30, 10) break end -- Temporarily enter last section
 			-- Handle error
 			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
@@ -827,7 +819,6 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 	local ret = RET_ERR
 	local top_mid = 0
 	local top_right = 0
-	local local_buff_stop_idle = 0
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
 	local disconn_fin = 1
@@ -859,8 +850,9 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
+				tansuo_time_cnt = 0
+				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
-				local_buff_stop_idle = 0
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.tansuo = win_cnt.tansuo + 1
 				keep_half_damo()
@@ -980,12 +972,10 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 查看体力
 			x, y = sushi_check() if x > -1 then lower_right_blank_click() break end
-			-- Idle buff stop
-			if local_buff_stop_idle == 1 then stop_buff() local_buff_stop_idle = 0 break end
 			-- 庭院
-			x, y = lct_tingyuan() if x > -1 then tingyuan_time_cnt, local_buff_stop_idle = tingyuan_idle_handle(tingyuan_time_cnt) break end
+			x, y = lct_tingyuan() if x > -1 then tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 探索
-			x, y = lct_tansuo() if x > -1 then tansuo_time_cnt, local_buff_stop_idle = tansuo_idle_handle(tansuo_time_cnt) break end
+			x, y = lct_tansuo() if x > -1 then tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt) break end
 			-- 体力不足
 			x, y = out_of_sushi()
 			break
