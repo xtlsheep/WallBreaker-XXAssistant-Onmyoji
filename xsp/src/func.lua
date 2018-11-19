@@ -557,6 +557,10 @@ function solo_start()
     return RET_OK
 end
 
+function group_start()
+	random_touch(0, 575, 440, 30, 10)
+end
+
 function fight_ready()
 	local x, y = findColor({1035, 596, 1039, 599}, -- 准备的鼓的棒槌
 		"0|0|0xe5c288,-62|17|0xebd19e,61|18|0xf0d8a9",
@@ -792,6 +796,7 @@ function member_room_find()
 	local right = 940
 	local arr = {}
 	local x, y
+	local cnt = math.random(1, 3)
 	
 	arr = getRandomList(4)
 	
@@ -802,7 +807,10 @@ function member_room_find()
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"寻找队伍",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			random_touch(0, x, y, 10, 5) -- 加入
+			for i = 1, cnt do
+				random_touch(0, x, y, 10, 5) -- 加入
+				random_sleep(100)
+			end
 			return
 		end
 	end

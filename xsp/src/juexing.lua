@@ -52,6 +52,7 @@ function juexing_element(element)
 	elseif (element == "雷") then
 		random_touch(0, 950, 300, 20, 20)
 	end
+	random_sleep(1000)
 end
 
 -- Main func
@@ -232,7 +233,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			-- 离开确认
 			x, y = member_room_quit() if (x > -1) then wait_invite = 0 break end
 			-- 觉醒材料
-			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 random_touch(0, 573, 440, 20, 10) break end -- 组队开始
+			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 group_start() break end -- 组队开始
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 觉醒之塔
@@ -372,7 +373,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 觉醒材料
-			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 random_touch(0, 573, 440, 20, 10) break end -- 组队开始
+			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 group_start() break end -- 组队开始
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
@@ -588,7 +589,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 觉醒材料
-			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 random_touch(0, 573, 440, 20, 10) break end -- 组队开始
+			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 group_start() break end -- 组队开始
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
