@@ -718,7 +718,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				print(string.format("      %d - %d - %d", map[4], map[5], map[6]))
 				print(string.format("      %d - %d - %d", map[7], map[8], map[9]))
 			end
-			print(string.format("winess %d, invalid %d, pos %d, found_target %d", winess, invalid, pos, found_target))
+			print(string.format("winess %d, invalid %d, pos %d, found_target %d, action %s", winess, invalid, pos, found_target, action_solo))
 			mSleep(500)
 			-- 悬赏封印
 			x, y = receive_offer() if (x > -1) then break end
@@ -756,14 +756,10 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				-- 锁定出战
 				lock_or_unlock(lock, "结界突破")
 				-- 分析地图
-				if action_solo ~= "Hold" then
-					map, winess, invalid = solo_analyse_map(solo_sel, map)
-				end
+				map, winess, invalid = solo_analyse_map(solo_sel, map)
 				-- 刷新判断
 				ret = solo_refresh(winess, invalid, refresh)
 				if ret == RET_OK then
-					-- 悬赏封印
-					x, y = receive_offer() if (x > -1) then break end
 					random_touch(0, 933, 481, 30, 10) -- 刷新
 					random_sleep(500)
 					random_touch(0, 674, 384, 30, 10) -- 确认
