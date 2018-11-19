@@ -47,7 +47,7 @@ function config_UI()
 	-- Config
 	config_ui = UI:new("config.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 	UI:Label(config_ui, "center", "0,0,0", 30, "高级选项", "30,20,960,55")
-	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,妖气封印    ,百鬼夜行    ,一键每日    ,副本组合    ,世界喊话    ,普通召唤    ,超鬼王        ,劲舞团        ,自动剧情    ,漫展漂移","0",30,"0,0,0","30,150,960,300")
+	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,妖气封印    ,百鬼夜行    ,一键每日    ,副本组合    ,世界喊话    ,普通召唤    ,悬赏查询    ,劲舞团        ,自动剧情    ,漫展漂移","0",30,"0,0,0","30,150,960,300")
 	UI:fit(config_ui)
 	
 	ret_config, res_config = UI:show(config_ui)
@@ -81,7 +81,7 @@ function config_UI()
 		-- 普通召唤
 	elseif (res_config.select == "11")  then normalcall_UI()
 		-- 超鬼王
-	elseif (res_config.select == "12")  then superghost_UI()
+	elseif (res_config.select == "12")  then offerinquire_UI()
 		-- 劲舞团
 	elseif (res_config.select == "13")  then audition_UI()
 		-- 自动剧情
@@ -175,11 +175,12 @@ function global_UI()
 	UI:Label(global_ui, "center", "0,0,0", 30, "全局设置", "30,20,960,55")
 	UI:CheckBoxGroup(global_ui, "offer_en","悬赏封印 - ","0",30,"0,0,0","20,100,300,60")
 	UI:CheckBoxGroup(global_ui, "offer_sel","勾玉,体力,金币,猫粮,狗粮","0@1@2@3@4",30,"0,0,0","280,100,720,60")
-	UI:CheckBoxGroup(global_ui, "buff_stop_idle","庭院或探索界面停留过久后自动关闭所有buff","0",30,"0,0,0","20,160,700,60")
-	UI:ComboBox(global_ui, "buff_stop_idle_time", "15秒,30秒,45秒,1分钟,2分钟,5分钟","3",23,"750,160,230,50")
-	UI:CheckBoxGroup(global_ui, "buff_stop_useup","体力用尽后自动关闭所有buff[暂时无效]","0",30,"0,0,0","20,220,700,60")
-	UI:CheckBoxGroup(global_ui, "HUD","可视化点击手势与运行辅助描述","0",30,"0,0,0","20,280,980,60")
-	UI:CheckBoxGroup(global_ui, "skill","自动关闭技能特写[建议手动关闭]","0",30,"0,0,0","20,340,980,60")
+	UI:Line(global_ui, "line_common", "100,100,100", 2, 960, "20,160,960,2")
+	UI:CheckBoxGroup(global_ui, "HUD","可视化点击手势与运行辅助描述","0",30,"0,0,0","20,170,980,60")
+	UI:CheckBoxGroup(global_ui, "skill","自动关闭技能特写[建议手动关闭并取消该选项]","0",30,"0,0,0","20,230,980,60")
+	UI:CheckBoxGroup(global_ui, "buff_stop_useup","体力用尽后自动关闭所有buff并退出脚本","0",30,"0,0,0","20,290,700,60")
+	UI:CheckBoxGroup(global_ui, "buff_stop_idle","庭院或探索界面停留过久后自动关闭所有buff","0",30,"0,0,0","20,350,700,60")
+	UI:ComboBox(global_ui, "buff_stop_idle_time", "15秒,30秒,45秒,1分钟,2分钟,5分钟","3",23,"750,350,230,50")
 	UI:fit(global_ui)
 	
 	ret_global, res_global = UI:show(global_ui)
@@ -1344,22 +1345,16 @@ function normalcall_UI()
 	normalcall(tickets)
 end
 
-function superghost_UI()
-	-- 超鬼王
-	superghost_ui = UI:new("superghost.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-	UI:Label(superghost_ui, "center", "0,0,0", 30, "超鬼王", "30,20,960,55")
-	UI:fit(superghost_ui)
+function offerinquire_UI()
+	-- 悬赏查询
+	offerinquire_ui = UI:new("offerinquire.dat", width_UI, height_UI, "返回", "返回", "backGround.jpg")
+	UI:Label(offerinquire_ui, "center", "0,0,0", 30, "悬赏查询", "30,20,960,55")
+	UI:WebView(offerinquire_ui, "offerinquire", "http://m.news.4399.com/yyssy/xsrw", "20, 32, 920, 400")
+	UI:fit(offerinquire_ui)
 	
-	ret_superghost, res_superghost = UI:show(superghost_ui)
-	if (ret_superghost == 0) then
-		config_UI()
-		return
-	end
-	
-	local ret_global = global_UI()
-	if (ret_global == RET_ERR) then
-		return
-	end
+	ret_offerinquire, res_offerinquire = UI:show(offerinquire_ui)
+	config_UI()
+	return
 end
 
 function audition_UI()

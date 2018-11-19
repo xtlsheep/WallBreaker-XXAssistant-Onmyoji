@@ -157,13 +157,11 @@ function UI:Image(ui, src, rect)
 	UI:insert(ui, image)
 end
 
-function UI:WebView(ui, id, url, height, witdh, rect)
+function UI:WebView(ui, id, url, rect)
 	local web = {
-		["type"] = "Web",
+		["type"] = "WebView",
 		["id"] = id,
 		["url"] = url,
-		["height"] = height,
-		["width"] = witdh,
 		["rect"] = rect
 	}
 	UI:insert(ui, web)
@@ -173,7 +171,7 @@ function UI:Line(ui, id, color, height, width, rect)
 	local line = {
 		["type"] = "Line",
 		["id"] = id,
-		["color"] = color,
+		["color"] = color,		
 		["height"] = height,
 		["width"] = width,
 		["rect"] = rect
