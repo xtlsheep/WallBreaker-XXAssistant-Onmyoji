@@ -183,17 +183,33 @@ function full_exp_top()
 	local x, y, top_mid, top_right
 	top_mid = 0
 	top_right = 0
-	x, y = findColor({300, 200, 500, 400},
-		"0|0|0xffa219,-1|8|0xfecf0b,7|13|0xffeb03,5|-1|0xff9d1a",
-		95, 0, 0, 0)
-	if x > -1 then
-		top_mid = 1
-	end
-	x, y = findColor({600, 250, 800, 450},
-		"0|0|0xffa219,-1|8|0xfecf0b,7|13|0xffeb03,5|-1|0xff9d1a",
-		95, 0, 0, 0)
-	if x > -1 then
-		top_right = 1
+	
+	if ver == "iOS" then
+		x, y = findColor({300, 200, 500, 400},
+			"0|0|0xffa219,-1|8|0xfecf0b,7|13|0xffeb03,5|-1|0xff9d1a",
+			90, 0, 0, 0)
+		if x > -1 then
+			top_mid = 1
+		end
+		x, y = findColor({600, 250, 800, 450},
+			"0|0|0xffa219,-1|8|0xfecf0b,7|13|0xffeb03,5|-1|0xff9d1a",
+			90, 0, 0, 0)
+		if x > -1 then
+			top_right = 1
+		end
+	elseif ver == "android" then
+		x, y = findColor({300, 200, 500, 400},
+			"0|0|0xfe9e1a,3|0|0xfba01a,-3|11|0xeedd24,7|13|0xf7e611",
+			90, 0, 0, 0)
+		if x > -1 then
+			top_mid = 1
+		end
+		x, y = findColor({600, 250, 800, 450},
+			"0|0|0xfe9e1a,3|0|0xfba01a,-3|11|0xeedd24,7|13|0xf7e611",
+			90, 0, 0, 0)
+		if x > -1 then
+			top_right = 1
+		end
 	end
 	
 	return top_mid, top_right
@@ -302,7 +318,7 @@ function tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round
 end
 
 function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
-	local move_total = math.random(5, 6)
+	local move_total = math.random(4, 5)
 	local move_cnt = 0
 	local scene_quit = 0
 	local quit = 0
@@ -336,7 +352,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 			x, y = fight_ongoing()
 			if (x > -1) then
 				-- 狗粮普攻
-				if nor_attk == 1 then df_normal_attack(1, 1, 0) end
+				if nor_attk == 1 then df_normal_attack(1, 1, 0) break end
 				break
 			end
 			-- 战斗胜利
@@ -510,7 +526,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				HUD_show_or_hide(HUD,hud_info,"进入场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				random_touch(0, 840, 480, 30, 10) -- 探索
 				move_cnt = 0
-				move_total = math.random(5, 6)
+				move_total = math.random(4, 5)
 				scene_quit = 0
 				mSleep(2000)
 				break
@@ -544,7 +560,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 end
 
 function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
-	local move_total = math.random(5, 6)
+	local move_total = math.random(4, 5)
 	local move_cnt = 0
 	local scene_quit = 0
 	local quit = 0
@@ -763,13 +779,13 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 			end
 			-- 邀请第一个好友
 			if (captain_auto_invite ~= "禁用") then
-				x, y = captain_room_invite_first(invite_zone) 
-				if (x > -1) then 
+				x, y = captain_room_invite_first(invite_zone)
+				if (x > -1) then
 					scene_quit = 0
 					move_cnt = 0
-					move_total = math.random(5, 6)
-					mSleep(3000) 
-					break 
+					move_total = math.random(4, 5)
+					mSleep(3000)
+					break
 				end
 			end
 			-- 继续邀请
