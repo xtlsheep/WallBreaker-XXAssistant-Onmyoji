@@ -81,6 +81,18 @@ function UI:insert(ui, control)
 	table.insert(ui.views, control)
 end
 
+function UI:Page(ui, text)
+	local page = {
+		["type"] = "Page",
+		["text"] = text,
+		["views"] = {
+		}
+	}
+	
+	UI:insert(ui, page)
+	return page
+end
+
 function UI:Label(ui, align, color, size, text, rect)
 	local label = {
 		["type"] = "Label",
