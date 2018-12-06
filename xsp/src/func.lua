@@ -136,8 +136,8 @@ function handle_error(disconn_fin, real_8dashe, secret_vender)
 end
 
 function lower_right_blank_click()
-    random_touch(0, 1040, 350, 50, 50)
-    return
+	random_touch(0, 1040, 350, 50, 50)
+	return
 end
 
 function disable_skill_feature()
@@ -147,8 +147,8 @@ function disable_skill_feature()
 	if x > -1 then
 		random_touch(0, 51, 62, 20, 20)
 		random_sleep(750)
-		x_, y_ = findColor({790, 492, 792, 493},
-			"0|0|0x4b5ee9,214|-395|0xe8d4cf,221|39|0xe3af75",
+		x_, y_ = findColor({791, 491, 793, 493},
+			"0|0|0xffffff,-1|-14|0x4b5ee9,9|-1|0x3b4bb9,215|-395|0xe8d4cf",
 			95, 0, 0, 0)
 		if x_ > -1 then
 			random_touch(0, x_, y_, 5, 5)
@@ -230,7 +230,7 @@ function idle_at_tingyuan(idle_time_cnt)
 	local time_cnt = 0
 	local local_buff_stop_idle = 0
 	local x, y
-
+	
 	-- Idle buff stop
 	if buff_stop_idle == 1 then
 		time_cnt = idle_time_cnt + 1
@@ -248,7 +248,7 @@ function idle_at_tansuo(idle_time_cnt)
 	local time_cnt = 0
 	local local_buff_stop_idle = 0
 	local x, y
-
+	
 	-- Idle buff stop
 	if buff_stop_idle == 1 then
 		time_cnt = idle_time_cnt + 1
@@ -398,163 +398,163 @@ end
 
 -- Fight func
 function level_select(level, init, lock, spec)
-    local function find_fifth_level()
-        local x, y = findColor({340, 120, 360, 360},
-            "0|0|0x312e2a,-11|-9|0x403c37,-14|-3|0x37332f,-17|0|0x534e49,-1|-7|0x49443f,2|5|0x4c4842,-9|7|0x4f4b45",
-            80, 0, 1, 0)
-        if x > -1 then
-            random_touch(0, x, y, 50, 10)
-        end
-    end
-
-    local function find_sixth_level()
-        local x, y = findColor({340, 120, 360, 360},
-            "0|0|0x4a4540,-6|-9|0x2f2b27,-17|-7|0x383530,-17|8|0x3f3b36,-10|7|0x423e39,-6|7|0x413d38,-1|8|0x4b4741,-1|4|0x2c2824",
-            80, 0, 1, 0)
-        if x > -1 then
-            random_touch(0, x, y, 50, 10)
-        end
-    end
-
-    mSleep(1000)
-    if (init == ENABLE) then
-        HUD_show_or_hide(HUD,hud_info,"层数 - 初始化",20,"0xff000000","0xffffffff",0,100,0,300,32)
-        -- 选择层数
-        if (level == 1) then
-            random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
-            random_sleep(750)
-            random_touch(0, 360, 150, 50, 10) -- 第一排
-        elseif (level == 2) then
-            random_move(0, 360, 150, 360, 400, 50, 10)
-            random_sleep(750)
-            random_touch(0, 360, 215, 50, 10) -- 第二排
-        elseif (level == 3) then
-            random_move(0, 360, 150, 360, 400, 50, 10)
-            random_sleep(750)
-            random_touch(0, 360, 280, 50, 10) -- 第三排
-        elseif (level == 4) then
-            random_move(0, 360, 150, 360, 400, 50, 10)
-            random_sleep(750)
-            random_touch(0, 360, 350, 50, 10) -- 第四排
-        elseif (level == 5) then
-            random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
-            random_sleep(750)
-            random_move(0, 360, 300, 360, 150, 50, 10) -- 向上拉
-            random_sleep(750)
-            find_fifth_level()
-        elseif (level == 6) then
-            random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
-            random_sleep(750)
-            random_move(0, 360, 300, 360, 150, 50, 10) -- 向上拉
-            random_sleep(750)
-            find_sixth_level()
-        elseif (level == 7) then
-            random_move(0, 360, 350, 360, 100, 50, 10) -- 向上拉
-            random_sleep(750)
-            random_touch(0, 360, 150, 50, 10)
-        elseif (level == 8) then
-            random_move(0, 360, 350, 360, 100, 50, 10)
-            random_sleep(750)
-            random_touch(0, 360, 215, 50, 10)
-        elseif (level == 9) then
-            random_move(0, 360, 350, 360, 100, 50, 10)
-            random_sleep(750)
-            random_touch(0, 360, 280, 50, 10)
-        elseif (level == 10) then
-            random_move(0, 360, 350, 360, 100, 50, 10)
-            random_sleep(750)
-            random_touch(0, 360, 350, 50, 10)
-        end
-    end
-
-    -- 锁定
-    lock_or_unlock(lock, spec)
+	local function find_fifth_level()
+		local x, y = findColor({340, 120, 360, 360},
+			"0|0|0x312e2a,-11|-9|0x403c37,-14|-3|0x37332f,-17|0|0x534e49,-1|-7|0x49443f,2|5|0x4c4842,-9|7|0x4f4b45",
+			80, 0, 1, 0)
+		if x > -1 then
+			random_touch(0, x, y, 50, 10)
+		end
+	end
+	
+	local function find_sixth_level()
+		local x, y = findColor({340, 120, 360, 360},
+			"0|0|0x4a4540,-6|-9|0x2f2b27,-17|-7|0x383530,-17|8|0x3f3b36,-10|7|0x423e39,-6|7|0x413d38,-1|8|0x4b4741,-1|4|0x2c2824",
+			80, 0, 1, 0)
+		if x > -1 then
+			random_touch(0, x, y, 50, 10)
+		end
+	end
+	
+	mSleep(1000)
+	if (init == ENABLE) then
+		HUD_show_or_hide(HUD,hud_info,"层数 - 初始化",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		-- 选择层数
+		if (level == 1) then
+			random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
+			random_sleep(750)
+			random_touch(0, 360, 150, 50, 10) -- 第一排
+		elseif (level == 2) then
+			random_move(0, 360, 150, 360, 400, 50, 10)
+			random_sleep(750)
+			random_touch(0, 360, 215, 50, 10) -- 第二排
+		elseif (level == 3) then
+			random_move(0, 360, 150, 360, 400, 50, 10)
+			random_sleep(750)
+			random_touch(0, 360, 280, 50, 10) -- 第三排
+		elseif (level == 4) then
+			random_move(0, 360, 150, 360, 400, 50, 10)
+			random_sleep(750)
+			random_touch(0, 360, 350, 50, 10) -- 第四排
+		elseif (level == 5) then
+			random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
+			random_sleep(750)
+			random_move(0, 360, 300, 360, 150, 50, 10) -- 向上拉
+			random_sleep(750)
+			find_fifth_level()
+		elseif (level == 6) then
+			random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
+			random_sleep(750)
+			random_move(0, 360, 300, 360, 150, 50, 10) -- 向上拉
+			random_sleep(750)
+			find_sixth_level()
+		elseif (level == 7) then
+			random_move(0, 360, 350, 360, 100, 50, 10) -- 向上拉
+			random_sleep(750)
+			random_touch(0, 360, 150, 50, 10)
+		elseif (level == 8) then
+			random_move(0, 360, 350, 360, 100, 50, 10)
+			random_sleep(750)
+			random_touch(0, 360, 215, 50, 10)
+		elseif (level == 9) then
+			random_move(0, 360, 350, 360, 100, 50, 10)
+			random_sleep(750)
+			random_touch(0, 360, 280, 50, 10)
+		elseif (level == 10) then
+			random_move(0, 360, 350, 360, 100, 50, 10)
+			random_sleep(750)
+			random_touch(0, 360, 350, 50, 10)
+		end
+	end
+	
+	-- 锁定
+	lock_or_unlock(lock, spec)
 end
 
 function lock_or_unlock(lock, spec)
-    local x1, y1, x2, y2, x, y
-    if spec == "??" then
-        x1 = 638 y1 = 369 x2 = 640 y2 = 371
-    elseif spec == "??" then
-        x1 = 638 y1 = 371 x2 = 640 y2 = 373
-    elseif spec == "???" then
-        x1 = 639 y1 = 369 x2 = 641 y2 = 371
-    elseif spec == "??" then
-        x1 = 552 y1 = 378 x2 = 554 y2 = 380
-    elseif spec == "????" then
-        x1 = 917 y1 = 551 x2 = 919 y2 = 553
-    elseif spec == "??" then
-        x1 = 750 y1 = 570 x2 = 760 y2 = 580
-    end
-
-    if (spec == "??" or spec == "??" or spec == "???" or spec == "??") then
-        if (lock == ENABLE) then
-            x, y = findColor({x1, y1, x2, y2},
-                "0|0|0x735c41,11|1|0x2c2119,-11|0|0x2e231c,-1|5|0x291f19",
-                95, 0, 0, 0)
-            if x > -1 then
-                random_touch(0, x, y, 3, 3)
-            end
-        else
-            x, y = findColor({x1, y1, x2, y2},
-                "0|0|0x725c40,0|-6|0x33271a,-13|1|0x9d93ce,13|1|0x9d95cd",
-                95, 0, 0, 0)
-            if x > -1 then
-                random_touch(0, x, y, 3, 3)
-            end
-        end
-        return x, y
-    end
-
-    if (spec == "??") then
-        if (lock == ENABLE) then
-            x, y = findColor({x1, y1, x2, y2},
-                "0|0|0x886d49,0|5|0x241911,-13|0|0x2f2318,15|0|0x2f2318",
-                95, 0, 0, 0)
-            if x > -1 then
-                random_touch(0, x, y, 3, 3)
-            end
-        else
-            x, y = findColor({x1, y1, x2, y2},
-                "0|0|0x886e4a,0|7|0x1d150f,-17|0|0xb9adf4,17|0|0xb8aef2",
-                95, 0, 0, 0)
-            if x > -1 then
-                random_touch(0, x, y, 3, 3)
-            end
-        end
-        return x, y
-    end
-    
-    if (spec == "????") then
-        if (lock == ENABLE) then
-            x, y = findColor({x1, y1, x2, y2},
-                "0|0|0x826745,0|5|0x1f150e,-13|0|0x2f2318,13|1|0x2f2318",
-                95, 0, 0, 0)
-            if x > -1 then
-                random_touch(0, x, y, 3, 3)
-            end
-        else
-            x, y = findColor({x1, y1, x2, y2},
-                "0|0|0x866c49,0|7|0x1c150e,-16|0|0xb8acf1,16|0|0xb3aaec",
-                95, 0, 0, 0)
-            if x > -1 then
-                random_touch(0, x, y, 3, 3)
-            end
-        end
-        return x, y
-    end
+	local x1, y1, x2, y2, x, y
+	if spec == "??" then
+		x1 = 638 y1 = 369 x2 = 640 y2 = 371
+	elseif spec == "??" then
+		x1 = 638 y1 = 371 x2 = 640 y2 = 373
+	elseif spec == "???" then
+		x1 = 639 y1 = 369 x2 = 641 y2 = 371
+	elseif spec == "??" then
+		x1 = 552 y1 = 378 x2 = 554 y2 = 380
+	elseif spec == "????" then
+		x1 = 917 y1 = 551 x2 = 919 y2 = 553
+	elseif spec == "??" then
+		x1 = 750 y1 = 570 x2 = 760 y2 = 580
+	end
+	
+	if (spec == "??" or spec == "??" or spec == "???" or spec == "??") then
+		if (lock == ENABLE) then
+			x, y = findColor({x1, y1, x2, y2},
+				"0|0|0x735c41,11|1|0x2c2119,-11|0|0x2e231c,-1|5|0x291f19",
+				95, 0, 0, 0)
+			if x > -1 then
+				random_touch(0, x, y, 3, 3)
+			end
+		else
+			x, y = findColor({x1, y1, x2, y2},
+				"0|0|0x725c40,0|-6|0x33271a,-13|1|0x9d93ce,13|1|0x9d95cd",
+				95, 0, 0, 0)
+			if x > -1 then
+				random_touch(0, x, y, 3, 3)
+			end
+		end
+		return x, y
+	end
+	
+	if (spec == "??") then
+		if (lock == ENABLE) then
+			x, y = findColor({x1, y1, x2, y2},
+				"0|0|0x886d49,0|5|0x241911,-13|0|0x2f2318,15|0|0x2f2318",
+				95, 0, 0, 0)
+			if x > -1 then
+				random_touch(0, x, y, 3, 3)
+			end
+		else
+			x, y = findColor({x1, y1, x2, y2},
+				"0|0|0x886e4a,0|7|0x1d150f,-17|0|0xb9adf4,17|0|0xb8aef2",
+				95, 0, 0, 0)
+			if x > -1 then
+				random_touch(0, x, y, 3, 3)
+			end
+		end
+		return x, y
+	end
+	
+	if (spec == "????") then
+		if (lock == ENABLE) then
+			x, y = findColor({x1, y1, x2, y2},
+				"0|0|0x826745,0|5|0x1f150e,-13|0|0x2f2318,13|1|0x2f2318",
+				95, 0, 0, 0)
+			if x > -1 then
+				random_touch(0, x, y, 3, 3)
+			end
+		else
+			x, y = findColor({x1, y1, x2, y2},
+				"0|0|0x866c49,0|7|0x1c150e,-16|0|0xb8acf1,16|0|0xb3aaec",
+				95, 0, 0, 0)
+			if x > -1 then
+				random_touch(0, x, y, 3, 3)
+			end
+		end
+		return x, y
+	end
 end
 
 function solo_start()
-    random_touch(0, 845, 440, 30, 10) -- 挑战
-    mSleep(1000)
-    local x, y = findColor({806, 441, 808, 443}, -- 挑战
-        "0|0|0xf3b25e,75|0|0xf3b25e",
-        95, 0, 0, 0)
-    if x > -1 then
-        return RET_ERR
-    end
-    return RET_OK
+	random_touch(0, 845, 440, 30, 10) -- 挑战
+	mSleep(1000)
+	local x, y = findColor({806, 441, 808, 443}, -- 挑战
+		"0|0|0xf3b25e,75|0|0xf3b25e",
+		95, 0, 0, 0)
+	if x > -1 then
+		return RET_ERR
+	end
+	return RET_OK
 end
 
 function group_start()
