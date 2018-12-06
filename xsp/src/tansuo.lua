@@ -300,25 +300,39 @@ function sushi_check()
 	return x, y
 end
 
+function get_scene_move(scene_move)
+	local move_total = 0
+	
+	if scene_move == "2-3" then
+		move_total = math.random(2, 3)
+	elseif scene_move == "3-4" then
+		move_total = math.random(3, 4)
+	elseif scene_move == "4-5" then
+		move_total = math.random(4, 5)
+	end
+	
+	return move_total
+end
+
 -- Main func
-function tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
-	print(string.format("模式: %s, 选择: 物品-%d,金币-%d,经验-%d,Boss-%d, 标记: %s, 难度: %s, 章节: %d, 限定: %s, 胜利: %s, 通关: %s, 邀请 %s",
-			mode, sel[1], sel[2], sel[3], sel[4], mark, hard, section, count_mode, win_round, sec_round, captain_auto_invite))
+function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
+	print(string.format("模式: %s, 选择: 物品-%d,金币-%d,经验-%d,Boss-%d, 标记: %s, 难度: %s, 移动: %s, 章节: %d, 限定: %s, 胜利: %s, 通关: %s, 邀请 %s",
+			mode, sel[1], sel[2], sel[3], sel[4], mark, scene_move, hard, section, count_mode, win_round, sec_round, captain_auto_invite))
 	print(string.format("狗粮普攻 %d, 自动更换 %d, 初始翻页 %d, 狗粮类型 %s, 素材类型(红蛋 %d, 白蛋 %d, 蓝蛋 %d, 黑蛋 %d)",
 			nor_attk, auto_change, page_jump, df_type, egg_color[1], egg_color[2], egg_color[3], egg_color[4]))
 	print_global_vars()
 	
 	if mode == "单人" then
-		tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
+		tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
 	elseif mode == "队长" then
-		tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
+		tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
 	elseif mode == "队员" then
 		tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg_color)
 	end
 end
 
-function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
-	local move_total = math.random(4, 5)
+function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
+	local move_total = get_scene_move(scene_move)
 	local move_cnt = 0
 	local scene_quit = 0
 	local quit = 0
@@ -489,7 +503,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 					-- Move
 					move_cnt = move_cnt + 1
 					HUD_show_or_hide(HUD,hud_info,string.format("场景移动[%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
-					random_move(0 ,950, 400, 200, 400, 50, 50) -- 场景移动
+					random_move(0 ,900, 400, 200, 400, 50, 50) -- 场景移动
 					if move_cnt >= move_total then
 						scene_quit = 1
 						break
@@ -526,7 +540,7 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 				HUD_show_or_hide(HUD,hud_info,"进入场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				random_touch(0, 840, 480, 30, 10) -- 探索
 				move_cnt = 0
-				move_total = math.random(4, 5)
+				move_total = get_scene_move(scene_move)
 				scene_quit = 0
 				mSleep(2000)
 				break
@@ -559,8 +573,8 @@ function tansuo_solo(sel, mark, hard, section, count_mode, win_round, sec_round,
 	return
 end
 
-function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
-	local move_total = math.random(4, 5)
+function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
+	local move_total = get_scene_move(scene_move)
 	local move_cnt = 0
 	local scene_quit = 0
 	local quit = 0
@@ -783,7 +797,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 				if (x > -1) then
 					scene_quit = 0
 					move_cnt = 0
-					move_total = math.random(4, 5)
+					move_total = get_scene_move(scene_move)
 					mSleep(3000)
 					break
 				end
@@ -797,7 +811,7 @@ function tansuo_captain(sel, mark, hard, section, count_mode, win_round, sec_rou
 					random_touch(0, x, y, 20, 5)
 					scene_quit = 0
 					move_cnt = 0
-					move_total = math.random(5, 6)
+					move_total = get_scene_move(scene_move)
 					mSleep(5000)
 				end
 				break

@@ -537,28 +537,30 @@ function tansuo_UI()
 	UI:RadioGroup(tansuo_ui, "mark", "随机小怪  ,中间大怪  ,无","2",30,"0,0,0","420,300,580,60")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "难度选择 - ", "20,360,300,60")
 	UI:RadioGroup(tansuo_ui, "hard", "普通                ,困难[队长强制]","1",30,"0,0,0","420,360,580,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "目标章节[暂时无效] - ", "20,420,500,60")
-	UI:ComboBox(tansuo_ui, "section", "第一章,第二章,第三章,第四章,第五章,第六章,第七章,第八章,第九章,第十章,第十一章,第十二章,第十三章,第十四章,第十五章,第十六章,第十七章,第十八章,第十九章,第二十章,第二十一章,第二十二章,第二十三章,第二十四章,第二十五章,第二十六章","25",23,"600,420,380,50")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "限定方式 - ", "20,480,500,60")
-	UI:ComboBox(tansuo_ui, "count_mode", "战斗胜利次数,章节通关次数[强制Boss]","0",23,"600,480,380,50")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗胜利次数 - ", "20,540,500,60")
-	UI:ComboBox(tansuo_ui, "win_round", "3次,10次,20次,30次[组队寮任务],50次,100次,无限次","6",23,"600,540,380,50")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "章节通关次数 - ", "20,600,500,60")
-	UI:ComboBox(tansuo_ui, "sec_round", "1次,2次,3次,5次,10次,50次,无限次","2",23,"600,600,380,50")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "队长自动邀请 - ", "20,660,500,60")
-	UI:ComboBox(tansuo_ui, "captain_auto_invite", "不使用自动邀请,第一位阴阳寮寮友,第一位本区好友,第一位跨区好友","0",23,"600,660,380,50")
-	UI:Line(tansuo_ui, "line_common", "100,100,100", 2, 960, "20,720,960,2")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮设置[狗粮队长位置为阴阳师左前方] - ", "20,730,900,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "强制普攻 - ", "20,790,300,60")
-	UI:RadioGroup(tansuo_ui, "nor_attk", "开启            ,关闭","0",30,"0,0,0","600,790,400,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动更换 - ", "20,850,300,60")
-	UI:RadioGroup(tansuo_ui, "auto_change", "开启            ,关闭","1",30,"0,0,0","600,850,400,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "初始翻页 - ", "20,910,300,60")
-	UI:ComboBox(tansuo_ui, "page_jump", "第一页,第二页,第三页,第四页,第五页,第六页,第七页,第八页,第九页,第十页","0",23,"600,910,380,50")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮类型 - ", "20,970,300,60")
-	UI:RadioGroup(tansuo_ui, "df_type", "N卡             ,素材","0",30,"0,0,0","600,970,400,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "素材类型[暂时无效] - ", "20,1030,300,60")
-	UI:CheckBoxGroup(tansuo_ui, "egg_color","红蛋,白蛋,蓝蛋,黑蛋","1@2",30,"0,0,0","470,1030,580,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "场景移动 - ", "20,420,300,60")
+	UI:RadioGroup(tansuo_ui, "scene_move", "2 - 3次  ,3 - 4次  ,4 - 5次","2",30,"0,0,0","420,420,580,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "目标章节[暂时无效] - ", "20,480,500,60")
+	UI:ComboBox(tansuo_ui, "section", "第一章,第二章,第三章,第四章,第五章,第六章,第七章,第八章,第九章,第十章,第十一章,第十二章,第十三章,第十四章,第十五章,第十六章,第十七章,第十八章,第十九章,第二十章,第二十一章,第二十二章,第二十三章,第二十四章,第二十五章,第二十六章","25",23,"600,480,380,50")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "限定方式 - ", "20,540,500,60")
+	UI:ComboBox(tansuo_ui, "count_mode", "战斗胜利次数,章节通关次数[强制Boss]","0",23,"600,540,380,50")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗胜利次数 - ", "20,600,500,60")
+	UI:ComboBox(tansuo_ui, "win_round", "3次,10次,20次,30次[组队寮任务],50次,100次,无限次","6",23,"600,600,380,50")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "章节通关次数 - ", "20,660,500,60")
+	UI:ComboBox(tansuo_ui, "sec_round", "1次,2次,3次,5次,10次,50次,无限次","2",23,"600,660,380,50")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "队长自动邀请 - ", "20,720,500,60")
+	UI:ComboBox(tansuo_ui, "captain_auto_invite", "不使用自动邀请,第一位阴阳寮寮友,第一位本区好友,第一位跨区好友","0",23,"600,720,380,50")
+	UI:Line(tansuo_ui, "line_common", "100,100,100", 2, 960, "20,780,960,2")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮设置[狗粮队长位置为阴阳师左前方] - ", "20,790,900,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "强制普攻 - ", "20,850,300,60")
+	UI:RadioGroup(tansuo_ui, "nor_attk", "开启            ,关闭","0",30,"0,0,0","600,850,400,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动更换 - ", "20,910,300,60")
+	UI:RadioGroup(tansuo_ui, "auto_change", "开启            ,关闭","1",30,"0,0,0","600,910,400,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "初始翻页 - ", "20,970,300,60")
+	UI:ComboBox(tansuo_ui, "page_jump", "第一页,第二页,第三页,第四页,第五页,第六页,第七页,第八页,第九页,第十页","0",23,"600,970,380,50")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮类型 - ", "20,1030,300,60")
+	UI:RadioGroup(tansuo_ui, "df_type", "N卡             ,素材","0",30,"0,0,0","600,1030,400,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "素材类型[暂时无效] - ", "20,1090,300,60")
+	UI:CheckBoxGroup(tansuo_ui, "egg_color","红蛋,白蛋,蓝蛋,黑蛋","1@2",30,"0,0,0","470,1090,580,60")
 	UI:fit(tansuo_ui)
 	
 	ret_tansuo, res_tansuo = UI:show(tansuo_ui)
@@ -567,7 +569,7 @@ function tansuo_UI()
 		return
 	end
 	
-	local mode, mark, hard, section, count_mode, win_round, sec_round
+	local mode, mark, hard, secne_move, section, count_mode, win_round, sec_round
 	if res_tansuo.mode == "0" then
 		mode = "单人"
 	elseif res_tansuo.mode == "1" then
@@ -609,6 +611,14 @@ function tansuo_UI()
 	
 	if mode == "队长" then
 		hard = "困难"
+	end
+	
+	if res_tansuo.scene_move == "0" then
+		scene_move = "2-3"
+	elseif res_tansuo.scene_move == "1" then
+		scene_move = "3-4"
+	elseif res_tansuo.scene_move == "2" then
+		scene_move = "4-5"
 	end
 	
 	section = tonumber(res_tansuo.section) + 1
@@ -709,7 +719,7 @@ function tansuo_UI()
 		return
 	end
 	
-	tansuo(mode, sel, mark, hard, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
+	tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
 end
 
 function jjtp_UI()
@@ -1182,7 +1192,7 @@ function yqfy_UI()
 	UI:Label(yqfy_ui, "left", "0,0,0", 30, "妖气选择 - ", "20,100,300,60")
 	UI:ComboBox(yqfy_ui, "sel", "跳跳哥哥,椒图,骨女,饿鬼,二口女,海坊主,鬼使黑,小松丸,日和坊","8",23,"650,100,330,50")
 	UI:Label(yqfy_ui, "left", "0,0,0", 30, "战斗次数 - ", "20,160,300,60")
-	UI:ComboBox(yqfy_ui, "round", "3次,5次,10次,20次,30次[不推荐...],50次[强烈不推荐...]","2",23,"650,160,330,50")
+	UI:ComboBox(yqfy_ui, "round", "3次,5次,10次,20次,30次,50次,无限次","2",23,"650,160,330,50")
 	UI:Label(yqfy_ui, "left", "0,0,0", 30, "战斗标记 - ", "20,220,300,60")
 	UI:RadioGroup(yqfy_ui, "mark", "随机小怪,中间大怪,无","2",30,"0,0,0","450,220,550,60")
 	UI:fit(yqfy_ui)
@@ -1206,6 +1216,8 @@ function yqfy_UI()
 		round = 30
 	elseif res_yqfy.round == "5" then
 		round = 50
+	elseif res_yqfy.round == "6" then
+		round = 99999
 	end
 	
 	if res_yqfy.sel == "0" then
@@ -1396,13 +1408,18 @@ end
 
 function offerinquire_UI()
 	-- 悬赏查询
-	offerinquire_ui = UI:new("offerinquire.dat", width_UI, height_UI, "返回", "返回", "backGround.jpg")
+	offerinquire_ui = UI:new("offerinquire.dat", width_UI, height_UI, "退出", "返回", "backGround.jpg")
 	UI:Label(offerinquire_ui, "center", "0,0,0", 30, "悬赏查询", "20,20,960,55")
 	UI:WebView(offerinquire_ui, "offerinquire", "http://m.news.4399.com/yyssy/xsrw", "20, 32, 920, 400")
 	UI:fit(offerinquire_ui)
 	
 	ret_offerinquire, res_offerinquire = UI:show(offerinquire_ui)
-	config_UI()
+	if (ret_offerinquire == 0) then
+		config_UI()
+		return
+	else
+		lua_exit()
+	end
 	return
 end
 
