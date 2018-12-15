@@ -22,10 +22,14 @@ function lct_8dashe()
 	return x, y
 end
 
-function yuhun_mark(position)
+function yuhun_mark(position, round)
 	mSleep(500)
 	random_sleep(500)
 	local cnt = math.random(2, 3)
+	
+	if round == 3 then
+		cnt = math.random(3, 5)
+	end
 	
 	for i = 1, cnt do
 		random_sleep(150)
@@ -92,11 +96,11 @@ function yuhun_solo(mark, level, round, lock)
 	while (1) do
 		while (1) do
 			-- 一回目
-			x, y = round_one() if (x > -1) then yuhun_mark(mark[1]) break end
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1],1) break end
 			-- 二回目
-			x, y = round_two() if (x > -1) then yuhun_mark(mark[2]) break end
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2],2) break end
 			-- 三回目
-			x, y = round_three() if (x > -1) then yuhun_mark(mark[3]) break end
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3],3) break end
 			mSleep(500)
 			-- 悬赏封印
 			x, y = receive_offer() if (x > -1) then break end
@@ -178,11 +182,11 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 	while (1) do
 		while (1) do
 			-- 一回目
-			x, y = round_one() if (x > -1) then yuhun_mark(mark[1]) break end
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1) break end
 			-- 二回目
-			x, y = round_two() if (x > -1) then yuhun_mark(mark[2]) break end
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2) break end
 			-- 三回目
-			x, y = round_three() if (x > -1) then yuhun_mark(mark[3]) break end
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
 			-- 悬赏封印
 			x, y = receive_offer() if (x > -1) then break end
@@ -310,11 +314,11 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 	while (1) do
 		while (1) do
 			-- 一回目
-			x, y = round_one() if (x > -1) then yuhun_mark(mark[1]) break end
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1) break end
 			-- 二回目
-			x, y = round_two() if (x > -1) then yuhun_mark(mark[2]) break end
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2) break end
 			-- 三回目
-			x, y = round_three() if (x > -1) then yuhun_mark(mark[3]) break end
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
 			-- 悬赏封印
 			x, y = receive_offer() if (x > -1) then break end
@@ -446,11 +450,11 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 	while (1) do
 		while (1) do
 			-- 一回目
-			x, y = round_one() if (x > -1) then yuhun_mark(mark[1]) break end
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1) break end
 			-- 二回目
-			x, y = round_two() if (x > -1) then yuhun_mark(mark[2]) break end
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2) break end
 			-- 三回目
-			x, y = round_three() if (x > -1) then yuhun_mark(mark[3]) break end
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
 			-- 悬赏封印
 			x, y = receive_offer() if (x > -1) then break end
@@ -534,11 +538,11 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 	while (1) do
 		while (1) do
 			-- 一回目
-			x, y = round_one() if (x > -1) then yuhun_mark(mark[1]) break end
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1) break end
 			-- 二回目
-			x, y = round_two() if (x > -1) then yuhun_mark(mark[2]) break end
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2) break end
 			-- 三回目
-			x, y = round_three() if (x > -1) then yuhun_mark(mark[3]) break end
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
 			-- 悬赏封印
 			x, y = receive_offer() if (x > -1) then break end
