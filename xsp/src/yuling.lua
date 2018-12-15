@@ -44,7 +44,6 @@ function yuling(sel, level, round, lock)
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then
 				win_cnt.global = win_cnt.global + 1
-				rd = rd - 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.yuling = win_cnt.yuling + 1
 				if win_cnt.yuling >= round then
