@@ -71,6 +71,11 @@ function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, f
 			member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate))
 	print_global_vars()
 	
+	if sg_en == 1 then
+		member_auto_group = 0
+		captain_auto_group = 0
+	end
+	
 	if (mode == "单人") then
 		yuhun_solo(mark, level, round, lock)
 	elseif (mode == "组队" and role == "队员" and group == "野队") then
@@ -106,6 +111,8 @@ function yuhun_solo(mark, level, round, lock)
 			x, y = receive_offer() if (x > -1) then break end
 			-- 真八岐大蛇
 			x, y = find_real8dashe() if (x > -1) then break end
+			-- 超鬼王
+			superghost()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -192,6 +199,8 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			x, y = receive_offer() if (x > -1) then break end
 			-- 真八岐大蛇
 			x, y = find_real8dashe() if (x > -1) then break end
+			-- 超鬼王
+			superghost()
 			-- 拒绝邀请
 			if (wait_invite == 0) then x, y = member_team_refuse_invite() if (x > -1) then break end end
 			-- 探索
@@ -324,6 +333,8 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = receive_offer() if (x > -1) then break end
 			-- 真八岐大蛇
 			x, y = find_real8dashe() if (x > -1) then break end
+			-- 超鬼王
+			superghost()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备

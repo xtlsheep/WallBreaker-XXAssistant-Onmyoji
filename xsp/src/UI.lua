@@ -9,6 +9,7 @@ require "tansuo"
 require "autostory"
 require "yqfy"
 require "hundredghost"
+require "superghost"
 
 -- UI init
 local width_UI = 1000
@@ -175,8 +176,8 @@ function global_UI()
 	global_basic_page = UI:Page(global_ui, "全局设置")
 	UI:CheckBoxGroup(global_basic_page, "offer_en","悬赏封印 - ","0",30,"0,0,0","20,20,300,60")
 	UI:CheckBoxGroup(global_basic_page, "offer_sel","勾玉,体力,金币,猫粮,狗粮","0@1@2@3@4",30,"0,0,0","280,20,720,60")
-	UI:CheckBoxGroup(global_basic_page, "auto_jjtp_en","启用智能突破[暂时无效]","0",30,"0,0,0","20,80,960,60")
-	UI:CheckBoxGroup(global_basic_page, "sg_en","启用超鬼王[仅限超鬼王期间]","0",30,"0,0,0","20,140,960,60")
+	UI:CheckBoxGroup(global_basic_page, "auto_jjtp_en","智能突破[暂时无效]","0",30,"0,0,0","20,80,960,60")
+	UI:CheckBoxGroup(global_basic_page, "sg_en","超鬼王[简易版 - 详细配置页面暂时无效]","0",30,"0,0,0","20,140,960,60")
 	UI:Line(global_basic_page, "line_common", "100,100,100", 2, 960, "20,200,960,2")
 	UI:CheckBoxGroup(global_basic_page, "HUD","可视化点击手势与运行辅助描述","0",30,"0,0,0","20,210,980,60")
 	UI:CheckBoxGroup(global_basic_page, "skill","自动关闭技能特写[建议手动关闭并取消该选项]","0",30,"0,0,0","20,270,980,60")
@@ -229,7 +230,7 @@ function global_UI()
 	UI:ComboBox(global_super_ghost_page, "sg_action_1", "集结,等待,喝茶","1",23,"600,440,380,50")
 	UI:Line(global_super_ghost_page, "line_common", "100,100,100", 2, 960, "20,500,960,2")
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "Tips - ", "20,510,300,60")
-	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "适用于御魂/觉醒/探索/业原火 的 单人/野队模式, 自动禁用自动组队", "20,570,960,60")
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "适用于御魂/觉醒/探索 的 单人/野队模式, 自动禁用自动组队", "20,570,960,60")
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "超鬼王界面开启时会先清理当前超鬼王", "20,630,960,60")
 	UI:fit(global_ui)
 	ret_global, res_global = UI:show(global_ui)
@@ -300,7 +301,37 @@ function global_UI()
 		buff_stop_useup = 0
 	end
 	
+	-- Enable战斗结算
 	settlement_enable = 1
+	
+	-- 超鬼王
+	if res_global.sg_en == "0" then
+		sg_en = 1
+	else
+		sg_en = 0
+	end
+
+	sg_force = tonumber(res_global.sg_force) + 1
+	
+	local sg_mark_ = {}
+	for w in string.gmatch(res_global.sg_mark,"([^'@']+)") do
+		table.insert(sg_mark_,w)
+	end
+	for i = 1, table.getn(sg_mark_), 1 do
+		if (sg_mark_[i] == "0") then
+			sg_mark[1] = 1 -- Boss
+		elseif (sg_mark_[i] == "1") then
+			sg_mark[2] = 1 -- 草人
+		end
+	end
+	
+	if res_global.sg_action_6 == "0" then sg_action[6] = "集结" elseif res_global.sg_action_6 == "1" then sg_action[6] = "等待" elseif res_global.sg_action_6 == "2" then sg_action[6] = "喝茶" end
+	if res_global.sg_action_5 == "0" then sg_action[5] = "集结" elseif res_global.sg_action_5 == "1" then sg_action[5] = "等待" elseif res_global.sg_action_5 == "2" then sg_action[5] = "喝茶" end
+	if res_global.sg_action_4 == "0" then sg_action[4] = "集结" elseif res_global.sg_action_4 == "1" then sg_action[4] = "等待" elseif res_global.sg_action_4 == "2" then sg_action[4] = "喝茶" end
+	if res_global.sg_action_3 == "0" then sg_action[3] = "集结" elseif res_global.sg_action_3 == "1" then sg_action[3] = "等待" elseif res_global.sg_action_3 == "2" then sg_action[3] = "喝茶" end
+	if res_global.sg_action_2 == "0" then sg_action[2] = "集结" elseif res_global.sg_action_2 == "1" then sg_action[2] = "等待" elseif res_global.sg_action_2 == "2" then sg_action[2] = "喝茶" end
+	if res_global.sg_action_1 == "0" then sg_action[1] = "集结" elseif res_global.sg_action_1 == "1" then sg_action[1] = "等待" elseif res_global.sg_action_1 == "2" then sg_action[1] = "喝茶" end
+	
 	return RET_OK
 end
 
@@ -1482,34 +1513,4 @@ function LBSGhostDriving_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
-end
-
-function superghost_UI()
-	-- 超鬼王
---	if res_global.sg_en == "0" then
---		sg_en = 1
---	else
---		sg_en = 0
---	end
-	
---	sg_force = tonumber(res_global.sg_force) + 1
-	
---	local sg_mark_ = {}
---	for w in string.gmatch(res_global.sg_mark,"([^'@']+)") do
---		table.insert(sg_mark_,w)
---	end
---	for i = 1, table.getn(sg_mark_), 1 do
---		if (sg_mark_[i] == "0") then
---			sg_mark[1] = 1 -- Boss
---		elseif (sg_mark_[i] == "1") then
---			sg_mark[2] = 1 -- 草人
---		end
---	end
-	
---	if res_global.sg_tired_6 == "0" then sg_tired[6] = "集结" elseif res_global.sg_tired_6 == "1" then sg_tired[6] = "等待" elseif res_global.sg_tired_6 == "2" then sg_tired[6] = "喝茶" end
---	if res_global.sg_tired_5 == "0" then sg_tired[5] = "集结" elseif res_global.sg_tired_5 == "1" then sg_tired[5] = "等待" elseif res_global.sg_tired_5 == "2" then sg_tired[5] = "喝茶" end
---	if res_global.sg_tired_4 == "0" then sg_tired[4] = "集结" elseif res_global.sg_tired_4 == "1" then sg_tired[4] = "等待" elseif res_global.sg_tired_4 == "2" then sg_tired[4] = "喝茶" end
---	if res_global.sg_tired_3 == "0" then sg_tired[3] = "集结" elseif res_global.sg_tired_3 == "1" then sg_tired[3] = "等待" elseif res_global.sg_tired_3 == "2" then sg_tired[3] = "喝茶" end
---	if res_global.sg_tired_2 == "0" then sg_tired[2] = "集结" elseif res_global.sg_tired_2 == "1" then sg_tired[2] = "等待" elseif res_global.sg_tired_2 == "2" then sg_tired[2] = "喝茶" end
---	if res_global.sg_tired_1 == "0" then sg_tired[1] = "集结" elseif res_global.sg_tired_1 == "1" then sg_tired[1] = "等待" elseif res_global.sg_tired_1 == "2" then sg_tired[1] = "喝茶" end
 end

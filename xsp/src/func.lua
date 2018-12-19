@@ -33,10 +33,13 @@ function show_win_fail(win_cnt, fail_cnt)
 end
 
 function print_global_vars()
-	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d)",
-			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6]))
-	print(string.format("停留过长关闭buff %d(%d sec), 体力用尽关闭buff %d",
-			buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
+	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d; 停留过长关闭buff %d(%d sec), 体力用尽关闭buff %d)",
+			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6], buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
+
+	if sg_en == 1 then
+		print(string.format("超鬼王: %d 强力追击 %d 标记 Boss %d 草人 %d 6星 %s 5星 %s 4星 %s 3星 %s 2星 %s 1星 %s",
+				sg_en, sg_force, sg_mark[1], sg_mark[2], sg_action[6], sg_action[5], sg_action[4], sg_action[3], sg_action[2], sg_action[1]))
+	end
 end
 
 function receive_offer()
@@ -416,7 +419,6 @@ function level_select(level, init, lock, spec)
 		end
 	end
 	
-	mSleep(1000)
 	if (init == ENABLE) then
 		HUD_show_or_hide(HUD,hud_info,"层数 - 初始化",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		-- 选择层数
