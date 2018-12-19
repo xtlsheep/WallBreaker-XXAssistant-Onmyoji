@@ -476,21 +476,21 @@ end
 
 function lock_or_unlock(lock, spec)
 	local x1, y1, x2, y2, x, y
-	if spec == "??" then
+	if spec == "御魂" then
 		x1 = 638 y1 = 369 x2 = 640 y2 = 371
-	elseif spec == "??" then
+	elseif spec == "觉醒" then
 		x1 = 638 y1 = 371 x2 = 640 y2 = 373
-	elseif spec == "???" then
+	elseif spec == "业原火" then
 		x1 = 639 y1 = 369 x2 = 641 y2 = 371
-	elseif spec == "??" then
+	elseif spec == "御灵" then
 		x1 = 552 y1 = 378 x2 = 554 y2 = 380
-	elseif spec == "????" then
+	elseif spec == "结界突破" then
 		x1 = 917 y1 = 551 x2 = 919 y2 = 553
-	elseif spec == "??" then
+	elseif spec == "探索" then
 		x1 = 750 y1 = 570 x2 = 760 y2 = 580
 	end
 	
-	if (spec == "??" or spec == "??" or spec == "???" or spec == "??") then
+	if (spec == "御魂" or spec == "觉醒" or spec == "业原火" or spec == "探索") then
 		if (lock == ENABLE) then
 			x, y = findColor({x1, y1, x2, y2},
 				"0|0|0x735c41,11|1|0x2c2119,-11|0|0x2e231c,-1|5|0x291f19",
@@ -507,9 +507,7 @@ function lock_or_unlock(lock, spec)
 			end
 		end
 		return x, y
-	end
-	
-	if (spec == "??") then
+	elseif (spec == "御灵") then
 		if (lock == ENABLE) then
 			x, y = findColor({x1, y1, x2, y2},
 				"0|0|0x886d49,0|5|0x241911,-13|0|0x2f2318,15|0|0x2f2318",
@@ -526,9 +524,7 @@ function lock_or_unlock(lock, spec)
 			end
 		end
 		return x, y
-	end
-	
-	if (spec == "????") then
+	elseif (spec == "结界突破") then
 		if (lock == ENABLE) then
 			x, y = findColor({x1, y1, x2, y2},
 				"0|0|0x826745,0|5|0x1f150e,-13|0|0x2f2318,13|1|0x2f2318",
