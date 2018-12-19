@@ -4,7 +4,7 @@ require "func"
 -- 超鬼王Global
 sg_en = 0
 sg_force = 0
-sg_mark = {0, 0}
+sg_mark_sel = {0, 0}
 sg_action = {0, 0, 0, 0, 0, 0}
 
 -- Util func
@@ -38,14 +38,14 @@ function lct_sg_group()
 	return x, y
 end
 
-function sg_mark_func(last_mark)
+function sg_mark(last_mark)
 	-- 标记Boss&草人
 	local cnt = math.random(1, 2)
 	local x, y, x_, y_
-	if sg_mark[1] == 0 and sg_mark[2] == 0 then
+	if sg_mark_sel[1] == 0 and sg_mark_sel[2] == 0 then
 		return ""
 	end
-	if sg_mark[1] == 1 and sg_mark[2] == 0 then
+	if sg_mark_sel[1] == 1 and sg_mark_sel[2] == 0 then
 		if last_mark ~= "Boss" then
 			for i = 1, cnt do
 				random_sleep(250)
@@ -53,7 +53,7 @@ function sg_mark_func(last_mark)
 			end
 		end
 		return "Boss"
-	elseif sg_mark[1] == 0 and sg_mark[2] == 1 then
+	elseif sg_mark_sel[1] == 0 and sg_mark_Sel[2] == 1 then
 		x, y = findColor({600, 190, 605, 220}, -- 丑女血条
 			"0|0|0xaf0d0a,2|0|0xb10e0b,4|0|0xb30e0b,-569|-168|0xd6c4a1,-582|-176|0x211b0f",
 			80, 0, 0, 0)
@@ -69,7 +69,7 @@ function sg_mark_func(last_mark)
 			end
 		end
 		return "草人"
-	elseif sg_mark[1] == 1 and sg_mark[2] == 1 then
+	elseif sg_mark_sel[1] == 1 and sg_mark_sel[2] == 1 then
 		x_, y_ = findColor({610, 140, 660, 170}, -- 箭头
 			"0|0|0xd41635,-7|0|0xc71e43,-22|-23|0xef45aa,15|-23|0xf65db9",
 			80, 0, 0, 0)
@@ -275,7 +275,7 @@ function superghost()
 			-- 悬赏封印
 			x, y = receive_offer() if (x > -1) then break end
 			-- 战斗进行
-			x, y = fight_ongoing() if (x > -1) then last_mark = sg_mark_func(last_mark) mSleep(3000) break end
+			x, y = fight_ongoing() if (x > -1) then last_mark = sg_mark(last_mark) mSleep(3000) break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗失败

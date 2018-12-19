@@ -319,9 +319,9 @@ function global_UI()
 	end
 	for i = 1, table.getn(sg_mark_), 1 do
 		if (sg_mark_[i] == "0") then
-			sg_mark[1] = 1 -- Boss
+			sg_mark_sel[1] = 1 -- Boss
 		elseif (sg_mark_[i] == "1") then
-			sg_mark[2] = 1 -- 草人
+			sg_mark_sel[2] = 1 -- 草人
 		end
 	end
 	
