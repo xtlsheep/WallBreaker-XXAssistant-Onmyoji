@@ -108,17 +108,17 @@ function receive_offer()
 	return x_, y_
 end
 
-function handle_error(disconn_fin, real_8dashe, secret_vender)
+function handle_error(real_8dashe, secret_vender)
 	local x, y
-	if (disconn_fin == ENABLE) then
-		x, y = findColor({567, 376, 570, 379},
-			"0|0|0xf1b15d,-180|-164|0xbba48a,172|-162|0xc3ac93,-5|50|0xb59f85",
-			95, 0, 0, 0)
-		if x > -1 then
-			HUD_show_or_hide(HUD,hud_info,"断线期间结束战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			random_touch(0, x, y, 20, 10)
-		end
+	
+	x, y = findColor({567, 376, 570, 379},
+		"0|0|0xf1b15d,-180|-164|0xbba48a,172|-162|0xc3ac93,-5|50|0xb59f85",
+		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"断线期间结束战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		random_touch(0, x, y, 20, 10)
 	end
+	
 	if (real_8dashe == ENABLE) then
 		x, y = findColor({804, 182, 806, 184}, -- 大蛇图案
 			"0|0|0x14fac5,-82|71|0x14fac5,-86|-69|0x14fac5,0|-16|0xffffff",
@@ -127,6 +127,7 @@ function handle_error(disconn_fin, real_8dashe, secret_vender)
 			random_touch(0, 973, 110, 5, 5) -- x
 		end
 	end
+	
 	if (secret_vender == ENABLE) then
 		x, y = findColor({989, 348, 991, 350}, -- 神秘商人
 			"0|0|0xfdf6f5,-14|-23|0x6b4b4e,-20|92|0xe17871,52|79|0xfdfbfb",

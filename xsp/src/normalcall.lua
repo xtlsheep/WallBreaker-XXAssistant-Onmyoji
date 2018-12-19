@@ -39,7 +39,6 @@ function normalcall(tickets)
 	print_global_vars()
 	
 	local cnt = 0
-	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
 	local x, y, x_, y_

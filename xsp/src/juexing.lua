@@ -85,7 +85,6 @@ function juexing_solo(element, mark, level, round, lock)
 	local init = 1
 	local tingyuan_time_cnt = 0
 	local quit = 0
-	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
 	local x, y
@@ -146,7 +145,7 @@ function juexing_solo(element, mark, level, round, lock)
 				break
 			end
 			-- Handle error
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
 			x, y = out_of_sushi()
 			break
@@ -165,7 +164,6 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 	local tansuo_time_cnt = 0
 	local quit = 0
 	local group_quit = 0
-	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
 	local x, y, x_, y_
@@ -277,7 +275,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Handle error
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
 			x, y = out_of_sushi()
 			break
@@ -292,7 +290,6 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 	local tansuo_time_cnt = 0
 	local quit = 0
 	local group_quit = 0
-	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
 	local x, y
@@ -407,7 +404,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Handle error
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
 			x, y = out_of_sushi()
 			break
@@ -421,7 +418,6 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 	local auto_grouped = -1
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
-	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
 	local x, y
@@ -476,7 +472,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Handle error
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
 			x, y = out_of_sushi()
 			break
@@ -492,7 +488,6 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 	local tingyuan_time_cnt = 0
 	local quit = 0
 	local group_quit = 0
-	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
 	local x, y
@@ -623,7 +618,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Handle error
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
 			x, y = out_of_sushi()
 			break

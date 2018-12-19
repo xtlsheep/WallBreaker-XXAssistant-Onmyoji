@@ -703,7 +703,6 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 	local finish = 0
 	local wait = 0
 	local action_solo = action
-	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
 	local x, y
@@ -860,7 +859,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			-- 退出防守记录
 			x, y = solo_quit_defense_record() if (x > -1) then break end
 			-- Handle error
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
 	end
@@ -875,7 +874,6 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 	local finish = 0
 	local wait = 0
 	local action_pub = action
-	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
 	local x, y
@@ -1048,7 +1046,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- Handle error
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
 	end

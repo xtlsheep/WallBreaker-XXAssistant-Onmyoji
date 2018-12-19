@@ -93,7 +93,6 @@ function yuhun_solo(mark, level, round, lock)
 	local init = 1
 	local tingyuan_time_cnt = 0
 	local quit = 0
-	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
 	local x, y
@@ -163,7 +162,7 @@ function yuhun_solo(mark, level, round, lock)
 			-- 发现宝藏
 			x, y = lct_petfind() if (x > -1) then break end
 			-- Handle error
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
 			x, y = out_of_sushi()
 			break
@@ -181,7 +180,6 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 	local tansuo_time_cnt = 0
 	local quit = 0
 	local group_quit = 0
-	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
 	local x, y, x_, y_
@@ -300,7 +298,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Handle error
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
 			x, y = out_of_sushi()
 			break
@@ -315,7 +313,6 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 	local tansuo_time_cnt = 0
 	local quit = 0
 	local group_quit = 0
-	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
 	local x, y
@@ -439,7 +436,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Handle error
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
 			x, y = out_of_sushi()
 			break
@@ -453,7 +450,6 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 	local auto_grouped = -1
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
-	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
 	local x, y
@@ -516,7 +512,7 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Handle error
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
 			x, y = out_of_sushi()
 			break
@@ -533,7 +529,6 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 	local quit = 0
 	local group_quit = 0
 	local invite_zone = -1
-	local disconn_fin = 1
 	local real_8dashe = 1
 	local secret_vender = 1
 	local x, y
@@ -673,7 +668,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			-- 发现宝藏
 			x, y = lct_petfind() if (x > -1) then break end
 			-- Handle error
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
 			x, y = out_of_sushi()
 			break

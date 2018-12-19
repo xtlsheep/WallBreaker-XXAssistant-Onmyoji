@@ -23,7 +23,6 @@ function yuling(sel, level, round, lock)
 	
 	local quit = 0
 	local init = 1
-	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
 	local x, y
@@ -92,7 +91,7 @@ function yuling(sel, level, round, lock)
 				break
 			end
 			-- Handle error
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
 	end

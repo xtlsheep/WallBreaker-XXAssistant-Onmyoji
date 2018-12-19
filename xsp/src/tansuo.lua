@@ -344,7 +344,6 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 	local top_mid = 0
 	local top_right = 0
 	local tingyuan_time_cnt = 0
-	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
 	local x, y, x_, y_
@@ -564,7 +563,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then random_touch(0, 1024, 533, 30, 10) break end -- Temporarily enter last section
 			-- Handle error
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
 			x, y = out_of_sushi()
 			break
@@ -587,7 +586,6 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 	local bot_right = 0
 	local tingyuan_time_cnt = 0
 	local invite_zone = -1
-	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
 	local x, y, x_, y_
@@ -835,7 +833,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then random_touch(0, 1024, 533, 30, 10) break end -- Temporarily enter last section
 			-- Handle error
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
 			x, y = out_of_sushi()
 			break
@@ -851,7 +849,6 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 	local top_right = 0
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
-	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
 	local x, y, x_, y_
@@ -1006,6 +1003,8 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			x, y = lct_tingyuan() if x > -1 then tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 探索
 			x, y = lct_tansuo() if x > -1 then tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt) break end
+			-- Handle error
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
 			x, y = out_of_sushi()
 			break

@@ -26,7 +26,6 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 	local end_chi = 0
 	local last_sel = 0
 	local ran_wait = 0
-	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
 	local x, y
@@ -143,7 +142,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			end
 			-- Handle error
 			x, y = lct_8dashe() if x > -1 then  random_touch(0, 928, 108, 5, 5) break end -- 八岐大蛇
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
 	end

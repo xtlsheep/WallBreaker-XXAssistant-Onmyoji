@@ -54,7 +54,6 @@ function yqfy(round, sel, mark)
 	
 	local quit = 0
 	local ran_wait = 0
-	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
 	local x, y
@@ -185,7 +184,7 @@ function yqfy(round, sel, mark)
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- Error Handle
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
 	end

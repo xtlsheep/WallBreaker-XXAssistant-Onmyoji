@@ -249,7 +249,6 @@ function superghost()
 	local time_cnt = 0
 	local sg_window = 0
 	local sg_page = 0
-	local disconn_fin = 1
 	local real_8dashe = 0
 	local secret_vender = 0
 	
@@ -304,7 +303,7 @@ function superghost()
 			x, y = lct_sg_page()
 			if x > -1 then
 				random_sleep(1500)
-				ret = check_sg_start()
+				ret = find_sg_start()
 				if ret == RET_OK then
 					random_touch(0, 1030, 540, 20, 20) -- 退治
 				else
@@ -314,7 +313,7 @@ function superghost()
 				break
 			end
 			-- Handle error
-			x, y = handle_error(disconn_fin, real_8dashe, secret_vender) if (x > -1) then break end
+			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
 	end
