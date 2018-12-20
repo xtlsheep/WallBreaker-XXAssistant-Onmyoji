@@ -344,8 +344,6 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 	local top_mid = 0
 	local top_right = 0
 	local tingyuan_time_cnt = 0
-	local real_8dashe = 0
-	local secret_vender = 0
 	local x, y, x_, y_
 	
 	while (1) do
@@ -357,8 +355,8 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			-- 二回目
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
+            -- 循环通用
+            global_loop_func()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行
@@ -424,7 +422,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump -1 do
-							receive_offer()
+                            global_loop_func()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -447,7 +445,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump - 1 do
-							receive_offer()
+                            global_loop_func()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -562,10 +560,8 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			x, y = sushi_check() if x > -1 then lower_right_blank_click() break end
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then random_touch(0, 1024, 533, 30, 10) break end -- Temporarily enter last section
-			-- Handle error
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
-			x, y = out_of_sushi()
+			x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end
@@ -585,9 +581,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 	local bot_left = 0
 	local bot_right = 0
 	local tingyuan_time_cnt = 0
-	local invite_zone = -1
-	local real_8dashe = 0
-	local secret_vender = 0
+	local invite_zone = 0
 	local x, y, x_, y_
 	
 	if captain_auto_invite == "寮友" then
@@ -607,8 +601,8 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			-- 二回目
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
+            -- 循环通用
+            global_loop_func()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行
@@ -674,7 +668,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				if x > -1 then
 					if bot_left == 1 or bot_right == 1 then
 						for i = 1, page_jump -1 do
-							receive_offer()
+                            global_loop_func()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -697,7 +691,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				if x > -1 then
 					if bot_left == 1 or bot_right == 1 then
 						for i = 1, page_jump - 1 do
-							receive_offer()
+                            global_loop_func()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -832,10 +826,8 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			x, y = sushi_check() if x > -1 then lower_right_blank_click() break end
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then random_touch(0, 1024, 533, 30, 10) break end -- Temporarily enter last section
-			-- Handle error
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
-			x, y = out_of_sushi()
+			x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end
@@ -849,8 +841,6 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 	local top_right = 0
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
-	local real_8dashe = 0
-	local secret_vender = 0
 	local x, y, x_, y_
 	
 	while (1) do
@@ -862,8 +852,8 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			-- 二回目
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
+            -- 循环通用
+            global_loop_func()
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then
@@ -928,7 +918,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump -1 do
-							receive_offer()
+                            global_loop_func()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -951,7 +941,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump - 1 do
-							receive_offer()
+                            global_loop_func()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -1003,10 +993,8 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			x, y = lct_tingyuan() if x > -1 then tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 探索
 			x, y = lct_tansuo() if x > -1 then tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt) break end
-			-- Handle error
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			-- 体力不足
-			x, y = out_of_sushi()
+			x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end

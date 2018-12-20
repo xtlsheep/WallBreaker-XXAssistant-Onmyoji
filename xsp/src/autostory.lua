@@ -79,16 +79,6 @@ function questionmark_click()
 	return x, y
 end
 
-function close_channel()
-	local x, y = findColor({578, 316, 580, 319},
-		"0|0|0xc0ae8e,11|-32|0x513e2a,10|36|0x523e2a,-575|-294|0x76553e",
-		95, 0, 0, 0)
-	if x > -1 then
-		random_touch(0, x, y, 5, 5)
-	end
-	return x, y
-end
-
 -- Main func
 function autostory()
 	print_global_vars()

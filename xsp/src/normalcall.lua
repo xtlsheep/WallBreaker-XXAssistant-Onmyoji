@@ -39,15 +39,13 @@ function normalcall(tickets)
 	print_global_vars()
 	
 	local cnt = 0
-	local real_8dashe = 0
-	local secret_vender = 0
 	local x, y, x_, y_
 	
 	while (1) do
 		while (1) do
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
+            -- 循环通用
+            global_loop_func()
 			-- 完成召唤
 			if cnt >= tickets then
 				x, y = finish_call()

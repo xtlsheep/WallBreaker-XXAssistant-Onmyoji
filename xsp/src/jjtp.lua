@@ -672,8 +672,8 @@ function jjtp_solo_to_pub(lock)
 	while (1) do
 		while (1) do
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
+            -- 循环通用
+            global_loop_func()
 			-- 个人突破
 			x, y = solo_lct_jjtp()
 			if (x > -1) then
@@ -703,8 +703,6 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 	local finish = 0
 	local wait = 0
 	local action_solo = action
-	local real_8dashe = 0
-	local secret_vender = 0
 	local x, y
 	
 	while (1) do
@@ -718,9 +716,10 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				print(string.format("      %d - %d - %d", map[7], map[8], map[9]))
 			end
 			print(string.format("winess %d, invalid %d, pos %d, found_target %d, action %s", winess, invalid, pos, found_target, action_solo))
+
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
+            -- 循环通用
+            global_loop_func()
 			-- 阴阳寮突破
 			x, y = pub_lct_jjtp() if x > -1 then quit_jjtp() break end
 			-- 个人突破
@@ -858,8 +857,6 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			x, y = lct_tansuo() if (x > -1) then random_touch(0, 280, 590, 20, 20) break end -- 结界突破
 			-- 退出防守记录
 			x, y = solo_quit_defense_record() if (x > -1) then break end
-			-- Handle error
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
 	end
@@ -874,8 +871,6 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 	local finish = 0
 	local wait = 0
 	local action_pub = action
-	local real_8dashe = 0
-	local secret_vender = 0
 	local x, y
 	
 	while (1) do
@@ -892,8 +887,8 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			print(string.format("pos = %d", pos))
 			
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
+            -- 循环通用
+            global_loop_func()
 			-- 未开寮突
 			x, y = pub_unstart()
 			if x > -1 then
@@ -1045,8 +1040,6 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			x, y = lct_tansuo() if (x > -1) then random_touch(0, 280, 590, 20, 20) break end -- 结界突破
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
-			-- Handle error
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
 	end

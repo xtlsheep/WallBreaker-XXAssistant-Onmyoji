@@ -197,7 +197,7 @@ function sg_keep_fight_failed()
 	-- 保持战斗失败的超鬼王识别
 	local x, y
 	while (1) do
-		receive_offer()
+        global_loop_func()
 		x, y = findColor({413, 104, 415, 106},
 			"0|0|0x514a5b,251|6|0xddd9cd,-135|-6|0xcdc59c,30|34|0x5b5265",
 			95, 0, 0, 0)
@@ -222,7 +222,7 @@ function sg_tired_detect()
 end
 
 function sg_group_invite()
-	-- 邀请1 ~ 4位好友[Consider more options]
+	-- 邀请1 ~ 4位好友
 	random_touch(0, 450, 210, 20, 10) -- 1st
 	random_sleep(250)
 	random_touch(0, 700, 210, 20, 10) -- 2nd
@@ -236,6 +236,10 @@ end
 
 -- Main func
 function superghost()
+    if sg_en == 0 then
+        return RET_ERR
+    end
+
 	local x = -1
 	local y = -1
 	local x_f = -1
@@ -249,12 +253,6 @@ function superghost()
 	local time_cnt = 0
 	local sg_window = 0
 	local sg_page = 0
-	local real_8dashe = 0
-	local secret_vender = 0
-	
-	if sg_en == 0 then
-		return RET_ERR
-	end
 	
 	-- 超鬼王识别
 	x, y = lct_sg_window() if x > -1 then sg_window = 1 end
@@ -268,12 +266,12 @@ function superghost()
 	while (1) do
 		while (1) do
 			mSleep(500)
+            -- 循环通用
+            global_loop_func()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 弹窗
 			x, y = lct_sg_window() if x > -1 then break end
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
 			-- 战斗进行
 			x, y = fight_ongoing() if (x > -1) then last_mark = sg_mark(last_mark) mSleep(3000) break end
 			-- 战斗准备
@@ -312,8 +310,6 @@ function superghost()
 				end
 				break
 			end
-			-- Handle error
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
 	end

@@ -85,8 +85,6 @@ function juexing_solo(element, mark, level, round, lock)
 	local init = 1
 	local tingyuan_time_cnt = 0
 	local quit = 0
-	local real_8dashe = 1
-	local secret_vender = 1
 	local x, y
 	
 	while (1) do
@@ -94,10 +92,8 @@ function juexing_solo(element, mark, level, round, lock)
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
-			-- 超鬼王
-			superghost()
+			-- 循环通用
+            global_loop_func()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -144,10 +140,12 @@ function juexing_solo(element, mark, level, round, lock)
 				keep_fight_failed("单人")
 				break
 			end
-			-- Handle error
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
+            -- 真八岐大蛇
+            x, y = real_baqidashe() if x > -1 then break end
+            -- 神秘商人
+            x, y = mysterious_vender() if x > -1 then break end
 			-- 体力不足
-			x, y = out_of_sushi()
+			x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end
@@ -164,8 +162,6 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 	local tansuo_time_cnt = 0
 	local quit = 0
 	local group_quit = 0
-	local real_8dashe = 1
-	local secret_vender = 1
 	local x, y, x_, y_
 	
 	while (1) do
@@ -173,10 +169,8 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
-			-- 超鬼王
-			superghost()
+            -- 循环通用
+            global_loop_func()
 			-- 拒绝邀请
 			if (wait_invite == 0) then x, y = member_team_refuse_invite() if (x > -1) then break end end
 			-- 探索
@@ -274,10 +268,12 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			x, y = captain_team_lost_invite() if (x > -1) then random_touch(0, 462, 383, 20, 10) break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
-			-- Handle error
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
-			-- 体力不足
-			x, y = out_of_sushi()
+            -- 真八岐大蛇
+            x, y = real_baqidashe() if x > -1 then break end
+            -- 神秘商人
+            x, y = mysterious_vender() if x > -1 then break end
+            -- 体力不足
+            x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end
@@ -290,8 +286,6 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 	local tansuo_time_cnt = 0
 	local quit = 0
 	local group_quit = 0
-	local real_8dashe = 1
-	local secret_vender = 1
 	local x, y
 	
 	while (1) do
@@ -299,10 +293,8 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
-			-- 超鬼王
-			superghost()
+            -- 循环通用
+            global_loop_func()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -403,10 +395,12 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
-			-- Handle error
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
-			-- 体力不足
-			x, y = out_of_sushi()
+            -- 真八岐大蛇
+            x, y = real_baqidashe() if x > -1 then break end
+            -- 神秘商人
+            x, y = mysterious_vender() if x > -1 then break end
+            -- 体力不足
+            x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end
@@ -418,8 +412,6 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 	local auto_grouped = -1
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
-	local real_8dashe = 1
-	local secret_vender = 1
 	local x, y
 	
 	while (1) do
@@ -427,8 +419,8 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
+            -- 循环通用
+            global_loop_func()
 			-- 接受邀请
 			x, y, auto_grouped = member_team_accept_invite(member_auto_group) if (x > -1) then break end
 			-- 战斗准备
@@ -471,10 +463,12 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			x, y = lct_tansuo() if x > -1 then tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt) break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
-			-- Handle error
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
-			-- 体力不足
-			x, y = out_of_sushi()
+            -- 真八岐大蛇
+            x, y = real_baqidashe() if x > -1 then break end
+            -- 神秘商人
+            x, y = mysterious_vender() if x > -1 then break end
+            -- 体力不足
+            x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end
@@ -488,8 +482,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 	local tingyuan_time_cnt = 0
 	local quit = 0
 	local group_quit = 0
-	local real_8dashe = 1
-	local secret_vender = 1
+    local invite_zone = 0
 	local x, y
 	
 	if auto_invite_zone == "好友" then
@@ -505,8 +498,8 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
+            -- 循环通用
+            global_loop_func()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -617,10 +610,12 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
-			-- Handle error
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
-			-- 体力不足
-			x, y = out_of_sushi()
+            -- 真八岐大蛇
+            x, y = real_baqidashe() if x > -1 then break end
+            -- 神秘商人
+            x, y = mysterious_vender() if x > -1 then break end
+            -- 体力不足
+            x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end

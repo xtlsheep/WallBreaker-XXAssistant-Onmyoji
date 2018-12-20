@@ -43,16 +43,6 @@ function yuhun_mark(position, round)
 	end
 end
 
-function find_real8dashe()
-	local x, y = findColor({27, 229, 34, 234}, -- 关闭箭头
-		"0|0|0xcf893c,10|-11|0xcc883a,12|16|0xd49248,379|-16|0x847396",
-		95, 0, 0, 0)
-	if x > -1 then
-		random_touch(0, x, y, 5, 5)
-	end
-	return x, y
-end
-
 function lct_petfind()
 	local x, y = findColor({829, 207, 831, 209}, -- 右边银色 发 宝
 		"0|0|0x7c7371,3|33|0xaea09b,-230|-55|0xf4e4b1,-370|-29|0xdbc788",
@@ -93,8 +83,6 @@ function yuhun_solo(mark, level, round, lock)
 	local init = 1
 	local tingyuan_time_cnt = 0
 	local quit = 0
-	local real_8dashe = 1
-	local secret_vender = 1
 	local x, y
 	
 	while (1) do
@@ -106,12 +94,8 @@ function yuhun_solo(mark, level, round, lock)
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3],3) break end
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
-			-- 真八岐大蛇
-			x, y = find_real8dashe() if (x > -1) then break end
-			-- 超鬼王
-			superghost()
+            -- 循环通用
+            global_loop_func()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -161,10 +145,12 @@ function yuhun_solo(mark, level, round, lock)
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 发现宝藏
 			x, y = lct_petfind() if (x > -1) then break end
-			-- Handle error
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
-			-- 体力不足
-			x, y = out_of_sushi()
+            -- 真八岐大蛇
+            x, y = real_baqidashe() if x > -1 then break end
+            -- 神秘商人
+            x, y = mysterious_vender() if x > -1 then break end
+            -- 体力不足
+            x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end
@@ -180,8 +166,6 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 	local tansuo_time_cnt = 0
 	local quit = 0
 	local group_quit = 0
-	local real_8dashe = 1
-	local secret_vender = 1
 	local x, y, x_, y_
 	
 	while (1) do
@@ -193,12 +177,8 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
-			-- 真八岐大蛇
-			x, y = find_real8dashe() if (x > -1) then break end
-			-- 超鬼王
-			superghost()
+            -- 循环通用
+            global_loop_func()
 			-- 拒绝邀请
 			if (wait_invite == 0) then x, y = member_team_refuse_invite() if (x > -1) then break end end
 			-- 探索
@@ -297,10 +277,12 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			x, y = captain_team_lost_invite() if (x > -1) then random_touch(0, 462, 383, 20, 10) break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
-			-- Handle error
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
-			-- 体力不足
-			x, y = out_of_sushi()
+            -- 真八岐大蛇
+            x, y = real_baqidashe() if x > -1 then break end
+            -- 神秘商人
+            x, y = mysterious_vender() if x > -1 then break end
+            -- 体力不足
+            x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end
@@ -313,8 +295,6 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 	local tansuo_time_cnt = 0
 	local quit = 0
 	local group_quit = 0
-	local real_8dashe = 1
-	local secret_vender = 1
 	local x, y
 	
 	while (1) do
@@ -326,12 +306,8 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
-			-- 真八岐大蛇
-			x, y = find_real8dashe() if (x > -1) then break end
-			-- 超鬼王
-			superghost()
+            -- 循环通用
+            global_loop_func()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -435,10 +411,12 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = lct_petfind() if (x > -1) then break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
-			-- Handle error
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
-			-- 体力不足
-			x, y = out_of_sushi()
+            -- 真八岐大蛇
+            x, y = real_baqidashe() if x > -1 then break end
+            -- 神秘商人
+            x, y = mysterious_vender() if x > -1 then break end
+            -- 体力不足
+            x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end
@@ -450,8 +428,6 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 	local auto_grouped = -1
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
-	local real_8dashe = 1
-	local secret_vender = 1
 	local x, y
 	
 	while (1) do
@@ -463,10 +439,8 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
-			-- 真八岐大蛇
-			x, y = find_real8dashe() if (x > -1) then break end
+            -- 循环通用
+            global_loop_func()
 			-- 接受邀请
 			x, y, auto_grouped = member_team_accept_invite(member_auto_group) if (x > -1) then break end
 			-- 战斗准备
@@ -511,10 +485,12 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
-			-- Handle error
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
-			-- 体力不足
-			x, y = out_of_sushi()
+            -- 真八岐大蛇
+            x, y = real_baqidashe() if x > -1 then break end
+            -- 神秘商人
+            x, y = mysterious_vender() if x > -1 then break end
+            -- 体力不足
+            x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end
@@ -528,9 +504,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 	local tingyuan_time_cnt = 0
 	local quit = 0
 	local group_quit = 0
-	local invite_zone = -1
-	local real_8dashe = 1
-	local secret_vender = 1
+	local invite_zone = 0
 	local x, y
 	
 	if auto_invite_zone == "好友" then
@@ -550,10 +524,8 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
-			-- 真八岐大蛇
-			x, y = find_real8dashe() if (x > -1) then break end
+            -- 循环通用
+            global_loop_func()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -667,10 +639,12 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- 发现宝藏
 			x, y = lct_petfind() if (x > -1) then break end
-			-- Handle error
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
-			-- 体力不足
-			x, y = out_of_sushi()
+            -- 真八岐大蛇
+            x, y = real_baqidashe() if x > -1 then break end
+            -- 神秘商人
+            x, y = mysterious_vender() if x > -1 then break end
+            -- 体力不足
+            x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end

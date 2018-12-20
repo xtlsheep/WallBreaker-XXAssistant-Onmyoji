@@ -54,8 +54,6 @@ function yqfy(round, sel, mark)
 	
 	local quit = 0
 	local ran_wait = 0
-	local real_8dashe = 0
-	local secret_vender = 0
 	local x, y
 	
 	while (1) do
@@ -66,11 +64,11 @@ function yqfy(round, sel, mark)
 			x, y = round_two() if (x > -1) then yqfy_mark(mark) break end
 			-- 三回目
 			x, y = round_three() if (x > -1) then yqfy_mark(mark) break end
-			-- 拒绝邀请
-			x, y = member_team_refuse_invite() if (x > -1) then break end
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
+            -- 循环通用
+            global_loop_func()
+            -- 拒绝邀请
+            x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 庭院
 			x, y = lct_tingyuan()
 			if (x > -1) then
@@ -183,8 +181,6 @@ function yqfy(round, sel, mark)
 			x, y = yqfy_deny_quit() if x > -1 then break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
-			-- Error Handle
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
 	end

@@ -23,8 +23,6 @@ function yuling(sel, level, round, lock)
 	
 	local quit = 0
 	local init = 1
-	local real_8dashe = 0
-	local secret_vender = 0
 	local x, y
 	
 	while (1) do
@@ -32,8 +30,8 @@ function yuling(sel, level, round, lock)
 			-- 战斗开始
 			x, y = round_fight() if (x > -1) then break end
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if (x > -1) then break end
+            -- 循环通用
+            global_loop_func()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗胜利
@@ -90,8 +88,6 @@ function yuling(sel, level, round, lock)
 				keep_fight_failed("单人")
 				break
 			end
-			-- Handle error
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
 			break
 		end
 	end

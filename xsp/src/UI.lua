@@ -302,7 +302,7 @@ function global_UI()
 	end
 	
 	-- Enable战斗结算
-	settlement_enable = 1
+	settlement_en = 1
 	
 	-- 超鬼王
 	if res_global.sg_en == "0" then
@@ -336,7 +336,7 @@ function global_UI()
 end
 
 function settlement_UI()
-	if settlement_enable == 0 then
+	if settlement_en == 0 then
 		return
 	end
 
@@ -346,7 +346,6 @@ function settlement_UI()
 	local dura_min = (dura_time % (1000 * 60 * 60)) / (1000 * 60)
 	local dura_sec = (dura_time % (1000 * 60)) / 1000
 	stats_write()
-	-- print(string.format("运行时间 - %d小时, %d分钟, %d秒", dura_hour, dura_min, dura_sec))
 	
 	settlement_ui = UI:new("settlement.dat", width_UI, height_UI, "退出", "重新启动", "backGround.jpg")
 	UI:Label(settlement_ui, "center", "0,0,0", 30, "战斗结算", "20,20,960,55")

@@ -8,17 +8,13 @@ function hundredghost(round, num, invite)
 	print(string.format("次数 %d 豆子 %s 邀请 %d", round, num, invite))
 	print_global_vars()
 	
-	local real_8dashe = 0
-	local secret_vender = 0
 	local x, y
 	
 	while (1) do
 		while(1) do
 			mSleep(500)
-			-- 悬赏封印
-			x, y = receive_offer() if x > -1 then break end
-			-- Error Handle
-			x, y = handle_error(real_8dashe, secret_vender) if (x > -1) then break end
+            -- 循环通用
+            global_loop_func()
 			break
 		end
 	end
