@@ -422,7 +422,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump -1 do
-                            global_loop_func()
+                            receive_offer()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -445,7 +445,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump - 1 do
-                            global_loop_func()
+                            receive_offer()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -668,7 +668,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				if x > -1 then
 					if bot_left == 1 or bot_right == 1 then
 						for i = 1, page_jump -1 do
-                            global_loop_func()
+                            receive_offer()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -691,7 +691,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				if x > -1 then
 					if bot_left == 1 or bot_right == 1 then
 						for i = 1, page_jump - 1 do
-                            global_loop_func()
+                            receive_offer()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -918,7 +918,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump -1 do
-                            global_loop_func()
+                            receive_offer()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -941,7 +941,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump - 1 do
-                            global_loop_func()
+                            receive_offer()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end

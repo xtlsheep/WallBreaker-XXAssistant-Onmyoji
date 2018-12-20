@@ -10,16 +10,31 @@ sg_action = {0, 0, 0, 0, 0, 0}
 -- Util func
 function lct_sg_window()
 	-- 识别弹窗
-	local x, y, x_, y_
-	x, y = findColor({24, 200, 26, 450}, -- 弹窗箭头
-		"0|0|0xcf8d43,26|1|0x846e5c,273|-10|0xd3755c,354|-75|0x13100e,407|-30|0xe1dad1",
-		95, 0, 0, 0)
-	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,"发现超鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		random_touch(0, x + 200, y, 50, 20) -- 点击弹窗
+	local x, y
+	
+	if ver == "iOS" then
+		x, y = findColor({24, 200, 26, 450}, -- 弹窗箭头
+			"0|0|0xcf8d43,26|1|0x846e5c,273|-10|0xd3755c,354|-75|0x13100e,407|-30|0xe1dad1",
+			95, 0, 0, 0)
+		if x > -1 then
+			HUD_show_or_hide(HUD,hud_info,"发现超鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			random_touch(0, x + 200, y, 50, 20) -- 点击弹窗
+			return x, y
+		end
 		return x, y
 	end
-	return x, y
+	
+	if ver == "android" then
+		x, y = findColor({24, 200, 26, 450}, -- 弹窗箭头
+			"0|0|0xcd8b40,23|1|0xb4a593,352|-75|0x121210,403|-9|0xdfd7ce,268|-11|0xd57259",
+			95, 0, 0, 0)
+		if x > -1 then
+			HUD_show_or_hide(HUD,hud_info,"发现超鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			random_touch(0, x + 200, y, 50, 20) -- 点击弹窗
+			return x, y
+		end
+		return x, y
+	end
 end
 
 function lct_sg_page()
@@ -53,7 +68,7 @@ function sg_mark(last_mark)
 			end
 		end
 		return "Boss"
-	elseif sg_mark_sel[1] == 0 and sg_mark_Sel[2] == 1 then
+	elseif sg_mark_sel[1] == 0 and sg_mark_sel[2] == 1 then
 		x, y = findColor({600, 190, 605, 220}, -- 丑女血条
 			"0|0|0xaf0d0a,2|0|0xb10e0b,4|0|0xb30e0b,-569|-168|0xd6c4a1,-582|-176|0x211b0f",
 			80, 0, 0, 0)
@@ -197,7 +212,7 @@ function sg_keep_fight_failed()
 	-- 保持战斗失败的超鬼王识别
 	local x, y
 	while (1) do
-        global_loop_func()
+		global_loop_func()
 		x, y = findColor({413, 104, 415, 106},
 			"0|0|0x514a5b,251|6|0xddd9cd,-135|-6|0xcdc59c,30|34|0x5b5265",
 			95, 0, 0, 0)
@@ -236,10 +251,10 @@ end
 
 -- Main func
 function superghost()
-    if sg_en == 0 then
-        return RET_ERR
-    end
-
+	if sg_en == 0 then
+		return RET_ERR
+	end
+	
 	local x = -1
 	local y = -1
 	local x_f = -1
@@ -266,8 +281,10 @@ function superghost()
 	while (1) do
 		while (1) do
 			mSleep(500)
-            -- 循环通用
-            global_loop_func()
+			-- 悬赏封印
+			receive_offer()
+			-- 断线结束战斗
+			disconn_dur_fight()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 弹窗
