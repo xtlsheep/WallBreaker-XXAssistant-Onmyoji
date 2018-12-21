@@ -386,9 +386,9 @@ function lct_tansuo()
 end
 
 function lct_zudui()
-	local x, y = findColor({854, 100, 856, 102},
-		"0|0|0xea7d2b,205|12|0xe8d4cf,-797|19|0xecd982,202|87|0x8d7245",
-		90, 0, 0, 0)
+	local x, y = findColor({851, 100, 853, 103},
+		"0|0|0xe97c2c,-794|19|0xecd982,-774|91|0x8d7245,148|14|0xd6c4a1",
+		95, 0, 0, 0)
 	return x, y
 end
 
