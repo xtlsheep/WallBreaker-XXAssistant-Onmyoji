@@ -292,6 +292,26 @@ function sg_group_invite()
 	random_touch(0, 690, 510, 20, 10) -- 邀请
 end
 
+function sg_bonus_get()
+	local x, y = findColor({442, 147, 44553, 149},
+		"0|0|0xf3e6af,392|130|0xc1b2ad,-135|131|0xbfb1ac,0|320|0x530c1a",
+		95, 0, 0, 0)
+	if x > -1 then
+		lower_right_blank_click()
+	end
+	return x, y
+end
+
+function sg_bonus_exit()
+	local x, y = findColor({991, 111, 993, 113},
+		"0|0|0xe8d4cf,-877|459|0xf4d4a5,-890|446|0x281918,-756|6|0x790606",
+		95, 0, 0, 0)
+	if x > -1 then
+		random_touch(0, x, y, 5, 5)
+	end
+	return x, y
+end
+
 -- Main func
 function superghost()
 	if sg_en == 0 then
@@ -382,7 +402,7 @@ function superghost()
 				end
 				if (sg_curr == 0) then
 					random_touch(0, 60, 55, 10, 10) -- 左上退出
-					return	
+					return
 				end
 			end
 			-- 战斗准备
@@ -397,8 +417,12 @@ function superghost()
 			-- 胜利达摩
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
-			x, y = half_damo() if (x > -1) then keep_half_damo() break
-			end
+			x, y = half_damo() if (x > -1) then keep_half_damo() break end
+			-- 领取奖励
+			x, y = sg_bonus_get() if x > -1 then break end
+			-- 退出奖励
+			x, y = sg_bonus_exit() if x > -1 then break end
+			break
 		end
 	end
 	return RET_ERR
