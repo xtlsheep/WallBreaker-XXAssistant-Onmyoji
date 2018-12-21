@@ -5,7 +5,7 @@ require "func"
 sg_en = 0
 sg_force = 0
 sg_mark_sel = {0, 0}
-sg_action = {0, 0, 0, 0, 0, 0}
+sg_tired = {0, 0, 0, 0, 0, 0}
 
 -- Def
 -- 3个横排区域中心勾玉范围 x1,y1,x2,y2
@@ -365,7 +365,7 @@ function superghost()
 			-- 疲劳溢出
 			x, y = sg_tired_detect()
 			if x > -1 then
-				tired_op = sg_action[sg_curr] -- 获得当前星级的疲劳操作
+				tired_op = sg_tired[sg_curr] -- 获得当前星级的疲劳操作
 				if tired_op == "喝茶" then
 					HUD_show_or_hide(HUD,hud_info,"购买 茶",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_touch(0, x, y , 30, 10) -- 58勾

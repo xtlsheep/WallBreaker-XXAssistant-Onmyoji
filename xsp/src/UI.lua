@@ -216,18 +216,67 @@ function global_UI()
 	UI:CheckBoxGroup(global_super_ghost_page, "sg_mark", "Boss      ,草人","2",30,"0,0,0","600,20,400,60")
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "强力追击 - ", "20,80,300,60")
 	UI:ComboBox(global_super_ghost_page, "sg_force", ">= 1星,>= 2星,>= 3星,>= 4星,>= 5星,      6星,不开启","4",23,"600,80,380,50")
-	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "战斗疲劳[6星] - ", "20,140,300,60")
-	UI:ComboBox(global_super_ghost_page, "sg_action_6", "公开,等待,喝茶","2",23,"600,140,380,50")
-	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "战斗疲劳[5星] - ", "20,200,300,60")
-	UI:ComboBox(global_super_ghost_page, "sg_action_5", "公开,等待,喝茶","2",23,"600,200,380,50")
-	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "战斗疲劳[4星] - ", "20,260,300,60")
-	UI:ComboBox(global_super_ghost_page, "sg_action_4", "集结,等待,喝茶","0",23,"600,260,380,50")
-	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "战斗疲劳[3星] - ", "20,320,300,60")
-	UI:ComboBox(global_super_ghost_page, "sg_action_3", "集结,等待,喝茶","0",23,"600,320,380,50")
-	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "战斗疲劳[2星] - ", "20,380,300,60")
-	UI:ComboBox(global_super_ghost_page, "sg_action_2", "集结,等待,喝茶","1",23,"600,380,380,50")
-	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "战斗疲劳[1星] - ", "20,440,300,60")
-	UI:ComboBox(global_super_ghost_page, "sg_action_1", "集结,等待,喝茶","1",23,"600,440,380,50")
+	-- 6星
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "6星设置 - ", "20,140,140,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>75%", "160,140,160,60")
+	UI:ComboBox(global_super_ghost_page, "sg_75_6", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"320,140,100,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">50%", "400,145,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_50_6", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"500,140,100,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">25%", "580,145,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_25_6", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"680,140,100,50")
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "780,145,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_tired_6", "公开,等待,喝茶,响铃","2",23,"880,140,100,50")
+	-- 5星
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "5星设置 - ", "20,200,140,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>75%", "160,200,160,60")
+	UI:ComboBox(global_super_ghost_page, "sg_75_5", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"320,200,100,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">50%", "400,205,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_50_5", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"500,200,100,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">25%", "580,205,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_25_5", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"680,200,100,50")
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "780,205,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_tired_5", "公开,等待,喝茶,响铃","2",23,"880,200,100,50")
+	-- 4星
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "4星设置 - ", "20,260,140,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>75%", "160,260,160,60")
+	UI:ComboBox(global_super_ghost_page, "sg_75_4", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"320,260,100,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">50%", "400,265,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_50_4", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"500,260,100,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">25%", "580,265,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_25_4", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"680,260,100,50")
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "780,265,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_tired_4", "公开,等待,喝茶,响铃","0",23,"880,260,100,50")
+	-- 3星
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "3星设置 - ", "20,320,140,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>75%", "160,320,160,60")
+	UI:ComboBox(global_super_ghost_page, "sg_75_3", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"320,320,100,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">50%", "400,325,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_50_3", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"500,320,100,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">25%", "580,325,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_25_3", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"680,320,100,50")
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "780,325,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_tired_3", "公开,等待,喝茶,响铃","0",23,"880,320,100,50")
+	-- 2星
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "2星设置 - ", "20,380,140,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>75%", "160,380,160,60")
+	UI:ComboBox(global_super_ghost_page, "sg_75_2", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"320,380,100,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">50%", "400,385,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_50_2", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"500,380,100,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">25%", "580,385,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_25_2", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"680,380,100,50")
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "780,385,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_tired_2", "公开,等待,喝茶,响铃","1",23,"880,380,100,50")
+	-- 1星
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "1星设置 - ", "20,440,140,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>75%", "160,440,160,60")
+	UI:ComboBox(global_super_ghost_page, "sg_75_1", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"320,440,100,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">50%", "400,445,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_50_1", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"500,440,100,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">25%", "580,445,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_25_1", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃","0",23,"680,440,100,50")
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "780,445,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_tired_1", "公开,等待,喝茶,响铃","1",23,"880,440,100,50")
+	
 	UI:Line(global_super_ghost_page, "line_common", "100,100,100", 2, 960, "20,500,960,2")
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "Tips - ", "20,510,300,60")
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "适用于御魂/觉醒/探索的所有模式", "20,570,960,60")
@@ -326,12 +375,12 @@ function global_UI()
 		end
 	end
 	
-	if res_global.sg_action_6 == "0" then sg_action[6] = "集结" elseif res_global.sg_action_6 == "1" then sg_action[6] = "等待" elseif res_global.sg_action_6 == "2" then sg_action[6] = "喝茶" end
-	if res_global.sg_action_5 == "0" then sg_action[5] = "集结" elseif res_global.sg_action_5 == "1" then sg_action[5] = "等待" elseif res_global.sg_action_5 == "2" then sg_action[5] = "喝茶" end
-	if res_global.sg_action_4 == "0" then sg_action[4] = "集结" elseif res_global.sg_action_4 == "1" then sg_action[4] = "等待" elseif res_global.sg_action_4 == "2" then sg_action[4] = "喝茶" end
-	if res_global.sg_action_3 == "0" then sg_action[3] = "集结" elseif res_global.sg_action_3 == "1" then sg_action[3] = "等待" elseif res_global.sg_action_3 == "2" then sg_action[3] = "喝茶" end
-	if res_global.sg_action_2 == "0" then sg_action[2] = "集结" elseif res_global.sg_action_2 == "1" then sg_action[2] = "等待" elseif res_global.sg_action_2 == "2" then sg_action[2] = "喝茶" end
-	if res_global.sg_action_1 == "0" then sg_action[1] = "集结" elseif res_global.sg_action_1 == "1" then sg_action[1] = "等待" elseif res_global.sg_action_1 == "2" then sg_action[1] = "喝茶" end
+	if res_global.sg_tired_6 == "0" then sg_tired[6] = "集结" elseif res_global.sg_tired_6 == "1" then sg_tired[6] = "等待" elseif res_global.sg_tired_6 == "2" then sg_tired[6] = "喝茶" elseif res_global.sg_tired_6 == "3" then sg_tired[6] = "响铃" end
+	if res_global.sg_tired_5 == "0" then sg_tired[5] = "集结" elseif res_global.sg_tired_5 == "1" then sg_tired[5] = "等待" elseif res_global.sg_tired_5 == "2" then sg_tired[5] = "喝茶" elseif res_global.sg_tired_5 == "3" then sg_tired[5] = "响铃"end
+	if res_global.sg_tired_4 == "0" then sg_tired[4] = "集结" elseif res_global.sg_tired_4 == "1" then sg_tired[4] = "等待" elseif res_global.sg_tired_4 == "2" then sg_tired[4] = "喝茶" elseif res_global.sg_tired_4 == "3" then sg_tired[4] = "响铃"end
+	if res_global.sg_tired_3 == "0" then sg_tired[3] = "集结" elseif res_global.sg_tired_3 == "1" then sg_tired[3] = "等待" elseif res_global.sg_tired_3 == "2" then sg_tired[3] = "喝茶" elseif res_global.sg_tired_3 == "3" then sg_tired[3] = "响铃"end
+	if res_global.sg_tired_2 == "0" then sg_tired[2] = "集结" elseif res_global.sg_tired_2 == "1" then sg_tired[2] = "等待" elseif res_global.sg_tired_2 == "2" then sg_tired[2] = "喝茶" elseif res_global.sg_tired_2 == "3" then sg_tired[2] = "响铃"end
+	if res_global.sg_tired_1 == "0" then sg_tired[1] = "集结" elseif res_global.sg_tired_1 == "1" then sg_tired[1] = "等待" elseif res_global.sg_tired_1 == "2" then sg_tired[1] = "喝茶" elseif res_global.sg_tired_1 == "3" then sg_tired[1] = "响铃"end
 	
 	return RET_OK
 end

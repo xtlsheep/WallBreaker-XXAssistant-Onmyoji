@@ -38,7 +38,7 @@ function print_global_vars()
 	
 	if sg_en == 1 then
 		print(string.format("超鬼王: %d 强力追击 %d 标记 Boss %d 草人 %d 6星 %s 5星 %s 4星 %s 3星 %s 2星 %s 1星 %s",
-				sg_en, sg_force, sg_mark_sel[1], sg_mark_sel[2], sg_action[6], sg_action[5], sg_action[4], sg_action[3], sg_action[2], sg_action[1]))
+				sg_en, sg_force, sg_mark_sel[1], sg_mark_sel[2], sg_tired[6], sg_tired[5], sg_tired[4], sg_tired[3], sg_tired[2], sg_tired[1]))
 	end
 end
 
