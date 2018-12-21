@@ -35,7 +35,7 @@ end
 function print_global_vars()
 	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d; 停留过长关闭buff %d(%d sec), 体力用尽关闭buff %d)",
 			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6], buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
-
+	
 	if sg_en == 1 then
 		print(string.format("超鬼王: %d 强力追击 %d 标记 Boss %d 草人 %d 6星 %s 5星 %s 4星 %s 3星 %s 2星 %s 1星 %s",
 				sg_en, sg_force, sg_mark_sel[1], sg_mark_sel[2], sg_action[6], sg_action[5], sg_action[4], sg_action[3], sg_action[2], sg_action[1]))
@@ -108,100 +108,100 @@ function receive_offer()
 end
 
 function disconn_dur_fight()
-    local x, y = findColor({567, 376, 570, 379},
-        "0|0|0xf1b15d,-180|-164|0xbba48a,172|-162|0xc3ac93,-5|50|0xb59f85",
-        95, 0, 0, 0)
-    if x > -1 then
-        HUD_show_or_hide(HUD,hud_info,"断线期间结束战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
-        random_touch(0, x, y, 20, 10)
-    end
+	local x, y = findColor({567, 376, 570, 379},
+		"0|0|0xf1b15d,-180|-164|0xbba48a,172|-162|0xc3ac93,-5|50|0xb59f85",
+		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"断线期间结束战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		random_touch(0, x, y, 20, 10)
+	end
 end
 
 function global_loop_func()
-    -- 悬赏封印
-    receive_offer()
-    -- 断线结束战斗
-    disconn_dur_fight()
-    -- 超鬼王
-    superghost()
+	-- 悬赏封印
+	receive_offer()
+	-- 断线结束战斗
+	disconn_dur_fight()
+	-- 超鬼王
+	superghost()
 end
 
 function real_baqidashe()
-    local x, y = findColor({804, 182, 806, 184}, -- 大蛇图案
-            "0|0|0x14fac5,-82|71|0x14fac5,-86|-69|0x14fac5,0|-16|0xffffff",
-            95, 0, 0, 0)
-        if x > -1 then
-            random_touch(0, 973, 110, 5, 5) -- x
-        end
-    return x, y
+	local x, y = findColor({804, 182, 806, 184}, -- 大蛇图案
+		"0|0|0x14fac5,-82|71|0x14fac5,-86|-69|0x14fac5,0|-16|0xffffff",
+		95, 0, 0, 0)
+	if x > -1 then
+		random_touch(0, 973, 110, 5, 5) -- x
+	end
+	return x, y
 end
 
 function mysterious_vender()
-    local x, y = findColor({989, 348, 991, 350}, -- 神秘商人
-            "0|0|0xfdf6f5,-14|-23|0x6b4b4e,-20|92|0xe17871,52|79|0xfdfbfb",
-            95, 0, 0, 0)
-        if x > -1 then
-            random_touch(0, 40, 45, 5, 5) -- <
-        end
-    return x, y
+	local x, y = findColor({989, 348, 991, 350}, -- 神秘商人
+		"0|0|0xfdf6f5,-14|-23|0x6b4b4e,-20|92|0xe17871,52|79|0xfdfbfb",
+		95, 0, 0, 0)
+	if x > -1 then
+		random_touch(0, 40, 45, 5, 5) -- <
+	end
+	return x, y
 end
 
 function close_channel()
-    local x, y = findColor({570, 315, 580, 320},
-        "0|0|0xc0ae8e,11|-32|0x513e2a,10|36|0x523e2a,-575|-294|0x76553e",
-        95, 0, 0, 0)
-    if x > -1 then
-        random_touch(0, x, y, 5, 5)
-    end
-    return x, y
+	local x, y = findColor({570, 315, 580, 320},
+		"0|0|0xc0ae8e,11|-32|0x513e2a,10|36|0x523e2a,-575|-294|0x76553e",
+		95, 0, 0, 0)
+	if x > -1 then
+		random_touch(0, x, y, 5, 5)
+	end
+	return x, y
 end
 
 function out_of_sushi()
-    local x, y, x_, y_
-    x_, y_ = findColor({831, 171, 833, 173},
-        "0|0|0xe8d4cf,-277|246|0xed4f3c,-313|138|0xeb7d30,-326|170|0x9446e7",
-        95, 0, 0, 0)
-    if x_ > -1 then
-        random_touch(0, x_, y_, 5, 5)
-
-        while (1) do
-            while(1) do
-                mSleep(500)
-                -- 循环通用
-                global_loop_func()
-                -- 八岐大蛇
-                x, y = lct_8dashe() if x > -1 then random_touch(0, 930, 110, 5, 5) break end
-                -- 创建队伍
-                x, y = captain_room_create_window() if x > -1 then random_touch(0, 355, 525, 20, 10) break end
-                -- 组队
-                x, y = lct_zudui() if x > -1 then random_touch(0, 1060, 110, 5, 5) break end
-                -- 探索场景
-                x, y = lct_tansuo_scene() if x > -1 then random_touch(0, 45, 60, 5, 5) break end
-                -- 退出场景
-                x, y = scene_quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
-                -- 探索章节
-                x, y = lct_tansuo_portal() if x > -1 then random_touch(0, 930, 135, 5, 5) break end
-                -- 探索
-                x, y = lct_tansuo()
-                if x > -1 then
-                    random_touch(0, 390, 50, 5, 5)
-                    mSleep(1500)
-                    stop_buff()
-                    lua_exit()
-                end
-                -- 庭院
-                x, y = lct_tingyuan()
-                if x > -1 then
-                    random_touch(0, 380, 60, 5, 5)
-                    mSleep(1500)
-                    stop_buff()
-                    lua_exit()
-                end
-                break
-            end
-        end
-    end
-    return x_, y_
+	local x, y, x_, y_
+	x_, y_ = findColor({831, 171, 833, 173},
+		"0|0|0xe8d4cf,-277|246|0xed4f3c,-313|138|0xeb7d30,-326|170|0x9446e7",
+		95, 0, 0, 0)
+	if x_ > -1 then
+		random_touch(0, x_, y_, 5, 5)
+		
+		while (1) do
+			while(1) do
+				mSleep(500)
+				-- 循环通用
+				global_loop_func()
+				-- 八岐大蛇
+				x, y = lct_8dashe() if x > -1 then random_touch(0, 930, 110, 5, 5) break end
+				-- 创建队伍
+				x, y = captain_room_create_window() if x > -1 then random_touch(0, 355, 525, 20, 10) break end
+				-- 组队
+				x, y = lct_zudui() if x > -1 then random_touch(0, 1060, 110, 5, 5) break end
+				-- 探索场景
+				x, y = lct_tansuo_scene() if x > -1 then random_touch(0, 45, 60, 5, 5) break end
+				-- 退出场景
+				x, y = scene_quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
+				-- 探索章节
+				x, y = lct_tansuo_portal() if x > -1 then random_touch(0, 930, 135, 5, 5) break end
+				-- 探索
+				x, y = lct_tansuo()
+				if x > -1 then
+					random_touch(0, 390, 50, 5, 5)
+					mSleep(1500)
+					stop_buff()
+					lua_exit()
+				end
+				-- 庭院
+				x, y = lct_tingyuan()
+				if x > -1 then
+					random_touch(0, 380, 60, 5, 5)
+					mSleep(1500)
+					stop_buff()
+					lua_exit()
+				end
+				break
+			end
+		end
+	end
+	return x_, y_
 end
 
 function lower_right_blank_click()
@@ -379,6 +379,9 @@ function lct_tansuo()
 	local x, y = findColor({43, 50, 47, 54}, -- 探索返回
 		"0|0|0xe0ecf9,-14|0|0xe6effa,4|-15|0xf0f5fb,34|-1|0x11215c",
 		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	end
 	return x, y
 end
 
@@ -700,7 +703,7 @@ end
 function keep_half_damo()
 	local x, y
 	while (1) do
-        global_loop_func()
+		global_loop_func()
 		x, y = findColor({498, 529, 501, 532}, -- 达摩底部
 			"0|0|0x670a0b,20|22|0x320204,127|0|0x7e0e0e,159|7|0x6f290b",
 			95, 0, 0, 0)
@@ -739,7 +742,7 @@ function keep_fight_failed(mode)
 	local x, y
 	if (mode == "单人") then
 		while (1) do
-            global_loop_func()
+			global_loop_func()
 			x, y = findColor({410, 130, 415, 135}, -- 失败的鼓
 				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
 				95, 0, 0, 0)
@@ -752,7 +755,7 @@ function keep_fight_failed(mode)
 		end
 	elseif (mode == "组队") then
 		while (1) do
-            global_loop_func()
+			global_loop_func()
 			x, y = findColor({410, 80, 415, 85}, -- 失败的鼓
 				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
 				95, 0, 0, 0)
