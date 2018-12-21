@@ -94,6 +94,8 @@ function juexing_solo(element, mark, level, round, lock)
 			mSleep(500)
 			-- 循环通用
             global_loop_func()
+			-- 超鬼王
+			superghost()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -171,6 +173,8 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			mSleep(500)
             -- 循环通用
             global_loop_func()
+			-- 超鬼王
+			superghost()
 			-- 拒绝邀请
 			if (wait_invite == 0) then x, y = member_team_refuse_invite() if (x > -1) then break end end
 			-- 探索
@@ -295,6 +299,8 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			mSleep(500)
             -- 循环通用
             global_loop_func()
+			-- 超鬼王
+			superghost()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -421,6 +427,8 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			mSleep(500)
             -- 循环通用
             global_loop_func()
+			-- 超鬼王
+			superghost()
 			-- 接受邀请
 			x, y, auto_grouped = member_team_accept_invite(member_auto_group) if (x > -1) then break end
 			-- 战斗准备
@@ -500,6 +508,8 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			mSleep(500)
             -- 循环通用
             global_loop_func()
+			-- 超鬼王
+			superghost()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备

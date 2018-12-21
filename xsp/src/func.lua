@@ -122,8 +122,6 @@ function global_loop_func()
 	receive_offer()
 	-- 断线结束战斗
 	disconn_dur_fight()
-	-- 超鬼王
-	superghost()
 end
 
 function real_baqidashe()
@@ -712,7 +710,7 @@ function keep_half_damo()
 		elseif x == -1 then
 			return
 		end
-		random_sleep(150)
+		random_sleep(100)
 	end
 end
 
@@ -751,7 +749,7 @@ function keep_fight_failed(mode)
 			elseif x == -1 then
 				return
 			end
-			random_sleep(150)
+			random_sleep(100)
 		end
 	elseif (mode == "组队") then
 		while (1) do
@@ -764,7 +762,7 @@ function keep_fight_failed(mode)
 			elseif x == -1 then
 				return
 			end
-			random_sleep(150)
+			random_sleep(100)
 		end
 	end
 end
@@ -859,13 +857,13 @@ function member_room_user_profile()
 		"0|0|0x9d4939,352|-374|0xd2bda7,353|-40|0xcdb8a3,380|-213|0xf3b25e",
 		95, 0, 0, 0)
 	if x > -1 then
-		random_touch(0, 1100, 500, 20, 20)
+		random_touch(0, 360, 530, 20, 20)
 	end
 	x, y = findColor({144, 532, 146, 534},
 		"0|0|0x9d4939,545|-378|0xd2bca6,546|-39|0xcab39e,577|-213|0xf3b25e",
 		95, 0, 0, 0)
 	if x > -1 then
-		random_touch(0, 1100, 500, 20, 20)
+		random_touch(0, 360, 530, 20, 20)
 	end
 	return x, y
 end

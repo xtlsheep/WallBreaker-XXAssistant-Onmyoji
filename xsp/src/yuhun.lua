@@ -96,6 +96,8 @@ function yuhun_solo(mark, level, round, lock)
 			mSleep(500)
             -- 循环通用
             global_loop_func()
+			-- 超鬼王
+			superghost()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -179,6 +181,8 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			mSleep(500)
             -- 循环通用
             global_loop_func()
+			-- 超鬼王
+			superghost()
 			-- 拒绝邀请
 			if (wait_invite == 0) then x, y = member_team_refuse_invite() if (x > -1) then break end end
 			-- 探索
@@ -308,6 +312,8 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			mSleep(500)
             -- 循环通用
             global_loop_func()
+			-- 超鬼王
+			superghost()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -441,6 +447,8 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			mSleep(500)
             -- 循环通用
             global_loop_func()
+			-- 超鬼王
+			superghost()
 			-- 接受邀请
 			x, y, auto_grouped = member_team_accept_invite(member_auto_group) if (x > -1) then break end
 			-- 战斗准备
@@ -526,6 +534,8 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			mSleep(500)
             -- 循环通用
             global_loop_func()
+			-- 超鬼王
+			superghost()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备

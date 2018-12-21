@@ -8,6 +8,7 @@ sg_mark_sel = {0, 0}
 sg_action = {0, 0, 0, 0, 0, 0}
 
 -- Def
+-- 3个横排区域中心勾玉范围 x1,y1,x2,y2
 mgt_find_x1 = {115, 115, 115}
 mgt_find_y1 = {310, 425, 540}
 mgt_find_x2 = {135, 135, 135}
@@ -16,7 +17,8 @@ mgt_find_y2 = {320, 435, 550}
 -- Util func
 function lct_sg_window()
 	-- 识别弹窗
-	local x, y
+	local x = -1
+	local y = -1
 	
 	if ver == "iOS" then
 		x, y = findColor({24, 200, 26, 450}, -- 弹窗箭头
@@ -41,6 +43,7 @@ function lct_sg_window()
 		end
 		return x, y
 	end
+	return x, y
 end
 
 function lct_sg_page()
@@ -52,7 +55,7 @@ function lct_sg_page()
 end
 
 function lct_sg_group()
-	-- 识别超鬼王集结页面
+	-- 识别集结页面
 	local x, y = findColor({844, 57, 846, 59},
 		"0|0|0xf6dfd8,-573|12|0xe2758c,-408|-32|0x1c0c0c,27|483|0x625641,-791|-3|0x636567",
 		95, 0, 0, 0)
@@ -216,7 +219,7 @@ function sg_start()
 end
 
 function sg_switch_mode(mgt)
-	-- 普通或者强力追击切换
+	-- 普通追击、强力追击切换
 	local x, y
 	x, y = findColor({524, 499, 526, 501}, -- 普通追击
 		"0|0|0xffffff,1|-16|0x4051c6,6|-7|0xfcfcfe,10|-2|0x4152c9",
@@ -240,7 +243,7 @@ function sg_switch_mode(mgt)
 end
 
 function sg_fight_failed()
-	-- 战斗失败的超鬼王识别
+	-- 超鬼王的战斗失败识别
 	local x, y = findColor({413, 104, 415, 106},
 		"0|0|0x514a5b,251|6|0xddd9cd,-135|-6|0xcdc59c,30|34|0x5b5265",
 		95, 0, 0, 0)
@@ -252,7 +255,7 @@ function sg_fight_failed()
 end
 
 function sg_keep_fight_failed()
-	-- 保持战斗失败的超鬼王识别
+	-- 超鬼王的保持战斗失败识别
 	local x, y
 	while (1) do
 		global_loop_func()
@@ -280,16 +283,23 @@ function sg_tired_detect()
 end
 
 function sg_group_invite()
-	-- 邀请1 ~ 4位好友
-	random_touch(0, 450, 210, 20, 10) -- 1st
-	random_sleep(250)
-	random_touch(0, 700, 210, 20, 10) -- 2nd
-	random_sleep(250)
-	random_touch(0, 450, 300, 20, 10) -- 3rd
-	random_sleep(250)
-	random_touch(0, 700, 300, 20, 10) -- 4th
-	random_sleep(250)
+	local x, y
+	-- 集結1-5位在线好友
+	x, y = findColor({449, 199, 451, 201},  "0|0|0xeac7a0,0|-30|0xeac7a0,0|30|0xeac7a0,100|0|0xeac7a0,-50|0|0xebc7a0", 95, 0, 0, 0)
+	if x > -1 then random_touch(0, x, y, 50, 20) random_sleep(250) end
+	x, y = findColor({709, 199, 711, 201},  "0|0|0xeac7a0,0|-30|0xeac7a0,0|30|0xeac7a0,100|0|0xeac7a0,-50|0|0xebc7a0", 95, 0, 0, 0)
+	if x > -1 then random_touch(0, x, y, 50, 20) random_sleep(250) end
+	x, y = findColor({449, 284, 451, 286},  "0|0|0xeac7a0,0|-30|0xeac7a0,0|30|0xeac7a0,100|0|0xeac7a0,-50|0|0xebc7a0", 95, 0, 0, 0)
+	if x > -1 then random_touch(0, x, y, 50, 20) random_sleep(250) end
+	x, y = findColor({709, 284, 711, 286},  "0|0|0xeac7a0,0|-30|0xeac7a0,0|30|0xeac7a0,100|0|0xeac7a0,-50|0|0xebc7a0", 95, 0, 0, 0)
+	if x > -1 then random_touch(0, x, y, 50, 20) random_sleep(250) end
+	x, y = findColor({449, 369, 451, 371},  "0|0|0xeac7a0,0|-30|0xeac7a0,0|30|0xeac7a0,100|0|0xeac7a0,-50|0|0xebc7a0", 95, 0, 0, 0)
+	if x > -1 then random_touch(0, x, y, 50, 20) random_sleep(250) end
 	random_touch(0, 690, 510, 20, 10) -- 邀请
+end
+
+function sg_group_public()
+	random_touch(0, 450, 510, 20, 10) -- 公开
 end
 
 function sg_bonus_get()
@@ -342,8 +352,8 @@ function superghost()
 	while (1) do
 		while (1) do
 			mSleep(500)
-			-- 悬赏封印
-			receive_offer()
+			-- 循环通用
+			global_loop_func()
 			-- 断线结束战斗
 			disconn_dur_fight()
 			-- 弹窗
@@ -366,25 +376,39 @@ function superghost()
 					mSleep(5*60*1000) -- Idle 5min
 					tired_op = nil
 				elseif tired_op == "集结" then
-					HUD_show_or_hide(HUD,hud_info,"集结后等待5分钟",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_touch(0, 831, 173, 5, 5) -- 关闭
 				end
 				break
 			end
-			-- 集结
-			x, y = lct_sg_group() if x > -1 then sg_group_invite() mSleep(5*60*1000) tired_op = nil break end -- 集结并等待5分钟
+			-- 集结好友
+			x, y = lct_sg_group()
+			if x > -1 then
+				HUD_show_or_hide(HUD,hud_info,string.format("集结后等待5分钟", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
+				if sg_curr <= 4 then
+					sg_group_invite() -- 邀请
+				else
+					sg_group_public() -- 公开
+					
+				end
+				mSleep(5*60*1000) -- 等待5分钟
+				tired_op = nil
+				break
+			end
 			-- 超鬼王页面
 			x, y = lct_sg_page()
 			random_sleep(1000)
 			if x > -1 then
 				-- 进入集结
-				if (tired_op == "集结") then random_touch(0, 880, 550, 10, 10) break end -- 疲劳-集结
+				if (tired_op == "集结") then
+					random_touch(0, 880, 550, 10, 10) -- 集结
+					break
+				end
 				-- 寻找超鬼王
 				for index = 1, 3 do
 					x_f, y_f, sg_curr = find_sg(index)
 					if sg_curr > 0 then
 						mSleep(500)
-						random_touch(0, x_f+150, y_f, 100, 10) -- 选择超鬼王
+						random_touch(0, x_f+150, y_f, 200, 30) -- 选择超鬼王
 						random_sleep(500)
 						ret = sg_start()
 						if ret == RET_OK then
