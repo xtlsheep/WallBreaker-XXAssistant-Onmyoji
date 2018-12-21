@@ -855,14 +855,14 @@ end
 
 function member_room_user_profile()
 	local x, y
-	x, y = findColor({146, 338, 418, 537},
-		"0|0|0x9d4939,720|-1|0xac7e42,381|-153|0xf3b25e,546|-152|0xf3b25e",
+	x, y = findColor({144, 532, 146, 534},
+		"0|0|0x9d4939,352|-374|0xd2bda7,353|-40|0xcdb8a3,380|-213|0xf3b25e",
 		95, 0, 0, 0)
 	if x > -1 then
 		random_touch(0, 1100, 500, 20, 20)
 	end
-	x, y = findColor({146, 338, 418, 537},
-		"0|0|0x9d4939,720|-1|0xac7e42,578|-151|0xf3b25e,742|-151|0xf3b25e",
+	x, y = findColor({144, 532, 146, 534},
+		"0|0|0x9d4939,545|-378|0xd2bca6,546|-39|0xcab39e,577|-213|0xf3b25e",
 		95, 0, 0, 0)
 	if x > -1 then
 		random_touch(0, 1100, 500, 20, 20)
