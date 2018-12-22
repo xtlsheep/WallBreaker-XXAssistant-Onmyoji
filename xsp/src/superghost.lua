@@ -6,6 +6,9 @@ sg_en = 0
 sg_force = 0
 sg_mark_sel = {0, 0}
 sg_tired = {0, 0, 0, 0, 0, 0}
+sg_high = {0, 0, 0, 0, 0, 0}
+sg_med = {0, 0, 0, 0, 0, 0}
+sg_low = {0, 0, 0, 0, 0, 0}
 
 -- Def
 -- 3个横排区域中心勾玉范围 x1,y1,x2,y2
@@ -13,6 +16,16 @@ mgt_find_x1 = {115, 115, 115}
 mgt_find_y1 = {310, 425, 540}
 mgt_find_x2 = {135, 135, 135}
 mgt_find_y2 = {320, 435, 550}
+-- 3个横排区域50%找色范围
+target_bar_50_x1 = {269, 269, 269}
+target_bar_50_y1 = {329, 444, 559}
+target_bar_50_x2 = {271, 271, 271}
+target_bar_50_y2 = {331, 446, 561}
+-- 3个横排区域25%找色范围
+target_bar_25_x1 = {169, 169, 169}
+target_bar_25_y1 = {329, 444, 559}
+target_bar_25_x2 = {171, 171, 171}
+target_bar_25_y2 = {331, 446, 561}
 
 -- Util func
 function lct_sg_window()
@@ -110,7 +123,7 @@ function find_sg_1(index)
 	return x, y
 end
 
-function find_sg(index)
+function find_sg_mgt(index)
 	-- 识别当前区域星级
 	local x = -1
 	local y = -1
@@ -145,6 +158,46 @@ function find_sg(index)
 		return x, y, 1
 	end
 	return x, y, 0
+end
+
+function find_sg_50(index)
+	-- 50%血条
+	local x, y = findColor({target_bar_50_x1[index], target_bar_50_y1[index], target_bar_50_x2[index], target_bar_50_y2[index]},
+		"0|0|0xe35f30,-100|-15|0xa89a96,185|-15|0xa69793",
+		95, 0, 0, 0)
+	if x > -1 then
+		return RET_OK
+	end
+	return RET_ERR
+end
+
+function find_sg_25(index)
+	-- 25%血条
+	local x, y = findColor({target_bar_25_x1[index], target_bar_25_y1[index], target_bar_25_x2[index], target_bar_25_y2[index]},
+		"0|0|0xd9492c,0|-15|0xa89a96,285|-15|0xa69793",
+		95, 0, 0, 0)
+	if x > -1 then
+		return RET_OK
+	end
+	return RET_ERR
+end
+
+function find_sg_tb(index, sg_curr)
+	local ret_25, ret_50
+	ret_25 = find_sg_25(index)
+	ret_50 = find_sg_50(index)
+	
+	if ret_50 == RET_OK then
+		HUD_show_or_hide(HUD,hud_info,string.format("高血量 - 执行 %s", sg_high[sg_curr]),20,"0xff000000","0xffffffff",0,100,0,300,32)
+		return "high"
+	elseif ret_50 == RET_ERR and ret_25 == RET_OK then
+		HUD_show_or_hide(HUD,hud_info,string.format("中血量 - 执行 %s", sg_med[sg_curr]),20,"0xff000000","0xffffffff",0,100,0,300,32)
+		return "med"
+	elseif ret_25 == RET_ERR then
+		HUD_show_or_hide(HUD,hud_info,string.format("低血量 - 执行 %s", sg_low[sg_curr]),20,"0xff000000","0xffffffff",0,100,0,300,32)
+		return "low"
+	end
+	return nil
 end
 
 function sg_mark(last_mark)
@@ -282,6 +335,17 @@ function sg_tired_detect()
 	return x, y
 end
 
+function sg_group()
+	local x, y = findColor({876, 554, 878, 556},
+		"0|0|0xe6c385,-5|-14|0xeed29e,-19|-16|0x251717,18|-9|0xcb9354",
+		80, 0, 0, 0)
+	if x > -1 then
+		random_touch(0, 880, 550, 10, 10) -- 集结
+		return RET_OK
+	end
+	return RET_ERR
+end
+
 function sg_group_invite()
 	local x, y
 	-- 集結1-5位在线好友
@@ -334,6 +398,7 @@ function superghost()
 	local y_f = -1
 	local ret = 0
 	local sg_curr = 0
+	local sg_tb = nil
 	local last_mark = nil
 	local tired_op = nil
 	local sg_window = 0
@@ -383,7 +448,7 @@ function superghost()
 			-- 集结好友
 			x, y = lct_sg_group()
 			if x > -1 then
-				HUD_show_or_hide(HUD,hud_info,string.format("集结后等待5分钟", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
+				HUD_show_or_hide(HUD,hud_info,"集结后等待5分钟",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				if sg_curr <= 4 then
 					sg_group_invite() -- 邀请
 				else
@@ -400,18 +465,23 @@ function superghost()
 			if x > -1 then
 				-- 进入集结
 				if (tired_op == "集结") then
-					random_touch(0, 880, 550, 10, 10) -- 集结
+					ret = sg_group()
+					if ret == RET_ERR then
+						return RET_OK
+					end
 					break
 				end
 				-- 寻找超鬼王
 				for index = 1, 3 do
-					x_f, y_f, sg_curr = find_sg(index)
+					x_f, y_f, sg_curr = find_sg_mgt(index)
 					if sg_curr > 0 then
 						mSleep(500)
 						random_touch(0, x_f+150, y_f, 200, 30) -- 选择超鬼王
 						random_sleep(500)
 						ret = sg_start()
 						if ret == RET_OK then
+							sg_tb = find_sg_tb(index, sg_curr)
+							random_sleep(500)
 							sg_switch_mode(sg_curr) -- 切换战斗模式
 							random_touch(0, 1030, 540, 20, 20) -- 挑战
 							break
