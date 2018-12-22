@@ -1060,13 +1060,25 @@ function member_team_accept_invite(auto)
 end
 
 function member_team_refuse_invite()
-	local x, y = findColor({37, 200, 42, 450}, -- x
-		"0|0|0xdc6d5a,2|-19|0x866c57,-21|2|0x846b55,21|1|0x856c56",
-		95, 0, 0, 0)
-	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,"拒绝组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		random_touch(0, x, y, 10, 10)
-		mSleep(500)
+	local x = -1
+	local y = -1
+	
+	if ver == "iOS" then
+		x, y = findColor({37, 200, 42, 450},
+			"0|0|0xd66b5a,1|-21|0xb6a18e,71|-3|0x5bb664,100|-10|0x62bd6b",
+			95, 0, 0, 0)
+		if x > -1 then
+			HUD_show_or_hide(HUD,hud_info,"拒绝组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			random_touch(0, x, y, 10, 10)
+		end
+	elseif ver == "android" then
+		x, y = findColor({37, 200, 42, 450},
+			"0|0|0xd66b5a,1|-21|0xb6a18e,71|-3|0x5bb664,100|-10|0x62bd6b",
+			95, 0, 0, 0)
+		if x > -1 then
+			HUD_show_or_hide(HUD,hud_info,"拒绝组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			random_touch(0, x, y, 10, 10)
+		end
 	end
 	return x, y
 end
