@@ -368,6 +368,19 @@ function stats_write()
 	end
 end
 
+function alarm_pause()
+	local touchCount = 2
+	
+	for i = 1, 5 do
+		playAudio("alarm.mp3")
+		mSleep(500)
+		stopAudio()
+		mSleep(500)
+	end
+	HUD_show_or_hide(HUD,hud_info,"暂停ing, 双击屏幕任意位置继续",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	results = catchTouchPoint(touchCount)
+end
+
 -- Locate & Enter func
 function lct_tingyuan()
 	local x, y = findColor({1093, 35, 1095, 37},  -- 频道 邮件 加成

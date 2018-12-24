@@ -483,6 +483,13 @@ function superghost()
 						ret = sg_start()
 						if ret == RET_OK then
 							sg_tb = find_sg_tb(index, sg_curr)
+							if sg_tb == "响铃" then
+								alarm_pause()
+							end
+							if sg_tb == "集结" then
+								tired_op == "集结"
+								break
+							end
 							random_sleep(500)
 							sg_switch_mode(sg_curr) -- 切换战斗模式
 							random_touch(0, 1030, 540, 20, 20) -- 挑战
