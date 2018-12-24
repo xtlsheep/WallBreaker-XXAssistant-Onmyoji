@@ -179,7 +179,9 @@ function global_UI()
 	UI:CheckBoxGroup(global_basic_page, "offer_en","悬赏封印 - ","0",30,"0,0,0","20,20,300,60")
 	UI:CheckBoxGroup(global_basic_page, "offer_sel","勾玉,体力,金币,猫粮,狗粮","0@1@2@3@4",30,"0,0,0","280,20,720,60")
 	UI:CheckBoxGroup(global_basic_page, "auto_jjtp_en","智能突破[暂时无效]","0",30,"0,0,0","20,80,960,60")
-	UI:CheckBoxGroup(global_basic_page, "sg_en","超鬼王[全功能 - 详细说明见第3设置页面]","0",30,"0,0,0","20,140,960,60")
+	UI:CheckBoxGroup(global_basic_page, "sg_en","超鬼王","0",30,"0,0,0","20,140,960,60")
+	UI:Label(global_basic_page, "left", "0,0,0", 30, "鬼王选择 - ", "500,140,180,60")
+	UI:ComboBox(global_basic_page, "sg_fight_sel", "所有公开的超鬼王, 自己发现的超鬼王","1",23,"680,140,300,50")
 	UI:Line(global_basic_page, "line_common", "100,100,100", 2, 960, "20,200,960,2")
 	UI:CheckBoxGroup(global_basic_page, "HUD","可视化点击手势与运行辅助描述","0",30,"0,0,0","20,210,980,60")
 	UI:CheckBoxGroup(global_basic_page, "skill","自动关闭技能特写[建议手动关闭并取消该选项]","0",30,"0,0,0","20,270,980,60")
@@ -221,63 +223,51 @@ function global_UI()
 	-- 6星
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "6星设置 - ", "20,140,140,60")
 	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>50%", "160,140,160,60")
-	UI:ComboBox(global_super_ghost_page, "sg_high_6", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"320,140,100,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">25%", "400,145,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_med_6", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"500,140,100,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<25%", "580,145,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_low_6", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"680,140,100,50")
-	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "780,145,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_tired_6", "公开,等待,喝茶,响铃","2",23,"880,140,100,50")
+	UI:ComboBox(global_super_ghost_page, "sg_high_6", "默认,①队,②队,③队,响铃,集结","0",23,"330,140,150,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<50%", "470,140,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_low_6", "默认,①队,②队,③队,响铃,集结","0",23,"570,140,150,50")
+	UI:Label(global_super_ghost_page, "center", "0,0,0", 30, "]  疲劳", "720,140,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_tired_6", "公开,等待,喝茶,响铃","2",23,"820,140,150,50")
 	-- 5星
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "5星设置 - ", "20,200,140,60")
 	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>50%", "160,200,160,60")
-	UI:ComboBox(global_super_ghost_page, "sg_high_5", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"320,200,100,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">25%", "400,205,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_med_5", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"500,200,100,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<25%", "580,205,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_low_5", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"680,200,100,50")
-	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "780,205,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_tired_5", "公开,等待,喝茶,响铃","2",23,"880,200,100,50")
+	UI:ComboBox(global_super_ghost_page, "sg_high_5", "默认,①队,②队,③队,响铃,集结","0",23,"330,200,150,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<50%", "470,200,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_low_5", "默认,①队,②队,③队,响铃,集结","0",23,"570,200,150,50")
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "720,200,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_tired_5", "公开,等待,喝茶,响铃","2",23,"820,200,150,50")
 	-- 4星
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "4星设置 - ", "20,260,140,60")
 	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>50%", "160,260,160,60")
-	UI:ComboBox(global_super_ghost_page, "sg_high_4", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"320,260,100,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">25%", "400,265,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_med_4", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"500,260,100,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<25%", "580,265,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_low_4", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"680,260,100,50")
-	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "780,265,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_tired_4", "公开,等待,喝茶,响铃","0",23,"880,260,100,50")
+	UI:ComboBox(global_super_ghost_page, "sg_high_4", "默认,①队,②队,③队,响铃,集结","0",23,"330,260,150,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<50%", "470,260,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_low_4", "默认,①队,②队,③队,响铃,集结","0",23,"570,260,150,50")
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "720,260,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_tired_4", "集结,等待,喝茶,响铃","0",23,"820,260,150,50")
 	-- 3星
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "3星设置 - ", "20,320,140,60")
 	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>50%", "160,320,160,60")
-	UI:ComboBox(global_super_ghost_page, "sg_high_3", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"320,320,100,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">25%", "400,325,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_med_3", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"500,320,100,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<25%", "580,325,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_low_3", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"680,320,100,50")
-	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "780,325,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_tired_3", "公开,等待,喝茶,响铃","0",23,"880,320,100,50")
+	UI:ComboBox(global_super_ghost_page, "sg_high_3", "默认,①队,②队,③队响铃,集结","0",23,"330,320,150,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<50%", "470,320,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_low_3", "默认,①队,②队,③队,响铃,集结","0",23,"570,320,150,50")
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "720,320,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_tired_3", "集结,等待,喝茶,响铃","0",23,"820,320,150,50")
 	-- 2星
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "2星设置 - ", "20,380,140,60")
 	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>50%", "160,380,160,60")
-	UI:ComboBox(global_super_ghost_page, "sg_high_2", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"320,380,100,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">25%", "400,385,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_med_2", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"500,380,100,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<25%", "580,385,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_low_2", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"680,380,100,50")
-	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "780,385,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_tired_2", "公开,等待,喝茶,响铃","1",23,"880,380,100,50")
+	UI:ComboBox(global_super_ghost_page, "sg_high_2", "默认,①队,②队,③队,响铃,集结","0",23,"330,380,150,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<50%", "470,380,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_low_2", "默认,①队,②队,③队,响铃,集结","0",23,"570,380,150,50")
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "720,380,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_tired_2", "集结,等待,喝茶,响铃","1",23,"820,380,150,50")
 	-- 1星
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "1星设置 - ", "20,440,140,60")
 	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>50%", "160,440,160,60")
-	UI:ComboBox(global_super_ghost_page, "sg_high_1", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"320,440,100,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, ">25%", "400,445,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_med_1", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"500,440,100,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<25%", "580,445,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_low_1", "默认,①队,②队,③队,④队,⑤队,⑥队,响铃,集结","0",23,"680,440,100,50")
-	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "780,445,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_tired_1", "公开,等待,喝茶,响铃","1",23,"880,440,100,50")
+	UI:ComboBox(global_super_ghost_page, "sg_high_1", "默认,①队,②队,③队,响铃,集结","0",23,"330,440,150,50")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<50%", "470,440,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_low_1", "默认,①队,②队,③队,响铃,集结","0",23,"570,440,150,50")
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "720,440,100,60")
+	UI:ComboBox(global_super_ghost_page, "sg_tired_1", "集结,等待,喝茶,响铃","1",23,"820,440,150,50")
 	
 	UI:Line(global_super_ghost_page, "line_common", "100,100,100", 2, 960, "20,500,960,2")
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "Tips - ", "20,510,300,60")
@@ -363,6 +353,12 @@ function global_UI()
 		sg_en = 0
 	end
 	
+	if res_global.sg_fight_sel == "0" then
+		sg_fight_sel = "Public"
+	else
+		sg_fight_sel = "Private"
+	end
+	
 	sg_force = tonumber(res_global.sg_force) + 1
 	
 	local sg_mark_ = {}
@@ -377,14 +373,11 @@ function global_UI()
 		end
 	end
 	
-	-- 50% - 100%
+	-- >50%
 	if res_global.sg_high_6 == "0" then sg_high[6] = "默认"
 	elseif res_global.sg_high_6 == "1" then sg_high[6] = "预设1"
 	elseif res_global.sg_high_6 == "2" then sg_high[6] = "预设2"
 	elseif res_global.sg_high_6 == "3" then sg_high[6] = "预设3"
-	elseif res_global.sg_high_6 == "4" then sg_high[6] = "预设4"
-	elseif res_global.sg_high_6 == "5" then sg_high[6] = "预设5"
-	elseif res_global.sg_high_6 == "6" then sg_high[6] = "预设6"
 	elseif res_global.sg_high_6 == "7" then sg_high[6] = "响铃"
 	elseif res_global.sg_high_6 == "7" then sg_high[6] = "集结" end
 	
@@ -392,9 +385,6 @@ function global_UI()
 	elseif res_global.sg_high_5 == "1" then sg_high[5] = "预设1"
 	elseif res_global.sg_high_5 == "2" then sg_high[5] = "预设2"
 	elseif res_global.sg_high_5 == "3" then sg_high[5] = "预设3"
-	elseif res_global.sg_high_5 == "4" then sg_high[5] = "预设4"
-	elseif res_global.sg_high_5 == "5" then sg_high[5] = "预设5"
-	elseif res_global.sg_high_5 == "6" then sg_high[5] = "预设6"
 	elseif res_global.sg_high_5 == "7" then sg_high[5] = "响铃"
 	elseif res_global.sg_high_5 == "7" then sg_high[5] = "集结" end
 	
@@ -402,9 +392,6 @@ function global_UI()
 	elseif res_global.sg_high_4 == "1" then sg_high[4] = "预设1"
 	elseif res_global.sg_high_4 == "2" then sg_high[4] = "预设2"
 	elseif res_global.sg_high_4 == "3" then sg_high[4] = "预设3"
-	elseif res_global.sg_high_4 == "4" then sg_high[4] = "预设4"
-	elseif res_global.sg_high_4 == "5" then sg_high[4] = "预设5"
-	elseif res_global.sg_high_4 == "6" then sg_high[4] = "预设6"
 	elseif res_global.sg_high_4 == "7" then sg_high[4] = "响铃"
 	elseif res_global.sg_high_4 == "7" then sg_high[4] = "集结" end
 	
@@ -412,9 +399,6 @@ function global_UI()
 	elseif res_global.sg_high_3 == "1" then sg_high[3] = "预设1"
 	elseif res_global.sg_high_3 == "2" then sg_high[3] = "预设2"
 	elseif res_global.sg_high_3 == "3" then sg_high[3] = "预设3"
-	elseif res_global.sg_high_3 == "4" then sg_high[3] = "预设4"
-	elseif res_global.sg_high_3 == "5" then sg_high[3] = "预设5"
-	elseif res_global.sg_high_3 == "6" then sg_high[3] = "预设6"
 	elseif res_global.sg_high_3 == "7" then sg_high[3] = "响铃"
 	elseif res_global.sg_high_3 == "7" then sg_high[3] = "集结" end
 	
@@ -422,9 +406,6 @@ function global_UI()
 	elseif res_global.sg_high_2 == "1" then sg_high[2] = "预设1"
 	elseif res_global.sg_high_2 == "2" then sg_high[2] = "预设2"
 	elseif res_global.sg_high_2 == "3" then sg_high[2] = "预设3"
-	elseif res_global.sg_high_2 == "4" then sg_high[2] = "预设4"
-	elseif res_global.sg_high_2 == "5" then sg_high[2] = "预设5"
-	elseif res_global.sg_high_2 == "6" then sg_high[2] = "预设6"
 	elseif res_global.sg_high_2 == "7" then sg_high[2] = "响铃"
 	elseif res_global.sg_high_2 == "7" then sg_high[2] = "集结" end
 	
@@ -432,81 +413,15 @@ function global_UI()
 	elseif res_global.sg_high_1 == "1" then sg_high[1] = "预设1"
 	elseif res_global.sg_high_1 == "2" then sg_high[1] = "预设2"
 	elseif res_global.sg_high_1 == "3" then sg_high[1] = "预设3"
-	elseif res_global.sg_high_1 == "4" then sg_high[1] = "预设4"
-	elseif res_global.sg_high_1 == "5" then sg_high[1] = "预设5"
-	elseif res_global.sg_high_1 == "6" then sg_high[1] = "预设6"
 	elseif res_global.sg_high_1 == "7" then sg_high[1] = "响铃"
 	elseif res_global.sg_high_1 == "7" then sg_high[1] = "集结" end
+
 	
-	-- 25% - 50%
-	if res_global.sg_med_6 == "0" then sg_med[6] = "默认"
-	elseif res_global.sg_med_6 == "1" then sg_med[6] = "预设1"
-	elseif res_global.sg_med_6 == "2" then sg_med[6] = "预设2"
-	elseif res_global.sg_med_6 == "3" then sg_med[6] = "预设3"
-	elseif res_global.sg_med_6 == "4" then sg_med[6] = "预设4"
-	elseif res_global.sg_med_6 == "5" then sg_med[6] = "预设5"
-	elseif res_global.sg_med_6 == "6" then sg_med[6] = "预设6"
-	elseif res_global.sg_med_6 == "7" then sg_med[6] = "响铃"
-	elseif res_global.sg_med_6 == "7" then sg_med[6] = "集结" end
-	
-	if res_global.sg_med_5 == "0" then sg_med[5] = "默认"
-	elseif res_global.sg_med_5 == "1" then sg_med[5] = "预设1"
-	elseif res_global.sg_med_5 == "2" then sg_med[5] = "预设2"
-	elseif res_global.sg_med_5 == "3" then sg_med[5] = "预设3"
-	elseif res_global.sg_med_5 == "4" then sg_med[5] = "预设4"
-	elseif res_global.sg_med_5 == "5" then sg_med[5] = "预设5"
-	elseif res_global.sg_med_5 == "6" then sg_med[5] = "预设6"
-	elseif res_global.sg_med_5 == "7" then sg_med[5] = "响铃"
-	elseif res_global.sg_med_5 == "7" then sg_med[5] = "集结" end
-	
-	if res_global.sg_med_4 == "0" then sg_med[4] = "默认"
-	elseif res_global.sg_med_4 == "1" then sg_med[4] = "预设1"
-	elseif res_global.sg_med_4 == "2" then sg_med[4] = "预设2"
-	elseif res_global.sg_med_4 == "3" then sg_med[4] = "预设3"
-	elseif res_global.sg_med_4 == "4" then sg_med[4] = "预设4"
-	elseif res_global.sg_med_4 == "5" then sg_med[4] = "预设5"
-	elseif res_global.sg_med_4 == "6" then sg_med[4] = "预设6"
-	elseif res_global.sg_med_4 == "7" then sg_med[4] = "响铃"
-	elseif res_global.sg_med_4 == "7" then sg_med[4] = "集结" end
-	
-	if res_global.sg_med_3 == "0" then sg_med[3] = "默认"
-	elseif res_global.sg_med_3 == "1" then sg_med[3] = "预设1"
-	elseif res_global.sg_med_3 == "2" then sg_med[3] = "预设2"
-	elseif res_global.sg_med_3 == "3" then sg_med[3] = "预设3"
-	elseif res_global.sg_med_3 == "4" then sg_med[3] = "预设4"
-	elseif res_global.sg_med_3 == "5" then sg_med[3] = "预设5"
-	elseif res_global.sg_med_3 == "6" then sg_med[3] = "预设6"
-	elseif res_global.sg_med_3 == "7" then sg_med[3] = "响铃"
-	elseif res_global.sg_med_3 == "7" then sg_med[3] = "集结" end
-	
-	if res_global.sg_med_2 == "0" then sg_med[2] = "默认"
-	elseif res_global.sg_med_2 == "1" then sg_med[2] = "预设1"
-	elseif res_global.sg_med_2 == "2" then sg_med[2] = "预设2"
-	elseif res_global.sg_med_2 == "3" then sg_med[2] = "预设3"
-	elseif res_global.sg_med_2 == "4" then sg_med[2] = "预设4"
-	elseif res_global.sg_med_2 == "5" then sg_med[2] = "预设5"
-	elseif res_global.sg_med_2 == "6" then sg_med[2] = "预设6"
-	elseif res_global.sg_med_2 == "7" then sg_med[2] = "响铃"
-	elseif res_global.sg_med_2 == "7" then sg_med[2] = "集结" end
-	
-	if res_global.sg_med_1 == "0" then sg_med[1] = "默认"
-	elseif res_global.sg_med_1 == "1" then sg_med[1] = "预设1"
-	elseif res_global.sg_med_1 == "2" then sg_med[1] = "预设2"
-	elseif res_global.sg_med_1 == "3" then sg_med[1] = "预设3"
-	elseif res_global.sg_med_1 == "4" then sg_med[1] = "预设4"
-	elseif res_global.sg_med_1 == "5" then sg_med[1] = "预设5"
-	elseif res_global.sg_med_1 == "6" then sg_med[1] = "预设6"
-	elseif res_global.sg_med_1 == "7" then sg_med[1] = "响铃"
-	elseif res_global.sg_med_1 == "7" then sg_med[1] = "集结" end
-	
-	-- 0% - 25%
+	-- <50%
 	if res_global.sg_low_6 == "0" then sg_low[6] = "默认"
 	elseif res_global.sg_low_6 == "1" then sg_low[6] = "预设1"
 	elseif res_global.sg_low_6 == "2" then sg_low[6] = "预设2"
 	elseif res_global.sg_low_6 == "3" then sg_low[6] = "预设3"
-	elseif res_global.sg_low_6 == "4" then sg_low[6] = "预设4"
-	elseif res_global.sg_low_6 == "5" then sg_low[6] = "预设5"
-	elseif res_global.sg_low_6 == "6" then sg_low[6] = "预设6"
 	elseif res_global.sg_low_6 == "7" then sg_low[6] = "响铃"
 	elseif res_global.sg_low_6 == "7" then sg_low[6] = "集结" end
 	
@@ -514,9 +429,6 @@ function global_UI()
 	elseif res_global.sg_low_5 == "1" then sg_low[5] = "预设1"
 	elseif res_global.sg_low_5 == "2" then sg_low[5] = "预设2"
 	elseif res_global.sg_low_5 == "3" then sg_low[5] = "预设3"
-	elseif res_global.sg_low_5 == "4" then sg_low[5] = "预设4"
-	elseif res_global.sg_low_5 == "5" then sg_low[5] = "预设5"
-	elseif res_global.sg_low_5 == "6" then sg_low[5] = "预设6"
 	elseif res_global.sg_low_5 == "7" then sg_low[5] = "响铃" 
 	elseif res_global.sg_low_5 == "7" then sg_low[5] = "集结" end
 	
@@ -524,9 +436,6 @@ function global_UI()
 	elseif res_global.sg_low_4 == "1" then sg_low[4] = "预设1"
 	elseif res_global.sg_low_4 == "2" then sg_low[4] = "预设2"
 	elseif res_global.sg_low_4 == "3" then sg_low[4] = "预设3"
-	elseif res_global.sg_low_4 == "4" then sg_low[4] = "预设4"
-	elseif res_global.sg_low_4 == "5" then sg_low[4] = "预设5"
-	elseif res_global.sg_low_4 == "6" then sg_low[4] = "预设6"
 	elseif res_global.sg_low_4 == "7" then sg_low[4] = "响铃" 
 	elseif res_global.sg_low_4 == "7" then sg_low[4] = "集结" end
 	
@@ -534,9 +443,6 @@ function global_UI()
 	elseif res_global.sg_low_3 == "1" then sg_low[3] = "预设1"
 	elseif res_global.sg_low_3 == "2" then sg_low[3] = "预设2"
 	elseif res_global.sg_low_3 == "3" then sg_low[3] = "预设3"
-	elseif res_global.sg_low_3 == "4" then sg_low[3] = "预设4"
-	elseif res_global.sg_low_3 == "5" then sg_low[3] = "预设5"
-	elseif res_global.sg_low_3 == "6" then sg_low[3] = "预设6"
 	elseif res_global.sg_low_3 == "7" then sg_low[3] = "响铃" 
 	elseif res_global.sg_low_3 == "7" then sg_low[3] = "集结" end
 	
@@ -544,9 +450,6 @@ function global_UI()
 	elseif res_global.sg_low_2 == "1" then sg_low[2] = "预设1"
 	elseif res_global.sg_low_2 == "2" then sg_low[2] = "预设2"
 	elseif res_global.sg_low_2 == "3" then sg_low[2] = "预设3"
-	elseif res_global.sg_low_2 == "4" then sg_low[2] = "预设4"
-	elseif res_global.sg_low_2 == "5" then sg_low[2] = "预设5"
-	elseif res_global.sg_low_2 == "6" then sg_low[2] = "预设6"
 	elseif res_global.sg_low_2 == "7" then sg_low[2] = "响铃" 
 	elseif res_global.sg_low_2 == "7" then sg_low[2] = "集结" end
 	
@@ -554,9 +457,6 @@ function global_UI()
 	elseif res_global.sg_low_1 == "1" then sg_low[1] = "预设1"
 	elseif res_global.sg_low_1 == "2" then sg_low[1] = "预设2"
 	elseif res_global.sg_low_1 == "3" then sg_low[1] = "预设3"
-	elseif res_global.sg_low_1 == "4" then sg_low[1] = "预设4"
-	elseif res_global.sg_low_1 == "5" then sg_low[1] = "预设5"
-	elseif res_global.sg_low_1 == "6" then sg_low[1] = "预设6"
 	elseif res_global.sg_low_1 == "7" then sg_low[1] = "响铃" 
 	elseif res_global.sg_low_1 == "7" then sg_low[1] = "集结" end
 	
@@ -1779,8 +1679,8 @@ function superghost_UI()
 	superghost_ui = UI:new("superghost.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 	UI:Label(superghost_ui, "center", "0,0,0", 30, "超鬼王", "20,20,960,55")
 	UI:Label(superghost_ui, "left", "0,0,0", 30, "Tips - ", "30,100,960,60")
-	UI:Label(superghost_ui, "left", "0,0,0", 30, "请在超鬼王界面打开，清理完当前超鬼王后会自动停止脚本", "30,160,960,60")
-	UI:Label(superghost_ui, "left", "0,0,0", 30, "详细设置请于[全局设置]-[超鬼王]页面中配置", "30,220,960,60")
+	UI:Label(superghost_ui, "left", "0,0,0", 30, "请在超鬼王界面运行，清理完当前超鬼王后会自动停止脚本", "30,160,960,60")
+	UI:Label(superghost_ui, "left", "0,0,0", 30, "详细设置参考[全局设置]-[超鬼王]页面", "30,220,960,60")
 	UI:fit(superghost_ui)
 	
 	ret_offerquery, res_offerquery = UI:show(superghost_ui)

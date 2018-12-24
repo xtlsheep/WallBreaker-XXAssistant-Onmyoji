@@ -4,10 +4,10 @@ require "func"
 -- 超鬼王Global
 sg_en = 0
 sg_force = 0
+sg_fight_sel = nil
 sg_mark_sel = {0, 0}
 sg_tired = {0, 0, 0, 0, 0, 0}
 sg_high = {0, 0, 0, 0, 0, 0}
-sg_med = {0, 0, 0, 0, 0, 0}
 sg_low = {0, 0, 0, 0, 0, 0}
 
 -- Def
@@ -21,11 +21,6 @@ target_bar_50_x1 = {269, 269, 269}
 target_bar_50_y1 = {329, 444, 559}
 target_bar_50_x2 = {271, 271, 271}
 target_bar_50_y2 = {331, 446, 561}
--- 3个横排区域25%找色范围
-target_bar_25_x1 = {169, 169, 169}
-target_bar_25_y1 = {329, 444, 559}
-target_bar_25_x2 = {171, 171, 171}
-target_bar_25_y2 = {331, 446, 561}
 
 -- Util func
 function lct_sg_window()
@@ -171,17 +166,6 @@ function find_sg_50(index)
 	return RET_ERR
 end
 
-function find_sg_25(index)
-	-- 25%血条
-	local x, y = findColor({target_bar_25_x1[index], target_bar_25_y1[index], target_bar_25_x2[index], target_bar_25_y2[index]},
-		"0|0|0xd9492c,0|-15|0xa89a96,285|-15|0xa69793",
-		95, 0, 0, 0)
-	if x > -1 then
-		return RET_OK
-	end
-	return RET_ERR
-end
-
 function find_sg_tb(index, sg_curr)
 	local ret_25, ret_50
 	ret_25 = find_sg_25(index)
@@ -189,13 +173,10 @@ function find_sg_tb(index, sg_curr)
 	
 	if ret_50 == RET_OK then
 		HUD_show_or_hide(HUD,hud_info,string.format("高血量 - 执行 %s", sg_high[sg_curr]),20,"0xff000000","0xffffffff",0,100,0,300,32)
-		return "high"
-	elseif ret_50 == RET_ERR and ret_25 == RET_OK then
-		HUD_show_or_hide(HUD,hud_info,string.format("中血量 - 执行 %s", sg_med[sg_curr]),20,"0xff000000","0xffffffff",0,100,0,300,32)
-		return "med"
+		return sg_high[sg_curr]
 	elseif ret_25 == RET_ERR then
 		HUD_show_or_hide(HUD,hud_info,string.format("低血量 - 执行 %s", sg_low[sg_curr]),20,"0xff000000","0xffffffff",0,100,0,300,32)
-		return "low"
+		return sg_low[sg_curr]
 	end
 	return nil
 end
@@ -335,7 +316,7 @@ function sg_tired_detect()
 	return x, y
 end
 
-function sg_group()
+function sg_group_enter()
 	local x, y = findColor({876, 554, 878, 556},
 		"0|0|0xe6c385,-5|-14|0xeed29e,-19|-16|0x251717,18|-9|0xcb9354",
 		80, 0, 0, 0)
@@ -366,7 +347,7 @@ function sg_group_public()
 	random_touch(0, 450, 510, 20, 10) -- 公开
 end
 
-function sg_bonus_yaoling()
+function sg_bonus_extra()
 	local x, y = findColor({567, 420, 569, 422},
 		"0|0|0xf3b25e,-174|-258|0xe9ab53,-166|-256|0xb54f3c,173|55|0xe9ab53,163|52|0xb34c39",
 		95, 0, 0, 0)
@@ -442,7 +423,7 @@ function superghost()
 			if x > -1 then
 				tired_op = sg_tired[sg_curr] -- 获得当前星级的疲劳操作
 				if tired_op == "喝茶" then
-					HUD_show_or_hide(HUD,hud_info,"购买 茶",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_info,"购买 茶 - 58勾",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_touch(0, x, y , 30, 10) -- 58勾
 					tired_op = nil
 				elseif tired_op == "等待" then
@@ -475,7 +456,7 @@ function superghost()
 			if x > -1 then
 				-- 进入集结
 				if (tired_op == "集结") then
-					ret = sg_group()
+					ret = sg_group_enter()
 					if ret == RET_ERR then
 						return RET_OK
 					end
@@ -522,6 +503,8 @@ function superghost()
 			x, y = whole_damo() if (x > -1) then break end
 			-- 胜利宝箱
 			x, y = half_damo() if (x > -1) then keep_half_damo() break end
+			-- 妖灵溢出
+			x, y = sg_bonus_extra() if x > -1 then break end
 			-- 领取奖励
 			x, y = sg_bonus_get() if x > -1 then break end
 			-- 退出奖励

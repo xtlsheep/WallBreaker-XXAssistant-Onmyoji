@@ -37,14 +37,14 @@ function print_global_vars()
 			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6], buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
 	
 	if sg_en == 1 then
-		print(string.format("超鬼王: %d 强力追击 %d 标记 Boss %d 草人 %d 6星 %s 5星 %s 4星 %s 3星 %s 2星 %s 1星 %s",
-				sg_en, sg_force, sg_mark_sel[1], sg_mark_sel[2], sg_tired[6], sg_tired[5], sg_tired[4], sg_tired[3], sg_tired[2], sg_tired[1]))
-		print(string.format("6星 high - %s med - %s low - %s 疲劳 - %s, 5星 high - %s med - %s low - %s 疲劳 - %s",
-				sg_high[6], sg_med[6], sg_low[6], sg_tired[6], sg_high[5], sg_med[5], sg_low[5], sg_tired[5]))
-		print(string.format("4星 high - %s med - %s low - %s 疲劳 - %s, 3星 high - %s med - %s low - %s 疲劳 - %s",
-				sg_high[4], sg_med[4], sg_low[4], sg_tired[4], sg_high[3], sg_med[3], sg_low[3], sg_tired[3]))
-		print(string.format("2星 high - %s med - %s low - %s 疲劳 - %s, 1星 high - %s med - %s low - %s 疲劳 - %s",
-				sg_high[2], sg_med[2], sg_low[2], sg_tired[2], sg_high[1], sg_med[1], sg_low[1], sg_tired[1]))
+		print(string.format("超鬼王: %d 鬼王选择 %s 强力追击 %d 标记 Boss %d 草人 %d 6星 %s 5星 %s 4星 %s 3星 %s 2星 %s 1星 %s",
+				sg_en, sg_fight_sel, sg_force, sg_mark_sel[1], sg_mark_sel[2], sg_tired[6], sg_tired[5], sg_tired[4], sg_tired[3], sg_tired[2], sg_tired[1]))
+		print(string.format("6星 high - %s low - %s 疲劳 - %s, 5星 high - %s low - %s 疲劳 - %s",
+				sg_high[6], sg_low[6], sg_tired[6], sg_high[5], sg_low[5], sg_tired[5]))
+		print(string.format("4星 high - %s low - %s 疲劳 - %s, 3星 high - %s low - %s 疲劳 - %s",
+				sg_high[4], sg_low[4], sg_tired[4], sg_high[3], sg_low[3], sg_tired[3]))
+		print(string.format("2星 high - %s low - %s 疲劳 - %s, 1星 high - %s low - %s 疲劳 - %s",
+				sg_high[2], sg_low[2], sg_tired[2], sg_high[1], sg_low[1], sg_tired[1]))
 	end
 end
 
