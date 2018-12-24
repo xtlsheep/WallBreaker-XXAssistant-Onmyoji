@@ -366,9 +366,19 @@ function sg_group_public()
 	random_touch(0, 450, 510, 20, 10) -- 公开
 end
 
+function sg_bonus_yaoling()
+	local x, y = findColor({567, 420, 569, 422}, 
+"0|0|0xf3b25e,-174|-258|0xe9ab53,-166|-256|0xb54f3c,173|55|0xe9ab53,163|52|0xb34c39",
+95, 0, 0, 0)
+if x > -1 then
+	lower_right_blank_click()
+end
+return x, y
+end
+
 function sg_bonus_get()
-	local x, y = findColor({442, 147, 44553, 149},
-		"0|0|0xf3e6af,392|130|0xc1b2ad,-135|131|0xbfb1ac,0|320|0x530c1a",
+	local x, y = findColor({442, 178, 444, 180}, 
+"0|0|0xf2e5ad,248|17|0xf2e5b4,-138|104|0xad9f9a,392|104|0xaea09b,1|258|0x500c19",
 		95, 0, 0, 0)
 	if x > -1 then
 		lower_right_blank_click()
