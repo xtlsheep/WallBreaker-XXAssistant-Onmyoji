@@ -440,11 +440,12 @@ function superghost()
 					random_touch(0, x, y , 30, 10) -- 58勾
 					tired_op = nil
 				elseif tired_op == "等待" then
+					random_touch(0, 830, 175, 5, 5) -- 关闭
 					HUD_show_or_hide(HUD,hud_info,"等待5分钟",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					mSleep(5*60*1000) -- 等待5分钟
 					tired_op = nil
 				elseif tired_op == "集结" then
-					random_touch(0, 831, 173, 5, 5) -- 关闭
+					random_touch(0, 830, 175, 5, 5) -- 关闭
 				elseif tired_op == "响铃" then
 					alarm("exit") -- 提醒后退出脚本
 				end
