@@ -39,11 +39,11 @@ function print_global_vars()
 	if sg_en == 1 then
 		print(string.format("超鬼王: %d 强力追击 %d 标记 Boss %d 草人 %d 6星 %s 5星 %s 4星 %s 3星 %s 2星 %s 1星 %s",
 				sg_en, sg_force, sg_mark_sel[1], sg_mark_sel[2], sg_tired[6], sg_tired[5], sg_tired[4], sg_tired[3], sg_tired[2], sg_tired[1]))
-		print(string.format("6星 high - %s med - %s low - %s 疲劳 - %s, 5星 high - %s med - %s low - %s 疲劳 - %s", 
+		print(string.format("6星 high - %s med - %s low - %s 疲劳 - %s, 5星 high - %s med - %s low - %s 疲劳 - %s",
 				sg_high[6], sg_med[6], sg_low[6], sg_tired[6], sg_high[5], sg_med[5], sg_low[5], sg_tired[5]))
-		print(string.format("4星 high - %s med - %s low - %s 疲劳 - %s, 3星 high - %s med - %s low - %s 疲劳 - %s", 
+		print(string.format("4星 high - %s med - %s low - %s 疲劳 - %s, 3星 high - %s med - %s low - %s 疲劳 - %s",
 				sg_high[4], sg_med[4], sg_low[4], sg_tired[4], sg_high[3], sg_med[3], sg_low[3], sg_tired[3]))
-		print(string.format("2星 high - %s med - %s low - %s 疲劳 - %s, 1星 high - %s med - %s low - %s 疲劳 - %s", 
+		print(string.format("2星 high - %s med - %s low - %s 疲劳 - %s, 1星 high - %s med - %s low - %s 疲劳 - %s",
 				sg_high[2], sg_med[2], sg_low[2], sg_tired[2], sg_high[1], sg_med[1], sg_low[1], sg_tired[1]))
 	end
 end
@@ -1071,11 +1071,11 @@ function member_team_refuse_invite()
 	
 	if ver == "iOS" then
 		x, y = findColor({37, 200, 42, 450},
-			"0|0|0xd66b5a,1|-21|0xb6a18e,71|-3|0x5bb664,100|-10|0x62bd6b",
+			"0|0|0xdc6d5a,2|-19|0x866c57,-21|2|0x846b55,21|1|0x856c56",
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"拒绝组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			random_touch(0, x, y, 10, 10)
+			random_touch(0, x, y, 5, 5)
 		end
 	elseif ver == "android" then
 		x, y = findColor({37, 200, 42, 450},
@@ -1083,7 +1083,7 @@ function member_team_refuse_invite()
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"拒绝组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			random_touch(0, x, y, 10, 10)
+			random_touch(0, x, y, 5, 5)
 		end
 	end
 	return x, y
