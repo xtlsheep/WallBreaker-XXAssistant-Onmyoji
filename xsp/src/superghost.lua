@@ -3,12 +3,13 @@ require "func"
 
 -- 超鬼王Global
 sg_en = 0
-sg_force = 0
-sg_fight_sel = nil
+sg_keep = 0 -- 超鬼王独立portal进入时使脚本持续运行
+sg_fight_sel = nil -- 自己发现的/所有公开的
 sg_mark_sel = {0, 0}
-sg_tired = {0, 0, 0, 0, 0, 0}
-sg_high = {0, 0, 0, 0, 0, 0}
-sg_low = {0, 0, 0, 0, 0, 0}
+sg_force = 0 -- 强力追击
+sg_tired = {0, 0, 0, 0, 0, 0} -- 疲劳操作
+sg_high = {0, 0, 0, 0, 0, 0} -- 高血量操作
+sg_low = {0, 0, 0, 0, 0, 0} -- 低血量操作
 
 -- Def
 -- 3个横排区域中心勾玉范围 x1,y1,x2,y2
@@ -56,8 +57,8 @@ end
 
 function lct_sg_page()
 	-- 识别超鬼王页面
-	local x, y = findColor({991, 540, 993, 542},
-		"0|0|0xcfe2f1,-69|-531|0xc4dbed,-567|-519|0x492421,-938|-484|0xf0f5fb,-610|-404|0xcfa146",
+	local x, y = findColor({922, 9, 924, 11},
+		"0|0|0xc4dbed,-492|19|0x47211f,-542|126|0xcd9f45,-869|47|0xf0f5fb",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -156,7 +157,7 @@ function find_sg_mgt(index)
 end
 
 function find_sg_50(index)
-	-- 50%血条
+	-- 识别50%刻度血条
 	local x, y = findColor({target_bar_50_x1[index], target_bar_50_y1[index], target_bar_50_x2[index], target_bar_50_y2[index]},
 		"0|0|0xe35f30,-100|-15|0xa89a96,185|-15|0xa69793",
 		95, 0, 0, 0)
@@ -167,6 +168,7 @@ function find_sg_50(index)
 end
 
 function find_sg_tb(index, sg_curr)
+	-- 判断高/低血量, 返回操作string
 	local ret_50
 	ret_50 = find_sg_50(index)
 	
@@ -241,7 +243,7 @@ function sg_mark(last_mark)
 end
 
 function sg_start()
-	-- 退治识别
+	-- 挑战识别
 	local x, y = findColor({1028, 534, 1030, 536},
 		"0|0|0xe5c089,-37|5|0xd1e3f1,-32|12|0xe07c52,-19|23|0xccdfee",
 		95, 0, 0, 0)
@@ -306,8 +308,8 @@ end
 
 function sg_tired_detect()
 	-- 识别疲劳窗口
-	local x, y = findColor({830, 171, 832, 173},
-		"0|0|0xe8d4cf,-366|150|0x9ad932,-358|155|0xecf693,-273|248|0xea361e",
+	local x, y = findColor({565, 418, 568, 420},
+		"0|0|0xf3b25e,-94|-92|0xecf693,-106|-96|0x8dd229,265|-247|0xe8d4cf",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"疲劳溢出",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -316,6 +318,7 @@ function sg_tired_detect()
 end
 
 function sg_group_check()
+	-- 识别集结窗口
 	local x, y = findColor({876, 554, 878, 556},
 		"0|0|0xe6c385,-5|-14|0xeed29e,-19|-16|0x251717,18|-9|0xcb9354",
 		80, 0, 0, 0)
@@ -342,12 +345,14 @@ function sg_group_invite()
 end
 
 function sg_group_public()
+	-- 5/6星鬼王公开
 	random_touch(0, 450, 510, 20, 10) -- 公开
 	random_sleep(500)
 	random_touch(0, 670, 375, 30, 10) -- 确认
 end
 
 function sg_bonus_extra()
+	-- 识别妖灵溢出
 	local x, y = findColor({567, 420, 569, 422},
 		"0|0|0xf3b25e,-174|-258|0xe9ab53,-166|-256|0xb54f3c,173|55|0xe9ab53,163|52|0xb34c39",
 		95, 0, 0, 0)
@@ -358,7 +363,8 @@ function sg_bonus_extra()
 end
 
 function sg_bonus_get()
-	local x, y = findColor({442, 178, 444, 180},
+	-- 识别低星鬼王自动领取奖励
+	local x, y = findColor({440, 100, 445, 250},
 		"0|0|0xf2e5ad,248|17|0xf2e5b4,-138|104|0xad9f9a,392|104|0xaea09b,1|258|0x500c19",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -368,6 +374,7 @@ function sg_bonus_get()
 end
 
 function sg_bonus_exit()
+	-- 退出超鬼王领赏
 	local x, y = findColor({991, 111, 993, 113},
 		"0|0|0xe8d4cf,-877|459|0xf4d4a5,-890|446|0x281918,-756|6|0x790606",
 		95, 0, 0, 0)
@@ -397,13 +404,14 @@ function superghost()
 	local index = 0
 	local index_max = 0
 	
-	-- 超鬼王识别
+	-- 超鬼王弹窗/页面识别
 	x, y = lct_sg_window() if x > -1 then sg_window = 1 end
 	x, y = lct_sg_page() if x > -1 then sg_page = 1 end
 	if (sg_window == 0) and (sg_page == 0) then
 		return RET_ERR
 	end
 	
+	-- 根据Pri/Pub设置区域扫描的循环次数
 	if sg_fight_sel == "Private" then
 		index_max = 1
 	elseif sg_fight_sel == "Public" then
@@ -422,7 +430,7 @@ function superghost()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行
-			x, y = fight_ongoing() if (x > -1) then last_mark = sg_mark(last_mark) mSleep(3000) break end
+			x, y = fight_ongoing() if (x > -1) then last_mark = sg_mark(last_mark) mSleep(3000) break end -- 三秒钟Check一次标记
 			-- 疲劳溢出
 			x, y = sg_tired_detect()
 			if x > -1 then
@@ -432,14 +440,13 @@ function superghost()
 					random_touch(0, x, y , 30, 10) -- 58勾
 					tired_op = nil
 				elseif tired_op == "等待" then
-					
 					HUD_show_or_hide(HUD,hud_info,"等待5分钟",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					mSleep(5*60*1000) -- Idle 5min
+					mSleep(5*60*1000) -- 等待5分钟
 					tired_op = nil
 				elseif tired_op == "集结" then
 					random_touch(0, 831, 173, 5, 5) -- 关闭
 				elseif tired_op == "响铃" then
-					alarm("exit")
+					alarm("exit") -- 提醒后退出脚本
 				end
 				break
 			end
@@ -462,31 +469,36 @@ function superghost()
 			if x > -1 then
 				-- 进入集结
 				if (tired_op == "集结") then
-					ret = sg_group_check()
+					ret = sg_group_check() -- Check是否可以集结
 					if ret == RET_OK then
 						random_touch(0, 880, 550, 10, 10) -- 集结
 					else
-						return RET_OK
+						HUD_show_or_hide(HUD,hud_info,"等待5分钟",20,"0xff000000","0xffffffff",0,100,0,300,32)
+						mSleep(5*60*1000) -- 等待5分钟
+						tired_op = nil
 					end
 					break
 				end
 				-- 寻找超鬼王
-				for index = 1, index_max do
-					x_f, y_f, sg_curr = find_sg_mgt(index)
+				for index = 1, index_max do	-- 扫描区域1至区域1[Pri]/区域3[Pub]
+					x_f, y_f, sg_curr = find_sg_mgt(index) -- 返回检测的Valid超鬼王的星级[sg_curr]
 					if sg_curr > 0 then
 						mSleep(500)
 						random_touch(0, x_f+150, y_f, 60, 30) -- 选择超鬼王
 						random_sleep(500)
+						-- Pri模式下Check是否可以集结[没有集结->non-pri超鬼王]
 						if sg_fight_sel == "Private" then
 							ret = sg_group_check()
 							if ret == RET_ERR then
-								sg_curr = 0
+								sg_curr = 0 -- 设置没有检测到Valid超鬼王然后退出扫描
 								break
 							end
 						end
+						-- Check是否可以挑战
 						ret = sg_start()
 						if ret == RET_OK then
-							sg_tb = find_sg_tb(index, sg_curr)
+							-- Check当前鬼王血条high/low
+							sg_tb = find_sg_tb(index, sg_curr) -- 返回当前星级鬼王high/low操作string
 							if sg_tb == "响铃" then
 								alarm("pause")
 							end
@@ -501,6 +513,7 @@ function superghost()
 						else
 							HUD_show_or_hide(HUD,hud_info,string.format("区域%d鬼王已经结算", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
 							mSleep(500)
+							-- Pri模式下设置没有检测到Valid超鬼王然后退出扫描
 							if sg_fight_sel == "Private" then
 								sg_curr = 0
 								break
@@ -509,6 +522,7 @@ function superghost()
 					else
 						HUD_show_or_hide(HUD,hud_info,string.format("区域%d未发现鬼王", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
 						mSleep(500)
+						-- Pri模式下设置没有检测到Valid超鬼王然后退出扫描
 						if sg_fight_sel == "Private" then
 							sg_curr = 0
 							break
@@ -516,8 +530,15 @@ function superghost()
 					end
 				end
 				if (sg_curr == 0) then
-					random_touch(0, 60, 55, 10, 10) -- 左上退出
-					return RET_OK
+					if sg_keep == 1 then
+						-- 超鬼王Portal进入时保持超鬼王函数持续运行
+						HUD_show_or_hide(HUD,hud_info,"等待3分钟",20,"0xff000000","0xffffffff",0,100,0,300,32)
+						mSleep(3*60*1000)
+					else
+						-- No valid超鬼王, 退出函数
+						random_touch(0, 60, 55, 10, 10) -- 左上退出
+						return RET_OK
+					end
 				end
 			end
 			-- 战斗准备/预设

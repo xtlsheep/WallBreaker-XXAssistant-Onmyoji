@@ -1678,8 +1678,7 @@ function superghost_UI()
 	superghost_ui = UI:new("superghost.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 	UI:Label(superghost_ui, "center", "0,0,0", 30, "超鬼王", "20,20,960,55")
 	UI:Label(superghost_ui, "left", "0,0,0", 30, "Tips - ", "30,100,960,60")
-	UI:Label(superghost_ui, "left", "0,0,0", 30, "请在超鬼王界面运行，清理完当前超鬼王后会自动停止脚本", "30,160,960,60")
-	UI:Label(superghost_ui, "left", "0,0,0", 30, "详细设置参考[全局设置]-[超鬼王]页面", "30,220,960,60")
+	UI:Label(superghost_ui, "left", "0,0,0", 30, "请在超鬼王界面运行, 详细设置位于[全局设置]-[超鬼王]页面", "30,160,960,60")
 	UI:fit(superghost_ui)
 	
 	ret_offerquery, res_offerquery = UI:show(superghost_ui)
@@ -1694,6 +1693,8 @@ function superghost_UI()
 	end
 	
 	sg_en = 1
+	sg_keep = 1
+	sg_fight_sel = "Public"
 	mSleep(500)
 	superghost()
 end
