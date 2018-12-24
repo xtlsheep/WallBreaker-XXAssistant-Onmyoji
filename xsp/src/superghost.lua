@@ -345,6 +345,8 @@ end
 
 function sg_group_public()
 	random_touch(0, 450, 510, 20, 10) -- 公开
+	random_sleep(500)
+	random_touch(0, 670, 375, 30, 10) -- 确认
 end
 
 function sg_bonus_extra()
