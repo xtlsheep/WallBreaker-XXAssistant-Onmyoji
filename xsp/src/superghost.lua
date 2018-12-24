@@ -167,14 +167,13 @@ function find_sg_50(index)
 end
 
 function find_sg_tb(index, sg_curr)
-	local ret_25, ret_50
-	ret_25 = find_sg_25(index)
+	local ret_50
 	ret_50 = find_sg_50(index)
 	
 	if ret_50 == RET_OK then
 		HUD_show_or_hide(HUD,hud_info,string.format("高血量 - 执行 %s", sg_high[sg_curr]),20,"0xff000000","0xffffffff",0,100,0,300,32)
 		return sg_high[sg_curr]
-	elseif ret_25 == RET_ERR then
+	else
 		HUD_show_or_hide(HUD,hud_info,string.format("低血量 - 执行 %s", sg_low[sg_curr]),20,"0xff000000","0xffffffff",0,100,0,300,32)
 		return sg_low[sg_curr]
 	end
@@ -316,12 +315,11 @@ function sg_tired_detect()
 	return x, y
 end
 
-function sg_group_enter()
+function sg_group_check()
 	local x, y = findColor({876, 554, 878, 556},
 		"0|0|0xe6c385,-5|-14|0xeed29e,-19|-16|0x251717,18|-9|0xcb9354",
 		80, 0, 0, 0)
 	if x > -1 then
-		random_touch(0, 880, 550, 10, 10) -- 集结
 		return RET_OK
 	end
 	return RET_ERR
@@ -397,6 +395,7 @@ function superghost()
 	local sg_window = 0
 	local sg_page = 0
 	local index = 0
+	local index_max = 0
 	
 	-- 超鬼王识别
 	x, y = lct_sg_window() if x > -1 then sg_window = 1 end
@@ -405,7 +404,11 @@ function superghost()
 		return RET_ERR
 	end
 	
-	HUD_show_or_hide(HUD,hud_info,string.format("超鬼王", win_cnt, fail_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
+	if sg_fight_sel == "Private" then
+		index_max = 1
+	elseif sg_fight_sel == "Public" then
+		index_max = 3
+	end
 	
 	while (1) do
 		while (1) do
@@ -446,7 +449,6 @@ function superghost()
 					sg_group_invite() -- 邀请
 				else
 					sg_group_public() -- 公开
-					
 				end
 				mSleep(5*60*1000) -- 等待5分钟
 				tired_op = nil
@@ -458,28 +460,37 @@ function superghost()
 			if x > -1 then
 				-- 进入集结
 				if (tired_op == "集结") then
-					ret = sg_group_enter()
-					if ret == RET_ERR then
+					ret = sg_group_check()
+					if ret == RET_OK then
+						random_touch(0, 880, 550, 10, 10) -- 集结
+					else
 						return RET_OK
 					end
 					break
 				end
 				-- 寻找超鬼王
-				for index = 1, 3 do
+				for index = 1, index_max do
 					x_f, y_f, sg_curr = find_sg_mgt(index)
 					if sg_curr > 0 then
 						mSleep(500)
 						random_touch(0, x_f+150, y_f, 200, 30) -- 选择超鬼王
 						random_sleep(500)
+						ret = sg_group_check()
+						if ret == RET_ERR then
+							sg_curr = 0
+							break
+						end
 						ret = sg_start()
 						if ret == RET_OK then
 							sg_tb = find_sg_tb(index, sg_curr)
 							random_sleep(500)
 							sg_switch_mode(sg_curr) -- 切换战斗模式
 							random_touch(0, 1030, 540, 20, 20) -- 挑战
+							sg_curr = 0
 							break
 						else
 							HUD_show_or_hide(HUD,hud_info,string.format("区域%d鬼王已经结算", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
+							sg_curr = 0
 							mSleep(500)
 						end
 					else
