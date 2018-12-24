@@ -25,6 +25,7 @@ function screen_direct_init()
 end
 
 function onBeforeUserExit()
+	stopAudio()
 	settlement_UI()
 end
 
@@ -368,7 +369,7 @@ function stats_write()
 	end
 end
 
-function alarm_pause()
+function alarm(op)
 	local touchCount = 2
 	
 	for i = 1, 5 do
@@ -377,8 +378,13 @@ function alarm_pause()
 		stopAudio()
 		mSleep(500)
 	end
-	HUD_show_or_hide(HUD,hud_info,"暂停ing, 双击屏幕任意位置继续",20,"0xff000000","0xffffffff",0,100,0,300,32)
-	results = catchTouchPoint(touchCount)
+	if op == "pause" then
+		HUD_show_or_hide(HUD,hud_info,"暂停ing, 双击屏幕任意位置继续",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		results = catchTouchPoint(touchCount)
+		return
+	elseif op == "exit" then
+		lua_exit()
+	end
 end
 
 -- Locate & Enter func
@@ -604,6 +610,29 @@ function fight_ready()
 		95, 0, 0, 0)
 	if (x > -1) then
 		HUD_show_or_hide(HUD,hud_info,"战斗开始",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		random_touch(0, 1040, 493, 30, 30) -- 准备的鼓
+	end
+	return x, y
+end
+
+function fight_preset(index)
+	local x, y = findColor({1035, 596, 1039, 599}, -- 准备的鼓的棒槌
+		"0|0|0xe5c288,-62|17|0xebd19e,61|18|0xf0d8a9",
+		95, 0, 0, 0)
+	if (x > -1) then
+		HUD_show_or_hide(HUD,hud_info,string.format("使用预设队伍%d", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
+		random_touch(0, 55, 610, 5, 5) -- 预设
+		random_sleep(250)
+		if index == 1 then
+			random_touch(0, 230, 275, 50, 20) -- 队伍1
+		elseif index == 2 then
+			random_touch(0, 230, 380, 50, 20) -- 队伍2
+		elseif index == 3 then
+			random_touch(0, 230, 485, 50, 20) -- 队伍3
+		end
+		random_sleep(250)
+		random_touch(0, 230, 610, 20, 10) -- 出战
+		random_sleep(1000)
 		random_touch(0, 1040, 493, 30, 30) -- 准备的鼓
 	end
 	return x, y

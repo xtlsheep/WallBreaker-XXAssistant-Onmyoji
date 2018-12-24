@@ -223,17 +223,17 @@ function global_UI()
 	-- 6星
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "6星设置 - ", "20,140,140,60")
 	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>50%", "160,140,160,60")
-	UI:ComboBox(global_super_ghost_page, "sg_high_6", "默认,①队,②队,③队,响铃,集结","0",23,"330,140,150,50")
+	UI:ComboBox(global_super_ghost_page, "sg_high_6", "默认,①队,②队,③队,响铃,公开","0",23,"330,140,150,50")
 	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<50%", "470,140,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_low_6", "默认,①队,②队,③队,响铃,集结","0",23,"570,140,150,50")
+	UI:ComboBox(global_super_ghost_page, "sg_low_6", "默认,①队,②队,③队,响铃,公开","0",23,"570,140,150,50")
 	UI:Label(global_super_ghost_page, "center", "0,0,0", 30, "]  疲劳", "720,140,100,60")
 	UI:ComboBox(global_super_ghost_page, "sg_tired_6", "公开,等待,喝茶,响铃","2",23,"820,140,150,50")
 	-- 5星
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "5星设置 - ", "20,200,140,60")
 	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>50%", "160,200,160,60")
-	UI:ComboBox(global_super_ghost_page, "sg_high_5", "默认,①队,②队,③队,响铃,集结","0",23,"330,200,150,50")
+	UI:ComboBox(global_super_ghost_page, "sg_high_5", "默认,①队,②队,③队,响铃,公开","0",23,"330,200,150,50")
 	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<50%", "470,200,100,60")
-	UI:ComboBox(global_super_ghost_page, "sg_low_5", "默认,①队,②队,③队,响铃,集结","0",23,"570,200,150,50")
+	UI:ComboBox(global_super_ghost_page, "sg_low_5", "默认,①队,②队,③队,响铃,公开","0",23,"570,200,150,50")
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "720,200,100,60")
 	UI:ComboBox(global_super_ghost_page, "sg_tired_5", "公开,等待,喝茶,响铃","2",23,"820,200,150,50")
 	-- 4星
@@ -247,7 +247,7 @@ function global_UI()
 	-- 3星
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "3星设置 - ", "20,320,140,60")
 	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>50%", "160,320,160,60")
-	UI:ComboBox(global_super_ghost_page, "sg_high_3", "默认,①队,②队,③队响铃,集结","0",23,"330,320,150,50")
+	UI:ComboBox(global_super_ghost_page, "sg_high_3", "默认,①队,②队,③队,响铃,集结","0",23,"330,320,150,50")
 	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<50%", "470,320,100,60")
 	UI:ComboBox(global_super_ghost_page, "sg_low_3", "默认,①队,②队,③队,响铃,集结","0",23,"570,320,150,50")
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "720,320,100,60")
@@ -378,87 +378,86 @@ function global_UI()
 	elseif res_global.sg_high_6 == "1" then sg_high[6] = "预设1"
 	elseif res_global.sg_high_6 == "2" then sg_high[6] = "预设2"
 	elseif res_global.sg_high_6 == "3" then sg_high[6] = "预设3"
-	elseif res_global.sg_high_6 == "7" then sg_high[6] = "响铃"
-	elseif res_global.sg_high_6 == "7" then sg_high[6] = "集结" end
+	elseif res_global.sg_high_6 == "4" then sg_high[6] = "响铃"
+	elseif res_global.sg_high_6 == "5" then sg_high[6] = "集结" end
 	
 	if res_global.sg_high_5 == "0" then sg_high[5] = "默认"
 	elseif res_global.sg_high_5 == "1" then sg_high[5] = "预设1"
 	elseif res_global.sg_high_5 == "2" then sg_high[5] = "预设2"
 	elseif res_global.sg_high_5 == "3" then sg_high[5] = "预设3"
-	elseif res_global.sg_high_5 == "7" then sg_high[5] = "响铃"
-	elseif res_global.sg_high_5 == "7" then sg_high[5] = "集结" end
+	elseif res_global.sg_high_5 == "4" then sg_high[5] = "响铃"
+	elseif res_global.sg_high_5 == "5" then sg_high[5] = "集结" end
 	
 	if res_global.sg_high_4 == "0" then sg_high[4] = "默认"
 	elseif res_global.sg_high_4 == "1" then sg_high[4] = "预设1"
 	elseif res_global.sg_high_4 == "2" then sg_high[4] = "预设2"
 	elseif res_global.sg_high_4 == "3" then sg_high[4] = "预设3"
-	elseif res_global.sg_high_4 == "7" then sg_high[4] = "响铃"
-	elseif res_global.sg_high_4 == "7" then sg_high[4] = "集结" end
+	elseif res_global.sg_high_4 == "4" then sg_high[4] = "响铃"
+	elseif res_global.sg_high_4 == "5" then sg_high[4] = "集结" end
 	
 	if res_global.sg_high_3 == "0" then sg_high[3] = "默认"
 	elseif res_global.sg_high_3 == "1" then sg_high[3] = "预设1"
 	elseif res_global.sg_high_3 == "2" then sg_high[3] = "预设2"
 	elseif res_global.sg_high_3 == "3" then sg_high[3] = "预设3"
-	elseif res_global.sg_high_3 == "7" then sg_high[3] = "响铃"
-	elseif res_global.sg_high_3 == "7" then sg_high[3] = "集结" end
+	elseif res_global.sg_high_3 == "4" then sg_high[3] = "响铃"
+	elseif res_global.sg_high_3 == "5" then sg_high[3] = "集结" end
 	
 	if res_global.sg_high_2 == "0" then sg_high[2] = "默认"
 	elseif res_global.sg_high_2 == "1" then sg_high[2] = "预设1"
 	elseif res_global.sg_high_2 == "2" then sg_high[2] = "预设2"
 	elseif res_global.sg_high_2 == "3" then sg_high[2] = "预设3"
-	elseif res_global.sg_high_2 == "7" then sg_high[2] = "响铃"
-	elseif res_global.sg_high_2 == "7" then sg_high[2] = "集结" end
+	elseif res_global.sg_high_2 == "4" then sg_high[2] = "响铃"
+	elseif res_global.sg_high_2 == "5" then sg_high[2] = "集结" end
 	
 	if res_global.sg_high_1 == "0" then sg_high[1] = "默认"
 	elseif res_global.sg_high_1 == "1" then sg_high[1] = "预设1"
 	elseif res_global.sg_high_1 == "2" then sg_high[1] = "预设2"
 	elseif res_global.sg_high_1 == "3" then sg_high[1] = "预设3"
-	elseif res_global.sg_high_1 == "7" then sg_high[1] = "响铃"
-	elseif res_global.sg_high_1 == "7" then sg_high[1] = "集结" end
+	elseif res_global.sg_high_1 == "4" then sg_high[1] = "响铃"
+	elseif res_global.sg_high_1 == "5" then sg_high[1] = "集结" end
 
-	
 	-- <50%
 	if res_global.sg_low_6 == "0" then sg_low[6] = "默认"
 	elseif res_global.sg_low_6 == "1" then sg_low[6] = "预设1"
 	elseif res_global.sg_low_6 == "2" then sg_low[6] = "预设2"
 	elseif res_global.sg_low_6 == "3" then sg_low[6] = "预设3"
-	elseif res_global.sg_low_6 == "7" then sg_low[6] = "响铃"
-	elseif res_global.sg_low_6 == "7" then sg_low[6] = "集结" end
+	elseif res_global.sg_low_6 == "4" then sg_low[6] = "响铃"
+	elseif res_global.sg_low_6 == "5" then sg_low[6] = "集结" end
 	
 	if res_global.sg_low_5 == "0" then sg_low[5] = "默认"
 	elseif res_global.sg_low_5 == "1" then sg_low[5] = "预设1"
 	elseif res_global.sg_low_5 == "2" then sg_low[5] = "预设2"
 	elseif res_global.sg_low_5 == "3" then sg_low[5] = "预设3"
-	elseif res_global.sg_low_5 == "7" then sg_low[5] = "响铃" 
-	elseif res_global.sg_low_5 == "7" then sg_low[5] = "集结" end
+	elseif res_global.sg_low_5 == "4" then sg_low[5] = "响铃" 
+	elseif res_global.sg_low_5 == "5" then sg_low[5] = "集结" end
 	
 	if res_global.sg_low_4 == "0" then sg_low[4] = "默认"
 	elseif res_global.sg_low_4 == "1" then sg_low[4] = "预设1"
 	elseif res_global.sg_low_4 == "2" then sg_low[4] = "预设2"
 	elseif res_global.sg_low_4 == "3" then sg_low[4] = "预设3"
-	elseif res_global.sg_low_4 == "7" then sg_low[4] = "响铃" 
-	elseif res_global.sg_low_4 == "7" then sg_low[4] = "集结" end
+	elseif res_global.sg_low_4 == "4" then sg_low[4] = "响铃" 
+	elseif res_global.sg_low_4 == "5" then sg_low[4] = "集结" end
 	
 	if res_global.sg_low_3 == "0" then sg_low[3] = "默认"
 	elseif res_global.sg_low_3 == "1" then sg_low[3] = "预设1"
 	elseif res_global.sg_low_3 == "2" then sg_low[3] = "预设2"
 	elseif res_global.sg_low_3 == "3" then sg_low[3] = "预设3"
-	elseif res_global.sg_low_3 == "7" then sg_low[3] = "响铃" 
-	elseif res_global.sg_low_3 == "7" then sg_low[3] = "集结" end
+	elseif res_global.sg_low_3 == "4" then sg_low[3] = "响铃" 
+	elseif res_global.sg_low_3 == "5" then sg_low[3] = "集结" end
 	
 	if res_global.sg_low_2 == "0" then sg_low[2] = "默认"
 	elseif res_global.sg_low_2 == "1" then sg_low[2] = "预设1"
 	elseif res_global.sg_low_2 == "2" then sg_low[2] = "预设2"
 	elseif res_global.sg_low_2 == "3" then sg_low[2] = "预设3"
-	elseif res_global.sg_low_2 == "7" then sg_low[2] = "响铃" 
-	elseif res_global.sg_low_2 == "7" then sg_low[2] = "集结" end
+	elseif res_global.sg_low_2 == "4" then sg_low[2] = "响铃" 
+	elseif res_global.sg_low_2 == "5" then sg_low[2] = "集结" end
 	
 	if res_global.sg_low_1 == "0" then sg_low[1] = "默认"
 	elseif res_global.sg_low_1 == "1" then sg_low[1] = "预设1"
 	elseif res_global.sg_low_1 == "2" then sg_low[1] = "预设2"
 	elseif res_global.sg_low_1 == "3" then sg_low[1] = "预设3"
-	elseif res_global.sg_low_1 == "7" then sg_low[1] = "响铃" 
-	elseif res_global.sg_low_1 == "7" then sg_low[1] = "集结" end
+	elseif res_global.sg_low_1 == "4" then sg_low[1] = "响铃" 
+	elseif res_global.sg_low_1 == "5" then sg_low[1] = "集结" end
 	
 	-- 疲劳
 	if res_global.sg_tired_6 == "0" then sg_tired[6] = "集结"
@@ -1695,5 +1694,6 @@ function superghost_UI()
 	end
 	
 	sg_en = 1
+	mSleep(500)
 	superghost()
 end

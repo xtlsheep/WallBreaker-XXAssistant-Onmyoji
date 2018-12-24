@@ -56,8 +56,8 @@ end
 
 function lct_sg_page()
 	-- 识别超鬼王页面
-	local x, y = findColor({419, 180, 421, 182},
-		"0|0|0xa67a28,-37|-45|0xcd9f45,-365|-125|0xf0f5fb,8|-157|0x3d1f1e",
+	local x, y = findColor({991, 540, 993, 542},
+		"0|0|0xcfe2f1,-69|-531|0xc4dbed,-567|-519|0x492421,-938|-484|0xf0f5fb,-610|-404|0xcfa146",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -306,8 +306,8 @@ end
 
 function sg_tired_detect()
 	-- 识别疲劳窗口
-	local x, y = findColor({567, 418, 569, 420},
-		"0|0|0xf3b25e,-81|-109|0x414277,-9|0|0xeb3219",
+	local x, y = findColor({830, 171, 832, 173},
+		"0|0|0xe8d4cf,-366|150|0x9ad932,-358|155|0xecf693,-273|248|0xea361e",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"疲劳溢出",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -432,12 +432,14 @@ function superghost()
 					random_touch(0, x, y , 30, 10) -- 58勾
 					tired_op = nil
 				elseif tired_op == "等待" then
-					random_touch(0, 831, 173, 5, 5) -- 关闭
+					
 					HUD_show_or_hide(HUD,hud_info,"等待5分钟",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					mSleep(5*60*1000) -- Idle 5min
 					tired_op = nil
 				elseif tired_op == "集结" then
 					random_touch(0, 831, 173, 5, 5) -- 关闭
+				elseif tired_op == "响铃" then
+					alarm("exit")
 				end
 				break
 			end
@@ -473,45 +475,62 @@ function superghost()
 					x_f, y_f, sg_curr = find_sg_mgt(index)
 					if sg_curr > 0 then
 						mSleep(500)
-						random_touch(0, x_f+150, y_f, 200, 30) -- 选择超鬼王
+						random_touch(0, x_f+150, y_f, 60, 30) -- 选择超鬼王
 						random_sleep(500)
-						ret = sg_group_check()
-						if ret == RET_ERR then
-							sg_curr = 0
-							break
+						if sg_fight_sel == "Private" then
+							ret = sg_group_check()
+							if ret == RET_ERR then
+								sg_curr = 0
+								break
+							end
 						end
 						ret = sg_start()
 						if ret == RET_OK then
 							sg_tb = find_sg_tb(index, sg_curr)
 							if sg_tb == "响铃" then
-								alarm_pause()
+								alarm("pause")
 							end
 							if sg_tb == "集结" then
-								tired_op == "集结"
+								tired_op = "集结"
 								break
 							end
 							random_sleep(500)
 							sg_switch_mode(sg_curr) -- 切换战斗模式
 							random_touch(0, 1030, 540, 20, 20) -- 挑战
-							sg_curr = 0
 							break
 						else
 							HUD_show_or_hide(HUD,hud_info,string.format("区域%d鬼王已经结算", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
-							sg_curr = 0
 							mSleep(500)
+							if sg_fight_sel == "Private" then
+								sg_curr = 0
+								break
+							end
 						end
 					else
 						HUD_show_or_hide(HUD,hud_info,string.format("区域%d未发现鬼王", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
 						mSleep(500)
+						if sg_fight_sel == "Private" then
+							sg_curr = 0
+							break
+						end
 					end
 				end
 				if (sg_curr == 0) then
 					random_touch(0, 60, 55, 10, 10) -- 左上退出
-					return
+					return RET_OK
 				end
 			end
-			-- 战斗准备
-			x, y = fight_ready() if (x > -1) then break end
+			-- 战斗准备/预设
+			if sg_tb == "预设1" then
+				x, y = fight_preset(1)
+			elseif sg_tb == "预设2" then
+				x, y = fight_preset(2)
+			elseif sg_tb == "预设3" then
+				x, y = fight_preset(3)
+			else
+				x, y = fight_ready()
+			end
+			if (x > -1) then sg_tb = nil break end
 			-- 战斗失败
 			x, y = sg_fight_failed() if (x > -1) then
 				sg_keep_fight_failed()
