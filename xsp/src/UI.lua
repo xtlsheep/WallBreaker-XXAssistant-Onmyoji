@@ -9,6 +9,7 @@ require "tansuo"
 require "autostory"
 require "yqfy"
 require "hundredghost"
+require "LBSGhostDriving"
 require "superghost"
 
 -- UI init
@@ -48,7 +49,7 @@ function config_UI()
 	-- Config
 	config_ui = UI:new("config.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 	UI:Label(config_ui, "center", "0,0,0", 30, "高级选项", "20,20,960,55")
-	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,妖气封印    ,百鬼夜行    ,一键每日    ,副本组合    ,世界喊话    ,普通召唤    ,悬赏查询    ,劲舞团        ,自动剧情    ,漫展漂移","0",30,"0,0,0","30,150,960,300")
+	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,妖气封印    ,百鬼夜行    ,自动樱饼    ,副本组合    ,世界喊话    ,普通召唤    ,悬赏查询    ,劲舞团        ,自动剧情    ,超鬼王","0",30,"0,0,0","30,150,960,300")
 	UI:fit(config_ui)
 	
 	ret_config, res_config = UI:show(config_ui)
@@ -74,7 +75,7 @@ function config_UI()
 		-- 百鬼夜行
 	elseif (res_config.select == "7")  then hundredghost_UI()
 		-- 一键每日
-	elseif (res_config.select == "8")  then dallymission_UI()
+	elseif (res_config.select == "8")  then auto_cake_UI()
 		-- 副本组合
 	elseif (res_config.select == "9")  then multimission_UI()
 		-- 世界喊话
@@ -87,8 +88,9 @@ function config_UI()
 	elseif (res_config.select == "13")  then audition_UI()
 		-- 自动剧情
 	elseif (res_config.select == "14")  then autostory_UI()
-		-- 漫展漂移
-	elseif (res_config.select == "15")  then LBSGhostDriving_UI()
+		-- 漫展漂移/超鬼王
+	--elseif (res_config.select == "15")  then LBSGhostDriving_UI()
+	elseif (res_config.select == "15")  then superghost_UI()
 	end
 end
 
@@ -1595,14 +1597,14 @@ function hundredghost_UI()
 	hundredghost(round, num, invite)
 end
 
-function dallymission_UI()
+function auto_cake_UI()
 	-- 一键每日
-	dallymission_ui = UI:new("dallymission.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-	UI:Label(dallymission_ui, "center", "0,0,0", 30, "一键每日", "20,20,960,55")
-	UI:fit(dallymission_ui)
+	auto_cake_ui = UI:new("auto_cake.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+	UI:Label(auto_cake_ui, "center", "0,0,0", 30, "一键每日", "20,20,960,55")
+	UI:fit(auto_cake_ui)
 	
-	ret_dallymission, res_dallymission = UI:show(dallymission_ui)
-	if (ret_dallymission == 0) then
+	ret_auto_cake, res_auto_cake = UI:show(auto_cake_ui)
+	if (ret_auto_cake == 0) then
 		config_UI()
 		return
 	end
@@ -1754,7 +1756,6 @@ function LBSGhostDriving_UI()
 	-- 漫展漂移
 	LBSGhostDriving_ui = UI:new("LBSGhostDriving.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 	UI:Label(LBSGhostDriving_ui, "center", "0,0,0", 30, "漫展漂移", "20,20,960,55")
-	UI:RadioGroup(LBSGhostDriving_ui, "round3", "左 ,中 ,右 ,无","3",30,"0,0,0","500,600,500,60")
 	UI:Label(LBSGhostDriving_ui, "left", "0,0,0", 30, "Tips - ", "30,100,960,60")
 	UI:Label(LBSGhostDriving_ui, "left", "0,0,0", 30, "请在漫展界面中使用", "30,160,960,60")
 	UI:fit(LBSGhostDriving_ui)
@@ -1769,4 +1770,30 @@ function LBSGhostDriving_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
+	
+	LBSGhostDriving()
+end
+
+function superghost_UI()
+	-- 超鬼王
+	superghost_ui = UI:new("superghost.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+	UI:Label(superghost_ui, "center", "0,0,0", 30, "超鬼王", "20,20,960,55")
+	UI:Label(superghost_ui, "left", "0,0,0", 30, "Tips - ", "30,100,960,60")
+	UI:Label(superghost_ui, "left", "0,0,0", 30, "请在超鬼王界面打开，清理完当前超鬼王后会自动停止脚本", "30,160,960,60")
+	UI:Label(superghost_ui, "left", "0,0,0", 30, "详细设置请于[全局设置]-[超鬼王]页面中配置", "30,220,960,60")
+	UI:fit(superghost_ui)
+	
+	ret_offerquery, res_offerquery = UI:show(superghost_ui)
+	if (ret_offerquery == 0) then
+		config_UI()
+		return
+	end
+	
+	local ret_global = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
+	
+	sg_en = 1
+	superghost()
 end

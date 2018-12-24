@@ -23,12 +23,12 @@ function create_team()
 	return x, y
 end
 
-function leave_team(interv)
+function leave_team()
 	local x, y = findColor({199, 536, 201, 538},
 		"0|0|0xdf6851,724|-13|0xf3b25e,116|-4|0xc7bdb4,-11|-275|0xcec6bc",
 		95, 0, 0, 0)
 	if x > -1 then
-		mSleep(interv*1000)
+		mSleep(2*1000)
 		random_touch(0, x, y, 20, 20)
 	end
 	return x, y
@@ -65,7 +65,7 @@ function pop_up()
 end
 
 -- Main func
-function LBSGhostDriving(interv)
+function LBSGhostDriving()
 	print_global_vars()
 	local x, y
 	
@@ -77,7 +77,7 @@ function LBSGhostDriving(interv)
 			-- 创建
 			x, y = create_team() if x > -1 then break end
 			-- 离开队伍
-			x, y = leave_team(interv) if x > -1 then break end
+			x, y = leave_team() if x > -1 then break end
 			-- 确认离开
 			x, y = leave_confirm() if x > -1 then break end
 			-- 取消邀请
