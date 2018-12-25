@@ -49,7 +49,7 @@ function config_UI()
 	-- Config
 	config_ui = UI:new("config.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 	UI:Label(config_ui, "center", "0,0,0", 30, "高级选项", "20,20,960,55")
-	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,妖气封印    ,百鬼夜行    ,自动樱饼    ,副本组合    ,世界喊话    ,普通召唤    ,悬赏查询    ,劲舞团        ,自动剧情    ,超鬼王","0",30,"0,0,0","30,150,960,300")
+	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,妖气封印    ,百鬼夜行    ,自动樱饼    ,副本组合    ,世界喊话    ,普通召唤    ,悬赏查询    ,劲舞团        ,自动剧情    ,特殊活动","0",30,"0,0,0","30,150,960,300")
 	UI:fit(config_ui)
 	
 	ret_config, res_config = UI:show(config_ui)
@@ -88,9 +88,10 @@ function config_UI()
 	elseif (res_config.select == "13")  then audition_UI()
 		-- 自动剧情
 	elseif (res_config.select == "14")  then autostory_UI()
-		-- 漫展漂移/超鬼王
+		-- 特殊活动
+	elseif (res_config.select == "15")  then activityreserve_UI()
 	--elseif (res_config.select == "15")  then LBSGhostDriving_UI()
-	elseif (res_config.select == "15")  then superghost_UI()
+	--elseif (res_config.select == "15")  then superghost_UI()
 	end
 end
 
@@ -1649,6 +1650,23 @@ function autostory_UI()
 	end
 	
 	autostory()
+end
+
+function activityreserve_UI()
+	-- 劲舞团
+	activityreserve_ui = UI:new("activityreserve.dat", width_UI, height_UI, "退出", "返回", "backGround.jpg")
+	UI:Label(activityreserve_ui, "center", "0,0,0", 30, "特殊活动", "20,20,960,55")
+	UI:Label(activityreserve_ui, "left", "0,0,0", 30, "活动预留页面, 请返回上一级菜单使用其他功能或退出", "30,100,960,60")
+	UI:fit(activityreserve_ui)
+	
+	ret_activityreserve, res_activityreserve = UI:show(activityreserve_ui)
+	if (ret_activityreserve == 0) then
+		config_UI()
+		return
+	else
+		lua_exit()
+	end
+	return
 end
 
 function LBSGhostDriving_UI()
