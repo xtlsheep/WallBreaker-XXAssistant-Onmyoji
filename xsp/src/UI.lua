@@ -182,13 +182,14 @@ function global_UI()
 	UI:CheckBoxGroup(global_basic_page, "auto_jjtp_en","智能突破[暂时无效]","0",30,"0,0,0","20,80,960,60")
 	UI:CheckBoxGroup(global_basic_page, "sg_en","超鬼王","0",30,"0,0,0","20,140,960,60")
 	UI:Label(global_basic_page, "left", "0,0,0", 30, "鬼王选择 - ", "500,140,180,60")
-	UI:ComboBox(global_basic_page, "sg_fight_sel", "所有公开的超鬼王, 自己发现的超鬼王","1",23,"680,140,300,50")
+	UI:ComboBox(global_basic_page, "sg_fight_sel", "所有公开的超鬼王,自己发现的超鬼王","1",23,"680,140,300,50")
 	UI:Line(global_basic_page, "line_common", "100,100,100", 2, 960, "20,200,960,2")
-	UI:CheckBoxGroup(global_basic_page, "HUD","可视化点击手势与运行辅助描述","0",30,"0,0,0","20,210,980,60")
-	UI:CheckBoxGroup(global_basic_page, "skill","自动关闭技能特写[建议手动关闭并取消该选项]","0",30,"0,0,0","20,270,980,60")
-	UI:CheckBoxGroup(global_basic_page, "buff_stop_useup","体力用尽后自动关闭所有buff并退出脚本","0",30,"0,0,0","20,330,700,60")
-	UI:CheckBoxGroup(global_basic_page, "buff_stop_idle","庭院或探索界面停留过久后自动关闭所有buff","0",30,"0,0,0","20,390,700,60")
+	UI:CheckBoxGroup(global_basic_page, "skill","自动关闭技能特写","0",30,"0,0,0","20,210,980,60")
+	UI:CheckBoxGroup(global_basic_page, "reconn","断线重连与闪退重连","0",30,"0,0,0","20,270,980,60")
+	UI:CheckBoxGroup(global_basic_page, "buff_stop_useup","体力用尽关闭所有buff","0",30,"0,0,0","20,330,700,60")
+	UI:CheckBoxGroup(global_basic_page, "buff_stop_idle","庭院探索停留过久关闭所有buff","0",30,"0,0,0","20,390,700,60")
 	UI:ComboBox(global_basic_page, "buff_stop_idle_time", "15秒,30秒,45秒,1分钟,2分钟,5分钟","3",23,"750,390,230,50")
+	UI:CheckBoxGroup(global_basic_page, "HUD","可视化点击手势与运行辅助描述","0",30,"0,0,0","20,450,980,60")
 	global_auto_jjtp_page = UI:Page(global_ui, "智能突破")
 	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "开启间隔 - ", "20,20,300,60")
 	UI:ComboBox(global_auto_jjtp_page, "auto_jjtp_interv", "15分钟,30分钟,45分钟,60分钟,120分钟","3",23,"600,20,380,50")
@@ -227,7 +228,7 @@ function global_UI()
 	UI:ComboBox(global_super_ghost_page, "sg_high_6", "默认,①队,②队,③队,响铃,公开","0",23,"330,140,150,50")
 	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<50%", "470,140,100,60")
 	UI:ComboBox(global_super_ghost_page, "sg_low_6", "默认,①队,②队,③队,响铃,公开","0",23,"570,140,150,50")
-	UI:Label(global_super_ghost_page, "center", "0,0,0", 30, "]  疲劳", "720,140,100,60")
+	UI:Label(global_super_ghost_page, "center", "0,0,0", 30, "]   疲劳", "720,140,100,60")
 	UI:ComboBox(global_super_ghost_page, "sg_tired_6", "公开,等待,喝茶,响铃","2",23,"820,140,150,50")
 	-- 5星
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "5星设置 - ", "20,200,140,60")
@@ -272,9 +273,7 @@ function global_UI()
 	
 	UI:Line(global_super_ghost_page, "line_common", "100,100,100", 2, 960, "20,500,960,2")
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "Tips - ", "20,510,300,60")
-	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "适用于御魂/觉醒/探索的所有模式", "20,570,960,60")
-	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "队长队员将会自动禁用自动组队", "20,630,960,60")
-	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "超鬼王界面开启时会先清理当前所有超鬼王", "20,690,960,60")
+	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "适用于御魂/觉醒/探索的所有模式, 队长队员将会自动禁用自动组队", "20,570,960,60")
 	UI:fit(global_ui)
 	ret_global, res_global = UI:show(global_ui)
 	
@@ -292,6 +291,9 @@ function global_UI()
 	if res_global.skill == "0" then
 		disable_skill_feature()
 	end
+	
+	-- Enable战斗结算
+	settlement_en = 1
 	
 	-- 悬赏封印
 	local offer_sel = {}
@@ -313,6 +315,13 @@ function global_UI()
 				offer_arr[6] = 1 -- 狗粮
 			end
 		end
+	end
+	
+	-- 断线闪退
+	if res_global.reconn == "0" then
+		reconn = 1
+	else
+		reconn = 0
 	end
 	
 	-- Idle关闭buff
@@ -344,15 +353,13 @@ function global_UI()
 		buff_stop_useup = 0
 	end
 	
-	-- Enable战斗结算
-	settlement_en = 1
-	
 	-- 超鬼王
-	if res_global.sg_en == "0" then
-		sg_en = 1
-	else
-		sg_en = 0
-	end
+	sg_en = 0
+--	if res_global.sg_en == "0" then
+--		sg_en = 1
+--	else
+--		sg_en = 0
+--	end
 	
 	if res_global.sg_fight_sel == "0" then
 		sg_fight_sel = "Public"
