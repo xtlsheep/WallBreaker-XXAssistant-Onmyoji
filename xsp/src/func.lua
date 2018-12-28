@@ -26,7 +26,10 @@ end
 
 function onBeforeUserExit()
 	stopAudio()
-	settlement_UI()
+
+	if win_cnt.global > 0 or fail_cnt.global > 0 then
+		settlement_UI()
+	end
 end
 
 function show_win_fail(win_cnt, fail_cnt)
@@ -34,8 +37,8 @@ function show_win_fail(win_cnt, fail_cnt)
 end
 
 function print_global_vars()
-	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d; 停留过长关闭buff %d(%d sec), 体力用尽关闭buff %d)",
-			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6], buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
+	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d; 断线/闪退 %d, 停留过长关闭buff %d(%d sec), 体力用尽关闭buff %d)",
+			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6], reconn, buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
 	
 	if sg_en == 1 then
 		print(string.format("超鬼王: %d 鬼王选择 %s 强力追击 %d 标记 Boss %d 草人 %d 6星 %s 5星 %s 4星 %s 3星 %s 2星 %s 1星 %s",
@@ -124,11 +127,108 @@ function disconn_dur_fight()
 	end
 end
 
+function game_disconn_reconn()
+	if reconn == 0 then
+		return
+	end
+	
+	function game_disconn()
+		local x, y = findColor({570, 360, 572, 362},
+			"0|0|0xf3b25e,445|-329|0x5c5242,-180|-338|0x675531,31|-332|0x60160c",
+			95, 0, 0, 0)
+		if x > -1 then
+			random_touch(0, x, y, 20, 10) -- 重新连接
+		end
+		return x, y
+	end
+	
+	function game_notice()
+		local x, y = findColor({1018, 69, 1020, 72},
+			"0|0|0xe8d4cf,-424|-11|0xf7e9c3,-352|4|0x655447,-11|-41|0x7e6874",
+			95, 0, 0, 0)
+		if x > -1 then
+			random_touch(0, x, y, 20, 10) -- 关闭
+		end
+		return x, y
+	end
+	
+	function game_portal()
+		local x, y = findColor({534, 562, 536, 564},
+			"0|0|0x8da6b5,-56|-460|0xffdaaa,-57|-479|0x8e272d,61|-154|0xf3edbe",
+			95, 0, 0, 0)
+		if x > -1 then
+			random_touch(0, x, y, 30, 10) -- 进入游戏
+		end
+		return x, y
+	end
+	
+	function game_load()
+		local x, y = findColor({568, 550, 570, 552},
+			"0|0|0x313b46,-144|-219|0xcac2dd,191|-455|0xd1c085,-143|-218|0xcac2dd",
+			95, 0, 0, 0)
+		if x > -1 then
+			random_touch(0, x, y, 30, 10) -- 点击屏幕进入游戏
+		end
+		return x, y
+	end
+	
+	local x, y
+	local disconn = 0
+	local notice = 0
+	
+	x, y = game_disconn() if x > -1 then disconn = 1 end
+	x, y = game_notice() if x >-1 then notice = 1 end
+	
+	if (disconn == 0) and (notice == 0) then
+		return
+	end
+
+	while (1) do
+		while (1) do
+			mSleep(500)
+			-- 断开连接
+			x, y = game_disconn() if x > -1 then break end
+			-- 游戏入口
+			x, y = game_portal() if x > -1 then break end
+			-- 游戏载入
+			x, y = game_load() if x > -1 then break end
+			-- 游戏公告
+			x, y = game_notice() if x > -1 then break end
+			-- 庭院
+			x, y = lct_tingyuan() if x > -1 then return end
+			break
+		end
+	end
+	
+	return
+end
+
+function game_exit_backend()
+	if reconn == 0 then
+		return
+	end
+
+	local isfront = isFrontApp("com.netease.onmyoji") --前台状态
+	if isfront == 1 then
+		return
+	else
+		HUD_show_or_hide(HUD,hud_info,"检测到游戏闪退或后台化, 5秒后重启...",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		mSleep(5000)
+		runApp("com.netease.onmyoji")
+	end
+	return
+end
+
 function global_loop_func()
 	-- 悬赏封印
 	receive_offer()
 	-- 断线结束战斗
 	disconn_dur_fight()
+	-- 断线重连
+	game_disconn_reconn()
+	-- 闪退重连
+	game_exit_backend()
+	return
 end
 
 function real_baqidashe()
