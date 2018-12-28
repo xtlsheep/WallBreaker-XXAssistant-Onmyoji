@@ -145,17 +145,17 @@ function game_disconn_reconn()
 	function game_notice()
 		local x, y = findColor({1018, 69, 1020, 72},
 			"0|0|0xe8d4cf,-424|-11|0xf7e9c3,-352|4|0x655447,-11|-41|0x7e6874",
-			95, 0, 0, 0)
+			90, 0, 0, 0)
 		if x > -1 then
 			random_touch(0, x, y, 20, 10) -- 关闭
 		end
 		return x, y
 	end
-	
+
 	function game_portal()
 		local x, y = findColor({534, 562, 536, 564},
-			"0|0|0x8da6b5,-56|-460|0xffdaaa,-57|-479|0x8e272d,61|-154|0xf3edbe",
-			95, 0, 0, 0)
+			"0|0|0x94adbc,-59|-459|0xffd8a6,-58|-480|0x8a272f,-369|-217|0xd17c5a,-346|-138|0xe7b674",
+			90, 0, 0, 0)
 		if x > -1 then
 			random_touch(0, x, y, 30, 10) -- 进入游戏
 		end
@@ -165,7 +165,7 @@ function game_disconn_reconn()
 	function game_load()
 		local x, y = findColor({568, 550, 570, 552},
 			"0|0|0x313b46,-144|-219|0xcac2dd,191|-455|0xd1c085,-143|-218|0xcac2dd",
-			95, 0, 0, 0)
+			90, 0, 0, 0)
 		if x > -1 then
 			random_touch(0, x, y, 30, 10) -- 点击屏幕进入游戏
 		end
@@ -208,11 +208,11 @@ function game_exit_backend()
 		return
 	end
 
-	local isfront = isFrontApp("com.netease.onmyoji") --前台状态
-	if isfront == 1 then
+	local flag = appIsRunning("com.netease.onmyoji")
+	if flag == 1 then
 		return
 	else
-		HUD_show_or_hide(HUD,hud_info,"检测到游戏闪退或后台化, 5秒后重启...",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"游戏闪退, 5秒后重启...",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		mSleep(5000)
 		runApp("com.netease.onmyoji")
 	end
