@@ -397,8 +397,8 @@ function pub_unstart()
 end
 
 function pub_lct_jjtp()
-	local x, y = findColor({78, 584, 80, 586}, -- 三个红条 突破记录
-		"0|0|0xc9a87b,228|-330|0x940719,229|-231|0x900618,227|-97|0x940719",
+	local x, y = findColor({1051, 59, 1053, 61},
+		"0|0|0xe8d4cf,-919|195|0x4c0c18,-753|292|0x98081a,-973|524|0xc9a87b",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -672,8 +672,8 @@ function jjtp_solo_to_pub(lock)
 	while (1) do
 		while (1) do
 			mSleep(500)
-            -- 循环通用
-            global_loop_func()
+			-- 循环通用
+			global_loop_func()
 			-- 个人突破
 			x, y = solo_lct_jjtp()
 			if (x > -1) then
@@ -716,10 +716,10 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				print(string.format("      %d - %d - %d", map[7], map[8], map[9]))
 			end
 			print(string.format("winess %d, invalid %d, pos %d, found_target %d, action %s", winess, invalid, pos, found_target, action_solo))
-
+			
 			mSleep(500)
-            -- 循环通用
-            global_loop_func()
+			-- 循环通用
+			global_loop_func()
 			-- 阴阳寮突破
 			x, y = pub_lct_jjtp() if x > -1 then quit_jjtp() break end
 			-- 个人突破
@@ -752,7 +752,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 					end
 				end
 				-- 锁定出战
-				lock_or_unlock(lock, "结界突破")
+				lock_or_unlock(lock, "Solo结界突破")
 				-- 分析地图
 				map, winess, invalid = solo_analyse_map(solo_sel, map)
 				-- 刷新判断
@@ -871,6 +871,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 	local finish = 0
 	local wait = 0
 	local action_pub = action
+	local click_cnt = 0
 	local x, y
 	
 	while (1) do
@@ -887,8 +888,8 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			print(string.format("pos = %d", pos))
 			
 			mSleep(500)
-            -- 循环通用
-            global_loop_func()
+			-- 循环通用
+			global_loop_func()
 			-- 未开寮突
 			x, y = pub_unstart()
 			if x > -1 then
@@ -928,6 +929,8 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 						return "Unfinish"
 					end
 				end
+				-- 锁定出战
+				lock_or_unlock(lock, "Pub结界突破")
 				-- 翻页
 				ret = pub_map_finished(map)
 				if ret == RET_OK then
@@ -982,10 +985,20 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 					jjtp_touch_blank()
 					break
 				end
+				-- 点击无效的结界
+				if click_cnt >= 3 then
+					HUD_show_or_hide(HUD,hud_info,"点击3次无效, 跳过结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					map[pos] = -1
+					pos = -1
+					click_cnt = 0
+					jjtp_touch_blank()
+					break
+				end
 				-- 五花肉
 				if whr == {0, 0, 0, 0} then
 					HUD_show_or_hide(HUD,hud_info,"进攻",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_touch(0, x_f, y_f+20, 20, 5) -- 进攻
+					click_cnt = click_cnt + 1
 					break
 				else
 					ret_w = find_whr(pos, whr, "public")
@@ -997,6 +1010,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 					else
 						HUD_show_or_hide(HUD,hud_info,"进攻",20,"0xff000000","0xffffffff",0,100,0,300,32)
 						random_touch(0, x_f, y_f+20, 20, 5) -- 进攻
+						click_cnt = click_cnt + 1
 						break
 					end
 				end
@@ -1004,6 +1018,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then
+				click_cnt = 0
 				time_cnt = time_cnt + 1
 				if (time_cnt > round_time*60*2) then
 					random_touch(0, 35, 30, 5, 5) -- 左上退出

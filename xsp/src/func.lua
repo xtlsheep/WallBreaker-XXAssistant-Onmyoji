@@ -26,7 +26,7 @@ end
 
 function onBeforeUserExit()
 	stopAudio()
-
+	
 	if win_cnt.global > 0 or fail_cnt.global > 0 then
 		settlement_UI()
 	end
@@ -151,7 +151,7 @@ function game_disconn_reconn()
 		end
 		return x, y
 	end
-
+	
 	function game_portal()
 		local x, y = findColor({534, 562, 536, 564},
 			"0|0|0x94adbc,-59|-459|0xffd8a6,-58|-480|0x8a272f,-369|-217|0xd17c5a,-346|-138|0xe7b674",
@@ -182,7 +182,7 @@ function game_disconn_reconn()
 	if (disconn == 0) and (notice == 0) then
 		return
 	end
-
+	
 	while (1) do
 		while (1) do
 			mSleep(500)
@@ -207,7 +207,7 @@ function game_exit_backend()
 	if reconn == 0 then
 		return
 	end
-
+	
 	local flag = appIsRunning("com.netease.onmyoji")
 	if flag == 1 then
 		return
@@ -628,8 +628,10 @@ function lock_or_unlock(lock, spec)
 		x1 = 639 y1 = 369 x2 = 641 y2 = 371
 	elseif spec == "御灵" then
 		x1 = 552 y1 = 378 x2 = 554 y2 = 380
-	elseif spec == "结界突破" then
+	elseif spec == "Solo结界突破" then
 		x1 = 917 y1 = 551 x2 = 919 y2 = 553
+	elseif spec == "Pub结界突破" then
+		x1 = 190 y1 = 547 x2 = 192 y2 = 549
 	elseif spec == "探索" then
 		x1 = 750 y1 = 570 x2 = 760 y2 = 580
 	end
@@ -668,7 +670,7 @@ function lock_or_unlock(lock, spec)
 			end
 		end
 		return x, y
-	elseif (spec == "结界突破") then
+	elseif (spec == "Solo结界突破") then
 		if (lock == 1) then
 			x, y = findColor({x1, y1, x2, y2},
 				"0|0|0x826745,0|5|0x1f150e,-13|0|0x2f2318,13|1|0x2f2318",
@@ -679,6 +681,23 @@ function lock_or_unlock(lock, spec)
 		else
 			x, y = findColor({x1, y1, x2, y2},
 				"0|0|0x866c49,0|7|0x1c150e,-16|0|0xb8acf1,16|0|0xb3aaec",
+				95, 0, 0, 0)
+			if x > -1 then
+				random_touch(0, x, y, 3, 3)
+			end
+		end
+		return x, y
+	elseif (spec == "Pub结界突破") then
+		if (lock == 1) then
+			x, y = findColor({x1, y1, x2, y2},
+				"0|0|0x806545,13|1|0x2f2318,-13|1|0x2f2318,-4|6|0x7c6242",
+				95, 0, 0, 0)
+			if x > -1 then
+				random_touch(0, x, y, 3, 3)
+			end
+		else
+			x, y = findColor({x1, y1, x2, y2},
+				"0|0|0x846a48,16|1|0xb8aef2,-16|1|0xb7aff7,1|7|0x1f1610",
 				95, 0, 0, 0)
 			if x > -1 then
 				random_touch(0, x, y, 3, 3)
