@@ -127,7 +127,7 @@ function autostory()
 			time_cnt = time_cnt + 1
 			if time_cnt > 20 then
 				HUD_show_or_hide(HUD,hud_info,"移动",20,"0xff000000","0xffffffff",0,100,0,300,32)
-				random_move(0, math.random(400,736), math.random(200,440), math.random(400, 736), math.random(200,440), 0, 0)
+				random_move(0, math.random(400,736), math.random(200,440), math.random(400, 736), math.random(200,440), 10, 10)
 				mSleep(1000)
 				time_cnt = 0
 			end

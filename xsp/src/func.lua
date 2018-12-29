@@ -203,22 +203,6 @@ function game_disconn_reconn()
 	return
 end
 
-function game_exit_backend()
-	if reconn == 0 then
-		return
-	end
-	
-	local flag = appIsRunning("com.netease.onmyoji")
-	if flag == 1 then
-		return
-	else
-		HUD_show_or_hide(HUD,hud_info,"游戏闪退, 5秒后重启...",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		mSleep(5000)
-		runApp("com.netease.onmyoji")
-	end
-	return
-end
-
 function global_loop_func()
 	-- 悬赏封印
 	receive_offer()
@@ -226,8 +210,6 @@ function global_loop_func()
 	disconn_dur_fight()
 	-- 断线重连
 	game_disconn_reconn()
-	-- 闪退重连
-	game_exit_backend()
 	return
 end
 
@@ -508,6 +490,16 @@ function lct_tansuo()
 	return x, y
 end
 
+function lct_dingzhong()
+	local x, y = findColor({770, 160, 820, 180}, -- 百鬼灯笼 庭院石碑 勾玉 勾玉加号
+		"0|0|0xfffff2,-199|-142|0xe9371f,122|45|0xb5afb9,80|-143|0xd6c4a1",
+		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"町中",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	end
+	return x, y -- 百鬼灯笼
+end
+
 function lct_zudui()
 	local x, y = findColor({851, 100, 853, 103},
 		"0|0|0xe97c2c,-794|19|0xecd982,-774|91|0x8d7245,148|14|0xd6c4a1",
@@ -516,11 +508,20 @@ function lct_zudui()
 end
 
 function tingyuan_enter_tansuo()
-	local x, y = findColor({230, 125, 1136, 175}, -- 庭院探索灯笼
+	local x, y = findColor({230, 125, 1136, 175}, -- 探索灯笼
 		"0|0|0xffffec,0|-2|0xffffec,0|2|0xffffd2,-2|0|0xffffe6,2|0|0xfffff1",
 		95, 1, 0, 0)
 	if x > -1 then
 		random_touch(0, x, y, 10, 10) -- 探索灯笼
+	end
+end
+
+function tingyuan_enter_dingzhong()
+	local x, y = findColor({450, 200, 1100, 400}, -- 町中石碑
+		"0|0|0xc1b5a3,-22|-11|0xafaaaf,-21|23|0xa5a29e,23|23|0xa5a19c,23|-10|0xada7b2",
+		90, 0, 1, 0)
+	if x > -1 then
+		random_touch(0, x, y, 10, 10) -- 町中石碑
 	end
 end
 
