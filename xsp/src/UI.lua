@@ -9,6 +9,7 @@ require "tansuo"
 require "autostory"
 require "yqfy"
 require "hundredghost"
+require "autocake"
 require "LBSGhostDriving"
 require "superghost"
 
@@ -75,7 +76,7 @@ function config_UI()
 		-- 百鬼夜行
 	elseif (res_config.select == "7")  then hundredghost_UI()
 		-- 一键每日
-	elseif (res_config.select == "8")  then auto_cake_UI()
+	elseif (res_config.select == "8")  then autocake_UI()
 		-- 副本组合
 	elseif (res_config.select == "9")  then multimission_UI()
 		-- 世界喊话
@@ -281,6 +282,9 @@ function global_UI()
 		return RET_ERR
 	end
 	
+	-- Enable战斗结算
+	settlement_en = 1
+	
 	-- HUD
 	if res_global.HUD == "0" then
 		HUD = "show"
@@ -291,9 +295,6 @@ function global_UI()
 	if res_global.skill == "0" then
 		disable_skill_feature()
 	end
-	
-	-- Enable战斗结算
-	settlement_en = 1
 	
 	-- 悬赏封印
 	local offer_sel = {}
@@ -1504,22 +1505,33 @@ function hundredghost_UI()
 	hundredghost(round, num, invite)
 end
 
-function auto_cake_UI()
+function autocake_UI()
 	-- 一键每日
-	auto_cake_ui = UI:new("auto_cake.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-	UI:Label(auto_cake_ui, "center", "0,0,0", 30, "一键每日", "20,20,960,55")
-	UI:fit(auto_cake_ui)
+	autocake_ui = UI:new("autocake.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+	UI:Label(autocake_ui, "center", "0,0,0", 30, "自动樱饼", "20,20,960,55")
+	UI:Label(autocake_ui, "left", "0,0,0", 30, "喂食次数 - ", "20,100,300,60")
+	UI:ComboBox(autocake_ui, "feed_times", "1次,2次,3次,4次,5次","4",23,"650,100,330,50")
+	UI:Line(autocake_ui, "line_common", "100,100,100", 2, 960, "20,160,960,2")
+	UI:Label(autocake_ui, "left", "0,0,0", 30, "Tips - ", "20,170,300,60")
+	UI:Label(autocake_ui, "left", "0,0,0", 30, "请手动开启[自动挑战], 进入战斗后使用此功能", "20,230,960,60")
 	
-	ret_auto_cake, res_auto_cake = UI:show(auto_cake_ui)
-	if (ret_auto_cake == 0) then
+	UI:fit(autocake_ui)
+	
+	ret_autocake, res_autocake = UI:show(autocake_ui)
+	if (ret_autocake == 0) then
 		config_UI()
 		return
 	end
+	
+	local feed_times = tonumber(res_autocake.feed_times) + 1
 	
 	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
+	
+	settlement_en = 0
+	autocake(feed_times)
 end
 
 function multimission_UI()
