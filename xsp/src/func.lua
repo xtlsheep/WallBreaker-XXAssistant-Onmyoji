@@ -36,7 +36,7 @@ function show_win_fail(win_cnt, fail_cnt)
 	HUD_show_or_hide(HUD,hud_info,string.format("战斗胜利 %d次 - 失败 %d次", win_cnt, fail_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 end
 
-function print_global_vars()
+function print_global_config()
 	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d; 断线/闪退 %d, 停留过长关闭buff %d(%d sec), 体力用尽关闭buff %d)",
 			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6], reconn, buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
 	
@@ -203,7 +203,7 @@ function game_disconn_reconn()
 	return
 end
 
-function global_loop_func()
+function loop_generic()
 	-- 悬赏封印
 	receive_offer()
 	-- 断线结束战斗
@@ -255,7 +255,7 @@ function out_of_sushi()
 			while(1) do
 				mSleep(500)
 				-- 循环通用
-				global_loop_func()
+				loop_generic()
 				-- 八岐大蛇
 				x, y = lct_8dashe() if x > -1 then random_touch(0, 930, 110, 5, 5) break end
 				-- 创建队伍
@@ -291,7 +291,7 @@ function out_of_sushi()
 	return x_, y_
 end
 
-function lower_right_blank_click()
+function right_lower_click()
 	random_touch(0, 1040, 350, 50, 50)
 	return
 end
@@ -332,7 +332,7 @@ function stop_buff()
 		end
 	end
 	random_sleep(500)
-	lower_right_blank_click()
+	right_lower_click()
 end
 
 function idle_at_tingyuan(idle_time_cnt)
@@ -823,7 +823,7 @@ function fight_success(mode)
 		if (x > -1) then
 			HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			for i = 1, cnt do
-				lower_right_blank_click()
+				right_lower_click()
 				random_sleep(150)
 			end
 		end
@@ -835,7 +835,7 @@ function fight_success(mode)
 		if (x > -1) then
 			HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			for i = 1, cnt do
-				lower_right_blank_click()
+				right_lower_click()
 				random_sleep(150)
 			end
 		end
@@ -850,7 +850,7 @@ function whole_damo()
 		95, 0, 0, 0)
 	if (x > -1) then
 		HUD_show_or_hide(HUD,hud_info,"领取奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		lower_right_blank_click()
+		right_lower_click()
 	end
 	return x, y
 end
@@ -861,7 +861,7 @@ function half_damo()
 		95, 0, 0, 0)
 	if (x > -1) then
 		HUD_show_or_hide(HUD,hud_info,"退出战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		lower_right_blank_click()
+		right_lower_click()
 	end
 	return x, y
 end
@@ -869,12 +869,12 @@ end
 function keep_half_damo()
 	local x, y
 	while (1) do
-		global_loop_func()
+		loop_generic()
 		x, y = findColor({498, 529, 501, 532}, -- 达摩底部
 			"0|0|0x670a0b,20|22|0x320204,127|0|0x7e0e0e,159|7|0x6f290b",
 			95, 0, 0, 0)
 		if x > -1 then
-			lower_right_blank_click()
+			right_lower_click()
 		elseif x == -1 then
 			return
 		end
@@ -890,7 +890,7 @@ function fight_failed(mode)
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			lower_right_blank_click()
+			right_lower_click()
 		end
 	elseif (mode == "组队") then
 		x, y = findColor({410, 80, 415, 85}, -- 失败的鼓
@@ -898,7 +898,7 @@ function fight_failed(mode)
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			lower_right_blank_click()
+			right_lower_click()
 		end
 	end
 	return x, y
@@ -908,12 +908,12 @@ function keep_fight_failed(mode)
 	local x, y
 	if (mode == "单人") then
 		while (1) do
-			global_loop_func()
+			loop_generic()
 			x, y = findColor({410, 130, 415, 135}, -- 失败的鼓
 				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
 				95, 0, 0, 0)
 			if x > -1 then
-				lower_right_blank_click()
+				right_lower_click()
 			elseif x == -1 then
 				return
 			end
@@ -921,12 +921,12 @@ function keep_fight_failed(mode)
 		end
 	elseif (mode == "组队") then
 		while (1) do
-			global_loop_func()
+			loop_generic()
 			x, y = findColor({410, 80, 415, 85}, -- 失败的鼓
 				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
 				95, 0, 0, 0)
 			if x > -1 then
-				lower_right_blank_click()
+				right_lower_click()
 			elseif x == -1 then
 				return
 			end
@@ -942,7 +942,7 @@ function yuhun_overflow()
 	if x > -1 then
 		random_touch(0, x, y, 20, 5)
 		random_sleep(1000)
-		lower_right_blank_click()
+		right_lower_click()
 	end
 	return x, y
 end

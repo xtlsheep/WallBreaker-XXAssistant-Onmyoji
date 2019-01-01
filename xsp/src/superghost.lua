@@ -284,7 +284,7 @@ function sg_fight_failed()
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		lower_right_blank_click()
+		right_lower_click()
 	end
 	return x, y
 end
@@ -293,12 +293,12 @@ function sg_keep_fight_failed()
 	-- 超鬼王的保持战斗失败识别
 	local x, y
 	while (1) do
-		global_loop_func()
+		loop_generic()
 		x, y = findColor({413, 104, 415, 106},
 			"0|0|0x514a5b,251|6|0xddd9cd,-135|-6|0xcdc59c,30|34|0x5b5265",
 			95, 0, 0, 0)
 		if x > -1 then
-			lower_right_blank_click()
+			right_lower_click()
 		elseif x == -1 then
 			return
 		end
@@ -368,7 +368,7 @@ function sg_bonus_get()
 		"0|0|0xf2e5ad,248|17|0xf2e5b4,-138|104|0xad9f9a,392|104|0xaea09b,1|258|0x500c19",
 		95, 0, 0, 0)
 	if x > -1 then
-		lower_right_blank_click()
+		right_lower_click()
 	end
 	return x, y
 end
@@ -422,7 +422,7 @@ function superghost()
 		while (1) do
 			mSleep(500)
 			-- 循环通用
-			global_loop_func()
+			loop_generic()
 			-- 断线结束战斗
 			disconn_dur_fight()
 			-- 弹窗

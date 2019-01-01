@@ -159,7 +159,7 @@ end
 -- Main func
 function hundredghost(round, num, invite)
 	print(string.format("次数 %d 豆子 %s 邀请 %d", round, num, invite))
-	print_global_vars()
+	print_global_config()
 	
 	local bean_sel = 0
 	local hg_cnt = 0
@@ -170,7 +170,7 @@ function hundredghost(round, num, invite)
 		while(1) do
 			mSleep(500)
 			-- 循环通用
-			global_loop_func()
+			loop_generic()
 			-- 百鬼夜行
 			x, y = lct_hg()
 			if x > -1 then

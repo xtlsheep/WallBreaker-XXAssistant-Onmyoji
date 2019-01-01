@@ -59,7 +59,7 @@ function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, f
 			mode, role, group, mark[1], mark[2], mark[3], level, round, lock))
 	print(string.format("队员自动组队：%d，失败重新组队：%d，队员接手队长：%d，队长自动组队：%d，队长自动邀请：%d, 自动邀请区域: %s, 失败重新建队：%d",
 			member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate))
-	print_global_vars()
+	print_global_config()
 	
 	if sg_en == 1 then
 		member_auto_group = 0
@@ -95,7 +95,7 @@ function yuhun_solo(mark, level, round, lock)
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3],3) break end
 			mSleep(500)
             -- 循环通用
-            global_loop_func()
+            loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 拒绝组队
@@ -180,7 +180,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
             -- 循环通用
-            global_loop_func()
+            loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 拒绝邀请
@@ -311,7 +311,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
             -- 循环通用
-            global_loop_func()
+            loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 拒绝邀请
@@ -446,7 +446,7 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
             -- 循环通用
-            global_loop_func()
+            loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 接受邀请
@@ -533,7 +533,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
             -- 循环通用
-            global_loop_func()
+            loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 拒绝邀请

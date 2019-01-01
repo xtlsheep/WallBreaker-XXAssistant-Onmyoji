@@ -81,7 +81,7 @@ end
 
 -- Main func
 function autostory()
-	print_global_vars()
+	print_global_config()
 	local time_cnt = 0
 	local x, y
 	

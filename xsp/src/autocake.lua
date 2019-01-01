@@ -43,7 +43,7 @@ function yujue_solo_pre_feed()
 		random_sleep(250)
 		random_touch(0, 705, 415, 30, 30) -- 喂食
 		random_sleep(250)
-		lower_right_blank_click()
+		right_lower_click()
 		random_sleep(250)
 		yujue_solo_auto_fight()
 	end
@@ -68,7 +68,7 @@ function yujue_group_pre_feed()
 		random_sleep(250)
 		random_touch(0, 710, 420, 30, 30) -- 喂食
 		random_sleep(250)
-		lower_right_blank_click()
+		right_lower_click()
 		random_sleep(250)
 		yujue_group_auto_fight()
 	end
@@ -78,7 +78,7 @@ end
 -- Main func
 function autocake(feed_times)
 	print(string.format("喂食次数 %d", feed_times))
-	print_global_vars()
+	print_global_config()
 	
 	local feed_cnt = 0
 	local mode = nil
@@ -88,7 +88,7 @@ function autocake(feed_times)
 		while (1) do
 			mSleep(500)
 			-- 循环通用
-			global_loop_func()
+			loop_generic()
 			-- 探索喂食
 			x, y = tansuo_pre_feed()
 			if x > -1 then

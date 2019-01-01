@@ -630,7 +630,7 @@ function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, l
 	print(string.format("模式：%s，战斗时间：%d，刷新：%d，个人突破：%s，阴阳寮突破：%d, 锁定: %d", mode, round_time, refresh, solo_sel, pub_sel, lock))
 	print(string.format("五花肉-个人：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)", whr_solo[1], whr_solo[2], whr_solo[3], whr_solo[4]))
 	print(string.format("五花肉-阴阳寮：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)", whr_pub[1], whr_pub[2], whr_pub[3], whr_pub[4]))
-	print_global_vars()
+	print_global_config()
 	
 	local ret_solo, ret_pub
 	local action_solo, action_pub
@@ -673,7 +673,7 @@ function jjtp_solo_to_pub(lock)
 		while (1) do
 			mSleep(500)
 			-- 循环通用
-			global_loop_func()
+			loop_generic()
 			-- 个人突破
 			x, y = solo_lct_jjtp()
 			if (x > -1) then
@@ -719,7 +719,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			
 			mSleep(500)
 			-- 循环通用
-			global_loop_func()
+			loop_generic()
 			-- 阴阳寮突破
 			x, y = pub_lct_jjtp() if x > -1 then quit_jjtp() break end
 			-- 个人突破
@@ -889,7 +889,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			
 			mSleep(500)
 			-- 循环通用
-			global_loop_func()
+			loop_generic()
 			-- 未开寮突
 			x, y = pub_unstart()
 			if x > -1 then

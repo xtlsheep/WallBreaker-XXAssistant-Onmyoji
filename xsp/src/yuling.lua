@@ -19,7 +19,7 @@ end
 -- Main func
 function yuling(sel, level, round, lock)
 	print(string.format("种类 %s，层数 %d, 次数 %d，锁定 %d", sel, level, round, lock))
-	print_global_vars()
+	print_global_config()
 	
 	local quit = 0
 	local init = 1
@@ -31,7 +31,7 @@ function yuling(sel, level, round, lock)
 			x, y = round_fight() if (x > -1) then break end
 			mSleep(500)
             -- 循环通用
-            global_loop_func()
+            loop_generic()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗胜利

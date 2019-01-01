@@ -16,7 +16,7 @@ end
 -- Main func
 function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 	print(string.format("贪 %d, 嗔 %d, 痴 %d，锁定 %d", round_tan, round_chen, round_chi, lock))
-	print_global_vars()
+	print_global_config()
 	
 	local cnt_tan = 0
 	local cnt_chen = 0
@@ -34,7 +34,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			x, y = round_fight() if (x > -1) then break end
 			mSleep(500)
             -- 循环通用
-            global_loop_func()
+            loop_generic()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗胜利

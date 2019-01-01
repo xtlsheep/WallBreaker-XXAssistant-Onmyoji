@@ -320,7 +320,7 @@ function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_roun
 			mode, sel[1], sel[2], sel[3], sel[4], mark, scene_move, hard, section, count_mode, win_round, sec_round, captain_auto_invite))
 	print(string.format("狗粮普攻 %d, 自动更换 %d, 初始翻页 %d, 狗粮类型 %s, 素材类型(红蛋 %d, 白蛋 %d, 蓝蛋 %d, 黑蛋 %d)",
 			nor_attk, auto_change, page_jump, df_type, egg_color[1], egg_color[2], egg_color[3], egg_color[4]))
-	print_global_vars()
+	print_global_config()
 	
 	if mode == "单人" then
 		tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
@@ -356,7 +356,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
             -- 循环通用
-            global_loop_func()
+            loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 拒绝组队
@@ -424,7 +424,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump -1 do
-                            global_loop_func()
+                            loop_generic()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -447,7 +447,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump - 1 do
-                            global_loop_func()
+                            loop_generic()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -559,7 +559,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			-- 御魂溢出
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 查看体力
-			x, y = sushi_check() if x > -1 then lower_right_blank_click() break end
+			x, y = sushi_check() if x > -1 then right_lower_click() break end
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then random_touch(0, 1024, 533, 30, 10) break end -- Temporarily enter last section
 			-- 体力不足
@@ -604,7 +604,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
             -- 循环通用
-            global_loop_func()
+            loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 拒绝组队
@@ -672,7 +672,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				if x > -1 then
 					if bot_left == 1 or bot_right == 1 then
 						for i = 1, page_jump -1 do
-                            global_loop_func()
+                            loop_generic()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -695,7 +695,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				if x > -1 then
 					if bot_left == 1 or bot_right == 1 then
 						for i = 1, page_jump - 1 do
-                            global_loop_func()
+                            loop_generic()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -827,7 +827,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			-- 御魂溢出
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 查看体力
-			x, y = sushi_check() if x > -1 then lower_right_blank_click() break end
+			x, y = sushi_check() if x > -1 then right_lower_click() break end
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then random_touch(0, 1024, 533, 30, 10) break end -- Temporarily enter last section
 			-- 体力不足
@@ -857,7 +857,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
             -- 循环通用
-            global_loop_func()
+            loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 战斗进行
@@ -924,7 +924,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump -1 do
-                            global_loop_func()
+                            loop_generic()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -947,7 +947,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump - 1 do
-                            global_loop_func()
+                            loop_generic()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -994,7 +994,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			-- 御魂溢出
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 查看体力
-			x, y = sushi_check() if x > -1 then lower_right_blank_click() break end
+			x, y = sushi_check() if x > -1 then right_lower_click() break end
 			-- 庭院
 			x, y = lct_tingyuan() if x > -1 then tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 探索

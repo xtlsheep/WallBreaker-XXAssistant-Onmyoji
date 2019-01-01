@@ -50,7 +50,7 @@ end
 -- Main func
 function yqfy(round, sel, mark)
 	print(string.format("次数 %d 妖气 %s 标记 %s", round, sel, mark))
-	print_global_vars()
+	print_global_config()
 	
 	local quit = 0
 	local ran_wait = 0
@@ -66,7 +66,7 @@ function yqfy(round, sel, mark)
 			x, y = round_three() if (x > -1) then yqfy_mark(mark) break end
 			mSleep(500)
             -- 循环通用
-            global_loop_func()
+            loop_generic()
             -- 拒绝邀请
             x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 庭院

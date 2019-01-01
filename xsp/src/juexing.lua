@@ -61,7 +61,7 @@ function juexing(mode, role, group, element, mark, level, round, lock, member_au
 			mode, role, group, element, mark, level, round, lock))
 	print(string.format("队员自动组队：%d，失败重新组队：%d，队员接手队长：%d，队长自动组队：%d，队长自动邀请：%d, 自动邀请区域 %s, 失败重新建队：%d",
 			member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate))
-	print_global_vars()
+	print_global_config()
 	
 	if sg_en == 1 then
 		member_auto_group = 0
@@ -93,7 +93,7 @@ function juexing_solo(element, mark, level, round, lock)
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
 			-- 循环通用
-            global_loop_func()
+            loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 拒绝组队
@@ -172,7 +172,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
             -- 循环通用
-            global_loop_func()
+            loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 拒绝邀请
@@ -298,7 +298,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
             -- 循环通用
-            global_loop_func()
+            loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 拒绝邀请
@@ -426,7 +426,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
             -- 循环通用
-            global_loop_func()
+            loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 接受邀请
@@ -507,7 +507,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
             -- 循环通用
-            global_loop_func()
+            loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 拒绝邀请

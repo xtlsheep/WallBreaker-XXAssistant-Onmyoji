@@ -66,7 +66,7 @@ end
 
 -- Main func
 function LBSGhostDriving()
-	print_global_vars()
+	print_global_config()
 	local x, y
 	
 	while (1) do
