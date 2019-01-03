@@ -15,6 +15,7 @@ auto_jjtp_lock = 0
 auto_jjtp_refresh = 0
 auto_jjtp_solo_sel = nil
 auto_jjtp_pub_sel = 0
+auto_jjtp_time_stamp = 0
 
 -- Util func
 function tingyuan_or_tansuo()
@@ -32,12 +33,25 @@ function tingyuan_or_tansuo()
 	end
 end
 
+function auto_jjtp_time_check()
+	local curr_time_stamp = mTime()
+	local dura_time = curr_time_stamp - auto_jjtp_time_stamp
+	local dura_time_min = dura_time/(1000*60)
+	
+	print(dura_time_min)
+	if dura_time_min > 0.5 then
+		return RET_VALID
+	end
+	return RET_OK
+end
+
 -- Main func
 function yuhun_auto_jjtp(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
 	print("御魂 + 智能突破")
 	local ret = 0
 	
 	while (1) do
+		auto_jjtp_time_stamp = mTime()
 		ret = yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
 		if ret == RET_OK then
 			return RET_OK

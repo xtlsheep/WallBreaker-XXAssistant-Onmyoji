@@ -61,31 +61,32 @@ function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, f
 			member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate))
 	print_global_config()
 	
+	local ret = 0
+	
 	if sg_en == 1 then
 		member_auto_group = 0
 		captain_auto_group = 0
 	end
 	
 	if (mode == "单人") then
-		yuhun_solo(mark, level, round, lock)
+		ret = yuhun_solo(mark, level, round, lock)
 	elseif (mode == "组队" and role == "队员" and group == "野队") then
-		yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
+		ret = yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
 	elseif (mode == "组队" and role == "队长" and (group == "野队2人" or group == "野队3人")) then
-		yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, fail_and_recreate, group)
+		ret = yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, fail_and_recreate, group)
 	elseif (mode == "组队" and role == "队员" and group == "固定队") then
-		yuhun_group_fix_member(mark, level, round, lock, member_auto_group, member_to_captain)
+		ret = yuhun_group_fix_member(mark, level, round, lock, member_auto_group, member_to_captain)
 	elseif (mode == "组队" and role == "队长" and (group == "固定队2人" or group == "固定队3人")) then
-		yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
+		ret = yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
 	end
-	return RET_OK
+	return ret
 end
 
 function yuhun_solo(mark, level, round, lock)
 	local init = 1
 	local tingyuan_time_cnt = 0
-	local aj_time_cnt = 0
-	local quit = 0
-	local quit_aj = 0
+	local quit_fin = 0
+	local quit_con = 0
 	local x, y
 	
 	while (1) do
@@ -97,13 +98,6 @@ function yuhun_solo(mark, level, round, lock)
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3],3) break end
 			mSleep(500)
-			-- 智能突破
-			if auto_jjtp_en == 1 then
-				aj_time_cnt = aj_time_cnt + 1
-				if aj_time_cnt*500 >= auto_jjtp_interv*1000 then
-					quit_aj = 1
-				end
-			end
             -- 循环通用
             loop_generic()
 			-- 超鬼王
@@ -123,7 +117,7 @@ function yuhun_solo(mark, level, round, lock)
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.yuhun = win_cnt.yuhun + 1
 				if win_cnt.yuhun >= round then
-					quit = 1
+					quit_fin = 1
 				end	
 				keep_half_damo()
 				break
@@ -131,16 +125,20 @@ function yuhun_solo(mark, level, round, lock)
 			-- 八岐大蛇
 			x, y = lct_8dashe() 
 			if (x > -1) then
-				if quit == 1 then
+				-- 智能突破Check
+				quit_con = auto_jjtp_time_check()
+				-- 完成后退出
+				if quit_fin == 1 then
 					random_touch(0, 930, 110, 5, 5)
 					return RET_OK
 				end
-				if quit_aj == 1 then
+				-- 退出后继续
+				if quit_con == 1 then
 					random_touch(0, 930, 110, 5, 5)
 					return RET_VALID
 				end
 				level_select(level, init, lock, "御魂") 
-				init = 0 
+				init = 0
 				solo_start() 
 				break 
 			end
