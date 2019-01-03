@@ -73,7 +73,7 @@ function yqfy(round, sel, mark)
 			x, y = lct_tingyuan()
 			if (x > -1) then
 				if quit == 1 then
-					return
+					return RET_OK
 				end
 				ran_wait = math.random(1000, 3000)
 				HUD_show_or_hide(HUD,hud_info,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -184,4 +184,5 @@ function yqfy(round, sel, mark)
 			break
 		end
 	end
+	return RET_ERR
 end

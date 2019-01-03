@@ -96,7 +96,7 @@ function autocake(feed_times)
 				HUD_show_or_hide(HUD,hud_info,string.format("喂食%d次", feed_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 				if feed_cnt >= feed_times then
 					mSleep(5000)
-					return
+					return RET_OK
 				end
 			end
 			-- 御觉单人喂食
@@ -106,7 +106,7 @@ function autocake(feed_times)
 				HUD_show_or_hide(HUD,hud_info,string.format("喂食%d次", feed_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 				if feed_cnt >= feed_times then
 					mSleep(5000)
-					return
+					return RET_OK
 				end
 			end
 			-- 御觉组队喂食
@@ -116,11 +116,11 @@ function autocake(feed_times)
 				HUD_show_or_hide(HUD,hud_info,string.format("喂食%d次", feed_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 				if feed_cnt >= feed_times then
 					mSleep(5000)
-					return
+					return RET_OK
 				end
 			end
 			break
 		end
 	end
-	return
+	return RET_ERR
 end

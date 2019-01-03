@@ -329,6 +329,7 @@ function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_roun
 	elseif mode == "队员" then
 		tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg_color)
 	end
+	return RET_OK
 end
 
 function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
@@ -525,7 +526,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			if x > -1 then
 				if quit == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
-					return
+					return RET_OK
 				end
 				if hard_sel == 0 then
 					if hard == "普通" then
@@ -567,7 +568,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			break
 		end
 	end
-	return
+	return RET_ERR
 end
 
 function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
@@ -771,7 +772,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			if x > -1 then
 				if quit == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
-					return
+					return RET_OK
 				end
 				if hard_sel == 0 then
 					if hard == "普通" then
@@ -835,7 +836,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			break
 		end
 	end
-	return
+	return RET_ERR
 end
 
 function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg_color)
@@ -1004,5 +1005,5 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			break
 		end
 	end
-	return
+	return RET_ERR
 end

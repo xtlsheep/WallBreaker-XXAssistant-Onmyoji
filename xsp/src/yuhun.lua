@@ -77,12 +77,15 @@ function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, f
 	elseif (mode == "组队" and role == "队长" and (group == "固定队2人" or group == "固定队3人")) then
 		yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
 	end
+	return RET_OK
 end
 
 function yuhun_solo(mark, level, round, lock)
 	local init = 1
 	local tingyuan_time_cnt = 0
+	local aj_time_cnt = 0
 	local quit = 0
+	local quit_aj = 0
 	local x, y
 	
 	while (1) do
@@ -94,6 +97,13 @@ function yuhun_solo(mark, level, round, lock)
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3],3) break end
 			mSleep(500)
+			-- 智能突破
+			if auto_jjtp_en == 1 then
+				aj_time_cnt = aj_time_cnt + 1
+				if aj_time_cnt*500 >= auto_jjtp_interv*1000 then
+					quit_aj = 1
+				end
+			end
             -- 循环通用
             loop_generic()
 			-- 超鬼王
@@ -123,10 +133,15 @@ function yuhun_solo(mark, level, round, lock)
 			if (x > -1) then
 				if quit == 1 then
 					random_touch(0, 930, 110, 5, 5)
-					return
+					return RET_OK
+				end
+				if quit_aj == 1 then
+					random_touch(0, 930, 110, 5, 5)
+					return RET_VALID
 				end
 				level_select(level, init, lock, "御魂") 
-				init = 0 solo_start() 
+				init = 0 
+				solo_start() 
 				break 
 			end
 			-- 庭院
@@ -156,7 +171,7 @@ function yuhun_solo(mark, level, round, lock)
 			break
 		end
 	end
-	return RET_OK
+	return RET_ERR
 end
 
 function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
@@ -189,7 +204,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			x, y = lct_tansuo()
 			if (x > -1) then
 				if quit == 1 then
-					return
+					return RET_OK
 				end
 				if wait_invite == 0 then
 					HUD_show_or_hide(HUD,hud_info,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -290,7 +305,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			break
 		end
 	end
-	return RET_OK
+	return RET_ERR
 end
 
 function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, fail_and_recreate, group)
@@ -382,7 +397,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = lct_tansuo() 
 			if (x > -1) then 
 				if quit == 1 then
-					return
+					return RET_OK
 				end
 				random_touch(0, 180, 590, 20, 20) 
 				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt) 
@@ -426,7 +441,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			break
 		end
 	end
-	return RET_OK
+	return RET_ERR
 end
 
 function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to_captain)
@@ -497,12 +512,12 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
             x, y = real_baqidashe() if x > -1 then break end
             -- 神秘商人
             x, y = mysterious_vender() if x > -1 then break end
-            -- 体力不足
+            -- 体力不足	
             x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end
-	return RET_OK
+	return RET_ERR
 end
 
 function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
@@ -615,7 +630,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			x, y = lct_tansuo() 
 			if (x > -1) then
 				if quit == 1 then
-					return
+					return RET_OK
 				end
 				random_touch(0, 180, 590, 20, 20)
 				break 
@@ -658,5 +673,5 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			break
 		end
 	end
-	return RET_OK
+	return RET_ERR
 end

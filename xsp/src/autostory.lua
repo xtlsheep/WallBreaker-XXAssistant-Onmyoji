@@ -136,5 +136,5 @@ function autostory()
 			break
 		end
 	end
-	return
+	return RET_ERR
 end

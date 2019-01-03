@@ -640,13 +640,13 @@ function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, l
 		jjtp_solo(whr_solo, round_time, refresh, solo_sel, lock, action_solo)
 	elseif (mode == "阴阳寮") then
 		action_pub = "Wait"
-		jjtp_solo_to_pub(lock)
+		jjtp_solo_to_pub()
 		jjtp_pub(whr_pub, round_time, pub_sel, lock, action_pub)
 	elseif (mode == "个人+阴阳寮") then
 		action_solo = "Switch"
 		while (1) do
 			if ret_solo == "Finish" and ret_pub == "Finish" then
-				return
+				return RET_OK
 			end
 			
 			ret_solo = jjtp_solo(whr_solo, round_time, refresh, solo_sel, lock, action_solo)
@@ -664,10 +664,10 @@ function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, l
 			end
 		end
 	end
-	return
+	return RET_OK
 end
 
-function jjtp_solo_to_pub(lock)
+function jjtp_solo_to_pub()
 	local x, y
 	while (1) do
 		while (1) do
@@ -677,7 +677,6 @@ function jjtp_solo_to_pub(lock)
 			-- 个人突破
 			x, y = solo_lct_jjtp()
 			if (x > -1) then
-				lock_or_unlock(lock, "结界突破")
 				random_sleep(500)
 				solo_to_pub()
 			end
@@ -686,10 +685,11 @@ function jjtp_solo_to_pub(lock)
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then random_touch(0, 280, 590, 20, 20) break end -- 结界突破
 			-- 阴阳寮突破
-			x, y = pub_lct_jjtp() if x > -1 then return end
+			x, y = pub_lct_jjtp() if x > -1 then return RET_OK end
 			break
 		end
 	end
+	return RET_ERR
 end
 
 function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
@@ -860,6 +860,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			break
 		end
 	end
+	return RET_ERR
 end
 
 function jjtp_pub(whr, round_time, pub_sel, lock, action)
@@ -1058,4 +1059,5 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			break
 		end
 	end
+	return RET_ERR
 end

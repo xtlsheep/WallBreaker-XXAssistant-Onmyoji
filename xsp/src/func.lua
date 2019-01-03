@@ -40,6 +40,15 @@ function print_global_config()
 	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d; 断线/闪退 %d, 停留过长关闭buff %d(%d sec), 体力用尽关闭buff %d)",
 			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6], reconn, buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
 	
+	if auto_jjtp_en == 1 then
+		print(string.format("突破间隔 %d, 强制 %d 模式：%s，战斗时间：%d，刷新：%d，个人突破：%s，阴阳寮突破：%d, 锁定: %d",
+				auto_jjtp_interv, auto_jjtp_force, auto_jjtp_mode, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock))
+		print(string.format("五花肉-个人：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)",
+				auto_jjtp_whr_solo[1], auto_jjtp_whr_solo[2], auto_jjtp_whr_solo[3], auto_jjtp_whr_solo[4]))
+		print(string.format("五花肉-阴阳寮：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)",
+				auto_jjtp_whr_pub[1], auto_jjtp_whr_pub[2], auto_jjtp_whr_pub[3], auto_jjtp_whr_pub[4]))
+	end
+	
 	if sg_en == 1 then
 		print(string.format("超鬼王: %d 鬼王选择 %s 强力追击 %d 标记 Boss %d 草人 %d 6星 %s 5星 %s 4星 %s 3星 %s 2星 %s 1星 %s",
 				sg_en, sg_fight_sel, sg_force, sg_mark_sel[1], sg_mark_sel[2], sg_tired[6], sg_tired[5], sg_tired[4], sg_tired[3], sg_tired[2], sg_tired[1]))

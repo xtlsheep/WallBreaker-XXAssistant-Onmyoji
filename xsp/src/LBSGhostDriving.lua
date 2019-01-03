@@ -89,4 +89,5 @@ function LBSGhostDriving()
 			break
 		end
 	end
+	return RET_ERR
 end

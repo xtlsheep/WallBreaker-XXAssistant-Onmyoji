@@ -56,7 +56,7 @@ function normalcall(tickets)
 				x, y = lct_call_house()
 				if x > -1 then
 					random_touch(0, 52, 27, 10, 10) -- 返回
-					return
+					return RET_OK
 				end
 			else
 				-- 召唤小屋
@@ -67,7 +67,7 @@ function normalcall(tickets)
 					x_, y_ = lct_call_house()
 					if x_ > -1 then
 						random_touch(0, 52, 27, 10, 10) -- 返回
-						return
+						return RET_OK
 					end
 					break
 				end
@@ -87,4 +87,5 @@ function normalcall(tickets)
 			break
 		end
 	end
+	return RET_ERR
 end

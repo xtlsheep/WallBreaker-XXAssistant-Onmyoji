@@ -190,7 +190,7 @@ function hundredghost(round, num, invite)
 				invite_cnt = 0
 				if hg_cnt >= round then
 					random_touch(0, 890, 150, 5, 5) -- 右上退出
-					return
+					return RET_OK
 				end
 				break
 			end
@@ -209,6 +209,5 @@ function hundredghost(round, num, invite)
 			break
 		end
 	end
-	
-	return
+	return RET_ERR
 end

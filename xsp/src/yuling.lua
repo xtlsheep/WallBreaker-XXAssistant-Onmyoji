@@ -68,7 +68,7 @@ function yuling(sel, level, round, lock)
 			if (x > -1) then
 				if quit == 1 then
 					random_touch(0, 930, 110, 5, 5)
-					return
+					return RET_OK
 				end
 				if (sel == "神龙") then
 					random_touch(0, 230, 240, 20, 20)
@@ -91,4 +91,5 @@ function yuling(sel, level, round, lock)
 			break
 		end
 	end
+	return RET_ERR
 end

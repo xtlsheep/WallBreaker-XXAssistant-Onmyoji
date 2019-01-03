@@ -73,7 +73,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			if x > -1 then
 				if (end_tan == 1 and end_chen == 1 and end_chi == 1) then
 					random_touch(0, 930, 110, 5, 5) -- 退出业原火
-					return
+					return RET_OK
 				end
 				ran_wait = math.random(3000, 5000)
 				HUD_show_or_hide(HUD,hud_info,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -143,4 +143,5 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			break
 		end
 	end
+	return RET_ERR
 end

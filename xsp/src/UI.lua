@@ -11,6 +11,7 @@ require "yqfy"
 require "hundredghost"
 require "autocake"
 require "LBSGhostDriving"
+require "autojjtp"
 require "superghost"
 
 -- UI init
@@ -43,7 +44,10 @@ function portal_UI()
 	elseif (res_portal.select == "1") then
 		stats_UI()
 	end
-	settlement_UI()
+	
+	if win_cnt.global > 0 or fail_cnt.global > 0 then
+		settlement_UI()
+	end
 end
 
 function config_UI()
@@ -180,7 +184,8 @@ function global_UI()
 	global_basic_page = UI:Page(global_ui, "全局设置")
 	UI:CheckBoxGroup(global_basic_page, "offer_en","悬赏封印 - ","0",30,"0,0,0","20,20,300,60")
 	UI:CheckBoxGroup(global_basic_page, "offer_sel","勾玉,体力,金币,猫粮,狗粮","0@1@2@3@4",30,"0,0,0","280,20,720,60")
-	UI:CheckBoxGroup(global_basic_page, "auto_jjtp_en","智能突破[暂时无效]","0",30,"0,0,0","20,80,960,60")
+	UI:CheckBoxGroup(global_basic_page, "auto_jjtp_en","智能突破","0",30,"0,0,0","20,80,960,60")
+	UI:CheckBoxGroup(global_basic_page, "auto_jjtp_force","强制突破","",30,"0,0,0","500,80,480,60")
 	UI:CheckBoxGroup(global_basic_page, "sg_en","超鬼王","0",30,"0,0,0","20,140,960,60")
 	UI:Label(global_basic_page, "left", "0,0,0", 30, "鬼王选择 - ", "500,140,180,60")
 	UI:ComboBox(global_basic_page, "sg_fight_sel", "所有公开的超鬼王,自己发现的超鬼王","1",23,"680,140,300,50")
@@ -198,7 +203,7 @@ function global_UI()
 	UI:ComboBox(global_auto_jjtp_page, "auto_jjtp_mode", "个人突破,阴阳寮突破,个人突破 + 阴阳寮突破", "2", 23, "600,80,380,50")
 	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "战斗限时 - ", "20,140,300,60")
 	UI:ComboBox(global_auto_jjtp_page, "auto_jjtp_round_time", "3分钟,5分钟,10分钟,不限时","1",23,"600,140,380,50")
-	UI:CheckBoxGroup(global_auto_jjtp_page, "lock","锁定出战阵容","0",30,"0,0,0","20,200,900,60")
+	UI:CheckBoxGroup(global_auto_jjtp_page, "auto_jjtp_lock","锁定出战阵容","0",30,"0,0,0","20,200,900,60")
 	UI:Line(global_auto_jjtp_page, "line_common", "100,100,100", 2, 960, "20,260,960,2")
 	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "个人突破设置 - ", "20,270,300,60")
 	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,330,300,60")
@@ -352,6 +357,121 @@ function global_UI()
 		buff_stop_useup = 1
 	else
 		buff_stop_useup = 0
+	end
+	
+	-- 智能突破
+	if res_global.auto_jjtp_en == "0" then
+		auto_jjtp_en = 1
+	else
+		auto_jjtp_en = 0
+	end
+	
+	if res_global.auto_jjtp_force == "0" then
+		auto_jjtp_force = 1
+	else
+		auto_jjtp_force = 0
+	end
+	
+	if res_global.auto_jjtp_interv == "0" then
+		auto_jjtp_interv = 15
+	elseif res_global.auto_jjtp_interv == "1" then
+		auto_jjtp_interv = 30
+	elseif res_global.auto_jjtp_interv == "2" then
+		auto_jjtp_interv = 45
+	elseif res_global.auto_jjtp_interv == "3" then
+		auto_jjtp_interv = 60
+	elseif res_global.auto_jjtp_interv == "4" then
+		auto_jjtp_interv = 120
+	end
+	
+	if (res_global.auto_jjtp_mode == "0") then
+		auto_jjtp_mode = "个人"
+	elseif (res_global.auto_jjtp_mode == "1") then
+		auto_jjtp_mode = "阴阳寮"
+	elseif (res_global.auto_jjtp_mode == "2") then
+		auto_jjtp_mode = "个人+阴阳寮"
+	end
+	
+	local whr_solo = {}
+	for w in string.gmatch(res_global.auto_jjtp_whr_solo,"([^'@']+)") do
+		table.insert(whr_solo,w)
+	end
+	for i = 1, table.getn(whr_solo), 1 do
+		if (whr_solo[i] == "0") then
+			auto_jjtp_whr_solo[1] = 1 -- 彼岸花
+		elseif (whr_solo[i] == "1") then
+			auto_jjtp_whr_solo[2] = 1 -- 小僧
+		elseif (whr_solo[i] == "2") then
+			auto_jjtp_whr_solo[3] = 1 -- 日和坊
+		elseif (whr_solo[i] == "3") then
+			auto_jjtp_whr_solo[4] = 1 -- 御馔津
+		end
+	end
+	
+	local whr_pub = {}
+	for w in string.gmatch(res_global.auto_jjtp_whr_pub,"([^'@']+)") do
+		table.insert(whr_pub,w)
+	end
+	for i = 1, table.getn(whr_pub), 1 do
+		if (whr_pub[i] == "0") then
+			auto_jjtp_whr_pub[1] = 1 -- 彼岸花
+		elseif (whr_pub[i] == "1") then
+			auto_jjtp_whr_pub[2] = 1 -- 小僧
+		elseif (whr_pub[i] == "2") then
+			auto_jjtp_whr_pub[3] = 1 -- 日和坊
+		elseif (whr_pub[i] == "3") then
+			auto_jjtp_whr_pub[4] = 1 -- 御馔津
+		end
+	end
+	
+	if (res_global.auto_jjtp_round_time == "0") then
+		auto_jjtp_round_time = 3
+	elseif (res_global.auto_jjtp_round_time == "1") then
+		auto_jjtp_round_time = 5
+	elseif (res_global.auto_jjtp_round_time == "2") then
+		auto_jjtp_round_time = 10
+	elseif (res_global.auto_jjtp_round_time == "3") then
+		auto_jjtp_round_time = 99999
+	end
+	
+	if (res_global.auto_jjtp_lock == "0") then
+		auto_jjtp_lock = 1
+	else
+		auto_jjtp_lock = 0
+	end
+	
+	if (res_global.auto_jjtp_refresh == "0") then
+		auto_jjtp_refresh = 3
+	elseif (res_global.auto_jjtp_refresh == "1") then
+		auto_jjtp_refresh = 6
+	elseif (res_global.auto_jjtp_refresh == "2") then
+		auto_jjtp_refresh = 9
+	end
+	
+	if (res_global.auto_jjtp_solo_sel == "0") then
+		auto_jjtp_solo_sel = "0_to_5"
+	elseif (res_global.auto_jjtp_solo_sel == "1") then
+		auto_jjtp_solo_sel = "3_to_5"
+	elseif (res_global.auto_jjtp_solo_sel == "2") then
+		auto_jjtp_solo_sel = "5_to_0"
+	elseif (res_global.auto_jjtp_solo_sel == "3") then
+		auto_jjtp_solo_sel = "3_to_0"
+	elseif (res_global.auto_jjtp_solo_sel == "4") then
+		auto_jjtp_solo_sel = "random"
+	end
+	
+	if (res_global.auto_jjtp_pub_sel == "0") then
+		auto_jjtp_pub_sel = 5
+	elseif (res_global.auto_jjtp_pub_sel == "1") then
+		auto_jjtp_pub_sel = 4
+	elseif (res_global.auto_jjtp_pub_sel == "2") then
+		auto_jjtp_pub_sel = 3
+	elseif (res_global.auto_jjtp_pub_sel == "3") then
+		auto_jjtp_pub_sel = 2
+	elseif (res_global.auto_jjtp_pub_sel == "4") then
+		auto_jjtp_pub_sel = 1
+	elseif (res_global.auto_jjtp_pub_sel == "5") then
+		auto_jjtp_pub_sel = 0
 	end
 	
 	-- 超鬼王
@@ -719,7 +839,11 @@ function baqidashe_UI()
 		return
 	end
 	
-	yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+	if (auto_jjtp_en == 1 and (mode == "单人" or group == "野队" or group == "野队2人" or group == "野队3人")) then
+		yuhun_auto_jjtp(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+	else
+		yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+	end
 end
 
 function tansuo_UI()
@@ -916,7 +1040,11 @@ function tansuo_UI()
 		return
 	end
 	
-	tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
+	if auto_jjtp_en == 1 then
+		tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
+	else
+		tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
+	end
 end
 
 function jjtp_UI()
@@ -1222,7 +1350,11 @@ function juexing_UI()
 		return
 	end
 	
-	juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+	if (auto_jjtp_en == 1 and (mode == "单人" or group == "野队" or group == "野队2人" or group == "野队3人")) then
+		juexing_auto_jjtp(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+	else
+		juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+	end
 end
 
 function yeyuanhuo_UI()
@@ -1308,7 +1440,11 @@ function yeyuanhuo_UI()
 		return
 	end
 	
-	yeyuanhuo(round_tan, round_chen, round_chi, lock)
+	if auto_jjtp_en == 1 then
+		yeyuanhuo_auto_jjtp(round_tan, round_chen, round_chi, lock)
+	else
+		yeyuanhuo(round_tan, round_chen, round_chi, lock)
+	end
 end
 
 function yuling_UI()

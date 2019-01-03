@@ -79,6 +79,7 @@ function juexing(mode, role, group, element, mark, level, round, lock, member_au
 	elseif (mode == "组队" and role == "队长" and (group == "固定队2人" or group == "固定队3人")) then
 		juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
 	end
+	return RET_OK
 end
 
 function juexing_solo(element, mark, level, round, lock)
@@ -121,7 +122,7 @@ function juexing_solo(element, mark, level, round, lock)
 			if (x > -1) then
 				if quit == 1 then
 					random_touch(0, 930, 110, 5, 5)
-					return
+					return RET_OK
 				end
 				level_select(level, init, lock, "觉醒") 
 				init = 0 
@@ -151,7 +152,7 @@ function juexing_solo(element, mark, level, round, lock)
 			break
 		end
 	end
-	return RET_OK
+	return RET_ERR
 end
 
 function juexing_group_wild_member(element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
@@ -181,7 +182,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			x, y = lct_tansuo()
 			if (x > -1) then
 				if quit == 1 then
-					return
+					return RET_OK
 				end
 				if wait_invite == 0 then
 					HUD_show_or_hide(HUD,hud_info,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -281,7 +282,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			break
 		end
 	end
-	return RET_OK
+	return RET_ERR
 end
 
 function juexing_group_wild_captain(element, mark, level, round, lock, captain_auto_group, fail_and_recreate, group)
@@ -369,7 +370,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			x, y = lct_tansuo() 
 			if (x > -1) then
 				if quit == 1 then
-					return
+					return RET_OK
 				end
 				random_touch(0, 90, 590, 20, 20) 
 				mSleep(1000) 
@@ -410,7 +411,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			break
 		end
 	end
-	return RET_OK
+	return RET_ERR
 end
 
 function juexing_group_fix_member(element, mark, level, round, member_auto_group, member_to_captain)
@@ -480,7 +481,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			break
 		end
 	end
-	return RET_OK
+	return RET_ERR
 end
 
 function juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
@@ -589,7 +590,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			x, y = lct_tansuo() 
 			if (x > -1) then
 				if quit == 1 then
-					return
+					return RET_OK
 				end
 				random_touch(0, 90, 590, 20, 20) 
 				mSleep(1000) 
@@ -629,5 +630,5 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			break
 		end
 	end
-	return RET_OK
+	return RET_ERR
 end
