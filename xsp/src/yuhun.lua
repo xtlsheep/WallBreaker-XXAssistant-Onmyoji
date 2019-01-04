@@ -594,9 +594,9 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 				break 
 			end
 			-- 创建初始化
-			x, y = captain_room_create_init()
+			x, y = captain_room_create_init() if x > -1 then break end
 			-- 创建私人队伍
-			x, y = captain_room_create_private()
+			x, y = captain_room_create_private() if x > -1 then invite = 1 break end
 			-- 邀请初始化
 			x, y = captain_room_invite_init()
 			if (x > -1) then

@@ -1046,8 +1046,8 @@ function member_room_user_profile()
 end
 
 function captain_room_create_init()
-	local x, y = findColor({925, 555, 937, 567}, -- 创建队伍 and 右边红穗
-		"0|0|0xf3b25e,133|-325|0xa52729,128|-362|0x8d7245,127|-327|0xead49c",
+	local x, y = findColor({927, 557, 929, 559},
+		"0|0|0xf3b25e,133|-447|0xe8d4cf,-866|-439|0xe0c167,-855|-328|0xa52729",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"创建队伍",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -1102,11 +1102,11 @@ end
 
 function captain_room_invite_first(invite_zone)
 	local x, y, x_, y_, x__, y__
-	x, y = findColor({687, 511, 689, 513},
-		"0|0|0xf3b25e,-241|-3|0xdf6851,-417|-444|0xe17189,156|-454|0xf5e0d9,127|-404|0xa68e78",
+	x, y = findColor({685, 508, 687, 510},
+		"0|0|0xf3b25e,158|-451|0xf5e0d9,-409|-440|0xe77d93,-239|1|0xdf6851",
 		95, 0, 0, 0)
 	if x > -1 then
-		mSleep(750)
+		mSleep(500)
 		if invite_zone == 1 then
 			x_, y_ = findColor({364, 94, 366, 96},
 				"0|0|0x8a553f,-46|-13|0xa36b4e,36|-13|0xa26b4e,-93|-22|0xe2758c,479|-33|0xf4e0da",
@@ -1133,19 +1133,26 @@ function captain_room_invite_first(invite_zone)
 			end
 		end
 		
-		for i = 1, 3 do
-			random_sleep(250)
+		for i = 1, 5 do
 			-- 已选中
-			x__, y__ = findColor({452, 201, 454, 204},
-				"0|0|0xa3d0ce,234|310|0xf3b25e,-7|307|0xdf6851,-181|-132|0xe2758c",
-				95, 0, 0, 0)
-			if x__ > -1 then
-				random_touch(0, 440, 205, 40, 20) -- 第一位好友
-				random_sleep(250)
-				random_touch(0, 440, 205, 40, 20) -- 第一位好友
-				random_sleep(250)
-				random_touch(0, x, y, 20, 10) -- 邀请
-				return x, y
+			if ver == "iOS" then
+				x__, y__ = findColor({452, 201, 454, 204},
+					"0|0|0xa3d0ce,234|310|0xf3b25e,-7|307|0xdf6851,-181|-132|0xe2758c",
+					95, 0, 0, 0)
+				if x__ > -1 then
+					random_sleep(250)
+					random_touch(0, x, y, 20, 10) -- 邀请
+					return x, y
+				end
+			elseif ver == "android" then
+				x__, y__ = findColor({452, 201, 454, 204},
+					"0|0|0xcbcbb4,233|307|0xf4b25f,-5|309|0xdd6951,391|-144|0xf8e0d8",
+					95, 0, 0, 0)
+				if x__ > -1 then
+					random_sleep(250)
+					random_touch(0, x, y, 20, 10) -- 邀请
+					return x, y
+				end
 			end
 			-- 未选中
 			x__, y__ = findColor({452, 201, 454, 204},
@@ -1157,7 +1164,9 @@ function captain_room_invite_first(invite_zone)
 				random_touch(0, x, y, 20, 10) -- 邀请
 				return x, y
 			end
+			mSleep(1000)
 		end
+		HUD_show_or_hide(HUD,hud_info,"没有找到在线好友",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -1275,11 +1284,22 @@ function captain_team_win_invite()
 end
 
 function captain_team_set_auto_invite()
-	local x, y = findColor({496, 317, 498, 319},
-		"0|0|0x73604d,-85|65|0xdf6851,74|65|0xcbb59c,226|66|0xf3b25e",
-		95, 0, 0, 0)
-	if x > -1 then
-		random_touch(0, x, y, 3, 3) -- 勾选
+	local x, y
+	
+	if ver == "iOS" then
+		x, y = findColor({496, 317, 498, 319},
+			"0|0|0x73604d,-85|65|0xdf6851,74|65|0xcbb59c,226|66|0xf3b25e",
+			95, 0, 0, 0)
+		if x > -1 then
+			random_touch(0, x, y, 3, 3) -- 勾选
+		end
+	elseif ver == "android" then
+		x, y = findColor({927, 557, 929, 559},
+			"0|0|0xf3b25e,133|-447|0xe8d4cf,-866|-439|0xe0c167,-855|-328|0xa52729",
+			95, 0, 0, 0)
+		if x > -1 then
+			random_touch(0, x, y, 3, 3) -- 勾选
+		end
 	end
 	return x, y
 end
