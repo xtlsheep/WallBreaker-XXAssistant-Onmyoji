@@ -41,11 +41,10 @@ function print_global_config()
 			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6], reconn, buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
 	
 	if auto_jjtp_en == 1 then
-		print(string.format("突破间隔 %d, 模式：%s，战斗时间：%d，刷新：%d，个人突破：%s，阴阳寮突破：%d, 锁定: %d",
+		print(string.format("智能突破 间隔 %d, 模式：%s，战斗时间：%d，刷新：%d，个人突破：%s，阴阳寮突破：%d, 锁定: %d",
 				auto_jjtp_interv, auto_jjtp_mode, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock))
-		print(string.format("五花肉-个人：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)",
-				auto_jjtp_whr_solo[1], auto_jjtp_whr_solo[2], auto_jjtp_whr_solo[3], auto_jjtp_whr_solo[4]))
-		print(string.format("五花肉-阴阳寮：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)",
+		print(string.format("五花肉 个人：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d) 阴阳寮：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)",
+				auto_jjtp_whr_solo[1], auto_jjtp_whr_solo[2], auto_jjtp_whr_solo[3], auto_jjtp_whr_solo[4],
 				auto_jjtp_whr_pub[1], auto_jjtp_whr_pub[2], auto_jjtp_whr_pub[3], auto_jjtp_whr_pub[4]))
 	end
 	
@@ -330,17 +329,17 @@ function stop_buff()
 		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"关闭buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		for i = 1, 10 do
+		for i = 1, 5 do
 			x_, y_ = findColor({794, 135, 796, 360},
 				"0|0|0x412e2b,5|-7|0xe4c197,-5|8|0xd8b389,0|-15|0x382826,-1|22|0xcbb59c",
 				90, 0, 0, 0)
 			if x_ > -1 then
 				random_touch(0, x_, y_, 5, 5)
+				random_sleep(500)
 			end
-			random_sleep(150)
+			random_sleep(250)
 		end
 	end
-	random_sleep(500)
 	right_lower_click()
 end
 

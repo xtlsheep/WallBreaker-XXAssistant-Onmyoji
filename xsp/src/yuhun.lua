@@ -85,7 +85,7 @@ end
 function yuhun_solo(mark, level, round, lock)
 	local init = 1
 	local tingyuan_time_cnt = 0
-	local quit_fin = 0
+	local quit_end = 0
 	local quit_con = 0
 	local x, y
 	
@@ -117,7 +117,7 @@ function yuhun_solo(mark, level, round, lock)
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.yuhun = win_cnt.yuhun + 1
 				if win_cnt.yuhun >= round then
-					quit_fin = 1
+					quit_end = 1
 				end
 				keep_half_damo()
 				break
@@ -128,7 +128,7 @@ function yuhun_solo(mark, level, round, lock)
 				-- 智能突破Check
 				quit_con = auto_jjtp_time_check()
 				-- 完成后退出
-				if quit_fin == 1 then
+				if quit_end == 1 then
 					random_touch(0, 930, 110, 5, 5)
 					return RET_OK
 				end
@@ -179,7 +179,8 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 	local auto_grouped = -1
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
-	local quit = 0
+	local quit_end = 0
+	local quit_con = 0
 	local quit_grp = 0
 	local x, y, x_, y_
 	
@@ -201,8 +202,11 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then
-				if quit == 1 then
+				if quit_end == 1 then
 					return RET_OK
+				end
+				if quit_con == 1 then
+					return RET_VALID
 				end
 				if wait_invite == 0 then
 					HUD_show_or_hide(HUD,hud_info,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -238,11 +242,15 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.yuhun = win_cnt.yuhun + 1
-				if win_cnt.yuhun >= round -1 then
-					quit_grp = 1
-				end
 				if win_cnt.yuhun >= round then
-					quit = 1
+					quit_grp = 1
+					quit_end = 1
+				end
+				-- 智能突破Check
+				ret = auto_jjtp_time_check()
+				if ret == RET_VALID then
+					quit_grp = 1
+					quit_con = 1
 				end
 				keep_half_damo()
 				break
@@ -310,7 +318,8 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 	local init = 1
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
-	local quit = 0
+	local quit_end = 0
+	local quit_con = 0
 	local quit_grp = 0
 	local x, y
 	
@@ -342,11 +351,15 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.yuhun = win_cnt.yuhun + 1
-				if win_cnt.yuhun >= round -1 then
-					quit_grp = 1
-				end
 				if win_cnt.yuhun >= round then
-					quit = 1
+					quit_grp = 1
+					quit_end = 1
+				end
+				-- 智能突破Check
+				ret = auto_jjtp_time_check()
+				if ret == RET_VALID then
+					quit_grp = 1
+					quit_con = 1
 				end
 				keep_half_damo()
 				break
@@ -362,7 +375,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 				break
 			end
 			-- 自动邀请
-			if (captain_auto_group == 1 and quit == 0) then
+			if (captain_auto_group == 1 and quit_end == 0 and quit_con == 0) then
 				x, y = captain_team_set_auto_invite()
 				if (x > -1) then
 					break
@@ -371,7 +384,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			-- 胜利邀请
 			x, y = captain_team_win_invite()
 			if (x > -1) then
-				if quit == 1 then
+				if quit_end == 1 or quit_con == 1 then
 					random_touch(0, 460, 385, 20, 10)
 				else
 					random_touch(0, 674, 385, 20, 10)
@@ -394,8 +407,11 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then
-				if quit == 1 then
+				if quit_end == 1 then
 					return RET_OK
+				end
+				if quit_con == 1 then
+					return RET_VALID
 				end
 				random_touch(0, 180, 590, 20, 20)
 				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt)
@@ -557,7 +573,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 	local init = 1
 	local invite = 1
 	local tingyuan_time_cnt = 0
-	local quit_fin = 0
+	local quit_end = 0
 	local quit_con = 0
 	local quit_grp = 0
 	local invite_zone = 0
@@ -599,15 +615,15 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.yuhun = win_cnt.yuhun + 1
+				if win_cnt.yuhun >= round then
+					quit_grp = 1
+					quit_end = 1
+				end
 				-- 智能突破Check
 				ret = auto_jjtp_time_check()
 				if ret == RET_VALID then
 					quit_grp = 1
 					quit_con = 1
-				end
-				if win_cnt.yuhun >= round then
-					quit_grp = 1
-					quit_fin = 1
 				end
 				keep_half_damo()
 				break
@@ -615,7 +631,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			-- 失败邀请
 			x, y = captain_team_lost_invite() if (x > -1) then random_touch(0, 673, 384, 20, 10) invite = 0 time_cnt = 0 break end -- 确定
 			-- 自动邀请
-			if (captain_auto_group == 1 and quit_fin == 0 and quit_con == 0) then
+			if (captain_auto_group == 1 and quit_end == 0 and quit_con == 0) then
 				x, y = captain_team_set_auto_invite()
 				if (x > -1) then
 					break
@@ -624,7 +640,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			-- 胜利邀请
 			x, y = captain_team_win_invite()
 			if (x > -1) then
-				if quit_fin == 1 or quit_con == 1 then
+				if quit_end == 1 or quit_con == 1 then
 					random_touch(0, 460, 385, 20, 10)
 				else
 					random_touch(0, 674, 385, 20, 10)
@@ -667,7 +683,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then
-				if quit_fin == 1 then
+				if quit_end == 1 then
 					return RET_OK
 				end
 				if quit_con == 1 then
