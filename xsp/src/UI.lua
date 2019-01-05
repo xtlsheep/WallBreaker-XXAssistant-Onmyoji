@@ -1180,6 +1180,9 @@ function jjtp_UI()
 		return
 	end
 	
+	-- Disable智能突破
+	auto_jjtp_en = 0
+	
 	jjtp(mode, whr_solo_out, whr_pub_out, round_time, refresh, solo_sel, pub_sel, lock)
 end
 

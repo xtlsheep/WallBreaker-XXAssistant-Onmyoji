@@ -27,6 +27,8 @@ function find_whr(pos, whr, role)
 		return RET_ERR
 	end
 	
+	mSleep(1000)
+	
 	if (role == "solo") then
 		x, y = findColor({solo_fight_x[pos]-1, solo_fight_y[pos]-1, solo_fight_x[pos]+1, solo_fight_y[pos]+1}, -- 进攻
 			"0|0|0xf3b25e,-40|-2|0xf3b25e,38|2|0xf3b25e,73|1|0xcbb59c",
@@ -34,13 +36,11 @@ function find_whr(pos, whr, role)
 		if x == -1 then
 			return RET_ERR
 		end
-		mSleep(500)
 		x1 = solo_whr_x1[pos]
 		x2 = solo_whr_x2[pos]
 		y1 = solo_whr_y1[pos]
 		y2 = solo_whr_y2[pos]
 	elseif (role == "public") then
-		mSleep(500)
 		if pos%2 == 1 then
 			x1 = 375
 			y1 = 155
@@ -913,6 +913,11 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 						return "Finish"
 					end
 					if wait == 1 then
+						-- 智能突破
+						if auto_jjtp_en == 1 then
+							quit_jjtp()
+							return "Finish"
+						end
 						HUD_show_or_hide(HUD,hud_info,"突破冷却中",20,"0xff000000","0xffffffff",0,100,0,300,32)
 						mSleep(60*1000)
 						map = {}
@@ -926,6 +931,11 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 						return "Finish"
 					end
 					if wait == 1 then
+						-- 智能突破
+						if auto_jjtp_en == 1 then
+							pub_to_solo()
+							return "Finish"
+						end
 						pub_to_solo()
 						return "Unfinish"
 					end

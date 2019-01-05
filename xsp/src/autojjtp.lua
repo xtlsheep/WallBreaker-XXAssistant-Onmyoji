@@ -34,6 +34,10 @@ function tingyuan_or_tansuo()
 end
 
 function auto_jjtp_time_check()
+	if auto_jjtp_en == 0 then
+		return
+	end
+	
 	local curr_time_stamp = mTime()
 	local dura_time = curr_time_stamp - auto_jjtp_time_stamp
 	local dura_time_min = dura_time/(1000*60)
