@@ -387,8 +387,8 @@ function solo_to_pub()
 end
 
 function pub_unstart()
-	local x, y = findColor({1050, 60, 1052, 62},
-		"0|0|0xe9d7d1,-503|110|0x4e4e4e,-585|147|0xd3cabc,-460|121|0xeaeaea",
+	local x, y = findColor({1050, 58, 1052, 60},
+		"0|0|0xe8d4cf,-519|124|0x131313,-510|206|0xe9e9e9,40|251|0xbd681a",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"寮突破未开启",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -684,8 +684,12 @@ function jjtp_solo_to_pub()
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then random_touch(0, 280, 590, 20, 20) break end -- 结界突破
+			-- 防守记录
+			x, y = solo_quit_defense_record() if x > -1 then break end
 			-- 阴阳寮突破
 			x, y = pub_lct_jjtp() if x > -1 then return RET_OK end
+			-- 阴阳寮Unstart
+			x, y = pub_unstart() if x > -1 then return RET_OK end
 			break
 		end
 	end
@@ -720,6 +724,8 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			mSleep(500)
 			-- 循环通用
 			loop_generic()
+			-- 拒绝邀请
+			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 阴阳寮突破
 			x, y = pub_lct_jjtp() if x > -1 then quit_jjtp() break end
 			-- 个人突破
@@ -849,8 +855,6 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
-			-- 拒绝邀请
-			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 探索
@@ -891,6 +895,8 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			mSleep(500)
 			-- 循环通用
 			loop_generic()
+			-- 拒绝邀请
+			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 未开寮突
 			x, y = pub_unstart()
 			if x > -1 then
@@ -1062,10 +1068,6 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
-			-- 探索
-			x, y = lct_tansuo() if (x > -1) then random_touch(0, 280, 590, 20, 20) break end -- 结界突破
-			-- 拒绝邀请
-			x, y = member_team_refuse_invite() if (x > -1) then break end
 			break
 		end
 	end

@@ -5,7 +5,6 @@ require "jjtp"
 
 -- 智能突破Global
 auto_jjtp_en = 0
-auto_jjtp_force = 0
 auto_jjtp_interv = 0
 auto_jjtp_mode = nil
 auto_jjtp_whr_solo = {0, 0, 0, 0}
@@ -43,7 +42,7 @@ function auto_jjtp_time_check()
 	local dura_time_min = dura_time/(1000*60)
 	
 	print(dura_time_min)
-	if dura_time_min > 0.5 then
+	if dura_time_min > 1 then
 		return RET_VALID
 	end
 	return RET_OK

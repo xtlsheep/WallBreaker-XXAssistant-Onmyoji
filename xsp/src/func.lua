@@ -41,8 +41,8 @@ function print_global_config()
 			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6], reconn, buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
 	
 	if auto_jjtp_en == 1 then
-		print(string.format("突破间隔 %d, 强制 %d 模式：%s，战斗时间：%d，刷新：%d，个人突破：%s，阴阳寮突破：%d, 锁定: %d",
-				auto_jjtp_interv, auto_jjtp_force, auto_jjtp_mode, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock))
+		print(string.format("突破间隔 %d, 模式：%s，战斗时间：%d，刷新：%d，个人突破：%s，阴阳寮突破：%d, 锁定: %d",
+				auto_jjtp_interv, auto_jjtp_mode, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock))
 		print(string.format("五花肉-个人：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)",
 				auto_jjtp_whr_solo[1], auto_jjtp_whr_solo[2], auto_jjtp_whr_solo[3], auto_jjtp_whr_solo[4]))
 		print(string.format("五花肉-阴阳寮：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)",
@@ -1176,7 +1176,7 @@ function captain_room_start_with_1_members()
 		"0|0|0xf3b25e,-60|-11|0xf3b25e,-63|13|0xf3b25e,65|2|0xf3b25e",
 		95, 0, 0, 0)
 	if x > -1 then
-		random_sleep(1000)
+		random_sleep(500)
 		random_touch(0, x, y, 20, 10)
 	end
 	return x, y
@@ -1191,7 +1191,7 @@ function captain_room_start_with_2_members()
 			"0|0|0x31251a,24|-21|0x433527,34|-33|0xdbbf68,-8|-15|0xe1cd8d",
 			95, 0, 0, 0)
 		if x_ == -1 then
-			random_sleep(1000)
+			random_sleep(500)
 			random_touch(0, x, y, 20, 10) -- 开始战斗
 		end
 	end

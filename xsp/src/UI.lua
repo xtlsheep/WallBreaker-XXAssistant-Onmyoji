@@ -185,7 +185,6 @@ function global_UI()
 	UI:CheckBoxGroup(global_basic_page, "offer_en","悬赏封印 - ","0",30,"0,0,0","20,20,300,60")
 	UI:CheckBoxGroup(global_basic_page, "offer_sel","勾玉,体力,金币,猫粮,狗粮","0@1@2@3@4",30,"0,0,0","280,20,720,60")
 	UI:CheckBoxGroup(global_basic_page, "auto_jjtp_en","智能突破","0",30,"0,0,0","20,80,960,60")
-	UI:CheckBoxGroup(global_basic_page, "auto_jjtp_force","强制突破","",30,"0,0,0","500,80,480,60")
 	UI:CheckBoxGroup(global_basic_page, "sg_en","超鬼王","0",30,"0,0,0","20,140,960,60")
 	UI:Label(global_basic_page, "left", "0,0,0", 30, "鬼王选择 - ", "500,140,180,60")
 	UI:ComboBox(global_basic_page, "sg_fight_sel", "所有公开的超鬼王,自己发现的超鬼王","1",23,"680,140,300,50")
@@ -364,12 +363,6 @@ function global_UI()
 		auto_jjtp_en = 1
 	else
 		auto_jjtp_en = 0
-	end
-	
-	if res_global.auto_jjtp_force == "0" then
-		auto_jjtp_force = 1
-	else
-		auto_jjtp_force = 0
 	end
 	
 	if res_global.auto_jjtp_interv == "0" then
@@ -839,7 +832,7 @@ function baqidashe_UI()
 		return
 	end
 	
-	if (auto_jjtp_en == 1 and (mode == "单人" or group == "野队" or group == "野队2人" or group == "野队3人")) then
+	if (auto_jjtp_en == 1) then
 		yuhun_auto_jjtp(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
 	else
 		yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)

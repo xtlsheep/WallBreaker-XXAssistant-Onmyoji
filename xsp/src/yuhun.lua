@@ -98,8 +98,8 @@ function yuhun_solo(mark, level, round, lock)
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3],3) break end
 			mSleep(500)
-            -- 循环通用
-            loop_generic()
+			-- 循环通用
+			loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 拒绝组队
@@ -118,12 +118,12 @@ function yuhun_solo(mark, level, round, lock)
 				win_cnt.yuhun = win_cnt.yuhun + 1
 				if win_cnt.yuhun >= round then
 					quit_fin = 1
-				end	
+				end
 				keep_half_damo()
 				break
 			end
 			-- 八岐大蛇
-			x, y = lct_8dashe() 
+			x, y = lct_8dashe()
 			if (x > -1) then
 				-- 智能突破Check
 				quit_con = auto_jjtp_time_check()
@@ -137,10 +137,10 @@ function yuhun_solo(mark, level, round, lock)
 					random_touch(0, 930, 110, 5, 5)
 					return RET_VALID
 				end
-				level_select(level, init, lock, "御魂") 
+				level_select(level, init, lock, "御魂")
 				init = 0
-				solo_start() 
-				break 
+				solo_start()
+				break
 			end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
@@ -160,12 +160,12 @@ function yuhun_solo(mark, level, round, lock)
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 发现宝藏
 			x, y = lct_petfind() if (x > -1) then break end
-            -- 真八岐大蛇
-            x, y = real_baqidashe() if x > -1 then break end
-            -- 神秘商人
-            x, y = mysterious_vender() if x > -1 then break end
-            -- 体力不足
-            x, y = out_of_sushi() if x > -1 then break end
+			-- 真八岐大蛇
+			x, y = real_baqidashe() if x > -1 then break end
+			-- 神秘商人
+			x, y = mysterious_vender() if x > -1 then break end
+			-- 体力不足
+			x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end
@@ -180,7 +180,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
 	local quit = 0
-	local group_quit = 0
+	local quit_grp = 0
 	local x, y, x_, y_
 	
 	while (1) do
@@ -192,8 +192,8 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
-            -- 循环通用
-            loop_generic()
+			-- 循环通用
+			loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 拒绝邀请
@@ -239,7 +239,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.yuhun = win_cnt.yuhun + 1
 				if win_cnt.yuhun >= round -1 then
-					group_quit = 1
+					quit_grp = 1
 				end
 				if win_cnt.yuhun >= round then
 					quit = 1
@@ -281,10 +281,10 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if x > -1 then
-				if group_quit == 1 then
+				if quit_grp == 1 then
 					x_, y_ = fight_stop_auto_group()
 					if x_ > -1 then
-						group_quit = 0
+						quit_grp = 0
 					end
 				end
 				break
@@ -294,12 +294,12 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			x, y = captain_team_lost_invite() if (x > -1) then random_touch(0, 462, 383, 20, 10) break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
-            -- 真八岐大蛇
-            x, y = real_baqidashe() if x > -1 then break end
-            -- 神秘商人
-            x, y = mysterious_vender() if x > -1 then break end
-            -- 体力不足
-            x, y = out_of_sushi() if x > -1 then break end
+			-- 真八岐大蛇
+			x, y = real_baqidashe() if x > -1 then break end
+			-- 神秘商人
+			x, y = mysterious_vender() if x > -1 then break end
+			-- 体力不足
+			x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end
@@ -311,7 +311,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
 	local quit = 0
-	local group_quit = 0
+	local quit_grp = 0
 	local x, y
 	
 	while (1) do
@@ -323,8 +323,8 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
-            -- 循环通用
-            loop_generic()
+			-- 循环通用
+			loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 拒绝邀请
@@ -343,7 +343,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.yuhun = win_cnt.yuhun + 1
 				if win_cnt.yuhun >= round -1 then
-					group_quit = 1
+					quit_grp = 1
 				end
 				if win_cnt.yuhun >= round then
 					quit = 1
@@ -365,18 +365,18 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			if (captain_auto_group == 1 and quit == 0) then
 				x, y = captain_team_set_auto_invite()
 				if (x > -1) then
-					break 
-				end 
+					break
+				end
 			end
 			-- 胜利邀请
-			x, y = captain_team_win_invite() 
+			x, y = captain_team_win_invite()
 			if (x > -1) then
 				if quit == 1 then
 					random_touch(0, 460, 385, 20, 10)
 				else
 					random_touch(0, 674, 385, 20, 10)
 				end
-				break 
+				break
 			end
 			-- 创建初始化
 			x, y = captain_room_create_init() if (x > -1) then break end -- 创建队伍
@@ -392,14 +392,14 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 探索
-			x, y = lct_tansuo() 
-			if (x > -1) then 
+			x, y = lct_tansuo()
+			if (x > -1) then
 				if quit == 1 then
 					return RET_OK
 				end
-				random_touch(0, 180, 590, 20, 20) 
-				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt) 
-				break 
+				random_touch(0, 180, 590, 20, 20)
+				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt)
+				break
 			end
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) random_sleep(1000) break end -- 八岐大蛇
@@ -418,10 +418,10 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if x > -1 then
-				if group_quit == 1 then
+				if quit_grp == 1 then
 					x_, y_ = fight_stop_auto_group()
 					if x_ > -1 then
-						group_quit = 0
+						quit_grp = 0
 					end
 				end
 				break
@@ -430,12 +430,12 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = lct_petfind() if (x > -1) then break end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
-            -- 真八岐大蛇
-            x, y = real_baqidashe() if x > -1 then break end
-            -- 神秘商人
-            x, y = mysterious_vender() if x > -1 then break end
-            -- 体力不足
-            x, y = out_of_sushi() if x > -1 then break end
+			-- 真八岐大蛇
+			x, y = real_baqidashe() if x > -1 then break end
+			-- 神秘商人
+			x, y = mysterious_vender() if x > -1 then break end
+			-- 体力不足
+			x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end
@@ -445,9 +445,11 @@ end
 function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to_captain)
 	local init = 1
 	local auto_grouped = -1
+	local quit_con = 0
+	local quit_grp = 0
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
-	local x, y
+	local x, y, x_, y_
 	
 	while (1) do
 		while (1) do
@@ -458,8 +460,8 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
-            -- 循环通用
-            loop_generic()
+			-- 循环通用
+			loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 接受邀请
@@ -478,9 +480,16 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.yuhun = win_cnt.yuhun + 1
+				-- 智能突破Check
+				ret = auto_jjtp_time_check()
+				if ret == RET_VALID then
+					quit_grp = 1
+					quit_con = 1
+				end
 				keep_half_damo()
 				break
 			end
+			-- 队员接手队长
 			if (member_to_captain == 1) then
 				x, y = member_room_find_start() if (x > -1) then random_touch(0, 925, 535, 20, 10) break end -- 开始战斗
 			else
@@ -499,19 +508,44 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 				break
 			end
 			-- 庭院
-			x, y = lct_tingyuan() if x > -1 then tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
+			x, y = lct_tingyuan()
+			if x > -1 then
+				if quit_con == 1 then
+					return RET_VALID
+				end
+				tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt)
+				break
+			end
 			-- 探索
-			x, y = lct_tansuo() if x > -1 then tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt) break end
+			x, y = lct_tansuo()
+			if x > -1 then
+				if quit_con == 1 then
+					return RET_VALID
+				end
+				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt)
+				break
+			end
 			-- 御魂溢出
 			x, y = yuhun_overflow() if x > -1 then break end
+			-- 战斗进行
+			x, y = fight_ongoing()
+			if x > -1 then
+				if quit_grp == 1 then
+					x_, y_ = fight_stop_auto_group()
+					if x_ > -1 then
+						quit_grp = 0
+					end
+				end
+				break
+			end
 			-- 退出个人资料
 			x, y = member_room_user_profile() if x > -1 then break end
-            -- 真八岐大蛇
-            x, y = real_baqidashe() if x > -1 then break end
-            -- 神秘商人
-            x, y = mysterious_vender() if x > -1 then break end
-            -- 体力不足	
-            x, y = out_of_sushi() if x > -1 then break end
+			-- 真八岐大蛇
+			x, y = real_baqidashe() if x > -1 then break end
+			-- 神秘商人
+			x, y = mysterious_vender() if x > -1 then break end
+			-- 体力不足
+			x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end
@@ -523,9 +557,11 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 	local init = 1
 	local invite = 1
 	local tingyuan_time_cnt = 0
-	local quit = 0
-	local group_quit = 0
+	local quit_fin = 0
+	local quit_con = 0
+	local quit_grp = 0
 	local invite_zone = 0
+	local ret = 0
 	local x, y
 	
 	if auto_invite_zone == "好友" then
@@ -545,8 +581,8 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
-            -- 循环通用
-            loop_generic()
+			-- 循环通用
+			loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 拒绝邀请
@@ -563,11 +599,15 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.yuhun = win_cnt.yuhun + 1
-				if win_cnt.yuhun >= round -1 then
-					group_quit = 1
+				-- 智能突破Check
+				ret = auto_jjtp_time_check()
+				if ret == RET_VALID then
+					quit_grp = 1
+					quit_con = 1
 				end
 				if win_cnt.yuhun >= round then
-					quit = 1
+					quit_grp = 1
+					quit_fin = 1
 				end
 				keep_half_damo()
 				break
@@ -575,23 +615,23 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			-- 失败邀请
 			x, y = captain_team_lost_invite() if (x > -1) then random_touch(0, 673, 384, 20, 10) invite = 0 time_cnt = 0 break end -- 确定
 			-- 自动邀请
-			if (captain_auto_group == 1 and quit == 0) then 
-				x, y = captain_team_set_auto_invite() 
+			if (captain_auto_group == 1 and quit_fin == 0 and quit_con == 0) then
+				x, y = captain_team_set_auto_invite()
 				if (x > -1) then
-					break 
-				end 
+					break
+				end
 			end
 			-- 胜利邀请
-			x, y = captain_team_win_invite() 
+			x, y = captain_team_win_invite()
 			if (x > -1) then
-				if quit == 1 then
+				if quit_fin == 1 or quit_con == 1 then
 					random_touch(0, 460, 385, 20, 10)
 				else
-					random_touch(0, 674, 385, 20, 10) 
-					invite = 0 
+					random_touch(0, 674, 385, 20, 10)
+					invite = 0
 					time_cnt = 0
 				end
-				break 
+				break
 			end
 			-- 创建初始化
 			x, y = captain_room_create_init() if x > -1 then break end
@@ -625,13 +665,16 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 探索
-			x, y = lct_tansuo() 
+			x, y = lct_tansuo()
 			if (x > -1) then
-				if quit == 1 then
+				if quit_fin == 1 then
 					return RET_OK
 				end
+				if quit_con == 1 then
+					return RET_VALID
+				end
 				random_touch(0, 180, 590, 20, 20)
-				break 
+				break
 			end
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) random_sleep(1000) break end -- 八岐大蛇
@@ -650,10 +693,10 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if x > -1 then
-				if group_quit == 1 then
+				if quit_grp == 1 then
 					x_, y_ = fight_stop_auto_group()
 					if x_ > -1 then
-						group_quit = 0
+						quit_grp = 0
 					end
 				end
 				break
@@ -662,12 +705,12 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			x, y = member_room_user_profile() if x > -1 then break end
 			-- 发现宝藏
 			x, y = lct_petfind() if (x > -1) then break end
-            -- 真八岐大蛇
-            x, y = real_baqidashe() if x > -1 then break end
-            -- 神秘商人
-            x, y = mysterious_vender() if x > -1 then break end
-            -- 体力不足
-            x, y = out_of_sushi() if x > -1 then break end
+			-- 真八岐大蛇
+			x, y = real_baqidashe() if x > -1 then break end
+			-- 神秘商人
+			x, y = mysterious_vender() if x > -1 then break end
+			-- 体力不足
+			x, y = out_of_sushi() if x > -1 then break end
 			break
 		end
 	end
