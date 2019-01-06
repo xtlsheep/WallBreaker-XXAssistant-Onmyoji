@@ -83,7 +83,6 @@ function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, f
 end
 
 function yuhun_solo(mark, level, round, lock)
-	local init = 1
 	local tingyuan_time_cnt = 0
 	local quit_end = 0
 	local quit_con = 0
@@ -137,8 +136,8 @@ function yuhun_solo(mark, level, round, lock)
 					random_touch(0, 930, 110, 5, 5)
 					return RET_VALID
 				end
-				level_select(level, init, lock, "御魂")
-				init = 0
+				level_select(level, level_inited.yuhun, lock, "御魂")
+				level_inited.yuhun = 0
 				solo_start()
 				break
 			end
@@ -174,7 +173,6 @@ end
 
 function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
 	local time_cnt = 0
-	local init = 1
 	local wait_invite = 0
 	local auto_grouped = -1
 	local tingyuan_time_cnt = 0
@@ -266,7 +264,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			-- 离开确认
 			x, y = member_room_quit() if (x > -1) then wait_invite = 0 break end
 			-- 八岐大蛇
-			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 group_start() break end -- 组队开始
+			x, y = lct_8dashe() if (x > -1) then level_select(level, level_inited.yuhun, lock, "御魂") level_inited.yuhun = 0 group_start() break end -- 组队开始
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then mSleep(500) tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 御魂
@@ -315,7 +313,6 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 end
 
 function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, fail_and_recreate, group)
-	local init = 1
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
 	local quit_end = 0
@@ -420,7 +417,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) random_sleep(1000) break end -- 八岐大蛇
 			-- 八岐大蛇
-			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 group_start() break end -- 组队开始
+			x, y = lct_8dashe() if (x > -1) then level_select(level, level_inited.yuhun, lock, "御魂") level_inited.yuhun = 0 group_start() break end -- 组队开始
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
@@ -459,7 +456,6 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 end
 
 function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to_captain)
-	local init = 1
 	local auto_grouped = -1
 	local quit_con = 0
 	local quit_grp = 0
@@ -570,7 +566,6 @@ end
 
 function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
 	local time_cnt = 0
-	local init = 1
 	local invite = 1
 	local tingyuan_time_cnt = 0
 	local quit_end = 0
@@ -695,7 +690,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) random_sleep(1000) break end -- 八岐大蛇
 			-- 八岐大蛇
-			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 group_start() break end -- 组队开始
+			x, y = lct_8dashe() if (x > -1) then level_select(level, level_inited.yuhun, lock, "御魂") level_inited.yuhun = 0 group_start() break end -- 组队开始
 			-- 战斗失败
 			x, y = fight_failed("组队") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1

@@ -18,6 +18,7 @@ reconn = 0
 buff_stop_idle = 0
 buff_stop_idle_time = 0
 buff_stop_useup = 0
+level_inited = {yuhun = 1, juexing = 1}
 
 -- Init
 system_date = os.date()

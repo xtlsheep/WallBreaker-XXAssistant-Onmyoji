@@ -322,21 +322,24 @@ function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_roun
 			nor_attk, auto_change, page_jump, df_type, egg_color[1], egg_color[2], egg_color[3], egg_color[4]))
 	print_global_config()
 	
+	local ret = 0
+	
 	if mode == "单人" then
-		tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
+		ret = tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
 	elseif mode == "队长" then
-		tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
+		ret = tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
 	elseif mode == "队员" then
-		tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg_color)
+		ret = tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg_color)
 	end
-	return RET_OK
+	return ret
 end
 
 function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, nor_attk, auto_change, page_jump, df_type, egg_color)
 	local move_total = get_scene_move(scene_move)
 	local move_cnt = 0
-	local scene_quit = 0
-	local quit = 0
+	local quit_sce = 0
+	local quit_end = 0
+	local quit_con = 0
 	local sec_cnt = 0
 	local found_boss = 0
 	local unlock = 0
@@ -356,8 +359,8 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			-- 二回目
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
-            -- 循环通用
-            loop_generic()
+			-- 循环通用
+			loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 拒绝组队
@@ -381,20 +384,20 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				win_cnt.tansuo = win_cnt.tansuo + 1
 				if count_mode == "战斗" then
 					if win_cnt.tansuo >= win_round then
-						scene_quit = 1
-						quit = 1
+						quit_sce = 1
+						quit_end = 1
 					end
 				end
 				if found_boss == 1 then
 					if count_mode == "章节" then
 						sec_cnt = sec_cnt + 1
 						if sec_cnt >= sec_round then
-							scene_quit = 1
-							quit = 1
+							quit_sce = 1
+							quit_end = 1
 						end
 					end
 					found_boss = 0
-					scene_quit = 1
+					quit_sce = 1
 				end
 				keep_half_damo()
 				break
@@ -425,7 +428,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump -1 do
-                            loop_generic()
+							loop_generic()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -448,7 +451,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump - 1 do
-                            loop_generic()
+							loop_generic()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -491,8 +494,8 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 					unlock = 1
 					break
 				end
-				-- Quit
-				if scene_quit == 1 then
+				-- quit_end
+				if quit_sce == 1 then
 					HUD_show_or_hide(HUD,hud_info,"退出场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_touch(0, 45, 60, 10, 10) -- 左上退出
 					break
@@ -505,7 +508,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 					HUD_show_or_hide(HUD,hud_info,string.format("场景移动[%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_move(0 ,900, 400, 200, 400, 50, 50) -- 场景移动
 					if move_cnt >= move_total then
-						scene_quit = 1
+						quit_sce = 1
 						break
 					end
 				elseif ret == RET_VALID then
@@ -524,9 +527,15 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			-- 探索章节
 			x, y = lct_tansuo_portal()
 			if x > -1 then
-				if quit == 1 then
+				-- 智能突破Check
+				quit_con = auto_jjtp_time_check()
+				if quit_end == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
 					return RET_OK
+				end
+				if quit_con == 1 then
+					random_touch(0, 930, 135, 5, 5) -- 退出章节
+					return RET_VALID
 				end
 				if hard_sel == 0 then
 					if hard == "普通" then
@@ -541,7 +550,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				random_touch(0, 840, 480, 30, 10) -- 探索
 				move_cnt = 0
 				move_total = get_scene_move(scene_move)
-				scene_quit = 0
+				quit_sce = 0
 				mSleep(2000)
 				break
 			end
@@ -574,8 +583,9 @@ end
 function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
 	local move_total = get_scene_move(scene_move)
 	local move_cnt = 0
-	local scene_quit = 0
-	local quit = 0
+	local quit_sce = 0
+	local quit_end = 0
+	local quit_con = 0
 	local sec_cnt = 0
 	local found_boss = 0
 	local unlock = 0
@@ -604,8 +614,8 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			-- 二回目
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
-            -- 循环通用
-            loop_generic()
+			-- 循环通用
+			loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 拒绝组队
@@ -629,20 +639,22 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				win_cnt.tansuo = win_cnt.tansuo + 1
 				if count_mode == "战斗" then
 					if win_cnt.tansuo >= win_round then
-						scene_quit = 1
-						quit = 1
+						quit_sce = 1
+						quit_end = 1
 					end
 				end
+				-- 智能突破Check
+				quit_con = auto_jjtp_time_check()
 				if found_boss == 1 then
 					if count_mode == "章节" then
 						sec_cnt = sec_cnt + 1
 						if sec_cnt >= sec_round then
-							scene_quit = 1
-							quit = 1
+							quit_sce = 1
+							quit_end = 1
 						end
 					end
 					found_boss = 0
-					scene_quit = 1
+					quit_sce = 1
 				end
 				keep_half_damo()
 				break
@@ -673,7 +685,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				if x > -1 then
 					if bot_left == 1 or bot_right == 1 then
 						for i = 1, page_jump -1 do
-                            loop_generic()
+							loop_generic()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -696,7 +708,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				if x > -1 then
 					if bot_left == 1 or bot_right == 1 then
 						for i = 1, page_jump - 1 do
-                            loop_generic()
+							loop_generic()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -737,8 +749,8 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 					unlock = 1
 					break
 				end
-				-- Quit
-				if scene_quit == 1 then
+				-- 退出场景
+				if quit_sce == 1 then
 					HUD_show_or_hide(HUD,hud_info,"退出场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_touch(0, 45, 60, 10, 10) -- 左上退出
 					break
@@ -751,7 +763,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 					HUD_show_or_hide(HUD,hud_info,string.format("场景移动[%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_move(0 ,950, 400, 200, 400, 50, 50) -- 场景移动
 					if move_cnt >= move_total then
-						scene_quit = 1
+						quit_sce = 1
 						break
 					end
 				elseif ret == RET_VALID then
@@ -770,9 +782,13 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			-- 探索章节
 			x, y = lct_tansuo_portal()
 			if x > -1 then
-				if quit == 1 then
+				if quit_end == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
 					return RET_OK
+				end
+				if quit_con == 1 then
+					random_touch(0, 930, 135, 5, 5) -- 退出章节
+					return RET_VALID
 				end
 				if hard_sel == 0 then
 					if hard == "普通" then
@@ -792,7 +808,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			if (captain_auto_invite ~= "禁用") then
 				x, y = captain_room_invite_first(invite_zone)
 				if (x > -1) then
-					scene_quit = 0
+					quit_sce = 0
 					move_cnt = 0
 					move_total = get_scene_move(scene_move)
 					mSleep(3000)
@@ -802,11 +818,11 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			-- 继续邀请
 			x, y = team_invite()
 			if x > -1 then
-				if quit == 1 then
+				if quit_end == 1 or quit_con == 1 then
 					random_touch(0, 465, 385, 20, 5)
 				else
 					random_touch(0, x, y, 20, 5)
-					scene_quit = 0
+					quit_sce = 0
 					move_cnt = 0
 					move_total = get_scene_move(scene_move)
 					mSleep(5000)
@@ -844,6 +860,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 	local ret = RET_ERR
 	local top_mid = 0
 	local top_right = 0
+	local quit_con = 0
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
 	local x, y, x_, y_
@@ -857,8 +874,8 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			-- 二回目
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
-            -- 循环通用
-            loop_generic()
+			-- 循环通用
+			loop_generic()
 			-- 超鬼王
 			superghost()
 			-- 战斗进行
@@ -925,7 +942,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump -1 do
-                            loop_generic()
+							loop_generic()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -948,7 +965,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				if x > -1 then
 					if top_right == 1 or top_mid == 1 then
 						for i = 1, page_jump - 1 do
-                            loop_generic()
+							loop_generic()
 							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 							random_sleep(500)
 						end
@@ -984,6 +1001,17 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			end
 			-- 确认退出
 			x, y = scene_quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
+			-- 探索章节
+			x, y = lct_tansuo_portal()
+			if x > -1 then
+				-- 智能突破Check
+				quit_con = auto_jjtp_time_check()
+				if quit_con == 1 then
+					random_touch(0, 930, 135, 5, 5) -- 退出章节
+					return RET_VALID
+				end
+				break
+			end
 			-- 战斗失败
 			x, y = fight_failed("单人") if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
@@ -999,7 +1027,16 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			-- 庭院
 			x, y = lct_tingyuan() if x > -1 then tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 探索
-			x, y = lct_tansuo() if x > -1 then tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt) break end
+			x, y = lct_tansuo()
+			if x > -1 then
+				-- 智能突破Check
+				quit_con = auto_jjtp_time_check()
+				if quit_con == 1 then
+					return RET_VALID
+				end
+				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt)
+				break
+			end
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
 			break

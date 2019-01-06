@@ -41,8 +41,7 @@ function auto_jjtp_time_check()
 	local dura_time = curr_time_stamp - auto_jjtp_time_stamp
 	local dura_time_min = dura_time/(1000*60)
 	
-	print(dura_time_min)
-	if dura_time_min > 1 then
+	if dura_time_min > auto_jjtp_interv then
 		return RET_VALID
 	end
 	return RET_OK
@@ -50,7 +49,6 @@ end
 
 -- Main func
 function yuhun_auto_jjtp(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
-	print("御魂 + 智能突破")
 	local ret = 0
 	
 	while (1) do
@@ -65,7 +63,7 @@ function yuhun_auto_jjtp(mode, role, group, mark, level, round, lock, member_aut
 			HUD_show_or_hide(HUD,hud_info,"场景识别错误, 结束脚本",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_ERR
 		end
-		ret = jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock)
+		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock)
 		mSleep(1000)
 		ret = tingyuan_or_tansuo()
 		if ret == RET_ERR then
@@ -77,13 +75,79 @@ function yuhun_auto_jjtp(mode, role, group, mark, level, round, lock, member_aut
 end
 
 function juexing_auto_jjtp(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
-	print("觉醒 + 智能突破")
+	local ret = 0
+	
+	while (1) do
+		auto_jjtp_time_stamp = mTime()
+		ret = juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+		if ret == RET_OK then
+			return RET_OK
+		end
+		mSleep(1000)
+		ret = tingyuan_or_tansuo()
+		if ret == RET_ERR then
+			HUD_show_or_hide(HUD,hud_info,"场景识别错误, 结束脚本",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			return RET_ERR
+		end
+		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock)
+		mSleep(1000)
+		ret = tingyuan_or_tansuo()
+		if ret == RET_ERR then
+			HUD_show_or_hide(HUD,hud_info,"场景识别错误, 结束脚本",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			return RET_ERR
+		end
+	end
+	return RET_ERR
 end
 
 function tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
-	print("探索 + 智能突破")
+	local ret = 0
+	
+	while (1) do
+		auto_jjtp_time_stamp = mTime()
+		ret = tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
+		if ret == RET_OK then
+			return RET_OK
+		end
+		mSleep(1000)
+		ret = tingyuan_or_tansuo()
+		if ret == RET_ERR then
+			HUD_show_or_hide(HUD,hud_info,"场景识别错误, 结束脚本",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			return RET_ERR
+		end
+		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock)
+		mSleep(1000)
+		ret = tingyuan_or_tansuo()
+		if ret == RET_ERR then
+			HUD_show_or_hide(HUD,hud_info,"场景识别错误, 结束脚本",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			return RET_ERR
+		end
+	end
+	return RET_ERR
 end
 
 function yeyuanhuo_auto_jjtp(round_tan, round_chen, round_chi, lock)
-	print("业原火 + 智能突破")
+	local ret = 0
+	
+	while (1) do
+		auto_jjtp_time_stamp = mTime()
+		ret = yeyuanhuo(round_tan, round_chen, round_chi, lock)
+		if ret == RET_OK then
+			return RET_OK
+		end
+		mSleep(1000)
+		ret = tingyuan_or_tansuo()
+		if ret == RET_ERR then
+			HUD_show_or_hide(HUD,hud_info,"场景识别错误, 结束脚本",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			return RET_ERR
+		end
+		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock)
+		mSleep(1000)
+		ret = tingyuan_or_tansuo()
+		if ret == RET_ERR then
+			HUD_show_or_hide(HUD,hud_info,"场景识别错误, 结束脚本",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			return RET_ERR
+		end
+	end
+	return RET_ERR
 end

@@ -219,9 +219,8 @@ function global_UI()
 	UI:ComboBox(global_auto_jjtp_page, "auto_jjtp_pub_sel", "5 - 0 勋章,4 - 0 勋章,3 - 0 勋章,2 - 0 勋章,1 - 0 勋章,0勋章","0",23,"700,640,280,50")
 	UI:Line(global_auto_jjtp_page, "line_common", "100,100,100", 2, 960, "20,700,960,2")
 	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "Tips - ", "20,710,300,60")
-	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "适用于御魂/觉醒/探索/业原火 的 单人/野队模式", "20,770,960,60")
-	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "单人模式: 间隔时间后会暂停当前活动然后清理突破", "20,830,960,60")
-	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "野队模式: 间隔时间后如果失败则暂停当前活动然后清理突破", "20,890,960,60")
+	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "适用于御魂/觉醒/探索/业原火的所有模式, 间隔时间后暂停活动清理突破", "20,770,960,60")
+	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "", "20,830,960,60")
 	global_super_ghost_page = UI:Page(global_ui, "超鬼王")
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "战斗标记 - ", "20,20,300,60")
 	UI:CheckBoxGroup(global_super_ghost_page, "sg_mark", "Boss      ,草人","2",30,"0,0,0","600,20,400,60")
@@ -1346,7 +1345,7 @@ function juexing_UI()
 		return
 	end
 	
-	if (auto_jjtp_en == 1 and (mode == "单人" or group == "野队" or group == "野队2人" or group == "野队3人")) then
+	if (auto_jjtp_en == 1) then
 		juexing_auto_jjtp(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
 	else
 		juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)

@@ -26,6 +26,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 	local end_chi = 0
 	local last_sel = 0
 	local ran_wait = 0
+	local ret = 0
 	local x, y
 
 	while (1) do
@@ -75,7 +76,13 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 					random_touch(0, 930, 110, 5, 5) -- 退出业原火
 					return RET_OK
 				end
-				ran_wait = math.random(3000, 5000)
+				-- 智能突破Check
+				ret = auto_jjtp_time_check()
+				if ret == RET_VALID then
+					random_touch(0, 930, 110, 5, 5) -- 退出业原火
+					return RET_VALID
+				end
+				ran_wait = math.random(1000, 2000)
 				HUD_show_or_hide(HUD,hud_info,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
 				mSleep(ran_wait)
 				HUD_show_or_hide(HUD,hud_info,string.format("业原火", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32) 
