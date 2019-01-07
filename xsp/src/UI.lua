@@ -907,6 +907,11 @@ function tansuo_UI()
 			sel[4] = 1
 		end
 	end
+	if sel[1] == 0 and sel[2] == 0 and sel[3] == 0 then
+		sel[1] = 1
+		sel[2] = 1
+		sel[3] = 1
+	end
 	
 	if res_tansuo.mark == "0" then
 		mark = "小怪"

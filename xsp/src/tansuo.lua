@@ -74,7 +74,14 @@ function find_goods()
 	return x, y
 end
 
-function find_normal(x_f, y_f)
+function find_boss()
+	local x, y = findColor({200, 100, 900, 300},
+		"0|0|0xb22e32,3|5|0xfffdf9,-7|-16|0x221108",
+		95, 0, 0, 0)
+	return x, y
+end
+
+function find_attack(x_f, y_f)
 	local x, y
 	if x_f == -1 and y_f == -1 then
 		local x, y = findColor({0, 100, 1135, 550},
@@ -96,67 +103,65 @@ function find_normal(x_f, y_f)
 	return x, y
 end
 
-function find_boss()
-	local x, y = findColor({200, 100, 900, 300},
-		"0|0|0xb22e32,3|5|0xfffdf9,-7|-16|0x221108",
-		95, 0, 0, 0)
-	return x, y
-end
-
 function find_target(sel)
-	local x_f = -1
-	local y_f = -1
-	local x_t = -1
-	local y_t = -1
+	local x_t, y_t, x_a, y_a
 	
 	HUD_show_or_hide(HUD,hud_info,"寻找ing...",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	
 	for i = 1, 5 do
-		x_t, y_t = find_boss()
-		if x_t > -1 then
-			HUD_show_or_hide(HUD,hud_info,"发现Boss",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			return RET_VALID
-		end
-		
-		if sel[1]==1 or sel[2]==1 or sel[3]==1 then
-			keepScreen(true)
-			-- Exp
-			if sel[3] == 1 then
-				x_f, y_f = find_exp()
-				if x_f > -1 then
-					HUD_show_or_hide(HUD,hud_info,"找到经验加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
-				end
-			end
-			-- Money
-			if sel[2] == 1 and x_f == -1 then
-				x_f, y_f = find_money()
-				if x_f > -1 then
-					HUD_show_or_hide(HUD,hud_info,"找到金币加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
-				end
-			end
-			-- Goods
-			if sel[1] == 1 and x_f == -1 then
-				x_f, y_f = find_goods()
-				if x_f > -1 then
-					HUD_show_or_hide(HUD,hud_info,"找到物品加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
-				end
-			end
-			keepScreen(false)
-			if x_f > -1 then
-				keepScreen(true)
-				x_t, y_t = find_normal(x_f, y_f)
+		keepScreen(true)
+		-- Boss
+		if sel[4] == 1 then
+			x_t, y_t = find_boss()
+			if x_t > -1 then
 				keepScreen(false)
+				HUD_show_or_hide(HUD,hud_info,"发现Boss",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				mSleep(1000)
+				x_a, y_a = find_boss()
+				random_touch(0, x_a, y_a, 5, 5)
+				return RET_VALID
 			end
-		else
-			keepScreen(true)
-			x_t, y_t = find_normal(x_f, y_f)
-			keepScreen(false)
 		end
-		if x_t > -1 then
-			random_touch(0, x_t, y_t, 0, 0)
-			mSleep(1000)
-			return RET_OK
+		-- Goods
+		if sel[1] == 1 then
+			x_t, y_t = find_goods()
+			if x_t > -1 then
+				keepScreen(false)
+				HUD_show_or_hide(HUD,hud_info,"找到物品加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				x_a, y_a = find_attack(x_t, y_t)
+				if x_a > -1 then
+					random_touch(0, x_a, y_a, 5, 5)
+					return RET_OK
+				end
+			end
 		end
+		-- Money
+		if sel[2] == 1 then
+			x_t, y_t = find_money()
+			if x_t > -1 then
+				keepScreen(false)
+				HUD_show_or_hide(HUD,hud_info,"找到金币加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				x_a, y_a = find_attack(x_t, y_t)
+				if x_a > -1 then
+					random_touch(0, x_a, y_a, 5, 5)
+					return RET_OK
+				end
+			end
+		end
+		-- Exp
+		if sel[3] == 1 then
+			x_t, y_t = find_exp()
+			if x_t > -1 then
+				keepScreen(false)
+				HUD_show_or_hide(HUD,hud_info,"找到经验加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				x_a, y_a = find_attack(x_t, y_t)
+				if x_a > -1 then
+					random_touch(0, x_a, y_a, 5, 5)
+					return RET_OK
+				end
+			end
+		end
+		keepScreen(false)
 		mSleep(250)
 	end
 	return RET_ERR
@@ -389,15 +394,14 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 					end
 				end
 				if found_boss == 1 then
+					found_boss = 0
+					quit_sce = 1
 					if count_mode == "章节" then
 						sec_cnt = sec_cnt + 1
 						if sec_cnt >= sec_round then
-							quit_sce = 1
 							quit_end = 1
 						end
 					end
-					found_boss = 0
-					quit_sce = 1
 				end
 				keep_half_damo()
 				break
@@ -494,7 +498,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 					unlock = 1
 					break
 				end
-				-- quit_end
+				-- 退出场景
 				if quit_sce == 1 then
 					HUD_show_or_hide(HUD,hud_info,"退出场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_touch(0, 45, 60, 10, 10) -- 左上退出
@@ -506,20 +510,12 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 					-- Move
 					move_cnt = move_cnt + 1
 					HUD_show_or_hide(HUD,hud_info,string.format("场景移动[%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
-					random_move(0 ,900, 400, 200, 400, 50, 50) -- 场景移动
+					random_move(0 ,950, 400, 200, 400, 30, 30) -- 场景移动
 					if move_cnt >= move_total then
 						quit_sce = 1
 						break
 					end
 				elseif ret == RET_VALID then
-					if sel[4] == 1 then
-						mSleep(1000)
-						x_, y_ = find_boss()
-						if x_ > -1 then
-							random_touch(0, x_, y_, 10, 10)
-							mSleep(1000)
-						end
-					end
 					found_boss = 1
 				end
 				break
@@ -548,8 +544,8 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				end
 				HUD_show_or_hide(HUD,hud_info,"进入场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				random_touch(0, 840, 480, 30, 10) -- 探索
-				move_cnt = 0
 				move_total = get_scene_move(scene_move)
+				move_cnt = 0
 				quit_sce = 0
 				mSleep(2000)
 				break
@@ -563,6 +559,9 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.tansuo = fail_cnt.tansuo + 1
+				if found_boss == 1 then
+					found_boss = 0
+				end
 				keep_fight_failed("单人")
 				break
 			end
@@ -643,19 +642,18 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 						quit_end = 1
 					end
 				end
-				-- 智能突破Check
-				quit_con = auto_jjtp_time_check()
 				if found_boss == 1 then
+					found_boss = 0
+					quit_sce = 1
 					if count_mode == "章节" then
 						sec_cnt = sec_cnt + 1
 						if sec_cnt >= sec_round then
-							quit_sce = 1
 							quit_end = 1
 						end
 					end
-					found_boss = 0
-					quit_sce = 1
 				end
+				-- 智能突破Check
+				quit_con = auto_jjtp_time_check()
 				keep_half_damo()
 				break
 			end
@@ -761,20 +759,12 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 					-- Move
 					move_cnt = move_cnt + 1
 					HUD_show_or_hide(HUD,hud_info,string.format("场景移动[%d次]", move_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
-					random_move(0 ,950, 400, 200, 400, 50, 50) -- 场景移动
+					random_move(0 ,950, 400, 200, 400, 30, 30) -- 场景移动
 					if move_cnt >= move_total then
 						quit_sce = 1
 						break
 					end
 				elseif ret == RET_VALID then
-					if sel[4] == 1 then
-						mSleep(1000)
-						x_, y_ = find_boss()
-						if x_ > -1 then
-							random_touch(0, x_, y_, 10, 10)
-							mSleep(1000)
-						end
-					end
 					found_boss = 1
 				end
 				break
@@ -839,6 +829,9 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.tansuo = fail_cnt.tansuo + 1
 				keep_fight_failed("单人")
+				if found_boss == 1 then
+					found_boss = 0
+				end
 				break
 			end
 			-- 御魂溢出
