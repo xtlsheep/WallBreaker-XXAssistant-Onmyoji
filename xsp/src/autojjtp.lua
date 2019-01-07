@@ -105,7 +105,7 @@ function tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode
 	
 	while (1) do
 		auto_jjtp_time_stamp = mTime()
-		ret = tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
+		ret = tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, auto_change, page_jump, df_type, egg_color)
 		if ret == RET_OK then
 			return RET_OK
 		end

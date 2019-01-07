@@ -844,7 +844,7 @@ function tansuo_UI()
 	UI:Label(tansuo_ui, "center", "0,0,0", 30, "探索章节[暂时仅支持账号解锁的最新章节]", "20,20,960,55")
 	UI:ComboBox(tansuo_ui, "mode", "单人模式,组队 - 队长,组队 - 队员", "0", 30, "20,100,960,60")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗设置 - ", "20,180,300,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "加成识别 - ", "20,240,300,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "加成识别 : ", "20,240,300,60")
 	UI:CheckBoxGroup(tansuo_ui, "select","物品,金币,经验,Boss","2@3",30,"0,0,0","420,240,580,60")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动标记 - ", "20,300,300,60")
 	UI:RadioGroup(tansuo_ui, "mark", "随机小怪  ,中间大怪  ,无","2",30,"0,0,0","420,300,580,60")
@@ -852,8 +852,8 @@ function tansuo_UI()
 	UI:RadioGroup(tansuo_ui, "hard", "普通                ,困难[队长强制]","1",30,"0,0,0","420,360,580,60")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "场景移动 - ", "20,420,300,60")
 	UI:RadioGroup(tansuo_ui, "scene_move", "2 - 3次  ,3 - 4次  ,4 - 5次","2",30,"0,0,0","420,420,580,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "目标章节[暂时无效] - ", "20,480,500,60")
-	UI:ComboBox(tansuo_ui, "section", "第一章,第二章,第三章,第四章,第五章,第六章,第七章,第八章,第九章,第十章,第十一章,第十二章,第十三章,第十四章,第十五章,第十六章,第十七章,第十八章,第十九章,第二十章,第二十一章,第二十二章,第二十三章,第二十四章,第二十五章,第二十六章","25",23,"600,480,380,50")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "目标章节 - ", "20,480,500,60")
+	UI:ComboBox(tansuo_ui, "section", "结算的最新章节","25",23,"600,480,380,50")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "限定方式 - ", "20,540,500,60")
 	UI:ComboBox(tansuo_ui, "count_mode", "战斗胜利次数,章节通关次数[强制Boss]","0",23,"600,540,380,50")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗胜利次数 - ", "20,600,500,60")
@@ -863,17 +863,19 @@ function tansuo_UI()
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "队长自动邀请 - ", "20,720,500,60")
 	UI:ComboBox(tansuo_ui, "captain_auto_invite", "不使用自动邀请,第一位阴阳寮寮友,第一位本区好友,第一位跨区好友","0",23,"600,720,380,50")
 	UI:Line(tansuo_ui, "line_common", "100,100,100", 2, 960, "20,780,960,2")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮设置[狗粮队长位置为阴阳师左前方] - ", "20,790,900,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "强制普攻 - ", "20,850,300,60")
-	UI:RadioGroup(tansuo_ui, "nor_attk", "开启            ,关闭","0",30,"0,0,0","600,850,400,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动更换 - ", "20,910,300,60")
-	UI:RadioGroup(tansuo_ui, "auto_change", "开启            ,关闭","1",30,"0,0,0","600,910,400,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "初始翻页 - ", "20,970,300,60")
-	UI:ComboBox(tansuo_ui, "page_jump", "第一页,第二页,第三页,第四页,第五页,第六页,第七页,第八页,第九页,第十页","0",23,"600,970,380,50")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮类型 - ", "20,1030,300,60")
-	UI:RadioGroup(tansuo_ui, "df_type", "N卡             ,素材","0",30,"0,0,0","600,1030,400,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "素材类型[暂时无效] - ", "20,1090,300,60")
-	UI:CheckBoxGroup(tansuo_ui, "egg_color","红蛋,白蛋,蓝蛋,黑蛋","1@2",30,"0,0,0","470,1090,580,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮设置 : ", "20,790,900,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮队长 - ", "20,850,300,60")
+	UI:ComboBox(tansuo_ui, "captain_pos", "阴阳师左前方,阴阳师正左方,无","0",23,"600,850,380,50")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮普攻 - ", "20,910,300,60")
+	UI:RadioGroup(tansuo_ui, "nor_attk", "开启            ,关闭","0",30,"0,0,0","600,910,400,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动更换 - ", "20,970,300,60")
+	UI:RadioGroup(tansuo_ui, "auto_change", "开启            ,关闭","1",30,"0,0,0","600,970,400,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "初始翻页 - ", "20,1030,300,60")
+	UI:ComboBox(tansuo_ui, "page_jump", "第一页,第二页,第三页,第四页,第五页,第六页,第七页,第八页,第九页,第十页","0",23,"600,1030,380,50")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮类型 - ", "20,1090,300,60")
+	UI:RadioGroup(tansuo_ui, "df_type", "N卡             ,素材","0",30,"0,0,0","600,1090,400,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "素材类型[暂时无效] - ", "20,1150,300,60")
+	UI:CheckBoxGroup(tansuo_ui, "egg_color","红蛋,白蛋,蓝蛋,黑蛋","1@2",30,"0,0,0","470,1150,580,60")
 	UI:fit(tansuo_ui)
 	
 	ret_tansuo, res_tansuo = UI:show(tansuo_ui)
@@ -994,7 +996,15 @@ function tansuo_UI()
 		captain_auto_invite = "跨区"
 	end
 	
-	local nor_attk, auto_change, page_jump, df_type, egg_color
+	local captain_pos, nor_attk, auto_change, page_jump, df_type, egg_color
+	if res_tansuo.captain_pos == "0" then
+		captain_pos = "左前"
+	elseif res_tansuo.captain_pos == "1" then
+		captain_pos = "正左"
+	elseif res_tansuo.captain_pos == "2" then
+		captain_pos = "无"
+	end
+	
 	if res_tansuo.nor_attk == "0" then
 		nor_attk = 1
 	elseif res_tansuo.nor_attk == "1" then
@@ -1038,9 +1048,9 @@ function tansuo_UI()
 	end
 	
 	if auto_jjtp_en == 1 then
-		tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
+		tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, auto_change, page_jump, df_type, egg_color)
 	else
-		tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, nor_attk, auto_change, page_jump, df_type, egg_color)
+		tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, auto_change, page_jump, df_type, egg_color)
 	end
 end
 
