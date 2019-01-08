@@ -95,8 +95,8 @@ function config_UI()
 	elseif (res_config.select == "14")  then autostory_UI()
 		-- 特殊活动
 	elseif (res_config.select == "15")  then activityreserve_UI()
-	--elseif (res_config.select == "15")  then LBSGhostDriving_UI()
-	--elseif (res_config.select == "15")  then superghost_UI()
+		--elseif (res_config.select == "15")  then LBSGhostDriving_UI()
+		--elseif (res_config.select == "15")  then superghost_UI()
 	end
 end
 
@@ -184,8 +184,8 @@ function global_UI()
 	global_basic_page = UI:Page(global_ui, "全局设置")
 	UI:CheckBoxGroup(global_basic_page, "offer_en","悬赏封印 - ","0",30,"0,0,0","20,20,300,60")
 	UI:CheckBoxGroup(global_basic_page, "offer_sel","勾玉,体力,金币,猫粮,狗粮","0@1@2@3@4",30,"0,0,0","280,20,720,60")
-	UI:CheckBoxGroup(global_basic_page, "auto_jjtp_en","智能突破","0",30,"0,0,0","20,80,960,60")
-	UI:CheckBoxGroup(global_basic_page, "sg_en","超鬼王","0",30,"0,0,0","20,140,960,60")
+	UI:CheckBoxGroup(global_basic_page, "auto_jjtp_en","智能突破","",30,"0,0,0","20,80,960,60")
+	UI:CheckBoxGroup(global_basic_page, "sg_en","超鬼王","",30,"0,0,0","20,140,960,60")
 	UI:Label(global_basic_page, "left", "0,0,0", 30, "鬼王选择 - ", "500,140,180,60")
 	UI:ComboBox(global_basic_page, "sg_fight_sel", "所有公开的超鬼王,自己发现的超鬼王","1",23,"680,140,300,50")
 	UI:Line(global_basic_page, "line_common", "100,100,100", 2, 960, "20,200,960,2")
@@ -468,11 +468,11 @@ function global_UI()
 	
 	-- 超鬼王
 	sg_en = 0
---	if res_global.sg_en == "0" then
---		sg_en = 1
---	else
---		sg_en = 0
---	end
+	--	if res_global.sg_en == "0" then
+	--		sg_en = 1
+	--	else
+	--		sg_en = 0
+	--	end
 	
 	if res_global.sg_fight_sel == "0" then
 		sg_fight_sel = "Public"
@@ -536,7 +536,7 @@ function global_UI()
 	elseif res_global.sg_high_1 == "3" then sg_high[1] = "预设3"
 	elseif res_global.sg_high_1 == "4" then sg_high[1] = "响铃"
 	elseif res_global.sg_high_1 == "5" then sg_high[1] = "集结" end
-
+	
 	-- <50%
 	if res_global.sg_low_6 == "0" then sg_low[6] = "默认"
 	elseif res_global.sg_low_6 == "1" then sg_low[6] = "预设1"
@@ -549,35 +549,35 @@ function global_UI()
 	elseif res_global.sg_low_5 == "1" then sg_low[5] = "预设1"
 	elseif res_global.sg_low_5 == "2" then sg_low[5] = "预设2"
 	elseif res_global.sg_low_5 == "3" then sg_low[5] = "预设3"
-	elseif res_global.sg_low_5 == "4" then sg_low[5] = "响铃" 
+	elseif res_global.sg_low_5 == "4" then sg_low[5] = "响铃"
 	elseif res_global.sg_low_5 == "5" then sg_low[5] = "集结" end
 	
 	if res_global.sg_low_4 == "0" then sg_low[4] = "默认"
 	elseif res_global.sg_low_4 == "1" then sg_low[4] = "预设1"
 	elseif res_global.sg_low_4 == "2" then sg_low[4] = "预设2"
 	elseif res_global.sg_low_4 == "3" then sg_low[4] = "预设3"
-	elseif res_global.sg_low_4 == "4" then sg_low[4] = "响铃" 
+	elseif res_global.sg_low_4 == "4" then sg_low[4] = "响铃"
 	elseif res_global.sg_low_4 == "5" then sg_low[4] = "集结" end
 	
 	if res_global.sg_low_3 == "0" then sg_low[3] = "默认"
 	elseif res_global.sg_low_3 == "1" then sg_low[3] = "预设1"
 	elseif res_global.sg_low_3 == "2" then sg_low[3] = "预设2"
 	elseif res_global.sg_low_3 == "3" then sg_low[3] = "预设3"
-	elseif res_global.sg_low_3 == "4" then sg_low[3] = "响铃" 
+	elseif res_global.sg_low_3 == "4" then sg_low[3] = "响铃"
 	elseif res_global.sg_low_3 == "5" then sg_low[3] = "集结" end
 	
 	if res_global.sg_low_2 == "0" then sg_low[2] = "默认"
 	elseif res_global.sg_low_2 == "1" then sg_low[2] = "预设1"
 	elseif res_global.sg_low_2 == "2" then sg_low[2] = "预设2"
 	elseif res_global.sg_low_2 == "3" then sg_low[2] = "预设3"
-	elseif res_global.sg_low_2 == "4" then sg_low[2] = "响铃" 
+	elseif res_global.sg_low_2 == "4" then sg_low[2] = "响铃"
 	elseif res_global.sg_low_2 == "5" then sg_low[2] = "集结" end
 	
 	if res_global.sg_low_1 == "0" then sg_low[1] = "默认"
 	elseif res_global.sg_low_1 == "1" then sg_low[1] = "预设1"
 	elseif res_global.sg_low_1 == "2" then sg_low[1] = "预设2"
 	elseif res_global.sg_low_1 == "3" then sg_low[1] = "预设3"
-	elseif res_global.sg_low_1 == "4" then sg_low[1] = "响铃" 
+	elseif res_global.sg_low_1 == "4" then sg_low[1] = "响铃"
 	elseif res_global.sg_low_1 == "5" then sg_low[1] = "集结" end
 	
 	-- 疲劳
@@ -853,7 +853,7 @@ function tansuo_UI()
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "场景移动 - ", "20,420,300,60")
 	UI:RadioGroup(tansuo_ui, "scene_move", "2 - 3次  ,3 - 4次  ,4 - 5次","2",30,"0,0,0","420,420,580,60")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "目标章节 - ", "20,480,500,60")
-	UI:ComboBox(tansuo_ui, "section", "结算的最新章节","25",23,"600,480,380,50")
+	UI:ComboBox(tansuo_ui, "section", "结算的最新章节","0",23,"600,480,380,50")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "限定方式 - ", "20,540,500,60")
 	UI:ComboBox(tansuo_ui, "count_mode", "战斗胜利次数,章节通关次数[强制Boss]","0",23,"600,540,380,50")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗胜利次数 - ", "20,600,500,60")
@@ -868,10 +868,10 @@ function tansuo_UI()
 	UI:ComboBox(tansuo_ui, "captain_pos", "阴阳师左前方,阴阳师正左方,无","0",23,"600,850,380,50")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮普攻 - ", "20,910,300,60")
 	UI:RadioGroup(tansuo_ui, "nor_attk", "开启            ,关闭","0",30,"0,0,0","600,910,400,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动更换 - ", "20,970,300,60")
-	UI:RadioGroup(tansuo_ui, "auto_change", "开启            ,关闭","1",30,"0,0,0","600,970,400,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "满级操作 - ", "20,970,300,60")
+	UI:ComboBox(tansuo_ui, "full_exp", "铃声提醒,自动更换,无","0",23,"600,970,380,50")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "初始翻页 - ", "20,1030,300,60")
-	UI:ComboBox(tansuo_ui, "page_jump", "第一页,第二页,第三页,第四页,第五页,第六页,第七页,第八页,第九页,第十页","0",23,"600,1030,380,50")
+	UI:ComboBox(tansuo_ui, "page_jump", "第一页,第五页,第十页,百分之10,百分之30,百分之50,百分之70,百分之90","4",23,"600,1030,380,50")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮类型 - ", "20,1090,300,60")
 	UI:RadioGroup(tansuo_ui, "df_type", "N卡             ,素材","0",30,"0,0,0","600,1090,400,60")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "素材类型[暂时无效] - ", "20,1150,300,60")
@@ -996,7 +996,7 @@ function tansuo_UI()
 		captain_auto_invite = "跨区"
 	end
 	
-	local captain_pos, nor_attk, auto_change, page_jump, df_type, egg_color
+	local captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color
 	if res_tansuo.captain_pos == "0" then
 		captain_pos = "左前"
 	elseif res_tansuo.captain_pos == "1" then
@@ -1011,13 +1011,31 @@ function tansuo_UI()
 		nor_attk = 0
 	end
 	
-	if res_tansuo.auto_change == "0" then
-		auto_change = 1
-	elseif res_tansuo.auto_change == "1" then
-		auto_change = 0
+	if res_tansuo.full_exp == "0" then
+		full_exp = "alarm"
+	elseif res_tansuo.full_exp == "1" then
+		full_exp = "change"
+	elseif res_tansuo.full_exp == "2" then
+		full_exp = "null"
 	end
 	
-	page_jump = tonumber(res_tansuo.page_jump) + 1
+	if res_tansuo.page_jump == "0" then
+		page_jump = "page1"
+	elseif res_tansuo.page_jump == "1" then
+		page_jump = "page5"
+	elseif res_tansuo.page_jump == "2" then
+		page_jump = "page10"
+	elseif res_tansuo.page_jump == "3" then
+		page_jump = "percent10"
+	elseif res_tansuo.page_jump == "4" then
+		page_jump = "percent30"
+	elseif res_tansuo.page_jump == "5" then
+		page_jump = "percent50"
+	elseif res_tansuo.page_jump == "6" then
+		page_jump = "percent70"
+	elseif res_tansuo.page_jump == "7" then
+		page_jump = "percent90"
+	end
 	
 	if res_tansuo.df_type == "0" then
 		df_type = "N"
@@ -1048,9 +1066,9 @@ function tansuo_UI()
 	end
 	
 	if auto_jjtp_en == 1 then
-		tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, auto_change, page_jump, df_type, egg_color)
+		tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 	else
-		tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, auto_change, page_jump, df_type, egg_color)
+		tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 	end
 end
 

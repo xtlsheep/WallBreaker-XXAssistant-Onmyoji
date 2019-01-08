@@ -315,6 +315,75 @@ function skkm_change_sel()
 	return x, y
 end
 
+function skkm_change_scroll(page_jump)
+	if page_jump == "page1" then
+		return
+	elseif page_jump == "page5" then
+		for i = 1, 4 do
+			random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
+			random_sleep(250)
+		end
+		return
+	elseif page_jump == "page10" then
+		for i = 1, 9 do
+			random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
+			random_sleep(250)
+		end
+		return
+	end
+	
+	local index = 0
+	local percent_scroll = {250, 350, 550, 650, 750}
+	
+	if page_jump == "percent10" then
+		index = 1
+	elseif page_jump == "percent30" then
+		index = 2
+	elseif page_jump == "percent50" then
+		index = 3
+	elseif page_jump == "percent70" then
+		index = 4
+	elseif page_jump == "percent90" then
+		index = 5
+	end
+	
+	random_move(0 ,170, 615, percent_scroll[index], 615, 5, 5) -- 滚动
+	return
+end
+
+function skkm_change_switch(top_left, top_mid, top_right, bot_left, bot_right)
+	if top_right == 1 then
+		for i = 1, math.random(2, 3) do
+			random_move(0, 200, 500, 200, 275, 10, 10)
+			random_sleep(500)
+		end
+	end
+	if top_mid == 1 then
+		for i = 1, math.random(2, 3) do
+			random_move(0, 800, 500, 580, 275, 10, 10)
+			random_sleep(500)
+		end
+	end
+	if top_left == 1 then
+		for i = 1, math.random(2, 3) do
+			random_move(0, 600, 500, 960, 275, 10, 10)
+			random_sleep(500)
+		end
+	end
+	if bot_right == 1 then
+		for i = 1, math.random(2, 3) do
+			random_move(0, 200, 500, 300, 250, 10, 10)
+			random_sleep(500)
+		end
+	end
+	if bot_left == 1 then
+		for i = 1, math.random(2, 3) do
+			random_move(0, 800, 500, 830, 250, 10, 10)
+			random_sleep(500)
+		end
+	end
+end
+
 function df_normal_attack(df_pos, mode)
 	local x, y
 	if mode == "solo" then
@@ -398,26 +467,26 @@ function get_scene_move(scene_move)
 end
 
 -- Main func
-function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, auto_change, page_jump, df_type, egg_color)
+function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 	print(string.format("模式: %s, 选择: 物品-%d,金币-%d,经验-%d,Boss-%d, 标记: %s, 难度: %s, 移动: %s, 章节: %d, 限定: %s, 胜利: %s, 通关: %s, 邀请 %s",
 			mode, sel[1], sel[2], sel[3], sel[4], mark, scene_move, hard, section, count_mode, win_round, sec_round, captain_auto_invite))
-	print(string.format("狗粮普攻 %d, 队长位置 %s 自动更换 %d, 初始翻页 %d, 狗粮类型 %s, 素材类型(红蛋 %d, 白蛋 %d, 蓝蛋 %d, 黑蛋 %d)",
-			nor_attk, captain_pos, auto_change, page_jump, df_type, egg_color[1], egg_color[2], egg_color[3], egg_color[4]))
+	print(string.format("狗粮普攻 %d, 队长位置 %s 满级操作 %s, 初始翻页 %s, 狗粮类型 %s, 素材类型(红蛋 %d, 白蛋 %d, 蓝蛋 %d, 黑蛋 %d)",
+			nor_attk, captain_pos, full_exp, page_jump, df_type, egg_color[1], egg_color[2], egg_color[3], egg_color[4]))
 	print_global_config()
 	
 	local ret = 0
 	
 	if mode == "单人" then
-		ret = tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_pos, nor_attk, auto_change, page_jump, df_type, egg_color)
+		ret = tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 	elseif mode == "队长" then
-		ret = tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, auto_change, page_jump, df_type, egg_color)
+		ret = tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 	elseif mode == "队员" then
-		ret = tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg_color)
+		ret = tansuo_member(sel, mark, nor_attk, full_exp, page_jump, df_type, egg_color)
 	end
 	return ret
 end
 
-function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_pos, nor_attk, auto_change, page_jump, df_type, egg_color)
+function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 	local move_total = get_scene_move(scene_move)
 	local move_cnt = 0
 	local quit_sce = 0
@@ -493,7 +562,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				break
 			end
 			-- 自动狗粮
-			if auto_change == 0 then
+			if full_exp == "null" then
 				-- 战斗准备
 				x, y = fight_ready() if (x > -1) then break end
 			else
@@ -517,24 +586,9 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				x, y = skkm_change_N()
 				if x > -1 then
 					if top_left == 1 or top_right == 1 or top_mid == 1 then
-						for i = 1, page_jump -1 do
-							loop_generic()
-							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
-							random_sleep(500)
-						end
+						skkm_change_scroll(page_jump)
 					end
-					if top_right == 1 then
-						random_move(0, 200, 500, 200, 275, 5, 5)
-						random_sleep(500)
-					end
-					if top_mid == 1 then
-						random_move(0, 800, 500, 580, 275, 5, 5)
-						random_sleep(500)
-					end
-					if top_left == 1 then
-						random_move(0, 600, 500, 960, 275, 5, 5)
-						random_sleep(500)
-					end
+					skkm_change_switch(top_left, top_mid, top_right, 0, 0)
 					fight_ready()
 					top_left = 0
 					top_mid = 0
@@ -545,24 +599,9 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				x, y = skkm_change_egg()
 				if x > -1 then
 					if top_left == 1 or top_right == 1 or top_mid == 1 then
-						for i = 1, page_jump -1 do
-							loop_generic()
-							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
-							random_sleep(500)
-						end
+						skkm_change_scroll(page_jump)
 					end
-					if top_right == 1 then
-						random_move(0, 200, 500, 200, 275, 5, 5)
-						random_sleep(500)
-					end
-					if top_mid == 1 then
-						random_move(0, 800, 500, 580, 275, 5, 5)
-						random_sleep(500)
-					end
-					if top_left == 1 then
-						random_move(0, 600, 500, 960, 275, 5, 5)
-						random_sleep(500)
-					end
+					skkm_change_switch(top_left, top_mid, top_right, 0, 0)
 					fight_ready()
 					top_left = 0
 					top_mid = 0
@@ -574,9 +613,13 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				if x > -1 then
 					top_left, top_mid, top_right = full_exp_top(df_pos)
 					if top_left == 1 or top_mid == 1 or top_right == 1 then
-						HUD_show_or_hide(HUD,hud_info,"更换狗粮",20,"0xff000000","0xffffffff",0,100,0,300,32)
-						random_touch(0, 350, 420, 30, 30) -- 更换式神
-						break
+						if full_exp == "change" then
+							HUD_show_or_hide(HUD,hud_info,"更换狗粮",20,"0xff000000","0xffffffff",0,100,0,300,32)
+							random_touch(0, 350, 420, 30, 30) -- 更换式神
+							break
+						elseif full_exp == "alarm" then
+							alarm("pause")
+						end
 					end
 					random_sleep(500)
 					x_, y_ = fight_ready() if (x_ > -1) then break end
@@ -673,7 +716,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 	return RET_ERR
 end
 
-function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, auto_change, page_jump, df_type, egg_color)
+function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 	local move_total = get_scene_move(scene_move)
 	local move_cnt = 0
 	local quit_sce = 0
@@ -759,7 +802,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				break
 			end
 			-- 自动狗粮
-			if auto_change == 0 then
+			if full_exp == "null" then
 				-- 战斗准备
 				x, y = fight_ready() if (x > -1) then break end
 			else
@@ -783,20 +826,9 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				x, y = skkm_change_N()
 				if x > -1 then
 					if bot_left == 1 or bot_right == 1 then
-						for i = 1, page_jump -1 do
-							loop_generic()
-							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
-							random_sleep(500)
-						end
+						skkm_change_scroll(page_jump)
 					end
-					if bot_right == 1 then
-						random_move(0, 200, 500, 300, 250, 20, 20)
-						random_sleep(1000)
-					end
-					if bot_left == 1 then
-						random_move(0, 800, 500, 830, 250, 20, 20)
-						random_sleep(1000)
-					end
+					skkm_change_switch(0, 0, 0, bot_left, bot_right)
 					fight_ready()
 					bot_right = 0
 					bot_left = 0
@@ -806,20 +838,9 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				x, y = skkm_change_egg()
 				if x > -1 then
 					if bot_left == 1 or bot_right == 1 then
-						for i = 1, page_jump - 1 do
-							loop_generic()
-							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
-							random_sleep(500)
-						end
+						skkm_change_scroll(page_jump)
 					end
-					if bot_right == 1 then
-						random_move(0, 200, 500, 300, 250, 20, 20)
-						random_sleep(1000)
-					end
-					if bot_left == 1 then
-						random_move(0, 800, 500, 830, 250, 20, 20)
-						random_sleep(1000)
-					end
+					skkm_change_switch(0, 0, 0, bot_left, bot_right)
 					fight_ready()
 					bot_right = 0
 					bot_left = 0
@@ -830,9 +851,13 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				if x > -1 then
 					bot_left, bot_right = full_exp_bot(df_pos)
 					if bot_left == 1 or bot_right == 1 then
-						HUD_show_or_hide(HUD,hud_info,"更换狗粮",20,"0xff000000","0xffffffff",0,100,0,300,32)
-						random_touch(0, 350, 420, 30, 30) -- 更换式神
-						break
+						if full_exp == "change" then
+							HUD_show_or_hide(HUD,hud_info,"更换狗粮",20,"0xff000000","0xffffffff",0,100,0,300,32)
+							random_touch(0, 350, 420, 30, 30) -- 更换式神
+							break
+						elseif full_exp == "alarm" then
+							alarm("pause")
+						end
 					end
 					random_sleep(500)
 					x_, y_ = fight_ready() if (x_ > -1) then break end
@@ -949,7 +974,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 	return RET_ERR
 end
 
-function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg_color)
+function tansuo_member(sel, mark, nor_attk, full_exp, page_jump, df_type, egg_color)
 	local unlock = 0
 	local ret = RET_ERR
 	local quit_con = 0
@@ -1019,7 +1044,7 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 			-- 接受邀请
 			x, y, auto_grouped = member_team_accept_invite(1) if (x > -1) then break end
 			-- 自动狗粮
-			if auto_change == 0 then
+			if full_exp == "null" then
 				-- 战斗准备
 				x, y = fight_ready() if (x > -1) then break end
 			else
@@ -1043,24 +1068,9 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				x, y = skkm_change_N()
 				if x > -1 then
 					if top_left == 1 or top_right == 1 or top_mid == 1 then
-						for i = 1, page_jump -1 do
-							loop_generic()
-							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
-							random_sleep(500)
-						end
+						skkm_change_scroll(page_jump)
 					end
-					if top_right == 1 then
-						random_move(0, 200, 500, 200, 275, 5, 5)
-						random_sleep(500)
-					end
-					if top_mid == 1 then
-						random_move(0, 800, 500, 580, 275, 5, 5)
-						random_sleep(500)
-					end
-					if top_left == 1 then
-						random_move(0, 600, 500, 960, 275, 5, 5)
-						random_sleep(500)
-					end
+					skkm_change_switch(top_left, top_mid, top_right, 0, 0)
 					fight_ready()
 					top_left = 0
 					top_mid = 0
@@ -1071,24 +1081,9 @@ function tansuo_member(sel, mark, nor_attk, auto_change, page_jump, df_type, egg
 				x, y = skkm_change_egg()
 				if x > -1 then
 					if top_left == 1 or top_right == 1 or top_mid == 1 then
-						for i = 1, page_jump -1 do
-							loop_generic()
-							random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
-							random_sleep(500)
-						end
+						skkm_change_scroll(page_jump)
 					end
-					if top_right == 1 then
-						random_move(0, 200, 500, 200, 275, 5, 5)
-						random_sleep(500)
-					end
-					if top_mid == 1 then
-						random_move(0, 800, 500, 580, 275, 5, 5)
-						random_sleep(500)
-					end
-					if top_left == 1 then
-						random_move(0, 600, 500, 960, 275, 5, 5)
-						random_sleep(500)
-					end
+					skkm_change_switch(top_left, top_mid, top_right, 0, 0)
 					fight_ready()
 					top_left = 0
 					top_mid = 0
