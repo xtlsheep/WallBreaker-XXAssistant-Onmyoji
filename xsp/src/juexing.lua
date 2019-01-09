@@ -104,11 +104,8 @@ function juexing_solo(element, mark, level, round, lock)
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("单人") if (x > -1) then break end
-			-- 胜利达摩
-			x, y = whole_damo() if (x > -1) then break end
-			-- 胜利宝箱
-			x, y = half_damo() if (x > -1) then
+			x, y = fight_success("单人") 
+			if (x > -1) then
 				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
@@ -116,7 +113,6 @@ function juexing_solo(element, mark, level, round, lock)
 				if win_cnt.juexing >= round then
 					quit_end = 1
 				end
-				keep_half_damo()
 				break
 			end
 			-- 觉醒材料
@@ -133,8 +129,8 @@ function juexing_solo(element, mark, level, round, lock)
 					random_touch(0, 930, 110, 5, 5)
 					return RET_VALID
 				end
-				level_select(level, level_inited.juexing, lock, "觉醒")
-				level_inited.juexing = 0
+				level_select(level, pre_init.juexing, lock, "觉醒")
+				pre_init.juexing = 0
 				solo_start()
 				break
 			end
@@ -145,11 +141,12 @@ function juexing_solo(element, mark, level, round, lock)
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 战斗失败
-			x, y = fight_failed("单人") if (x > -1) then
+			x, y = fight_failed("单人") 
+			if (x > -1) then
+				tingyuan_time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.juexing = fail_cnt.juexing + 1
-				keep_fight_failed("单人")
 				break
 			end
 			-- 真八岐大蛇
@@ -220,11 +217,8 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("组队") if (x > -1) then break end
-			-- 胜利达摩
-			x, y = whole_damo() if (x > -1) then break end
-			-- 胜利宝箱
-			x, y = half_damo() if (x > -1) then
+			x, y = fight_success("组队") 
+			if (x > -1) then
 				wait_invite = 1
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
@@ -241,7 +235,6 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 					quit_grp = 1
 					quit_con = 1
 				end
-				keep_half_damo()
 				break
 			end
 			-- 组队寻找
@@ -255,22 +248,23 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			-- 离开确认
 			x, y = member_room_quit() if (x > -1) then wait_invite = 0 break end
 			-- 觉醒材料
-			x, y = lct_juexingelement() if (x > -1) then level_select(level, level_inited.juexing, lock, "觉醒") level_inited.juexing = 0 group_start() break end -- 组队开始
+			x, y = lct_juexingelement() if (x > -1) then level_select(level, pre_init.juexing, lock, "觉醒") pre_init.juexing = 0 group_start() break end -- 组队开始
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 战斗失败
-			x, y = fight_failed("组队") if (x > -1) then
+			x, y = fight_failed("组队") 
+			if (x > -1) then
 				if (fail_and_group == 1) then
 					wait_invite = 0
 				else
 					wait_invite = 1
 				end
+				tingyuan_time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.juexing = fail_cnt.juexing + 1
-				keep_fight_failed("组队")
 				break
 			end
 			-- 战斗进行
@@ -324,11 +318,8 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("组队") if (x > -1) then break end
-			-- 胜利达摩
-			x, y = whole_damo() if (x > -1) then break end
-			-- 胜利宝箱
-			x, y = half_damo() if (x > -1) then
+			x, y = fight_success("组队") 
+			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
@@ -344,7 +335,6 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 					quit_grp = 1
 					quit_con = 1
 				end
-				keep_half_damo()
 				break
 			end
 			-- 失败邀请
@@ -404,13 +394,14 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 觉醒材料
-			x, y = lct_juexingelement() if (x > -1) then level_select(level, level_inited.juexing, lock, "觉醒") level_inited.juexing = 0 group_start() break end -- 组队开始
+			x, y = lct_juexingelement() if (x > -1) then level_select(level, pre_init.juexing, lock, "觉醒") pre_init.juexing = 0 group_start() break end -- 组队开始
 			-- 战斗失败
-			x, y = fight_failed("组队") if (x > -1) then
+			x, y = fight_failed("组队") 
+			if (x > -1) then
+				tingyuan_time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.juexing = fail_cnt.juexing + 1
-				keep_fight_failed("组队")
 				break
 			end
 			-- 战斗进行
@@ -461,11 +452,8 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("组队") if (x > -1) then break end
-			-- 胜利达摩
-			x, y = whole_damo() if (x > -1) then break end
-			-- 胜利宝箱
-			x, y = half_damo() if (x > -1) then
+			x, y = fight_success("组队") 
+			if (x > -1) then
 				wait_invite = 1
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
@@ -478,7 +466,6 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 					quit_grp = 1
 					quit_con = 1
 				end
-				keep_half_damo()
 				break
 			end
 			-- 队员接手队长
@@ -492,11 +479,13 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			-- 离开确认
 			x, y = member_room_quit() if (x > -1) then break end
 			-- 战斗失败
-			x, y = fight_failed("组队") if (x > -1) then
+			x, y = fight_failed("组队") 
+			if (x > -1) then
+				tansuo_time_cnt = 0
+				tingyuan_time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.juexing = fail_cnt.juexing + 1
-				keep_fight_failed("组队")
 				break
 			end
 			-- 庭院
@@ -576,11 +565,8 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("组队") if (x > -1) then break end
-			-- 胜利达摩
-			x, y = whole_damo() if (x > -1) then break end
-			-- 胜利宝箱
-			x, y = half_damo() if (x > -1) then
+			x, y = fight_success("组队") 
+			if (x > -1) then
 				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
@@ -595,7 +581,6 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 					quit_grp = 1
 					quit_con = 1
 				end
-				keep_half_damo()
 				break
 			end
 			-- 失败邀请
@@ -666,13 +651,14 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 觉醒材料
-			x, y = lct_juexingelement() if (x > -1) then level_select(level, level_inited.juexing, lock, "觉醒") level_inited.juexing = 0 group_start() break end -- 组队开始
+			x, y = lct_juexingelement() if (x > -1) then level_select(level, pre_init.juexing, lock, "觉醒") pre_init.juexing = 0 group_start() break end -- 组队开始
 			-- 战斗失败
-			x, y = fight_failed("组队") if (x > -1) then
+			x, y = fight_failed("组队") 
+			if (x > -1) then
+				tingyuan_time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.juexing = fail_cnt.juexing + 1
-				keep_fight_failed("组队")
 				break
 			end
 			-- 战斗进行

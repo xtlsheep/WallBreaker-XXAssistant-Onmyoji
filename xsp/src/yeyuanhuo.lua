@@ -39,11 +39,8 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("单人") if (x > -1) then break end
-			-- 胜利达摩
-			x, y = whole_damo() if (x > -1) then break end
-			-- 胜利宝箱
-			x, y = half_damo() if (x > -1) then
+			x, y = fight_success("单人") 
+			if (x > -1) then
 				win_cnt.global = win_cnt.global + 1
 				if (last_sel == "tan") then
 					cnt_tan = cnt_tan + 1
@@ -54,7 +51,6 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 				end
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.yyh = win_cnt.yyh + 1
-				keep_half_damo()
 				break
 			end
 			-- 战斗准备
@@ -138,11 +134,11 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then random_touch(0, 845, 320, 50, 50) random_sleep(1000) break end -- 业原火
 			-- 战斗失败
-			x, y = fight_failed("单人") if (x > -1) then
+			x, y = fight_failed("单人") 
+			if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.yyh = fail_cnt.yyh + 1
-				keep_fight_failed("单人")
 				break
 			end
 			-- 八岐大蛇

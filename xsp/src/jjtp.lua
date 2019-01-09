@@ -826,11 +826,8 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success("单人") if (x > -1) then break end
-			-- 胜利达摩
-			x, y = whole_damo() if (x > -1) then break end
-			-- 胜利宝箱
-			x, y = half_damo() if (x > -1) then
+			x, y = fight_success("单人") 
+			if (x > -1) then
 				map[pos] = -1
 				pos = -1
 				found_target = -1
@@ -838,11 +835,11 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				time_cnt = 0
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.jjtp = win_cnt.jjtp + 1
-				keep_half_damo()
 				break
 			end
 			-- 战斗失败
-			x, y = fight_failed("单人") if (x > -1) then
+			x, y = fight_failed("单人") 
+			if (x > -1) then
 				map[pos] = -1
 				pos = -1
 				found_target = -1
@@ -850,7 +847,6 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				time_cnt = 0
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.jjtp = fail_cnt.jjtp + 1
-				keep_fight_failed("单人")
 				break
 			end
 			-- 战斗准备
@@ -1045,26 +1041,22 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success("单人") if (x > -1) then break end
-			-- 胜利达摩
-			x, y = whole_damo() if (x > -1) then break end
-			-- 胜利宝箱
-			x, y = half_damo() if (x > -1) then
+			x, y = fight_success("单人") 
+			if (x > -1) then
 				win_cnt.global = win_cnt.global + 1
 				time_cnt = 0
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.jjtp = win_cnt.jjtp + 1
-				keep_half_damo()
 			end
 			-- 战斗失败
-			x, y = fight_failed("单人") if (x > -1) then
+			x, y = fight_failed("单人") 
+			if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
 				time_cnt = 0
 				map[pos] = -1
 				pos = -1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.jjtp = fail_cnt.jjtp + 1
-				keep_fight_failed("单人")
 			end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end

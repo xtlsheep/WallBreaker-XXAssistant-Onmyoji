@@ -119,6 +119,7 @@ function find_target(sel)
 				mSleep(1000)
 				x_a, y_a = find_boss()
 				random_touch(0, x_a, y_a, 5, 5)
+				mSleep(1000)
 				return RET_VALID
 			end
 		end
@@ -131,6 +132,7 @@ function find_target(sel)
 				x_a, y_a = find_attack(x_t, y_t)
 				if x_a > -1 then
 					random_touch(0, x_a, y_a, 5, 5)
+					mSleep(1000)
 					return RET_OK
 				end
 			end
@@ -144,6 +146,7 @@ function find_target(sel)
 				x_a, y_a = find_attack(x_t, y_t)
 				if x_a > -1 then
 					random_touch(0, x_a, y_a, 5, 5)
+					mSleep(1000)
 					return RET_OK
 				end
 			end
@@ -157,6 +160,7 @@ function find_target(sel)
 				x_a, y_a = find_attack(x_t, y_t)
 				if x_a > -1 then
 					random_touch(0, x_a, y_a, 5, 5)
+					mSleep(1000)
 					return RET_OK
 				end
 			end
@@ -501,7 +505,6 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 	local sec_cnt = 0
 	local found_boss = 0
 	local unlock = 0
-	local hard_sel = 0
 	local ret = RET_ERR
 	local df_pos = {}
 	local top_left = 0
@@ -539,11 +542,8 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success("单人") if (x > -1) then break end
-			-- 胜利达摩
-			x, y = whole_damo() if (x > -1) then break end
-			-- 胜利宝箱
-			x, y = half_damo() if (x > -1) then
+			x, y = fight_success("单人")
+			if (x > -1) then
 				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
@@ -564,7 +564,6 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 						end
 					end
 				end
-				keep_half_damo()
 				break
 			end
 			-- 自动狗粮
@@ -676,14 +675,14 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
 					return RET_VALID
 				end
-				if hard_sel == 0 then
+				if pre_init.tansuo == 1 then
 					if hard == "普通" then
 						random_touch(0, 300, 200, 20, 20) -- 普通
 					elseif hard == "困难" then
 						random_touch(0, 420, 200, 20, 20) -- 困难
 					end
 					random_sleep(500)
-					hard_sel = 1
+					pre_init.tansuo = 0
 				end
 				HUD_show_or_hide(HUD,hud_info,"进入场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				random_touch(0, 840, 480, 30, 10) -- 探索
@@ -698,14 +697,14 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 战斗失败
-			x, y = fight_failed("单人") if (x > -1) then
+			x, y = fight_failed("单人") 
+			if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.tansuo = fail_cnt.tansuo + 1
 				if found_boss == 1 then
 					found_boss = 0
 				end
-				keep_fight_failed("单人")
 				break
 			end
 			-- 御魂溢出
@@ -731,7 +730,6 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 	local sec_cnt = 0
 	local found_boss = 0
 	local unlock = 0
-	local hard_sel = 0
 	local ret = RET_ERR
 	local df_pos = {}
 	local bot_left = 0
@@ -777,11 +775,8 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success("单人") if (x > -1) then break end
-			-- 胜利达摩
-			x, y = whole_damo() if (x > -1) then break end
-			-- 胜利宝箱
-			x, y = half_damo() if (x > -1) then
+			x, y = fight_success("单人") 
+			if (x > -1) then
 				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
@@ -804,7 +799,6 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				end
 				-- 智能突破Check
 				quit_con = auto_jjtp_time_check()
-				keep_half_damo()
 				break
 			end
 			-- 自动狗粮
@@ -912,14 +906,14 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
 					return RET_VALID
 				end
-				if hard_sel == 0 then
+				if pre_init.tansuo == 1 then
 					if hard == "普通" then
 						random_touch(0, 300, 200, 20, 20) -- 普通
 					elseif hard == "困难" then
 						random_touch(0, 420, 200, 20, 20) -- 困难
 					end
 					random_sleep(500)
-					hard_sel = 1
+					pre_init.tansuo = 0
 				end
 				HUD_show_or_hide(HUD,hud_info,"邀请队员",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				random_touch(0, 580, 480, 30, 10) -- 组队
@@ -956,11 +950,12 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 战斗失败
-			x, y = fight_failed("单人") if (x > -1) then
+			x, y = fight_failed("单人") 
+			if (x > -1) then
+				tingyuan_time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.tansuo = fail_cnt.tansuo + 1
-				keep_fight_failed("单人")
 				if found_boss == 1 then
 					found_boss = 0
 				end
@@ -997,7 +992,7 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 	else
 		df_pos = {1, 1, 1}
 	end
-
+	
 	while (1) do
 		while (1) do
 			-- 战
@@ -1019,17 +1014,13 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success("单人") if (x > -1) then break end
-			-- 胜利达摩
-			x, y = whole_damo() if (x > -1) then break end
-			-- 胜利宝箱
-			x, y = half_damo() if (x > -1) then
+			x, y = fight_success("单人") 
+			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.tansuo = win_cnt.tansuo + 1
-				keep_half_damo()
 				break
 			end
 			-- 探索场景
@@ -1124,11 +1115,13 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 				break
 			end
 			-- 战斗失败
-			x, y = fight_failed("单人") if (x > -1) then
+			x, y = fight_failed("单人") 
+			if (x > -1) then
+				tansuo_time_cnt = 0
+				tingyuan_time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.tansuo = fail_cnt.tansuo + 1
-				keep_fight_failed("单人")
 				break
 			end
 			-- 御魂溢出

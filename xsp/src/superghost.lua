@@ -279,31 +279,26 @@ end
 
 function sg_fight_failed()
 	-- 超鬼王的战斗失败识别
-	local x, y = findColor({413, 104, 415, 106},
+	local x, y, x_, y_
+	x, y = findColor({413, 104, 415, 106},
 		"0|0|0x514a5b,251|6|0xddd9cd,-135|-6|0xcdc59c,30|34|0x5b5265",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		right_lower_click()
+		while (1) do
+			loop_generic()
+			x_, y_ = findColor({413, 104, 415, 106},
+				"0|0|0x514a5b,251|6|0xddd9cd,-135|-6|0xcdc59c,30|34|0x5b5265",
+				95, 0, 0, 0)
+			if x_ > -1 then
+				right_lower_click()
+			elseif x_ == -1 then
+				return x, y
+			end
+			mSleep(500)
+		end
 	end
 	return x, y
-end
-
-function sg_keep_fight_failed()
-	-- 超鬼王的保持战斗失败识别
-	local x, y
-	while (1) do
-		loop_generic()
-		x, y = findColor({413, 104, 415, 106},
-			"0|0|0x514a5b,251|6|0xddd9cd,-135|-6|0xcdc59c,30|34|0x5b5265",
-			95, 0, 0, 0)
-		if x > -1 then
-			right_lower_click()
-		elseif x == -1 then
-			return
-		end
-		mSleep(500)
-	end
 end
 
 function sg_tired_detect()
@@ -554,16 +549,9 @@ function superghost()
 			end
 			if (x > -1) then sg_tb = nil break end
 			-- 战斗失败
-			x, y = sg_fight_failed() if (x > -1) then
-				sg_keep_fight_failed()
-				break
-			end
+			x, y = sg_fight_failed() if (x > -1) then break end
 			-- 战斗胜利
 			x, y = fight_success("组队") if (x > -1) then break end
-			-- 胜利达摩
-			x, y = whole_damo() if (x > -1) then break end
-			-- 胜利宝箱
-			x, y = half_damo() if (x > -1) then keep_half_damo() break end
 			-- 妖灵溢出
 			x, y = sg_bonus_extra() if x > -1 then break end
 			-- 领取奖励

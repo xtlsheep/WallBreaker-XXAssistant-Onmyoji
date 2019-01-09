@@ -822,83 +822,85 @@ function fight_ongoing()
 end
 
 function fight_success(mode)
-	local cnt, x, y
-	cnt = 3
+	function half_harma()
+		local x, y, x_, y_
+		x, y = findColor({498, 529, 501, 532}, -- 达摩底部
+			"0|0|0x670a0b,20|22|0x320204,127|0|0x7e0e0e,159|7|0x6f290b",
+			95, 0, 0, 0)
+		if (x > -1) then
+			HUD_show_or_hide(HUD,hud_info,"退出战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			while (1) do
+				loop_generic()
+				x_, y_ = findColor({498, 529, 501, 532}, -- 达摩底部
+					"0|0|0x670a0b,20|22|0x320204,127|0|0x7e0e0e,159|7|0x6f290b",
+					95, 0, 0, 0)
+				if x_ > -1 then
+					right_lower_click()
+				elseif x_ == -1 then
+					return RET_OK
+				end
+				random_sleep(100)
+			end
+		end
+		return RET_ERR
+	end
+	
+	local x, y, ret
+	
 	if mode == "组队" then
 		x, y = findColor({417, 86, 426, 95}, -- 组队胜利的鼓
 			"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
 			95, 0, 0, 0)
 		if (x > -1) then
 			HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			for i = 1, cnt do
+			while (1) do
+				ret = half_harma()
+				if ret == RET_OK then
+					return x, y
+				end
 				right_lower_click()
-				random_sleep(150)
+				random_sleep(100)
 			end
 		end
-		return x, y
 	elseif mode == "单人" then
 		x, y = findColor({421, 136, 430, 145}, -- 单人胜利的鼓
 			"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
 			95, 0, 0, 0)
 		if (x > -1) then
 			HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			for i = 1, cnt do
+			while (1) do
+				ret = half_harma()
+				if ret == RET_OK then
+					return x, y
+				end
 				right_lower_click()
-				random_sleep(150)
+				random_sleep(100)
 			end
 		end
-		return x, y
 	end
 	return x, y
-end
-
-function whole_damo()
-	local x, y = findColor({560, 369, 571, 376}, -- 达摩底部
-		"0|0|0xaa7b2a,-52|61|0x340204,1|61|0x3b0305,76|55|0x370204",
-		95, 0, 0, 0)
-	if (x > -1) then
-		HUD_show_or_hide(HUD,hud_info,"领取奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		right_lower_click()
-	end
-	return x, y
-end
-
-function half_damo()
-	local x, y = findColor({498, 529, 501, 532}, -- 达摩底部
-		"0|0|0x670a0b,20|22|0x320204,127|0|0x7e0e0e,159|7|0x6f290b",
-		95, 0, 0, 0)
-	if (x > -1) then
-		HUD_show_or_hide(HUD,hud_info,"退出战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		right_lower_click()
-	end
-	return x, y
-end
-
-function keep_half_damo()
-	local x, y
-	while (1) do
-		loop_generic()
-		x, y = findColor({498, 529, 501, 532}, -- 达摩底部
-			"0|0|0x670a0b,20|22|0x320204,127|0|0x7e0e0e,159|7|0x6f290b",
-			95, 0, 0, 0)
-		if x > -1 then
-			right_lower_click()
-		elseif x == -1 then
-			return
-		end
-		random_sleep(100)
-	end
 end
 
 function fight_failed(mode)
-	local x, y
+	local x, y, x_, y_
 	if (mode == "单人") then
 		x, y = findColor({410, 130, 415, 135}, -- 失败的鼓
 			"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			right_lower_click()
+			while (1) do
+				loop_generic()
+				x_, y_ = findColor({410, 130, 415, 135}, -- 失败的鼓
+					"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
+					95, 0, 0, 0)
+				if x_ > -1 then
+					right_lower_click()
+				elseif x_ == -1 then
+					return x, y
+				end
+				random_sleep(100)
+			end
 		end
 	elseif (mode == "组队") then
 		x, y = findColor({410, 80, 415, 85}, -- 失败的鼓
@@ -906,41 +908,21 @@ function fight_failed(mode)
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			right_lower_click()
+			while (1) do
+				loop_generic()
+				x_, y_ = findColor({410, 80, 415, 85}, -- 失败的鼓
+					"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
+					95, 0, 0, 0)
+				if x_ > -1 then
+					right_lower_click()
+				elseif x_ == -1 then
+					return x, y
+				end
+				random_sleep(100)
+			end
 		end
 	end
 	return x, y
-end
-
-function keep_fight_failed(mode)
-	local x, y
-	if (mode == "单人") then
-		while (1) do
-			loop_generic()
-			x, y = findColor({410, 130, 415, 135}, -- 失败的鼓
-				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
-				95, 0, 0, 0)
-			if x > -1 then
-				right_lower_click()
-			elseif x == -1 then
-				return
-			end
-			random_sleep(100)
-		end
-	elseif (mode == "组队") then
-		while (1) do
-			loop_generic()
-			x, y = findColor({410, 80, 415, 85}, -- 失败的鼓
-				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
-				95, 0, 0, 0)
-			if x > -1 then
-				right_lower_click()
-			elseif x == -1 then
-				return
-			end
-			random_sleep(100)
-		end
-	end
 end
 
 function yuhun_overflow()

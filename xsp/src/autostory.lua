@@ -105,22 +105,18 @@ function autostory()
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then time_cnt = 0 break end
 			-- 战斗胜利
-			x, y = fight_success("单人") if (x > -1) then time_cnt = 0 break end
-			-- 胜利达摩
-			x, y = whole_damo() if (x > -1) then time_cnt = 0 break end
-			-- 胜利宝箱
-			x, y = half_damo() if (x > -1) then
+			x, y = fight_success("单人")
+			if (x > -1) then
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
-				keep_half_damo()
 				time_cnt = 0
 				break
 			end
 			-- 战斗失败
-			x, y = fight_failed("单人") if (x > -1) then
+			x, y = fight_failed("单人")
+			if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
-				keep_fight_failed("单人")
 				time_cnt = 0
 				break
 			end
