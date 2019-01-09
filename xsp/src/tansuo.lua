@@ -251,7 +251,7 @@ function full_exp_bot(df_pos)
 	
 	if ver == "iOS" then
 		if df_pos[1] == 1 then
-			x, y = findColor({0, 250, 150, 450},
+			x, y = findColor({0, 200, 150, 400},
 				"0|0|0xffa219,-1|8|0xfecf0b,7|13|0xffeb03,5|-1|0xff9d1a",
 				90, 0, 0, 0)
 			if x > -1 then
@@ -259,7 +259,7 @@ function full_exp_bot(df_pos)
 			end
 		end
 		if df_pos[3] == 1 then
-			x, y = findColor({400, 450, 600, 640},
+			x, y = findColor({400, 400, 600, 600},
 				"0|0|0xffa219,-1|8|0xfecf0b,7|13|0xffeb03,5|-1|0xff9d1a",
 				90, 0, 0, 0)
 			if x > -1 then
@@ -268,7 +268,7 @@ function full_exp_bot(df_pos)
 		end
 	elseif ver == "android" then
 		if df_pos[1] == 1 then
-			x, y = findColor({0, 250, 150, 450},
+			x, y = findColor({0, 200, 150, 400},
 				"0|0|0xfe9e1a,3|0|0xfba01a,-3|11|0xeedd24,7|13|0xf7e611",
 				90, 0, 0, 0)
 			if x > -1 then
@@ -276,7 +276,7 @@ function full_exp_bot(df_pos)
 			end
 		end
 		if df_pos[3] == 1 then
-			x, y = findColor({400, 450, 600, 640},
+			x, y = findColor({400, 400, 600, 600},
 				"0|0|0xfe9e1a,3|0|0xfba01a,-3|11|0xeedd24,7|13|0xf7e611",
 				90, 0, 0, 0)
 			if x > -1 then
@@ -352,33 +352,39 @@ function skkm_change_scroll(page_jump)
 end
 
 function skkm_change_switch(top_left, top_mid, top_right, bot_left, bot_right)
+	local cnt
 	if top_right == 1 then
-		for i = 1, math.random(2, 3) do
-			random_move(0, 200, 500, 200, 275, 10, 10)
+		cnt = math.random(2, 3)
+		for i = 1, cnt do
+			random_move(0, 200, 500, 200, 250, 10, 10)
 			random_sleep(500)
 		end
 	end
 	if top_mid == 1 then
-		for i = 1, math.random(2, 3) do
-			random_move(0, 800, 500, 580, 275, 10, 10)
+		cnt = math.random(2, 3)
+		for i = 1, cnt do
+			random_move(0, 800, 500, 580, 250, 10, 10)
 			random_sleep(500)
 		end
 	end
 	if top_left == 1 then
-		for i = 1, math.random(2, 3) do
-			random_move(0, 600, 500, 960, 275, 10, 10)
+		cnt = math.random(2, 3)
+		for i = 1, cnt do
+			random_move(0, 600, 500, 960, 250, 10, 10)
 			random_sleep(500)
 		end
 	end
 	if bot_right == 1 then
-		for i = 1, math.random(2, 3) do
-			random_move(0, 200, 500, 300, 250, 10, 10)
+		cnt = math.random(2, 3)
+		for i = 1, cnt do
+			random_move(0, 200, 500, 300, 250, 10, 30)
 			random_sleep(500)
 		end
 	end
 	if bot_left == 1 then
-		for i = 1, math.random(2, 3) do
-			random_move(0, 800, 500, 830, 250, 10, 10)
+		cnt = math.random(2, 3)
+		for i = 1, cnt do
+			random_move(0, 800, 500, 830, 250, 10, 30)
 			random_sleep(500)
 		end
 	end
@@ -481,7 +487,7 @@ function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_roun
 	elseif mode == "队长" then
 		ret = tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 	elseif mode == "队员" then
-		ret = tansuo_member(sel, mark, nor_attk, full_exp, page_jump, df_type, egg_color)
+		ret = tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 	end
 	return ret
 end
@@ -974,7 +980,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 	return RET_ERR
 end
 
-function tansuo_member(sel, mark, nor_attk, full_exp, page_jump, df_type, egg_color)
+function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 	local unlock = 0
 	local ret = RET_ERR
 	local quit_con = 0
@@ -991,7 +997,7 @@ function tansuo_member(sel, mark, nor_attk, full_exp, page_jump, df_type, egg_co
 	else
 		df_pos = {1, 1, 1}
 	end
-	
+
 	while (1) do
 		while (1) do
 			-- 战
