@@ -64,7 +64,7 @@ function receive_offer()
 	local x, y, x_, y_
 	x_, y_ = findColor({681, 167, 685, 171}, -- √ x 和 交接处
 		"0|0|0xb39276,-1|29|0x9e7d62,71|209|0x50ad5b,74|295|0xd96c5a",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	if (x_ > -1) then
 		if (offer_arr[1] == 0) then
 			HUD_show_or_hide(HUD,hud_info,"拒绝悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -73,7 +73,7 @@ function receive_offer()
 			if offer_arr[2] == 1 then
 				x, y = findColor({614, 432, 616, 434},
 					"0|0|0xed4a36,11|-21|0x67457c,-13|9|0xc7a98b,-30|17|0x8647c8",
-					90, 0, 0, 0)
+					80, 0, 0, 0)
 				if x > -1 then
 					HUD_show_or_hide(HUD,hud_info,"接受勾玉悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_touch(0, 759, 373, 10, 10) -- 接受
@@ -83,7 +83,7 @@ function receive_offer()
 			if offer_arr[3] == 1 then
 				x, y = findColor({754, 376, 756, 378},
 					"0|0|0x55b260,2|83|0xdd725f,-157|68|0x0d0f0b,-151|39|0xe97a2b",
-					90, 0, 0, 0)
+					80, 0, 0, 0)
 				if x > -1 then
 					HUD_show_or_hide(HUD,hud_info,"接受体力悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_touch(0, 759, 373, 10, 10) -- 接受
@@ -93,7 +93,7 @@ function receive_offer()
 			if offer_arr[4] == 1 then
 				x, y = findColor({754, 376, 756, 378},
 					"0|0|0x55b260,2|83|0xdd725f,-147|59|0x75671b,-166|48|0xddb64d",
-					90, 0, 0, 0)
+					80, 0, 0, 0)
 				if x > -1 then
 					HUD_show_or_hide(HUD,hud_info,"接受金币悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_touch(0, 759, 373, 10, 10) -- 接受
@@ -103,7 +103,7 @@ function receive_offer()
 			if offer_arr[5] == 1 then
 				x, y = findColor({529, 451, 531, 453},
 					"0|0|0x8b3028,-11|-8|0xf37b62,-10|-19|0xfdfeff,-9|-39|0x69467f",
-					90, 0, 0, 0)
+					80, 0, 0, 0)
 				if x > -1 then
 					HUD_show_or_hide(HUD,hud_info,"接受猫粮悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_touch(0, 759, 373, 10, 10) -- 接受
@@ -113,7 +113,7 @@ function receive_offer()
 			if offer_arr[6] == 1 then
 				x, y = findColor({754, 376, 756, 378},
 					"0|0|0x55b260,2|83|0xdd725f,-147|59|0x75671b,-243|44|0xfffbe9",
-					90, 0, 0, 0)
+					80, 0, 0, 0)
 				if x > -1 then
 					HUD_show_or_hide(HUD,hud_info,"接受狗粮悬赏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_touch(0, 759, 373, 10, 10) -- 接受
