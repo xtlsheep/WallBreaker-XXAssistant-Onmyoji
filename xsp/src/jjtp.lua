@@ -174,7 +174,7 @@ function quit_jjtp()
 end
 
 function jjtp_touch_blank()
-	random_touch(0, 1095, 495, 10, 50)
+	random_touch(0, 1100, 500, 30, 50)
 end
 
 function solo_lct_jjtp()
@@ -320,12 +320,12 @@ function solo_refresh(winess, invalid, refresh)
 end
 
 function solo_get_bonus()
-	local x, y = findColor({605, 464, 607, 466},
-		"0|0|0xbb3c1a,64|-6|0xd19118,-20|-63|0xcbb599,-37|-78|0xd73846,-339|84|0x79582e,-7|106|0x6a645c",
+	local x, y = findColor({570, 382, 572, 384},
+		"0|0|0xd93948,16|13|0xc8b295,-61|-13|0xd88016,-32|20|0xe3d73d,481|-323|0x736967,424|166|0x241b12",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"领取奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		random_touch(0, 1095, 485, 20, 50) -- 左下空白
+		jjtp_touch_blank()
 	end
 	return x, y
 end
@@ -366,7 +366,7 @@ function solo_quit_defense_record()
 		"0|0|0xf3b25e,-37|2|0xcbb59c,-18|93|0xd6c9b9,-9|394|0xd6c9b9",
 		95, 0, 0, 0)
 	if x > -1 then
-		random_touch(0, 1090, 475, 10, 50) --右下空白
+		jjtp_touch_blank()
 	end
 	return x, y
 end
@@ -383,7 +383,7 @@ end
 
 function solo_to_pub()
 	HUD_show_or_hide(HUD,hud_info,"切换至阴阳寮突破",20,"0xff000000","0xffffffff",0,100,0,300,32)
-	random_touch(0, 1095, 300, 10, 10)
+	random_touch(0, 1100, 300, 10, 10)
 end
 
 function pub_unstart()
@@ -622,7 +622,7 @@ end
 
 function pub_to_solo()
 	HUD_show_or_hide(HUD,hud_info,"切换至个人突破",20,"0xff000000","0xffffffff",0,100,0,300,32)
-	random_touch(0, 1095, 200, 10, 10)
+	random_touch(0, 1100, 200, 10, 10)
 end
 
 -- Main func
@@ -787,8 +787,6 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 					break
 				end
 			end
-			-- 获取奖励
-			x, y = solo_get_bonus() if (x > -1) then break end
 			-- 寻找目标
 			if ((table.getn(map) ~= 0) and (found_target == -1)) then
 				found_target, pos = solo_find_next_target(map, solo_sel)
@@ -826,7 +824,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success("单人") 
+			x, y = fight_success("单人")
 			if (x > -1) then
 				map[pos] = -1
 				pos = -1
@@ -838,7 +836,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				break
 			end
 			-- 战斗失败
-			x, y = fight_failed("单人") 
+			x, y = fight_failed("单人")
 			if (x > -1) then
 				map[pos] = -1
 				pos = -1
@@ -849,6 +847,8 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				fail_cnt.jjtp = fail_cnt.jjtp + 1
 				break
 			end
+			-- 获取奖励
+			x, y = solo_get_bonus() if (x > -1) then break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 庭院
@@ -1041,7 +1041,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success("单人") 
+			x, y = fight_success("单人")
 			if (x > -1) then
 				win_cnt.global = win_cnt.global + 1
 				time_cnt = 0
@@ -1049,7 +1049,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				win_cnt.jjtp = win_cnt.jjtp + 1
 			end
 			-- 战斗失败
-			x, y = fight_failed("单人") 
+			x, y = fight_failed("单人")
 			if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
 				time_cnt = 0

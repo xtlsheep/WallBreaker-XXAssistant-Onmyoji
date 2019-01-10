@@ -824,15 +824,15 @@ end
 function fight_success(mode)
 	function half_harma()
 		local x, y, x_, y_
-		x, y = findColor({498, 529, 501, 532}, -- 达摩底部
-			"0|0|0x670a0b,20|22|0x320204,127|0|0x7e0e0e,159|7|0x6f290b",
+		x, y = findColor({427, 541, 429, 543},
+			"0|0|0x3a82c9,10|12|0x81aada,72|12|0x70290b,78|11|0x360204",
 			95, 0, 0, 0)
 		if (x > -1) then
 			HUD_show_or_hide(HUD,hud_info,"退出战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			while (1) do
 				loop_generic()
-				x_, y_ = findColor({498, 529, 501, 532}, -- 达摩底部
-					"0|0|0x670a0b,20|22|0x320204,127|0|0x7e0e0e,159|7|0x6f290b",
+				x_, y_ = findColor({427, 541, 429, 543},
+					"0|0|0x3a82c9,10|12|0x81aada,72|12|0x70290b,78|11|0x360204",
 					95, 0, 0, 0)
 				if x_ > -1 then
 					right_lower_click()
@@ -1275,8 +1275,8 @@ function captain_team_set_auto_invite()
 			random_touch(0, x, y, 3, 3) -- 勾选
 		end
 	elseif ver == "android" then
-		x, y = findColor({927, 557, 929, 559},
-			"0|0|0xf3b25e,133|-447|0xe8d4cf,-866|-439|0xe0c167,-855|-328|0xa52729",
+		x, y = findColor({496, 317, 498, 319},
+			"0|0|0x9d8771,-35|63|0xdd6951,177|64|0xf4b25f,75|62|0xccb49b",
 			95, 0, 0, 0)
 		if x > -1 then
 			random_touch(0, x, y, 3, 3) -- 勾选

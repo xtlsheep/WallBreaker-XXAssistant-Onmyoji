@@ -349,9 +349,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			end
 			-- 自动邀请
 			if (captain_auto_group == 1 and quit_end == 0 and quit_con == 0) then
-				x, y = captain_team_set_auto_invite()
-				if (x > -1) then
-					break
+				x, y = captain_team_set_auto_invite() if (x > -1) then break
 				end
 			end
 			-- 胜利邀请
@@ -587,9 +585,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			x, y = captain_team_lost_invite() if (x > -1) then random_touch(0, 673, 384, 20, 10) invite = 0 time_cnt = 0 break end -- 确定
 			-- 自动邀请
 			if (captain_auto_group == 1 and quit_end == 0 and quit_con == 0) then
-				x, y = captain_team_set_auto_invite()
-				if (x > -1) then
-					break
+				x, y = captain_team_set_auto_invite() if (x > -1) then break
 				end
 			end
 			-- 胜利邀请
