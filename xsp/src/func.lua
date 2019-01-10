@@ -638,7 +638,7 @@ function lock_or_unlock(lock, spec)
 	elseif spec == "御灵" then
 		x1 = 552 y1 = 378 x2 = 554 y2 = 380
 	elseif spec == "Solo结界突破" then
-		x1 = 917 y1 = 551 x2 = 919 y2 = 553
+		x1 = 922 y1 = 548 x2 = 924 y2 = 550
 	elseif spec == "Pub结界突破" then
 		x1 = 190 y1 = 547 x2 = 192 y2 = 549
 	elseif spec == "探索" then

@@ -320,8 +320,8 @@ function solo_refresh(winess, invalid, refresh)
 end
 
 function solo_get_bonus()
-	local x, y = findColor({570, 382, 572, 384},
-		"0|0|0xd93948,16|13|0xc8b295,-61|-13|0xd88016,-32|20|0xe3d73d,481|-323|0x736967,424|166|0x241b12",
+	local x, y = findColor({568, 380, 570, 382},
+		"0|0|0xd73847,19|18|0xcab497,101|76|0xd19118,35|83|0xbb3a1a,483|-320|0x746b68,-423|102|0x53290e",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"领取奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)

@@ -1485,7 +1485,8 @@ function yuling_UI()
 	UI:ComboBox(yuling_ui, "level", "一层,二层,三层","2",23,"650,160,330,50")
 	UI:Label(yuling_ui, "left", "0,0,0", 30, "战斗次数 - ", "20,220,300,60")
 	UI:ComboBox(yuling_ui, "round", "10次,20次,30次,50次,100次,全部御灵境之钥","5",23,"650,220,330,50")
-	UI:CheckBoxGroup(yuling_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,280,900,60")
+	UI:CheckBoxGroup(yuling_ui, "doll","自动标记草人","0",30,"0,0,0","20,280,900,60")
+	UI:CheckBoxGroup(yuling_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,340,900,60")
 	UI:fit(yuling_ui)
 	
 	
@@ -1498,6 +1499,7 @@ function yuling_UI()
 	local sel = -1
 	local level = -1
 	local round = -1
+	local doll = -1
 	local lock = -1
 	
 	if (res_yuling.select == "0") then
@@ -1532,6 +1534,12 @@ function yuling_UI()
 		round = 99999
 	end
 	
+	if (res_yuling.doll == "0") then
+		doll = 1
+	else
+		doll = 0
+	end
+	
 	if (res_yuling.lock == "0") then
 		lock = 1
 	else
@@ -1543,7 +1551,7 @@ function yuling_UI()
 		return
 	end
 	
-	yuling(sel, level, round, lock)
+	yuling(sel, level, round, doll, lock)
 end
 
 function yqfy_UI()
