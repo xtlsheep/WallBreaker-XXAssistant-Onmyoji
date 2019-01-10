@@ -326,6 +326,7 @@ function solo_get_bonus()
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"领取奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		jjtp_touch_blank()
+		mSleep(1000)
 	end
 	return x, y
 end
@@ -726,8 +727,6 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			loop_generic()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
-			-- 阴阳寮突破
-			x, y = pub_lct_jjtp() if x > -1 then quit_jjtp() break end
 			-- 个人突破
 			x, y = solo_lct_jjtp()
 			if (x > -1) then
@@ -786,11 +785,11 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 					random_touch(0, solo_center_x[pos], solo_center_y[pos], 50, 20)
 					break
 				end
-			end
-			-- 寻找目标
-			if ((table.getn(map) ~= 0) and (found_target == -1)) then
-				found_target, pos = solo_find_next_target(map, solo_sel)
-				break
+				-- 寻找目标
+				if ((table.getn(map) ~= 0) and (found_target == -1)) then
+					found_target, pos = solo_find_next_target(map, solo_sel)
+					break
+				end
 			end
 			-- 五花肉
 			ret = find_whr(pos, whr, "solo")
@@ -823,6 +822,8 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				end
 				break
 			end
+			-- 获取奖励
+			x, y = solo_get_bonus() if (x > -1) then break end
 			-- 战斗胜利
 			x, y = fight_success("单人")
 			if (x > -1) then
@@ -847,10 +848,10 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				fail_cnt.jjtp = fail_cnt.jjtp + 1
 				break
 			end
-			-- 获取奖励
-			x, y = solo_get_bonus() if (x > -1) then break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
+			-- 阴阳寮突破
+			x, y = pub_lct_jjtp() if x > -1 then quit_jjtp() break end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 探索

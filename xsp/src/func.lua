@@ -822,18 +822,35 @@ function fight_ongoing()
 end
 
 function fight_success(mode)
+	function success_drum(mode)
+		local x, y
+		if mode == "组队" then
+			x, y = findColor({417, 86, 426, 95},
+				"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
+				95, 0, 0, 0)
+		elseif mode == "单人" then
+			x, y = findColor({421, 136, 430, 145},
+				"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
+				95, 0, 0, 0)
+		end
+		return x, y
+	end
+	
 	function half_harma()
-		local x, y, x_, y_
-		x, y = findColor({427, 541, 429, 543},
+		local x, y = findColor({427, 541, 429, 543},
 			"0|0|0x3a82c9,10|12|0x81aada,72|12|0x70290b,78|11|0x360204",
-			95, 0, 0, 0)
+			90, 0, 0, 0)
+		return x, y
+	end
+	
+	function half_harma_loop()
+		local x, y, x_, y_
+		x, y = half_harma()
 		if (x > -1) then
 			HUD_show_or_hide(HUD,hud_info,"退出战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			while (1) do
 				loop_generic()
-				x_, y_ = findColor({427, 541, 429, 543},
-					"0|0|0x3a82c9,10|12|0x81aada,72|12|0x70290b,78|11|0x360204",
-					95, 0, 0, 0)
+				x_, y_ = half_harma()
 				if x_ > -1 then
 					right_lower_click()
 				elseif x_ == -1 then
@@ -845,84 +862,58 @@ function fight_success(mode)
 		return RET_ERR
 	end
 	
-	local x, y, ret
+	local x_s, y_s, x_h, y_h, ret
 	
-	if mode == "组队" then
-		x, y = findColor({417, 86, 426, 95}, -- 组队胜利的鼓
-			"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
-			95, 0, 0, 0)
-		if (x > -1) then
-			HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			while (1) do
-				ret = half_harma()
-				if ret == RET_OK then
-					return x, y
-				end
-				right_lower_click()
-				random_sleep(100)
+	x_s, y_s = success_drum(mode)
+	x_h, y_h = half_harma()
+	if (x_s > -1 or x_h > -1) then
+		HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		while (1) do
+			ret = half_harma_loop()
+			if ret == RET_OK then
+				return RET_OK, RET_OK
 			end
-		end
-	elseif mode == "单人" then
-		x, y = findColor({421, 136, 430, 145}, -- 单人胜利的鼓
-			"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
-			95, 0, 0, 0)
-		if (x > -1) then
-			HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			while (1) do
-				ret = half_harma()
-				if ret == RET_OK then
-					return x, y
-				end
-				right_lower_click()
-				random_sleep(100)
-			end
+			right_lower_click()
+			random_sleep(100)
 		end
 	end
-	return x, y
+	
+	return RET_ERR, RET_ERR
 end
 
 function fight_failed(mode)
-	local x, y, x_, y_
-	if (mode == "单人") then
-		x, y = findColor({410, 130, 415, 135}, -- 失败的鼓
-			"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
-			95, 0, 0, 0)
-		if x > -1 then
-			HUD_show_or_hide(HUD,hud_info,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			while (1) do
-				loop_generic()
-				x_, y_ = findColor({410, 130, 415, 135}, -- 失败的鼓
-					"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
-					95, 0, 0, 0)
-				if x_ > -1 then
-					right_lower_click()
-				elseif x_ == -1 then
-					return x, y
-				end
-				random_sleep(100)
-			end
+	function failed_drum(mode)
+		local x, y
+		if mode == "组队" then
+			x, y = findColor({410, 80, 415, 85},
+				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
+				95, 0, 0, 0)
+		elseif mode == "单人" then
+			x, y = findColor({410, 130, 415, 135},
+				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
+				95, 0, 0, 0)
 		end
-	elseif (mode == "组队") then
-		x, y = findColor({410, 80, 415, 85}, -- 失败的鼓
-			"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
-			95, 0, 0, 0)
-		if x > -1 then
-			HUD_show_or_hide(HUD,hud_info,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			while (1) do
-				loop_generic()
-				x_, y_ = findColor({410, 80, 415, 85}, -- 失败的鼓
-					"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
-					95, 0, 0, 0)
-				if x_ > -1 then
-					right_lower_click()
-				elseif x_ == -1 then
-					return x, y
-				end
-				random_sleep(100)
+		return x, y
+	end
+	
+	local x, y
+	
+	x, y = failed_drum(mode)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		while (1) do
+			loop_generic()
+			x, y = failed_drum(mode)
+			if x > -1 then
+				right_lower_click()
+			elseif x == -1 then
+				return RET_OK, RET_OK
 			end
+			random_sleep(100)
 		end
 	end
-	return x, y
+	
+	return RET_ERR, RET_ERR
 end
 
 function yuhun_overflow()
