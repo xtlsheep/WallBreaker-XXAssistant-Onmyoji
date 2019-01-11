@@ -1077,29 +1077,28 @@ function captain_room_invite_first(invite_zone)
 		"0|0|0xf3b25e,158|-451|0xf5e0d9,-409|-440|0xe77d93,-239|1|0xdf6851",
 		95, 0, 0, 0)
 	if x > -1 then
-		mSleep(500)
 		if invite_zone == 1 then
-			x_, y_ = findColor({364, 94, 366, 96},
-				"0|0|0x8a553f,-46|-13|0xa36b4e,36|-13|0xa26b4e,-93|-22|0xe2758c,479|-33|0xf4e0da",
+			x_, y_ = findColor({359, 99, 361, 101},
+				"0|0|0x8b5941,482|-42|0xf5dcd4,-86|-31|0xe97d96,328|414|0xf4b25f,85|409|0xdd6951",
 				95, 0, 0, 0)
 			if x_ > -1 then
-				random_touch(0, x_, y_, 20, 5)
+				random_touch(0, x_, y_, 30, 10)
 				mSleep(1000)
 			end
 		elseif invite_zone == 2 then
-			x_, y_ = findColor({464, 94, 466, 96},
-				"0|0|0x8b5640,-44|-15|0xa1694e,39|-16|0xa26b4e,-192|-25|0xe77c94,378|-37|0xf5e0d9",
+			x_, y_ = findColor({462, 104, 464, 106},
+				"0|0|0x95644b,379|-47|0xf5dcd4,-189|-36|0xe97d96,225|409|0xf4b25f,-18|404|0xdd6951",
 				95, 0, 0, 0)
 			if x_ > -1 then
-				random_touch(0, x_, y_, 20, 5)
+				random_touch(0, x_, y_, 30, 10)
 				mSleep(1000)
 			end
 		elseif invite_zone == 3 then
-			x_, y_ = findColor({564, 94, 566, 96},
-				"0|0|0x8a563e,-41|-16|0xa36b4e,43|-17|0xa26b4e,-293|-25|0xe2758c,279|-36|0xf4e0da",
+			x_, y_ = findColor({564, 104, 566, 106},
+				"0|0|0x96654c,277|-47|0xf5dcd4,-291|-36|0xe97d96,123|409|0xf4b25f,-120|404|0xdd6951",
 				95, 0, 0, 0)
 			if x_ > -1 then
-				random_touch(0, x_, y_, 20, 5)
+				random_touch(0, x_, y_, 30, 10)
 				mSleep(1000)
 			end
 		end
