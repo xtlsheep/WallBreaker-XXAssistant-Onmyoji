@@ -71,9 +71,9 @@ function random_touch(id, x, y, ran_x, ran_y)
 	end
 	
 	hud_button = createHUD()
-	show_point(x_r, y_r, 250)
+	show_point(x_r, y_r, 200)
 	hideHUD(hud_button)
-	random_sleep(150)
+	random_sleep(100)
 	touchDown(id, x_r, y_r)
 	random_sleep(200)
 	touchUp(id, x_r, y_r)

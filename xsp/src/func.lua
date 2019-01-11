@@ -849,7 +849,6 @@ function fight_success(mode)
 		if (x > -1) then
 			HUD_show_or_hide(HUD,hud_info,"退出战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			while (1) do
-				loop_generic()
 				x_, y_ = half_harma()
 				if x_ > -1 then
 					right_lower_click()

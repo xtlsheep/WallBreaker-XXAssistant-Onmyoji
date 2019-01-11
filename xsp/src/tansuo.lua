@@ -75,7 +75,7 @@ function find_goods()
 end
 
 function find_boss()
-	local x, y = findColor({200, 100, 900, 300},
+	local x, y = findColor({0, 0, 1154, 400},
 		"0|0|0xb22e32,3|5|0xfffdf9,-7|-16|0x221108",
 		95, 0, 0, 0)
 	return x, y
@@ -476,6 +476,18 @@ function get_scene_move(scene_move)
 	return move_total
 end
 
+function treasure_box()
+	local x, y = findColor({70, 150, 80, 550},
+		"0|0|0xbd4a1c,6|-1|0xd08635,2|-8|0x261917,17|-17|0xece0c7",
+95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"发现宝箱",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		mSleep(1000)
+		random_touch(0, x, y, 5, 5)
+	end
+	return x, y
+end
+
 -- Main func
 function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 	print(string.format("模式: %s, 选择: 物品-%d,金币-%d,经验-%d,Boss-%d, 标记: %s, 难度: %s, 移动: %s, 章节: %d, 限定: %s, 胜利: %s, 通关: %s, 邀请 %s",
@@ -564,6 +576,16 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 						end
 					end
 				end
+				break
+			end
+			-- 探索
+			x, y = lct_tansuo()
+			if (x > -1) then
+				x_, y_ = treasure_box()
+				if x_ > -1 then
+					break
+				end
+				random_touch(0, 1024, 533, 30, 10)
 				break
 			end
 			-- 自动狗粮
@@ -697,7 +719,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 战斗失败
-			x, y = fight_failed("单人") 
+			x, y = fight_failed("单人")
 			if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
@@ -711,8 +733,6 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 查看体力
 			x, y = sushi_check() if x > -1 then right_lower_click() break end
-			-- 探索
-			x, y = lct_tansuo() if (x > -1) then random_touch(0, 1024, 533, 30, 10) break end -- Temporarily enter last section
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
 			break
@@ -775,7 +795,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success("单人") 
+			x, y = fight_success("单人")
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
@@ -799,6 +819,16 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				end
 				-- 智能突破Check
 				quit_con = auto_jjtp_time_check()
+				break
+			end
+			-- 探索
+			x, y = lct_tansuo()
+			if (x > -1) then
+				x_, y_ = treasure_box()
+				if x_ > -1 then
+					break
+				end
+				random_touch(0, 1024, 533, 30, 10)
 				break
 			end
 			-- 自动狗粮
@@ -950,7 +980,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 战斗失败
-			x, y = fight_failed("单人") 
+			x, y = fight_failed("单人")
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
@@ -965,8 +995,6 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			x, y = yuhun_overflow() if x > -1 then break end
 			-- 查看体力
 			x, y = sushi_check() if x > -1 then right_lower_click() break end
-			-- 探索
-			x, y = lct_tansuo() if (x > -1) then random_touch(0, 1024, 533, 30, 10) break end -- Temporarily enter last section
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
 			break
@@ -1014,7 +1042,7 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success("单人") 
+			x, y = fight_success("单人")
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
@@ -1036,6 +1064,21 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 				if x_ == -1 then
 					random_touch(0, 47, 56, 5, 5) -- 左上退出
 				end
+				break
+			end
+			-- 探索
+			x, y = lct_tansuo()
+			if x > -1 then
+				x_, y_ = treasure_box()
+				if x_ > -1 then
+					break
+				end
+				-- 智能突破Check
+				quit_con = auto_jjtp_time_check()
+				if quit_con == 1 then
+					return RET_VALID
+				end
+				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt)
 				break
 			end
 			-- 接受邀请
@@ -1115,7 +1158,7 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 				break
 			end
 			-- 战斗失败
-			x, y = fight_failed("单人") 
+			x, y = fight_failed("单人")
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
@@ -1130,17 +1173,6 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 			x, y = sushi_check() if x > -1 then right_lower_click() break end
 			-- 庭院
 			x, y = lct_tingyuan() if x > -1 then tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
-			-- 探索
-			x, y = lct_tansuo()
-			if x > -1 then
-				-- 智能突破Check
-				quit_con = auto_jjtp_time_check()
-				if quit_con == 1 then
-					return RET_VALID
-				end
-				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt)
-				break
-			end
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
 			break
