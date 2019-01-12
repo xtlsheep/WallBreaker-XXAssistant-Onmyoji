@@ -822,6 +822,16 @@ function fight_ongoing()
 end
 
 function fight_success(mode)
+	function yuhun_overflow()
+		local x, y = findColor({568, 376, 570, 378},
+			"0|0|0xf3b25e,-54|-24|0x973b2e,52|20|0x963b2e,179|-163|0xc6b096,-182|42|0xcab49a",
+			95, 0, 0, 0)
+		if x > -1 then
+			random_touch(0, x, y, 20, 5)
+		end
+		return x, y
+	end
+	
 	function success_drum(mode)
 		local x, y
 		if mode == "组队" then
@@ -872,6 +882,7 @@ function fight_success(mode)
 			if ret == RET_OK then
 				return RET_OK, RET_OK
 			end
+			yuhun_overflow()
 			right_lower_click()
 			random_sleep(100)
 		end
@@ -913,18 +924,6 @@ function fight_failed(mode)
 	end
 	
 	return RET_ERR, RET_ERR
-end
-
-function yuhun_overflow()
-	local x, y = findColor({568, 376, 570, 378},
-		"0|0|0xf3b25e,-54|-24|0x973b2e,52|20|0x963b2e,179|-163|0xc6b096,-182|42|0xcab49a",
-		95, 0, 0, 0)
-	if x > -1 then
-		random_touch(0, x, y, 20, 5)
-		random_sleep(1000)
-		right_lower_click()
-	end
-	return x, y
 end
 
 function fight_stop_auto_group()

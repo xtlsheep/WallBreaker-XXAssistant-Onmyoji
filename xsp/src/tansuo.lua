@@ -729,8 +729,6 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				end
 				break
 			end
-			-- 御魂溢出
-			x, y = yuhun_overflow() if x > -1 then break end
 			-- 查看体力
 			x, y = sushi_check() if x > -1 then right_lower_click() break end
 			-- 体力不足
@@ -991,10 +989,6 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				end
 				break
 			end
-			-- 御魂溢出
-			x, y = yuhun_overflow() if x > -1 then break end
-			-- 查看体力
-			x, y = sushi_check() if x > -1 then right_lower_click() break end
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
 			break
@@ -1167,8 +1161,6 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 				fail_cnt.tansuo = fail_cnt.tansuo + 1
 				break
 			end
-			-- 御魂溢出
-			x, y = yuhun_overflow() if x > -1 then break end
 			-- 查看体力
 			x, y = sushi_check() if x > -1 then right_lower_click() break end
 			-- 庭院

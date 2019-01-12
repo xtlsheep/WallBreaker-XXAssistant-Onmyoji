@@ -148,8 +148,6 @@ function yuhun_solo(mark, level, round, lock)
 				fail_cnt.yuhun = fail_cnt.yuhun + 1
 				break
 			end
-			-- 御魂溢出
-			x, y = yuhun_overflow() if x > -1 then break end
 			-- 发现宝藏
 			x, y = lct_petfind() if (x > -1) then break end
 			-- 真八岐大蛇
@@ -273,8 +271,6 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 				fail_cnt.yuhun = fail_cnt.yuhun + 1
 				break
 			end
-			-- 御魂溢出
-			x, y = yuhun_overflow() if x > -1 then break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if x > -1 then
@@ -412,8 +408,6 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 				fail_cnt.yuhun = fail_cnt.yuhun + 1
 				break
 			end
-			-- 御魂溢出
-			x, y = yuhun_overflow() if x > -1 then break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if x > -1 then
@@ -521,8 +515,6 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt)
 				break
 			end
-			-- 御魂溢出
-			x, y = yuhun_overflow() if x > -1 then break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if x > -1 then
@@ -677,8 +669,6 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 				fail_cnt.yuhun = fail_cnt.yuhun + 1
 				break
 			end
-			-- 御魂溢出
-			x, y = yuhun_overflow() if x > -1 then break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if x > -1 then
