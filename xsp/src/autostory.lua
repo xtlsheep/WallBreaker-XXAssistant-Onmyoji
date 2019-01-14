@@ -83,6 +83,7 @@ end
 function autostory()
 	print_global_config()
 	local time_cnt = 0
+	local rd
 	local x, y
 	
 	while (1) do
@@ -123,7 +124,8 @@ function autostory()
 			time_cnt = time_cnt + 1
 			if time_cnt > 20 then
 				HUD_show_or_hide(HUD,hud_info,"移动",20,"0xff000000","0xffffffff",0,100,0,300,32)
-				if (math.random(1, 2) % 2 == 0) then
+				rd = math.random(1, 2)
+				if (rd % 2 == 0) then
 					random_move(0, 300, 300, 800, 300, 20, 20)
 				else
 					random_move(0, 800, 300, 300, 300, 10, 10)

@@ -23,6 +23,177 @@ function lct_tansuo_prepare()
 	return x, y
 end
 
+function section_select(section)
+	local sec_func = {}
+	
+	sec_func[10] = function(x1, y1, x2, y2)
+		local x, y = findColor({x1, y1, x2, y2},
+			"0|0|0xf8f3e0,-10|2|0xf8f3e0,9|0|0xf4efdc,-7|-7|0x44332b,-10|11|0x44332b,-1|9|0x44332b,-1|5|0x44332b,9|10|0x44332b",
+			90, 0, 0, 0)
+		if x > -1 then return x, y, 1 else return x, y, 0 end
+	end
+	
+	sec_func[1] = function(x1, y1, x2, y2)
+		local x, y = findColor({x1, y1, x2, y2},
+			"0|0|0x44332b,-3|-6|0xf8f3e0,2|-6|0xf8f3e0,-8|7|0xf8f3e0,8|6|0xf8f3e0,-10|-5|0x44332b,10|0|0x44332b",
+			90, 0, 0, 0)
+		if x > -1 then return x, y, 2 else return x, y, 0 end
+	end
+	
+	sec_func[2] = function(x1, y1, x2, y2)
+		local x, y = findColor({x1, y1, x2, y2},
+			"0|0|0xf7f2df,-3|-7|0xf2eddb,3|-8|0xebe6d3,1|-4|0x281f15,-2|5|0x231910,7|0|0x44332b,-7|9|0xf8f3e0,8|8|0xf8f3e0",
+			90, 0, 0, 0)
+		if x > -1 then return x, y, 3 else return x, y, 0 end
+	end
+	
+	sec_func[3] = function(x1, y1, x2, y2)
+		local x, y = findColor({x1, y1, x2, y2},
+			"0|0|0x22180f,-8|-5|0xf8f3e0,9|-6|0xf8f3e0,7|6|0xf8f3e0,-7|6|0xf7f2df,-9|0|0xf8f3e0,9|0|0xf8f3e0",
+			90, 0, 0, 0)
+		if x > -1 then return x, y, 4 else return x, y, 0 end
+	end
+	
+	sec_func[4] = function(x1, y1, x2, y2)
+		local x, y = findColor({x1, y1, x2, y2},
+			"0|0|0xf8f3e0,0|4|0x22180f,-2|-7|0xf6f1de,5|-8|0xf8f2df,-7|9|0xf0ebd9,10|9|0xf8f3e0,11|0|0x44332b,-9|-5|0x44332b",
+			90, 0, 0, 0)
+		if x > -1 then return x, y, 5 else return x, y, 0 end
+	end
+	
+	sec_func[5] = function(x1, y1, x2, y2)
+		local x, y = findColor({x1, y1, x2, y2},
+			"0|0|0x3d2e26,-1|-5|0xf8f3e0,-2|-9|0xf6f1de,-9|-4|0xece7d5,8|-5|0xf7f2df,6|6|0xefead7,-1|8|0x44332b,-11|-11|0x44332b",
+			90, 0, 0, 0)
+		if x > -1 then return x, y, 6 else return x, y, 0 end
+	end
+	
+	sec_func[6] = function(x1, y1, x2, y2)
+		local x, y = findColor({x1, y1, x2, y2},
+			"0|0|0xf4efdc,0|-7|0xf6f1df,-8|2|0xf8f3e0,9|-2|0xf8f3e0,6|8|0xf6f0de,-8|10|0x44332b,-9|-9|0x44332b",
+			90, 0, 0, 0)
+		if x > -1 then return x, y, 7 else return x, y, 0 end
+	end
+	
+	sec_func[7] = function(x1, y1, x2, y2)
+		local x, y = findColor({x1, y1, x2, y2},
+			"0|0|0x43322a,-4|-2|0xe2dcca,-8|2|0xf5f0dd,3|-5|0xf7f2df,9|3|0xf8f3e0,4|-3|0xf8f3e0,7|1|0xf8f3e0,-10|-7|0x44332b",
+			90, 0, 0, 0)
+		if x > -1 then return x, y, 8 else return x, y, 0 end
+	end
+	
+	sec_func[8] = function(x1, y1, x2, y2)
+		local x, y = findColor({x1, y1, x2, y2},
+			"0|0|0x22180f,1|-9|0xf8f3e0,-5|-3|0xf8f3e0,6|-7|0xf6f1de,4|-2|0xefead7,3|7|0xf8f3e0,12|7|0xf8f3e0,9|0|0x44332b",
+			90, 0, 0, 0)
+		if x > -1 then return x, y, 9 else return x, y, 0 end
+	end
+	
+	sec_func[9] = function(x1, y1, x2, y2)
+		local x, y = findColor({x1, y1, x2, y2},
+			"0|0|0xf8f3e0,0|-7|0xf1ecd9,0|-4|0xeee9d6,-9|1|0xf3eedb,-1|9|0xf8f3e0,-10|-7|0x44332b,8|-8|0x44332b,8|10|0x44332b",
+			90, 0, 0, 0)
+		if x > -1 then return x, y, 10 else return x, y, 0 end
+	end
+	
+	function sec_recg(x1, y1, x2, y2)
+		local x, y, x_, y_, x__, y__, ret
+		local section = 0
+		local section_str = ""
+		
+		for i = 1, 10 do
+			x, y, ret = sec_func[i](x1, y1, x2, y2)
+			if ret > 0 then
+				section_str = section_str..ret
+				break
+			end
+		end
+		
+		if ret > 0 then
+			for i = 1, 10 do
+				x_, y_, ret = sec_func[i](x+10, y-10, x+30, y+10)
+				if ret > 0 then
+					if section_str == "10" then
+						section_str = "1"
+					end
+					section_str = section_str..ret
+					break
+				end
+			end
+		end
+		
+		if ret > 0 then
+			for i = 1, 10 do
+				x__, y__, ret = sec_func[i](x_+10, y_-10, x_+30, y_+10)
+				if ret > 0 then
+					section_str = string.sub(section_str, 1, 1)
+					section_str = section_str..ret
+					break
+				end
+			end
+		end
+		
+		-- Handle section 20 case
+		if section_str == "210" then
+			section_str = "20"
+		end
+		
+		if string.len(section_str) > 0 then
+			section = tonumber(section_str)
+		end
+		
+		return x, y, section
+	end
+	
+	local x, y, sec, ret, rd
+	
+	if section == -1 then
+		random_touch(0, 1025, 220, 20, 20)
+	elseif section == 0 then
+		random_touch(0, 1025, 530, 20, 20)
+	else
+		while (1) do
+			x, y, sec = sec_recg(990, 250, 1025, 350)
+			print(string.format("%d, %d sec - %d", x, y, sec))
+			if sec == 0 then
+				HUD_show_or_hide(HUD,hud_info,"识别错误并重调中, 持续报错请使用手动模式",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				rd = math.random(1, 2)
+				if rd % 2 == 0 then
+					random_move(0, 1025, 560, 1025, 210, 10, 30)
+				else
+					random_move(0, 1025, 210, 1025, 560, 10, 30)
+				end
+			else
+				if sec < section then
+					if section - sec == 1 then
+						random_touch(0, x+20, y+30+100, 20, 20)
+						break
+					elseif section - sec == 2 then
+						random_touch(0, x+20, y+30+200, 20, 20)
+						break
+					else
+						random_move(0, 1025, 560, 1025, 210, 10, 30)
+					end
+				elseif sec > section then
+					if sec - section == 1 then
+						random_touch(0, x+20, y+30-100, 20, 20)
+						break
+					else
+						random_move(0, 1025, 210, 1025, 560, 10, 30)
+					end
+				else
+					random_touch(0, x+20, y+30, 20, 20)
+					break
+				end
+			end
+			mSleep(500)
+		end
+	end
+	
+	mSleep(1000)
+	return RET_OK
+end
+
 function tansuo_mark(mark)
 	random_sleep(500)
 	local x, y
@@ -479,7 +650,7 @@ end
 function treasure_box()
 	local x, y = findColor({70, 150, 80, 550},
 		"0|0|0xbd4a1c,6|-1|0xd08635,2|-8|0x261917,17|-17|0xece0c7",
-95, 0, 0, 0)
+		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"发现宝箱",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		mSleep(1000)
@@ -585,7 +756,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				if x_ > -1 then
 					break
 				end
-				random_touch(0, 1024, 533, 30, 10)
+				section_select(section)
 				break
 			end
 			-- 自动狗粮
@@ -826,7 +997,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				if x_ > -1 then
 					break
 				end
-				random_touch(0, 1024, 533, 30, 10)
+				section_select(section)
 				break
 			end
 			-- 自动狗粮
@@ -1035,6 +1206,8 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 				if nor_attk == 1 then df_normal_attack(df_pos, "group") end
 				break
 			end
+			-- 接受邀请
+			x, y, auto_grouped = member_team_accept_invite(1) if (x > -1) then break end
 			-- 战斗胜利
 			x, y = fight_success("单人")
 			if (x > -1) then
@@ -1075,8 +1248,6 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt)
 				break
 			end
-			-- 接受邀请
-			x, y, auto_grouped = member_team_accept_invite(1) if (x > -1) then break end
 			-- 自动狗粮
 			if full_exp == "null" then
 				-- 战斗准备

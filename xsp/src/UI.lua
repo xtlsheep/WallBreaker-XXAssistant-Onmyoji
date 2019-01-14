@@ -841,7 +841,7 @@ end
 function tansuo_UI()
 	-- 探索章节
 	tansuo_ui = UI:new("tansuo.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-	UI:Label(tansuo_ui, "center", "0,0,0", 30, "探索章节[暂时仅支持账号解锁的最新章节]", "20,20,960,55")
+	UI:Label(tansuo_ui, "center", "0,0,0", 30, "探索章节", "20,20,960,55")
 	UI:ComboBox(tansuo_ui, "mode", "单人模式,组队 - 队长,组队 - 队员", "0", 30, "20,100,960,60")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗设置 - ", "20,180,300,60")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "加成识别 : ", "20,240,300,60")
@@ -853,7 +853,7 @@ function tansuo_UI()
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "场景移动 - ", "20,420,300,60")
 	UI:RadioGroup(tansuo_ui, "scene_move", "2 - 3次  ,3 - 4次  ,4 - 5次","2",30,"0,0,0","420,420,580,60")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "目标章节 - ", "20,480,500,60")
-	UI:ComboBox(tansuo_ui, "section", "结算的最新章节","0",23,"600,480,380,50")
+	UI:ComboBox(tansuo_ui, "section", "章节菜单第一栏[手动调整位置],章节菜单第四栏[手动调整位置],第一章,第二章,第三章,第四章,第五章,第六章,第七章,第八章,第九章,第十章,第十一章,第十二章,第十三章,第十四章,第十五章,第十六章,第十七章,第十八章,第十九章,第二十章,第二十一章,第二十二章,第二十三章,第二十四章,第二十五章,第二十六章,第二十七章,第二十八章","29",23,"600,480,380,50")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "限定方式 - ", "20,540,500,60")
 	UI:ComboBox(tansuo_ui, "count_mode", "战斗胜利次数,章节通关次数[强制Boss]","0",23,"600,540,380,50")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗胜利次数 - ", "20,600,500,60")
@@ -941,7 +941,7 @@ function tansuo_UI()
 		scene_move = "4-5"
 	end
 	
-	section = tonumber(res_tansuo.section) + 1
+	section = tonumber(res_tansuo.section) - 1
 	
 	if res_tansuo.count_mode == "0" then
 		count_mode = "战斗"
