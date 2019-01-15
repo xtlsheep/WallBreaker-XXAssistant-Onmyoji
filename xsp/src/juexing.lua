@@ -164,13 +164,13 @@ end
 function juexing_group_wild_member(element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
 	local time_cnt = 0
 	local wait_invite = 0
-	local auto_grouped = -1
+	local auto_grouped = 0
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
 	local quit_end = 0
 	local quit_con = 0
 	local quit_grp = 0
-	local ret = -1
+	local ret = 0
 	local x, y, x_, y_
 	
 	while (1) do
@@ -428,7 +428,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 end
 
 function juexing_group_fix_member(element, mark, level, round, member_auto_group, member_to_captain)
-	local auto_grouped = -1
+	local auto_grouped = 0
 	local quit_con = 0
 	local quit_grp = 0
 	local tingyuan_time_cnt = 0

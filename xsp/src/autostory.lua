@@ -89,8 +89,6 @@ function autostory()
 	while (1) do
 		while (1) do
 			mSleep(1000)
-			-- 跳过
-			x, y = bypass_click() if (x > -1) then time_cnt = 0 break end
 			-- 对话
 			x, y = diag_click() if (x > -1) then time_cnt = 0 break end
 			-- 新任务
@@ -103,6 +101,8 @@ function autostory()
 			x, y = fight_click() if (x > -1) then time_cnt = 0 break end
 			-- 眼睛
 			x, y = eye_click() if (x > -1) then time_cnt = 0 break end
+			-- 跳过
+			x, y = bypass_click() if (x > -1) then time_cnt = 0 break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then time_cnt = 0 break end
 			-- 战斗胜利
