@@ -323,23 +323,25 @@ function disable_skill_feature()
 end
 
 function stop_buff()
+	local buff_y = {146, 208, 270, 332, 394}
 	local x, y, x_, y_
-	x, y = findColor({816, 469, 818, 471},
-		"0|0|0x46533c,26|-8|0xac7b42,12|11|0xc1ab93,-19|12|0x2b3516",
+	x, y = findColor({302, 447, 304, 449},
+		"0|0|0x828270,532|3|0x6d725e,28|-333|0xd5c7bc,519|-25|0x858572,626|-411|0x9e8d72",
 		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"关闭buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		mSleep(1000)
 		for i = 1, 5 do
-			x_, y_ = findColor({794, 135, 796, 360},
-				"0|0|0x412e2b,5|-7|0xe4c197,-5|8|0xd8b389,0|-15|0x382826,-1|22|0xcbb59c",
+			x_, y_ = findColor({694, buff_y[i]-1, 696, buff_y[i]+1},
+				"0|0|0xe3952c,-5|-7|0xe18b2b,-5|7|0xe18a2b,63|-9|0xeeb92e,62|8|0xedb62f",
 				90, 0, 0, 0)
 			if x_ > -1 then
-				random_touch(0, x_, y_, 5, 5)
+				random_touch(0, x_+40, y_, 10, 5)
 				random_sleep(500)
 			end
-			random_sleep(250)
 		end
 	end
+	mSleep(1000)
 	right_lower_click()
 end
 
