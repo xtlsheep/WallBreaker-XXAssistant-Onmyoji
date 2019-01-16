@@ -40,11 +40,12 @@ function yuhun_mark(position)
 end
 
 function lct_petfind()
-	local x, y = findColor({829, 207, 831, 209}, -- 右边银色 发 宝
-		"0|0|0x7c7371,3|33|0xaea09b,-230|-55|0xf4e4b1,-370|-29|0xdbc788",
+	local x, y = findColor({832, 265, 834, 267},
+		"0|0|0xc0b2ae,21|-99|0x614023,-169|-135|0xfcedc0,-373|-136|0xfcedc0",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"御魂 - 发现宝藏",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		right_lower_click()
 	end
 	return x, y
 end
@@ -102,7 +103,7 @@ function yuhun_solo(mark, level, round, lock)
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("单人") 
+			x, y = fight_success("单人")
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
@@ -140,7 +141,7 @@ function yuhun_solo(mark, level, round, lock)
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) random_sleep(1000) break end -- 八岐大蛇
 			-- 战斗失败
-			x, y = fight_failed("单人") 
+			x, y = fight_failed("单人")
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
@@ -221,7 +222,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("组队") 
+			x, y = fight_success("组队")
 			if (x > -1) then
 				wait_invite = 1
 				tansuo_time_cnt = 0
@@ -258,7 +259,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) random_sleep(1000) break end -- 八岐大蛇
 			-- 战斗失败
-			x, y = fight_failed("组队") 
+			x, y = fight_failed("组队")
 			if (x > -1) then
 				if (fail_and_group == 1) then
 					wait_invite = 0
@@ -327,7 +328,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("组队") 
+			x, y = fight_success("组队")
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
@@ -401,7 +402,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			-- 八岐大蛇
 			x, y = lct_8dashe() if (x > -1) then level_select(level, pre_init.yuhun, lock, "御魂") pre_init.yuhun = 0 group_start() break end -- 组队开始
 			-- 战斗失败
-			x, y = fight_failed("组队") 
+			x, y = fight_failed("组队")
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
@@ -464,7 +465,7 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("组队") 
+			x, y = fight_success("组队")
 			if (x > -1) then
 				wait_invite = 1
 				tansuo_time_cnt = 0
@@ -491,7 +492,7 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			-- 离开确认
 			x, y = member_room_quit() if (x > -1) then break end
 			-- 战斗失败
-			x, y = fight_failed("组队") 
+			x, y = fight_failed("组队")
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
@@ -580,7 +581,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("组队") 
+			x, y = fight_success("组队")
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
@@ -664,7 +665,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			-- 八岐大蛇
 			x, y = lct_8dashe() if (x > -1) then level_select(level, pre_init.yuhun, lock, "御魂") pre_init.yuhun = 0 group_start() break end -- 组队开始
 			-- 战斗失败
-			x, y = fight_failed("组队") 
+			x, y = fight_failed("组队")
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
