@@ -4,7 +4,7 @@ require "func"
 -- Util func
 function lct_tansuo_scene()
 	local x, y = findColor({770, 5, 790, 15},
-		"0|0|0xe97b2b,-746|49|0xf0f5fb,-729|48|0x313583,305|26|0xa29c7b,305|19|0xdfc7a1",
+		"0|0|0xe97b2b,305|26|0xa29c7b,-745|48|0xf0f5fb,-750|496|0x943256",
 		95, 0, 0, 0)
 	return x, y
 end
