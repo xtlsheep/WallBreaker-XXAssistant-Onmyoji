@@ -77,7 +77,7 @@ function juexing(mode, role, group, element, mark, level, round, lock, member_au
 	elseif (mode == "组队" and role == "队长" and (group == "野队2人" or group == "野队3人")) then
 		ret = juexing_group_wild_captain(element, mark, level, round, lock, captain_auto_group, fail_and_recreate, group)
 	elseif (mode == "组队" and role == "队员" and group == "固定队") then
-		ret = juexing_group_fix_member(element, mark, level, round, lock, member_auto_group, member_to_captain)
+		ret = juexing_group_fix_member(element, mark, level, round, member_auto_group, member_to_captain)
 	elseif (mode == "组队" and role == "队长" and (group == "固定队2人" or group == "固定队3人")) then
 		ret = juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
 	end
@@ -194,7 +194,6 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 					return RET_VALID
 				end
 				if wait_invite == 0 then
-					HUD_show_or_hide(HUD,hud_info,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_touch(0, 90, 590, 20, 20) -- 觉醒
 					mSleep(1000)
 				else

@@ -70,7 +70,7 @@ function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, f
 	elseif (mode == "组队" and role == "队员" and group == "野队") then
 		ret = yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
 	elseif (mode == "组队" and role == "队长" and (group == "野队2人" or group == "野队3人")) then
-		ret = yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, fail_and_recreate, group)
+		ret = yuhun_group_wild_captain(mark, level, round, captain_auto_group, fail_and_recreate, group)
 	elseif (mode == "组队" and role == "队员" and group == "固定队") then
 		ret = yuhun_group_fix_member(mark, level, round, lock, member_auto_group, member_to_captain)
 	elseif (mode == "组队" and role == "队长" and (group == "固定队2人" or group == "固定队3人")) then
@@ -200,7 +200,6 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 					return RET_VALID
 				end
 				if wait_invite == 0 then
-					HUD_show_or_hide(HUD,hud_info,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_touch(0, 180, 590, 20, 20) -- 御魂
 				else
 					HUD_show_or_hide(HUD,hud_info,"探索 - 等待组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)

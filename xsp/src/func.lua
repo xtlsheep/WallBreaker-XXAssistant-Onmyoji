@@ -1024,6 +1024,7 @@ function captain_room_create_init()
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"创建队伍",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		random_touch(0, x, y, 20, 10)
+		mSleep(1000)
 	end
 	return x, y
 end
