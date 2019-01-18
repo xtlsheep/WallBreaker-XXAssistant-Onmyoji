@@ -451,7 +451,6 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			-- 战斗胜利
 			x, y = fight_success("组队") 
 			if (x > -1) then
-				wait_invite = 1
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1

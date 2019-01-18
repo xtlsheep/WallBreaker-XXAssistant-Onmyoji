@@ -32,7 +32,7 @@ function yuhun_mark(position)
 		if (position == "左") then
 			random_touch(0, 290, 155, 10, 10)
 		elseif (position == "中") then
-			random_touch(0, 520, 155, 10, 10)
+			random_touch(0, 530, 155, 10, 10)
 		elseif (position == "右") then
 			random_touch(0, 830, 155, 10, 10)
 		end
@@ -466,7 +466,6 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			-- 战斗胜利
 			x, y = fight_success("组队")
 			if (x > -1) then
-				wait_invite = 1
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1

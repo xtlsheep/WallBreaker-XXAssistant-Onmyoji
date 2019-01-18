@@ -531,36 +531,36 @@ function skkm_change_switch(top_left, top_mid, top_right, bot_left, bot_right)
 	if top_right == 1 then
 		cnt = math.random(2, 3)
 		for i = 1, cnt do
-			random_move(0, 200, 500, 200, 250, 10, 10)
+			random_move(0, 200, 500, 200, 250, 5, 10)
 			random_sleep(500)
 		end
 	end
 	if top_mid == 1 then
 		cnt = math.random(2, 3)
 		for i = 1, cnt do
-			random_move(0, 800, 500, 580, 250, 10, 10)
+			random_move(0, 800, 500, 580, 250, 5, 10)
 			random_sleep(500)
 		end
 	end
 	if top_left == 1 then
 		cnt = math.random(2, 3)
 		for i = 1, cnt do
-			random_move(0, 600, 500, 960, 250, 10, 10)
+			random_move(0, 600, 500, 960, 250, 5, 10)
 			random_sleep(500)
 		end
 	end
 	if bot_right == 1 then
 		cnt = math.random(2, 3)
 		for i = 1, cnt do
-			random_move(0, 200, 500, 300, 250, 10, 30)
-			random_sleep(500)
+			random_move(0, 200, 500, 320, 300, 5, 10)
+			random_sleep(1000)
 		end
 	end
 	if bot_left == 1 then
 		cnt = math.random(2, 3)
 		for i = 1, cnt do
-			random_move(0, 800, 500, 830, 250, 10, 30)
-			random_sleep(500)
+			random_move(0, 800, 500, 850, 300, 5, 10)
+			random_sleep(1000)
 		end
 	end
 end
@@ -764,47 +764,49 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				-- 战斗准备
 				x, y = fight_ready() if (x > -1) then break end
 			else
-				-- 更换式神
-				x, y = skkm_change_all()
-				if x > -1 then
-					random_touch(0, 65, 585, 10, 10) -- 全部
-					break
-				end
-				x, y = skkm_change_sel()
-				if x > -1 then
-					if df_type == "N" then
-						random_touch(0, 155, 300, 5, 5) -- N
-					elseif df_type == "Egg" then
-						random_touch(0, 60, 285, 5, 5) -- 素材
+				if full_exp == "change" then
+					-- 更换式神
+					x, y = skkm_change_all()
+					if x > -1 then
+						random_touch(0, 65, 585, 10, 10) -- 全部
+						break
 					end
-					random_sleep(750)
-					break
-				end
-				-- N卡
-				x, y = skkm_change_N()
-				if x > -1 then
-					if top_left == 1 or top_right == 1 or top_mid == 1 then
-						skkm_change_scroll(page_jump)
+					x, y = skkm_change_sel()
+					if x > -1 then
+						if df_type == "N" then
+							random_touch(0, 155, 300, 5, 5) -- N
+						elseif df_type == "Egg" then
+							random_touch(0, 60, 285, 5, 5) -- 素材
+						end
+						random_sleep(750)
+						break
 					end
-					skkm_change_switch(top_left, top_mid, top_right, 0, 0)
-					fight_ready()
-					top_left = 0
-					top_mid = 0
-					top_right = 0
-					break
-				end
-				-- 素材
-				x, y = skkm_change_egg()
-				if x > -1 then
-					if top_left == 1 or top_right == 1 or top_mid == 1 then
-						skkm_change_scroll(page_jump)
+					-- N卡
+					x, y = skkm_change_N()
+					if x > -1 then
+						if top_left == 1 or top_right == 1 or top_mid == 1 then
+							skkm_change_scroll(page_jump)
+						end
+						skkm_change_switch(top_left, top_mid, top_right, 0, 0)
+						fight_ready()
+						top_left = 0
+						top_mid = 0
+						top_right = 0
+						break
 					end
-					skkm_change_switch(top_left, top_mid, top_right, 0, 0)
-					fight_ready()
-					top_left = 0
-					top_mid = 0
-					top_right = 0
-					break
+					-- 素材
+					x, y = skkm_change_egg()
+					if x > -1 then
+						if top_left == 1 or top_right == 1 or top_mid == 1 then
+							skkm_change_scroll(page_jump)
+						end
+						skkm_change_switch(top_left, top_mid, top_right, 0, 0)
+						fight_ready()
+						top_left = 0
+						top_mid = 0
+						top_right = 0
+						break
+					end
 				end
 				-- 探索预备
 				x, y = lct_tansuo_prepare()
@@ -960,7 +962,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			x, y = fight_ongoing()
 			if (x > -1) then
 				-- 狗粮普攻
-				if nor_attk == 1 then df_normal_attack(df_pos, "group") end
+				if nor_attk == 1 then df_normal_attack({df_pos[1], df_pos[3], df_pos[2]}, "group") end
 				break
 			end
 			-- 战斗胜利
@@ -1005,45 +1007,47 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				-- 战斗准备
 				x, y = fight_ready() if (x > -1) then break end
 			else
-				-- 更换式神
-				x, y = skkm_change_all()
-				if x > -1 then
-					random_touch(0, 65, 585, 10, 10) -- 全部
-					break
-				end
-				x, y = skkm_change_sel()
-				if x > -1 then
-					if df_type == "N" then
-						random_touch(0, 155, 300, 5, 5) -- N
-					elseif df_type == "Egg" then
-						random_touch(0, 60, 285, 5, 5) -- 素材
+				if full_exp == "change" then
+					-- 更换式神
+					x, y = skkm_change_all()
+					if x > -1 then
+						random_touch(0, 65, 585, 10, 10) -- 全部
+						break
 					end
-					random_sleep(750)
-					break
-				end
-				-- N卡
-				x, y = skkm_change_N()
-				if x > -1 then
-					if bot_left == 1 or bot_right == 1 then
-						skkm_change_scroll(page_jump)
+					x, y = skkm_change_sel()
+					if x > -1 then
+						if df_type == "N" then
+							random_touch(0, 155, 300, 5, 5) -- N
+						elseif df_type == "Egg" then
+							random_touch(0, 60, 285, 5, 5) -- 素材
+						end
+						random_sleep(750)
+						break
 					end
-					skkm_change_switch(0, 0, 0, bot_left, bot_right)
-					fight_ready()
-					bot_right = 0
-					bot_left = 0
-					break
-				end
-				-- 素材
-				x, y = skkm_change_egg()
-				if x > -1 then
-					if bot_left == 1 or bot_right == 1 then
-						skkm_change_scroll(page_jump)
+					-- N卡
+					x, y = skkm_change_N()
+					if x > -1 then
+						if bot_left == 1 or bot_right == 1 then
+							skkm_change_scroll(page_jump)
+						end
+						skkm_change_switch(0, 0, 0, bot_left, bot_right)
+						fight_ready()
+						bot_right = 0
+						bot_left = 0
+						break
 					end
-					skkm_change_switch(0, 0, 0, bot_left, bot_right)
-					fight_ready()
-					bot_right = 0
-					bot_left = 0
-					break
+					-- 素材
+					x, y = skkm_change_egg()
+					if x > -1 then
+						if bot_left == 1 or bot_right == 1 then
+							skkm_change_scroll(page_jump)
+						end
+						skkm_change_switch(0, 0, 0, bot_left, bot_right)
+						fight_ready()
+						bot_right = 0
+						bot_left = 0
+						break
+					end
 				end
 				-- 探索预备
 				x, y = lct_tansuo_prepare()

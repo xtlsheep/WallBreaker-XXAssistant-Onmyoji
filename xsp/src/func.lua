@@ -471,9 +471,18 @@ function alarm(op)
 		mSleep(500)
 	end
 	if op == "pause" then
-		HUD_show_or_hide(HUD,hud_info,"暂停ing, 双击屏幕任意位置继续",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		results = catchTouchPoint(touchCount)
-		return
+		while (1) do
+			HUD_show_or_hide(HUD,hud_info,"暂停ing, 请双击屏幕右上角继续",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			results = catchTouchPoint(touchCount)
+			for i = 1, #results do
+				sysLog("第"..i.."个坐标为:"..i..",x="..results[i].x..",y="..results[i].y);
+			end
+			if results[1].x > 450 and results[2].x > 450 and results[1].y > 800 and results[2].y > 800 then
+				HUD_show_or_hide(HUD,hud_info,"继续运行",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				mSleep(1000)
+				return
+			end
+		end
 	elseif op == "exit" then
 		lua_exit()
 	end
@@ -861,13 +870,14 @@ function fight_success(mode)
 		if (x > -1) then
 			HUD_show_or_hide(HUD,hud_info,"退出战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			while (1) do
+				loop_generic()
 				x_, y_ = half_harma()
 				if x_ > -1 then
 					right_lower_click()
 				elseif x_ == -1 then
 					return RET_OK
 				end
-				random_sleep(100)
+				random_sleep(50)
 			end
 		end
 		return RET_ERR
@@ -880,13 +890,14 @@ function fight_success(mode)
 	if (x_s > -1 or x_h > -1) then
 		HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		while (1) do
+			loop_generic()
 			ret = half_harma_loop()
 			if ret == RET_OK then
 				return RET_OK, RET_OK
 			end
 			yuhun_overflow()
 			right_lower_click()
-			random_sleep(100)
+			random_sleep(50)
 		end
 	end
 	
@@ -921,7 +932,7 @@ function fight_failed(mode)
 			elseif x == -1 then
 				return RET_OK, RET_OK
 			end
-			random_sleep(100)
+			random_sleep(50)
 		end
 	end
 	

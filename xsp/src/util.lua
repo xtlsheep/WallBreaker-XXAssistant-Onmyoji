@@ -143,7 +143,7 @@ function random_move(id, start_point_X, start_point_Y, end_point_X, end_point_Y,
 	touchDown(id, curve_X[1], curve_Y[1])
 	show_point(curve_X[1], curve_Y[1], 200)
 	for i = 2, curve_points - 1 do
-		show_point(curve_X[i], curve_Y[i], 5)
+		show_point(curve_X[i], curve_Y[i], 10)
 		touchMove(id, curve_X[i], curve_Y[i])
 	end
 	show_point(curve_X[curve_points], curve_Y[curve_points], 200)
