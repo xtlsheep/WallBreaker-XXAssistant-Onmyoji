@@ -81,8 +81,8 @@ function find_whr(pos, whr, role)
 		end
 		-- 彼岸花秘闻皮
 		x, y = findColor({x1, y1, x2, y2},
-			"0|0|0xfafaee,-10|-5|0x2c2733,-16|-2|0xa88050,-1|-8|0xf7f6e9,0|-15|0x776c73",
-			90, 0, 0, 0)
+			"0|0|0xf9f7f5,5|2|0xf7f1f0,10|-1|0xa79fa2,13|-15|0xceae4e,-2|-11|0xdbced1",
+			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"彼岸花秘闻皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			return RET_OK
@@ -117,7 +117,7 @@ function find_whr(pos, whr, role)
 	if (whr[4] == 1) then
 		-- 御馔津原皮
 		x, y = findColor({x1, y1, x2, y2},
-			"0|0|0xfff8ef,13|-15|0x323440,18|-7|0xa07448,-4|15|0xfcfcf9,-19|-3|0xa78050,-17|9|0xe6b96a",
+			"0|0|0xfffcf2,-3|7|0xfffcf2,5|5|0xfff7ee,10|-14|0x323440,-15|5|0xc19952",
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"御馔津原Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -294,6 +294,7 @@ function solo_find_next_target(map, solo_sel)
 		for j = 1, 9 do
 			if map[ran_arr[j]] ~= -1 then
 				pos = ran_arr[j]
+				ret = RET_OK
 				break
 			end
 		end
@@ -460,7 +461,7 @@ function pub_cnt_metal(x1, y1, x2, y2)
 		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
 			x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
 		if x_f > -1 then
-			return x, y, -5
+			return x, y, -1
 		end
 		return x, y, 5
 	end
@@ -469,7 +470,7 @@ function pub_cnt_metal(x1, y1, x2, y2)
 		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
 			x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
 		if x_f > -1 then
-			return x, y, -5
+			return x, y, -1
 		end
 		return x, y, 4
 	end
@@ -478,7 +479,7 @@ function pub_cnt_metal(x1, y1, x2, y2)
 		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
 			x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
 		if x_f > -1 then
-			return x, y, -5
+			return x, y, -1
 		end
 		return x, y, 3
 	end
@@ -487,7 +488,7 @@ function pub_cnt_metal(x1, y1, x2, y2)
 		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
 			x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
 		if x_f > -1 then
-			return x, y, -5
+			return x, y, -1
 		end
 		return x, y, 2
 	end
@@ -496,7 +497,7 @@ function pub_cnt_metal(x1, y1, x2, y2)
 		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
 			x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
 		if x_f > -1 then
-			return x, y, -5
+			return x, y, -1
 		end
 		return x, y, 1
 	end
@@ -505,11 +506,11 @@ function pub_cnt_metal(x1, y1, x2, y2)
 		x_f, y_f = pub_ff(x+pub_mid_metal_ff_x_diff, y+pub_mid_metal_ff_y_diff,
 			x+pub_mid_metal_ff_x_diff+20, y+pub_mid_metal_ff_y_diff+20)
 		if x_f > -1 then
-			return x, y, -5
+			return x, y, -1
 		end
 		return x, y, 0
 	end
-	return x, y, -1
+	return x, y, -5
 end
 
 function pub_ff_open()
@@ -604,21 +605,21 @@ function pub_find_ivld_button()
 end
 
 function pub_map_finished(map)
-	for i = 1, 8, 1 do
+	local valid = 1
+	for i = 1, 8 do
 		if map[i] ~= -1 and map[i] ~= -5 then
 			return RET_ERR
 		end
-	end
-	return RET_OK
-end
-
-function pub_map_ivld(map)
-	for i = 1, 8, 1 do
-		if map[i] ~= -1 then
-			return RET_ERR
+		if map[i] == -5 then
+			valid = 0
 		end
 	end
-	return RET_OK
+	
+	if valid == 1 then
+		return RET_VALID
+	else
+		return RET_OK
+	end
 end
 
 function pub_to_solo()
@@ -727,6 +728,31 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			loop_generic()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
+			-- 战斗进行
+			x, y = fight_ongoing()
+			if (x > -1) then
+				time_cnt = time_cnt + 1
+				if (time_cnt > round_time*60*2) then
+					random_touch(0, 35, 30, 5, 5) -- 左上退出
+					random_sleep(1000)
+					random_touch(0, 660, 378, 20, 10) -- 确定
+				end
+				break
+			end
+			-- 获取奖励
+			x, y = solo_get_bonus() if (x > -1) then break end
+			-- 战斗胜利
+			x, y = fight_success("单人")
+			if (x > -1) then
+				map[pos] = -1
+				pos = -1
+				found_target = -1
+				win_cnt.global = win_cnt.global + 1
+				time_cnt = 0
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.jjtp = win_cnt.jjtp + 1
+				break
+			end
 			-- 个人突破
 			x, y = solo_lct_jjtp()
 			if (x > -1) then
@@ -811,31 +837,6 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 					break
 				end
 			end
-			-- 战斗进行
-			x, y = fight_ongoing()
-			if (x > -1) then
-				time_cnt = time_cnt + 1
-				if (time_cnt > round_time*60*2) then
-					random_touch(0, 35, 30, 5, 5) -- 左上退出
-					random_sleep(1000)
-					random_touch(0, 660, 378, 20, 10) -- 确定
-				end
-				break
-			end
-			-- 获取奖励
-			x, y = solo_get_bonus() if (x > -1) then break end
-			-- 战斗胜利
-			x, y = fight_success("单人")
-			if (x > -1) then
-				map[pos] = -1
-				pos = -1
-				found_target = -1
-				win_cnt.global = win_cnt.global + 1
-				time_cnt = 0
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				win_cnt.jjtp = win_cnt.jjtp + 1
-				break
-			end
 			-- 战斗失败
 			x, y = fight_failed("单人")
 			if (x > -1) then
@@ -883,26 +884,35 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				print(string.format("	 %d - %d", map[3], map[4]))
 				print(string.format("	 %d - %d", map[5], map[6]))
 				print(string.format("	 %d - %d", map[7], map[8]))
-				print(string.format("    wait = %d, finish = %d", wait, finish))
+				print(string.format("    pos = %d, wait = %d, finish = %d", pos, wait, finish))
 			else
 				print("Map is not created")
 			end
-			print(string.format("pos = %d", pos))
 			
 			mSleep(500)
 			-- 循环通用
 			loop_generic()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
-			-- 未开寮突
-			x, y = pub_unstart()
-			if x > -1 then
-				if action_pub == "Wait" then
-					quit_jjtp()
-				else
-					pub_to_solo()
+			-- 战斗进行
+			x, y = fight_ongoing()
+			if (x > -1) then
+				time_cnt = time_cnt + 1
+				if (time_cnt > round_time*60*2) then
+					random_touch(0, 35, 30, 5, 5) -- 左上退出
+					random_sleep(1000)
+					random_touch(0, 660, 378, 20, 10) -- 确定
 				end
-				return "Finish"
+				break
+			end
+			-- 战斗胜利
+			x, y = fight_success("单人")
+			if (x > -1) then
+				win_cnt.global = win_cnt.global + 1
+				time_cnt = 0
+				click_cnt = 0
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.jjtp = win_cnt.jjtp + 1
 			end
 			-- 个人突破
 			x, y = solo_lct_jjtp() if x > -1 then quit_jjtp() break end
@@ -945,14 +955,6 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				end
 				-- 锁定出战
 				lock_or_unlock(lock, "Pub结界突破")
-				-- 翻页
-				ret = pub_map_finished(map)
-				if ret == RET_OK then
-					pub_refresh()
-					map = {}
-					pos = -1
-					break
-				end
 				-- 点击目标
 				if pos ~= -1 then
 					random_touch(0, coor_map_x[pos], coor_map_y[pos], 50, 10)
@@ -966,12 +968,16 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				-- 分析地图
 				if (table.getn(map) == 0) then
 					coor_map_x, coor_map_y, map = pub_analyse_map(pub_sel)
-					ret = pub_map_ivld(map)
+					ret = pub_map_finished(map)
 					if ret == RET_OK then
+						-- 退出
 						finish = 1
-						break
+					elseif ret == RET_VALID then
+						-- 翻页
+						pub_refresh()
+						map = {}
+						pos = -1
 					end
-					break
 				end
 			end
 			-- 进攻button检测
@@ -1029,30 +1035,11 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 					end
 				end
 			end
-			-- 战斗进行
-			x, y = fight_ongoing()
-			if (x > -1) then
-				click_cnt = 0
-				time_cnt = time_cnt + 1
-				if (time_cnt > round_time*60*2) then
-					random_touch(0, 35, 30, 5, 5) -- 左上退出
-					random_sleep(1000)
-					random_touch(0, 660, 378, 20, 10) -- 确定
-				end
-				break
-			end
-			-- 战斗胜利
-			x, y = fight_success("单人")
-			if (x > -1) then
-				win_cnt.global = win_cnt.global + 1
-				time_cnt = 0
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				win_cnt.jjtp = win_cnt.jjtp + 1
-			end
 			-- 战斗失败
 			x, y = fight_failed("单人")
 			if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
+				click_cnt = 0
 				time_cnt = 0
 				map[pos] = -1
 				pos = -1
@@ -1061,6 +1048,16 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
+			-- 未开寮突
+			x, y = pub_unstart()
+			if x > -1 then
+				if action_pub == "Wait" then
+					quit_jjtp()
+				else
+					pub_to_solo()
+				end
+				return "Finish"
+			end
 			break
 		end
 	end
