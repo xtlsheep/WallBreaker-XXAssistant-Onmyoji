@@ -4,21 +4,11 @@ require "func"
 -- Util func
 function lct_hg()
 	local x, y
-	-- 普通场景
-	x, y = findColor({33, 51, 35, 53},
-		"0|0|0xf0f5fb,36|487|0xece2ce,16|498|0x000000,171|542|0xf2cb49,132|538|0x271818",
-		95, 0, 0, 0)
-	if x > -1 then
-		return x, y
-	end
 	
-	-- 冰冻场景
 	x, y = findColor({33, 51, 35, 53},
-		"0|0|0xf0f5fb,-20|-36|0xe5f1f6,35|486|0xe7f3f5,169|541|0xf2cb4a,134|539|0x271818",
+		"0|0|0xf0f5fb,59|536|0xefe9be,61|546|0xb1701d,70|542|0x271818,165|542|0xf2cd4a",
 		95, 0, 0, 0)
-	if x > -1 then
-		return x, y
-	end
+	
 	return x, y
 end
 
@@ -51,7 +41,7 @@ function hg_portal_invited(invite_cnt)
 	return invite_cnt
 end
 
-function hg_invite()
+function hg_invite(invite)
 	local x_ = {450, 700}
 	local y_ = {230, 305, 380, 455}
 	local pos = math.random(1, 8)
@@ -60,7 +50,7 @@ function hg_invite()
 	x, y = findColor({888, 144, 890, 146},
 		"0|0|0xb2a29e,-686|207|0xb7b7b2,-622|-22|0xe3758c,-42|-48|0xf5e0da",
 		95, 0, 0, 0)
-	if x > -1 then
+	if x > -1 and invite == 1 then
 		HUD_show_or_hide(HUD,hud_info,string.format("邀请第%d位好友", pos),20,"0xff000000","0xffffffff",0,100,0,300,32)
 		random_touch(0, x_[2 - pos%2], y_[math.floor((pos - 1)/2) + 1], 30, 10) -- 随机选择1-8
 		random_sleep(1000)
@@ -135,11 +125,8 @@ function hg_fight()
 	local x, y
 	
 	for i = 1, cnt + 1 do
-		x, y = lct_hg()
-		if x > -1 then
-			random_sleep(400)
-			random_touch(0, 950 - x_interv*(i - 1), 400, 30, 30)
-		end
+		random_sleep(500)
+		random_touch(0, 1000 - x_interv*(i - 1), 400, 30, 30)
 	end
 end
 
@@ -195,11 +182,11 @@ function hundredghost(round, num, invite)
 				break
 			end
 			-- 邀请好友
-			x, y = hg_invite() if x > -1 then break end
+			x, y = hg_invite(invite) if x > -1 then break end
 			-- 百鬼Portal-已邀请
 			invite_cnt = hg_portal_invited(invite_cnt)
 			-- 鬼王选择
-			x, y = hg_master_sel() if x > -1 then break end
+			x, y = hg_master_sel() if x > -1 then hg_cnt = hg_cnt + 1 break end
 			-- 领取奖励
 			x, y = hg_get_frag() if x > -1 then break end
 			-- 町中

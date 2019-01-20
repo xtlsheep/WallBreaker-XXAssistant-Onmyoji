@@ -70,9 +70,9 @@ function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, f
 	elseif (mode == "组队" and role == "队员" and group == "野队") then
 		ret = yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
 	elseif (mode == "组队" and role == "队长" and (group == "野队2人" or group == "野队3人")) then
-		ret = yuhun_group_wild_captain(mark, level, round, captain_auto_group, fail_and_recreate, group)
+		ret = yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, fail_and_recreate, group)
 	elseif (mode == "组队" and role == "队员" and group == "固定队") then
-		ret = yuhun_group_fix_member(mark, level, round, lock, member_auto_group, member_to_captain)
+		ret = yuhun_group_fix_member(mark, level, round, member_auto_group, member_to_captain)
 	elseif (mode == "组队" and role == "队长" and (group == "固定队2人" or group == "固定队3人")) then
 		ret = yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
 	end

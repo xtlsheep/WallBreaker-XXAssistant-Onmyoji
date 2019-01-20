@@ -178,8 +178,8 @@ function jjtp_touch_blank()
 end
 
 function solo_lct_jjtp()
-	local x, y = findColor({140, 547, 142, 549},
-		"0|0|0xf3b25e,4|-66|0xa6521e,139|-70|0x752907,589|-11|0xde3945",
+	local x, y = findColor({1050, 59, 1052, 61},
+		"0|0|0xe8d4cf,-772|420|0x762906,-905|422|0xa6521e,-298|490|0xdc2f3c",
 		95, 0, 0, 0)
 	return x, y
 end

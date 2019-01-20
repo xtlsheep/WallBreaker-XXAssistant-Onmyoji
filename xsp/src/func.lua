@@ -151,8 +151,8 @@ function game_disconn_reconn()
 	end
 	
 	function game_notice()
-		local x, y = findColor({1018, 69, 1020, 72},
-			"0|0|0xe8d4cf,-424|-11|0xf7e9c3,-352|4|0x655447,-11|-41|0x7e6874",
+		local x, y = findColor({1018, 69, 1020, 70},
+			"0|0|0xe8d4cf,53|-52|0x554949,63|-41|0x161215,50|-21|0x584544,60|-1|0x3d1019",
 			90, 0, 0, 0)
 		if x > -1 then
 			random_touch(0, x, y, 20, 10) -- 关闭
@@ -490,11 +490,20 @@ end
 
 -- Locate & Enter func
 function lct_tingyuan()
-	local x, y = findColor({1093, 35, 1095, 37},  -- 频道 邮件 加成
+	local x, y, x_, y_
+	x, y = findColor({1093, 35, 1095, 37},  -- 频道 邮件 加成
 		"0|0|0xa29c7b,-77|-4|0xdfc7a1,-703|10|0xfddc8a,-710|35|0xf37f5b",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"庭院",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		-- 缩起的卷轴
+		x_, y_ = findColor({1083, 545, 1085, 547},
+			"0|0|0xe0d0cb,12|-15|0xecc891,-3|28|0x7e2513,-31|57|0xd4b17f",
+			95, 0, 0, 0)
+		if x_ > -1 then
+			random_touch(0, x_, y_, 10, 10)
+			mSleep(1000)
+		end
 	end
 	return x, y
 end
@@ -511,7 +520,7 @@ end
 
 function lct_dingzhong()
 	local x, y = findColor({770, 160, 820, 180}, -- 百鬼灯笼 庭院石碑 勾玉 勾玉加号
-		"0|0|0xfffff2,-199|-142|0xe9371f,122|45|0xb5afb9,80|-143|0xd6c4a1",
+		"0|0|0xffffef,-49|-158|0xe87b2a,80|-144|0xd6c4a1,-84|-143|0xd6c4a1",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"町中",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -546,13 +555,6 @@ end
 
 function tingyuan_enter_zudui()
 	local x, y
-	-- 缩起的卷轴
-	x, y = findColor({1083, 545, 1085, 547},
-		"0|0|0xe0d0cb,12|-15|0xecc891,-3|28|0x7e2513,-31|57|0xd4b17f",
-		95, 0, 0, 0)
-	if x > -1 then
-		random_touch(0, x, y, 10, 10)
-	end
 	-- 打开的卷轴
 	local x, y = findColor({1093, 35, 1095, 37},
 		"0|0|0xa29c7b,-77|-4|0xdfc7a1,-703|10|0xfddc8a,-710|35|0xf37f5b",

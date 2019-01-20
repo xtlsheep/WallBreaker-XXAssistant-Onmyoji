@@ -78,7 +78,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 					random_touch(0, 930, 110, 5, 5) -- 退出业原火
 					return RET_VALID
 				end
-				ran_wait = math.random(1000, 2000)
+				ran_wait = math.random(500, 1000)
 				HUD_show_or_hide(HUD,hud_info,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
 				mSleep(ran_wait)
 				HUD_show_or_hide(HUD,hud_info,string.format("业原火", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32) 

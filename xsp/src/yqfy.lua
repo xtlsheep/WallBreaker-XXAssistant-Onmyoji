@@ -21,13 +21,15 @@ end
 
 function yqfy_mark(mark)
 	random_sleep(500)
-	local pos = math.random(1, 3)
-	local cnt = math.random(2, 3)
+	local pos
+	local cnt
 	local pos_x = {350, 550, 750}
 	local pos_y = {200, 200, 200}
 	
+	cnt = math.random(2, 3)
 	for i = 1, cnt do
 		random_sleep(150)
+		pos = math.random(1, 3)
 		if mark == "大怪" then
 			random_touch(0, 555, 75, 10, 30)
 		elseif (mark == "小怪") then
@@ -75,7 +77,7 @@ function yqfy(round, sel, mark)
 				if quit == 1 then
 					return RET_OK
 				end
-				ran_wait = math.random(1000, 3000)
+				ran_wait = math.random(500, 1000)
 				HUD_show_or_hide(HUD,hud_info,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
 				mSleep(ran_wait)
 				tingyuan_enter_zudui()
