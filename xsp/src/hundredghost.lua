@@ -26,9 +26,18 @@ function hg_portal_uninvited(invite)
 end
 
 function hg_portal_invited(invite_cnt)
-	local x, y = findColor({823, 468, 825, 470},
-		"0|0|0xf3b25e,-517|-33|0xe8d4cf,-503|-31|0x952f7c,-449|8|0xd3ab83,65|-325|0xe8d4cf",
-		95, 0, 0, 0)
+	local x, y
+	
+	if ver == "iOS" then
+		x, y = findColor({823, 468, 825, 470},
+			"0|0|0xf3b25e,-517|-33|0xe8d4cf,-503|-31|0x952f7c,-449|8|0xd3ab83,65|-325|0xe8d4cf",
+			95, 0, 0, 0)
+	elseif ver == "android" then
+		x, y = findColor({823, 468, 825, 470},
+			"0|0|0xf4b25f,64|-322|0xf3d2d2,-518|-31|0xe5d4cf,-622|-112|0xefefe7,-599|-121|0x621329",
+			95, 0, 0, 0)
+	end
+	
 	if x > -1 then
 		if invite_cnt < 3 then
 			random_touch(0, x, y, 20, 10) -- 进入
@@ -131,9 +140,18 @@ function hg_fight()
 end
 
 function hg_get_frag()
-	local x, y = findColor({86, 126, 88, 128},
-		"0|0|0xc6a3d8,-6|-8|0xae6cc9,46|31|0xf0eae1,-13|360|0x8b55a6,11|350|0x60648e",
-		95, 0, 0, 0)
+	local x, y
+	
+	if ver == "iOS" then
+		x, y = findColor({86, 126, 88, 128},
+			"0|0|0xc6a3d8,-6|-8|0xae6cc9,46|31|0xf0eae1,-13|360|0x8b55a6,11|350|0x60648e",
+			95, 0, 0, 0)
+	elseif ver == "android" then
+		x, y = findColor({84, 115, 86, 117},
+			"0|0|0xb473cf,7|7|0xcaa6dd,15|-7|0x8485ad,50|42|0xece6df,33|24|0xacabcf",
+			95, 0, 0, 0)
+	end
+	
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"百鬼契约书",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		random_sleep(500)

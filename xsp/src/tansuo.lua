@@ -154,9 +154,8 @@ function section_select(section)
 	else
 		while (1) do
 			x, y, sec = sec_recg(990, 250, 1025, 350)
-			print(string.format("%d, %d sec - %d", x, y, sec))
 			if sec == 0 then
-				HUD_show_or_hide(HUD,hud_info,"识别错误并重调中, 持续报错请使用手动模式",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				HUD_show_or_hide(HUD,hud_info,"重新调整, 可使用手动模式",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				rd = math.random(1, 2)
 				if rd % 2 == 0 then
 					random_move(0, 1025, 560, 1025, 210, 10, 30)
@@ -552,14 +551,14 @@ function skkm_change_switch(top_left, top_mid, top_right, bot_left, bot_right)
 	if bot_right == 1 then
 		cnt = math.random(2, 3)
 		for i = 1, cnt do
-			random_move(0, 200, 500, 320, 300, 5, 10)
+			random_move(0, 200, 500, 330, 280, 5, 10)
 			random_sleep(1000)
 		end
 	end
 	if bot_left == 1 then
 		cnt = math.random(2, 3)
 		for i = 1, cnt do
-			random_move(0, 800, 500, 850, 300, 5, 10)
+			random_move(0, 800, 500, 850, 280, 5, 10)
 			random_sleep(1000)
 		end
 	end
