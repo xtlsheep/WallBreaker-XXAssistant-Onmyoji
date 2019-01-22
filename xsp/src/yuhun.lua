@@ -134,6 +134,8 @@ function yuhun_solo(mark, level, round, lock)
 				solo_start()
 				break
 			end
+			-- 战斗进行
+			x, y = fight_ongoing() if x > -1 then break end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 探索

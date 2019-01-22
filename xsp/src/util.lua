@@ -129,8 +129,8 @@ function random_move(id, start_point_X, start_point_Y, end_point_X, end_point_Y,
 	--print(string.format("control point (%d, %d)", control_point_X, control_point_Y))
 	
 	init_points = {{X = start_X_ran, Y = start_Y_ran}, {X = control_point_X, Y = control_point_Y}, {X = end_X_ran, Y = end_Y_ran}}
-	
-	curve_points = math.floor(distance/25)
+
+	curve_points = math.floor(distance/25*(width/width_dev))
 	step = 1/curve_points
 	t = 0
 	

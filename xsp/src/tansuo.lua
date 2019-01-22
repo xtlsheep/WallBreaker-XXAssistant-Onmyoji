@@ -12,7 +12,7 @@ end
 function lct_tansuo_portal()
 	local x, y = findColor({928, 132, 930, 134},
 		"0|0|0xe9d6d0,-41|-22|0x493625,-673|312|0x404359,-606|320|0xe0bd5f",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	return x, y
 end
 
@@ -84,7 +84,7 @@ function section_select(section)
 	
 	sec_func[8] = function(x1, y1, x2, y2)
 		local x, y = findColor({x1, y1, x2, y2},
-			"0|0|0x22180f,1|-9|0xf8f3e0,-5|-3|0xf8f3e0,6|-7|0xf6f1de,4|-2|0xefead7,3|7|0xf8f3e0,12|7|0xf8f3e0,9|0|0x44332b",
+			"0|0|0xf8f3e0,4|-5|0xf6f1de,9|-3|0xf8f3e0,15|11|0xf4efdc,7|11|0xf8f3e0,12|3|0x46322b,0|11|0x46322b,-3|-6|0x46322b",
 			90, 0, 0, 0)
 		if x > -1 then return x, y, 9 else return x, y, 0 end
 	end
@@ -154,6 +154,7 @@ function section_select(section)
 	else
 		while (1) do
 			x, y, sec = sec_recg(990, 250, 1025, 350)
+			print(string.format("Section - %d", sec))
 			if sec == 0 then
 				HUD_show_or_hide(HUD,hud_info,"重新调整, 可使用手动模式",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				rd = math.random(1, 2)
@@ -570,7 +571,7 @@ function df_normal_attack(df_pos, mode)
 		if df_pos[1] == 1 then
 			x, y = findColor({784, 617, 786, 619},
 				"0|0|0xfbfbfa,-11|-5|0x452116,9|7|0xfefefe",
-				95, 0, 0, 0)
+				90, 0, 0, 0)
 			if x > -1 then
 				random_touch(0, 775, 595, 10, 10)
 				return
@@ -579,7 +580,7 @@ function df_normal_attack(df_pos, mode)
 		if df_pos[2] == 1 then
 			x, y = findColor({884, 617, 886, 619},
 				"0|0|0xfbfbfa,-11|-5|0x452116,9|7|0xfefefe",
-				95, 0, 0, 0)
+				90, 0, 0, 0)
 			if x > -1 then
 				random_touch(0, 875, 595, 10, 10)
 				return
@@ -588,7 +589,7 @@ function df_normal_attack(df_pos, mode)
 		if df_pos[3] == 1 then
 			x, y = findColor({984, 617, 986, 619},
 				"0|0|0xfbfbfa,-11|-5|0x452116,9|7|0xfefefe",
-				95, 0, 0, 0)
+				90, 0, 0, 0)
 			if x > -1 then
 				random_touch(0, 975, 595, 10, 10)
 				return
@@ -598,7 +599,7 @@ function df_normal_attack(df_pos, mode)
 		if df_pos[1] == 1 then
 			x, y = findColor({884, 617, 886, 619},
 				"0|0|0xfbfbfa,-11|-5|0x452116,9|7|0xfefefe",
-				95, 0, 0, 0)
+				90, 0, 0, 0)
 			if x > -1 then
 				random_touch(0, 875, 595, 10, 10)
 				return
@@ -607,7 +608,7 @@ function df_normal_attack(df_pos, mode)
 		if df_pos[2] == 1 then
 			x, y = findColor({984, 617, 986, 619},
 				"0|0|0xfbfbfa,-11|-5|0x452116,9|7|0xfefefe",
-				95, 0, 0, 0)
+				90, 0, 0, 0)
 			if x > -1 then
 				random_touch(0, 975, 595, 10, 10)
 				return
@@ -616,7 +617,7 @@ function df_normal_attack(df_pos, mode)
 		if df_pos[3] == 1 then
 			x, y = findColor({1084, 617, 1086, 619},
 				"0|0|0xfbfbfa,-11|-5|0x452116,9|7|0xfefefe",
-				95, 0, 0, 0)
+				90, 0, 0, 0)
 			if x > -1 then
 				random_touch(0, 1075, 595, 10, 10)
 				return

@@ -656,6 +656,7 @@ function settlement_UI()
 	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", win_cnt.yuling), "700,340,80,60")
 	UI:Label(settlement_ui, "left", "0,0,0", 30, "-", "780,340,10,60")
 	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", fail_cnt.yuling), "865,340,135,60")
+	UI:fit(settlement_ui)
 	
 	ret_settlement, res_settlement = UI:show(settlement_ui)
 	
