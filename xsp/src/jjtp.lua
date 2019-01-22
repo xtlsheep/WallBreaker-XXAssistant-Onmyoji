@@ -143,7 +143,7 @@ function find_whr(pos, whr, role)
 	if (whr[2] == 1) then
 		-- 小僧原皮
 		x, y = findColor({x1, y1, x2, y2},
-			"0|0|0xfbdbb9,1|8|0xfce1c2,4|5|0xfce0be,-10|5|0xfad9be,9|0|0x4e514d",
+			"0|0|0xf7d6bb,16|-1|0xfbdcb9,12|-5|0xfbdab6,18|-8|0x425769,9|12|0xf1cab0",
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"小僧原皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -151,7 +151,7 @@ function find_whr(pos, whr, role)
 		end
 		-- 小僧觉醒皮
 		x, y = findColor({x1, y1, x2, y2},
-			"0|0|0xd7d3d5,5|5|0xcccacc,15|-3|0x46494f,-17|13|0x4e534e",
+			"0|0|0xd1d2d1,7|-4|0xd3d1d0,12|6|0xc8c7c5,19|-6|0x42586a,9|15|0xccc1bc",
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"小僧觉醒皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -159,7 +159,7 @@ function find_whr(pos, whr, role)
 		end
 		-- 小僧商店皮
 		x, y = findColor({x1, y1, x2, y2},
-			"0|0|0xe4d9c3,10|13|0xbcd9da,-3|17|0xcfac69,-12|12|0x4c514d",
+			"0|0|0xdfd3b9,-7|6|0xe2d7c1,20|5|0xdbd1bb,10|17|0xbcdada,-2|21|0xcdaa67",
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"小僧商店皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
