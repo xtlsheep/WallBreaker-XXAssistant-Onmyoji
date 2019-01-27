@@ -19,18 +19,18 @@ end
 function yuling_mark(doll)
 	local x, y
 	
-	x, y = findColor({640, 200, 740, 250}, -- 草人标记
+	x, y = findColor({650, 200, 700, 300}, -- 草人标记
 		"0|0|0xda0b4b,-19|1|0xef44a9,18|1|0xf65cb8,3|24|0xd41636,-3|31|0xf9505d",
 		95, 0, 0, 0)
 	if x > -1 then
 		return x, y
 	end
 	
-	x, y = findColor({610, 250, 780, 350}, -- 草人血条
+	x, y = findColor({600, 250, 700, 350}, -- 草人血条
 		"0|0|0xb1120e,3|0|0xb10e0b,6|0|0xb40e0b",
 		95, 0, 0, 0)
 	if x > -1 then
-		random_touch(0, 700, 350, 5, 5) -- 草人
+		random_touch(0, 700, 380, 5, 5) -- 草人
 		mSleep(5000)
 	end
 	return x, y

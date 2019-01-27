@@ -647,9 +647,9 @@ function lock_or_unlock(lock, spec)
 	elseif spec == "觉醒" then
 		x1 = 638 y1 = 371 x2 = 640 y2 = 373
 	elseif spec == "业原火" then
-		x1 = 639 y1 = 370 x2 = 641 y2 = 372
+		x1 = 639 y1 = 368 x2 = 641 y2 = 369
 	elseif spec == "御灵" then
-		x1 = 552 y1 = 378 x2 = 554 y2 = 380
+		x1 = 639 y1 = 370 x2 = 641 y2 = 372
 	elseif spec == "Solo结界突破" then
 		x1 = 923 y1 = 550 x2 = 925 y2 = 552
 	elseif spec == "Pub结界突破" then
@@ -658,7 +658,7 @@ function lock_or_unlock(lock, spec)
 		x1 = 750 y1 = 570 x2 = 760 y2 = 580
 	end
 	
-	if (spec == "御魂" or spec == "觉醒" or spec == "业原火" or spec == "探索") then
+	if (spec == "御魂" or spec == "觉醒" or spec == "业原火" or spec == "探索" or spec == "御灵") then
 		if (lock == 1) then
 			x, y = findColor({x1, y1, x2, y2},
 				"0|0|0x735c41,11|1|0x2c2119,-11|0|0x2e231c,-1|5|0x291f19",
@@ -670,23 +670,6 @@ function lock_or_unlock(lock, spec)
 			x, y = findColor({x1, y1, x2, y2},
 				"0|0|0x725c40,0|-6|0x33271a,-13|1|0x9d93ce,13|1|0x9d95cd",
 				90, 0, 0, 0)
-			if x > -1 then
-				random_touch(0, x, y, 3, 3)
-			end
-		end
-		return x, y
-	elseif (spec == "御灵") then
-		if (lock == 1) then
-			x, y = findColor({x1, y1, x2, y2},
-				"0|0|0x886d49,0|5|0x241911,-13|0|0x2f2318,15|0|0x2f2318",
-				95, 0, 0, 0)
-			if x > -1 then
-				random_touch(0, x, y, 3, 3)
-			end
-		else
-			x, y = findColor({x1, y1, x2, y2},
-				"0|0|0x886e4a,0|7|0x1d150f,-17|0|0xb9adf4,17|0|0xb8aef2",
-				95, 0, 0, 0)
 			if x > -1 then
 				random_touch(0, x, y, 3, 3)
 			end
