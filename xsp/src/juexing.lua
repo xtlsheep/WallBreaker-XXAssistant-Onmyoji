@@ -5,7 +5,7 @@ require "func"
 function lct_juexingtower()
 	local x, y = findColor({233, 162, 235, 165}, -- 4个麒麟头部
 		"0|0|0xb17880,238|12|0x56b083,478|30|0x358fe5,718|40|0xd378d5",
-		95, 0, 0, 0)
+		80, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"探索 - 觉醒之塔",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end

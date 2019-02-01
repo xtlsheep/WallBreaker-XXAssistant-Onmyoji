@@ -19,7 +19,7 @@ end
 function lct_tansuo_prepare()
 	local x, y = findColor({27, 35, 29, 37},
 		"0|0|0xd6c4a1,4|468|0x98335a,92|570|0xfefbe5,25|552|0xf6c990",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	return x, y
 end
 
@@ -146,6 +146,7 @@ function section_select(section)
 	end
 	
 	local x, y, sec, ret, rd
+	local cnt = 0
 	
 	if section == -1 then
 		random_touch(0, 1025, 220, 20, 20)
@@ -162,6 +163,10 @@ function section_select(section)
 					random_move(0, 1025, 560, 1025, 210, 10, 30)
 				else
 					random_move(0, 1025, 210, 1025, 560, 10, 30)
+				end
+				cnt = cnt + 1
+				if cnt >= 5 then
+					break
 				end
 			else
 				if sec < section then
@@ -225,30 +230,30 @@ function scene_quit_confirm()
 end
 
 function find_exp()
-	local x, y = findColor({0, 100, 1135, 550},
+	local x, y = findColor({0, 0, 1000, 600},
 		"0|0|0xb29773,-13|-4|0x2b6478,-7|8|0x831917",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	return x, y
 end
 
 function find_money()
-	local x, y = findColor({0, 100, 1135, 550},
+	local x, y = findColor({0, 0, 1000, 600},
 		"0|0|0xdacb6f,5|-11|0xdfd082,12|-2|0xdaca71",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	return x, y
 end
 
 function find_goods()
-	local x, y = findColor({0, 100, 1135, 550},
+	local x, y = findColor({0, 0, 1000, 600},
 		"0|0|0xf6db12,-10|-9|0xd62e22,-21|-15|0xce4428",
-		80, 0, 0, 0)
+		90, 0, 0, 0)
 	return x, y
 end
 
 function find_boss()
-	local x, y = findColor({0, 0, 1154, 400},
-		"0|0|0xb22e32,3|5|0xfffdf9,-7|-16|0x221108",
-		95, 0, 0, 0)
+	local x, y = findColor({0, 0, 1000, 600},
+		"0|0|0xf3e8e0,-11|-31|0xefb4bc,-26|-12|0x221108,-19|5|0xb63034",
+		90, 0, 0, 0)
 	return x, y
 end
 
@@ -543,9 +548,10 @@ function skkm_change_switch(top_left, top_mid, top_right, bot_left, bot_right)
 		end
 	end
 	if top_left == 1 then
+		random_move(0 ,800, 520, 300, 520, 20, 20) -- 翻页
 		cnt = math.random(2, 3)
 		for i = 1, cnt do
-			random_move(0, 600, 500, 960, 250, 5, 10)
+			random_move(0, 800, 500, 960, 250, 5, 10)
 			random_sleep(500)
 		end
 	end

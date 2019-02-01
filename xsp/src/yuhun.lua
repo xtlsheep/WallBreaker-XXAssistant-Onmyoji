@@ -5,7 +5,7 @@ require "func"
 function lct_yuhun()
 	local x, y = findColor({57, 487, 60, 489}, -- 左边小路灯
 		"0|0|0xffd821,0|-19|0xb24828,-1|-47|0xddd3bf,0|36|0x855021",
-		95, 0, 0, 0)
+		80, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"探索 - 御魂",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
@@ -141,7 +141,7 @@ function yuhun_solo(mark, level, round, lock)
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then random_touch(0, 180, 590, 20, 20) break end -- 御魂
 			-- 御魂
-			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) random_sleep(1000) break end -- 八岐大蛇
+			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) mSleep(1500) break end -- 八岐大蛇
 			-- 战斗失败
 			x, y = fight_failed("单人")
 			if (x > -1) then
@@ -258,7 +258,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then mSleep(500) tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 御魂
-			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) random_sleep(1000) break end -- 八岐大蛇
+			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) mSleep(1500) break end -- 八岐大蛇
 			-- 战斗失败
 			x, y = fight_failed("组队")
 			if (x > -1) then
@@ -399,7 +399,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 				break
 			end
 			-- 御魂
-			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) random_sleep(1000) break end -- 八岐大蛇
+			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) mSleep(1500) break end -- 八岐大蛇
 			-- 八岐大蛇
 			x, y = lct_8dashe() if (x > -1) then level_select(level, pre_init.yuhun, lock, "御魂") pre_init.yuhun = 0 group_start() break end -- 组队开始
 			-- 战斗失败
@@ -661,7 +661,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 				break
 			end
 			-- 御魂
-			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) random_sleep(1000) break end -- 八岐大蛇
+			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) mSleep(1500) break end -- 八岐大蛇
 			-- 八岐大蛇
 			x, y = lct_8dashe() if (x > -1) then level_select(level, pre_init.yuhun, lock, "御魂") pre_init.yuhun = 0 group_start() break end -- 组队开始
 			-- 战斗失败

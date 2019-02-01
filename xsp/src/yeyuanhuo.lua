@@ -5,7 +5,7 @@ require "func"
 function lct_yyh()
 	local x, y = findColor({807, 439, 819, 441}, -- 业原火
 		"0|0|0xf3b25e,-59|-236|0xdd7cb3,-124|-168|0xf2faf9,-83|-142|0x2eae93",
-		95, 0, 0, 0)
+		80, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"业原火",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		mSleep(1000)

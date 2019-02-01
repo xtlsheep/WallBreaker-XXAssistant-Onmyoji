@@ -151,8 +151,8 @@ function game_disconn_reconn()
 	end
 	
 	function game_notice()
-		local x, y = findColor({1018, 69, 1020, 70},
-			"0|0|0xe8d4cf,53|-52|0x554949,63|-41|0x161215,50|-21|0x584544,60|-1|0x3d1019",
+		local x, y = findColor({1018, 69, 1020, 71},
+			"0|0|0xe8d4cf,63|0|0x420b13,67|-41|0x140f0f,55|-20|0x69514c",
 			90, 0, 0, 0)
 		if x > -1 then
 			random_touch(0, x, y, 20, 10) -- 关闭
@@ -161,8 +161,8 @@ function game_disconn_reconn()
 	end
 	
 	function game_portal()
-		local x, y = findColor({534, 562, 536, 564},
-			"0|0|0x94adbc,-59|-459|0xffd8a6,-58|-480|0x8a272f,-369|-217|0xd17c5a,-346|-138|0xe7b674",
+		local x, y = findColor({556, 553, 558, 555},
+			"0|0|0xffffff,54|-145|0xf9edac,34|-151|0xfffe52,44|-133|0xfad157",
 			90, 0, 0, 0)
 		if x > -1 then
 			random_touch(0, x, y, 30, 10) -- 进入游戏
@@ -171,8 +171,8 @@ function game_disconn_reconn()
 	end
 	
 	function game_load()
-		local x, y = findColor({568, 550, 570, 552},
-			"0|0|0x313b46,-144|-219|0xcac2dd,191|-455|0xd1c085,-143|-218|0xcac2dd",
+		local x, y = findColor({549, 585, 551, 587},
+			"0|0|0x383855,-429|-114|0xc19a72,-412|-124|0x461710,-447|-148|0x211e2f",
 			90, 0, 0, 0)
 		if x > -1 then
 			random_touch(0, x, y, 30, 10) -- 点击屏幕进入游戏
@@ -323,20 +323,20 @@ function disable_skill_feature()
 end
 
 function stop_buff()
-	local buff_y = {146, 208, 270, 332, 394}
+	local buff_y = {136, 196, 256, 316, 376}
 	local x, y, x_, y_
-	x, y = findColor({302, 447, 304, 449},
-		"0|0|0x828270,532|3|0x6d725e,28|-333|0xd5c7bc,519|-25|0x858572,626|-411|0x9e8d72",
+	x, y = findColor({295, 470, 297, 472},
+		"0|0|0x7e7f6c,10|-21|0x838573,29|-37|0xb0a197,539|2|0x69705a",
 		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"关闭buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		mSleep(1000)
 		for i = 1, 5 do
-			x_, y_ = findColor({694, buff_y[i]-1, 696, buff_y[i]+1},
-				"0|0|0xe3952c,-5|-7|0xe18b2b,-5|7|0xe18a2b,63|-9|0xeeb92e,62|8|0xedb62f",
+			x_, y_ = findColor({687, buff_y[i]-1, 689, buff_y[i]+1},
+				"0|0|0xe08400,0|-7|0xe08400,0|8|0xe08400,-8|0|0xd9ccc2",
 				90, 0, 0, 0)
 			if x_ > -1 then
-				random_touch(0, x_+40, y_, 10, 5)
+				random_touch(0, x_+50, y_, 10, 5)
 				random_sleep(500)
 			end
 		end
