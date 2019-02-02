@@ -910,6 +910,8 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			end
 			-- 查看体力
 			x, y = sushi_check() if x > -1 then right_lower_click() break end
+			-- 神秘商人
+			x, y = mysterious_vender() if x > -1 then break end
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
 			break
@@ -1170,6 +1172,8 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				end
 				break
 			end
+			-- 神秘商人
+			x, y = mysterious_vender() if x > -1 then break end
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
 			break
@@ -1346,6 +1350,8 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 			x, y = sushi_check() if x > -1 then right_lower_click() break end
 			-- 庭院
 			x, y = lct_tingyuan() if x > -1 then tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
+			-- 神秘商人
+			x, y = mysterious_vender() if x > -1 then break end
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
 			break

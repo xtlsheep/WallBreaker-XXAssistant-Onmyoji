@@ -145,6 +145,7 @@ function game_disconn_reconn()
 			"0|0|0xf3b25e,445|-329|0x5c5242,-180|-338|0x675531,31|-332|0x60160c",
 			95, 0, 0, 0)
 		if x > -1 then
+			HUD_show_or_hide(HUD,hud_info,"重新连接",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			random_touch(0, x, y, 20, 10) -- 重新连接
 		end
 		return x, y
@@ -155,6 +156,7 @@ function game_disconn_reconn()
 			"0|0|0xe8d4cf,63|0|0x420b13,67|-41|0x140f0f,55|-20|0x69514c",
 			90, 0, 0, 0)
 		if x > -1 then
+			HUD_show_or_hide(HUD,hud_info,"关闭公告",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			random_touch(0, x, y, 20, 10) -- 关闭
 		end
 		return x, y
@@ -165,6 +167,7 @@ function game_disconn_reconn()
 			"0|0|0xffffff,54|-145|0xf9edac,34|-151|0xfffe52,44|-133|0xfad157",
 			90, 0, 0, 0)
 		if x > -1 then
+			HUD_show_or_hide(HUD,hud_info,"进入服务器",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			random_touch(0, x, y, 30, 10) -- 进入游戏
 		end
 		return x, y
@@ -175,6 +178,7 @@ function game_disconn_reconn()
 			"0|0|0x383855,-429|-114|0xc19a72,-412|-124|0x461710,-447|-148|0x211e2f",
 			90, 0, 0, 0)
 		if x > -1 then
+			HUD_show_or_hide(HUD,hud_info,"进入游戏",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			random_touch(0, x, y, 30, 10) -- 点击屏幕进入游戏
 		end
 		return x, y
@@ -1092,6 +1096,7 @@ end
 
 function captain_room_invite_first(invite_zone)
 	local x, y, x_, y_, x__, y__
+	local cnt = 0
 	x, y = findColor({685, 508, 687, 510},
 		"0|0|0xf3b25e,158|-451|0xf5e0d9,-409|-440|0xe77d93,-239|1|0xdf6851",
 		95, 0, 0, 0)
@@ -1122,7 +1127,7 @@ function captain_room_invite_first(invite_zone)
 			end
 		end
 		
-		for i = 1, 5 do
+		while (1) do
 			-- 已选中
 			if ver == "iOS" then
 				x__, y__ = findColor({452, 201, 454, 204},
@@ -1131,7 +1136,7 @@ function captain_room_invite_first(invite_zone)
 				if x__ > -1 then
 					random_sleep(250)
 					random_touch(0, x, y, 20, 10) -- 邀请
-					return x, y
+					return x__, y__
 				end
 			elseif ver == "android" then
 				x__, y__ = findColor({452, 201, 454, 204},
@@ -1140,7 +1145,7 @@ function captain_room_invite_first(invite_zone)
 				if x__ > -1 then
 					random_sleep(250)
 					random_touch(0, x, y, 20, 10) -- 邀请
-					return x, y
+					return x__, y__
 				end
 			end
 			-- 未选中
@@ -1151,11 +1156,16 @@ function captain_room_invite_first(invite_zone)
 				random_touch(0, 440, 205, 40, 20) -- 第一位好友
 				random_sleep(250)
 				random_touch(0, x, y, 20, 10) -- 邀请
-				return x, y
+				return x__, y__
+			end
+			cnt = cnt + 1
+			if cnt >= 10 then
+				HUD_show_or_hide(HUD,hud_info,"没有找到在线好友",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				right_lower_click()
+				return x__, y__
 			end
 			mSleep(1000)
 		end
-		HUD_show_or_hide(HUD,hud_info,"没有找到在线好友",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
