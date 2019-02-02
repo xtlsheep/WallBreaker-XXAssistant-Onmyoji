@@ -280,6 +280,7 @@ end
 function sg_fight_failed()
 	-- 超鬼王的战斗失败识别
 	local x, y, x_, y_
+	local cnt = 0
 	x, y = findColor({413, 104, 415, 106},
 		"0|0|0x514a5b,251|6|0xddd9cd,-135|-6|0xcdc59c,30|34|0x5b5265",
 		95, 0, 0, 0)
@@ -292,6 +293,10 @@ function sg_fight_failed()
 				95, 0, 0, 0)
 			if x_ > -1 then
 				right_lower_click()
+				cnt = cnt + 1
+				if cnt >= 10 then
+					return x, y
+				end
 			elseif x_ == -1 then
 				return x, y
 			end

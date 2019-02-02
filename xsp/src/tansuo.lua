@@ -230,28 +230,28 @@ function scene_quit_confirm()
 end
 
 function find_exp()
-	local x, y = findColor({0, 0, 1000, 600},
+	local x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xb29773,-13|-4|0x2b6478,-7|8|0x831917",
 		90, 0, 0, 0)
 	return x, y
 end
 
 function find_money()
-	local x, y = findColor({0, 0, 1000, 600},
+	local x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xdacb6f,5|-11|0xdfd082,12|-2|0xdaca71",
 		90, 0, 0, 0)
 	return x, y
 end
 
 function find_goods()
-	local x, y = findColor({0, 0, 1000, 600},
+	local x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xf6db12,-10|-9|0xd62e22,-21|-15|0xce4428",
 		90, 0, 0, 0)
 	return x, y
 end
 
 function find_boss()
-	local x, y = findColor({0, 0, 1000, 600},
+	local x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xf3e8e0,-11|-31|0xefb4bc,-26|-12|0x221108,-19|5|0xb63034",
 		90, 0, 0, 0)
 	return x, y
@@ -824,7 +824,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 							random_touch(0, 350, 420, 30, 30) -- 更换式神
 							break
 						elseif full_exp == "alarm" then
-							alarm("pause")
+							ret = alarm("pause")
 						end
 					end
 					random_sleep(500)
@@ -1065,7 +1065,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 							random_touch(0, 350, 420, 30, 30) -- 更换式神
 							break
 						elseif full_exp == "alarm" then
-							alarm("pause")
+							ret = alarm("pause")
 						end
 					end
 					random_sleep(500)

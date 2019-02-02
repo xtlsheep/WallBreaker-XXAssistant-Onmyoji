@@ -471,21 +471,21 @@ function alarm(op)
 		mSleep(500)
 	end
 	if op == "pause" then
-		while (1) do
-			HUD_show_or_hide(HUD,hud_info,"暂停ing, 请双击屏幕右上角继续",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			results = catchTouchPoint(touchCount)
-			for i = 1, #results do
-				sysLog("第"..i.."个坐标为:"..i..",x="..results[i].x..",y="..results[i].y);
-			end
-			if results[1].x > 450 and results[2].x > 450 and results[1].y > 800 and results[2].y > 800 then
-				HUD_show_or_hide(HUD,hud_info,"继续运行",20,"0xff000000","0xffffffff",0,100,0,300,32)
-				mSleep(1000)
-				return
-			end
+		HUD_show_or_hide(HUD,hud_info,"暂停ing, 双击右上角继续",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		results = catchTouchPoint(touchCount)
+		for i = 1, #results do
+			sysLog("第"..i.."个坐标为:"..i..",x="..results[i].x..",y="..results[i].y);
+		end
+		if results[1].x > 450 and results[2].x > 450 and results[1].y > 800 and results[2].y > 800 then
+			HUD_show_or_hide(HUD,hud_info,"继续运行",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			mSleep(1000)
+			return RET_OK
 		end
 	elseif op == "exit" then
 		lua_exit()
 	end
+	
+	return RET_ERR
 end
 
 -- Locate & Enter func
@@ -851,6 +851,7 @@ function fight_success(mode)
 	
 	function half_harma_loop()
 		local x, y, x_, y_
+		local cnt = 0
 		x, y = half_harma()
 		if (x > -1) then
 			HUD_show_or_hide(HUD,hud_info,"退出战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -862,6 +863,10 @@ function fight_success(mode)
 				elseif x_ == -1 then
 					return RET_OK
 				end
+				cnt = cnt + 1
+				if cnt >= 10 then
+					return RET_OK
+				end
 				random_sleep(50)
 			end
 		end
@@ -869,6 +874,7 @@ function fight_success(mode)
 	end
 	
 	local x_s, y_s, x_h, y_h, ret
+	local cnt = 0
 	
 	x_s, y_s = success_drum(mode)
 	x_h, y_h = half_harma()
@@ -882,6 +888,10 @@ function fight_success(mode)
 			end
 			yuhun_overflow()
 			right_lower_click()
+			cnt = cnt + 1
+			if cnt >= 10 then
+				return RET_OK
+			end
 			random_sleep(50)
 		end
 	end
@@ -905,6 +915,7 @@ function fight_failed(mode)
 	end
 	
 	local x, y
+	local cnt = 0
 	
 	x, y = failed_drum(mode)
 	if x > -1 then
@@ -916,6 +927,10 @@ function fight_failed(mode)
 				right_lower_click()
 			elseif x == -1 then
 				return RET_OK, RET_OK
+			end
+			cnt = cnt + 1
+			if cnt >= 10 then
+				return RET_OK
 			end
 			random_sleep(50)
 		end

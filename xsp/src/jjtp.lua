@@ -180,7 +180,7 @@ end
 function solo_lct_jjtp()
 	local x, y = findColor({1050, 59, 1052, 61},
 		"0|0|0xe8d4cf,-772|420|0x762906,-905|422|0xa6521e,-298|490|0xdc2f3c",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	return x, y
 end
 
@@ -400,8 +400,8 @@ end
 
 function pub_lct_jjtp()
 	local x, y = findColor({1051, 59, 1053, 61},
-		"0|0|0xe8d4cf,-919|195|0x4c0c18,-753|292|0x98081a,-973|524|0xc9a87b",
-		95, 0, 0, 0)
+		"0|0|0xf2d3d1,-753|191|0x9a0616,-757|288|0x960a1a,-973|521|0xcbaa80",
+		90, 0, 0, 0)
 	return x, y
 end
 
