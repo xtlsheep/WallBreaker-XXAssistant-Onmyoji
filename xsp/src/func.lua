@@ -463,6 +463,10 @@ end
 
 function alarm(op)
 	local touchCount = 2
+	local x_range, y_range
+	
+	x_range = width - math.floor(width/3)
+	y_range = height - math.floor(height/3)
 	
 	for i = 1, 5 do
 		playAudio("alarm.mp3")
@@ -471,15 +475,17 @@ function alarm(op)
 		mSleep(500)
 	end
 	if op == "pause" then
-		HUD_show_or_hide(HUD,hud_info,"暂停ing, 双击右上角继续",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		results = catchTouchPoint(touchCount)
-		for i = 1, #results do
-			sysLog("第"..i.."个坐标为:"..i..",x="..results[i].x..",y="..results[i].y);
-		end
-		if results[1].x > 450 and results[2].x > 450 and results[1].y > 800 and results[2].y > 800 then
-			HUD_show_or_hide(HUD,hud_info,"继续运行",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			mSleep(1000)
-			return RET_OK
+		while (1) do
+			HUD_show_or_hide(HUD,hud_info,"暂停ing, 双击右上角继续",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			results = catchTouchPoint(touchCount)
+			for i = 1, #results do
+				sysLog("第"..i.."个坐标为:"..i..",x="..results[i].x..",y="..results[i].y);
+			end
+			if results[1].x > x_range and results[2].x > x_range and results[1].y > y_range and results[2].y > y_range then
+				HUD_show_or_hide(HUD,hud_info,"继续运行",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				mSleep(1000)
+				return RET_OK
+			end
 		end
 	elseif op == "exit" then
 		lua_exit()
