@@ -164,7 +164,7 @@ function game_disconn_reconn()
 	
 	function game_portal()
 		local x, y = findColor({556, 553, 558, 555},
-			"0|0|0xffffff,54|-145|0xf9edac,34|-151|0xfffe52,44|-133|0xfad157",
+			"0|0|0xfffffa,26|-128|0xfffe8d,72|-65|0xf0eac6,-39|-48|0x5a3f57",
 			90, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"进入服务器",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -496,6 +496,15 @@ function alarm(op)
 	end
 	
 	return RET_ERR
+end
+
+function garbage_collect()
+	local count
+
+	collectgarbage("collect")
+	count = collectgarbage("count")
+	print(string.format("Execute collectgarbage, memory cost  - %d kb", count))
+	setTimer(5*60*1000, garbage_collect)
 end
 
 -- Locate & Enter func

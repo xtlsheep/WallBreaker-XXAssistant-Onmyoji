@@ -36,6 +36,7 @@ setScreenScale(width_dev, height_dev) -- iPhone 5s
 linkage, linkage_err = getCloudContent("WALL_BREAKER_LINKAGE", "BDAB2A1E8229572B", "0")
 math.randomseed(os.time())
 math.random(1,10000)
+setTimer(5*60*1000, garbage_collect)
 print(system_date)
 print(string.format("OS = %s, AppID = %s, width = %d, height = %d, dpi = %d",ver, appid, width, height, dpi))
 
