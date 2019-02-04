@@ -199,6 +199,29 @@ function section_select(section)
 	return RET_OK
 end
 
+function degree_select(hard)
+	local x, y
+	
+	if hard == "普通" then
+		x, y = findColor({293, 197, 295, 199},
+			"0|0|0x331b0c,-10|-4|0xf1f1f1,27|18|0xa9a7a4,-7|17|0xababa8",
+			95, 0, 0, 0)
+		if x > -1 then
+			random_touch(0, x, y, 10, 10)
+		end
+	elseif hard == "困难" then
+		x, y = findColor({415, 208, 417, 210},
+			"0|0|0x1a0d06,-27|-27|0xc3a46e,-16|-4|0xf0dca8,25|14|0xc9aa72",
+			95, 0, 0, 0)
+		if x > -1 then
+			random_touch(0, x, y, 10, 10)
+		end
+	end
+	
+	random_sleep(500)
+	return x, y
+end
+
 function tansuo_mark(mark)
 	random_sleep(500)
 	local x, y
@@ -876,15 +899,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
 					return RET_VALID
 				end
-				if pre_init.tansuo == 1 then
-					if hard == "普通" then
-						random_touch(0, 300, 200, 20, 20) -- 普通
-					elseif hard == "困难" then
-						random_touch(0, 420, 200, 20, 20) -- 困难
-					end
-					random_sleep(500)
-					pre_init.tansuo = 0
-				end
+				degree_select(hard)
 				HUD_show_or_hide(HUD,hud_info,"进入场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				random_touch(0, 840, 480, 30, 10) -- 探索
 				move_total = get_scene_move(scene_move)
@@ -1117,15 +1132,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
 					return RET_VALID
 				end
-				if pre_init.tansuo == 1 then
-					if hard == "普通" then
-						random_touch(0, 300, 200, 20, 20) -- 普通
-					elseif hard == "困难" then
-						random_touch(0, 420, 200, 20, 20) -- 困难
-					end
-					random_sleep(500)
-					pre_init.tansuo = 0
-				end
+				degree_select(hard)
 				HUD_show_or_hide(HUD,hud_info,"邀请队员",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				random_touch(0, 580, 480, 30, 10) -- 组队
 				mSleep(2000)
