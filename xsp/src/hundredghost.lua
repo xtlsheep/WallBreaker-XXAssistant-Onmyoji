@@ -166,11 +166,19 @@ function hundredghost(round, num, invite)
 	print(string.format("次数 %d 豆子 %s 邀请 %d", round, num, invite))
 	print_global_config()
 	
+	while (1) do
+		hundredghost_(round, num, invite)
+	end
+	
+	return RET_ERR
+end
+
+function hundredghost_(round, num, invite)
 	local bean_sel = 0
 	local invite_cnt = 0
 	local ret = 0
 	local x, y
-	
+
 	while (1) do
 		while(1) do
 			mSleep(500)

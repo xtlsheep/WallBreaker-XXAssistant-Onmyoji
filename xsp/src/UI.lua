@@ -834,13 +834,11 @@ function baqidashe_UI()
 		return
 	end
 	
-	while (1) do
 		if (auto_jjtp_en == 1) then
 			yuhun_auto_jjtp(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
 		else
 			yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
 		end
-	end
 end
 
 function tansuo_UI()
@@ -1070,13 +1068,11 @@ function tansuo_UI()
 		return
 	end
 	
-	while (1) do
 		if auto_jjtp_en == 1 then
 			tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 		else
 			tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 		end
-	end
 end
 
 function jjtp_UI()
@@ -1385,13 +1381,11 @@ function juexing_UI()
 		return
 	end
 	
-	while (1) do
 		if (auto_jjtp_en == 1) then
 			juexing_auto_jjtp(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
 		else
 			juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
 		end
-	end
 end
 
 function yeyuanhuo_UI()
@@ -1477,13 +1471,11 @@ function yeyuanhuo_UI()
 		return
 	end
 	
-	while (1) do
 		if auto_jjtp_en == 1 then
 			yeyuanhuo_auto_jjtp(round_tan, round_chen, round_chi, lock)
 		else
 			yeyuanhuo(round_tan, round_chen, round_chi, lock)
 		end
-	end
 end
 
 function yuling_UI()
@@ -1562,9 +1554,7 @@ function yuling_UI()
 		return
 	end
 	
-	while (1) do
 		yuling(sel, level, round, doll, lock)
-	end
 end
 
 function yqfy_UI()
@@ -1635,9 +1625,7 @@ function yqfy_UI()
 		return
 	end
 	
-	while (1) do
 		yqfy(round, sel, mark)
-	end
 end
 
 function hundredghost_UI()
@@ -1689,9 +1677,7 @@ function hundredghost_UI()
 		return
 	end
 	
-	while (1) do
 		hundredghost(round, num, invite)
-	end
 end
 
 function autocake_UI()
@@ -1857,11 +1843,12 @@ function autostory_UI()
 		return
 	end
 	
+	settlement_en = 0
 	autostory()
 end
 
 function activityreserve_UI()
-	-- 劲舞团
+	-- 活动预留
 	activityreserve_ui = UI:new("activityreserve.dat", width_UI, height_UI, "退出", "返回", "backGround.jpg")
 	UI:Label(activityreserve_ui, "center", "0,0,0", 30, "特殊活动", "20,20,960,55")
 	UI:Label(activityreserve_ui, "left", "0,0,0", 30, "活动预留页面, 请返回上一级菜单使用其他功能或退出", "30,100,960,60")
@@ -1921,6 +1908,6 @@ function superghost_UI()
 	sg_en = 1
 	sg_keep = 1
 	sg_fight_sel = "Public"
-	mSleep(500)
+	
 	superghost()
 end

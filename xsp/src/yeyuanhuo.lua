@@ -18,6 +18,14 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 	print(string.format("贪 %d, 嗔 %d, 痴 %d，锁定 %d", round_tan, round_chen, round_chi, lock))
 	print_global_config()
 	
+	while (1) do
+		yeyuanhuo_(round_tan, round_chen, round_chi, lock)
+	end
+	
+	return RET_ERR
+end
+
+function yeyuanhuo_(round_tan, round_chen, round_chi, lock)
 	local cnt_tan = 0
 	local cnt_chen = 0
 	local cnt_chi = 0
@@ -28,18 +36,18 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 	local ran_wait = 0
 	local ret = 0
 	local x, y
-
+	
 	while (1) do
 		while (1) do
 			-- 战斗开始
 			x, y = round_fight() if (x > -1) then break end
 			mSleep(500)
-            -- 循环通用
-            ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
+			-- 循环通用
+			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("单人") 
+			x, y = fight_success("单人")
 			if (x > -1) then
 				win_cnt.global = win_cnt.global + 1
 				if (last_sel == "tan") then
@@ -81,7 +89,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 				ran_wait = math.random(500, 1000)
 				HUD_show_or_hide(HUD,hud_info,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
 				mSleep(ran_wait)
-				HUD_show_or_hide(HUD,hud_info,string.format("业原火", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32) 
+				HUD_show_or_hide(HUD,hud_info,string.format("业原火", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
 				-- 锁定 or not
 				lock_or_unlock(lock, "业原火")
 				-- 贪
@@ -134,7 +142,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then random_touch(0, 845, 320, 50, 50) random_sleep(1000) break end -- 业原火
 			-- 战斗失败
-			x, y = fight_failed("单人") 
+			x, y = fight_failed("单人")
 			if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)

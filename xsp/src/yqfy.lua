@@ -54,6 +54,14 @@ function yqfy(round, sel, mark)
 	print(string.format("次数 %d 妖气 %s 标记 %s", round, sel, mark))
 	print_global_config()
 	
+	while (1) do
+		yqfy_(round, sel, mark)
+	end
+	
+	return RET_ERR
+end
+
+function yqfy_(round, sel, mark)
 	local quit = 0
 	local ran_wait = 0
 	local x, y
@@ -67,10 +75,10 @@ function yqfy(round, sel, mark)
 			-- 三回目
 			x, y = round_three() if (x > -1) then yqfy_mark(mark) break end
 			mSleep(500)
-            -- 循环通用
-            ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
-            -- 拒绝邀请
-            x, y = member_team_refuse_invite() if (x > -1) then break end
+			-- 循环通用
+			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
+			-- 拒绝邀请
+			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 庭院
 			x, y = lct_tingyuan()
 			if (x > -1) then
@@ -157,7 +165,7 @@ function yqfy(round, sel, mark)
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then HUD_show_or_hide(HUD,hud_info,"战斗准备",20,"0xff000000","0xffffffff",0,100,0,300,32) break end
 			-- 战斗胜利
-			x, y = fight_success("组队") 
+			x, y = fight_success("组队")
 			if (x > -1) then
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
@@ -168,7 +176,7 @@ function yqfy(round, sel, mark)
 				break
 			end
 			-- 战斗失败
-			x, y = fight_failed("组队") 
+			x, y = fight_failed("组队")
 			if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)

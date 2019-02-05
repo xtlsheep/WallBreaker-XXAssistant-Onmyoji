@@ -142,7 +142,7 @@ function game_disconn_reconn()
 	
 	function game_disconn()
 		local x, y = findColor({570, 360, 572, 362},
-			"0|0|0xf3b25e,445|-329|0x5c5242,-180|-338|0x675531,31|-332|0x60160c",
+			"0|0|0xf3b25e,-55|-24|0x983c2e,-50|-19|0xf3b25e,-62|-32|0xcbb59c",
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"重新连接",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -152,13 +152,22 @@ function game_disconn_reconn()
 	end
 	
 	function game_notice()
-		local x, y = findColor({1018, 69, 1020, 71},
-			"0|0|0xe8d4cf,63|0|0x420b13,67|-41|0x140f0f,55|-20|0x69514c",
-			90, 0, 0, 0)
+		local x, y
+		
+		if ver == "iOS" then
+			x, y = findColor({1018, 69, 1020, 71},
+				"0|0|0xe8d4cf,63|0|0x420b13,67|-41|0x140f0f,55|-20|0x69514c",
+				90, 0, 0, 0)
+		elseif ver == "android" then
+			x, y = findColor({1018, 69, 1020, 71},
+				"0|0|0xe5d4cc,65|-2|0x480b15,74|-2|0x36261a,59|-10|0x695b55",
+				90, 0, 0, 0)
+		end
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"关闭公告",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			random_touch(0, x, y, 20, 10) -- 关闭
 		end
+		
 		return x, y
 	end
 	
@@ -501,7 +510,7 @@ end
 
 function garbage_collect()
 	local count
-
+	
 	collectgarbage("collect")
 	count = collectgarbage("count")
 	print(string.format("Execute collectgarbage, memory cost  - %d kb", count))

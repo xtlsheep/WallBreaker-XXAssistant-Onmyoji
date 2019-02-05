@@ -698,14 +698,21 @@ function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_roun
 	
 	local ret = 0
 	
-	if mode == "单人" then
-		ret = tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
-	elseif mode == "队长" then
-		ret = tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
-	elseif mode == "队员" then
-		ret = tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+	while (1) do
+		if mode == "单人" then
+			ret = tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+		elseif mode == "队长" then
+			ret = tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+		elseif mode == "队员" then
+			ret = tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+		end
+		
+		if ret == RET_VALID then
+			return RET_ERR
+		end
 	end
-	return ret
+	
+	return RET_ERR
 end
 
 function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)

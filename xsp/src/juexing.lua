@@ -70,18 +70,24 @@ function juexing(mode, role, group, element, mark, level, round, lock, member_au
 		captain_auto_group = 0
 	end
 	
-	if (mode == "单人") then
-		ret = juexing_solo(element, mark, level, round, lock)
-	elseif (mode == "组队" and role == "队员" and group == "野队") then
-		ret = juexing_group_wild_member(element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
-	elseif (mode == "组队" and role == "队长" and (group == "野队2人" or group == "野队3人")) then
-		ret = juexing_group_wild_captain(element, mark, level, round, lock, captain_auto_group, fail_and_recreate, group)
-	elseif (mode == "组队" and role == "队员" and group == "固定队") then
-		ret = juexing_group_fix_member(element, mark, level, round, member_auto_group, member_to_captain)
-	elseif (mode == "组队" and role == "队长" and (group == "固定队2人" or group == "固定队3人")) then
-		ret = juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
+	while (1) do
+		if (mode == "单人") then
+			ret = juexing_solo(element, mark, level, round, lock)
+		elseif (mode == "组队" and role == "队员" and group == "野队") then
+			ret = juexing_group_wild_member(element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
+		elseif (mode == "组队" and role == "队长" and (group == "野队2人" or group == "野队3人")) then
+			ret = juexing_group_wild_captain(element, mark, level, round, lock, captain_auto_group, fail_and_recreate, group)
+		elseif (mode == "组队" and role == "队员" and group == "固定队") then
+			ret = juexing_group_fix_member(element, mark, level, round, member_auto_group, member_to_captain)
+		elseif (mode == "组队" and role == "队长" and (group == "固定队2人" or group == "固定队3人")) then
+			ret = juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
+		end
+		
+		if ret == RET_VALID then
+			return RET_ERR
+		end
 	end
-	return RET_OK
+	return RET_ERR
 end
 
 function juexing_solo(element, mark, level, round, lock)
@@ -105,7 +111,7 @@ function juexing_solo(element, mark, level, round, lock)
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("单人") 
+			x, y = fight_success("单人")
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
@@ -144,7 +150,7 @@ function juexing_solo(element, mark, level, round, lock)
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 战斗失败
-			x, y = fight_failed("单人") 
+			x, y = fight_failed("单人")
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
@@ -220,7 +226,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("组队") 
+			x, y = fight_success("组队")
 			if (x > -1) then
 				wait_invite = 1
 				tansuo_time_cnt = 0
@@ -257,7 +263,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			-- 觉醒之塔
 			x, y = lct_juexingtower() if (x > -1) then juexing_element(element) break end
 			-- 战斗失败
-			x, y = fight_failed("组队") 
+			x, y = fight_failed("组队")
 			if (x > -1) then
 				if (fail_and_group == 1) then
 					wait_invite = 0
@@ -322,7 +328,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("组队") 
+			x, y = fight_success("组队")
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
@@ -398,7 +404,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			-- 觉醒材料
 			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 group_start() break end -- 组队开始
 			-- 战斗失败
-			x, y = fight_failed("组队") 
+			x, y = fight_failed("组队")
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
@@ -454,7 +460,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("组队") 
+			x, y = fight_success("组队")
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
@@ -480,7 +486,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			-- 离开确认
 			x, y = member_room_quit() if (x > -1) then break end
 			-- 战斗失败
-			x, y = fight_failed("组队") 
+			x, y = fight_failed("组队")
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
@@ -567,7 +573,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("组队") 
+			x, y = fight_success("组队")
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
@@ -653,7 +659,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			-- 觉醒材料
 			x, y = lct_juexingelement() if (x > -1) then level_select(level, init, lock, "觉醒") init = 0 group_start() break end -- 组队开始
 			-- 战斗失败
-			x, y = fight_failed("组队") 
+			x, y = fight_failed("组队")
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
