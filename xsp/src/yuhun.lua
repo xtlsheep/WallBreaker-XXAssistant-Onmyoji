@@ -22,7 +22,7 @@ function lct_8dashe()
 	return x, y
 end
 
-function yuhun_mark(position)
+function yuhun_mark(position, round)
 	mSleep(500)
 	random_sleep(500)
 	local cnt = math.random(2, 3)
@@ -32,7 +32,13 @@ function yuhun_mark(position)
 		if (position == "左") then
 			random_touch(0, 290, 155, 10, 10)
 		elseif (position == "中") then
-			random_touch(0, 530, 155, 10, 10)
+			if round == 1 then
+				random_touch(0, 545, 145, 10, 10)
+			elseif round == 2 then
+				random_touch(0, 545, 110, 10, 10)
+			elseif round == 3 then
+				random_touch(0, 520, 140, 10, 10)
+			end
 		elseif (position == "右") then
 			random_touch(0, 830, 155, 10, 10)
 		end
@@ -89,11 +95,11 @@ function yuhun_solo(mark, level, round, lock)
 	while (1) do
 		while (1) do
 			-- 一回目
-			x, y = round_one() if (x > -1) then yuhun_mark(mark[1]) break end
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1) break end
 			-- 二回目
-			x, y = round_two() if (x > -1) then yuhun_mark(mark[2]) break end
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2) break end
 			-- 三回目
-			x, y = round_three() if (x > -1) then yuhun_mark(mark[3]) break end
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
@@ -182,11 +188,11 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 	while (1) do
 		while (1) do
 			-- 一回目
-			x, y = round_one() if (x > -1) then yuhun_mark(mark[1]) break end
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1) break end
 			-- 二回目
-			x, y = round_two() if (x > -1) then yuhun_mark(mark[2]) break end
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2) break end
 			-- 三回目
-			x, y = round_three() if (x > -1) then yuhun_mark(mark[3]) break end
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
@@ -317,11 +323,11 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 	while (1) do
 		while (1) do
 			-- 一回目
-			x, y = round_one() if (x > -1) then yuhun_mark(mark[1]) break end
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1) break end
 			-- 二回目
-			x, y = round_two() if (x > -1) then yuhun_mark(mark[2]) break end
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2) break end
 			-- 三回目
-			x, y = round_three() if (x > -1) then yuhun_mark(mark[3]) break end
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
@@ -454,11 +460,11 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 	while (1) do
 		while (1) do
 			-- 一回目
-			x, y = round_one() if (x > -1) then yuhun_mark(mark[1]) break end
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1) break end
 			-- 二回目
-			x, y = round_two() if (x > -1) then yuhun_mark(mark[2]) break end
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2) break end
 			-- 三回目
-			x, y = round_three() if (x > -1) then yuhun_mark(mark[3]) break end
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
@@ -570,11 +576,11 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 	while (1) do
 		while (1) do
 			-- 一回目
-			x, y = round_one() if (x > -1) then yuhun_mark(mark[1]) break end
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1) break end
 			-- 二回目
-			x, y = round_two() if (x > -1) then yuhun_mark(mark[2]) break end
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2) break end
 			-- 三回目
-			x, y = round_three() if (x > -1) then yuhun_mark(mark[3]) break end
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
