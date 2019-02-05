@@ -1215,9 +1215,7 @@ function jjtp_UI()
 	-- Disable智能突破
 	auto_jjtp_en = 0
 	
-	while (1) do
-		jjtp(mode, whr_solo_out, whr_pub_out, round_time, refresh, solo_sel, pub_sel, lock)
-	end
+	jjtp(mode, whr_solo_out, whr_pub_out, round_time, refresh, solo_sel, pub_sel, lock)
 end
 
 function juexing_UI()

@@ -648,13 +648,10 @@ function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, l
 		action_solo = "Switch"
 		while (1) do
 			if ret_solo == "Finish" and ret_pub == "Finish" then
-				lua_exit()
+				return RET_OK
 			end
 			
 			ret_solo = jjtp_solo(whr_solo, round_time, refresh, solo_sel, lock, action_solo)
-			if ret_solo == RET_RECONN then
-				return RET_OK
-			end
 			if ret_solo == "Finish" then
 				action_pub = "Wait"
 			elseif ret_solo == "Unfinish" then
@@ -662,9 +659,6 @@ function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, l
 			end
 			
 			ret_pub = jjtp_pub(whr_pub, round_time, pub_sel, lock, action_pub)
-			if ret_pub == RET_RECONN then
-				return RET_OK
-			end
 			if ret_pub == "Finish" then
 				action_solo = "Wait"
 			elseif ret_pub == "Unfinish" then
@@ -731,7 +725,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			
 			mSleep(500)
 			-- 循环通用
-			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
+			loop_generic()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行
@@ -897,7 +891,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			
 			mSleep(500)
 			-- 循环通用
-			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
+			loop_generic()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行
