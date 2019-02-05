@@ -741,7 +741,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
 			-- 循环通用
-			loop_generic()
+			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
 			superghost()
 			-- 拒绝组队
@@ -893,7 +893,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				quit_con = auto_jjtp_time_check()
 				if quit_end == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
-					return RET_OK
+					lua_exit()
 				end
 				if quit_con == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
@@ -976,7 +976,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
 			-- 循环通用
-			loop_generic()
+			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
 			superghost()
 			-- 拒绝组队
@@ -1126,7 +1126,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			if x > -1 then
 				if quit_end == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
-					return RET_OK
+					lua_exit()
 				end
 				if quit_con == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
@@ -1217,7 +1217,7 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 			x, y = round_two() if x > -1 then tansuo_mark(mark) break end
 			mSleep(500)
 			-- 循环通用
-			loop_generic()
+			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
 			superghost()
 			-- 战斗进行

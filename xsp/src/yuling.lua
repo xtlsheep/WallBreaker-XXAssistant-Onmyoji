@@ -54,7 +54,7 @@ function yuling(sel, level, round, doll, lock)
 			x, y = round_fight() if (x > -1) then break end
 			mSleep(500)
 			-- 循环通用
-			loop_generic()
+			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗胜利
@@ -89,7 +89,7 @@ function yuling(sel, level, round, doll, lock)
 			if (x > -1) then
 				if quit == 1 then
 					random_touch(0, 930, 110, 5, 5)
-					return RET_OK
+					lua_exit()
 				end
 				if (sel == "神龙") then
 					random_touch(0, 230, 240, 20, 20)

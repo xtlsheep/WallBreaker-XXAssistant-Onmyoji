@@ -167,15 +167,15 @@ function hundredghost(round, num, invite)
 	print_global_config()
 	
 	local bean_sel = 0
-	local hg_cnt = 0
 	local invite_cnt = 0
+	local ret = 0
 	local x, y
 	
 	while (1) do
 		while(1) do
 			mSleep(500)
 			-- 循环通用
-			loop_generic()
+			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 百鬼夜行
 			x, y = lct_hg()
 			if x > -1 then
@@ -193,9 +193,9 @@ function hundredghost(round, num, invite)
 			if x > -1 then
 				bean_sel = 0
 				invite_cnt = 0
-				if hg_cnt >= round then
+				if win_cnt.hundgho >= round then
 					random_touch(0, 890, 150, 5, 5) -- 右上退出
-					return RET_OK
+					lua_exit()
 				end
 				break
 			end
@@ -204,7 +204,7 @@ function hundredghost(round, num, invite)
 			-- 百鬼Portal-已邀请
 			invite_cnt = hg_portal_invited(invite_cnt)
 			-- 鬼王选择
-			x, y = hg_master_sel() if x > -1 then hg_cnt = hg_cnt + 1 break end
+			x, y = hg_master_sel() if x > -1 then win_cnt.hundgho = win_cnt.hundgho + 1 break end
 			-- 领取奖励
 			x, y = hg_get_frag() if x > -1 then break end
 			-- 町中

@@ -68,14 +68,14 @@ function yqfy(round, sel, mark)
 			x, y = round_three() if (x > -1) then yqfy_mark(mark) break end
 			mSleep(500)
             -- 循环通用
-            loop_generic()
+            ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
             -- 拒绝邀请
             x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 庭院
 			x, y = lct_tingyuan()
 			if (x > -1) then
 				if quit == 1 then
-					return RET_OK
+					lua_exit()
 				end
 				ran_wait = math.random(500, 1000)
 				HUD_show_or_hide(HUD,hud_info,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)

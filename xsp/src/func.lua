@@ -137,7 +137,7 @@ end
 
 function game_disconn_reconn()
 	if reconn == 0 then
-		return
+		return RET_ERR
 	end
 	
 	function game_disconn()
@@ -192,7 +192,7 @@ function game_disconn_reconn()
 	x, y = game_notice() if x >-1 then notice = 1 end
 	
 	if (disconn == 0) and (notice == 0) then
-		return
+		return RET_OK
 	end
 	
 	while (1) do
@@ -207,22 +207,23 @@ function game_disconn_reconn()
 			-- 游戏公告
 			x, y = game_notice() if x > -1 then break end
 			-- 庭院
-			x, y = lct_tingyuan() if x > -1 then return end
+			x, y = lct_tingyuan() if x > -1 then return RET_RECONN end
 			break
 		end
 	end
 	
-	return
+	return RET_ERR
 end
 
 function loop_generic()
+	local ret = 0
 	-- 悬赏封印
 	receive_offer()
 	-- 断线结束战斗
 	disconn_dur_fight()
 	-- 断线重连
-	game_disconn_reconn()
-	return
+	ret = game_disconn_reconn()
+	return ret
 end
 
 function real_baqidashe()
@@ -535,6 +536,21 @@ function lct_tansuo()
 		HUD_show_or_hide(HUD,hud_info,"探索",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
+end
+
+function lct_tingyuan_or_tansuo()
+	local tingyuan_ = 0
+	local tansuo_ = 0
+	local x, y
+	
+	x, y = lct_tingyuan() if x > -1 then tingyuan_ = 1 end
+	x, y = lct_tansuo() if x > -1 then tansuo_ = 1 end
+	
+	if tingyuan_ == 1 or tansuo_ == 1 then
+		return RET_OK
+	else
+		return RET_ERR
+	end
 end
 
 function lct_dingzhong()

@@ -97,7 +97,7 @@ function juexing_solo(element, mark, level, round, lock)
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
 			-- 循环通用
-			loop_generic()
+			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
 			superghost()
 			-- 拒绝组队
@@ -123,7 +123,7 @@ function juexing_solo(element, mark, level, round, lock)
 				quit_con = auto_jjtp_time_check()
 				if quit_end == 1 then
 					random_touch(0, 930, 110, 5, 5)
-					return RET_OK
+					lua_exit()
 				end
 				-- 退出后继续
 				if quit_con == 1 then
@@ -183,7 +183,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
 			-- 循环通用
-			loop_generic()
+			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
 			superghost()
 			-- 拒绝邀请
@@ -192,7 +192,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			x, y = lct_tansuo()
 			if (x > -1) then
 				if quit_end == 1 then
-					return RET_OK
+					lua_exit()
 				end
 				if quit_con == 1 then
 					return RET_VALID
@@ -314,7 +314,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
 			-- 循环通用
-			loop_generic()
+			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
 			superghost()
 			-- 拒绝邀请
@@ -383,7 +383,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			x, y = lct_tansuo()
 			if (x > -1) then
 				if quit_end == 1 then
-					return RET_OK
+					lua_exit()
 				end
 				if quit_con == 1 then
 					return RET_VALID
@@ -446,7 +446,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
 			-- 循环通用
-			loop_generic()
+			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
 			superghost()
 			-- 接受邀请
@@ -559,7 +559,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
 			-- 循环通用
-			loop_generic()
+			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
 			superghost()
 			-- 拒绝邀请
@@ -639,7 +639,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			x, y = lct_tansuo()
 			if (x > -1) then
 				if quit_end == 1 then
-					return RET_OK
+					lua_exit()
 				end
 				if quit_con == 1 then
 					return RET_VALID

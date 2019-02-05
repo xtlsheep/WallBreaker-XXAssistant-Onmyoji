@@ -5,6 +5,7 @@ require "UI"
 RET_OK = 0
 RET_ERR = -1
 RET_VALID = 1
+RET_RECONN = 2
 
 -- Global cfg
 HUD = nil
@@ -18,7 +19,7 @@ buff_stop_idle_time = 0
 buff_stop_useup = 0
 
 -- Global vars
-win_cnt = {global = 0, yuhun = 0, tansuo = 0, jjtp = 0, juexing = 0, yyh = 0, yuling = 0, yqfy = 0}
+win_cnt = {global = 0, yuhun = 0, tansuo = 0, jjtp = 0, juexing = 0, yyh = 0, yuling = 0, yqfy = 0, hundgho = 0 }
 fail_cnt = {global = 0, yuhun = 0, tansuo = 0, jjtp = 0, juexing = 0, yyh = 0, yuling = 0, yqfy = 0}
 
 -- Init

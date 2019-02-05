@@ -470,148 +470,148 @@ function global_UI()
 	
 	-- 超鬼王
 	sg_en = 0
---	if res_global.sg_en == "0" then
---		sg_en = 1
---	else
---		sg_en = 0
---	end
+	--	if res_global.sg_en == "0" then
+	--		sg_en = 1
+	--	else
+	--		sg_en = 0
+	--	end
 	
---	if res_global.sg_fight_sel == "0" then
---		sg_fight_sel = "Public"
---	else
---		sg_fight_sel = "Private"
---	end
+	--	if res_global.sg_fight_sel == "0" then
+	--		sg_fight_sel = "Public"
+	--	else
+	--		sg_fight_sel = "Private"
+	--	end
 	
---	sg_force = tonumber(res_global.sg_force) + 1
+	--	sg_force = tonumber(res_global.sg_force) + 1
 	
---	local sg_mark_ = {}
---	for w in string.gmatch(res_global.sg_mark,"([^'@']+)") do
---		table.insert(sg_mark_,w)
---	end
---	for i = 1, table.getn(sg_mark_), 1 do
---		if (sg_mark_[i] == "0") then
---			sg_mark_sel[1] = 1 -- Boss
---		elseif (sg_mark_[i] == "1") then
---			sg_mark_sel[2] = 1 -- 草人
---		end
---	end
+	--	local sg_mark_ = {}
+	--	for w in string.gmatch(res_global.sg_mark,"([^'@']+)") do
+	--		table.insert(sg_mark_,w)
+	--	end
+	--	for i = 1, table.getn(sg_mark_), 1 do
+	--		if (sg_mark_[i] == "0") then
+	--			sg_mark_sel[1] = 1 -- Boss
+	--		elseif (sg_mark_[i] == "1") then
+	--			sg_mark_sel[2] = 1 -- 草人
+	--		end
+	--	end
 	
---	-- >50%
---	if res_global.sg_high_6 == "0" then sg_high[6] = "默认"
---	elseif res_global.sg_high_6 == "1" then sg_high[6] = "预设1"
---	elseif res_global.sg_high_6 == "2" then sg_high[6] = "预设2"
---	elseif res_global.sg_high_6 == "3" then sg_high[6] = "预设3"
---	elseif res_global.sg_high_6 == "4" then sg_high[6] = "响铃"
---	elseif res_global.sg_high_6 == "5" then sg_high[6] = "集结" end
+	--	-- >50%
+	--	if res_global.sg_high_6 == "0" then sg_high[6] = "默认"
+	--	elseif res_global.sg_high_6 == "1" then sg_high[6] = "预设1"
+	--	elseif res_global.sg_high_6 == "2" then sg_high[6] = "预设2"
+	--	elseif res_global.sg_high_6 == "3" then sg_high[6] = "预设3"
+	--	elseif res_global.sg_high_6 == "4" then sg_high[6] = "响铃"
+	--	elseif res_global.sg_high_6 == "5" then sg_high[6] = "集结" end
 	
---	if res_global.sg_high_5 == "0" then sg_high[5] = "默认"
---	elseif res_global.sg_high_5 == "1" then sg_high[5] = "预设1"
---	elseif res_global.sg_high_5 == "2" then sg_high[5] = "预设2"
---	elseif res_global.sg_high_5 == "3" then sg_high[5] = "预设3"
---	elseif res_global.sg_high_5 == "4" then sg_high[5] = "响铃"
---	elseif res_global.sg_high_5 == "5" then sg_high[5] = "集结" end
+	--	if res_global.sg_high_5 == "0" then sg_high[5] = "默认"
+	--	elseif res_global.sg_high_5 == "1" then sg_high[5] = "预设1"
+	--	elseif res_global.sg_high_5 == "2" then sg_high[5] = "预设2"
+	--	elseif res_global.sg_high_5 == "3" then sg_high[5] = "预设3"
+	--	elseif res_global.sg_high_5 == "4" then sg_high[5] = "响铃"
+	--	elseif res_global.sg_high_5 == "5" then sg_high[5] = "集结" end
 	
---	if res_global.sg_high_4 == "0" then sg_high[4] = "默认"
---	elseif res_global.sg_high_4 == "1" then sg_high[4] = "预设1"
---	elseif res_global.sg_high_4 == "2" then sg_high[4] = "预设2"
---	elseif res_global.sg_high_4 == "3" then sg_high[4] = "预设3"
---	elseif res_global.sg_high_4 == "4" then sg_high[4] = "响铃"
---	elseif res_global.sg_high_4 == "5" then sg_high[4] = "集结" end
+	--	if res_global.sg_high_4 == "0" then sg_high[4] = "默认"
+	--	elseif res_global.sg_high_4 == "1" then sg_high[4] = "预设1"
+	--	elseif res_global.sg_high_4 == "2" then sg_high[4] = "预设2"
+	--	elseif res_global.sg_high_4 == "3" then sg_high[4] = "预设3"
+	--	elseif res_global.sg_high_4 == "4" then sg_high[4] = "响铃"
+	--	elseif res_global.sg_high_4 == "5" then sg_high[4] = "集结" end
 	
---	if res_global.sg_high_3 == "0" then sg_high[3] = "默认"
---	elseif res_global.sg_high_3 == "1" then sg_high[3] = "预设1"
---	elseif res_global.sg_high_3 == "2" then sg_high[3] = "预设2"
---	elseif res_global.sg_high_3 == "3" then sg_high[3] = "预设3"
---	elseif res_global.sg_high_3 == "4" then sg_high[3] = "响铃"
---	elseif res_global.sg_high_3 == "5" then sg_high[3] = "集结" end
+	--	if res_global.sg_high_3 == "0" then sg_high[3] = "默认"
+	--	elseif res_global.sg_high_3 == "1" then sg_high[3] = "预设1"
+	--	elseif res_global.sg_high_3 == "2" then sg_high[3] = "预设2"
+	--	elseif res_global.sg_high_3 == "3" then sg_high[3] = "预设3"
+	--	elseif res_global.sg_high_3 == "4" then sg_high[3] = "响铃"
+	--	elseif res_global.sg_high_3 == "5" then sg_high[3] = "集结" end
 	
---	if res_global.sg_high_2 == "0" then sg_high[2] = "默认"
---	elseif res_global.sg_high_2 == "1" then sg_high[2] = "预设1"
---	elseif res_global.sg_high_2 == "2" then sg_high[2] = "预设2"
---	elseif res_global.sg_high_2 == "3" then sg_high[2] = "预设3"
---	elseif res_global.sg_high_2 == "4" then sg_high[2] = "响铃"
---	elseif res_global.sg_high_2 == "5" then sg_high[2] = "集结" end
+	--	if res_global.sg_high_2 == "0" then sg_high[2] = "默认"
+	--	elseif res_global.sg_high_2 == "1" then sg_high[2] = "预设1"
+	--	elseif res_global.sg_high_2 == "2" then sg_high[2] = "预设2"
+	--	elseif res_global.sg_high_2 == "3" then sg_high[2] = "预设3"
+	--	elseif res_global.sg_high_2 == "4" then sg_high[2] = "响铃"
+	--	elseif res_global.sg_high_2 == "5" then sg_high[2] = "集结" end
 	
---	if res_global.sg_high_1 == "0" then sg_high[1] = "默认"
---	elseif res_global.sg_high_1 == "1" then sg_high[1] = "预设1"
---	elseif res_global.sg_high_1 == "2" then sg_high[1] = "预设2"
---	elseif res_global.sg_high_1 == "3" then sg_high[1] = "预设3"
---	elseif res_global.sg_high_1 == "4" then sg_high[1] = "响铃"
---	elseif res_global.sg_high_1 == "5" then sg_high[1] = "集结" end
+	--	if res_global.sg_high_1 == "0" then sg_high[1] = "默认"
+	--	elseif res_global.sg_high_1 == "1" then sg_high[1] = "预设1"
+	--	elseif res_global.sg_high_1 == "2" then sg_high[1] = "预设2"
+	--	elseif res_global.sg_high_1 == "3" then sg_high[1] = "预设3"
+	--	elseif res_global.sg_high_1 == "4" then sg_high[1] = "响铃"
+	--	elseif res_global.sg_high_1 == "5" then sg_high[1] = "集结" end
 	
---	-- <50%
---	if res_global.sg_low_6 == "0" then sg_low[6] = "默认"
---	elseif res_global.sg_low_6 == "1" then sg_low[6] = "预设1"
---	elseif res_global.sg_low_6 == "2" then sg_low[6] = "预设2"
---	elseif res_global.sg_low_6 == "3" then sg_low[6] = "预设3"
---	elseif res_global.sg_low_6 == "4" then sg_low[6] = "响铃"
---	elseif res_global.sg_low_6 == "5" then sg_low[6] = "集结" end
+	--	-- <50%
+	--	if res_global.sg_low_6 == "0" then sg_low[6] = "默认"
+	--	elseif res_global.sg_low_6 == "1" then sg_low[6] = "预设1"
+	--	elseif res_global.sg_low_6 == "2" then sg_low[6] = "预设2"
+	--	elseif res_global.sg_low_6 == "3" then sg_low[6] = "预设3"
+	--	elseif res_global.sg_low_6 == "4" then sg_low[6] = "响铃"
+	--	elseif res_global.sg_low_6 == "5" then sg_low[6] = "集结" end
 	
---	if res_global.sg_low_5 == "0" then sg_low[5] = "默认"
---	elseif res_global.sg_low_5 == "1" then sg_low[5] = "预设1"
---	elseif res_global.sg_low_5 == "2" then sg_low[5] = "预设2"
---	elseif res_global.sg_low_5 == "3" then sg_low[5] = "预设3"
---	elseif res_global.sg_low_5 == "4" then sg_low[5] = "响铃"
---	elseif res_global.sg_low_5 == "5" then sg_low[5] = "集结" end
+	--	if res_global.sg_low_5 == "0" then sg_low[5] = "默认"
+	--	elseif res_global.sg_low_5 == "1" then sg_low[5] = "预设1"
+	--	elseif res_global.sg_low_5 == "2" then sg_low[5] = "预设2"
+	--	elseif res_global.sg_low_5 == "3" then sg_low[5] = "预设3"
+	--	elseif res_global.sg_low_5 == "4" then sg_low[5] = "响铃"
+	--	elseif res_global.sg_low_5 == "5" then sg_low[5] = "集结" end
 	
---	if res_global.sg_low_4 == "0" then sg_low[4] = "默认"
---	elseif res_global.sg_low_4 == "1" then sg_low[4] = "预设1"
---	elseif res_global.sg_low_4 == "2" then sg_low[4] = "预设2"
---	elseif res_global.sg_low_4 == "3" then sg_low[4] = "预设3"
---	elseif res_global.sg_low_4 == "4" then sg_low[4] = "响铃"
---	elseif res_global.sg_low_4 == "5" then sg_low[4] = "集结" end
+	--	if res_global.sg_low_4 == "0" then sg_low[4] = "默认"
+	--	elseif res_global.sg_low_4 == "1" then sg_low[4] = "预设1"
+	--	elseif res_global.sg_low_4 == "2" then sg_low[4] = "预设2"
+	--	elseif res_global.sg_low_4 == "3" then sg_low[4] = "预设3"
+	--	elseif res_global.sg_low_4 == "4" then sg_low[4] = "响铃"
+	--	elseif res_global.sg_low_4 == "5" then sg_low[4] = "集结" end
 	
---	if res_global.sg_low_3 == "0" then sg_low[3] = "默认"
---	elseif res_global.sg_low_3 == "1" then sg_low[3] = "预设1"
---	elseif res_global.sg_low_3 == "2" then sg_low[3] = "预设2"
---	elseif res_global.sg_low_3 == "3" then sg_low[3] = "预设3"
---	elseif res_global.sg_low_3 == "4" then sg_low[3] = "响铃"
---	elseif res_global.sg_low_3 == "5" then sg_low[3] = "集结" end
+	--	if res_global.sg_low_3 == "0" then sg_low[3] = "默认"
+	--	elseif res_global.sg_low_3 == "1" then sg_low[3] = "预设1"
+	--	elseif res_global.sg_low_3 == "2" then sg_low[3] = "预设2"
+	--	elseif res_global.sg_low_3 == "3" then sg_low[3] = "预设3"
+	--	elseif res_global.sg_low_3 == "4" then sg_low[3] = "响铃"
+	--	elseif res_global.sg_low_3 == "5" then sg_low[3] = "集结" end
 	
---	if res_global.sg_low_2 == "0" then sg_low[2] = "默认"
---	elseif res_global.sg_low_2 == "1" then sg_low[2] = "预设1"
---	elseif res_global.sg_low_2 == "2" then sg_low[2] = "预设2"
---	elseif res_global.sg_low_2 == "3" then sg_low[2] = "预设3"
---	elseif res_global.sg_low_2 == "4" then sg_low[2] = "响铃"
---	elseif res_global.sg_low_2 == "5" then sg_low[2] = "集结" end
+	--	if res_global.sg_low_2 == "0" then sg_low[2] = "默认"
+	--	elseif res_global.sg_low_2 == "1" then sg_low[2] = "预设1"
+	--	elseif res_global.sg_low_2 == "2" then sg_low[2] = "预设2"
+	--	elseif res_global.sg_low_2 == "3" then sg_low[2] = "预设3"
+	--	elseif res_global.sg_low_2 == "4" then sg_low[2] = "响铃"
+	--	elseif res_global.sg_low_2 == "5" then sg_low[2] = "集结" end
 	
---	if res_global.sg_low_1 == "0" then sg_low[1] = "默认"
---	elseif res_global.sg_low_1 == "1" then sg_low[1] = "预设1"
---	elseif res_global.sg_low_1 == "2" then sg_low[1] = "预设2"
---	elseif res_global.sg_low_1 == "3" then sg_low[1] = "预设3"
---	elseif res_global.sg_low_1 == "4" then sg_low[1] = "响铃"
---	elseif res_global.sg_low_1 == "5" then sg_low[1] = "集结" end
+	--	if res_global.sg_low_1 == "0" then sg_low[1] = "默认"
+	--	elseif res_global.sg_low_1 == "1" then sg_low[1] = "预设1"
+	--	elseif res_global.sg_low_1 == "2" then sg_low[1] = "预设2"
+	--	elseif res_global.sg_low_1 == "3" then sg_low[1] = "预设3"
+	--	elseif res_global.sg_low_1 == "4" then sg_low[1] = "响铃"
+	--	elseif res_global.sg_low_1 == "5" then sg_low[1] = "集结" end
 	
---	-- 疲劳
---	if res_global.sg_tired_6 == "0" then sg_tired[6] = "集结"
---	elseif res_global.sg_tired_6 == "1" then sg_tired[6] = "等待"
---	elseif res_global.sg_tired_6 == "2" then sg_tired[6] = "喝茶"
---	elseif res_global.sg_tired_6 == "3" then sg_tired[6] = "响铃" end
+	--	-- 疲劳
+	--	if res_global.sg_tired_6 == "0" then sg_tired[6] = "集结"
+	--	elseif res_global.sg_tired_6 == "1" then sg_tired[6] = "等待"
+	--	elseif res_global.sg_tired_6 == "2" then sg_tired[6] = "喝茶"
+	--	elseif res_global.sg_tired_6 == "3" then sg_tired[6] = "响铃" end
 	
---	if res_global.sg_tired_5 == "0" then sg_tired[5] = "集结"
---	elseif res_global.sg_tired_5 == "1" then sg_tired[5] = "等待"
---	elseif res_global.sg_tired_5 == "2" then sg_tired[5] = "喝茶"
---	elseif res_global.sg_tired_5 == "3" then sg_tired[5] = "响铃" end
+	--	if res_global.sg_tired_5 == "0" then sg_tired[5] = "集结"
+	--	elseif res_global.sg_tired_5 == "1" then sg_tired[5] = "等待"
+	--	elseif res_global.sg_tired_5 == "2" then sg_tired[5] = "喝茶"
+	--	elseif res_global.sg_tired_5 == "3" then sg_tired[5] = "响铃" end
 	
---	if res_global.sg_tired_4 == "0" then sg_tired[4] = "集结"
---	elseif res_global.sg_tired_4 == "1" then sg_tired[4] = "等待"
---	elseif res_global.sg_tired_4 == "2" then sg_tired[4] = "喝茶"
---	elseif res_global.sg_tired_4 == "3" then sg_tired[4] = "响铃" end
+	--	if res_global.sg_tired_4 == "0" then sg_tired[4] = "集结"
+	--	elseif res_global.sg_tired_4 == "1" then sg_tired[4] = "等待"
+	--	elseif res_global.sg_tired_4 == "2" then sg_tired[4] = "喝茶"
+	--	elseif res_global.sg_tired_4 == "3" then sg_tired[4] = "响铃" end
 	
---	if res_global.sg_tired_3 == "0" then sg_tired[3] = "集结"
---	elseif res_global.sg_tired_3 == "1" then sg_tired[3] = "等待"
---	elseif res_global.sg_tired_3 == "2" then sg_tired[3] = "喝茶"
---	elseif res_global.sg_tired_3 == "3" then sg_tired[3] = "响铃" end
+	--	if res_global.sg_tired_3 == "0" then sg_tired[3] = "集结"
+	--	elseif res_global.sg_tired_3 == "1" then sg_tired[3] = "等待"
+	--	elseif res_global.sg_tired_3 == "2" then sg_tired[3] = "喝茶"
+	--	elseif res_global.sg_tired_3 == "3" then sg_tired[3] = "响铃" end
 	
---	if res_global.sg_tired_2 == "0" then sg_tired[2] = "集结"
---	elseif res_global.sg_tired_2 == "1" then sg_tired[2] = "等待"
---	elseif res_global.sg_tired_2 == "2" then sg_tired[2] = "喝茶"
---	elseif res_global.sg_tired_2 == "3" then sg_tired[2] = "响铃" end
+	--	if res_global.sg_tired_2 == "0" then sg_tired[2] = "集结"
+	--	elseif res_global.sg_tired_2 == "1" then sg_tired[2] = "等待"
+	--	elseif res_global.sg_tired_2 == "2" then sg_tired[2] = "喝茶"
+	--	elseif res_global.sg_tired_2 == "3" then sg_tired[2] = "响铃" end
 	
---	if res_global.sg_tired_1 == "0" then sg_tired[1] = "集结"
---	elseif res_global.sg_tired_1 == "1" then sg_tired[1] = "等待"
---	elseif res_global.sg_tired_1 == "2" then sg_tired[1] = "喝茶"
---	elseif res_global.sg_tired_1 == "3" then sg_tired[1] = "响铃" end
+	--	if res_global.sg_tired_1 == "0" then sg_tired[1] = "集结"
+	--	elseif res_global.sg_tired_1 == "1" then sg_tired[1] = "等待"
+	--	elseif res_global.sg_tired_1 == "2" then sg_tired[1] = "喝茶"
+	--	elseif res_global.sg_tired_1 == "3" then sg_tired[1] = "响铃" end
 	
 	return RET_OK
 end
@@ -834,10 +834,12 @@ function baqidashe_UI()
 		return
 	end
 	
-	if (auto_jjtp_en == 1) then
-		yuhun_auto_jjtp(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
-	else
-		yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+	while (1) do
+		if (auto_jjtp_en == 1) then
+			yuhun_auto_jjtp(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+		else
+			yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+		end
 	end
 end
 
@@ -1068,10 +1070,12 @@ function tansuo_UI()
 		return
 	end
 	
-	if auto_jjtp_en == 1 then
-		tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
-	else
-		tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+	while (1) do
+		if auto_jjtp_en == 1 then
+			tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+		else
+			tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+		end
 	end
 end
 
@@ -1211,7 +1215,9 @@ function jjtp_UI()
 	-- Disable智能突破
 	auto_jjtp_en = 0
 	
-	jjtp(mode, whr_solo_out, whr_pub_out, round_time, refresh, solo_sel, pub_sel, lock)
+	while (1) do
+		jjtp(mode, whr_solo_out, whr_pub_out, round_time, refresh, solo_sel, pub_sel, lock)
+	end
 end
 
 function juexing_UI()
@@ -1381,10 +1387,12 @@ function juexing_UI()
 		return
 	end
 	
-	if (auto_jjtp_en == 1) then
-		juexing_auto_jjtp(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
-	else
-		juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+	while (1) do
+		if (auto_jjtp_en == 1) then
+			juexing_auto_jjtp(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+		else
+			juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+		end
 	end
 end
 
@@ -1471,10 +1479,12 @@ function yeyuanhuo_UI()
 		return
 	end
 	
-	if auto_jjtp_en == 1 then
-		yeyuanhuo_auto_jjtp(round_tan, round_chen, round_chi, lock)
-	else
-		yeyuanhuo(round_tan, round_chen, round_chi, lock)
+	while (1) do
+		if auto_jjtp_en == 1 then
+			yeyuanhuo_auto_jjtp(round_tan, round_chen, round_chi, lock)
+		else
+			yeyuanhuo(round_tan, round_chen, round_chi, lock)
+		end
 	end
 end
 
@@ -1554,7 +1564,9 @@ function yuling_UI()
 		return
 	end
 	
-	yuling(sel, level, round, doll, lock)
+	while (1) do
+		yuling(sel, level, round, doll, lock)
+	end
 end
 
 function yqfy_UI()
@@ -1625,7 +1637,9 @@ function yqfy_UI()
 		return
 	end
 	
-	yqfy(round, sel, mark)
+	while (1) do
+		yqfy(round, sel, mark)
+	end
 end
 
 function hundredghost_UI()
@@ -1677,7 +1691,9 @@ function hundredghost_UI()
 		return
 	end
 	
-	hundredghost(round, num, invite)
+	while (1) do
+		hundredghost(round, num, invite)
+	end
 end
 
 function autocake_UI()

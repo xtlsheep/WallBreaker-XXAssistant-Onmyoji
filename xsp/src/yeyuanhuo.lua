@@ -35,7 +35,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			x, y = round_fight() if (x > -1) then break end
 			mSleep(500)
             -- 循环通用
-            loop_generic()
+            ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗胜利
@@ -70,7 +70,7 @@ function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 			if x > -1 then
 				if (end_tan == 1 and end_chen == 1 and end_chi == 1) then
 					random_touch(0, 930, 110, 5, 5) -- 退出业原火
-					return RET_OK
+					lua_exit()
 				end
 				-- 智能突破Check
 				ret = auto_jjtp_time_check()
