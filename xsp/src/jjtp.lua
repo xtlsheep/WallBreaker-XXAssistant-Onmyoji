@@ -81,7 +81,7 @@ function find_whr(pos, whr, role)
 		end
 		-- 彼岸花秘闻皮
 		x, y = findColor({x1, y1, x2, y2},
-			"0|0|0xf9f7f5,5|2|0xf7f1f0,10|-1|0xa79fa2,13|-15|0xceae4e,-2|-11|0xdbced1",
+			"0|0|0xf7f6e9,-2|17|0xa69a99,-17|7|0xc19952,1|-9|0x574f5c,-7|2|0x302a38",
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"彼岸花秘闻皮Get",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -637,36 +637,53 @@ function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, l
 	local ret_solo, ret_pub
 	local action_solo, action_pub
 	
-	if (mode == "个人") then
-		action_solo = "Quit"
-		jjtp_solo(whr_solo, round_time, refresh, solo_sel, lock, action_solo)
-	elseif (mode == "阴阳寮") then
-		action_pub = "Wait"
-		jjtp_solo_to_pub()
-		jjtp_pub(whr_pub, round_time, pub_sel, lock, action_pub)
-	elseif (mode == "个人+阴阳寮") then
-		action_solo = "Switch"
-		while (1) do
-			if ret_solo == "Finish" and ret_pub == "Finish" then
+	while (1) do
+		if (mode == "个人") then
+			action_solo = "Quit"
+			ret_solo = jjtp_solo(whr_solo, round_time, refresh, solo_sel, lock, action_solo)
+			
+			if ret_solo == "Finish" then
 				return RET_OK
 			end
-			
-			ret_solo = jjtp_solo(whr_solo, round_time, refresh, solo_sel, lock, action_solo)
-			if ret_solo == "Finish" then
-				action_pub = "Wait"
-			elseif ret_solo == "Unfinish" then
-				action_pub = "Switch"
-			end
-			
+		elseif (mode == "阴阳寮") then
+			action_pub = "Wait"
+			jjtp_solo_to_pub()
 			ret_pub = jjtp_pub(whr_pub, round_time, pub_sel, lock, action_pub)
+			
 			if ret_pub == "Finish" then
-				action_solo = "Wait"
-			elseif ret_pub == "Unfinish" then
-				action_solo = "Hold"
+				return RET_OK
+			end
+		elseif (mode == "个人+阴阳寮") then
+			action_solo = "Switch"
+			while (1) do
+				if ret_solo == "Finish" and ret_pub == "Finish" then
+					return RET_OK
+				end
+				
+				ret_solo = jjtp_solo(whr_solo, round_time, refresh, solo_sel, lock, action_solo)
+				if ret_solo == RET_RECONN then
+					break
+				end
+				if ret_solo == "Finish" then
+					action_pub = "Wait"
+				elseif ret_solo == "Unfinish" then
+					action_pub = "Switch"
+				end
+				
+				ret_pub = jjtp_pub(whr_pub, round_time, pub_sel, lock, action_pub)
+				if ret_pub == RET_RECONN then
+					break
+				end
+				if ret_pub == "Finish" then
+					action_solo = "Wait"
+				elseif ret_pub == "Unfinish" then
+					action_solo = "Hold"
+				end
 			end
 		end
 	end
-	return RET_OK
+	
+	return RET_ERR
 end
 
 function jjtp_solo_to_pub()
@@ -725,7 +742,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			
 			mSleep(500)
 			-- 循环通用
-			loop_generic()
+			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行
@@ -891,7 +908,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			
 			mSleep(500)
 			-- 循环通用
-			loop_generic()
+			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行

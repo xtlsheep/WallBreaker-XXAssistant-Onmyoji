@@ -708,7 +708,7 @@ function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_roun
 		end
 		
 		if ret == RET_VALID then
-			return RET_ERR
+			return RET_VALID
 		end
 	end
 	
