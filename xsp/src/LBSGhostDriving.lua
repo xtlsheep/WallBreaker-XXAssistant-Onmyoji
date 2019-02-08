@@ -83,7 +83,7 @@ function LBSGhostDriving()
 			-- 取消邀请
 			x, y = cancel_invite() if x > -1 then break end
 			-- 退出资料
-			x, y = member_room_user_profile() if x > -1 then break end
+			x, y = member_user_profile() if x > -1 then break end
 			-- 掉落弹出
 			x, y = pop_up() if x > -1 then break end
 			break

@@ -256,6 +256,9 @@ function find_exp()
 	local x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xb29773,-13|-4|0x2b6478,-7|8|0x831917",
 		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"发现经验加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	end
 	return x, y
 end
 
@@ -263,6 +266,9 @@ function find_money()
 	local x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xdacb6f,5|-11|0xdfd082,12|-2|0xdaca71",
 		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"发现金币加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	end
 	return x, y
 end
 
@@ -270,6 +276,9 @@ function find_goods()
 	local x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xf6db12,-10|-9|0xd62e22,-21|-15|0xce4428",
 		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"发现掉落加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	end
 	return x, y
 end
 
@@ -277,6 +286,9 @@ function find_boss()
 	local x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xf3e8e0,-11|-31|0xefb4bc,-26|-12|0x221108,-19|5|0xb63034",
 		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"发现Boss",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	end
 	return x, y
 end
 
@@ -314,7 +326,6 @@ function find_target(sel)
 			x_t, y_t = find_boss()
 			if x_t > -1 then
 				keepScreen(false)
-				HUD_show_or_hide(HUD,hud_info,"发现Boss",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				mSleep(1000)
 				x_a, y_a = find_boss()
 				random_touch(0, x_a, y_a, 5, 5)
@@ -327,7 +338,6 @@ function find_target(sel)
 			x_t, y_t = find_goods()
 			if x_t > -1 then
 				keepScreen(false)
-				HUD_show_or_hide(HUD,hud_info,"找到物品加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				x_a, y_a = find_attack(x_t, y_t)
 				if x_a > -1 then
 					random_touch(0, x_a, y_a, 5, 5)
@@ -341,7 +351,6 @@ function find_target(sel)
 			x_t, y_t = find_money()
 			if x_t > -1 then
 				keepScreen(false)
-				HUD_show_or_hide(HUD,hud_info,"找到金币加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				x_a, y_a = find_attack(x_t, y_t)
 				if x_a > -1 then
 					random_touch(0, x_a, y_a, 5, 5)
@@ -355,7 +364,6 @@ function find_target(sel)
 			x_t, y_t = find_exp()
 			if x_t > -1 then
 				keepScreen(false)
-				HUD_show_or_hide(HUD,hud_info,"找到经验加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				x_a, y_a = find_attack(x_t, y_t)
 				if x_a > -1 then
 					random_touch(0, x_a, y_a, 5, 5)
@@ -1172,6 +1180,8 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			end
 			-- 确认退出
 			x, y = scene_quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
+			-- 队员档案
+			x, y = member_user_profile() if x > -1 then break end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 战斗失败
@@ -1362,6 +1372,8 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 			end
 			-- 查看体力
 			x, y = sushi_check() if x > -1 then right_lower_click() break end
+			-- 队员档案
+			x, y = member_user_profile() if x > -1 then break end
 			-- 庭院
 			x, y = lct_tingyuan() if x > -1 then tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 神秘商人

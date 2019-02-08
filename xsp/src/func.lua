@@ -1000,6 +1000,33 @@ function fight_stop_auto_group()
 end
 
 -- Member & Captain func
+function member_user_profile()
+	local x, y
+	-- 探索队员
+	x, y = findColor({110, 130, 115, 135},
+		"0|0|0x7c5d4d,-7|-16|0x6d6e4c,3|-7|0x3d2621,12|3|0x5d463c,9|20|0xcfb9a4",
+		95, 0, 0, 0)
+	if x > -1 then
+		random_touch(0, 1100, 400, 20, 20)
+	end
+	-- 房间第一位队员
+	x, y = findColor({480, 130, 485, 135},
+		"0|0|0x7c5d4d,-7|-16|0x6d6e4c,3|-7|0x3d2621,12|3|0x5d463c,9|20|0xcfb9a4",
+		95, 0, 0, 0)
+	if x > -1 then
+		random_touch(0, 1100, 400, 20, 20)
+	end
+	-- 房间第二位队员
+	x, y = findColor({675, 130, 680, 135},
+		"0|0|0x7c5d4d,-7|-16|0x6d6e4c,3|-7|0x3d2621,12|3|0x5d463c,9|20|0xcfb9a4",
+		95, 0, 0, 0)
+	if x > -1 then
+		random_touch(0, 1100, 400, 20, 20)
+	end
+	
+	return x, y
+end
+
 function member_room_init()
 	local x, y = findColor({75, 181, 80, 185}, -- 左边红穗
 		"0|0|0x8d7245,1|23|0x8d7245,-5|45|0xa02527,1|45|0xead49c",
@@ -1052,23 +1079,6 @@ function member_room_find_start()
 	local x, y = findColor({925, 535, 927, 537},  -- 开始战斗
 		"0|0|0xf3b25e,-60|-11|0xf3b25e,-63|13|0xf3b25e,65|2|0xf3b25e",
 		95, 0, 0, 0)
-	return x, y
-end
-
-function member_room_user_profile()
-	local x, y
-	x, y = findColor({144, 532, 146, 534},
-		"0|0|0x9d4939,352|-374|0xd2bda7,353|-40|0xcdb8a3,380|-213|0xf3b25e",
-		95, 0, 0, 0)
-	if x > -1 then
-		random_touch(0, 360, 530, 20, 20)
-	end
-	x, y = findColor({144, 532, 146, 534},
-		"0|0|0x9d4939,545|-378|0xd2bca6,546|-39|0xcab39e,577|-213|0xf3b25e",
-		95, 0, 0, 0)
-	if x > -1 then
-		random_touch(0, 360, 530, 20, 20)
-	end
 	return x, y
 end
 

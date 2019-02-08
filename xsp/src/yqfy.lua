@@ -186,7 +186,7 @@ function yqfy_(round, sel, mark)
 			-- 取消退出
 			x, y = yqfy_deny_quit() if x > -1 then break end
 			-- 退出个人资料
-			x, y = member_room_user_profile() if x > -1 then break end
+			x, y = member_user_profile() if x > -1 then break end
 			break
 		end
 	end

@@ -291,7 +291,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			x, y = captain_team_win_invite() if (x > -1) then random_touch(0, 460, 385, 20, 10) break end
 			x, y = captain_team_lost_invite() if (x > -1) then random_touch(0, 462, 383, 20, 10) break end
 			-- 退出个人资料
-			x, y = member_room_user_profile() if x > -1 then break end
+			x, y = member_user_profile() if x > -1 then break end
 			-- 真八岐大蛇
 			x, y = real_baqidashe() if x > -1 then break end
 			-- 神秘商人
@@ -424,7 +424,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 				break
 			end
 			-- 退出个人资料
-			x, y = member_room_user_profile() if x > -1 then break end
+			x, y = member_user_profile() if x > -1 then break end
 			-- 真八岐大蛇
 			x, y = real_baqidashe() if x > -1 then break end
 			-- 神秘商人
@@ -526,7 +526,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 				break
 			end
 			-- 退出个人资料
-			x, y = member_room_user_profile() if x > -1 then break end
+			x, y = member_user_profile() if x > -1 then break end
 			-- 真八岐大蛇
 			x, y = real_baqidashe() if x > -1 then break end
 			-- 神秘商人
@@ -679,7 +679,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 				break
 			end
 			-- 退出个人资料
-			x, y = member_room_user_profile() if x > -1 then break end
+			x, y = member_user_profile() if x > -1 then break end
 			-- 真八岐大蛇
 			x, y = real_baqidashe() if x > -1 then break end
 			-- 神秘商人
