@@ -977,6 +977,17 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 					random_touch(0, coor_map_x[pos], coor_map_y[pos], 50, 10)
 					break
 				end
+				-- 无效地图
+				ret = pub_map_finished(map)
+				if ret == RET_OK then
+					-- 退出
+					finish = 1
+				elseif ret == RET_VALID then
+					-- 翻页
+					pub_refresh()
+					map = {}
+					pos = -1
+				end
 				-- 寻找目标
 				if (table.getn(map) ~= 0 and pos == -1) then
 					pos = pub_find_next_target(map)
@@ -985,16 +996,6 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				-- 分析地图
 				if (table.getn(map) == 0) then
 					coor_map_x, coor_map_y, map = pub_analyse_map(pub_sel)
-					ret = pub_map_finished(map)
-					if ret == RET_OK then
-						-- 退出
-						finish = 1
-					elseif ret == RET_VALID then
-						-- 翻页
-						pub_refresh()
-						map = {}
-						pos = -1
-					end
 				end
 			end
 			-- 进攻button检测
