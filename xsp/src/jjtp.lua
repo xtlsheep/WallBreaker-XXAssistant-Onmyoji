@@ -647,7 +647,6 @@ function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, l
 			end
 		elseif (mode == "阴阳寮") then
 			action_pub = "Wait"
-			jjtp_solo_to_pub()
 			ret_pub = jjtp_pub(whr_pub, round_time, pub_sel, lock, action_pub)
 			
 			if ret_pub == "Finish" then
@@ -686,35 +685,6 @@ function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, l
 	return RET_ERR
 end
 
-function jjtp_solo_to_pub()
-	local x, y
-	while (1) do
-		while (1) do
-			mSleep(500)
-			-- 循环通用
-			loop_generic()
-			-- 个人突破
-			x, y = solo_lct_jjtp()
-			if (x > -1) then
-				random_sleep(500)
-				solo_to_pub()
-			end
-			-- 庭院
-			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
-			-- 探索
-			x, y = lct_tansuo() if (x > -1) then random_touch(0, 280, 590, 20, 20) break end -- 结界突破
-			-- 防守记录
-			x, y = solo_quit_defense_record() if x > -1 then break end
-			-- 阴阳寮突破
-			x, y = pub_lct_jjtp() if x > -1 then return RET_OK end
-			-- 阴阳寮Unstart
-			x, y = pub_unstart() if x > -1 then return RET_OK end
-			break
-		end
-	end
-	return RET_ERR
-end
-
 function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 	local time_cnt = 0
 	local map = {}
@@ -744,7 +714,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 拒绝邀请
-			x, y = member_team_refuse_invite() if (x > -1) then break end
+			x, y = member_team_refuse_invite() if (x > -1) then mSleep(1000) break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then
@@ -891,7 +861,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 	local finish = 0
 	local wait = 0
 	local action_pub = action
-	local click_cnt = 0
+	local fight_cnt = 0
 	local x, y
 	
 	while (1) do
@@ -910,7 +880,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 拒绝邀请
-			x, y = member_team_refuse_invite() if (x > -1) then break end
+			x, y = member_team_refuse_invite() if (x > -1) then mSleep(1000) break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then
@@ -927,12 +897,10 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			if (x > -1) then
 				win_cnt.global = win_cnt.global + 1
 				time_cnt = 0
-				click_cnt = 0
+				fight_cnt = 0
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.jjtp = win_cnt.jjtp + 1
 			end
-			-- 个人突破
-			x, y = solo_lct_jjtp() if x > -1 then quit_jjtp() break end
 			-- 阴阳寮突破
 			x, y = pub_lct_jjtp()
 			if (x > 0) then
@@ -1024,11 +992,11 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 					break
 				end
 				-- 点击无效的结界
-				if click_cnt >= 3 then
+				if fight_cnt >= 3 then
 					HUD_show_or_hide(HUD,hud_info,"点击3次无效, 跳过结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					map[pos] = -1
 					pos = -1
-					click_cnt = 0
+					fight_cnt = 0
 					jjtp_touch_blank()
 					break
 				end
@@ -1036,7 +1004,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				if whr == {0, 0, 0, 0} then
 					HUD_show_or_hide(HUD,hud_info,"进攻",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_touch(0, x_f, y_f+20, 20, 5) -- 进攻
-					click_cnt = click_cnt + 1
+					fight_cnt = fight_cnt + 1
 					break
 				else
 					ret_w = find_whr(pos, whr, "public")
@@ -1048,7 +1016,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 					else
 						HUD_show_or_hide(HUD,hud_info,"进攻",20,"0xff000000","0xffffffff",0,100,0,300,32)
 						random_touch(0, x_f, y_f+20, 20, 5) -- 进攻
-						click_cnt = click_cnt + 1
+						fight_cnt = fight_cnt + 1
 						break
 					end
 				end
@@ -1057,7 +1025,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			x, y = fight_failed("单人")
 			if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
-				click_cnt = 0
+				fight_cnt = 0
 				time_cnt = 0
 				map[pos] = -1
 				pos = -1
@@ -1066,6 +1034,12 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
+			-- 个人突破
+			x, y = solo_lct_jjtp() if (x > -1) then	solo_to_pub() end
+			-- 庭院
+			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
+			-- 探索
+			x, y = lct_tansuo() if (x > -1) then random_touch(0, 280, 590, 20, 20) break end -- 结界突破
 			-- 未开寮突
 			x, y = pub_unstart()
 			if x > -1 then
