@@ -43,9 +43,13 @@ end
 function yuling(sel, level, round, doll, lock)
 	print(string.format("种类 %s，层数 %d, 次数 %d，草人 %d, 锁定 %d", sel, level, round, doll, lock))
 	print_global_config()
+	local ret
 	
 	while (1) do
-		yuling_(sel, level, round, doll, lock)
+		ret = yuling_(sel, level, round, doll, lock)
+		if ret ~= RET_RECONN then
+			return ret
+		end
 	end
 	
 	return RET_ERR

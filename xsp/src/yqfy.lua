@@ -53,9 +53,13 @@ end
 function yqfy(round, sel, mark)
 	print(string.format("次数 %d 妖气 %s 标记 %s", round, sel, mark))
 	print_global_config()
+	local ret
 	
 	while (1) do
-		yqfy_(round, sel, mark)
+		ret = yqfy_(round, sel, mark)
+		if ret ~= RET_RECONN then
+			return ret
+		end
 	end
 	
 	return RET_ERR

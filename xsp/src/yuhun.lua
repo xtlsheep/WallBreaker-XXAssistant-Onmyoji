@@ -84,8 +84,8 @@ function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, f
 			ret = yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
 		end
 		
-		if ret == RET_VALID then
-			return RET_ERR
+		if ret ~= RET_RECONN then
+			return ret
 		end
 	end
 	

@@ -17,9 +17,13 @@ end
 function yeyuanhuo(round_tan, round_chen, round_chi, lock)
 	print(string.format("贪 %d, 嗔 %d, 痴 %d，锁定 %d", round_tan, round_chen, round_chi, lock))
 	print_global_config()
+	local ret
 	
 	while (1) do
-		yeyuanhuo_(round_tan, round_chen, round_chi, lock)
+		ret = yeyuanhuo_(round_tan, round_chen, round_chi, lock)
+		if ret ~= RET_RECONN then
+			return ret
+		end
 	end
 	
 	return RET_ERR

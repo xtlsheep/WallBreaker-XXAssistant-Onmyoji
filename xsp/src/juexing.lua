@@ -83,8 +83,8 @@ function juexing(mode, role, group, element, mark, level, round, lock, member_au
 			ret = juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
 		end
 		
-		if ret == RET_VALID then
-			return RET_ERR
+		if ret ~= RET_RECONN then
+			return ret
 		end
 	end
 	return RET_ERR

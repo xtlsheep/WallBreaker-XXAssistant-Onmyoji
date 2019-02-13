@@ -165,9 +165,13 @@ end
 function hundredghost(round, num, invite)
 	print(string.format("次数 %d 豆子 %s 邀请 %d", round, num, invite))
 	print_global_config()
+	local ret
 	
 	while (1) do
-		hundredghost_(round, num, invite)
+		ret = hundredghost_(round, num, invite)
+		if ret ~= RET_RECONN then
+			return ret
+		end
 	end
 	
 	return RET_ERR

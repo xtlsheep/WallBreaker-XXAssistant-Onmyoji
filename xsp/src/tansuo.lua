@@ -715,8 +715,8 @@ function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_roun
 			ret = tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 		end
 		
-		if ret == RET_VALID then
-			return RET_VALID
+		if ret ~= RET_RECONN then
+			return ret
 		end
 	end
 	
