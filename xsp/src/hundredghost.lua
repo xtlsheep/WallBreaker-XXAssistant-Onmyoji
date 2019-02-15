@@ -220,7 +220,7 @@ function hundredghost_(round, num, invite)
 			-- 领取奖励
 			x, y = hg_get_frag() if x > -1 then break end
 			-- 町中
-			x, y = lct_dingzhong() if x > -1 then random_touch(0, x, y, 5, 5) mSleep(500) break end
+			x, y = lct_dingzhong() if x > -1 then random_touch(0, 800, 170, 5, 5) mSleep(1000) break end
 			-- 庭院
 			x, y = lct_tingyuan() if x > -1 then tingyuan_enter_dingzhong() break end
 			break

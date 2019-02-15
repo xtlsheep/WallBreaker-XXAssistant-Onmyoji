@@ -70,7 +70,7 @@ function yuling_(sel, level, round, doll, lock)
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("单人")
+			x, y = fight_success()
 			if (x > -1) then
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
@@ -114,7 +114,7 @@ function yuling_(sel, level, round, doll, lock)
 				end
 			end
 			-- 战斗失败
-			x, y = fight_failed("单人")
+			x, y = fight_failed()
 			if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)

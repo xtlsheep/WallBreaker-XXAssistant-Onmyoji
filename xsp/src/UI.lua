@@ -10,8 +10,9 @@ require "autostory"
 require "yqfy"
 require "hundredghost"
 require "autocake"
-require "LBSGhostDriving"
+require "autobattle"
 require "autojjtp"
+require "LBSGhostDriving"
 require "superghost"
 
 -- UI init
@@ -54,7 +55,7 @@ function config_UI()
 	-- Config
 	config_ui = UI:new("config.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 	UI:Label(config_ui, "center", "0,0,0", 30, "高级选项", "20,20,960,55")
-	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,妖气封印    ,百鬼夜行    ,自动樱饼    ,副本组合    ,世界喊话    ,普通召唤    ,悬赏查询    ,劲舞团        ,自动剧情    ,特殊活动","0",30,"0,0,0","30,150,960,300")
+	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,妖气封印    ,百鬼夜行    ,自动樱饼    ,副本组合    ,世界喊话    ,普通召唤    ,悬赏查询    ,自动斗技    ,自动剧情    ,特殊活动","0",30,"0,0,0","30,150,960,300")
 	UI:fit(config_ui)
 	
 	ret_config, res_config = UI:show(config_ui)
@@ -89,8 +90,8 @@ function config_UI()
 	elseif (res_config.select == "11")  then normalcall_UI()
 		-- 超鬼王
 	elseif (res_config.select == "12")  then offerinquire_UI()
-		-- 劲舞团
-	elseif (res_config.select == "13")  then audition_UI()
+		-- 自动斗技
+	elseif (res_config.select == "13")  then autobattle_UI()
 		-- 自动剧情
 	elseif (res_config.select == "14")  then autostory_UI()
 		-- 特殊活动
@@ -143,32 +144,48 @@ function stats_UI()
 	UI:Label(stats_ui, "left", "0,0,0", 30, string.format("%d", win_cnt_last.yuling), "700,530,80,60")
 	UI:Label(stats_ui, "left", "0,0,0", 30, "-", "780,530,10,60")
 	UI:Label(stats_ui, "left", "0,0,0", 30, string.format("%d", fail_cnt_last.yuling), "865,530,135,60")
-	UI:Line(stats_ui, "line_common", "100,100,100", 2, 960, "20,590,960,2")
-	UI:Label(stats_ui, "left", "0,0,0", 30, "历史战斗结算 - ", "30,600,960,55")
-	UI:Label(stats_ui, "left", "0,0,0", 30, "御魂:", "30,660,100,60")
-	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", win_cnt_total.yuhun), "160,660,140,60")
-	UI:Label(stats_ui, "left", "0,0,0", 30, "-", "300,660,10,60")
-	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", fail_cnt_total.yuhun), "360,660,140,60")
-	UI:Label(stats_ui, "left", "0,0,0", 30, "探索:", "500,660,100,60")
-	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", win_cnt_total.tansuo), "640,660,140,60")
-	UI:Label(stats_ui, "left", "0,0,0", 30, "-", "780,660,10,60")
-	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", fail_cnt_total.tansuo), "830,660,140,60")
-	UI:Label(stats_ui, "left", "0,0,0", 30, "突破:", "30,720,100,60")
-	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", win_cnt_total.jjtp), "160,720,140,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, "妖气:", "30,590,200,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, string.format("%d", win_cnt_last.yqfy), "220,590,80,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, "-", "300,590,10,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, string.format("%d", fail_cnt_last.yqfy), "365,590,135,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, "斗技:", "500,590,200,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, string.format("%d", win_cnt_last.battle), "700,590,80,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, "-", "780,590,10,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, string.format("%d", fail_cnt_last.battle), "865,590,135,60")
+	UI:Line(stats_ui, "line_common", "100,100,100", 2, 960, "20,650,960,2")
+	UI:Label(stats_ui, "left", "0,0,0", 30, "历史战斗结算 - ", "30,660,960,55")
+	UI:Label(stats_ui, "left", "0,0,0", 30, "御魂:", "30,720,100,60")
+	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", win_cnt_total.yuhun), "160,720,140,60")
 	UI:Label(stats_ui, "left", "0,0,0", 30, "-", "300,720,10,60")
-	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", fail_cnt_total.jjtp), "360,720,140,60")
-	UI:Label(stats_ui, "left", "0,0,0", 30, "觉醒:", "500,720,100,60")
-	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", win_cnt_total.juexing), "640,720,140,60")
+	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", fail_cnt_total.yuhun), "360,720,140,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, "探索:", "500,720,100,60")
+	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", win_cnt_total.tansuo), "640,720,140,60")
 	UI:Label(stats_ui, "left", "0,0,0", 30, "-", "780,720,10,60")
-	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", fail_cnt_total.juexing), "830,720,140,60")
-	UI:Label(stats_ui, "left", "0,0,0", 30, "业原火:", "30,780,100,60")
-	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", win_cnt_total.yyh), "160,780,140,60")
+	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", fail_cnt_total.tansuo), "830,720,140,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, "突破:", "30,780,100,60")
+	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", win_cnt_total.jjtp), "160,780,140,60")
 	UI:Label(stats_ui, "left", "0,0,0", 30, "-", "300,780,10,60")
-	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", fail_cnt_total.yyh), "360,780,140,60")
-	UI:Label(stats_ui, "left", "0,0,0", 30, "御灵:", "500,780,100,60")
-	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", win_cnt_total.yuling), "640,780,140,60")
+	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", fail_cnt_total.jjtp), "360,780,140,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, "觉醒:", "500,780,100,60")
+	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", win_cnt_total.juexing), "640,780,140,60")
 	UI:Label(stats_ui, "left", "0,0,0", 30, "-", "780,780,10,60")
-	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", fail_cnt_total.yuling), "830,780,140,60")
+	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", fail_cnt_total.juexing), "830,780,140,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, "业原火:", "30,840,100,60")
+	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", win_cnt_total.yyh), "160,840,140,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, "-", "300,840,10,60")
+	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", fail_cnt_total.yyh), "360,840,140,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, "御灵:", "500,840,100,60")
+	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", win_cnt_total.yuling), "640,840,140,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, "-", "780,840,10,60")
+	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", fail_cnt_total.yuling), "830,840,140,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, "妖气:", "30,900,200,60")
+	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", win_cnt_last.yqfy), "160,900,140,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, "-", "300,900,10,60")
+	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", fail_cnt_last.yqfy), "360,900,140,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, "斗技:", "500,900,200,60")
+	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", win_cnt_last.battle), "640,900,140,60")
+	UI:Label(stats_ui, "left", "0,0,0", 30, "-", "780,900,10,60")
+	UI:Label(stats_ui, "center", "0,0,0", 30, string.format("%d", fail_cnt_last.battle), "830,900,140,60")
 	UI:fit(stats_ui)
 	
 	ret_stats, res_stats = UI:show(stats_ui)
@@ -190,11 +207,12 @@ function global_UI()
 	--UI:ComboBox(global_basic_page, "sg_fight_sel", "所有公开的超鬼王,自己发现的超鬼王","1",23,"680,140,300,50")
 	UI:Line(global_basic_page, "line_common", "100,100,100", 2, 960, "20,140,960,2")
 	UI:CheckBoxGroup(global_basic_page, "skill","自动关闭技能特写","0",30,"0,0,0","20,150,980,60")
-	UI:CheckBoxGroup(global_basic_page, "reconn","自动断线重新连接","0",30,"0,0,0","20,210,980,60")
-	UI:CheckBoxGroup(global_basic_page, "buff_stop_useup","体力用尽关闭所有Buff","0",30,"0,0,0","20,270,700,60")
-	UI:CheckBoxGroup(global_basic_page, "buff_stop_idle","庭院探索停留过久关闭所有Buff","0",30,"0,0,0","20,330,700,60")
-	UI:ComboBox(global_basic_page, "buff_stop_idle_time", "15秒,30秒,45秒,1分钟,2分钟,5分钟","3",23,"750,330,230,50")
-	UI:CheckBoxGroup(global_basic_page, "HUD","可视化点击手势与运行辅助描述","0",30,"0,0,0","20,390,980,60")
+	UI:CheckBoxGroup(global_basic_page, "bff_start","自动开启加成Buff","0",30,"0,0,0","20,210,980,60")
+	UI:CheckBoxGroup(global_basic_page, "reconn","自动断线重新连接","0",30,"0,0,0","20,270,980,60")
+	UI:CheckBoxGroup(global_basic_page, "buff_stop_useup","体力用尽关闭所有Buff","0",30,"0,0,0","20,330,700,60")
+	UI:CheckBoxGroup(global_basic_page, "buff_stop_idle","庭院探索停留过久关闭所有Buff","0",30,"0,0,0","20,390,700,60")
+	UI:ComboBox(global_basic_page, "buff_stop_idle_time", "15秒,30秒,45秒,1分钟,2分钟,5分钟","3",23,"750,390,230,50")
+	UI:CheckBoxGroup(global_basic_page, "HUD","可视化点击手势与运行辅助描述","0",30,"0,0,0","20,450,980,60")
 	
 	global_auto_jjtp_page = UI:Page(global_ui, "智能突破")
 	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "开启间隔 - ", "20,20,300,60")
@@ -296,11 +314,6 @@ function global_UI()
 		hud_info = createHUD()
 	end
 	
-	-- 关闭特效
-	if res_global.skill == "0" then
-		disable_skill_feature()
-	end
-	
 	-- 悬赏封印
 	local offer_sel = {}
 	if res_global.offer_en == "0" then
@@ -323,11 +336,21 @@ function global_UI()
 		end
 	end
 	
+	-- 关闭特效
+	if res_global.skill == "0" then
+		disable_skill_feature()
+	end
+	
 	-- 断线闪退
 	if res_global.reconn == "0" then
 		reconn = 1
 	else
 		reconn = 0
+	end
+	
+	-- 开启buff
+	if res_global.buff_start == "0" then
+		buff_start = 1
 	end
 	
 	-- Idle关闭buff
@@ -656,6 +679,14 @@ function settlement_UI()
 	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", win_cnt.yuling), "700,340,80,60")
 	UI:Label(settlement_ui, "left", "0,0,0", 30, "-", "780,340,10,60")
 	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", fail_cnt.yuling), "865,340,135,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, "妖气:", "30,400,200,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", win_cnt.yqfy), "220,400,80,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, "-", "300,400,10,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", fail_cnt.yqfy), "365,400,135,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, "斗技:", "500,400,200,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", win_cnt.battle), "700,400,80,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, "-", "780,400,10,60")
+	UI:Label(settlement_ui, "left", "0,0,0", 30, string.format("%d", fail_cnt.battle), "865,400,135,60")
 	UI:fit(settlement_ui)
 	
 	ret_settlement, res_settlement = UI:show(settlement_ui)
@@ -1689,7 +1720,6 @@ function autocake_UI()
 	UI:Line(autocake_ui, "line_common", "100,100,100", 2, 960, "20,160,960,2")
 	UI:Label(autocake_ui, "left", "0,0,0", 30, "Tips - ", "20,170,300,60")
 	UI:Label(autocake_ui, "left", "0,0,0", 30, "请手动开启[自动挑战], 进入战斗后使用此功能", "20,230,960,60")
-	
 	UI:fit(autocake_ui)
 	
 	ret_autocake, res_autocake = UI:show(autocake_ui)
@@ -1806,22 +1836,75 @@ function offerinquire_UI()
 	return
 end
 
-function audition_UI()
-	-- 劲舞团
-	audition_ui = UI:new("audition.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-	UI:Label(audition_ui, "center", "0,0,0", 30, "劲舞团", "20,20,960,55")
-	UI:fit(audition_ui)
+function autobattle_UI()
+	-- 自动斗技
+	autobattle_ui = UI:new("autobattle.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+	UI:Label(autobattle_ui, "center", "0,0,0", 30, "自动斗技", "20,20,960,55")
+	UI:Label(autobattle_ui, "left", "0,0,0", 30, "强制退出 - ", "20,100,300,60")
+	UI:RadioGroup(autobattle_ui, "force_quit", "否		,是","0",30,"0,0,0","650,100,330,60")
+	UI:Label(autobattle_ui, "left", "0,0,0", 30, "胜利次数 - ", "20,160,300,60")
+	UI:ComboBox(autobattle_ui, "round", "3次,5次,10次,无限次","3",23,"650,160,330,50")
+	UI:Label(autobattle_ui, "left", "0,0,0", 30, "战斗时间 - ", "20,220,300,60")
+	UI:ComboBox(autobattle_ui, "round_time", "5分钟,10分钟,无限制","2",23,"650,220,330,50")
+	UI:Label(autobattle_ui, "left", "0,0,0", 30, "标记己方式神[暂时无效] - ", "20,280,300,60")
+	UI:ComboBox(autobattle_ui, "mark_self", "无,正左,左前,正前,右前,正右","0",23,"650,280,330,50")
+	UI:CheckBoxGroup(autobattle_ui, "mark","随机标记敌方式神[暂时无效]","0",30,"0,0,0","20,340,900,60")
+	UI:fit(autobattle_ui)
 	
-	ret_audition, res_audition = UI:show(audition_ui)
-	if (ret_audition == 0) then
+	ret_autobattle, res_autobattle = UI:show(autobattle_ui)
+	if (ret_autobattle == 0) then
 		config_UI()
 		return
+	end
+	
+	local round, round_time, force_quit, mark_self, mark
+	
+	force_quit = tonumber(res_autobattle.force_quit)
+	
+	if res_autobattle.round == "0" then
+		round = 3
+	elseif res_autobattle.round == "1" then
+		round = 5
+	elseif res_autobattle.round == "2" then
+		round = 10
+	elseif res_autobattle.round == "3" then
+		round = 99999
+	end
+	
+	if res_autobattle.round_time == "0" then
+		round_time = 5
+	elseif res_autobattle.round_time == "1" then
+		round_time = 10
+	elseif res_autobattle.round_time == "2" then
+		round_time = 99999
+	end
+		
+	if res_autobattle.mark_self == "0" then
+		mark_self = "无"
+	elseif res_autobattle.mark_self == "1" then
+		mark_self = "正左"
+	elseif res_autobattle.mark_self == "2" then
+		mark_self = "左前"
+	elseif res_autobattle.mark_self == "3" then
+		mark_self = "正前"
+	elseif res_autobattle.mark_self == "4" then
+		mark_self = "右前"
+	elseif res_autobattle.mark_self == "5" then
+		mark_self = "正右"
+	end
+	
+	if res_autobattle.mark == "0" then
+		mark = 1
+	else
+		mark = 0
 	end
 	
 	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
+	
+	autobattle(round, round_time, force_quit, mark_self, mark)
 end
 
 function autostory_UI()

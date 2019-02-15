@@ -769,7 +769,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success("单人")
+			x, y = fight_success()
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
@@ -928,7 +928,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 战斗失败
-			x, y = fight_failed("单人")
+			x, y = fight_failed()
 			if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
@@ -1004,7 +1004,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success("单人")
+			x, y = fight_success()
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
@@ -1185,7 +1185,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 战斗失败
-			x, y = fight_failed("单人")
+			x, y = fight_failed()
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
@@ -1247,7 +1247,7 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 			-- 接受邀请
 			x, y, auto_grouped = member_team_accept_invite(1) if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("单人")
+			x, y = fight_success()
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
@@ -1361,7 +1361,7 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 				break
 			end
 			-- 战斗失败
-			x, y = fight_failed("单人")
+			x, y = fight_failed()
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0

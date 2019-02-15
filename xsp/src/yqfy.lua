@@ -169,7 +169,7 @@ function yqfy_(round, sel, mark)
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then HUD_show_or_hide(HUD,hud_info,"战斗准备",20,"0xff000000","0xffffffff",0,100,0,300,32) break end
 			-- 战斗胜利
-			x, y = fight_success("组队")
+			x, y = fight_success()
 			if (x > -1) then
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
@@ -180,7 +180,7 @@ function yqfy_(round, sel, mark)
 				break
 			end
 			-- 战斗失败
-			x, y = fight_failed("组队")
+			x, y = fight_failed()
 			if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)

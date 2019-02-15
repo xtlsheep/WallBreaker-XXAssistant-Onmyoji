@@ -37,8 +37,8 @@ function show_win_fail(win_cnt, fail_cnt)
 end
 
 function print_global_config()
-	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d; 断线/闪退 %d, 停留过长关闭buff %d(%d sec), 体力用尽关闭buff %d)",
-			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6], reconn, buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
+	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d) 断线/闪退 %d, 自动开启buff %d 停留过长关闭buff %d(%d sec), 体力用尽关闭buff %d)",
+			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6], reconn, buff_start, buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
 	
 	if auto_jjtp_en == 1 then
 		print(string.format("智能突破 间隔 %d, 模式：%s，战斗时间：%d，刷新：%d，个人突破：%s，阴阳寮突破：%d, 锁定: %d",
@@ -336,6 +336,82 @@ function disable_skill_feature()
 	end
 end
 
+function start_buff(sel)
+	function juexing_buff()
+		local x, y = findColor({345, 120, 365, 400},
+			"0|0|0x341e02,1|-8|0xf48204,17|11|0xe77600,0|15|0x321b01,334|4|0xb10b30",
+			90, 0, 0, 0)
+		return x, y
+	end
+	
+	function yuhun_buff()
+		local x, y = findColor({345, 120, 365, 400},
+			"0|0|0x023131,-7|15|0x01d7e5,-2|-10|0x00d6e5,-8|5|0x023131,331|2|0xb10b30",
+			90, 0, 0, 0)
+		return x, y
+	end
+	
+	function money_buff()
+		local x, y = findColor({345, 120, 365, 400},
+			"0|0|0xdeb74d,-14|5|0xcfc2b8,11|-8|0xebd7aa,5|8|0xf8e93b,330|1|0xb10b30",
+			90, 0, 0, 0)
+		return x, y
+	end
+	
+	function exp_buff()
+		local x, y = findColor({345, 120, 365, 400},
+			"0|0|0xa3c0e4,-5|-14|0xbfdbf1,11|-18|0xbfdbf1,13|6|0xf7e733,338|-2|0xb10b30",
+			90, 0, 0, 0)
+		return x, y
+	end
+	
+	local x_len = 380
+	local x, y, x_, y_
+	x, y = findColor({295, 470, 297, 472},
+		"0|0|0x7e7f6c,10|-21|0x838573,29|-37|0xb0a197,539|2|0x69705a",
+		90, 0, 0, 0)
+	if x > -1 then
+		-- 觉醒
+		if sel[1] == 1 then
+			x_, y_ = juexing_buff()
+			if x_ > -1 then
+				HUD_show_or_hide(HUD,hud_info,"开启觉醒Buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				random_touch(0, x_ + x_len, y_, 5, 20)
+				mSleep(1000)
+			end
+		end
+		-- 御魂
+		if sel[2] == 1 then
+			x_, y_ = yuhun_buff()
+			if x_ > -1 then
+				HUD_show_or_hide(HUD,hud_info,"开启御魂Buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				random_touch(0, x_ + x_len, y_, 5, 20)
+				mSleep(1000)
+			end
+		end
+		-- 金币
+		if sel[3] == 1 then
+			x_, y_ = money_buff()
+			if x_ > -1 then
+				HUD_show_or_hide(HUD,hud_info,"开启金币Buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				random_touch(0, x_ + x_len, y_, 5, 20)
+				mSleep(1000)
+			end
+		end
+		-- 经验
+		if sel[4] == 1 then
+			for i = 1, 2 do
+				x_, y_ = exp_buff()
+				if x_ > -1 then
+					HUD_show_or_hide(HUD,hud_info,"开启经验Buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_touch(0, x_ + x_len, y_, 5, 20)
+					mSleep(1000)
+				end
+			end
+		end
+	end
+end
+
 function stop_buff()
 	local buff_y = {136, 196, 256, 316, 376}
 	local x, y, x_, y_
@@ -343,7 +419,7 @@ function stop_buff()
 		"0|0|0x7e7f6c,10|-21|0x838573,29|-37|0xb0a197,539|2|0x69705a",
 		90, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,"关闭buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"关闭所有buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		mSleep(1000)
 		for i = 1, 5 do
 			x_, y_ = findColor({687, buff_y[i]-1, 689, buff_y[i]+1},
@@ -397,10 +473,10 @@ end
 
 function stats_read()
 	local stats_time = {first_date = "Unknown", total_dura = 0, last_date = "Unknown", last_dura = 0}
-	local win_cnt_last = {yuhun = 0, tansuo = 0, jjtp = 0, juexing = 0, yyh = 0, yuling = 0}
-	local fail_cnt_last = {yuhun = 0, tansuo = 0, jjtp = 0, juexing = 0, yyh = 0, yuling = 0}
-	local win_cnt_total = {yuhun = 0, tansuo = 0, jjtp = 0, juexing = 0, yyh = 0, yuling = 0}
-	local fail_cnt_total = {yuhun = 0, tansuo = 0, jjtp = 0, juexing = 0, yyh = 0, yuling = 0}
+	local win_cnt_last = {yuhun = 0, tansuo = 0, jjtp = 0, juexing = 0, yyh = 0, yuling = 0, yqfy = 0, battle = 0}
+	local fail_cnt_last = {yuhun = 0, tansuo = 0, jjtp = 0, juexing = 0, yyh = 0, yuling = 0, yqfy = 0, battle = 0}
+	local win_cnt_total = {yuhun = 0, tansuo = 0, jjtp = 0, juexing = 0, yyh = 0, yuling = 0, yqfy = 0, battle = 0}
+	local fail_cnt_total = {yuhun = 0, tansuo = 0, jjtp = 0, juexing = 0, yyh = 0, yuling = 0, yqfy = 0, battle = 0}
 	
 	stats_time.first_date = getStringConfig("script_first_start_date", "Unknown")
 	stats_time.total_dura = getNumberConfig("script_total_run_duration", 0)
@@ -413,24 +489,32 @@ function stats_read()
 	win_cnt_last.juexing = getNumberConfig("last_win_cnt_juexing", 0)
 	win_cnt_last.yyh = getNumberConfig("last_win_cnt_yyh", 0)
 	win_cnt_last.yuling = getNumberConfig("last_win_cnt_yuling", 0)
+	win_cnt_last.yyh = getNumberConfig("last_win_cnt_yqfy", 0)
+	win_cnt_last.yuling = getNumberConfig("last_win_cnt_battle", 0)
 	fail_cnt_last.yuhun = getNumberConfig("last_fail_cnt_yuhun", 0)
 	fail_cnt_last.tansuo = getNumberConfig("last_fail_cnt_tansuo", 0)
 	fail_cnt_last.jjtp = getNumberConfig("last_fail_cnt_jjtp", 0)
 	fail_cnt_last.juexing = getNumberConfig("last_fail_cnt_juexing", 0)
 	fail_cnt_last.yyh = getNumberConfig("last_fail_cnt_yyh", 0)
 	fail_cnt_last.yuling = getNumberConfig("last_fail_cnt_yuling", 0)
+	fail_cnt_last.yyh = getNumberConfig("last_fail_cnt_yqfy", 0)
+	fail_cnt_last.yuling = getNumberConfig("last_fail_cnt_battle", 0)
 	win_cnt_total.yuhun = getNumberConfig("total_win_cnt_yuhun", 0)
 	win_cnt_total.tansuo = getNumberConfig("total_win_cnt_tansuo", 0)
 	win_cnt_total.jjtp = getNumberConfig("total_win_cnt_jjtp", 0)
 	win_cnt_total.juexing = getNumberConfig("total_win_cnt_juexing", 0)
 	win_cnt_total.yyh = getNumberConfig("total_win_cnt_yyh", 0)
 	win_cnt_total.yuling = getNumberConfig("total_win_cnt_yuling", 0)
+	win_cnt_total.yyh = getNumberConfig("total_win_cnt_yqfy", 0)
+	win_cnt_total.yuling = getNumberConfig("total_win_cnt_battle", 0)
 	fail_cnt_total.yuhun = getNumberConfig("total_fail_cnt_yuhun", 0)
 	fail_cnt_total.tansuo = getNumberConfig("total_fail_cnt_tansuo", 0)
 	fail_cnt_total.jjtp = getNumberConfig("total_fail_cnt_jjtp", 0)
 	fail_cnt_total.juexing = getNumberConfig("total_fail_cnt_juexing", 0)
 	fail_cnt_total.yyh = getNumberConfig("total_fail_cnt_yyh", 0)
 	fail_cnt_total.yuling = getNumberConfig("total_fail_cnt_yuling", 0)
+	fail_cnt_total.yyh = getNumberConfig("total_fail_cnt_yqfy", 0)
+	fail_cnt_total.yuling = getNumberConfig("total_fail_cnt_battle", 0)
 	
 	return stats_time, win_cnt_last, fail_cnt_last, win_cnt_total, fail_cnt_total
 end
@@ -454,24 +538,32 @@ function stats_write()
 		setNumberConfig("last_win_cnt_juexing", win_cnt.juexing)
 		setNumberConfig("last_win_cnt_yyh", win_cnt.yyh)
 		setNumberConfig("last_win_cnt_yuling", win_cnt.yuling)
+		setNumberConfig("last_win_cnt_yyh", win_cnt.yqft)
+		setNumberConfig("last_win_cnt_yuling", win_cnt.battle)
 		setNumberConfig("last_fail_cnt_yuhun", fail_cnt.yuhun)
 		setNumberConfig("last_fail_cnt_tansuo", fail_cnt.tansuo)
 		setNumberConfig("last_fail_cnt_jjtp", fail_cnt.jjtp)
 		setNumberConfig("last_fail_cnt_juexing", fail_cnt.juexing)
 		setNumberConfig("last_fail_cnt_yyh", fail_cnt.yyh)
 		setNumberConfig("last_fail_cnt_yuling", fail_cnt.yuling)
+		setNumberConfig("last_fail_cnt_yyh", fail_cnt.yqft)
+		setNumberConfig("last_fail_cnt_yuling", fail_cnt.battle)
 		setNumberConfig("total_win_cnt_yuhun", (win_cnt_total.yuhun + win_cnt.yuhun))
 		setNumberConfig("total_win_cnt_tansuo", (win_cnt_total.tansuo + win_cnt.tansuo))
 		setNumberConfig("total_win_cnt_jjtp", (win_cnt_total.jjtp + win_cnt.jjtp))
 		setNumberConfig("total_win_cnt_juexing", (win_cnt_total.juexing + win_cnt.juexing))
 		setNumberConfig("total_win_cnt_yyh", (win_cnt_total.yyh + win_cnt.yyh))
 		setNumberConfig("total_win_cnt_yuling", (win_cnt_total.yuling + win_cnt.yuling))
+		setNumberConfig("total_win_cnt_yyh", (win_cnt_total.yqfy + win_cnt.yqfy))
+		setNumberConfig("total_win_cnt_yuling", (win_cnt_total.battle + win_cnt.battle))
 		setNumberConfig("total_fail_cnt_yuhun", (fail_cnt_total.yuhun + fail_cnt.yuhun))
 		setNumberConfig("total_fail_cnt_tansuo", (fail_cnt_total.tansuo + fail_cnt.tansuo))
 		setNumberConfig("total_fail_cnt_jjtp", (fail_cnt_total.jjtp + fail_cnt.jjtp))
 		setNumberConfig("total_fail_cnt_juexing", (fail_cnt_total.juexing + fail_cnt.juexing))
 		setNumberConfig("total_fail_cnt_yyh", (fail_cnt_total.yyh + fail_cnt.yyh))
 		setNumberConfig("total_fail_cnt_yuling", (fail_cnt_total.yuling + fail_cnt.yuling))
+		setNumberConfig("total_fail_cnt_yyh", (fail_cnt_total.yqfy + fail_cnt.yqfy))
+		setNumberConfig("total_fail_cnt_yuling", (fail_cnt_total.battle + fail_cnt.battle))
 	end
 end
 
@@ -846,6 +938,32 @@ function round_fight()
 	return x, y
 end
 
+function manual_detect()
+	local x, y = findColor({780, 632, 782, 634},
+		"0|0|0xffffff,8|-4|0x05b4d4,3|-7|0x03b9e9,-3|-10|0x019dd2,-6|5|0x07b1b1",
+		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"切换自动",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		random_touch(0, 55, 590, 10, 10)
+		mSleep(1000)
+	end
+	return x, y
+end
+
+function quit_confirm(sel)
+	local x, y = findColor({658, 376, 660, 378},
+		"0|0|0xf3b25e,-185|-3|0xdf6851,-65|-3|0xcbb59c,-119|-1|0xcbb59c",
+		95, 0, 0, 0)
+	if x > -1 then
+		if sel == "确认" then
+			random_touch(0, 660, 380, 20, 5)
+		elseif sel == "取消" then
+			random_touch(0, 475, 380, 20, 5)
+		end
+	end
+	return x, y
+end
+
 function fight_ongoing()
 	local x, y = findColor({26, 36, 28, 38}, -- 云彩&返回
 		"0|0|0xd6c4a1,-7|523|0x625a7c,-13|525|0x5b5374,-16|598|0x2f4633",
@@ -861,7 +979,7 @@ function fight_ongoing()
 	return x, y
 end
 
-function fight_success(mode)
+function fight_success()
 	function yuhun_overflow()
 		local x, y = findColor({568, 376, 570, 378},
 			"0|0|0xf3b25e,-54|-24|0x973b2e,52|20|0x963b2e,179|-163|0xc6b096,-182|42|0xcab49a",
@@ -872,17 +990,10 @@ function fight_success(mode)
 		return x, y
 	end
 	
-	function success_drum(mode)
-		local x, y
-		if mode == "组队" then
-			x, y = findColor({417, 86, 426, 95},
-				"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
-				95, 0, 0, 0)
-		elseif mode == "单人" then
-			x, y = findColor({421, 136, 430, 145},
-				"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
-				95, 0, 0, 0)
-		end
+	function success_drum()
+		local x, y = findColor({421, 75, 430, 145},
+			"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
+			95, 0, 0, 0)
 		return x, y
 	end
 	
@@ -920,7 +1031,7 @@ function fight_success(mode)
 	local x_s, y_s, x_h, y_h, ret
 	local cnt = 0
 	
-	x_s, y_s = success_drum(mode)
+	x_s, y_s = success_drum()
 	x_h, y_h = half_harma()
 	if (x_s > -1 or x_h > -1) then
 		HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -940,33 +1051,26 @@ function fight_success(mode)
 		end
 	end
 	
-	return RET_ERR, RET_ERR
+	return -1, -1
 end
 
-function fight_failed(mode)
-	function failed_drum(mode)
-		local x, y
-		if mode == "组队" then
-			x, y = findColor({410, 80, 415, 85},
-				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
-				95, 0, 0, 0)
-		elseif mode == "单人" then
-			x, y = findColor({410, 130, 415, 135},
-				"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
-				95, 0, 0, 0)
-		end
+function fight_failed()
+	function failed_drum()
+		local x, y = findColor({410, 65, 415, 135},
+			"0|0|0x524c5e,-19|37|0x5e5468,31|38|0x5b5265,234|24|0xbab2a4",
+			95, 0, 0, 0)
 		return x, y
 	end
 	
 	local x, y
 	local cnt = 0
 	
-	x, y = failed_drum(mode)
+	x, y = failed_drum()
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		while (1) do
 			loop_generic()
-			x, y = failed_drum(mode)
+			x, y = failed_drum()
 			if x > -1 then
 				right_lower_click()
 			elseif x == -1 then
@@ -980,7 +1084,7 @@ function fight_failed(mode)
 		end
 	end
 	
-	return RET_ERR, RET_ERR
+	return -1, -1
 end
 
 function fight_stop_auto_group()

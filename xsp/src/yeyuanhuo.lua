@@ -51,7 +51,7 @@ function yeyuanhuo_(round_tan, round_chen, round_chi, lock)
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success("单人")
+			x, y = fight_success()
 			if (x > -1) then
 				win_cnt.global = win_cnt.global + 1
 				if (last_sel == "tan") then
@@ -146,7 +146,7 @@ function yeyuanhuo_(round_tan, round_chen, round_chi, lock)
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then random_touch(0, 845, 320, 50, 50) random_sleep(1000) break end -- 业原火
 			-- 战斗失败
-			x, y = fight_failed("单人")
+			x, y = fight_failed()
 			if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
