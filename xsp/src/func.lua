@@ -538,32 +538,32 @@ function stats_write()
 		setNumberConfig("last_win_cnt_juexing", win_cnt.juexing)
 		setNumberConfig("last_win_cnt_yyh", win_cnt.yyh)
 		setNumberConfig("last_win_cnt_yuling", win_cnt.yuling)
-		setNumberConfig("last_win_cnt_yyh", win_cnt.yqft)
-		setNumberConfig("last_win_cnt_yuling", win_cnt.battle)
+		setNumberConfig("last_win_cnt_yqfy", win_cnt.yqfy)
+		setNumberConfig("last_win_cnt_battle", win_cnt.battle)
 		setNumberConfig("last_fail_cnt_yuhun", fail_cnt.yuhun)
 		setNumberConfig("last_fail_cnt_tansuo", fail_cnt.tansuo)
 		setNumberConfig("last_fail_cnt_jjtp", fail_cnt.jjtp)
 		setNumberConfig("last_fail_cnt_juexing", fail_cnt.juexing)
 		setNumberConfig("last_fail_cnt_yyh", fail_cnt.yyh)
 		setNumberConfig("last_fail_cnt_yuling", fail_cnt.yuling)
-		setNumberConfig("last_fail_cnt_yyh", fail_cnt.yqft)
-		setNumberConfig("last_fail_cnt_yuling", fail_cnt.battle)
+		setNumberConfig("last_fail_cnt_yqfy", fail_cnt.yqfy)
+		setNumberConfig("last_fail_cnt_battle", fail_cnt.battle)
 		setNumberConfig("total_win_cnt_yuhun", (win_cnt_total.yuhun + win_cnt.yuhun))
 		setNumberConfig("total_win_cnt_tansuo", (win_cnt_total.tansuo + win_cnt.tansuo))
 		setNumberConfig("total_win_cnt_jjtp", (win_cnt_total.jjtp + win_cnt.jjtp))
 		setNumberConfig("total_win_cnt_juexing", (win_cnt_total.juexing + win_cnt.juexing))
 		setNumberConfig("total_win_cnt_yyh", (win_cnt_total.yyh + win_cnt.yyh))
 		setNumberConfig("total_win_cnt_yuling", (win_cnt_total.yuling + win_cnt.yuling))
-		setNumberConfig("total_win_cnt_yyh", (win_cnt_total.yqfy + win_cnt.yqfy))
-		setNumberConfig("total_win_cnt_yuling", (win_cnt_total.battle + win_cnt.battle))
+		setNumberConfig("total_win_cnt_yqfy", (win_cnt_total.yqfy + win_cnt.yqfy))
+		setNumberConfig("total_win_cnt_battle", (win_cnt_total.battle + win_cnt.battle))
 		setNumberConfig("total_fail_cnt_yuhun", (fail_cnt_total.yuhun + fail_cnt.yuhun))
 		setNumberConfig("total_fail_cnt_tansuo", (fail_cnt_total.tansuo + fail_cnt.tansuo))
 		setNumberConfig("total_fail_cnt_jjtp", (fail_cnt_total.jjtp + fail_cnt.jjtp))
 		setNumberConfig("total_fail_cnt_juexing", (fail_cnt_total.juexing + fail_cnt.juexing))
 		setNumberConfig("total_fail_cnt_yyh", (fail_cnt_total.yyh + fail_cnt.yyh))
 		setNumberConfig("total_fail_cnt_yuling", (fail_cnt_total.yuling + fail_cnt.yuling))
-		setNumberConfig("total_fail_cnt_yyh", (fail_cnt_total.yqfy + fail_cnt.yqfy))
-		setNumberConfig("total_fail_cnt_yuling", (fail_cnt_total.battle + fail_cnt.battle))
+		setNumberConfig("total_fail_cnt_yqfy", (fail_cnt_total.yqfy + fail_cnt.yqfy))
+		setNumberConfig("total_fail_cnt_battle", (fail_cnt_total.battle + fail_cnt.battle))
 	end
 end
 
@@ -787,7 +787,7 @@ function lock_or_unlock(lock, spec)
 	elseif spec == "御灵" then
 		x1 = 639 y1 = 370 x2 = 641 y2 = 372
 	elseif spec == "Solo结界突破" then
-		x1 = 923 y1 = 550 x2 = 925 y2 = 552
+		x1 = 923 y1 = 548 x2 = 925 y2 = 550
 	elseif spec == "Pub结界突破" then
 		x1 = 190 y1 = 547 x2 = 192 y2 = 549
 	elseif spec == "探索" then
@@ -814,7 +814,7 @@ function lock_or_unlock(lock, spec)
 	elseif (spec == "Solo结界突破") then
 		if (lock == 1) then
 			x, y = findColor({x1, y1, x2, y2},
-				"0|0|0x8a6f4b,0|6|0x1f1610,-16|-1|0xbbaef3,15|-1|0xb9aef1",
+				"0|0|0x806545,13|1|0x2f2318,-13|1|0x2f2318,-4|6|0x7c6242",
 				95, 0, 0, 0)
 			if x > -1 then
 				random_touch(0, x, y, 3, 3)
