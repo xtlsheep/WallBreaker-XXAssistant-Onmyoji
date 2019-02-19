@@ -155,6 +155,8 @@ function yeyuanhuo_(round_tan, round_chen, round_chi, lock)
 			end
 			-- 八岐大蛇
 			x, y = lct_8dashe() if x > -1 then  random_touch(0, 928, 108, 5, 5) break end -- 八岐大蛇
+			-- 喂食纸人
+			x, y = feed_paperman() if x > -1 then break end
 			break
 		end
 	end

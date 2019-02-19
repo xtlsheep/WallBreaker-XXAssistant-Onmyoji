@@ -148,9 +148,9 @@ function section_select(section)
 	local x, y, sec, ret, rd
 	local cnt = 0
 	
-	if section == -1 then
+	if section == 0 then
 		random_touch(0, 1025, 220, 20, 20)
-	elseif section == 0 then
+	elseif section == -1 then
 		random_touch(0, 1025, 530, 20, 20)
 	else
 		while (1) do
@@ -712,7 +712,7 @@ function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_roun
 		elseif mode == "队长" then
 			ret = tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 		elseif mode == "队员" then
-			ret = tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+			ret = tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 		end
 		
 		if ret ~= RET_RECONN then
@@ -799,6 +799,10 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				x_, y_ = treasure_box()
 				if x_ > -1 then
 					break
+				end
+				if quit_end == 1 then
+					stop_buff()
+					lua_exit()
 				end
 				section_select(section)
 				break
@@ -904,12 +908,13 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			-- 探索章节
 			x, y = lct_tansuo_portal()
 			if x > -1 then
-				-- 智能突破Check
-				quit_con = auto_jjtp_time_check()
 				if quit_end == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
-					lua_exit()
+					mSleep(1000)
+					break
 				end
+				-- 智能突破Check
+				quit_con = auto_jjtp_time_check()
 				if quit_con == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
 					return RET_VALID
@@ -1030,12 +1035,30 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				quit_con = auto_jjtp_time_check()
 				break
 			end
+			-- 继续邀请
+			x, y = team_invite()
+			if x > -1 then
+				if quit_end == 1 or quit_con == 1 then
+					random_touch(0, 465, 385, 20, 5)
+				else
+					random_touch(0, x, y, 20, 5)
+					quit_sce = 0
+					move_cnt = 0
+					move_total = get_scene_move(scene_move)
+					mSleep(5000)
+				end
+				break
+			end
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then
 				x_, y_ = treasure_box()
 				if x_ > -1 then
 					break
+				end
+				if quit_end == 1 then
+					stop_buff()
+					lua_exit()
 				end
 				section_select(section)
 				break
@@ -1141,7 +1164,6 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			if x > -1 then
 				if quit_end == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
-					lua_exit()
 				end
 				if quit_con == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
@@ -1163,20 +1185,6 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 					mSleep(3000)
 					break
 				end
-			end
-			-- 继续邀请
-			x, y = team_invite()
-			if x > -1 then
-				if quit_end == 1 or quit_con == 1 then
-					random_touch(0, 465, 385, 20, 5)
-				else
-					random_touch(0, x, y, 20, 5)
-					quit_sce = 0
-					move_cnt = 0
-					move_total = get_scene_move(scene_move)
-					mSleep(5000)
-				end
-				break
 			end
 			-- 确认退出
 			x, y = scene_quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
@@ -1206,10 +1214,13 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 	return RET_ERR
 end
 
-function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 	local unlock = 0
 	local ret = RET_ERR
+	local quit_sce = 0
+	local quit_end = 0
 	local quit_con = 0
+	local sec_cnt = 0
 	local df_pos = {}
 	local top_left = 0
 	local top_mid = 0
@@ -1244,8 +1255,13 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 				if nor_attk == 1 then df_normal_attack(df_pos, "group") end
 				break
 			end
+			-- 拒绝邀请
+			if quit_con == 1 or quit_end == 1 then
+				x, y = member_team_refuse_invite() if (x > -1) then mSleep(1000) break end
+			else
 			-- 接受邀请
-			x, y, auto_grouped = member_team_accept_invite(1) if (x > -1) then break end
+				x, y, auto_grouped = member_team_accept_invite(member_auto_group) if (x > -1) then break end
+			end
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then
@@ -1254,6 +1270,12 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.tansuo = win_cnt.tansuo + 1
+				if count_mode == "战斗" then
+					if win_cnt.tansuo >= win_round then
+						quit_sce = 1
+						quit_end = 1
+					end
+				end
 				break
 			end
 			-- 探索场景
@@ -1266,8 +1288,15 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 					break
 				end
 				x_, y_ = member_quit()
-				if x_ == -1 then
-					random_touch(0, 47, 56, 5, 5) -- 左上退出
+				if x_ == -1 or quit_sce == 1 then
+					HUD_show_or_hide(HUD,hud_info,"退出场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_touch(0, 45, 60, 10, 10) -- 左上退出
+					if count_mode == "章节" then
+						sec_cnt = sec_cnt + 1
+						if sec_cnt >= sec_round then
+							quit_end = 1
+						end
+					end
 				end
 				break
 			end
@@ -1277,6 +1306,10 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 				x_, y_ = treasure_box()
 				if x_ > -1 then
 					break
+				end
+				if quit_end == 1 then
+					stop_buff()
+					lua_exit()
 				end
 				-- 智能突破Check
 				quit_con = auto_jjtp_time_check()
@@ -1352,6 +1385,10 @@ function tansuo_member(sel, mark, captain_pos, nor_attk, full_exp, page_jump, df
 			-- 探索章节
 			x, y = lct_tansuo_portal()
 			if x > -1 then
+				if quit_end == 1 then
+					random_touch(0, 930, 135, 5, 5) -- 退出章节
+					break
+				end
 				-- 智能突破Check
 				quit_con = auto_jjtp_time_check()
 				if quit_con == 1 then

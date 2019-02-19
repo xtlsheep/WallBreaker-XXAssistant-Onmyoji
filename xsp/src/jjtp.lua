@@ -847,6 +847,10 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			x, y = lct_tansuo() if (x > -1) then random_touch(0, 280, 590, 20, 20) break end -- 结界突破
 			-- 退出防守记录
 			x, y = solo_quit_defense_record() if (x > -1) then break end
+			-- 真八岐大蛇
+			x, y = real_baqidashe() if x > -1 then break end
+			-- 神秘商人
+			x, y = mysterious_vender() if x > -1 then break end
 			break
 		end
 	end
@@ -1052,6 +1056,10 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				end
 				return "Finish"
 			end
+			-- 真八岐大蛇
+			x, y = real_baqidashe() if x > -1 then break end
+			-- 神秘商人
+			x, y = mysterious_vender() if x > -1 then break end
 			break
 		end
 	end

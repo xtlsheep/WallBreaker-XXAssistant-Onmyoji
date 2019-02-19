@@ -293,16 +293,12 @@ function out_of_sushi()
 				-- 探索
 				x, y = lct_tansuo()
 				if x > -1 then
-					random_touch(0, 390, 50, 5, 5)
-					mSleep(1500)
 					stop_buff()
 					lua_exit()
 				end
 				-- 庭院
 				x, y = lct_tingyuan()
 				if x > -1 then
-					random_touch(0, 380, 60, 5, 5)
-					mSleep(1500)
 					stop_buff()
 					lua_exit()
 				end
@@ -336,7 +332,7 @@ function disable_skill_feature()
 	end
 end
 
-function start_buff(sel)
+function start_buff()
 	function juexing_buff()
 		local x, y = findColor({345, 120, 365, 400},
 			"0|0|0x341e02,1|-8|0xf48204,17|11|0xe77600,0|15|0x321b01,334|4|0xb10b30",
@@ -367,12 +363,17 @@ function start_buff(sel)
 	
 	local x_len = 380
 	local x, y, x_, y_
+	
+	random_touch(0, 390, 50, 5, 5)
+	mSleep(1000)
+	
 	x, y = findColor({295, 470, 297, 472},
 		"0|0|0x7e7f6c,10|-21|0x838573,29|-37|0xb0a197,539|2|0x69705a",
 		90, 0, 0, 0)
 	if x > -1 then
+		mSleep(1000)
 		-- 觉醒
-		if sel[1] == 1 then
+		if buff_sel[1] == 1 then
 			x_, y_ = juexing_buff()
 			if x_ > -1 then
 				HUD_show_or_hide(HUD,hud_info,"开启觉醒Buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -381,7 +382,7 @@ function start_buff(sel)
 			end
 		end
 		-- 御魂
-		if sel[2] == 1 then
+		if buff_sel[2] == 1 then
 			x_, y_ = yuhun_buff()
 			if x_ > -1 then
 				HUD_show_or_hide(HUD,hud_info,"开启御魂Buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -390,7 +391,7 @@ function start_buff(sel)
 			end
 		end
 		-- 金币
-		if sel[3] == 1 then
+		if buff_sel[3] == 1 then
 			x_, y_ = money_buff()
 			if x_ > -1 then
 				HUD_show_or_hide(HUD,hud_info,"开启金币Buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -399,7 +400,7 @@ function start_buff(sel)
 			end
 		end
 		-- 经验
-		if sel[4] == 1 then
+		if buff_sel[4] == 1 then
 			for i = 1, 2 do
 				x_, y_ = exp_buff()
 				if x_ > -1 then
@@ -409,12 +410,18 @@ function start_buff(sel)
 				end
 			end
 		end
+		right_lower_click()
+		mSleep(1000)
 	end
 end
 
 function stop_buff()
 	local buff_y = {136, 196, 256, 316, 376}
 	local x, y, x_, y_
+	
+	random_touch(0, 390, 50, 5, 5)
+	mSleep(1000)
+	
 	x, y = findColor({295, 470, 297, 472},
 		"0|0|0x7e7f6c,10|-21|0x838573,29|-37|0xb0a197,539|2|0x69705a",
 		90, 0, 0, 0)
@@ -430,9 +437,9 @@ function stop_buff()
 				random_sleep(500)
 			end
 		end
+		right_lower_click()
+		mSleep(1000)
 	end
-	mSleep(1000)
-	right_lower_click()
 end
 
 function idle_at_tingyuan(idle_time_cnt)
@@ -444,12 +451,12 @@ function idle_at_tingyuan(idle_time_cnt)
 	if buff_stop_idle == 1 then
 		time_cnt = idle_time_cnt + 1
 	end
+	
 	if time_cnt*500 > buff_stop_idle_time*1000 then
-		random_touch(0, 390, 50, 10, 10) -- 加成
-		mSleep(1500)
 		stop_buff()
 		buff_stop_idle = 0
 	end
+	
 	return time_cnt
 end
 
@@ -462,12 +469,12 @@ function idle_at_tansuo(idle_time_cnt)
 	if buff_stop_idle == 1 then
 		time_cnt = idle_time_cnt + 1
 	end
+	
 	if time_cnt*500 > buff_stop_idle_time*1000 then
-		random_touch(0, 390, 60, 10, 5) -- 加成
-		mSleep(1500)
 		stop_buff()
 		buff_stop_idle = 0
 	end
+	
 	return time_cnt
 end
 
@@ -607,6 +614,16 @@ function garbage_collect()
 	count = collectgarbage("count")
 	print(string.format("Execute collectgarbage, memory cost  - %d kb", count))
 	setTimer(5*60*1000, garbage_collect)
+end
+
+function feed_paperman()
+	local x, y = findColor({708, 422, 710, 424},
+		"0|0|0xdabc69,-175|-14|0xfef3e6,-177|-19|0x93b464,-180|-29|0xfed5dc",
+		95, 0, 0, 0)
+	if x > -1 then
+		right_lower_click()
+	end
+	return x, y
 end
 
 -- Locate & Enter func

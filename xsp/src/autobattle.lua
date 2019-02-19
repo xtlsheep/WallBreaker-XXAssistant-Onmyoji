@@ -120,7 +120,7 @@ function autobattle(round, round_time, force_quit, mark_self, mark)
 				time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
-				fail_cnt.jjtp = fail_cnt.jjtp + 1
+				fail_cnt.battle = fail_cnt.battle + 1
 				break
 			end
 			-- 排名

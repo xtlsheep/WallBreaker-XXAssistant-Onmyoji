@@ -15,6 +15,7 @@ settlement_en = 0
 offer_arr = {0, 0, 0, 0, 0, 0}
 reconn = 0
 buff_start = 0
+buff_sel = {0, 0, 0, 0}
 buff_stop_idle = 0
 buff_stop_idle_time = 0
 buff_stop_useup = 0
