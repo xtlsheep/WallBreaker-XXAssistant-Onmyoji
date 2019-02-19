@@ -401,13 +401,17 @@ function start_buff()
 		end
 		-- 经验
 		if buff_sel[4] == 1 then
-			for i = 1, 2 do
-				x_, y_ = exp_buff()
-				if x_ > -1 then
-					HUD_show_or_hide(HUD,hud_info,"开启经验Buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					random_touch(0, x_ + x_len, y_, 5, 20)
-					mSleep(1000)
-				end
+			-- 1st
+			x_, y_ = exp_buff()
+			if x_ > -1 then
+				HUD_show_or_hide(HUD,hud_info,"开启经验Buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				random_touch(0, x_ + x_len, y_, 5, 20)
+				mSleep(3000)
+			end
+			-- 2nd
+			x_, y_ = exp_buff()
+			if x_ > -1 then
+				random_touch(0, x_ + x_len, y_, 5, 20)
 			end
 		end
 		right_lower_click()

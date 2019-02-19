@@ -706,6 +706,18 @@ function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_roun
 	
 	local ret = 0
 	
+	if buff_start == 1 then
+		buff_start_en = 1
+		buff_sel[1] = 0
+		buff_sel[2] = 0
+		if sel[2] == 1 then
+			buff_sel[3] = 1
+		end
+		if sel[3] == 1 then
+			buff_sel[4] = 1
+		end
+	end
+	
 	while (1) do
 		if mode == "单人" then
 			ret = tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
@@ -803,6 +815,10 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				if quit_end == 1 then
 					stop_buff()
 					lua_exit()
+				end
+				if buff_start_en == 1 then
+					start_buff()
+					buff_start_en = 0
 				end
 				section_select(section)
 				break
@@ -1060,6 +1076,10 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 					stop_buff()
 					lua_exit()
 				end
+				if buff_start_en == 1 then
+					start_buff()
+					buff_start_en = 0
+				end
 				section_select(section)
 				break
 			end
@@ -1259,7 +1279,7 @@ function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos,
 			if quit_con == 1 or quit_end == 1 then
 				x, y = member_team_refuse_invite() if (x > -1) then mSleep(1000) break end
 			else
-			-- 接受邀请
+				-- 接受邀请
 				x, y, auto_grouped = member_team_accept_invite(member_auto_group) if (x > -1) then break end
 			end
 			-- 战斗胜利
@@ -1315,6 +1335,10 @@ function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos,
 				quit_con = auto_jjtp_time_check()
 				if quit_con == 1 then
 					return RET_VALID
+				end
+				if buff_start_en == 1 then
+					start_buff()
+					buff_start_en = 0
 				end
 				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt)
 				break
@@ -1412,7 +1436,15 @@ function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos,
 			-- 队员档案
 			x, y = member_user_profile() if x > -1 then break end
 			-- 庭院
-			x, y = lct_tingyuan() if x > -1 then tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
+			x, y = lct_tingyuan()
+			if x > -1 then
+				if buff_start_en == 1 then
+					start_buff()
+					buff_start_en = 0
+				end
+				tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt)
+				break
+			end
 			-- 神秘商人
 			x, y = mysterious_vender() if x > -1 then break end
 			-- 体力不足

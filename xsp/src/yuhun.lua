@@ -71,7 +71,10 @@ function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, f
 		captain_auto_group = 0
 	end
 	
-	buff_sel = {0, 1, 0, 0}
+	if buff_start == 1 then
+		buff_start_en = 1
+		buff_sel = {0, 1, 0, 0}
+	end
 	
 	while (1) do
 		if (mode == "单人") then
@@ -161,6 +164,10 @@ function yuhun_solo(mark, level, round, lock)
 					stop_buff()
 					lua_exit()
 				end
+				if buff_start_en == 1 then
+					start_buff()
+					buff_start_en = 0
+				end
 				random_touch(0, 180, 590, 20, 20) -- 御魂
 				break
 			end
@@ -228,6 +235,10 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 				end
 				if quit_con == 1 then
 					return RET_VALID
+				end
+				if buff_start_en == 1 then
+					start_buff()
+					buff_start_en = 0
 				end
 				if wait_invite == 0 then
 					random_touch(0, 180, 590, 20, 20) -- 御魂
@@ -432,6 +443,10 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 				if quit_con == 1 then
 					return RET_VALID
 				end
+				if buff_start_en == 1 then
+					start_buff()
+					buff_start_en = 0
+				end
 				random_touch(0, 180, 590, 20, 20)
 				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt)
 				break
@@ -507,7 +522,7 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			if wait_invite == 1 then
 				x, y, auto_grouped = member_team_accept_invite(member_auto_group) if (x > -1) then break end
 			else
-			-- 拒绝邀请
+				-- 拒绝邀请
 				x, y = member_team_refuse_invite() if (x > -1) then mSleep(1000) break end
 			end
 			-- 战斗准备
@@ -566,6 +581,10 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 				if quit_con == 1 then
 					return RET_VALID
 				end
+				if buff_start_en == 1 then
+					start_buff()
+					buff_start_en = 0
+				end
 				tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt)
 				break
 			end
@@ -578,6 +597,10 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 				end
 				if quit_con == 1 then
 					return RET_VALID
+				end
+				if buff_start_en == 1 then
+					start_buff()
+					buff_start_en = 0
 				end
 				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt)
 				break
@@ -725,6 +748,10 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 				end
 				if quit_con == 1 then
 					return RET_VALID
+				end
+				if buff_start_en == 1 then
+					start_buff()
+					buff_start_en = 0
 				end
 				random_touch(0, 180, 590, 20, 20)
 				break

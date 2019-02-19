@@ -69,7 +69,11 @@ function juexing(mode, role, group, element, mark, level, round, lock, member_au
 		member_auto_group = 0
 		captain_auto_group = 0
 	end
-	buff_sel = {1, 0, 0, 0}
+	
+	if buff_start == 1 then
+		buff_start_en = 1
+		buff_sel = {1, 0, 0, 0}
+	end
 	
 	while (1) do
 		if (mode == "单人") then
@@ -153,6 +157,10 @@ function juexing_solo(element, mark, level, round, lock)
 					stop_buff()
 					lua_exit()
 				end
+				if buff_start_en == 1 then
+					start_buff()
+					buff_start_en = 0
+				end
 				random_touch(0, 90, 590, 20, 20)
 				mSleep(1000)
 				break
@@ -215,6 +223,10 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 				end
 				if quit_con == 1 then
 					return RET_VALID
+				end
+				if buff_start_en == 1 then
+					start_buff()
+					buff_start_en = 0
 				end
 				if wait_invite == 0 then
 					random_touch(0, 90, 590, 20, 20) -- 觉醒
@@ -416,6 +428,10 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 				if quit_con == 1 then
 					return RET_VALID
 				end
+				if buff_start_en == 1 then
+					start_buff()
+					buff_start_en = 0
+				end
 				random_touch(0, 90, 590, 20, 20)
 				mSleep(1000)
 				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt)
@@ -544,6 +560,10 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 				if quit_con == 1 then
 					return RET_VALID
 				end
+				if buff_start_en == 1 then
+					start_buff()
+					buff_start_en = 0
+				end
 				tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt)
 				break
 			end
@@ -556,6 +576,10 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 				end
 				if quit_con == 1 then
 					return RET_VALID
+				end
+				if buff_start_en == 1 then
+					start_buff()
+					buff_start_en = 0
 				end
 				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt)
 				break
@@ -701,6 +725,10 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 				end
 				if quit_con == 1 then
 					return RET_VALID
+				end
+				if buff_start_en == 1 then
+					start_buff()
+					buff_start_en = 0
 				end
 				random_touch(0, 90, 590, 20, 20)
 				mSleep(1000)
