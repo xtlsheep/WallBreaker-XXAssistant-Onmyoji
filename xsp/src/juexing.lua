@@ -139,7 +139,7 @@ function juexing_solo(element, mark, level, round, lock)
 				-- 退出后继续
 				if quit_con == 1 then
 					random_touch(0, 930, 110, 5, 5)
-					return RET_VALID
+					break
 				end
 				level_select(level, init, lock, "觉醒")
 				init = 0
@@ -156,6 +156,10 @@ function juexing_solo(element, mark, level, round, lock)
 				if quit_end == 1 then
 					stop_buff()
 					lua_exit()
+				end
+				if quit_con == 1 then
+					stop_buff()
+					return RET_VALID
 				end
 				if buff_start_en == 1 then
 					start_buff()
@@ -222,6 +226,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 					lua_exit()
 				end
 				if quit_con == 1 then
+					stop_buff()
 					return RET_VALID
 				end
 				if buff_start_en == 1 then
@@ -426,6 +431,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 					lua_exit()
 				end
 				if quit_con == 1 then
+					stop_buff()
 					return RET_VALID
 				end
 				if buff_start_en == 1 then
@@ -558,6 +564,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 					lua_exit()
 				end
 				if quit_con == 1 then
+					stop_buff()
 					return RET_VALID
 				end
 				if buff_start_en == 1 then
@@ -575,6 +582,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 					lua_exit()
 				end
 				if quit_con == 1 then
+					stop_buff()
 					return RET_VALID
 				end
 				if buff_start_en == 1 then
@@ -724,6 +732,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 					lua_exit()
 				end
 				if quit_con == 1 then
+					stop_buff()
 					return RET_VALID
 				end
 				if buff_start_en == 1 then

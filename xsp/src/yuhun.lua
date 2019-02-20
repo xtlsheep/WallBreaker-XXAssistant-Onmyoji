@@ -146,7 +146,7 @@ function yuhun_solo(mark, level, round, lock)
 				-- 退出后继续
 				if quit_con == 1 then
 					random_touch(0, 930, 110, 5, 5)
-					return RET_VALID
+					break
 				end
 				level_select(level, init, lock, "御魂")
 				init = 0
@@ -163,6 +163,10 @@ function yuhun_solo(mark, level, round, lock)
 				if quit_end == 1 then
 					stop_buff()
 					lua_exit()
+				end
+				if quit_con == 1 then
+					stop_buff()
+					return RET_VALID
 				end
 				if buff_start_en == 1 then
 					start_buff()
@@ -234,6 +238,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 					lua_exit()
 				end
 				if quit_con == 1 then
+					stop_buff()
 					return RET_VALID
 				end
 				if buff_start_en == 1 then
@@ -441,6 +446,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 					lua_exit()
 				end
 				if quit_con == 1 then
+					stop_buff()
 					return RET_VALID
 				end
 				if buff_start_en == 1 then
@@ -579,6 +585,7 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 					lua_exit()
 				end
 				if quit_con == 1 then
+					stop_buff()
 					return RET_VALID
 				end
 				if buff_start_en == 1 then
@@ -596,6 +603,7 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 					lua_exit()
 				end
 				if quit_con == 1 then
+					stop_buff()
 					return RET_VALID
 				end
 				if buff_start_en == 1 then
@@ -747,6 +755,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 					lua_exit()
 				end
 				if quit_con == 1 then
+					stop_buff()
 					return RET_VALID
 				end
 				if buff_start_en == 1 then

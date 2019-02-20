@@ -816,6 +816,10 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 					stop_buff()
 					lua_exit()
 				end
+				if quit_con == 1 then
+					stop_buff()
+					return RET_VALID
+				end
 				if buff_start_en == 1 then
 					start_buff()
 					buff_start_en = 0
@@ -933,7 +937,8 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				quit_con = auto_jjtp_time_check()
 				if quit_con == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
-					return RET_VALID
+					mSleep(1000)
+					break
 				end
 				degree_select(hard)
 				HUD_show_or_hide(HUD,hud_info,"进入场景",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -1076,6 +1081,10 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 					stop_buff()
 					lua_exit()
 				end
+				if quit_con == 1 then
+					stop_buff()
+					return RET_VALID
+				end
 				if buff_start_en == 1 then
 					start_buff()
 					buff_start_en = 0
@@ -1184,10 +1193,13 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			if x > -1 then
 				if quit_end == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
+					mSleep(1000)
+					break
 				end
 				if quit_con == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
-					return RET_VALID
+					mSleep(1000)
+					break
 				end
 				degree_select(hard)
 				HUD_show_or_hide(HUD,hud_info,"邀请队员",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -1334,6 +1346,7 @@ function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos,
 				-- 智能突破Check
 				quit_con = auto_jjtp_time_check()
 				if quit_con == 1 then
+					stop_buff()
 					return RET_VALID
 				end
 				if buff_start_en == 1 then
@@ -1411,13 +1424,15 @@ function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos,
 			if x > -1 then
 				if quit_end == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
+					mSleep(1000)
 					break
 				end
 				-- 智能突破Check
 				quit_con = auto_jjtp_time_check()
 				if quit_con == 1 then
 					random_touch(0, 930, 135, 5, 5) -- 退出章节
-					return RET_VALID
+					mSleep(1000)
+					break
 				end
 				break
 			end
