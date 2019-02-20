@@ -20,7 +20,6 @@ function yqfy_queue()
 end
 
 function yqfy_mark(mark)
-	random_sleep(500)
 	local pos
 	local cnt
 	local pos_x = {350, 550, 750}
@@ -68,6 +67,7 @@ end
 function yqfy_(round, sel, mark)
 	local quit = 0
 	local ran_wait = 0
+	local ret = 0
 	local x, y
 	
 	while (1) do
@@ -99,8 +99,8 @@ function yqfy_(round, sel, mark)
 			x, y = yqfy_queue() if x > -1 then break end
 			-- 妖气封印
 			x, y = lct_yqfy()
-			random_sleep(500)
 			if x > -1 then
+				random_sleep(500)
 				if sel == "跳跳哥哥" then
 					random_touch(0, 430, 230, 50, 10)
 					random_sleep(750)
@@ -161,7 +161,7 @@ function yqfy_(round, sel, mark)
 				elseif linkage == "Disable" then
 					random_touch(0, 220, 520, 50, 10)
 				end
-				random_sleep(750)
+				random_sleep(1000)
 				break
 			end
 			-- 队员接手队长
