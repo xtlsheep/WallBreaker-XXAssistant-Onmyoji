@@ -3,8 +3,8 @@ require "func"
 
 -- Util func
 function lct_douji()
-	local x, y = findColor({949, 502, 951, 504},
-		"0|0|0xf0df90,98|-384|0xe8d4cf,-394|-457|0xb39c68,5|-11|0x272420",
+	local x, y = findColor({1046, 119, 1048, 121},
+		"0|0|0xf0d3d2,-35|-1|0xa48959,-43|-10|0x5f3832,-35|9|0x181d4d",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"斗技",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -120,9 +120,13 @@ function autobattle(round, round_time, force_quit, mark_self, mark)
 				time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
-				fail_cnt.jjtp = fail_cnt.jjtp + 1
+				fail_cnt.battle = fail_cnt.battle + 1
 				break
 			end
+			-- 排名
+			x, y = lct_rank() if x > -1 then break end
+			-- 段位
+			x, y = lct_grade() if x > -1 then break end
 			-- 斗技
 			x, y = lct_douji()
 			if x > -1 then
@@ -130,15 +134,11 @@ function autobattle(round, round_time, force_quit, mark_self, mark)
 					random_touch(0, 1050, 120, 10, 10)
 					return RET_OK
 				end
-				random_touch(0, x, y, 10, 10)
+				random_touch(0, 950, 500, 10, 10)
 				break
 			end
 			-- 确认退出
 			x, y = quit_confirm("确认") if x > -1 then mSleep(500) break end
-			-- 排名
-			x, y = lct_rank() if x > -1 then break end
-			-- 段位
-			x, y = lct_grade() if x > -1 then break end
 			-- 段位上升
 			x, y = upgrade() if x > -1 then break end
 			-- 町中

@@ -121,6 +121,8 @@ function yuling_(sel, level, round, doll, lock)
 				fail_cnt.yuling = fail_cnt.yuling + 1
 				break
 			end
+			-- 喂食纸人
+			x, y = feed_paperman() if x > -1 then break end
 			break
 		end
 	end

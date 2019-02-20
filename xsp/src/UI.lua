@@ -207,7 +207,7 @@ function global_UI()
 	--UI:ComboBox(global_basic_page, "sg_fight_sel", "所有公开的超鬼王,自己发现的超鬼王","1",23,"680,140,300,50")
 	UI:Line(global_basic_page, "line_common", "100,100,100", 2, 960, "20,140,960,2")
 	UI:CheckBoxGroup(global_basic_page, "skill","自动关闭技能特写","0",30,"0,0,0","20,150,980,60")
-	UI:CheckBoxGroup(global_basic_page, "bff_start","自动开启加成Buff","0",30,"0,0,0","20,210,980,60")
+	UI:CheckBoxGroup(global_basic_page, "buff_start","自动开启加成Buff","",30,"0,0,0","20,210,980,60")
 	UI:CheckBoxGroup(global_basic_page, "reconn","自动断线重新连接","0",30,"0,0,0","20,270,980,60")
 	UI:CheckBoxGroup(global_basic_page, "buff_stop_useup","体力用尽关闭所有Buff","0",30,"0,0,0","20,330,700,60")
 	UI:CheckBoxGroup(global_basic_page, "buff_stop_idle","庭院探索停留过久关闭所有Buff","0",30,"0,0,0","20,390,700,60")
@@ -708,7 +708,7 @@ function baqidashe_UI()
 	UI:Label(bqds_ui, "left", "0,0,0", 30, "请选择御魂层数 - ", "20,240,300,60")
 	UI:ComboBox(bqds_ui, "level", "一层,二层,三层,四层,五层,六层,七层,八层,九层,十层","9",23,"700,240,280,50")
 	UI:Label(bqds_ui, "left", "0,0,0", 30, "请选择战斗次数 - ", "20,300,300,60")
-	UI:ComboBox(bqds_ui, "round", "3次,10次,20次,30次,50次,100次,无限次数","6",23,"700,300,280,50")
+	UI:ComboBox(bqds_ui, "round", "3次,10次,20次,30次,50次,100次,200次,300次,无限次数","8",23,"700,300,280,50")
 	UI:CheckBoxGroup(bqds_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,360,900,60")
 	UI:Label(bqds_ui, "left", "0,0,0", 30, "标记 - ", "20,420,300,60")
 	UI:Label(bqds_ui, "left", "0,0,0", 30, "第一回合 ~ ", "20,480,300,60")
@@ -799,6 +799,10 @@ function baqidashe_UI()
 	elseif (res_baqi.round == "5") then
 		round = 100
 	elseif (res_baqi.round == "6") then
+		round = 200
+	elseif (res_baqi.round == "7") then
+		round = 300
+	elseif (res_baqi.round == "8") then
 		round = 99999
 	end
 	
@@ -887,7 +891,7 @@ function tansuo_UI()
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "场景移动 - ", "20,420,300,60")
 	UI:RadioGroup(tansuo_ui, "scene_move", "2 - 3次  ,3 - 4次  ,4 - 5次","2",30,"0,0,0","420,420,580,60")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "目标章节 - ", "20,480,500,60")
-	UI:ComboBox(tansuo_ui, "section", "章节第一栏[手动调整位置],章节第四栏[手动调整位置],第一章,第二章,第三章,第四章,第五章,第六章,第七章,第八章,第九章,第十章,第十一章,第十二章,第十三章,第十四章,第十五章,第十六章,第十七章,第十八章,第十九章,第二十章,第二十一章,第二十二章,第二十三章,第二十四章,第二十五章,第二十六章,第二十七章,第二十八章","29",23,"600,480,380,50")
+	UI:ComboBox(tansuo_ui, "section", "第28章,第27章,第26章,第25章,第24章,第23章,第22章,第21章,第20章,第19章,第18章,第17章,第16章,第15章,第14章,第13章,第12章,第11章,第10章,第9章,第8章,第7章,第6章,第5章,第4章,第3章,第2章,第1章,章节第一栏[手动调整位置],章节第四栏[手动调整位置]","29",23,"600,480,380,50")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "限定方式 - ", "20,540,500,60")
 	UI:ComboBox(tansuo_ui, "count_mode", "战斗胜利次数,章节通关次数[强制Boss]","0",23,"600,540,380,50")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗胜利次数 - ", "20,600,500,60")
@@ -975,7 +979,7 @@ function tansuo_UI()
 		scene_move = "4-5"
 	end
 	
-	section = tonumber(res_tansuo.section) - 1
+	section = 28 - tonumber(res_tansuo.section)
 	
 	if res_tansuo.count_mode == "0" then
 		count_mode = "战斗"
@@ -1846,9 +1850,10 @@ function autobattle_UI()
 	UI:ComboBox(autobattle_ui, "round", "3次,5次,10次,无限次","3",23,"650,160,330,50")
 	UI:Label(autobattle_ui, "left", "0,0,0", 30, "战斗时间 - ", "20,220,300,60")
 	UI:ComboBox(autobattle_ui, "round_time", "5分钟,10分钟,无限制","2",23,"650,220,330,50")
-	UI:Label(autobattle_ui, "left", "0,0,0", 30, "标记己方式神[暂时无效] - ", "20,280,300,60")
+	UI:Label(autobattle_ui, "left", "0,0,0", 30, "标记己方式神[暂时无效] - ", "20,280,600,60")
 	UI:ComboBox(autobattle_ui, "mark_self", "无,正左,左前,正前,右前,正右","0",23,"650,280,330,50")
-	UI:CheckBoxGroup(autobattle_ui, "mark","随机标记敌方式神[暂时无效]","0",30,"0,0,0","20,340,900,60")
+	UI:Label(autobattle_ui, "left", "0,0,0", 30, "标记敌方式神[暂时无效] - ", "20,340,600,60")
+	UI:RadioGroup(autobattle_ui, "mark", "否		,是","0",30,"0,0,0","650,340,330,60")
 	UI:fit(autobattle_ui)
 	
 	ret_autobattle, res_autobattle = UI:show(autobattle_ui)
@@ -1893,11 +1898,7 @@ function autobattle_UI()
 		mark_self = "正右"
 	end
 	
-	if res_autobattle.mark == "0" then
-		mark = 1
-	else
-		mark = 0
-	end
+	mark = tonumber(res_autobattle.mark)
 	
 	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then

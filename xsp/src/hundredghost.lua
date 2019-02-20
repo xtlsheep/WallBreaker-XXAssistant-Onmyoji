@@ -131,11 +131,14 @@ function hg_fight()
 	-- 150, 400 - 950, 400
 	local cnt = math.random(3, 4)
 	local x_interv = 800/cnt
-	local x, y
+	local x, y, x_, y_
 	
 	for i = 1, cnt + 1 do
 		random_sleep(500)
-		random_touch(0, 1000 - x_interv*(i - 1), 400, 30, 30)
+		x_, y_ = lct_hg()
+		if x_ > -1 then
+			random_touch(0, 1000 - x_interv*(i - 1), 400, 30, 30)
+		end
 	end
 end
 
@@ -182,7 +185,7 @@ function hundredghost_(round, num, invite)
 	local invite_cnt = 0
 	local ret = 0
 	local x, y
-
+	
 	while (1) do
 		while(1) do
 			mSleep(500)
