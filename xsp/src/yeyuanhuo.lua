@@ -3,9 +3,9 @@ require "func"
 
 -- Util func
 function lct_yyh()
-	local x, y = findColor({807, 439, 819, 441}, -- 业原火
-		"0|0|0xf3b25e,-59|-236|0xdd7cb3,-124|-168|0xf2faf9,-83|-142|0x2eae93",
-		80, 0, 0, 0)
+	local x, y = findColor({929, 108, 931, 110},
+		"0|0|0xe8d4cf,-213|57|0xcd76a8,-231|134|0xfbf6ff,-204|188|0x2fae93",
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"业原火",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		mSleep(1000)

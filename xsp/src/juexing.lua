@@ -3,9 +3,9 @@ require "func"
 
 -- Util func
 function lct_juexingtower()
-	local x, y = findColor({233, 162, 235, 165}, -- 4个麒麟头部
-		"0|0|0xb17880,238|12|0x56b083,478|30|0x358fe5,718|40|0xd378d5",
-		80, 0, 0, 0)
+	local x, y = findColor({109, 139, 1098, 141},
+		"0|0|0xe8d4cf,-776|159|0xfb6c4f,-551|167|0x4ccd89,-334|156|0x5aa9f0,-88|166|0x8356c6",
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"探索 - 觉醒之塔",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
@@ -13,9 +13,9 @@ function lct_juexingtower()
 end
 
 function lct_juexingelement()
-	local x, y = findColor({226, 540, 228, 542}, -- 4个麒麟头部
-		"0|0|0xb17684,187|10|0xbcedb5,385|2|0x3090e2,576|7|0xfcbbce",
-		95, 0, 0, 0)
+	local x, y = findColor({929, 108, 931, 110},
+		"0|0|0xe8d4cf,-210|320|0xe97c2c,-84|332|0xf3b25e,-380|-7|0xf8f3e0",
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"探索 - 觉醒材料",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end

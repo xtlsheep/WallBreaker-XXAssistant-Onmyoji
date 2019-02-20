@@ -3,9 +3,9 @@ require "func"
 
 -- Util func
 function lct_yuhun()
-	local x, y = findColor({57, 487, 60, 489}, -- 左边小路灯
-		"0|0|0xffd821,0|-19|0xb24828,-1|-47|0xddd3bf,0|36|0x855021",
-		80, 0, 0, 0)
+	local x, y = findColor({1100, 132, 1102, 134},
+		"0|0|0xe8d4cf,-536|-26|0xffffff,-286|72|0xcd76a8,-164|128|0x902c32,-24|362|0xfee11d",
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"探索 - 御魂",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
@@ -13,9 +13,9 @@ function lct_yuhun()
 end
 
 function lct_8dashe()
-	local x, y = findColor({998, 616, 999, 617}, -- 右下鳞片
-		"0|0|0xfbe9bc,0|-34|0x040402,-1|-52|0xa46d91,10|-22|0x391f10",
-		95, 0, 0, 0)
+	local x, y = findColor({929, 108, 931, 110},
+		"0|0|0xe8d4cf,-385|70|0xf8f3e0,-387|32|0x310a0a,-210|320|0xe97c2a",
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"御魂 - 八岐大蛇",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
