@@ -867,6 +867,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 	local wait = 0
 	local action_pub = action
 	local fight_cnt = 0
+	local sel_cnt = 0
 	local x, y
 	
 	while (1) do
@@ -902,6 +903,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				win_cnt.global = win_cnt.global + 1
 				time_cnt = 0
 				fight_cnt = 0
+				sel_cnt = 0
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.jjtp = win_cnt.jjtp + 1
 			end
@@ -944,9 +946,17 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				end
 				-- 锁定出战
 				lock_or_unlock(lock, "Pub结界突破")
+				-- 选择无效
+				if sel_cnt > 3 then
+					HUD_show_or_hide(HUD,hud_info,"进攻3次无效, 跳过结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					map[pos] = -1
+					pos = -1
+					break
+				end
 				-- 点击目标
 				if pos ~= -1 then
 					random_touch(0, coor_map_x[pos], coor_map_y[pos], 50, 10)
+					sel_cnt = sel_cnt + 1
 					break
 				end
 				-- 无效地图
@@ -995,9 +1005,9 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 					jjtp_touch_blank()
 					break
 				end
-				-- 点击无效的结界
+				-- 进攻无效
 				if fight_cnt >= 3 then
-					HUD_show_or_hide(HUD,hud_info,"点击3次无效, 跳过结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_info,"进攻3次无效, 跳过结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					map[pos] = -1
 					pos = -1
 					fight_cnt = 0
@@ -1030,6 +1040,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			if (x > -1) then
 				fail_cnt.global = fail_cnt.global + 1
 				fight_cnt = 0
+				sel_cnt = 0
 				time_cnt = 0
 				map[pos] = -1
 				pos = -1
