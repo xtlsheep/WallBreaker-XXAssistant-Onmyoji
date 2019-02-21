@@ -105,9 +105,9 @@ function yqfy_(round, sel, mark)
 						ran_wait = 10*60*60*1000 + math.random(1000, 5000)
 					else
 						ran_wait = math.random(500, 1000)
-						HUD_show_or_hide(HUD,hud_info,string.format("随机等待时间: %s s", ran_wait/1000),20,"0xff000000","0xffffffff",0,100,0,300,32)
-						mSleep(ran_wait)
 					end
+					HUD_show_or_hide(HUD,hud_info,string.format("随机等待时间: %d s", ran_wait/1000),20,"0xff000000","0xffffffff",0,100,0,300,32)
+					mSleep(ran_wait)
 				end
 				tingyuan_enter_zudui()
 				break
@@ -153,7 +153,6 @@ function yqfy_(round, sel, mark)
 			-- 组队
 			x, y = lct_zudui()
 			if (x > -1) then
-				HUD_show_or_hide(HUD,hud_info,"组队",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				if selected == 1 then
 					random_touch(0, 680, 560, 50, 10)
 					selected = 0

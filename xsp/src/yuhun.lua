@@ -57,11 +57,11 @@ function lct_petfind()
 end
 
 -- Main func
-function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate, limitation)
 	print(string.format("八岐大蛇 - 模式：%s，角色：%s，组队：%s，一层标记：%s 二层标记：%s 三层标记：%s，层数：%d，战斗次数：%d，锁定出战：%d",
 			mode, role, group, mark[1], mark[2], mark[3], level, round, lock))
-	print(string.format("队员自动组队：%d，失败重新组队：%d，队员接手队长：%d，队长自动组队：%d，队长自动邀请：%d, 自动邀请区域: %s, 失败重新建队：%d",
-			member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate))
+	print(string.format("队员自动组队：%d，失败重新组队：%d，队员接手队长：%d，队长自动组队：%d，队长自动邀请：%d, 自动邀请区域: %s, 失败重新建队：%d, 建房限制次数 %d",
+			member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate, limitation))
 	print_global_config()
 	
 	local ret = 0
@@ -86,7 +86,7 @@ function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, f
 		elseif (mode == "组队" and role == "队员" and group == "固定队") then
 			ret = yuhun_group_fix_member(mark, level, round, member_auto_group, member_to_captain)
 		elseif (mode == "组队" and role == "队长" and (group == "固定队2人" or group == "固定队3人")) then
-			ret = yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
+			ret = yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group, limitation)
 		end
 		
 		if ret ~= RET_RECONN then
@@ -640,7 +640,7 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 	return RET_ERR
 end
 
-function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
+function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group, limitation)
 	local time_cnt = 0
 	local invite = 1
 	local tingyuan_time_cnt = 0
@@ -648,6 +648,8 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 	local quit_con = 0
 	local quit_grp = 0
 	local invite_zone = 0
+	local invite_cnt = 0
+	local create_cnt = 0
 	local ret = 0
 	local init = 1
 	local x, y
@@ -677,6 +679,17 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
+			-- 战斗进行
+			x, y = fight_ongoing()
+			if x > -1 then
+				if quit_grp == 1 then
+					x_, y_ = fight_stop_auto_group()
+					if x_ > -1 then
+						quit_grp = 0
+					end
+				end
+				break
+			end
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then
@@ -716,21 +729,50 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 				end
 				break
 			end
+			-- 组队
+			x, y = lct_zudui()
+			if x > -1 then
+				if quit_end == 1 then
+					random_touch(0, 1060, 115, 5, 5) -- 退出组队
+					break
+				end
+			end
 			-- 创建初始化
 			x, y = captain_room_create_init() if x > -1 then break end
+			-- 创建窗口
+			x, y = captain_room_create_window()
+			if x > -1 then
+				if create_cnt > limitation then
+					HUD_show_or_hide(HUD,hud_info,"创建次数超过限制",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_touch(0, 355, 525, 20, 10) -- 取消
+					quit_end = 1
+					break
+				end
+			end
 			-- 创建私人队伍
-			x, y = captain_room_create_private() if x > -1 then invite = 1 break end
+			x, y = captain_room_create_private()
+			if x > -1 then
+				invite = 1
+				invite_cnt = 0
+				create_cnt = create_cnt + 1
+				break
+			end
 			-- 邀请初始化
 			x, y = captain_room_invite_init()
 			if (x > -1) then
+				if (invite_cnt > limitation) then
+					HUD_show_or_hide(HUD,hud_info,"邀请次数超过限制",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					break
+				end
 				time_cnt = time_cnt + 1
 				mSleep(500)
 				if (time_cnt > math.random(8, 12)) then
 					invite = 1
 				end
-				if (captain_auto_invite == 1 and invite == 1) then
+				if (captain_auto_invite == 1 and invite == 1 and (invite_cnt <= limitation)) then
+					HUD_show_or_hide(HUD,hud_info,"邀请队员",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_touch(0, 565, 320, 50, 50) -- 邀请初始化
-					x, y = captain_room_invite_init() if (x > -1) then break end
+					invite_cnt = invite_cnt + 1
 				end
 				break
 			end
@@ -768,7 +810,17 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) mSleep(1500) break end -- 八岐大蛇
 			-- 八岐大蛇
-			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 group_start() break end -- 组队开始
+			x, y = lct_8dashe()
+			if (x > -1) then
+				if quit_end == 1 then
+					random_touch(0, 930, 110, 5, 5)
+					break
+				end
+				level_select(level, init, lock, "御魂")
+				init = 0
+				group_start()
+				break
+			end
 			-- 战斗失败
 			x, y = fight_failed()
 			if (x > -1) then
@@ -776,17 +828,6 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.yuhun = fail_cnt.yuhun + 1
-				break
-			end
-			-- 战斗进行
-			x, y = fight_ongoing()
-			if x > -1 then
-				if quit_grp == 1 then
-					x_, y_ = fight_stop_auto_group()
-					if x_ > -1 then
-						quit_grp = 0
-					end
-				end
 				break
 			end
 			-- 退出个人资料

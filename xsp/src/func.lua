@@ -689,6 +689,9 @@ function lct_zudui()
 	local x, y = findColor({851, 100, 853, 103},
 		"0|0|0xe97c2c,-794|19|0xecd982,-774|91|0x8d7245,148|14|0xd6c4a1",
 		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"组队",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	end
 	return x, y
 end
 
