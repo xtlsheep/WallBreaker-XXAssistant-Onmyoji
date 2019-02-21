@@ -3,18 +3,22 @@ require "func"
 
 -- Util func
 function lct_yqfy()
-	local x, y = findColor({368, 115, 370, 117},
-		"0|0|0xf7f2df,12|-1|0x4f0c0c,42|4|0xf8f3e0,42|-5|0xf8f3e0,23|441|0xf3b25e",
-		80, 0, 0, 0)
+	local x, y = findColor({773, 101, 775, 103},
+		"0|0|0xe87b2a,-393|15|0x4d0c0c,-421|45|0xfec266,287|10|0xe8d4cf",
+		90, 0, 0, 0)
 	return x, y
 end
 
+function zudui_move()
+	random_move(0, 220, 550, 220, 130, 50, 10)
+end
+
 function yqfy_queue()
-	local x, y = findColor({368, 115, 370, 117},
-		"0|0|0xf7f2df,12|1|0x4d0c0c,362|378|0x151311,251|441|0xf3b25e,497|443|0xb0a9a1",
+	local x, y = findColor({854, 100, 856, 102},
+		"0|0|0xe97c2c,205|11|0xe8d4cf,-173|457|0xf3b25e,-112|400|0x262422",
 		90, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,"妖气封印 - 匹配中",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"匹配中",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -40,7 +44,7 @@ end
 function yqfy_deny_quit()
 	local x, y = findColor({460, 382, 462, 384},
 		"0|0|0xdf6851,212|1|0xf3b25e,269|111|0x080807",
-		80, 0, 0, 0)
+		90, 0, 0, 0)
 	if x > -1 then
 		random_sleep(500)
 		random_touch(0, x, y, 30, 10)
@@ -66,7 +70,9 @@ end
 
 function yqfy_(round, sel, mark)
 	local quit = 0
+	local wait = 0
 	local ran_wait = 0
+	local selected = 0
 	local ret = 0
 	local x, y
 	
@@ -89,9 +95,20 @@ function yqfy_(round, sel, mark)
 				if quit == 1 then
 					lua_exit()
 				end
-				ran_wait = math.random(500, 1000)
-				HUD_show_or_hide(HUD,hud_info,string.format("随机等待时间: %s ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
-				mSleep(ran_wait)
+				-- 等待
+				if wait == 1 then
+					if sel == "联动" then
+						ran_wait = 30*60*1000 + math.random(1000, 5000)
+					elseif sel == "石距" then
+						ran_wait = 60*60*1000 + math.random(1000, 5000)
+					elseif sel == "年兽" then
+						ran_wait = 10*60*60*1000 + math.random(1000, 5000)
+					else
+						ran_wait = math.random(500, 1000)
+						HUD_show_or_hide(HUD,hud_info,string.format("随机等待时间: %s s", ran_wait/1000),20,"0xff000000","0xffffffff",0,100,0,300,32)
+						mSleep(ran_wait)
+					end
+				end
 				tingyuan_enter_zudui()
 				break
 			end
@@ -100,66 +117,74 @@ function yqfy_(round, sel, mark)
 			-- 妖气封印
 			x, y = lct_yqfy()
 			if x > -1 then
-				random_sleep(500)
+				HUD_show_or_hide(HUD,hud_info,"妖气封印",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				if sel == "跳跳哥哥" then
 					random_touch(0, 430, 230, 50, 10)
-					random_sleep(750)
-					random_touch(0, 680, 560, 50, 10)
 				elseif sel == "椒图" then
 					random_touch(0, 430, 290, 50, 10)
-					random_sleep(750)
-					random_touch(0, 680, 560, 50, 10)
 				elseif sel == "骨女" then
 					random_touch(0, 430, 350, 50, 10)
-					random_sleep(750)
-					random_touch(0, 680, 560, 50, 10)
 				elseif sel == "饿鬼" then
 					random_touch(0, 430, 410, 50, 10)
-					random_sleep(750)
-					random_touch(0, 680, 560, 50, 10)
 				elseif sel == "二口女" then
 					random_touch(0, 430, 470, 50, 10)
-					random_sleep(750)
-					random_touch(0, 680, 560, 50, 10)
 				elseif sel == "海坊主" then
-					random_move(0, 430, 470, 430, 230, 50, 10)
-					random_sleep(750)
+					random_move(0, 430, 500, 430, 200, 50, 10)
+					random_sleep(1000)
 					random_touch(0, 430, 310, 50, 10)
-					random_sleep(750)
-					random_touch(0, 680, 560, 50, 10)
 				elseif sel == "鬼使黑" then
-					random_move(0, 430, 470, 430, 230, 50, 10)
-					random_sleep(750)
+					random_move(0, 430, 500, 430, 200, 50, 10)
+					random_sleep(1000)
 					random_touch(0, 430, 370, 50, 10)
-					random_sleep(750)
-					random_touch(0, 680, 560, 50, 10)
 				elseif sel == "小松丸" then
-					random_move(0, 430, 470, 430, 230, 50, 10)
-					random_sleep(750)
+					random_move(0, 430, 500, 430, 200, 50, 10)
+					random_sleep(1000)
 					random_touch(0, 430, 430, 50, 10)
-					random_sleep(750)
-					random_touch(0, 680, 560, 50, 10)
 				elseif sel == "日和坊" then
-					random_move(0, 430, 470, 430, 230, 50, 10)
-					random_sleep(750)
+					random_move(0, 430, 500, 430, 200, 50, 10)
+					random_sleep(1000)
 					random_touch(0, 430, 490, 50, 10)
-					random_sleep(750)
-					random_touch(0, 680, 560, 50, 10)
 				end
-				random_sleep(500)
+				mSleep(1000)
+				right_lower_click()
+				selected = 1
 				break
 			end
 			-- 组队
 			x, y = lct_zudui()
 			if (x > -1) then
 				HUD_show_or_hide(HUD,hud_info,"组队",20,"0xff000000","0xffffffff",0,100,0,300,32)
-				random_sleep(500)
-				if linkage == "Enable" then
-					random_move(0, 220, 520, 220, 130, 50, 10)
-					random_sleep(750)
-					random_touch(0, 220, 145, 50, 10)
-				elseif linkage == "Disable" then
-					random_touch(0, 220, 520, 50, 10)
+				if selected == 1 then
+					random_touch(0, 680, 560, 50, 10)
+					selected = 0
+					break
+				end
+				if sel == "联动" then
+					if linkage == "Enable" then
+						random_touch(0, 220, 150, 50, 10) -- 联动
+						selected = 1
+					else
+						HUD_show_or_hide(HUD,hud_info,"未开启联动活动",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					end
+				elseif sel == "石距" then
+					zudui_move()
+					random_sleep(1000)
+					random_touch(0, 220, 410, 50, 10) -- 石距
+					selected = 1
+				elseif sel == "年兽" then
+					zudui_move()
+					random_sleep(1000)
+					random_touch(0, 220, 350, 50, 10) -- 年兽
+					selected = 1
+				else
+					if linkage == "Enable" then
+						zudui_move()
+						random_sleep(1000)
+						random_touch(0, 220, 150, 50, 10) -- 妖气封印
+					elseif linkage == "Disable" then
+						random_touch(0, 220, 520, 50, 10) -- 妖气封印
+					end
+					selected = 1
 				end
 				random_sleep(1000)
 				break
@@ -171,6 +196,7 @@ function yqfy_(round, sel, mark)
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then
+				wait = 1
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.yqfy = win_cnt.yqfy + 1

@@ -55,7 +55,7 @@ function config_UI()
 	-- Config
 	config_ui = UI:new("config.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 	UI:Label(config_ui, "center", "0,0,0", 30, "高级选项", "20,20,960,55")
-	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,妖气封印    ,百鬼夜行    ,自动樱饼    ,副本组合    ,世界喊话    ,普通召唤    ,悬赏查询    ,自动斗技    ,自动剧情    ,特殊活动","0",30,"0,0,0","30,150,960,300")
+	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,排队副本    ,百鬼夜行    ,组合任务    ,世界喊话    ,普通召唤    ,悬赏查询    ,自动斗技    ,自动剧情    ,自动樱饼    ,特殊活动","0",30,"0,0,0","30,150,960,300")
 	UI:fit(config_ui)
 	
 	ret_config, res_config = UI:show(config_ui)
@@ -80,20 +80,20 @@ function config_UI()
 	elseif (res_config.select == "6")  then yqfy_UI()
 		-- 百鬼夜行
 	elseif (res_config.select == "7")  then hundredghost_UI()
-		-- 一键每日
+		-- 组合任务
 	elseif (res_config.select == "8")  then autocake_UI()
-		-- 副本组合
-	elseif (res_config.select == "9")  then multimission_UI()
 		-- 世界喊话
-	elseif (res_config.select == "10")  then publicity_UI()
+	elseif (res_config.select == "9")  then publicity_UI()
 		-- 普通召唤
-	elseif (res_config.select == "11")  then normalcall_UI()
-		-- 超鬼王
-	elseif (res_config.select == "12")  then offerinquire_UI()
+	elseif (res_config.select == "10")  then normalcall_UI()
+		-- 悬赏查询
+	elseif (res_config.select == "11")  then offerinquire_UI()
 		-- 自动斗技
 	elseif (res_config.select == "13")  then autobattle_UI()
 		-- 自动剧情
-	elseif (res_config.select == "14")  then autostory_UI()
+	elseif (res_config.select == "13")  then autostory_UI()
+		-- 自动樱饼
+	elseif (res_config.select == "14")  then autocake_UI()
 		-- 特殊活动
 	elseif (res_config.select == "15")  then activityreserve_UI()
 		--elseif (res_config.select == "15")  then LBSGhostDriving_UI()
@@ -1593,11 +1593,11 @@ function yuling_UI()
 end
 
 function yqfy_UI()
-	-- 妖气封印
+	-- 排队副本
 	yqfy_ui = UI:new("yqfy.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-	UI:Label(yqfy_ui, "center", "0,0,0", 30, "妖气封印", "20,20,960,55")
-	UI:Label(yqfy_ui, "left", "0,0,0", 30, "妖气选择 - ", "20,100,300,60")
-	UI:ComboBox(yqfy_ui, "sel", "跳跳哥哥,椒图,骨女,饿鬼,二口女,海坊主,鬼使黑,小松丸,日和坊","8",23,"650,100,330,50")
+	UI:Label(yqfy_ui, "center", "0,0,0", 30, "排队副本", "20,20,960,55")
+	UI:Label(yqfy_ui, "left", "0,0,0", 30, "副本选择 - ", "20,100,300,60")
+	UI:ComboBox(yqfy_ui, "sel", "石距,年兽,联动碎片,跳跳哥哥,椒图,骨女,饿鬼,二口女,海坊主,鬼使黑,小松丸,日和坊","8",23,"650,100,330,50")
 	UI:Label(yqfy_ui, "left", "0,0,0", 30, "战斗次数 - ", "20,160,300,60")
 	UI:ComboBox(yqfy_ui, "round", "3次,5次,10次,20次,30次,50次,无限次","2",23,"650,160,330,50")
 	UI:Label(yqfy_ui, "left", "0,0,0", 30, "战斗标记 - ", "20,220,300,60")
@@ -1628,22 +1628,28 @@ function yqfy_UI()
 	end
 	
 	if res_yqfy.sel == "0" then
-		sel = "跳跳哥哥"
+		sel = "石距"
 	elseif res_yqfy.sel == "1" then
-		sel = "椒图"
+		sel = "年兽"
 	elseif res_yqfy.sel == "2" then
-		sel = "骨女"
+		sel = "联动"
 	elseif res_yqfy.sel == "3" then
-		sel = "饿鬼"
+		sel = "跳跳哥哥"
 	elseif res_yqfy.sel == "4" then
-		sel = "二口女"
+		sel = "椒图"
 	elseif res_yqfy.sel == "5" then
-		sel = "海坊主"
+		sel = "骨女"
 	elseif res_yqfy.sel == "6" then
-		sel = "鬼使黑"
+		sel = "饿鬼"
 	elseif res_yqfy.sel == "7" then
-		sel = "小松丸"
+		sel = "二口女"
 	elseif res_yqfy.sel == "8" then
+		sel = "海坊主"
+	elseif res_yqfy.sel == "9" then
+		sel = "鬼使黑"
+	elseif res_yqfy.sel == "10" then
+		sel = "小松丸"
+	elseif res_yqfy.sel == "11" then
 		sel = "日和坊"
 	end
 	
@@ -1746,7 +1752,7 @@ end
 function multimission_UI()
 	-- 副本组合
 	multimission_ui = UI:new("multimission.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
-	UI:Label(multimission_ui, "center", "0,0,0", 30, "副本组合", "20,20,960,55")
+	UI:Label(multimission_ui, "center", "0,0,0", 30, "组合任务", "20,20,960,55")
 	UI:fit(multimission_ui)
 	
 	ret_multimission, res_multimission = UI:show(multimission_ui)

@@ -17,9 +17,9 @@ function tansuo_pre_feed()
 		95, 0, 0, 0)
 	if x > -1 then
 		random_touch(0, 1080, 580, 20, 20) -- 小纸人
-		random_sleep(250)
+		random_sleep(1000)
 		random_touch(0, 1050, 475, 30, 30) -- 喂食
-		random_sleep(250)
+		random_sleep(1000)
 		tansuo_auto_fight()
 	end
 	return x, y
@@ -40,11 +40,11 @@ function yujue_solo_pre_feed()
 		95, 0, 0, 0)
 	if x > -1 then
 		random_touch(0, 880, 371, 20, 20) -- 小纸人
-		random_sleep(250)
+		random_sleep(1000)
 		random_touch(0, 705, 415, 30, 30) -- 喂食
-		random_sleep(250)
+		random_sleep(1000)
 		right_lower_click()
-		random_sleep(250)
+		random_sleep(1000)
 		yujue_solo_auto_fight()
 	end
 	return x, y
@@ -65,11 +65,11 @@ function yujue_group_pre_feed()
 		95, 0, 0, 0)
 	if x > -1 then
 		random_touch(0, 380, 465, 20, 20) -- 小纸人
-		random_sleep(250)
+		random_sleep(1000)
 		random_touch(0, 710, 420, 30, 30) -- 喂食
-		random_sleep(250)
+		random_sleep(1000)
 		right_lower_click()
-		random_sleep(250)
+		random_sleep(1000)
 		yujue_group_auto_fight()
 	end
 	return x, y
@@ -97,6 +97,7 @@ function autocake(feed_times)
 				if feed_cnt >= feed_times then
 					lua_exit()
 				end
+				mSleep(3000)
 			end
 			-- 御觉单人喂食
 			x, y = yujue_solo_pre_feed()
@@ -106,6 +107,7 @@ function autocake(feed_times)
 				if feed_cnt >= feed_times then
 					lua_exit()
 				end
+				mSleep(3000)
 			end
 			-- 御觉组队喂食
 			x, y = yujue_group_pre_feed()
@@ -115,6 +117,7 @@ function autocake(feed_times)
 				if feed_cnt >= feed_times then
 					lua_exit()
 				end
+				mSleep(3000)
 			end
 			break
 		end
