@@ -89,7 +89,7 @@ function config_UI()
 		-- 悬赏查询
 	elseif (res_config.select == "11")  then offerinquire_UI()
 		-- 自动斗技
-	elseif (res_config.select == "13")  then autobattle_UI()
+	elseif (res_config.select == "12")  then autobattle_UI()
 		-- 自动剧情
 	elseif (res_config.select == "13")  then autostory_UI()
 		-- 自动樱饼

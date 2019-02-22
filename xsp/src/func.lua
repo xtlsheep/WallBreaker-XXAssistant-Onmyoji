@@ -596,7 +596,7 @@ function alarm(op)
 			HUD_show_or_hide(HUD,hud_info,"暂停ing, 双击右上角继续",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			results = catchTouchPoint(touchCount)
 			for i = 1, #results do
-				sysLog("第"..i.."个坐标为:"..i..",x="..results[i].x..",y="..results[i].y);
+				sysLog("第"..i.."个坐标为:"..i..",x="..results[i].x..",y="..results[i].y)
 			end
 			if results[1].x > x_range and results[2].x > x_range and results[1].y > y_range and results[2].y > y_range then
 				HUD_show_or_hide(HUD,hud_info,"继续运行",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -1069,13 +1069,13 @@ function fight_success()
 			right_lower_click()
 			cnt = cnt + 1
 			if cnt >= 10 then
-				return RET_OK
+				return RET_OK, RET_OK
 			end
 			random_sleep(50)
 		end
 	end
 	
-	return -1, -1
+	return RET_ERR, RET_ERR
 end
 
 function fight_failed()
@@ -1102,13 +1102,13 @@ function fight_failed()
 			end
 			cnt = cnt + 1
 			if cnt >= 10 then
-				return RET_OK
+				return RET_OK, RET_OK
 			end
 			random_sleep(50)
 		end
 	end
 	
-	return -1, -1
+	return RET_ERR, RET_ERR
 end
 
 function fight_stop_auto_group()

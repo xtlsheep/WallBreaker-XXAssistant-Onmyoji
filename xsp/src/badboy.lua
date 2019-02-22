@@ -6,7 +6,7 @@ local lo_json = {}
 lo_json.obj = require('bblibs.JSON')
 lo_json.decode = function(x) return lo_json.obj:decode(x) end
 lo_json.encode = function(x) return lo_json.obj:encode(x) end
-lo_json.encode_pretty = function(x) return lo_json.obj:encode_pretty(x) end;
+lo_json.encode_pretty = function(x) return lo_json.obj:encode_pretty(x) end
 badboy.json = lo_json
 badboy.jsonlib = lo_json.obj
 -- JSON模块

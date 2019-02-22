@@ -56,7 +56,7 @@ function battle_success()
 			end
 			cnt = cnt + 1
 			if cnt >= 10 then
-				return RET_OK
+				return RET_OK, RET_OK
 			end
 			random_sleep(50)
 		end
@@ -145,7 +145,7 @@ function autobattle(round, round_time, force_quit, mark_self, mark)
 			x, y = lct_dingzhong() if x > -1 then random_touch(0, 690, 150, 5, 5) break end
 			-- 庭院
 			x, y = lct_tingyuan() if x > -1 then tingyuan_enter_dingzhong() break end
-			break;
+			break
 		end
 	end
 	
