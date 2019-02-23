@@ -946,11 +946,12 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				end
 				-- 锁定出战
 				lock_or_unlock(lock, "Pub结界突破")
-				-- 选择无效
+				-- 点击无效
 				if sel_cnt > 3 then
-					HUD_show_or_hide(HUD,hud_info,"进攻3次无效, 跳过结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					HUD_show_or_hide(HUD,hud_info,"点击3次无效, 跳过结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					map[pos] = -1
 					pos = -1
+					sel_cnt = 0
 					break
 				end
 				-- 点击目标
@@ -1006,7 +1007,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 					break
 				end
 				-- 进攻无效
-				if fight_cnt >= 3 then
+				if fight_cnt > 3 then
 					HUD_show_or_hide(HUD,hud_info,"进攻3次无效, 跳过结界",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					map[pos] = -1
 					pos = -1

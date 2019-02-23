@@ -320,13 +320,13 @@ function disable_skill_feature()
 	x, y = lct_tingyuan()
 	if x > -1 then
 		random_touch(0, 51, 62, 20, 20)
-		random_sleep(750)
-		x_, y_ = findColor({791, 491, 793, 493},
-			"0|0|0xffffff,-1|-14|0x4b5ee9,9|-1|0x3b4bb9,215|-395|0xe8d4cf",
+		random_sleep(1000)
+		x_, y_ = findColor({790, 491, 793, 493},
+			"0|0|0xffffff,-1|-12|0x4d5eea,216|-395|0xf2d3d1,190|26|0xe5cc9a",
 			95, 0, 0, 0)
 		if x_ > -1 then
 			random_touch(0, x_, y_, 5, 5)
-			random_sleep(750)
+			random_sleep(1000)
 		end
 		random_touch(0, 1008, 97, 5, 5)
 	end
