@@ -997,7 +997,7 @@ end
 
 function fight_ongoing()
 	local x, y = findColor({26, 35, 28, 37},
-		"0|0|0xd4c4a3,-15|-7|0x1f160e,23|552|0x77674f,88|510|0x836b52,-15|525|0x5d5575",
+		"0|0|0xd4c4a3,-13|-7|0x231a12,-13|524|0x5e5776,22|532|0x35275a",
 		90, 0, 0, 0)
 	if (x > -1) then
 		if turbo_succ_en == 1 then
@@ -1061,7 +1061,7 @@ function fight_success()
 	
 	local x, y, x_, y_
 	local x_s, y_s, x_h, y_h, ret
-	local cnt = math.random(8, 12)
+	local cnt = math.random(10, 12)
 	
 	if turbo_succ_en == 1 and turbo_succ == 1 then
 		x, y = fight_ongoing()
@@ -1081,6 +1081,7 @@ function fight_success()
 				x_, y_ = lct_yyh() if x_ > -1 then return RET_OK, RET_OK end
 				x_, y_ = lct_yuling_single() if x_ > -1 then return RET_OK, RET_OK end
 				right_lower_click()
+				random_sleep(50)
 			end
 			return RET_OK, RET_OK
 		end
