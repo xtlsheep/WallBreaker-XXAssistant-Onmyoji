@@ -43,6 +43,7 @@ function yuhun_mark(position, round)
 			random_touch(0, 830, 155, 10, 10)
 		end
 	end
+	mSleep(1000)
 end
 
 function lct_petfind()
@@ -121,6 +122,8 @@ function yuhun_solo(mark, level, round, lock)
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
+			-- 战斗进行
+			x, y = fight_ongoing() if x > -1 then break end
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then
@@ -153,8 +156,6 @@ function yuhun_solo(mark, level, round, lock)
 				solo_start()
 				break
 			end
-			-- 战斗进行
-			x, y = fight_ongoing() if x > -1 then break end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 探索
@@ -266,6 +267,17 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
+			-- 战斗进行
+			x, y = fight_ongoing()
+			if x > -1 then
+				if quit_grp == 1 then
+					x_, y_ = fight_stop_auto_group()
+					if x_ > -1 then
+						quit_grp = 0
+					end
+				end
+				break
+			end
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then
@@ -322,17 +334,6 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 				fail_cnt.yuhun = fail_cnt.yuhun + 1
 				break
 			end
-			-- 战斗进行
-			x, y = fight_ongoing()
-			if x > -1 then
-				if quit_grp == 1 then
-					x_, y_ = fight_stop_auto_group()
-					if x_ > -1 then
-						quit_grp = 0
-					end
-				end
-				break
-			end
 			-- 停止邀请
 			x, y = captain_team_win_invite() if (x > -1) then random_touch(0, 460, 385, 20, 10) break end
 			x, y = captain_team_lost_invite() if (x > -1) then random_touch(0, 462, 383, 20, 10) break end
@@ -379,6 +380,17 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
+			-- 战斗进行
+			x, y = fight_ongoing()
+			if x > -1 then
+				if quit_grp == 1 then
+					x_, y_ = fight_stop_auto_group()
+					if x_ > -1 then
+						quit_grp = 0
+					end
+				end
+				break
+			end
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then
@@ -471,17 +483,6 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 				fail_cnt.yuhun = fail_cnt.yuhun + 1
 				break
 			end
-			-- 战斗进行
-			x, y = fight_ongoing()
-			if x > -1 then
-				if quit_grp == 1 then
-					x_, y_ = fight_stop_auto_group()
-					if x_ > -1 then
-						quit_grp = 0
-					end
-				end
-				break
-			end
 			-- 发现宝藏
 			x, y = lct_petfind() if (x > -1) then break end
 			-- 退出个人资料
@@ -533,6 +534,17 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
+			-- 战斗进行
+			x, y = fight_ongoing()
+			if x > -1 then
+				if quit_grp == 1 then
+					x_, y_ = fight_stop_auto_group()
+					if x_ > -1 then
+						quit_grp = 0
+					end
+				end
+				break
+			end
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then
@@ -611,17 +623,6 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 					buff_start_en = 0
 				end
 				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt)
-				break
-			end
-			-- 战斗进行
-			x, y = fight_ongoing()
-			if x > -1 then
-				if quit_grp == 1 then
-					x_, y_ = fight_stop_auto_group()
-					if x_ > -1 then
-						quit_grp = 0
-					end
-				end
 				break
 			end
 			-- 退出个人资料

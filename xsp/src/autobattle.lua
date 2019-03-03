@@ -90,17 +90,8 @@ function autobattle(round, round_time, force_quit, mark_self, mark)
 			mSleep(500)
 			-- 循环通用
 			loop_generic()
-			-- 战斗胜利
-			x, y = battle_success()
-			if x > -1 then
-				if win_cnt.battle > round then
-					quit = 1
-				end
-				time_cnt = 0
-				win_cnt.global = win_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				win_cnt.battle = win_cnt.battle + 1
-			end
+			-- 战斗准备
+			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if x > -1 then
@@ -112,8 +103,17 @@ function autobattle(round, round_time, force_quit, mark_self, mark)
 				x_, y_ = manual_detect()
 				break
 			end
-			-- 战斗准备
-			x, y = fight_ready() if (x > -1) then break end
+			-- 战斗胜利
+			x, y = battle_success()
+			if x > -1 then
+				if win_cnt.battle > round then
+					quit = 1
+				end
+				time_cnt = 0
+				win_cnt.global = win_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.battle = win_cnt.battle + 1
+			end
 			-- 战斗失败
 			x, y = fight_failed()
 			if (x > -1) then

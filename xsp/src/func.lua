@@ -37,8 +37,8 @@ function show_win_fail(win_cnt, fail_cnt)
 end
 
 function print_global_config()
-	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d) 断线/闪退 %d, 自动开启buff %d 停留过长关闭buff %d(%d sec), 体力用尽关闭buff %d)",
-			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6], reconn, buff_start, buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
+	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d) 胜利快速结算 %d, 断线/闪退 %d, 自动开启buff %d 停留过长关闭buff %d(%d sec), 体力用尽关闭buff %d)",
+			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6], turbo_succ_en, reconn, buff_start, buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
 	
 	if auto_jjtp_en == 1 then
 		print(string.format("智能突破 间隔 %d, 模式：%s，战斗时间：%d，刷新：%d，个人突破：%s，阴阳寮突破：%d, 锁定: %d",
@@ -695,6 +695,13 @@ function lct_zudui()
 	return x, y
 end
 
+function lct_group_room()
+	local x, y = findColor({783, 519, 785, 521},
+		"0|0|0xe87a2a,-581|19|0xdd6951,-402|-65|0xceccc5,194|-415|0xd4c4a3",
+		95, 0, 0, 0)
+	return x, y
+end
+
 function tingyuan_enter_tansuo()
 	local x, y = findColor({230, 125, 1136, 175}, -- 探索灯笼
 		"0|0|0xffffec,0|-2|0xffffec,0|2|0xffffd2,-2|0|0xffffe6,2|0|0xfffff1",
@@ -989,10 +996,13 @@ function quit_confirm(sel)
 end
 
 function fight_ongoing()
-	local x, y = findColor({26, 36, 28, 38}, -- 云彩&返回
-		"0|0|0xd6c4a1,-7|523|0x625a7c,-13|525|0x5b5374,-16|598|0x2f4633",
-		80, 0, 0, 0)
+	local x, y = findColor({26, 35, 28, 37},
+		"0|0|0xd4c4a3,-15|-7|0x1f160e,23|552|0x77674f,88|510|0x836b52,-15|525|0x5d5575",
+		90, 0, 0, 0)
 	if (x > -1) then
+		if turbo_succ_en == 1 then
+			turbo_succ = 1
+		end
 		local x_, y_ = findColor({35, 514, 37, 516}, -- 指南针
 			"0|0|0x29211b,-6|3|0xd3ad6a,-3|8|0x9c652b,6|-6|0xa97534,0|-6|0xd8b773",
 			95, 0, 0, 0)
@@ -1030,11 +1040,11 @@ function fight_success()
 	
 	function half_harma_loop()
 		local x, y, x_, y_
-		local cnt = 0
+		local cnt = math.random(8, 12)
 		x, y = half_harma()
 		if (x > -1) then
 			HUD_show_or_hide(HUD,hud_info,"退出战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			while (1) do
+			for i = 1, cnt do
 				loop_generic()
 				x_, y_ = half_harma()
 				if x_ > -1 then
@@ -1042,36 +1052,54 @@ function fight_success()
 				elseif x_ == -1 then
 					return RET_OK
 				end
-				cnt = cnt + 1
-				if cnt >= 10 then
-					return RET_OK
-				end
 				random_sleep(50)
 			end
+			return RET_OK
 		end
 		return RET_ERR
 	end
 	
+	local x, y, x_, y_
 	local x_s, y_s, x_h, y_h, ret
-	local cnt = 0
+	local cnt = math.random(8, 12)
 	
-	x_s, y_s = success_drum()
-	x_h, y_h = half_harma()
-	if (x_s > -1 or x_h > -1) then
-		HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		while (1) do
-			loop_generic()
-			ret = half_harma_loop()
-			if ret == RET_OK then
-				return RET_OK, RET_OK
+	if turbo_succ_en == 1 and turbo_succ == 1 then
+		x, y = fight_ongoing()
+		if x == -1 then
+			HUD_show_or_hide(HUD,hud_info,"战斗胜利快速结算",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			turbo_succ = 0
+			for i = 1, cnt do
+				loop_generic()
+				x_, y_ = lct_tingyuan() if x_ > -1 then return RET_OK, RET_OK end
+				x_, y_ = lct_tansuo() if x_ > -1 then return RET_OK, RET_OK end
+				x_, y_ = lct_group_room() if x_ > -1 then return RET_OK, RET_OK end
+				x_, y_ = lct_8dashe() if x_ > -1 then return RET_OK, RET_OK end
+				x_, y_ = lct_tansuo_scene() if x_ > -1 then return RET_OK, RET_OK end
+				x_, y_ = lct_solo_jjtp() if x_ > -1 then return RET_OK, RET_OK end
+				x_, y_ = lct_pub_jjtp() if x_ > -1 then return RET_OK, RET_OK end
+				x_, y_ = lct_juexingtower() if x_ > -1 then return RET_OK, RET_OK end
+				x_, y_ = lct_yyh() if x_ > -1 then return RET_OK, RET_OK end
+				x_, y_ = lct_yuling_single() if x_ > -1 then return RET_OK, RET_OK end
+				right_lower_click()
 			end
-			yuhun_overflow()
-			right_lower_click()
-			cnt = cnt + 1
-			if cnt >= 10 then
-				return RET_OK, RET_OK
+			return RET_OK, RET_OK
+		end
+	else
+		x_s, y_s = success_drum()
+		x_h, y_h = half_harma()
+		if (x_s > -1 or x_h > -1) then
+			HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			for i = 1, cnt do
+				loop_generic()
+				ret = half_harma_loop()
+				if ret == RET_OK then
+					return RET_OK, RET_OK
+				end
+				yuhun_overflow()
+				right_lower_click()
+				random_sleep(50)
 			end
-			random_sleep(50)
+			return RET_OK, RET_OK
 		end
 	end
 	
@@ -1087,12 +1115,11 @@ function fight_failed()
 	end
 	
 	local x, y
-	local cnt = 0
 	
 	x, y = failed_drum()
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		while (1) do
+		for i = 1, 10 do
 			loop_generic()
 			x, y = failed_drum()
 			if x > -1 then
@@ -1100,12 +1127,9 @@ function fight_failed()
 			elseif x == -1 then
 				return RET_OK, RET_OK
 			end
-			cnt = cnt + 1
-			if cnt >= 10 then
-				return RET_OK, RET_OK
-			end
 			random_sleep(50)
 		end
+		return RET_OK, RET_OK
 	end
 	
 	return RET_ERR, RET_ERR
@@ -1207,6 +1231,77 @@ function member_room_find_start()
 	local x, y = findColor({925, 535, 927, 537},  -- 开始战斗
 		"0|0|0xf3b25e,-60|-11|0xf3b25e,-63|13|0xf3b25e,65|2|0xf3b25e",
 		95, 0, 0, 0)
+	return x, y
+end
+
+function member_team_accept_invite(auto)
+	local x, y
+	local x_auto, y_auto
+	
+	if ver == "iOS" then
+		x, y = findColor({120, 225, 122, 460},
+			"0|0|0x56b361,19|9|0x866f5a,-93|-16|0xdd6c59,-102|-5|0x826952",
+			95, 0, 0, 0)
+		if x > -1 then
+			random_sleep(150)
+			if (auto == 1) then
+				x_auto, y_auto = findColor({205, 225, 210, 460}, -- 自动准备的按钮
+					"0|0|0xedc791,0|13|0x5ab565,8|19|0x51ad5b,17|9|0x5bb665",
+					90, 0, 0, 0)
+				if x_auto > -1 then
+					HUD_show_or_hide(HUD,hud_info,"收到自动组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_touch(0, x_auto, y_auto, 5, 5) -- 自动准备的按钮
+					return x, y, RET_OK
+				end
+			end
+			HUD_show_or_hide(HUD,hud_info,"收到组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			random_touch(0, x, y, 5, 5) -- √
+			return x, y, RET_ERR
+		end
+	elseif ver == "android" then
+		x, y = findColor({120, 225, 122, 460},
+			"0|0|0x58b360,17|10|0xb7a796,-83|-5|0xdd6e5d,-104|-3|0xb49f87",
+			95, 0, 0, 0)
+		if x > -1 then
+			random_sleep(150)
+			if (auto == 1) then
+				x_auto, y_auto = findColor({205, 225, 210, 440},
+					"0|0|0xefc594,0|13|0x5ab563,19|9|0x61bc6a,20|20|0xb7a896",
+					90, 0, 0, 0)
+				if x_auto > -1 then
+					HUD_show_or_hide(HUD,hud_info,"收到自动组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_touch(0, x_auto, y_auto, 5, 5) -- 自动准备的按钮
+					return x, y, RET_OK
+				end
+			end
+			HUD_show_or_hide(HUD,hud_info,"收到组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			random_touch(0, x, y, 5, 5) -- √
+		end
+	end
+	return x, y, RET_ERR
+end
+
+function member_team_refuse_invite()
+	local x = -1
+	local y = -1
+	
+	if ver == "iOS" then
+		x, y = findColor({37, 200, 42, 450},
+			"0|0|0xdc6d5a,2|-19|0x866c57,-21|2|0x846b55,21|1|0x856c56",
+			95, 0, 0, 0)
+		if x > -1 then
+			HUD_show_or_hide(HUD,hud_info,"拒绝组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			random_touch(0, x, y, 5, 5)
+		end
+	elseif ver == "android" then
+		x, y = findColor({37, 200, 42, 450},
+			"0|0|0xd66b5a,1|-21|0xb6a18e,71|-3|0x5bb664,100|-10|0x62bd6b",
+			95, 0, 0, 0)
+		if x > -1 then
+			HUD_show_or_hide(HUD,hud_info,"拒绝组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			random_touch(0, x, y, 5, 5)
+		end
+	end
 	return x, y
 end
 
@@ -1364,77 +1459,6 @@ function captain_room_start_with_2_members()
 		if x_ == -1 then
 			random_sleep(500)
 			random_touch(0, x, y, 20, 10) -- 开始战斗
-		end
-	end
-	return x, y
-end
-
-function member_team_accept_invite(auto)
-	local x, y
-	local x_auto, y_auto
-	
-	if ver == "iOS" then
-		x, y = findColor({120, 225, 122, 460},
-			"0|0|0x56b361,19|9|0x866f5a,-93|-16|0xdd6c59,-102|-5|0x826952",
-			95, 0, 0, 0)
-		if x > -1 then
-			random_sleep(150)
-			if (auto == 1) then
-				x_auto, y_auto = findColor({205, 225, 210, 460}, -- 自动准备的按钮
-					"0|0|0xedc791,0|13|0x5ab565,8|19|0x51ad5b,17|9|0x5bb665",
-					90, 0, 0, 0)
-				if x_auto > -1 then
-					HUD_show_or_hide(HUD,hud_info,"收到自动组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					random_touch(0, x_auto, y_auto, 5, 5) -- 自动准备的按钮
-					return x, y, RET_OK
-				end
-			end
-			HUD_show_or_hide(HUD,hud_info,"收到组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			random_touch(0, x, y, 5, 5) -- √
-			return x, y, RET_ERR
-		end
-	elseif ver == "android" then
-		x, y = findColor({120, 225, 122, 460},
-			"0|0|0x58b360,17|10|0xb7a796,-83|-5|0xdd6e5d,-104|-3|0xb49f87",
-			95, 0, 0, 0)
-		if x > -1 then
-			random_sleep(150)
-			if (auto == 1) then
-				x_auto, y_auto = findColor({205, 225, 210, 440},
-					"0|0|0xefc594,0|13|0x5ab563,19|9|0x61bc6a,20|20|0xb7a896",
-					90, 0, 0, 0)
-				if x_auto > -1 then
-					HUD_show_or_hide(HUD,hud_info,"收到自动组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					random_touch(0, x_auto, y_auto, 5, 5) -- 自动准备的按钮
-					return x, y, RET_OK
-				end
-			end
-			HUD_show_or_hide(HUD,hud_info,"收到组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			random_touch(0, x, y, 5, 5) -- √
-		end
-	end
-	return x, y, RET_ERR
-end
-
-function member_team_refuse_invite()
-	local x = -1
-	local y = -1
-	
-	if ver == "iOS" then
-		x, y = findColor({37, 200, 42, 450},
-			"0|0|0xdc6d5a,2|-19|0x866c57,-21|2|0x846b55,21|1|0x856c56",
-			95, 0, 0, 0)
-		if x > -1 then
-			HUD_show_or_hide(HUD,hud_info,"拒绝组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			random_touch(0, x, y, 5, 5)
-		end
-	elseif ver == "android" then
-		x, y = findColor({37, 200, 42, 450},
-			"0|0|0xd66b5a,1|-21|0xb6a18e,71|-3|0x5bb664,100|-10|0x62bd6b",
-			95, 0, 0, 0)
-		if x > -1 then
-			HUD_show_or_hide(HUD,hud_info,"拒绝组队邀请",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			random_touch(0, x, y, 5, 5)
 		end
 	end
 	return x, y

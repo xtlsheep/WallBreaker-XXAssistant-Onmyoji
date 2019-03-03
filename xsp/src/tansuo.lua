@@ -243,6 +243,7 @@ function tansuo_mark(mark)
 			random_touch(0, 765, 60, 10, 10)
 		end
 	end
+	mSleep(1000)
 end
 
 function scene_quit_confirm()

@@ -206,13 +206,14 @@ function global_UI()
 	--UI:Label(global_basic_page, "left", "0,0,0", 30, "鬼王选择 - ", "500,140,180,60")
 	--UI:ComboBox(global_basic_page, "sg_fight_sel", "所有公开的超鬼王,自己发现的超鬼王","1",23,"680,140,300,50")
 	UI:Line(global_basic_page, "line_common", "100,100,100", 2, 960, "20,140,960,2")
-	UI:CheckBoxGroup(global_basic_page, "skill","自动关闭技能特写","0",30,"0,0,0","20,150,980,60")
-	UI:CheckBoxGroup(global_basic_page, "buff_start","自动开启加成Buff","",30,"0,0,0","20,210,980,60")
-	UI:CheckBoxGroup(global_basic_page, "reconn","自动断线重新连接","0",30,"0,0,0","20,270,980,60")
-	UI:CheckBoxGroup(global_basic_page, "buff_stop_useup","体力用尽关闭所有Buff","0",30,"0,0,0","20,330,700,60")
-	UI:CheckBoxGroup(global_basic_page, "buff_stop_idle","庭院探索停留过久关闭所有Buff","0",30,"0,0,0","20,390,700,60")
-	UI:ComboBox(global_basic_page, "buff_stop_idle_time", "15秒,30秒,45秒,1分钟,2分钟,5分钟","3",23,"750,390,230,50")
-	UI:CheckBoxGroup(global_basic_page, "HUD","可视化点击手势与运行辅助描述","0",30,"0,0,0","20,450,980,60")
+	UI:CheckBoxGroup(global_basic_page, "turbo_succ_en","战斗胜利快速结算","",30,"0,0,0","20,150,980,60")
+	UI:CheckBoxGroup(global_basic_page, "skill","自动关闭技能特写","0",30,"0,0,0","20,210,980,60")
+	UI:CheckBoxGroup(global_basic_page, "buff_start","自动开启加成Buff","",30,"0,0,0","20,270,980,60")
+	UI:CheckBoxGroup(global_basic_page, "reconn","自动断线重新连接","0",30,"0,0,0","20,330,980,60")
+	UI:CheckBoxGroup(global_basic_page, "buff_stop_useup","体力用尽关闭所有Buff","0",30,"0,0,0","20,390,700,60")
+	UI:CheckBoxGroup(global_basic_page, "buff_stop_idle","庭院探索停留过久关闭所有Buff","0",30,"0,0,0","20,450,700,60")
+	UI:ComboBox(global_basic_page, "buff_stop_idle_time", "15秒,30秒,45秒,1分钟,2分钟,5分钟","3",23,"750,450,230,50")
+	UI:CheckBoxGroup(global_basic_page, "HUD","可视化点击手势与运行辅助描述","0",30,"0,0,0","20,510,980,60")
 	
 	global_auto_jjtp_page = UI:Page(global_ui, "智能突破")
 	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "开启间隔 - ", "20,20,300,60")
@@ -334,6 +335,13 @@ function global_UI()
 				offer_arr[6] = 1 -- 狗粮
 			end
 		end
+	end
+	
+	-- 战斗胜利turbo
+	if res_global.turbo_succ_en == "0" then
+		turbo_succ_en = 1
+	else
+		turbo_succ_en = 0
 	end
 	
 	-- 关闭特效
@@ -710,27 +718,26 @@ function baqidashe_UI()
 	UI:Label(bqds_ui, "left", "0,0,0", 30, "请选择战斗次数 - ", "20,300,300,60")
 	UI:ComboBox(bqds_ui, "round", "3次,10次,20次,30次,50次,100次,200次,300次,无限次数","8",23,"700,300,280,50")
 	UI:CheckBoxGroup(bqds_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,360,900,60")
-	UI:CheckBoxGroup(bqds_ui, "df_change","自动更换狗粮","",30,"0,0,0","20,420,900,60")
-	UI:Label(bqds_ui, "left", "0,0,0", 30, "标记 - ", "20,480,300,60")
-	UI:Label(bqds_ui, "left", "0,0,0", 30, "第一回合 ~ ", "20,540,300,60")
-	UI:RadioGroup(bqds_ui, "round1", "左  ,中  ,右  ,无","3",30,"0,0,0","500,540,500,60")
-	UI:Label(bqds_ui, "left", "0,0,0", 30, "第二回合 ~ ", "20,600,300,60")
-	UI:RadioGroup(bqds_ui, "round2", "左  ,中  ,右  ,无","3",30,"0,0,0","500,600,500,60")
-	UI:Label(bqds_ui, "left", "0,0,0", 30, "第三回合 ~ ", "20,660,300,60")
-	UI:RadioGroup(bqds_ui, "round3", "左  ,中  ,右  ,无","3",30,"0,0,0","500,660,500,60")
-	UI:Line(bqds_ui, "line_common", "100,100,100", 2, 960, "20,720,960,2")
-	UI:Label(bqds_ui, "left", "0,0,0", 30, "队员设置 - ", "20,730,900,60")
-	UI:CheckBoxGroup(bqds_ui, "member_auto_group","接受自动组队","0",30,"0,0,0","20,790,900,60")
-	UI:CheckBoxGroup(bqds_ui, "fail_and_group","失败重新寻找队伍","0",30,"0,0,0","20,850,900,60")
-	UI:CheckBoxGroup(bqds_ui, "member_to_captain","禁止队员接手队长","0",30,"0,0,0","20,910,900,60")
-	UI:Line(bqds_ui, "line_common", "100,100,100", 2, 960, "20,970,960,2")
-	UI:Label(bqds_ui, "left", "0,0,0", 30, "队长设置 - ", "20,980,900,60")
-	UI:CheckBoxGroup(bqds_ui, "captain_auto_group","开启自动组队","0",30,"0,0,0","20,1040,900,60")
-	UI:CheckBoxGroup(bqds_ui, "fail_and_recreate","失败后重新建立房间","0",30,"0,0,0","20,1100,900,60")
-	UI:CheckBoxGroup(bqds_ui, "captain_auto_invite","固定队伍自动邀请第一位","0",30,"0,0,0","20,1160,500,60")
-	UI:ComboBox(bqds_ui, "auto_invite_zone", "本区好友,最近组队,跨区好友","0",23,"700,1160,280,50")
-	UI:CheckBoxGroup(bqds_ui, "create_limit","固定队伍无人时建房限制","0",30,"0,0,0","20,1220,500,60")
-	UI:ComboBox(bqds_ui, "limitation", "邀请3次&建房3次,邀请10次&建房10次","0",23,"700,1220,280,50")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "标记 - ", "20,420,300,60")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "第一回合 ~ ", "20,480,300,60")
+	UI:RadioGroup(bqds_ui, "round1", "左  ,中  ,右  ,无","3",30,"0,0,0","500,480,500,60")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "第二回合 ~ ", "20,540,300,60")
+	UI:RadioGroup(bqds_ui, "round2", "左  ,中  ,右  ,无","3",30,"0,0,0","500,540,500,60")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "第三回合 ~ ", "20,600,300,60")
+	UI:RadioGroup(bqds_ui, "round3", "左  ,中  ,右  ,无","3",30,"0,0,0","500,600,500,60")
+	UI:Line(bqds_ui, "line_common", "100,100,100", 2, 960, "20,660,960,2")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "队员设置 - ", "20,670,900,60")
+	UI:CheckBoxGroup(bqds_ui, "member_auto_group","接受自动组队","0",30,"0,0,0","20,730,900,60")
+	UI:CheckBoxGroup(bqds_ui, "fail_and_group","失败重新寻找队伍","0",30,"0,0,0","20,790,900,60")
+	UI:CheckBoxGroup(bqds_ui, "member_to_captain","禁止队员接手队长","0",30,"0,0,0","20,850,900,60")
+	UI:Line(bqds_ui, "line_common", "100,100,100", 2, 960, "20,910,960,2")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "队长设置 - ", "20,920,900,60")
+	UI:CheckBoxGroup(bqds_ui, "captain_auto_group","开启自动组队","0",30,"0,0,0","20,980,900,60")
+	UI:CheckBoxGroup(bqds_ui, "fail_and_recreate","失败后重新建立房间","0",30,"0,0,0","20,1040,900,60")
+	UI:CheckBoxGroup(bqds_ui, "captain_auto_invite","固定队伍自动邀请第一位","0",30,"0,0,0","20,1100,500,60")
+	UI:ComboBox(bqds_ui, "auto_invite_zone", "本区好友,最近组队,跨区好友","0",23,"700,1100,280,50")
+	UI:CheckBoxGroup(bqds_ui, "create_limit","固定队伍无人时建房限制","0",30,"0,0,0","20,1160,500,60")
+	UI:ComboBox(bqds_ui, "limitation", "邀请&建房3次,邀请&建房10次","0",23,"700,1160,280,50")
 	UI:fit(bqds_ui)
 	
 	ret_baqi, res_baqi = UI:show(bqds_ui)
@@ -814,14 +821,6 @@ function baqidashe_UI()
 		lock = 1
 	else
 		lock = 0
-	end
-	
-	local df_change
-	if (res_baqi.df_change == "0") then
-		df_change = 1
-		lock = 0
-	else
-		df_change = 0
 	end
 	
 	local member_auto_group
@@ -1938,6 +1937,8 @@ function autobattle_UI()
 		return
 	end
 	
+	turbo_succ_en = 0
+	
 	autobattle(round, round_time, force_quit, mark_self, mark)
 end
 
@@ -1961,6 +1962,8 @@ function autostory_UI()
 	end
 	
 	settlement_en = 0
+	turbo_succ_en = 0
+	
 	autostory()
 end
 

@@ -105,6 +105,8 @@ function autostory()
 			x, y = bypass_click() if (x > -1) then time_cnt = 0 break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then time_cnt = 0 break end
+			-- 战斗进行
+			x, y = fight_ongoing() if (x > -1) then break end
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then

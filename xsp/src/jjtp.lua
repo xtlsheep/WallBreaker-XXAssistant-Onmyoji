@@ -21,6 +21,20 @@ local pub_mid_metal_ff_x_diff = 100
 local pub_mid_metal_ff_y_diff = -35
 
 -- Util func
+function lct_solo_jjtp()
+	local x, y = findColor({1050, 59, 1052, 61},
+		"0|0|0xe8d4cf,-772|420|0x762906,-905|422|0xa6521e,-298|490|0xdc2f3c",
+		90, 0, 0, 0)
+	return x, y
+end
+
+function lct_pub_jjtp()
+	local x, y = findColor({1051, 59, 1053, 61},
+		"0|0|0xf2d3d1,-753|191|0x9a0616,-757|288|0x960a1a,-973|521|0xcbaa80",
+		90, 0, 0, 0)
+	return x, y
+end
+
 function find_whr(pos, whr, role)
 	local x, y, x1, x2, y1, y2
 	if (pos == -1) then
@@ -175,13 +189,6 @@ end
 
 function jjtp_touch_blank()
 	random_touch(0, 1100, 500, 30, 50)
-end
-
-function solo_lct_jjtp()
-	local x, y = findColor({1050, 59, 1052, 61},
-		"0|0|0xe8d4cf,-772|420|0x762906,-905|422|0xa6521e,-298|490|0xdc2f3c",
-		90, 0, 0, 0)
-	return x, y
 end
 
 function solo_analyse_map(solo_sel, map_)
@@ -395,13 +402,6 @@ function pub_unstart()
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"寮突破未开启",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
-	return x, y
-end
-
-function pub_lct_jjtp()
-	local x, y = findColor({1051, 59, 1053, 61},
-		"0|0|0xf2d3d1,-753|191|0x9a0616,-757|288|0x960a1a,-973|521|0xcbaa80",
-		90, 0, 0, 0)
 	return x, y
 end
 
@@ -740,7 +740,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				break
 			end
 			-- 个人突破
-			x, y = solo_lct_jjtp()
+			x, y = lct_solo_jjtp()
 			if (x > -1) then
 				-- Action
 				if action_solo == "Quit" then
@@ -838,7 +838,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 阴阳寮突破
-			x, y = pub_lct_jjtp() if x > -1 then quit_jjtp() break end
+			x, y = lct_pub_jjtp() if x > -1 then quit_jjtp() break end
 			-- 确认退出
 			x, y = quit_confirm("确认") if x > -1 then mSleep(500) break end
 			-- 庭院
@@ -908,7 +908,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				win_cnt.jjtp = win_cnt.jjtp + 1
 			end
 			-- 阴阳寮突破
-			x, y = pub_lct_jjtp()
+			x, y = lct_pub_jjtp()
 			if (x > 0) then
 				-- Action
 				if action_pub == "Wait" then
@@ -1053,7 +1053,7 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			-- 确认退出
 			x, y = quit_confirm("确认") if x > -1 then mSleep(500) break end
 			-- 个人突破
-			x, y = solo_lct_jjtp() if (x > -1) then	solo_to_pub() end
+			x, y = lct_solo_jjtp() if (x > -1) then	solo_to_pub() end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 探索

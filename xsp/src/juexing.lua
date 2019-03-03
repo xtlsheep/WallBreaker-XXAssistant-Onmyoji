@@ -40,6 +40,7 @@ function juexing_mark(mark)
 			random_touch(0, pos_x[pos], pos_y[pos], 10, 10)
 		end
 	end
+	mSleep(1000)
 end
 
 function juexing_element(element)
@@ -115,6 +116,8 @@ function juexing_solo(element, mark, level, round, lock)
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
+			-- 战斗进行
+			x, y = fight_ongoing() if x > -1 then break end
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then
@@ -146,8 +149,6 @@ function juexing_solo(element, mark, level, round, lock)
 				solo_start()
 				break
 			end
-			-- 战斗进行
-			x, y = fight_ongoing() if x > -1 then break end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 探索
@@ -255,6 +256,17 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
+			-- 战斗进行
+			x, y = fight_ongoing()
+			if x > -1 then
+				if quit_grp == 1 then
+					x_, y_ = fight_stop_auto_group()
+					if x_ > -1 then
+						quit_grp = 0
+					end
+				end
+				break
+			end
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then
@@ -310,17 +322,6 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 				fail_cnt.juexing = fail_cnt.juexing + 1
 				break
 			end
-			-- 战斗进行
-			x, y = fight_ongoing()
-			if x > -1 then
-				if quit_grp == 1 then
-					x_, y_ = fight_stop_auto_group()
-					if x_ > -1 then
-						quit_grp = 0
-					end
-				end
-				break
-			end
 			-- 停止邀请
 			x, y = captain_team_win_invite() if (x > -1) then random_touch(0, 460, 385, 20, 10) break end
 			x, y = captain_team_lost_invite() if (x > -1) then random_touch(0, 462, 383, 20, 10) break end
@@ -361,6 +362,17 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			superghost()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
+			-- 战斗进行
+			x, y = fight_ongoing()
+			if x > -1 then
+				if quit_grp == 1 then
+					x_, y_ = fight_stop_auto_group()
+					if x_ > -1 then
+						quit_grp = 0
+					end
+				end
+				break
+			end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
@@ -456,17 +468,6 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 				fail_cnt.juexing = fail_cnt.juexing + 1
 				break
 			end
-			-- 战斗进行
-			x, y = fight_ongoing()
-			if x > -1 then
-				if quit_grp == 1 then
-					x_, y_ = fight_stop_auto_group()
-					if x_ > -1 then
-						quit_grp = 0
-					end
-				end
-				break
-			end
 			-- 退出个人资料
 			x, y = member_user_profile() if x > -1 then break end
 			-- 真八岐大蛇
@@ -512,6 +513,17 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
+			-- 战斗进行
+			x, y = fight_ongoing()
+			if x > -1 then
+				if quit_grp == 1 then
+					x_, y_ = fight_stop_auto_group()
+					if x_ > -1 then
+						quit_grp = 0
+					end
+				end
+				break
+			end
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then
@@ -593,17 +605,6 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 				break
 			end
 			x, y = lct_tansuo() if x > -1 then tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt) break end
-			-- 战斗进行
-			x, y = fight_ongoing()
-			if x > -1 then
-				if quit_grp == 1 then
-					x_, y_ = fight_stop_auto_group()
-					if x_ > -1 then
-						quit_grp = 0
-					end
-				end
-				break
-			end
 			-- 退出个人资料
 			x, y = member_user_profile() if x > -1 then break end
 			-- 真八岐大蛇
@@ -653,6 +654,17 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
+			-- 战斗进行
+			x, y = fight_ongoing()
+			if x > -1 then
+				if quit_grp == 1 then
+					x_, y_ = fight_stop_auto_group()
+					if x_ > -1 then
+						quit_grp = 0
+					end
+				end
+				break
+			end
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then
@@ -754,17 +766,6 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.juexing = fail_cnt.juexing + 1
-				break
-			end
-			-- 战斗进行
-			x, y = fight_ongoing()
-			if x > -1 then
-				if quit_grp == 1 then
-					x_, y_ = fight_stop_auto_group()
-					if x_ > -1 then
-						quit_grp = 0
-					end
-				end
 				break
 			end
 			-- 退出个人资料

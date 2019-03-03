@@ -36,6 +36,7 @@ function yuling_mark(doll)
 			mSleep(5000)
 		end
 	end
+	mSleep(1000)
 	return x, y
 end
 
@@ -69,6 +70,8 @@ function yuling_(sel, level, round, doll, lock)
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
+			-- 战斗进行
+			x, y = fight_ongoing() if x > -1 then break end
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then

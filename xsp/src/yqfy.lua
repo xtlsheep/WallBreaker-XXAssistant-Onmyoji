@@ -39,6 +39,7 @@ function yqfy_mark(mark)
 			random_touch(0, pos_x[pos], pos_y[pos], 10, 10)
 		end
 	end
+	mSleep(1000)
 end
 
 function yqfy_deny_quit()
@@ -89,6 +90,8 @@ function yqfy_(round, sel, mark)
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
+			-- 战斗进行
+			x, y = fight_ongoing() if x > -1 then break end
 			-- 庭院
 			x, y = lct_tingyuan()
 			if (x > -1) then
