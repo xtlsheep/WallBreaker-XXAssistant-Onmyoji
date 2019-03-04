@@ -774,38 +774,6 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			superghost()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
-			-- 战斗进行
-			x, y = fight_ongoing()
-			if (x > -1) then
-				-- 狗粮普攻
-				if nor_attk == 1 then df_normal_attack(df_pos, "solo") break end
-				break
-			end
-			-- 战斗胜利
-			x, y = fight_success()
-			if (x > -1) then
-				tingyuan_time_cnt = 0
-				win_cnt.global = win_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				win_cnt.tansuo = win_cnt.tansuo + 1
-				if count_mode == "战斗" then
-					if win_cnt.tansuo >= win_round then
-						quit_sce = 1
-						quit_end = 1
-					end
-				end
-				if found_boss == 1 then
-					found_boss = 0
-					quit_sce = 1
-					if count_mode == "章节" then
-						sec_cnt = sec_cnt + 1
-						if sec_cnt >= sec_round then
-							quit_end = 1
-						end
-					end
-				end
-				break
-			end
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then
@@ -926,6 +894,38 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				end
 				break
 			end
+			-- 战斗进行
+			x, y = fight_ongoing()
+			if (x > -1) then
+				-- 狗粮普攻
+				if nor_attk == 1 then df_normal_attack(df_pos, "solo") break end
+				break
+			end
+			-- 战斗胜利
+			x, y = fight_success()
+			if (x > -1) then
+				tingyuan_time_cnt = 0
+				win_cnt.global = win_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.tansuo = win_cnt.tansuo + 1
+				if count_mode == "战斗" then
+					if win_cnt.tansuo >= win_round then
+						quit_sce = 1
+						quit_end = 1
+					end
+				end
+				if found_boss == 1 then
+					found_boss = 0
+					quit_sce = 1
+					if count_mode == "章节" then
+						sec_cnt = sec_cnt + 1
+						if sec_cnt >= sec_round then
+							quit_end = 1
+						end
+					end
+				end
+				break
+			end
 			-- 探索章节
 			x, y = lct_tansuo_portal()
 			if x > -1 then
@@ -1023,40 +1023,6 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			superghost()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
-			-- 战斗进行
-			x, y = fight_ongoing()
-			if (x > -1) then
-				-- 狗粮普攻
-				if nor_attk == 1 then df_normal_attack({df_pos[1], df_pos[3], df_pos[2]}, "group") end
-				break
-			end
-			-- 战斗胜利
-			x, y = fight_success()
-			if (x > -1) then
-				tingyuan_time_cnt = 0
-				win_cnt.global = win_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				win_cnt.tansuo = win_cnt.tansuo + 1
-				if count_mode == "战斗" then
-					if win_cnt.tansuo >= win_round then
-						quit_sce = 1
-						quit_end = 1
-					end
-				end
-				if found_boss == 1 then
-					found_boss = 0
-					quit_sce = 1
-					if count_mode == "章节" then
-						sec_cnt = sec_cnt + 1
-						if sec_cnt >= sec_round then
-							quit_end = 1
-						end
-					end
-				end
-				-- 智能突破Check
-				quit_con = auto_jjtp_time_check()
-				break
-			end
 			-- 继续邀请
 			x, y = team_invite()
 			if x > -1 then
@@ -1189,6 +1155,40 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				end
 				break
 			end
+			-- 战斗进行
+			x, y = fight_ongoing()
+			if (x > -1) then
+				-- 狗粮普攻
+				if nor_attk == 1 then df_normal_attack({df_pos[1], df_pos[3], df_pos[2]}, "group") end
+				break
+			end
+			-- 战斗胜利
+			x, y = fight_success()
+			if (x > -1) then
+				tingyuan_time_cnt = 0
+				win_cnt.global = win_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.tansuo = win_cnt.tansuo + 1
+				if count_mode == "战斗" then
+					if win_cnt.tansuo >= win_round then
+						quit_sce = 1
+						quit_end = 1
+					end
+				end
+				if found_boss == 1 then
+					found_boss = 0
+					quit_sce = 1
+					if count_mode == "章节" then
+						sec_cnt = sec_cnt + 1
+						if sec_cnt >= sec_round then
+							quit_end = 1
+						end
+					end
+				end
+				-- 智能突破Check
+				quit_con = auto_jjtp_time_check()
+				break
+			end
 			-- 探索章节
 			x, y = lct_tansuo_portal()
 			if x > -1 then
@@ -1281,35 +1281,12 @@ function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos,
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
 			superghost()
-			-- 战斗进行
-			x, y = fight_ongoing()
-			if (x > -1) then
-				-- 狗粮普攻
-				if nor_attk == 1 then df_normal_attack(df_pos, "group") end
-				break
-			end
 			-- 拒绝邀请
 			if quit_con == 1 or quit_end == 1 then
 				x, y = member_team_refuse_invite() if (x > -1) then mSleep(1000) break end
 			else
 				-- 接受邀请
 				x, y, auto_grouped = member_team_accept_invite(member_auto_group) if (x > -1) then break end
-			end
-			-- 战斗胜利
-			x, y = fight_success()
-			if (x > -1) then
-				tansuo_time_cnt = 0
-				tingyuan_time_cnt = 0
-				win_cnt.global = win_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				win_cnt.tansuo = win_cnt.tansuo + 1
-				if count_mode == "战斗" then
-					if win_cnt.tansuo >= win_round then
-						quit_sce = 1
-						quit_end = 1
-					end
-				end
-				break
 			end
 			-- 探索场景
 			x, y = lct_tansuo_scene()
@@ -1417,6 +1394,29 @@ function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos,
 					x_, y_ = fight_ready() if (x_ > -1) then break end
 					break
 				end
+			end
+			-- 战斗进行
+			x, y = fight_ongoing()
+			if (x > -1) then
+				-- 狗粮普攻
+				if nor_attk == 1 then df_normal_attack(df_pos, "group") end
+				break
+			end
+			-- 战斗胜利
+			x, y = fight_success()
+			if (x > -1) then
+				tansuo_time_cnt = 0
+				tingyuan_time_cnt = 0
+				win_cnt.global = win_cnt.global + 1
+				show_win_fail(win_cnt.global, fail_cnt.global)
+				win_cnt.tansuo = win_cnt.tansuo + 1
+				if count_mode == "战斗" then
+					if win_cnt.tansuo >= win_round then
+						quit_sce = 1
+						quit_end = 1
+					end
+				end
+				break
 			end
 			-- 确认退出
 			x, y = scene_quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
