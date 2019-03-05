@@ -43,7 +43,7 @@ function yuhun_mark(position, round)
 			random_touch(0, 830, 155, 10, 10)
 		end
 	end
-	mSleep(1000)
+	mSleep(3000)
 end
 
 function lct_petfind()
@@ -371,6 +371,13 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2) break end
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
+			-- 开始战斗
+			if group == "野队2人" then
+				x, y = captain_room_start_with_1_members() if (x > -1) then break end
+			end
+			if group == "野队3人" then
+				x, y = captain_room_start_with_2_members() if (x > -1) then break end
+			end
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
@@ -441,13 +448,6 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = captain_room_create_init() if (x > -1) then break end -- 创建队伍
 			-- 创建公共队伍
 			x, y = captain_room_create_public() if (x > -1) then break end
-			-- 开始战斗
-			if group == "野队2人" then
-				x, y = captain_room_start_with_1_members() if (x > -1) then break end
-			end
-			if group == "野队3人" then
-				x, y = captain_room_start_with_2_members() if (x > -1) then break end
-			end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 探索
@@ -671,6 +671,13 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2) break end
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3) break end
+			-- 开始战斗
+			if group == "固定队2人" then
+				x, y = captain_room_start_with_1_members() if (x > -1) then invite = 0 time_cnt = 0 break end
+			end
+			if group == "固定队3人" then
+				x, y = captain_room_start_with_2_members() if (x > -1) then invite = 0 time_cnt = 0 break end
+			end
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
@@ -780,13 +787,6 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			-- 邀请第一个好友
 			if (captain_auto_invite == 1 and invite == 1) then
 				x, y = captain_room_invite_first(invite_zone) if (x > -1) then invite = 0 time_cnt = 0 break end
-			end
-			-- 开始战斗
-			if group == "固定队2人" then
-				x, y = captain_room_start_with_1_members() if (x > -1) then invite = 0 time_cnt = 0 break end
-			end
-			if group == "固定队3人" then
-				x, y = captain_room_start_with_2_members() if (x > -1) then invite = 0 time_cnt = 0 break end
 			end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end

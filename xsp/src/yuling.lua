@@ -2,14 +2,14 @@ require "util"
 require "func"
 
 -- Util func
-function lct_yuling_all()
+function lct_yuling_portal()
 	local x, y = findColor({113, 157, 115, 169},
 		"0|0|0xe1d8c8,-29|204|0xe2d8c8,193|452|0x322610,416|450|0x161a0d",
 		95, 0, 0, 0)
 	return x, y
 end
 
-function lct_yuling_single()
+function lct_yuling_entry()
 	local x, y = findColor({279, 464, 281, 466},
 		"0|0|0x3a3e45,68|-1|0x3a3f46,132|-2|0x61476b,199|-1|0x6a543a",
 		95, 0, 0, 0)
@@ -84,7 +84,7 @@ function yuling_(sel, level, round, doll, lock)
 				break
 			end
 			-- 御灵
-			x, y = lct_yuling_single()
+			x, y = lct_yuling_entry()
 			if (x > -1) then
 				level_select(level, init, lock, "御灵")
 				init = 0
@@ -100,7 +100,7 @@ function yuling_(sel, level, round, doll, lock)
 			-- 探索
 			x, y = lct_tansuo() if (x > -1) then random_touch(0, 375, 590, 20, 20) break end -- 御灵
 			-- 御灵选择
-			x, y = lct_yuling_all()
+			x, y = lct_yuling_portal()
 			if (x > -1) then
 				if quit == 1 then
 					random_touch(0, 930, 110, 5, 5)

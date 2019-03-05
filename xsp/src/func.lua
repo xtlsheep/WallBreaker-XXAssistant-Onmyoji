@@ -695,13 +695,6 @@ function lct_zudui()
 	return x, y
 end
 
-function lct_group_room()
-	local x, y = findColor({783, 519, 785, 521},
-		"0|0|0xe87a2a,-581|19|0xdd6951,-402|-65|0xceccc5,194|-415|0xd4c4a3",
-		95, 0, 0, 0)
-	return x, y
-end
-
 function tingyuan_enter_tansuo()
 	local x, y = findColor({230, 125, 1136, 175}, -- 探索灯笼
 		"0|0|0xffffec,0|-2|0xffffec,0|2|0xffffd2,-2|0|0xffffe6,2|0|0xfffff1",
@@ -1052,16 +1045,15 @@ function fight_success()
 				elseif x_ == -1 then
 					return RET_OK
 				end
-				random_sleep(50)
+				random_sleep(25)
 			end
 			return RET_OK
 		end
 		return RET_ERR
 	end
 	
-	local x, y, x_, y_
-	local x_s, y_s, x_h, y_h, ret
-	local cnt = math.random(10, 12)
+	local x, y, x_s, y_s, x_h, y_h, ret
+	local cnt = math.random(8, 12)
 	
 	if turbo_succ_en == 1 and turbo_succ == 1 then
 		x, y = fight_ongoing()
@@ -1070,18 +1062,13 @@ function fight_success()
 			turbo_succ = 0
 			for i = 1, cnt do
 				loop_generic()
-				x_, y_ = lct_tingyuan() if x_ > -1 then return RET_OK, RET_OK end
-				x_, y_ = lct_tansuo() if x_ > -1 then return RET_OK, RET_OK end
-				x_, y_ = lct_group_room() if x_ > -1 then return RET_OK, RET_OK end
-				x_, y_ = lct_8dashe() if x_ > -1 then return RET_OK, RET_OK end
-				x_, y_ = lct_tansuo_scene() if x_ > -1 then return RET_OK, RET_OK end
-				x_, y_ = lct_solo_jjtp() if x_ > -1 then return RET_OK, RET_OK end
-				x_, y_ = lct_pub_jjtp() if x_ > -1 then return RET_OK, RET_OK end
-				x_, y_ = lct_juexingtower() if x_ > -1 then return RET_OK, RET_OK end
-				x_, y_ = lct_yyh() if x_ > -1 then return RET_OK, RET_OK end
-				x_, y_ = lct_yuling_single() if x_ > -1 then return RET_OK, RET_OK end
+				ret = half_harma_loop()
+				if ret == RET_OK then
+					return RET_OK, RET_OK
+				end
+				yuhun_overflow()
 				right_lower_click()
-				random_sleep(50)
+				random_sleep(25)
 			end
 			return RET_OK, RET_OK
 		end
@@ -1098,7 +1085,7 @@ function fight_success()
 				end
 				yuhun_overflow()
 				right_lower_click()
-				random_sleep(50)
+				random_sleep(25)
 			end
 			return RET_OK, RET_OK
 		end
@@ -1116,11 +1103,12 @@ function fight_failed()
 	end
 	
 	local x, y
+	local cnt = math.random(8, 12)
 	
 	x, y = failed_drum()
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		for i = 1, 10 do
+		for i = 1, cnt do
 			loop_generic()
 			x, y = failed_drum()
 			if x > -1 then

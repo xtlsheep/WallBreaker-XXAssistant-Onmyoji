@@ -355,6 +355,13 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 		while (1) do
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
+			-- 开始战斗
+			if group == "野队2人" then
+				x, y = captain_room_start_with_1_members() if (x > -1) then break end
+			end
+			if group == "野队3人" then
+				x, y = captain_room_start_with_2_members() if (x > -1) then break end
+			end
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
@@ -426,13 +433,6 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			x, y = captain_room_create_init() if (x > -1) then break end -- 创建队伍
 			-- 创建公共队伍
 			x, y = captain_room_create_public() if (x > -1) then break end
-			-- 开始战斗
-			if group == "野队2人" then
-				x, y = captain_room_start_with_1_members() if (x > -1) then break end
-			end
-			if group == "野队3人" then
-				x, y = captain_room_start_with_2_members() if (x > -1) then break end
-			end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 探索
@@ -645,6 +645,13 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 		while (1) do
 			-- 战
 			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
+			-- 开始战斗
+			if group == "固定队2人" then
+				x, y = captain_room_start_with_1_members() if (x > -1) then invite = 0 time_cnt = 0 break end
+			end
+			if group == "固定队3人" then
+				x, y = captain_room_start_with_2_members() if (x > -1) then invite = 0 time_cnt = 0 break end
+			end
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
@@ -726,13 +733,6 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			-- 邀请第一个好友
 			if (captain_auto_invite == 1 and invite == 1) then
 				x, y = captain_room_invite_first(invite_zone) if (x > -1) then invite = 0 time_cnt = 0 break end
-			end
-			-- 开始战斗
-			if group == "固定队2人" then
-				x, y = captain_room_start_with_1_members() if (x > -1) then invite = 0 time_cnt = 0 break end
-			end
-			if group == "固定队3人" then
-				x, y = captain_room_start_with_2_members() if (x > -1) then invite = 0 time_cnt = 0 break end
 			end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
