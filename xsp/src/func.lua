@@ -1317,8 +1317,8 @@ function captain_room_create_public()
 	local x, y = captain_room_create_window()
 	if x > -1 then
 		mSleep(500)
-		local x_, y_ = findColor({273, 457, 275, 459}, -- 所有人选项
-			"0|0|0x402f11",
+		local x_, y_ = findColor({288, 451, 290, 453},
+			"0|0|0x402f0e",
 			95, 0, 0, 0)
 		if x_ > -1 then
 			random_touch(0, x_, y_, 3, 3)
@@ -1332,7 +1332,7 @@ function captain_room_create_private()
 	local x, y = captain_room_create_window()
 	if x > -1 then
 		mSleep(500)
-		local x_, y_ = findColor({673, 457, 675, 459}, -- 不公开
+		local x_, y_ = findColor({673, 457, 675, 459},
 			"0|0|0x402f11",
 			95, 0, 0, 0)
 		if x_ > -1 then
