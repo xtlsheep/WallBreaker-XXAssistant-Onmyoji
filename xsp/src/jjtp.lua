@@ -703,6 +703,8 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then mSleep(1000) break end
+			-- 战斗准备
+			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then
@@ -823,8 +825,6 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				fail_cnt.jjtp = fail_cnt.jjtp + 1
 				break
 			end
-			-- 战斗准备
-			x, y = fight_ready() if (x > -1) then break end
 			-- 阴阳寮突破
 			x, y = lct_pub_jjtp() if x > -1 then quit_jjtp() break end
 			-- 确认退出
@@ -875,6 +875,8 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then mSleep(1000) break end
+			-- 战斗准备
+			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then
@@ -1036,8 +1038,6 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				fail_cnt.jjtp = fail_cnt.jjtp + 1
 			end
-			-- 战斗准备
-			x, y = fight_ready() if (x > -1) then break end
 			-- 确认退出
 			x, y = quit_confirm("确认") if x > -1 then mSleep(500) break end
 			-- 个人突破
