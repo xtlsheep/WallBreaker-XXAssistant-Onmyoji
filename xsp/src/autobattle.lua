@@ -123,6 +123,8 @@ function autobattle(round, round_time, force_quit, mark_self, mark)
 				fail_cnt.battle = fail_cnt.battle + 1
 				break
 			end
+			-- 领取奖励
+			x, y = get_bonus() if x > -1 then break end
 			-- 排名
 			x, y = lct_rank() if x > -1 then break end
 			-- 段位

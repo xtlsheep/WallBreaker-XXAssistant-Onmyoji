@@ -327,18 +327,6 @@ function solo_refresh(winess, invalid, refresh)
 	return RET_ERR
 end
 
-function solo_get_bonus()
-	local x, y = findColor({568, 380, 570, 382},
-		"0|0|0xd73847,19|18|0xcab497,101|76|0xd19118,35|83|0xbb3a1a,483|-320|0x746b68,-423|102|0x53290e",
-		95, 0, 0, 0)
-	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,"领取奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		jjtp_touch_blank()
-		mSleep(1000)
-	end
-	return x, y
-end
-
 function solo_fight_start(pos)
 	local x, y = RET_ERR
 	if (pos == -1) then
@@ -726,7 +714,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 				break
 			end
 			-- 获取奖励
-			x, y = solo_get_bonus() if (x > -1) then break end
+			x, y = get_bonus() if (x > -1) then break end
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then
