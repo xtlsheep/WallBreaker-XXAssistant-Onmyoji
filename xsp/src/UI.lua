@@ -714,7 +714,7 @@ function baqidashe_UI()
 	UI:ComboBox(bqds_ui, "mode", "单人模式,队长 - 野队 2人队伍,队长 - 野队 3人队伍,队长 - 固定队 2人队伍,队长 - 固定队 3人队伍,队员 - 野队,队员 - 固定队", "0", 30, "20,100,960,60")
 	UI:Label(bqds_ui, "left", "0,0,0", 30, "公共设置 - ", "20,180,300,60")
 	UI:Label(bqds_ui, "left", "0,0,0", 30, "请选择御魂层数 - ", "20,240,300,60")
-	UI:ComboBox(bqds_ui, "level", "一层,二层,三层,四层,五层,六层,七层,八层,九层,十层","9",23,"700,240,280,50")
+	UI:ComboBox(bqds_ui, "level", "一层,二层,三层,四层,五层,六层,七层,八层,九层,十层,悲鸣","9",23,"700,240,280,50")
 	UI:Label(bqds_ui, "left", "0,0,0", 30, "请选择战斗次数 - ", "20,300,300,60")
 	UI:ComboBox(bqds_ui, "round", "3次,10次,20次,30次,50次,100次,200次,300次,无限次数","8",23,"700,300,280,50")
 	UI:CheckBoxGroup(bqds_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,360,900,60")
@@ -1269,8 +1269,9 @@ function jjtp_UI()
 		return
 	end
 	
-	-- Disable智能突破
+	-- Disable
 	auto_jjtp_en = 0
+	turbo_succ_en = 0
 	
 	jjtp(mode, whr_solo_out, whr_pub_out, round_time, refresh, solo_sel, pub_sel, lock)
 end

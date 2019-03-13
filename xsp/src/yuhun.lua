@@ -23,8 +23,7 @@ function lct_8dashe()
 end
 
 function yuhun_mark(position, round)
-	mSleep(500)
-	random_sleep(500)
+	mSleep(700)
 	local cnt = math.random(2, 3)
 	
 	for i = 1, cnt do

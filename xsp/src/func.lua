@@ -743,7 +743,7 @@ function level_select(level, init, lock, spec)
 	local function find_fifth_level()
 		local x, y = findColor({340, 120, 360, 360},
 			"0|0|0x312e2a,-11|-9|0x403c37,-14|-3|0x37332f,-17|0|0x534e49,-1|-7|0x49443f,2|5|0x4c4842,-9|7|0x4f4b45",
-			80, 0, 1, 0)
+			85, 0, 1, 0)
 		if x > -1 then
 			random_touch(0, x, y, 50, 10)
 		end
@@ -752,7 +752,16 @@ function level_select(level, init, lock, spec)
 	local function find_sixth_level()
 		local x, y = findColor({340, 120, 360, 360},
 			"0|0|0x4a4540,-6|-9|0x2f2b27,-17|-7|0x383530,-17|8|0x3f3b36,-10|7|0x423e39,-6|7|0x413d38,-1|8|0x4b4741,-1|4|0x2c2824",
-			80, 0, 1, 0)
+			85, 0, 1, 0)
+		if x > -1 then
+			random_touch(0, x, y, 50, 10)
+		end
+	end
+	
+	local function find_seventh_level()
+		local x, y = findColor({340, 120, 360, 360},
+			"0|0|0x292622,8|-5|0x34302c,6|5|0x272420,7|-1|0x34312c,2|-11|0x58534d",
+			85, 0, 0, 0)
 		if x > -1 then
 			random_touch(0, x, y, 50, 10)
 		end
@@ -762,49 +771,81 @@ function level_select(level, init, lock, spec)
 		HUD_show_or_hide(HUD,hud_info,"层数 - 初始化",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		-- 选择层数
 		if (level == 1) then
-			random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
+			random_move(0, 360, 150, 360, 500, 50, 10) -- 向下拉
 			random_sleep(750)
 			random_touch(0, 360, 150, 50, 10) -- 第一排
 		elseif (level == 2) then
-			random_move(0, 360, 150, 360, 400, 50, 10)
+			random_move(0, 360, 150, 360, 500, 50, 10)
 			random_sleep(750)
 			random_touch(0, 360, 215, 50, 10) -- 第二排
 		elseif (level == 3) then
-			random_move(0, 360, 150, 360, 400, 50, 10)
+			random_move(0, 360, 150, 360, 500, 50, 10)
 			random_sleep(750)
 			random_touch(0, 360, 280, 50, 10) -- 第三排
 		elseif (level == 4) then
-			random_move(0, 360, 150, 360, 400, 50, 10)
+			random_move(0, 360, 150, 360, 500, 50, 10)
 			random_sleep(750)
 			random_touch(0, 360, 350, 50, 10) -- 第四排
 		elseif (level == 5) then
-			random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
+			random_move(0, 360, 150, 360, 500, 50, 10) -- 向下拉
 			random_sleep(750)
 			random_move(0, 360, 300, 360, 150, 50, 10) -- 向上拉
 			random_sleep(750)
 			find_fifth_level()
 		elseif (level == 6) then
-			random_move(0, 360, 150, 360, 400, 50, 10) -- 向下拉
+			random_move(0, 360, 150, 360, 500, 50, 10)
 			random_sleep(750)
-			random_move(0, 360, 300, 360, 150, 50, 10) -- 向上拉
+			random_move(0, 360, 300, 360, 150, 50, 10)
 			random_sleep(750)
 			find_sixth_level()
 		elseif (level == 7) then
-			random_move(0, 360, 350, 360, 100, 50, 10) -- 向上拉
-			random_sleep(750)
-			random_touch(0, 360, 150, 50, 10)
+			if spec == "御魂" then
+				random_move(0, 360, 350, 360, 50, 50, 10)
+				random_sleep(750)
+				random_move(0, 360, 150, 360, 250, 50, 10)
+				random_sleep(750)
+				find_seventh_level()
+			else
+				random_move(0, 360, 350, 360, 50, 50, 10)
+				random_sleep(750)
+				random_touch(0, 360, 150, 50, 10)
+			end
 		elseif (level == 8) then
-			random_move(0, 360, 350, 360, 100, 50, 10)
-			random_sleep(750)
-			random_touch(0, 360, 215, 50, 10)
+			if spec == "御魂" then
+				random_move(0, 360, 350, 360, 50, 50, 10)
+				random_sleep(750)
+				random_touch(0, 360, 150, 50, 10)
+			else
+				random_move(0, 360, 350, 360, 50, 50, 10)
+				random_sleep(750)
+				random_touch(0, 360, 215, 50, 10)
+			end
 		elseif (level == 9) then
-			random_move(0, 360, 350, 360, 100, 50, 10)
-			random_sleep(750)
-			random_touch(0, 360, 280, 50, 10)
+			if spec == "御魂" then
+				random_move(0, 360, 350, 360, 50, 50, 10)
+				random_sleep(750)
+				random_touch(0, 360, 215, 50, 10)
+			else
+				random_move(0, 360, 350, 360, 50, 50, 10)
+				random_sleep(750)
+				random_touch(0, 360, 280, 50, 10)
+			end
 		elseif (level == 10) then
-			random_move(0, 360, 350, 360, 100, 50, 10)
-			random_sleep(750)
-			random_touch(0, 360, 350, 50, 10)
+			if spec == "御魂" then
+				random_move(0, 360, 350, 360, 50, 50, 10)
+				random_sleep(750)
+				random_touch(0, 360, 280, 50, 10)
+			else
+				random_move(0, 360, 350, 360, 50, 50, 10)
+				random_sleep(750)
+				random_touch(0, 360, 350, 50, 10)
+			end
+		elseif (level == 11) then
+			if spec == "御魂" then
+				random_move(0, 360, 350, 360, 50, 50, 10)
+				random_sleep(750)
+				random_touch(0, 360, 350, 50, 10)
+			end
 		end
 	end
 	
@@ -1001,21 +1042,55 @@ function quit_confirm(sel)
 end
 
 function fight_ongoing()
-	local x, y = findColor({26, 35, 28, 37},
-		"0|0|0xd4c4a3,-13|-7|0x231a12,-13|524|0x5e5776,22|532|0x35275a",
-		90, 0, 0, 0)
-	if (x > -1) then
+	local function fight_6p()
+		local x, y = findColor({27, 36, 29, 38},
+			"0|0|0xd6c4a1,450|596|0xffffff,452|589|0x03b9ea,466|586|0x281918",
+			95, 0, 0, 0)
+		return x
+	end
+	
+	local function fight_4p()
+		local x, y = findColor({27, 36, 29, 38},
+			"0|0|0xd6c4a1,652|596|0xffffff,655|589|0x03b8e9,669|586|0x281918",
+			95, 0, 0, 0)
+		return x
+	end
+	
+	local function fight_3p()
+		local x, y = findColor({27, 36, 29, 38},
+			"0|0|0xd6c4a1,754|596|0xffffff,756|589|0x03b9e9,769|586|0x281918",
+			95, 0, 0, 0)
+		return x
+	end
+	
+	local function fight_2p()
+		local x, y = findColor({27, 36, 29, 38},
+			"0|0|0xd6c4a1,855|596|0xffffff,857|589|0x03b9e9,870|586|0x281918",
+			95, 0, 0, 0)
+		return x
+	end
+	
+	local p6 = fight_6p()
+	local p4 = fight_4p()
+	local p3 = fight_3p()
+	local p2 = fight_2p()
+	local flag = -1
+	if p6 > -1 or p4 > -1 or p3 > -1 or p2 > -1 then
+		flag = 0
+	end
+	
+	if flag > -1 then
 		if turbo_succ_en == 1 then
 			turbo_succ = 1
 		end
-		local x_, y_ = findColor({35, 514, 37, 516}, -- 指南针
+		local x, y = findColor({35, 514, 37, 516}, -- 指南针
 			"0|0|0x29211b,-6|3|0xd3ad6a,-3|8|0x9c652b,6|-6|0xa97534,0|-6|0xd8b773",
 			95, 0, 0, 0)
-		if (x_ > -1) then
-			random_touch(0, x_, y_, 10, 10) -- 指南针
+		if (x > -1) then
+			random_touch(0, x, y, 10, 10) -- 指南针
 		end
 	end
-	return x, y
+	return flag, 0
 end
 
 function fight_success()
