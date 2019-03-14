@@ -1205,6 +1205,9 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				degree_select(hard)
 				HUD_show_or_hide(HUD,hud_info,"邀请队员",20,"0xff000000","0xffffffff",0,100,0,300,32)
 				random_touch(0, 580, 480, 30, 10) -- 组队
+				move_total = get_scene_move(scene_move)
+				move_cnt = 0
+				quit_sce = 0
 				mSleep(2000)
 				break
 			end
