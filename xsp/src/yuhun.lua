@@ -1,6 +1,9 @@
 require "util"
 require "func"
 
+-- Config
+mark_delay = 500
+
 -- Util func
 function lct_yuhun()
 	local x, y = findColor({1100, 132, 1102, 134},
@@ -24,9 +27,8 @@ end
 
 function yuhun_mark(position, round, level)
 	mSleep(800)
-	if level == 11 then
-		mSleep(1000)
-	end
+	mSleep(mark_delay)
+	random_sleep(50)
 	
 	local cnt
 	if round == 3 then
@@ -36,28 +38,31 @@ function yuhun_mark(position, round, level)
 	end
 	
 	for i = 1, cnt do
-		random_sleep(150)
 		if (position == "左") then
 			random_touch(0, 290, 150, 10, 10)
+		elseif (position == "右") then
+			random_touch(0, 840, 150, 10, 10)
 		elseif (position == "中") then
 			if round == 1 then
-				random_touch(0, 560, 150, 10, 10)
+				random_touch(0, 550, 150, 10, 10)
 			elseif round == 2 then
 				if level == 10 then
-					random_touch(0, 560, 110, 10, 10)
+					-- 魂十 第二回合 青行灯
+					random_touch(0, 550, 80, 10, 10)
 				else
-					random_touch(0, 506, 150, 10, 10)
+					random_touch(0, 550, 150, 10, 10)
 				end
 			elseif round == 3 then
 				if level <= 10 then
-					random_touch(0, 520, 140, 10, 10)
+					-- 普通大蛇
+					random_touch(0, 520, 150, 10, 10)
 				else
-					random_touch(0, 560, 150, 10, 10)
+					-- 悲鸣大蛇
+					random_touch(0, 550, 150, 10, 10)
 				end
 			end
-		elseif (position == "右") then
-			random_touch(0, 840, 150, 10, 10)
 		end
+		random_sleep(50)
 	end
 	mSleep(3000)
 end
@@ -75,8 +80,8 @@ end
 
 -- Main func
 function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate, limitation)
-	print(string.format("八岐大蛇 - 模式：%s，角色：%s，组队：%s，一层标记：%s 二层标记：%s 三层标记：%s，层数：%d，战斗次数：%d，锁定出战：%d",
-			mode, role, group, mark[1], mark[2], mark[3], level, round, lock))
+	print(string.format("八岐大蛇 - 模式：%s，角色：%s，组队：%s，标记延迟 %d, 一层标记：%s 二层标记：%s 三层标记：%s，层数：%d，战斗次数：%d，锁定出战：%d",
+			mode, role, group, mark_delay, mark[1], mark[2], mark[3], level, round, lock))
 	print(string.format("队员自动组队：%d，失败重新组队：%d，队员接手队长：%d，队长自动组队：%d，队长自动邀请：%d, 自动邀请区域: %s, 失败重新建队：%d, 建房限制次数 %d",
 			member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate, limitation))
 	print_global_config()

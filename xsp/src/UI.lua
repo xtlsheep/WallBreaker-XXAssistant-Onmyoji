@@ -719,25 +719,27 @@ function baqidashe_UI()
 	UI:ComboBox(bqds_ui, "round", "3次,10次,20次,30次,50次,100次,200次,300次,无限次数","8",23,"700,300,280,50")
 	UI:CheckBoxGroup(bqds_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,360,900,60")
 	UI:Label(bqds_ui, "left", "0,0,0", 30, "标记 - ", "20,420,300,60")
-	UI:Label(bqds_ui, "left", "0,0,0", 30, "第一回合 ~ ", "20,480,300,60")
-	UI:RadioGroup(bqds_ui, "round1", "左  ,中  ,右  ,无","3",30,"0,0,0","500,480,500,60")
-	UI:Label(bqds_ui, "left", "0,0,0", 30, "第二回合 ~ ", "20,540,300,60")
-	UI:RadioGroup(bqds_ui, "round2", "左  ,中  ,右  ,无","3",30,"0,0,0","500,540,500,60")
-	UI:Label(bqds_ui, "left", "0,0,0", 30, "第三回合 ~ ", "20,600,300,60")
-	UI:RadioGroup(bqds_ui, "round3", "左  ,中  ,右  ,无","3",30,"0,0,0","500,600,500,60")
-	UI:Line(bqds_ui, "line_common", "100,100,100", 2, 960, "20,660,960,2")
-	UI:Label(bqds_ui, "left", "0,0,0", 30, "队员设置 - ", "20,670,900,60")
-	UI:CheckBoxGroup(bqds_ui, "member_auto_group","接受自动组队","0",30,"0,0,0","20,730,900,60")
-	UI:CheckBoxGroup(bqds_ui, "fail_and_group","失败重新寻找队伍","0",30,"0,0,0","20,790,900,60")
-	UI:CheckBoxGroup(bqds_ui, "member_to_captain","禁止队员接手队长","0",30,"0,0,0","20,850,900,60")
-	UI:Line(bqds_ui, "line_common", "100,100,100", 2, 960, "20,910,960,2")
-	UI:Label(bqds_ui, "left", "0,0,0", 30, "队长设置 - ", "20,920,900,60")
-	UI:CheckBoxGroup(bqds_ui, "captain_auto_group","开启自动组队","0",30,"0,0,0","20,980,900,60")
-	UI:CheckBoxGroup(bqds_ui, "fail_and_recreate","失败后重新建立房间","0",30,"0,0,0","20,1040,900,60")
-	UI:CheckBoxGroup(bqds_ui, "captain_auto_invite","固定队伍自动邀请第一位","0",30,"0,0,0","20,1100,500,60")
-	UI:ComboBox(bqds_ui, "auto_invite_zone", "本区好友,最近组队,跨区好友","0",23,"700,1100,280,50")
-	UI:CheckBoxGroup(bqds_ui, "create_limit","固定队伍无人时建房限制","0",30,"0,0,0","20,1160,500,60")
-	UI:ComboBox(bqds_ui, "limitation", "邀请&建房3次,邀请&建房10次","0",23,"700,1160,280,50")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "标记延迟 - ", "20,480,300,60")
+	UI:ComboBox(bqds_ui, "mark_delay", "0 ms,100 ms,200 ms,300 ms,400 ms,500 ms,1000 ms,1500 ms,2000 ms,3000 ms","5",23,"700,480,280,50")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "第一回合 ~ ", "20,540,300,60")
+	UI:RadioGroup(bqds_ui, "round1", "左  ,中  ,右  ,无","3",30,"0,0,0","500,540,500,60")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "第二回合 ~ ", "20,600,300,60")
+	UI:RadioGroup(bqds_ui, "round2", "左  ,中  ,右  ,无","3",30,"0,0,0","500,600,500,60")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "第三回合 ~ ", "20,660,300,60")
+	UI:RadioGroup(bqds_ui, "round3", "左  ,中  ,右  ,无","3",30,"0,0,0","500,660,500,60")
+	UI:Line(bqds_ui, "line_common", "100,100,100", 2, 960, "20,720,960,2")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "队员设置 - ", "20,730,900,60")
+	UI:CheckBoxGroup(bqds_ui, "member_auto_group","接受自动组队","0",30,"0,0,0","20,790,900,60")
+	UI:CheckBoxGroup(bqds_ui, "fail_and_group","失败重新寻找队伍","0",30,"0,0,0","20,850,900,60")
+	UI:CheckBoxGroup(bqds_ui, "member_to_captain","禁止队员接手队长","0",30,"0,0,0","20,910,900,60")
+	UI:Line(bqds_ui, "line_common", "100,100,100", 2, 960, "20,970,960,2")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "队长设置 - ", "20,980,900,60")
+	UI:CheckBoxGroup(bqds_ui, "captain_auto_group","开启自动组队","0",30,"0,0,0","20,1040,900,60")
+	UI:CheckBoxGroup(bqds_ui, "fail_and_recreate","失败后重新建立房间","0",30,"0,0,0","20,1100,900,60")
+	UI:CheckBoxGroup(bqds_ui, "captain_auto_invite","固定队伍自动邀请第一位","0",30,"0,0,0","20,1160,500,60")
+	UI:ComboBox(bqds_ui, "auto_invite_zone", "本区好友,最近组队,跨区好友","0",23,"700,1160,280,50")
+	UI:CheckBoxGroup(bqds_ui, "create_limit","固定队伍无人时建房限制","0",30,"0,0,0","20,1220,500,60")
+	UI:ComboBox(bqds_ui, "limitation", "邀请&建房3次,邀请&建房10次","0",23,"700,1220,280,50")
 	UI:fit(bqds_ui)
 	
 	ret_baqi, res_baqi = UI:show(bqds_ui)
@@ -775,6 +777,28 @@ function baqidashe_UI()
 		mode = "组队"
 		role = "队员"
 		group = "固定队"
+	end
+	
+	if (res_baqi.mark_delay == "0") then
+		mark_delay = 0
+	elseif (res_baqi.mark_delay == "1") then
+		mark_delay = 100
+	elseif (res_baqi.mark_delay == "2") then
+		mark_delay = 200
+	elseif (res_baqi.mark_delay == "3") then
+		mark_delay = 300
+	elseif (res_baqi.mark_delay == "4") then
+		mark_delay = 400
+	elseif (res_baqi.mark_delay == "5") then
+		mark_delay = 500
+	elseif (res_baqi.mark_delay == "6") then
+		mark_delay = 1000
+	elseif (res_baqi.mark_delay == "7") then
+		mark_delay = 1500
+	elseif (res_baqi.mark_delay == "8") then
+		mark_delay = 2000
+	elseif (res_baqi.mark_delay == "9") then
+		mark_delay = 3000
 	end
 	
 	local mark = {}
