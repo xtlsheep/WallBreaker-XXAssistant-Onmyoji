@@ -15,6 +15,7 @@ auto_jjtp_refresh = 0
 auto_jjtp_solo_sel = nil
 auto_jjtp_pub_sel = 0
 auto_jjtp_time_stamp = 0
+auto_jjtp_turbo_succ_flag = 0
 
 -- Util func
 function auto_jjtp_time_check()
@@ -35,6 +36,9 @@ end
 -- Main func
 function yuhun_auto_jjtp(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate, limitation)
 	local ret = 0
+	if turbo_succ_en == 1 then
+		auto_jjtp_turbo_succ_flag = 1
+	end
 	
 	while (1) do
 		auto_jjtp_time_stamp = mTime()
@@ -47,7 +51,9 @@ function yuhun_auto_jjtp(mode, role, group, mark, level, round, lock, member_aut
 			lua_exit()
 		end
 		
+		turbo_succ_en = 0
 		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock)
+		turbo_succ_en = auto_jjtp_turbo_succ_flag
 		mSleep(1000)
 		ret = lct_tingyuan_or_tansuo()
 		if ret == RET_ERR then
@@ -60,6 +66,10 @@ end
 
 function juexing_auto_jjtp(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
 	local ret = 0
+	local ret = 0
+	if turbo_succ_en == 1 then
+		auto_jjtp_turbo_succ_flag = 1
+	end
 	
 	while (1) do
 		auto_jjtp_time_stamp = mTime()
@@ -72,7 +82,9 @@ function juexing_auto_jjtp(mode, role, group, element, mark, level, round, lock,
 			lua_exit()
 		end
 		
+		turbo_succ_en = 0
 		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock)
+		turbo_succ_en = auto_jjtp_turbo_succ_flag
 		mSleep(1000)
 		ret = lct_tingyuan_or_tansuo()
 		if ret == RET_ERR then
@@ -85,6 +97,10 @@ end
 
 function tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
 	local ret = 0
+	local ret = 0
+	if turbo_succ_en == 1 then
+		auto_jjtp_turbo_succ_flag = 1
+	end
 	
 	while (1) do
 		auto_jjtp_time_stamp = mTime()
@@ -97,8 +113,9 @@ function tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode
 			lua_exit()
 		end
 		
-		
+		turbo_succ_en = 0
 		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock)
+		turbo_succ_en = auto_jjtp_turbo_succ_flag
 		mSleep(1000)
 		ret = lct_tingyuan_or_tansuo()
 		if ret == RET_ERR then
@@ -111,6 +128,10 @@ end
 
 function yeyuanhuo_auto_jjtp(round_tan, round_chen, round_chi, lock)
 	local ret = 0
+	local ret = 0
+	if turbo_succ_en == 1 then
+		auto_jjtp_turbo_succ_flag = 1
+	end
 	
 	while (1) do
 		auto_jjtp_time_stamp = mTime()
@@ -123,7 +144,9 @@ function yeyuanhuo_auto_jjtp(round_tan, round_chen, round_chi, lock)
 			lua_exit()
 		end
 		
+		turbo_succ_en = 0
 		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock)
+		turbo_succ_en = auto_jjtp_turbo_succ_flag
 		mSleep(1000)
 		ret = lct_tingyuan_or_tansuo()
 		if ret == RET_ERR then
