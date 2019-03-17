@@ -568,14 +568,14 @@ function skkm_change_switch(top_left, top_mid, top_right, bot_left, bot_right)
 	if top_right == 1 then
 		cnt = math.random(2, 3)
 		for i = 1, cnt do
-			random_move(0, 200, 500, 200, 250, 5, 10)
+			random_move(0, 200, 500, 180, 250, 5, 10)
 			random_sleep(500)
 		end
 	end
 	if top_mid == 1 then
 		cnt = math.random(2, 3)
 		for i = 1, cnt do
-			random_move(0, 800, 500, 580, 250, 5, 10)
+			random_move(0, 800, 500, 550, 250, 5, 10)
 			random_sleep(500)
 		end
 	end
