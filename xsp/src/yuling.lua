@@ -21,13 +21,14 @@ function yuling_mark(doll)
 	local y = -1
 	
 	if doll == 1 then
+
 		x, y = findColor({650, 200, 700, 300}, -- 草人标记
 			"0|0|0xda0b4b,-19|1|0xef44a9,18|1|0xf65cb8,3|24|0xd41636,-3|31|0xf9505d",
 			95, 0, 0, 0)
 		if x > -1 then
 			return x, y
 		end
-		
+
 		x, y = findColor({600, 250, 700, 350}, -- 草人血条
 			"0|0|0xb1120e,3|0|0xb10e0b,6|0|0xb40e0b",
 			95, 0, 0, 0)
@@ -70,6 +71,8 @@ function yuling_(sel, level, round, doll, lock)
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
+			-- 草人标记
+			x, y = yuling_mark(doll) if x > -1 then break end
 			-- 战斗进行
 			x, y = fight_ongoing() if x > -1 then break end
 			-- 战斗胜利
@@ -93,8 +96,6 @@ function yuling_(sel, level, round, doll, lock)
 			end
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
-			-- 草人标记
-			x, y = yuling_mark(doll) if x > -1 then break end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() break end
 			-- 探索
