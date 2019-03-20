@@ -751,6 +751,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 	local top_mid = 0
 	local top_right = 0
 	local tingyuan_time_cnt = 0
+	local tansuo_time_cnt = 0
 	local x, y, x_, y_
 	
 	if captain_pos == "左前" then
@@ -991,6 +992,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 	local bot_left = 0
 	local bot_right = 0
 	local tingyuan_time_cnt = 0
+	local tansuo_time_cnt = 0
 	local invite_zone = 0
 	local x, y, x_, y_
 	
@@ -1164,7 +1166,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				break
 			end
 			-- 战斗胜利
-			x, y. ret = fight_settle()
+			x, y, ret = fight_settle()
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				tansuo_time_cnt = 0
