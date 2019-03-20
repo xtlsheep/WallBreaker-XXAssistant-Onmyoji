@@ -254,31 +254,88 @@ function scene_quit_confirm()
 end
 
 function find_exp()
-	local x, y = findColor({0, 0, 1136, 640},
+	local x, y
+	-- small
+	x, y = findColor({0, 0, 1136, 640},
+		"0|0|0xded1aa,-13|8|0x8e2320,15|-1|0x921d1c,15|-9|0x286d7e",
+		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"发现经验加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		return x, y
+	end
+	-- normal
+	x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xb29773,-13|-4|0x2b6478,-7|8|0x831917",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"发现经验加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		return x, y
+	end
+	-- big
+	x, y = findColor({0, 0, 1136, 640},
+		"0|0|0xebdcb0,-22|12|0x871c1c,28|-3|0x891918,29|-17|0x21566e",
+		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"发现经验加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		return x, y
 	end
 	return x, y
 end
 
 function find_money()
-	local x, y = findColor({0, 0, 1136, 640},
+	local x, y
+	-- small
+	x, y = findColor({0, 0, 1136, 640},
+		"0|0|0x713d2c,2|-12|0xd5bc62,-11|-7|0xdece77,10|15|0xecd41c",
+		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"发现金币加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		return x, y
+	end
+	-- normal
+	x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xdacb6f,5|-11|0xdfd082,12|-2|0xdaca71",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"发现金币加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		return x, y
+	end
+	-- big
+	x, y = findColor({0, 0, 1136, 640},
+		"0|0|0x70412f,2|-18|0xdbc76c,-20|-10|0xdece76,16|28|0xedd817",
+		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"发现金币加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		return x, y
 	end
 	return x, y
 end
 
 function find_goods()
-	local x, y = findColor({0, 0, 1136, 640},
+	local x, y
+	-- small
+	x, y = findColor({0, 0, 1136, 640},
+		"0|0|0xd52a22,21|7|0xf9e219,14|8|0xfbf525,6|-13|0xf8f7e7",
+		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"发现掉落加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		return x, y
+	end
+	-- normal
+	x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xf6db12,-10|-9|0xd62e22,-21|-15|0xce4428",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"发现掉落加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		return x, y
+	end
+	-- big
+	x, y = findColor({0, 0, 1136, 640},
+		"0|0|0xd62d24,25|13|0xfaf124,38|10|0xfce711,10|-26|0xfbfbeb",
+		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"发现掉落加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		return x, y
 	end
 	return x, y
 end
@@ -320,7 +377,7 @@ function find_target(sel)
 	
 	HUD_show_or_hide(HUD,hud_info,"寻找ing...",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	
-	for i = 1, 5 do
+	for i = 1, 3 do
 		keepScreen(true)
 		-- Boss
 		if sel[4] == 1 then
@@ -850,6 +907,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				-- 探索预备
 				x, y = lct_tansuo_prepare()
 				if x > -1 then
+					mSleep(500)
 					top_left, top_mid, top_right = full_exp_top(df_pos)
 					if top_left == 1 or top_mid == 1 or top_right == 1 then
 						if full_exp == "change" then
