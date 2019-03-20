@@ -1105,17 +1105,17 @@ function fight_ongoing()
 	return flag, 0
 end
 
-function fight_success()
-	function yuhun_overflow()
-		local x, y = findColor({568, 376, 570, 378},
-			"0|0|0xf3b25e,-54|-24|0x973b2e,52|20|0x963b2e,179|-163|0xc6b096,-182|42|0xcab49a",
-			95, 0, 0, 0)
-		if x > -1 then
-			random_touch(0, x, y, 20, 5)
-		end
-		return x, y
+function yuhun_overflow()
+	local x, y = findColor({568, 376, 570, 378},
+		"0|0|0xf3b25e,-54|-24|0x973b2e,52|20|0x963b2e,179|-163|0xc6b096,-182|42|0xcab49a",
+		95, 0, 0, 0)
+	if x > -1 then
+		random_touch(0, x, y, 20, 5)
 	end
-	
+	return x, y
+end
+
+function fight_success()
 	function success_drum()
 		local x, y = findColor({421, 75, 430, 145},
 			"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
