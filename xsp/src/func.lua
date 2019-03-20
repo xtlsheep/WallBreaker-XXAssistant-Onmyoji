@@ -942,12 +942,24 @@ function group_start()
 end
 
 function fight_ready()
-	local x, y = findColor({1035, 596, 1039, 599}, -- 准备的鼓的棒槌
+	local x, y
+	-- 正式服
+	x, y = findColor({1035, 596, 1039, 599}, -- 准备的鼓的棒槌
 		"0|0|0xe5c288,-62|17|0xebd19e,61|18|0xf0d8a9",
 		95, 0, 0, 0)
 	if (x > -1) then
 		HUD_show_or_hide(HUD,hud_info,"战斗开始",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		random_touch(0, 1040, 493, 30, 30) -- 准备的鼓
+		return x, y
+	end
+	-- 体服
+	x, y = findColor({1036,486,1038,489},
+		"0|0|0xd4ae7a,8|7|0xfff4d7,-50|78|0xdaae71,-51|60|0x731208",
+		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"战斗开始",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		random_touch(0, 1040, 493, 30, 30) -- 准备的鼓
+		return x, y
 	end
 	return x, y
 end
