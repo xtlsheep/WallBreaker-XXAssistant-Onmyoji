@@ -124,6 +124,7 @@ function yuhun_solo(mark, level, round, lock)
 	local quit_end = 0
 	local quit_con = 0
 	local init = 1
+	local ret = 0
 	local x, y
 	
 	while (1) do
@@ -145,15 +146,21 @@ function yuhun_solo(mark, level, round, lock)
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗进行
 			x, y = fight_ongoing() if x > -1 then break end
-			-- 战斗胜利
-			x, y = fight_success()
+			-- 战斗结算
+			x, y, ret = fight_settle()
 			if (x > -1) then
 				tingyuan_time_cnt = 0
-				win_cnt.global = win_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				win_cnt.yuhun = win_cnt.yuhun + 1
-				if win_cnt.yuhun >= round then
-					quit_end = 1
+				if ret == "Success" then
+					win_cnt.global = win_cnt.global + 1
+					show_win_fail(win_cnt.global, fail_cnt.global)
+					win_cnt.yuhun = win_cnt.yuhun + 1
+					if win_cnt.yuhun >= round then
+						quit_end = 1
+					end
+				elseif ret == "Failed" then
+					fail_cnt.global = fail_cnt.global + 1
+					show_win_fail(win_cnt.global, fail_cnt.global)
+					fail_cnt.yuhun = fail_cnt.yuhun + 1
 				end
 				break
 			end
@@ -199,15 +206,6 @@ function yuhun_solo(mark, level, round, lock)
 			end
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) mSleep(1500) break end -- 八岐大蛇
-			-- 战斗失败
-			x, y = fight_failed()
-			if (x > -1) then
-				tingyuan_time_cnt = 0
-				fail_cnt.global = fail_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				fail_cnt.yuhun = fail_cnt.yuhun + 1
-				break
-			end
 			-- 发现宝藏
 			x, y = lct_petfind() if (x > -1) then break end
 			-- 真八岐大蛇
@@ -234,6 +232,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 	local quit_con = 0
 	local quit_grp = 0
 	local ret = 0
+	local ret_ = 0
 	local init = 1
 	local x, y, x_, y_
 	
@@ -300,27 +299,38 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success()
+			x, y, ret_ = fight_settle()
 			if (x > -1) then
-				wait_invite = 1
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
-				win_cnt.global = win_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				win_cnt.yuhun = win_cnt.yuhun + 1
-				if win_cnt.yuhun == round then
-					quit_grp = 1
-					wait_invite = 0
-				end
-				if win_cnt.yuhun > round then
-					quit_end = 1
-				end
-				-- 智能突破Check
-				ret = auto_jjtp_time_check()
-				if ret == RET_VALID then
-					quit_grp = 1
-					quit_con = 1
-					wait_invite = 0
+				if ret_ == "Success" then
+					wait_invite = 1
+					win_cnt.global = win_cnt.global + 1
+					show_win_fail(win_cnt.global, fail_cnt.global)
+					win_cnt.yuhun = win_cnt.yuhun + 1
+					if win_cnt.yuhun == round then
+						quit_grp = 1
+						wait_invite = 0
+					end
+					if win_cnt.yuhun > round then
+						quit_end = 1
+					end
+					-- 智能突破Check
+					ret = auto_jjtp_time_check()
+					if ret == RET_VALID then
+						quit_grp = 1
+						quit_con = 1
+						wait_invite = 0
+					end
+				elseif ret_ == "Failed" then
+					if (fail_and_group == 1) then
+						wait_invite = 0
+					else
+						wait_invite = 1
+					end
+					fail_cnt.global = fail_cnt.global + 1
+					show_win_fail(win_cnt.global, fail_cnt.global)
+					fail_cnt.yuhun = fail_cnt.yuhun + 1
 				end
 				break
 			end
@@ -340,21 +350,6 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			x, y = lct_tingyuan() if (x > -1) then mSleep(500) tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
 			-- 御魂
 			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) mSleep(1500) break end -- 八岐大蛇
-			-- 战斗失败
-			x, y = fight_failed()
-			if (x > -1) then
-				if (fail_and_group == 1) then
-					wait_invite = 0
-				else
-					wait_invite = 1
-				end
-				tansuo_time_cnt = 0
-				tingyuan_time_cnt = 0
-				fail_cnt.global = fail_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				fail_cnt.yuhun = fail_cnt.yuhun + 1
-				break
-			end
 			-- 停止邀请
 			x, y = captain_team_win_invite() if (x > -1) then random_touch(0, 460, 385, 20, 10) break end
 			x, y = captain_team_lost_invite() if (x > -1) then random_touch(0, 462, 383, 20, 10) break end
@@ -381,6 +376,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 	local quit_con = 0
 	local quit_grp = 0
 	local ret  = 0
+	local ret_ = 0
 	local init = 1
 	local x, y
 	
@@ -420,24 +416,30 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success()
+			x, y, ret_ = fight_settle()
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
-				win_cnt.global = win_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				win_cnt.yuhun = win_cnt.yuhun + 1
-				if win_cnt.yuhun == round then
-					quit_grp = 1
-				end
-				if win_cnt.yuhun > round then
-					quit_end = 1
-				end
-				-- 智能突破Check
-				ret = auto_jjtp_time_check()
-				if ret == RET_VALID then
-					quit_grp = 1
-					quit_con = 1
+				if ret_ == "Success" then
+					win_cnt.global = win_cnt.global + 1
+					show_win_fail(win_cnt.global, fail_cnt.global)
+					win_cnt.yuhun = win_cnt.yuhun + 1
+					if win_cnt.yuhun == round then
+						quit_grp = 1
+					end
+					if win_cnt.yuhun > round then
+						quit_end = 1
+					end
+					-- 智能突破Check
+					ret = auto_jjtp_time_check()
+					if ret == RET_VALID then
+						quit_grp = 1
+						quit_con = 1
+					end
+				elseif ret_ == "Failed" then
+					fail_cnt.global = fail_cnt.global + 1
+					show_win_fail(win_cnt.global, fail_cnt.global)
+					fail_cnt.yuhun = fail_cnt.yuhun + 1
 				end
 				break
 			end
@@ -494,16 +496,6 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = lct_yuhun() if (x > -1) then random_touch(0, 355, 320, 50, 50) mSleep(1500) break end -- 八岐大蛇
 			-- 八岐大蛇
 			x, y = lct_8dashe() if (x > -1) then level_select(level, init, lock, "御魂") init = 0 group_start() break end -- 组队开始
-			-- 战斗失败
-			x, y = fight_failed()
-			if (x > -1) then
-				tansuo_time_cnt = 0
-				tingyuan_time_cnt = 0
-				fail_cnt.global = fail_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				fail_cnt.yuhun = fail_cnt.yuhun + 1
-				break
-			end
 			-- 发现宝藏
 			x, y = lct_petfind() if (x > -1) then break end
 			-- 退出个人资料
@@ -531,6 +523,7 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 	local tansuo_time_cnt = 0
 	local wait_invite = 1
 	local ret = 0
+	local ret_ = 0
 	local x, y, x_, y_
 	
 	while (1) do
@@ -567,26 +560,32 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success()
+			x, y, ret_ = fight_settle()
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
-				win_cnt.global = win_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				win_cnt.yuhun = win_cnt.yuhun + 1
-				if win_cnt.yuhun == round then
-					quit_grp = 1
-					wait_invite = 0
-				end
-				if win_cnt.yuhun > round then
-					quit_end = 1
-				end
-				-- 智能突破Check
-				ret = auto_jjtp_time_check()
-				if ret == RET_VALID then
-					quit_grp = 1
-					quit_con = 1
-					wait_invite = 0
+				if ret_ == "Success" then
+					win_cnt.global = win_cnt.global + 1
+					show_win_fail(win_cnt.global, fail_cnt.global)
+					win_cnt.yuhun = win_cnt.yuhun + 1
+					if win_cnt.yuhun == round then
+						quit_grp = 1
+						wait_invite = 0
+					end
+					if win_cnt.yuhun > round then
+						quit_end = 1
+					end
+					-- 智能突破Check
+					ret = auto_jjtp_time_check()
+					if ret == RET_VALID then
+						quit_grp = 1
+						quit_con = 1
+						wait_invite = 0
+					end
+				elseif ret_ == "Failed" then
+					fail_cnt.global = fail_cnt.global + 1
+					show_win_fail(win_cnt.global, fail_cnt.global)
+					fail_cnt.yuhun = fail_cnt.yuhun + 1
 				end
 				break
 			end
@@ -600,16 +599,6 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			x, y = member_room_find_start() if (x > -1) then random_touch(0, 205, 535, 20, 10) break end -- 离开队伍
 			-- 离开确认
 			x, y = member_room_quit() if (x > -1) then break end
-			-- 战斗失败
-			x, y = fight_failed()
-			if (x > -1) then
-				tansuo_time_cnt = 0
-				tingyuan_time_cnt = 0
-				fail_cnt.global = fail_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				fail_cnt.yuhun = fail_cnt.yuhun + 1
-				break
-			end
 			-- 庭院
 			x, y = lct_tingyuan()
 			if x > -1 then
@@ -666,6 +655,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 	local time_cnt = 0
 	local invite = 1
 	local tingyuan_time_cnt = 0
+	local tansuo_time_cnt = 0
 	local quit_end = 0
 	local quit_con = 0
 	local quit_grp = 0
@@ -673,6 +663,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 	local invite_cnt = 0
 	local create_cnt = 0
 	local ret = 0
+	local ret_ = 0
 	local init = 1
 	local x, y
 	
@@ -720,23 +711,30 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success()
+			x, y, ret_ = fight_settle()
 			if (x > -1) then
 				tingyuan_time_cnt = 0
-				win_cnt.global = win_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				win_cnt.yuhun = win_cnt.yuhun + 1
-				if win_cnt.yuhun == round then
-					quit_grp = 1
-				end
-				if win_cnt.yuhun > round then
-					quit_end = 1
-				end
-				-- 智能突破Check
-				ret = auto_jjtp_time_check()
-				if ret == RET_VALID then
-					quit_grp = 1
-					quit_con = 1
+				tansuo_time_cnt = 0
+				if ret_ == "Success" then
+					win_cnt.global = win_cnt.global + 1
+					show_win_fail(win_cnt.global, fail_cnt.global)
+					win_cnt.yuhun = win_cnt.yuhun + 1
+					if win_cnt.yuhun == round then
+						quit_grp = 1
+					end
+					if win_cnt.yuhun > round then
+						quit_end = 1
+					end
+					-- 智能突破Check
+					ret = auto_jjtp_time_check()
+					if ret == RET_VALID then
+						quit_grp = 1
+						quit_con = 1
+					end
+				elseif ret_ == "Failed" then
+					fail_cnt.global = fail_cnt.global + 1
+					show_win_fail(win_cnt.global, fail_cnt.global)
+					fail_cnt.yuhun = fail_cnt.yuhun + 1
 				end
 				break
 			end
@@ -827,6 +825,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 					buff_start_en = 0
 				end
 				random_touch(0, 180, 590, 20, 20)
+				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt)
 				break
 			end
 			-- 御魂
@@ -841,15 +840,6 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 				level_select(level, init, lock, "御魂")
 				init = 0
 				group_start()
-				break
-			end
-			-- 战斗失败
-			x, y = fight_failed()
-			if (x > -1) then
-				tingyuan_time_cnt = 0
-				fail_cnt.global = fail_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				fail_cnt.yuhun = fail_cnt.yuhun + 1
 				break
 			end
 			-- 退出个人资料

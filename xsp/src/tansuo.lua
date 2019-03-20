@@ -794,6 +794,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 					buff_start_en = 0
 				end
 				section_select(section)
+				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt)
 				break
 			end
 			-- 自动狗粮
@@ -902,26 +903,36 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success()
+			x, y, ret = fight_settle()
 			if (x > -1) then
 				tingyuan_time_cnt = 0
-				win_cnt.global = win_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				win_cnt.tansuo = win_cnt.tansuo + 1
-				if count_mode == "战斗" then
-					if win_cnt.tansuo >= win_round then
-						quit_sce = 1
-						quit_end = 1
-					end
-				end
-				if found_boss == 1 then
-					found_boss = 0
-					quit_sce = 1
-					if count_mode == "章节" then
-						sec_cnt = sec_cnt + 1
-						if sec_cnt >= sec_round then
+				tansuo_time_cnt = 0
+				if ret == "Success" then
+					win_cnt.global = win_cnt.global + 1
+					show_win_fail(win_cnt.global, fail_cnt.global)
+					win_cnt.tansuo = win_cnt.tansuo + 1
+					if count_mode == "战斗" then
+						if win_cnt.tansuo >= win_round then
+							quit_sce = 1
 							quit_end = 1
 						end
+					end
+					if found_boss == 1 then
+						found_boss = 0
+						quit_sce = 1
+						if count_mode == "章节" then
+							sec_cnt = sec_cnt + 1
+							if sec_cnt >= sec_round then
+								quit_end = 1
+							end
+						end
+					end
+				elseif ret == "Failed" then
+					fail_cnt.global = fail_cnt.global + 1
+					show_win_fail(win_cnt.global, fail_cnt.global)
+					fail_cnt.tansuo = fail_cnt.tansuo + 1
+					if found_boss == 1 then
+						found_boss = 0
 					end
 				end
 				break
@@ -954,17 +965,6 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			x, y = scene_quit_confirm() if x > -1 then random_touch(0, x, y, 30, 5) break end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
-			-- 战斗失败
-			x, y = fight_failed()
-			if (x > -1) then
-				fail_cnt.global = fail_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				fail_cnt.tansuo = fail_cnt.tansuo + 1
-				if found_boss == 1 then
-					found_boss = 0
-				end
-				break
-			end
 			-- 查看体力
 			x, y = sushi_check() if x > -1 then right_lower_click() break end
 			-- 神秘商人
@@ -1057,6 +1057,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 					buff_start_en = 0
 				end
 				section_select(section)
+				tansuo_time_cnt = idle_at_tansuo(tansuo_time_cnt)
 				break
 			end
 			-- 自动狗粮
@@ -1163,30 +1164,41 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success()
+			x, y. ret = fight_settle()
 			if (x > -1) then
 				tingyuan_time_cnt = 0
-				win_cnt.global = win_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				win_cnt.tansuo = win_cnt.tansuo + 1
-				if count_mode == "战斗" then
-					if win_cnt.tansuo >= win_round then
-						quit_sce = 1
-						quit_end = 1
-					end
-				end
-				if found_boss == 1 then
-					found_boss = 0
-					quit_sce = 1
-					if count_mode == "章节" then
-						sec_cnt = sec_cnt + 1
-						if sec_cnt >= sec_round then
+				tansuo_time_cnt = 0
+				if ret == "Success" then
+					win_cnt.global = win_cnt.global + 1
+					show_win_fail(win_cnt.global, fail_cnt.global)
+					win_cnt.tansuo = win_cnt.tansuo + 1
+					if count_mode == "战斗" then
+						if win_cnt.tansuo >= win_round then
+							quit_sce = 1
 							quit_end = 1
 						end
 					end
+					if found_boss == 1 then
+						found_boss = 0
+						quit_sce = 1
+						if count_mode == "章节" then
+							sec_cnt = sec_cnt + 1
+							if sec_cnt >= sec_round then
+								quit_end = 1
+							end
+						end
+					end
+					-- 智能突破Check
+					quit_con = auto_jjtp_time_check()
+				elseif ret == "Failed" then
+					fail_cnt.global = fail_cnt.global + 1
+					show_win_fail(win_cnt.global, fail_cnt.global)
+					fail_cnt.tansuo = fail_cnt.tansuo + 1
+					if found_boss == 1 then
+						found_boss = 0
+					end
+					break
 				end
-				-- 智能突破Check
-				quit_con = auto_jjtp_time_check()
 				break
 			end
 			-- 探索章节
@@ -1228,18 +1240,6 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			x, y = member_user_profile() if x > -1 then break end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
-			-- 战斗失败
-			x, y = fight_failed()
-			if (x > -1) then
-				tingyuan_time_cnt = 0
-				fail_cnt.global = fail_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				fail_cnt.tansuo = fail_cnt.tansuo + 1
-				if found_boss == 1 then
-					found_boss = 0
-				end
-				break
-			end
 			-- 神秘商人
 			x, y = mysterious_vender() if x > -1 then break end
 			-- 体力不足
@@ -1406,18 +1406,24 @@ function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos,
 				break
 			end
 			-- 战斗胜利
-			x, y = fight_success()
+			x, y, ret = fight_settle()
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
-				win_cnt.global = win_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				win_cnt.tansuo = win_cnt.tansuo + 1
-				if count_mode == "战斗" then
-					if win_cnt.tansuo >= win_round then
-						quit_sce = 1
-						quit_end = 1
+				if ret == "Success" then
+					win_cnt.global = win_cnt.global + 1
+					show_win_fail(win_cnt.global, fail_cnt.global)
+					win_cnt.tansuo = win_cnt.tansuo + 1
+					if count_mode == "战斗" then
+						if win_cnt.tansuo >= win_round then
+							quit_sce = 1
+							quit_end = 1
+						end
 					end
+				elseif ret == "Failed" then
+					fail_cnt.global = fail_cnt.global + 1
+					show_win_fail(win_cnt.global, fail_cnt.global)
+					fail_cnt.tansuo = fail_cnt.tansuo + 1
 				end
 				break
 			end
@@ -1438,16 +1444,6 @@ function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos,
 					mSleep(1000)
 					break
 				end
-				break
-			end
-			-- 战斗失败
-			x, y = fight_failed()
-			if (x > -1) then
-				tansuo_time_cnt = 0
-				tingyuan_time_cnt = 0
-				fail_cnt.global = fail_cnt.global + 1
-				show_win_fail(win_cnt.global, fail_cnt.global)
-				fail_cnt.tansuo = fail_cnt.tansuo + 1
 				break
 			end
 			-- 查看体力

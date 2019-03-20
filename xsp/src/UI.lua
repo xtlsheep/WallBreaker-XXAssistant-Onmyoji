@@ -96,8 +96,8 @@ function config_UI()
 	elseif (res_config.select == "14")  then autocake_UI()
 		-- 特殊活动
 	elseif (res_config.select == "15")  then activityreserve_UI()
-		--elseif (res_config.select == "15")  then LBSGhostDriving_UI()
-		--elseif (res_config.select == "15")  then superghost_UI()
+	--elseif (res_config.select == "15")  then LBSGhostDriving_UI()
+	--elseif (res_config.select == "15")  then superghost_UI()
 	end
 end
 
@@ -206,7 +206,7 @@ function global_UI()
 	--UI:Label(global_basic_page, "left", "0,0,0", 30, "鬼王选择 - ", "500,140,180,60")
 	--UI:ComboBox(global_basic_page, "sg_fight_sel", "所有公开的超鬼王,自己发现的超鬼王","1",23,"680,140,300,50")
 	UI:Line(global_basic_page, "line_common", "100,100,100", 2, 960, "20,140,960,2")
-	UI:CheckBoxGroup(global_basic_page, "turbo_succ_en","战斗胜利快速结算","",30,"0,0,0","20,150,980,60")
+	UI:CheckBoxGroup(global_basic_page, "turbo_settle_en","战斗结束快速结算","",30,"0,0,0","20,150,980,60")
 	UI:CheckBoxGroup(global_basic_page, "skill","自动关闭技能特写","0",30,"0,0,0","20,210,980,60")
 	UI:CheckBoxGroup(global_basic_page, "buff_start","自动开启加成Buff","",30,"0,0,0","20,270,980,60")
 	UI:CheckBoxGroup(global_basic_page, "reconn","自动断线重新连接","0",30,"0,0,0","20,330,980,60")
@@ -338,10 +338,10 @@ function global_UI()
 	end
 	
 	-- 战斗胜利turbo
-	if res_global.turbo_succ_en == "0" then
-		turbo_succ_en = 1
+	if res_global.turbo_settle_en == "0" then
+		turbo_settle_en = 1
 	else
-		turbo_succ_en = 0
+		turbo_settle_en = 0
 	end
 	
 	-- 关闭特效
@@ -1295,7 +1295,6 @@ function jjtp_UI()
 	
 	-- Disable
 	auto_jjtp_en = 0
-	turbo_succ_en = 0
 	
 	jjtp(mode, whr_solo_out, whr_pub_out, round_time, refresh, solo_sel, pub_sel, lock)
 end
@@ -1962,8 +1961,6 @@ function autobattle_UI()
 		return
 	end
 	
-	turbo_succ_en = 0
-	
 	autobattle(round, round_time, force_quit, mark_self, mark)
 end
 
@@ -1987,7 +1984,6 @@ function autostory_UI()
 	end
 	
 	settlement_en = 0
-	turbo_succ_en = 0
 	
 	autostory()
 end

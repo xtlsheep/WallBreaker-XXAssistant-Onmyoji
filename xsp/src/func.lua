@@ -37,8 +37,8 @@ function show_win_fail(win_cnt, fail_cnt)
 end
 
 function print_global_config()
-	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d) 胜利快速结算 %d, 断线/闪退 %d, 自动开启buff %d 停留过长关闭buff %d(%d sec), 体力用尽关闭buff %d)",
-			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6], turbo_succ_en, reconn, buff_start, buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
+	print(string.format("悬赏封印：%d (勾玉：%d 体力：%d 金币：%d 猫粮：%d 狗粮：%d) 快速结算 %d, 断线/闪退 %d, 自动开启buff %d 停留过长关闭buff %d(%d sec), 体力用尽关闭buff %d)",
+			offer_arr[1], offer_arr[2], offer_arr[3], offer_arr[4], offer_arr[5], offer_arr[6], turbo_settle_en, reconn, buff_start, buff_stop_idle, buff_stop_idle_time, buff_stop_useup))
 	
 	if auto_jjtp_en == 1 then
 		print(string.format("智能突破 间隔 %d, 模式：%s，战斗时间：%d，刷新：%d，个人突破：%s，阴阳寮突破：%d, 锁定: %d",
@@ -1080,8 +1080,8 @@ function fight_ongoing()
 	end
 	
 	if flag > -1 then
-		if turbo_succ_en == 1 then
-			turbo_succ = 1
+		if turbo_settle_en == 1 then
+			turbo_settle = 1
 		end
 		local x, y = findColor({35, 514, 37, 516}, -- 指南针
 			"0|0|0x29211b,-6|3|0xd3ad6a,-3|8|0x9c652b,6|-6|0xa97534,0|-6|0xd8b773",
@@ -1120,10 +1120,10 @@ function fight_success()
 	
 	function half_harma_loop()
 		local x, y, x_, y_
-		local cnt = math.random(8, 12)
+		local cnt = math.random(8, 10)
 		x, y = half_harma()
 		if (x > -1) then
-			HUD_show_or_hide(HUD,hud_info,"退出战斗",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			HUD_show_or_hide(HUD,hud_info,"领取奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			for i = 1, cnt do
 				loop_generic()
 				x_, y_ = half_harma()
@@ -1139,45 +1139,26 @@ function fight_success()
 		return RET_ERR
 	end
 	
-	local x, y, x_s, y_s, x_h, y_h, ret
-	local cnt = math.random(8, 12)
+	local x_s, y_s, x_h, y_h, ret
+	local cnt = math.random(8, 10)
 	
-	if turbo_succ_en == 1 and turbo_succ == 1 then
-		x, y = fight_ongoing()
-		if x == -1 then
-			HUD_show_or_hide(HUD,hud_info,"战斗胜利快速结算",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			turbo_succ = 0
-			for i = 1, cnt do
-				loop_generic()
-				ret = half_harma_loop()
-				if ret == RET_OK then
-					return RET_OK, RET_OK
-				end
-				yuhun_overflow()
-				right_lower_click()
-				random_sleep(25)
+	x_s, y_s = success_drum()
+	x_h, y_h = half_harma()
+	
+	if (x_s > -1 or x_h > -1) then
+		HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		for i = 1, cnt do
+			loop_generic()
+			ret = half_harma_loop()
+			if ret == RET_OK then
+				return RET_OK, RET_OK
 			end
-			return RET_OK, RET_OK
+			yuhun_overflow()
+			right_lower_click()
+			random_sleep(25)
 		end
-	else
-		x_s, y_s = success_drum()
-		x_h, y_h = half_harma()
-		if (x_s > -1 or x_h > -1) then
-			HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			for i = 1, cnt do
-				loop_generic()
-				ret = half_harma_loop()
-				if ret == RET_OK then
-					return RET_OK, RET_OK
-				end
-				yuhun_overflow()
-				right_lower_click()
-				random_sleep(25)
-			end
-			return RET_OK, RET_OK
-		end
+		return RET_OK, RET_OK
 	end
-	
 	return RET_ERR, RET_ERR
 end
 
@@ -1189,11 +1170,12 @@ function fight_failed()
 		return x, y
 	end
 	
-	local x, y
-	local cnt = math.random(8, 12)
+	local x, y, x_f, y_f, ret
+	local cnt = math.random(8, 10)
 	
-	x, y = failed_drum()
-	if x > -1 then
+	x_f, y_f = failed_drum()
+	
+	if x_f > -1 then
 		HUD_show_or_hide(HUD,hud_info,"战斗失败",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		for i = 1, cnt do
 			loop_generic()
@@ -1203,12 +1185,56 @@ function fight_failed()
 			elseif x == -1 then
 				return RET_OK, RET_OK
 			end
-			random_sleep(50)
+			random_sleep(25)
 		end
 		return RET_OK, RET_OK
 	end
-	
 	return RET_ERR, RET_ERR
+end
+
+function fight_settle()
+	function fight_turbo()
+		local x, y
+		local cnt = 5
+		if turbo_settle_en == 1 then
+			x, y = fight_ongoing()
+			
+			if x == -1 and turbo_settle == 1 then
+				HUD_show_or_hide(HUD,hud_info,"战斗结束快速结算",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				turbo_settle = 0
+				for i = 1, cnt do
+					loop_generic()
+					yuhun_overflow()
+					right_lower_click()
+					random_sleep(25)
+				end
+				return RET_OK
+			end
+		end
+		return RET_ERR
+	end
+	
+	local ret, x_s, y_s, x_f, y_f
+	
+	ret = fight_turbo()
+	x_s, y_s = fight_success()
+	x_f, y_f = fight_failed()
+	
+	if ret == RET_OK then
+		if x_s > -1 then
+			return RET_OK, RET_OK, "Success"
+		else
+			return RET_OK, RET_OK, "Failed"
+		end
+	else
+		if x_s > -1 then
+			return RET_OK, RET_OK, "Success"
+		elseif x_f > -1 then
+			return RET_OK, RET_OK, "Failed"
+		else
+			return RET_ERR, RET_ERR, "None"
+		end
+	end
 end
 
 function fight_stop_auto_group()
