@@ -54,7 +54,6 @@ function yuhun_mark(position, round, level)
 				end
 			elseif round == 3 then
 				random_touch(0, 520, 150, 10, 10)
-				end
 			end
 		end
 		random_sleep(50)
