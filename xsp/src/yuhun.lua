@@ -26,7 +26,7 @@ function lct_8dashe()
 end
 
 function yuhun_mark(position, round, level)
-	mSleep(800)
+	mSleep(700)
 	mSleep(mark_delay)
 	random_sleep(50)
 	
@@ -53,12 +53,7 @@ function yuhun_mark(position, round, level)
 					random_touch(0, 550, 150, 10, 10)
 				end
 			elseif round == 3 then
-				if level <= 10 then
-					-- 普通大蛇
-					random_touch(0, 520, 150, 10, 10)
-				else
-					-- 悲鸣大蛇
-					random_touch(0, 550, 150, 10, 10)
+				random_touch(0, 520, 150, 10, 10)
 				end
 			end
 		end
