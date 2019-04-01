@@ -152,17 +152,10 @@ function game_disconn_reconn()
 	end
 	
 	function game_notice()
-		local x, y
+		local x, y = findColor({1080, 146, 1082, 148},
+			"0|0|0xe8d4cf,2|-77|0x470c15,-7|-96|0x69504c,-1|-52|0x5a5756",
+			90, 0, 0, 0)
 		
-		if ver == "iOS" then
-			x, y = findColor({1018, 69, 1020, 71},
-				"0|0|0xe8d4cf,63|0|0x420b13,67|-41|0x140f0f,55|-20|0x69514c",
-				90, 0, 0, 0)
-		elseif ver == "android" then
-			x, y = findColor({1018, 69, 1020, 71},
-				"0|0|0xe5d4cc,65|-2|0x480b15,74|-2|0x36261a,59|-10|0x695b55",
-				90, 0, 0, 0)
-		end
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"关闭公告",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			random_touch(0, x, y, 20, 10) -- 关闭

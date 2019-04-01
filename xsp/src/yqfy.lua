@@ -3,24 +3,20 @@ require "func"
 
 -- Util func
 function lct_yqfy()
-	local x, y = findColor({773, 101, 775, 103},
-		"0|0|0xe87b2a,-393|15|0x4d0c0c,-421|45|0xfec266,287|10|0xe8d4cf",
+	x, y = findColor({349, 144, 351, 146},
+		"0|0|0xfdc165,161|0|0xffc96e,52|-36|0x600a0a,72|-32|0xf8f3e0",
 		90, 0, 0, 0)
 	return x, y
 end
 
-function zudui_move()
+function zudui_move_down()
 	random_move(0, 220, 550, 220, 130, 50, 10)
+	random_sleep(1000)
 end
 
-function yqfy_queue()
-	local x, y = findColor({854, 100, 856, 102},
-		"0|0|0xe97c2c,205|11|0xe8d4cf,-173|457|0xf3b25e,-112|400|0x262422",
-		90, 0, 0, 0)
-	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,"匹配中",20,"0xff000000","0xffffffff",0,100,0,300,32)
-	end
-	return x, y
+function zudui_move_up()
+	random_move(0, 220, 130, 220, 550, 50, 10)
+	random_sleep(1000)
 end
 
 function yqfy_mark(mark)
@@ -42,13 +38,34 @@ function yqfy_mark(mark)
 	mSleep(1000)
 end
 
-function yqfy_deny_quit()
+function deny_quit()
 	local x, y = findColor({460, 382, 462, 384},
 		"0|0|0xdf6851,212|1|0xf3b25e,269|111|0x080807",
 		90, 0, 0, 0)
 	if x > -1 then
 		random_sleep(500)
 		random_touch(0, x, y, 30, 10)
+	end
+	return x, y
+end
+
+function enter_queue()
+	local x, y = findColor({682, 558, 684, 560},
+		"0|0|0xf3b25e,244|-3|0xb0a9a1,91|-457|0xe87b2a,172|-459|0xea7d2b,53|-51|0xc7bdb4",
+		90, 0, 0, 0)
+	if x > -1 then
+		random_touch(0, x, y, 20, 10)
+		mSleep(1000)
+	end
+	return x, y
+end
+
+function in_queue()
+	local x, y = findColor({854, 100, 856, 102},
+		"0|0|0xe97c2c,205|11|0xe8d4cf,-173|457|0xf3b25e,-112|400|0x262422",
+		90, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"匹配中",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end
@@ -73,8 +90,8 @@ function yqfy_(round, sel, mark)
 	local quit = 0
 	local wait = 0
 	local ran_wait = 0
-	local selected = 0
 	local ret = 0
+	local init = 0
 	local x, y
 	
 	while (1) do
@@ -115,8 +132,40 @@ function yqfy_(round, sel, mark)
 				tingyuan_enter_zudui()
 				break
 			end
+			-- 匹配中
+			x, y = in_queue() if x > -1 then break end
 			-- 自动匹配
-			x, y = yqfy_queue() if x > -1 then break end
+			if init == 1 then
+				x, y = enter_queue() if x > -1 then break end
+			end
+			-- 组队
+			x, y = lct_zudui()
+			if x > -1 and init == 0 then
+				if sel == "联动" then
+					if linkage == "Enable" then
+						zudui_move_up()
+						random_touch(0, 220, 150, 50, 10) -- 联动
+					else
+						HUD_show_or_hide(HUD,hud_info,"未开启联动活动",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					end
+				elseif sel == "石距" then
+					zudui_move_down()
+					random_touch(0, 220, 410, 50, 10) -- 石距
+				elseif sel == "年兽" then
+					zudui_move_down()
+					random_touch(0, 220, 350, 50, 10) -- 年兽
+				else
+					if linkage == "Enable" then
+						zudui_move_down()
+						random_touch(0, 220, 150, 50, 10) -- 妖气封印
+					elseif linkage == "Disable" then
+						random_touch(0, 220, 520, 50, 10) -- 妖气封印
+					end
+				end
+				random_sleep(1000)
+				init = 1
+				break
+			end
 			-- 妖气封印
 			x, y = lct_yqfy()
 			if x > -1 then
@@ -150,45 +199,6 @@ function yqfy_(round, sel, mark)
 				end
 				mSleep(1000)
 				right_lower_click()
-				selected = 1
-				break
-			end
-			-- 组队
-			x, y = lct_zudui()
-			if (x > -1) then
-				if selected == 1 then
-					random_touch(0, 680, 560, 50, 10)
-					selected = 0
-					break
-				end
-				if sel == "联动" then
-					if linkage == "Enable" then
-						random_touch(0, 220, 150, 50, 10) -- 联动
-						selected = 1
-					else
-						HUD_show_or_hide(HUD,hud_info,"未开启联动活动",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					end
-				elseif sel == "石距" then
-					zudui_move()
-					random_sleep(1000)
-					random_touch(0, 220, 410, 50, 10) -- 石距
-					selected = 1
-				elseif sel == "年兽" then
-					zudui_move()
-					random_sleep(1000)
-					random_touch(0, 220, 350, 50, 10) -- 年兽
-					selected = 1
-				else
-					if linkage == "Enable" then
-						zudui_move()
-						random_sleep(1000)
-						random_touch(0, 220, 150, 50, 10) -- 妖气封印
-					elseif linkage == "Disable" then
-						random_touch(0, 220, 520, 50, 10) -- 妖气封印
-					end
-					selected = 1
-				end
-				random_sleep(1000)
 				break
 			end
 			-- 队员接手队长
@@ -216,7 +226,7 @@ function yqfy_(round, sel, mark)
 				break
 			end
 			-- 取消退出
-			x, y = yqfy_deny_quit() if x > -1 then break end
+			x, y = deny_quit() if x > -1 then break end
 			-- 退出个人资料
 			x, y = member_user_profile() if x > -1 then break end
 			break
