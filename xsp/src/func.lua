@@ -981,8 +981,8 @@ function fight_preset(index)
 end
 
 function round_one()
-	local x, y = findColor({519, 320, 526, 325}, -- 字 一
-		"0|0|0x272420,0|-14|0xd9ba91,0|17|0xead0a3,126|10|0xdeaa70",
+	local x, y = findColor({652, 449, 654, 451},
+		"0|0|0xb52410,-30|-13|0xa97b4b,-167|-127|0x272420,-125|-127|0x272420",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"第一回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -991,8 +991,8 @@ function round_one()
 end
 
 function round_two()
-	local x, y = findColor({519, 320, 526, 325}, -- 字 二
-		"0|0|0xdcc096,-1|-11|0x272420,1|7|0x272420,124|11|0xdea86c",
+	local x, y = findColor({652, 449, 654, 451},
+		"0|0|0xb52410,-30|-13|0xa97b4b,-164|-113|0x272420,-123|-116|0x272420,-156|-139|0x272420,-135|-142|0x272420",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"第二回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -1001,8 +1001,8 @@ function round_two()
 end
 
 function round_three()
-	local x, y = findColor({519, 320, 526, 325}, -- 字 三
-		"0|0|0x272420,0|-13|0x272420,1|11|0x272420,126|14|0xdda669",
+	local x, y = findColor({652, 446, 654, 448},
+		"0|0|0xb92712,4|-17|0xe2c195,-127|-199|0x030303,-15|-57|0x030303",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"第三回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -1011,8 +1011,8 @@ function round_three()
 end
 
 function round_fight()
-	local x, y = findColor({534, 288, 536, 290},
-		"0|0|0x030303,44|-23|0x020202,84|81|0x020202,80|150|0x881509,-524|272|0x5d5575",
+	local x, y = findColor({652, 446, 654, 448},
+		"0|0|0xb92712,4|-17|0xe2c195,-127|-199|0x030303,-15|-57|0x030303",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"战斗开始",20,"0xff000000","0xffffffff",0,100,0,300,32)

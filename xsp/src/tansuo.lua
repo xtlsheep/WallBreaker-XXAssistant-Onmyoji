@@ -829,7 +829,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
-			superghost()
+			SuperGhost()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 探索
@@ -1080,7 +1080,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
-			superghost()
+			SuperGhost()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 继续邀请
@@ -1343,7 +1343,7 @@ function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos,
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
-			superghost()
+			SuperGhost()
 			-- 拒绝邀请
 			if quit_con == 1 or quit_end == 1 then
 				x, y = member_team_refuse_invite() if (x > -1) then mSleep(1000) break end

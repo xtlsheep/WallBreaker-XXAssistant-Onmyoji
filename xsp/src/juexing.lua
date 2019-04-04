@@ -23,7 +23,8 @@ function lct_juexingelement()
 end
 
 function juexing_mark(mark)
-	random_sleep(500)
+	mSleep(1000)
+	random_sleep(250)
 	local cnt = math.random(2, 3)
 	local pos_x = {488, 560, 653, 823, 1016}
 	local pos_y = {140, 170, 210, 230, 240}
@@ -107,12 +108,12 @@ function juexing_solo(element, mark, level, round, lock)
 	while (1) do
 		while (1) do
 			-- 战
-			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
+			x, y = round_fight() if (x > -1) then print("!!!")juexing_mark(mark) break end
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
-			superghost()
+			SuperGhost()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -216,7 +217,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
-			superghost()
+			SuperGhost()
 			-- 拒绝邀请
 			if (wait_invite == 0) then x, y = member_team_refuse_invite() if (x > -1) then mSleep(1000) break end end
 			-- 探索
@@ -364,7 +365,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
-			superghost()
+			SuperGhost()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行
@@ -499,7 +500,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
-			superghost()
+			SuperGhost()
 			-- 接受邀请
 			if wait_invite == 1 then
 				x, y, auto_grouped = member_team_accept_invite(member_auto_group) if (x > -1) then break end
@@ -650,7 +651,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
-			superghost()
+			SuperGhost()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备

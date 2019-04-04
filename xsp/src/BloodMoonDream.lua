@@ -86,6 +86,7 @@ function BloodMoonDream(level, round, round1, round2, round3)
 					init = 1
 				end
 				random_touch(0, x, y, 20, 5)
+				mSleep(1000)
 			end
 			break
 		end
