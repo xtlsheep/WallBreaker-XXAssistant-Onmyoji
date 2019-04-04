@@ -13,7 +13,8 @@ require "autocake"
 require "autobattle"
 require "autojjtp"
 require "LBSGhostDriving"
-require "superghost"
+require "SuperGhost"
+require "BloodMoonDream"
 
 -- UI init
 local width_UI = 1000
@@ -55,7 +56,7 @@ function config_UI()
 	-- Config
 	config_ui = UI:new("config.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 	UI:Label(config_ui, "center", "0,0,0", 30, "高级选项", "20,20,960,55")
-	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,排队副本    ,百鬼夜行    ,组合任务    ,世界喊话    ,普通召唤    ,悬赏查询    ,自动斗技    ,自动剧情    ,自动樱饼    ,特殊活动","0",30,"0,0,0","30,150,960,300")
+	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,排队副本    ,百鬼夜行    ,组合任务    ,世界喊话    ,普通召唤    ,悬赏查询    ,自动斗技    ,自动剧情    ,自动樱饼    ,血月梦境","0",30,"0,0,0","30,150,960,300")
 	UI:fit(config_ui)
 	
 	ret_config, res_config = UI:show(config_ui)
@@ -95,9 +96,10 @@ function config_UI()
 		-- 自动樱饼
 	elseif (res_config.select == "14")  then autocake_UI()
 		-- 特殊活动
-	elseif (res_config.select == "15")  then activityreserve_UI()
+	--elseif (res_config.select == "15")  then activityreserve_UI()
 	--elseif (res_config.select == "15")  then LBSGhostDriving_UI()
-	--elseif (res_config.select == "15")  then superghost_UI()
+	--elseif (res_config.select == "15")  then SuperGhost_UI()
+	elseif (res_config.select == "15")  then BloodMoonDream_UI()
 	end
 end
 
@@ -2013,8 +2015,8 @@ function LBSGhostDriving_UI()
 	UI:Label(LBSGhostDriving_ui, "left", "0,0,0", 30, "请在漫展界面中使用", "30,160,960,60")
 	UI:fit(LBSGhostDriving_ui)
 	
-	ret_offerquery, res_offerquery = UI:show(LBSGhostDriving_ui)
-	if (ret_offerquery == 0) then
+	ret_LBS, res_LBS = UI:show(LBSGhostDriving_ui)
+	if (ret_LBS == 0) then
 		config_UI()
 		return
 	end
@@ -2027,16 +2029,16 @@ function LBSGhostDriving_UI()
 	LBSGhostDriving()
 end
 
-function superghost_UI()
+function SuperGhost_UI()
 	-- 超鬼王
 	superghost_ui = UI:new("superghost.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 	UI:Label(superghost_ui, "center", "0,0,0", 30, "超鬼王", "20,20,960,55")
-	UI:Label(superghost_ui, "left", "0,0,0", 30, "Tips - ", "30,100,960,60")
-	UI:Label(superghost_ui, "left", "0,0,0", 30, "请在超鬼王界面运行, 详细设置位于[全局设置]-[超鬼王]页面", "30,160,960,60")
+	UI:Label(superghost_ui, "left", "0,0,0", 30, "Tips - ", "20,100,960,60")
+	UI:Label(superghost_ui, "left", "0,0,0", 30, "请在超鬼王界面运行, 详细设置位于[全局设置]-[超鬼王]页面", "20,160,960,60")
 	UI:fit(superghost_ui)
 	
-	ret_offerquery, res_offerquery = UI:show(superghost_ui)
-	if (ret_offerquery == 0) then
+	ret_SG, res_SG = UI:show(superghost_ui)
+	if (ret_SG == 0) then
 		config_UI()
 		return
 	end
@@ -2050,5 +2052,86 @@ function superghost_UI()
 	sg_keep = 1
 	sg_fight_sel = "Public"
 	
-	superghost()
+	SuperGhost()
+end
+
+function BloodMoonDream_UI()
+	-- 血月梦境
+	bmd_ui = UI:new("bmd.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+	UI:Label(bmd_ui, "center", "0,0,0", 30, "血月梦境", "20,20,960,55")
+	UI:Label(bmd_ui, "left", "0,0,0", 30, "Tips - ", "20,100,960,60")
+	UI:Label(bmd_ui, "left", "0,0,0", 30, "请手动进入选定的血月梦境后运行", "20,160,960,60")
+	UI:Line(bmd_ui, "line_common", "100,100,100", 2, 960, "20,220,960,2")
+	UI:Label(bmd_ui, "left", "0,0,0", 30, "请选择梦境层数 - ", "20,230,300,60")
+	UI:ComboBox(bmd_ui, "level", "苍月,金月,血月,梦魇","3",23,"700,230,280,50")
+	UI:Label(bmd_ui, "left", "0,0,0", 30, "请选择战斗次数 - ", "20,290,300,60")
+	UI:ComboBox(bmd_ui, "round", "3次,10次,20次,30次,50次,100次","3",23,"700,290,280,50")
+	UI:Label(bmd_ui, "left", "0,0,0", 30, "标记 - ", "20,350,300,60")
+	UI:Label(bmd_ui, "left", "0,0,0", 30, "第一回合 ~ ", "20,410,300,60")
+	UI:RadioGroup(bmd_ui, "round1", "左  ,中  ,右  ,无","3",30,"0,0,0","500,410,500,60")
+	UI:Label(bmd_ui, "left", "0,0,0", 30, "第二回合 ~ ", "20,470,300,60")
+	UI:RadioGroup(bmd_ui, "round2", "左  ,中  ,右  ,无","3",30,"0,0,0","500,470,500,60")
+	UI:Label(bmd_ui, "left", "0,0,0", 30, "第三回合 ~ ", "20,530,300,60")
+	UI:RadioGroup(bmd_ui, "round3", "左  ,中  ,右  ,无","3",30,"0,0,0","500,530,500,60")
+	
+	ret_BMD, res_BMD = UI:show(bmd_ui)
+	if (ret_BMD == 0) then
+		config_UI()
+		return
+	end
+	
+	local level, round, round1, round2, round3
+	level = tonumber(res_BMD.level) + 1
+	
+	if res_BMD.round == "0" then
+		round = 3
+	elseif res_BMD.round == "1" then
+		round = 10
+	elseif res_BMD.round == "2" then
+		round = 20
+	elseif res_BMD.round == "3" then
+		round = 30
+	elseif res_BMD.round == "4" then
+		round = 50
+	elseif res_BMD.round == "5" then
+		round = 100
+	end
+	
+	if res_BMD.round1 == "0" then
+		round1 =  "左"
+	elseif res_BMD.round1 == "1" then
+		round1 =  "中"
+	elseif res_BMD.round1 == "2" then
+		round1 =  "右"
+	elseif res_BMD.round1 == "3" then
+		round1 =  "无"
+	end
+	
+	if res_BMD.round2 == "0" then
+		round2 =  "左"
+	elseif res_BMD.round2 == "1" then
+		round2 =  "中"
+	elseif res_BMD.round2 == "2" then
+		round2 =  "右"
+	elseif res_BMD.round2 == "3" then
+		round2 =  "无"
+	end
+	
+	if res_BMD.round3 == "0" then
+		round3 =  "左"
+	elseif res_BMD.round3 == "1" then
+		round3 =  "中"
+	elseif res_BMD.round3 == "2" then
+		round3 =  "右"
+	elseif res_BMD.round3 == "3" then
+		round3 =  "无"
+	end
+	
+	
+	local ret_global = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
+	
+	BloodMoonDream(level, round, round1, round2, round3)
 end

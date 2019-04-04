@@ -356,7 +356,7 @@ function sg_bonus_exit()
 end
 
 -- Main func
-function superghost()
+function SuperGhost()
 	if sg_en == 0 then
 		return RET_ERR
 	end
