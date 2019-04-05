@@ -141,7 +141,7 @@ function yuhun_solo(mark, level, round, lock)
 			-- 战斗进行
 			x, y = fight_ongoing() if x > -1 then break end
 			-- 战斗结算
-			x, y, ret = fight_settle()
+			x, y, ret = fight_settle("御魂")
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				if ret == "Success" then
@@ -293,7 +293,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 				break
 			end
 			-- 战斗胜利
-			x, y, ret_ = fight_settle()
+			x, y, ret_ = fight_settle("御魂")
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
@@ -410,7 +410,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 				break
 			end
 			-- 战斗胜利
-			x, y, ret_ = fight_settle()
+			x, y, ret_ = fight_settle("御魂")
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
@@ -554,7 +554,7 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 				break
 			end
 			-- 战斗胜利
-			x, y, ret_ = fight_settle()
+			x, y, ret_ = fight_settle("御魂")
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
@@ -705,7 +705,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 				break
 			end
 			-- 战斗胜利
-			x, y, ret_ = fight_settle()
+			x, y, ret_ = fight_settle("御魂")
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				tansuo_time_cnt = 0

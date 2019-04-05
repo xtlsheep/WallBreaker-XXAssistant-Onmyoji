@@ -121,7 +121,7 @@ function juexing_solo(element, mark, level, round, lock)
 			-- 战斗进行
 			x, y = fight_ongoing() if x > -1 then break end
 			-- 战斗胜利
-			x, y, ret = fight_settle()
+			x, y, ret = fight_settle("觉醒")
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				if ret == "Success" then
@@ -269,7 +269,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 				break
 			end
 			-- 战斗胜利
-			x, y, ret_ = fight_settle()
+			x, y, ret_ = fight_settle("觉醒")
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
@@ -382,7 +382,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗胜利
-			x, y, ret_ = fight_settle()
+			x, y, ret_ = fight_settle("觉醒")
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
@@ -522,7 +522,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 				break
 			end
 			-- 战斗胜利
-			x, y, ret_ = fight_settle()
+			x, y, ret_ = fight_settle("觉醒")
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
@@ -668,7 +668,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 				break
 			end
 			-- 战斗胜利
-			x, y, ret_ = fight_settle()
+			x, y, ret_ = fight_settle("觉醒")
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				if ret_ == "Success" then

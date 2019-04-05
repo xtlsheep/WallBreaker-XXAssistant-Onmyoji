@@ -1197,10 +1197,17 @@ function fight_failed()
 	return RET_ERR, RET_ERR
 end
 
-function fight_settle()
-	function fight_turbo()
+function fight_settle(mode)
+	function fight_turbo(mode)
 		local x, y
-		local cnt = 5
+		local cnt
+
+		if mode == "探索" then
+			cnt = 8
+		else
+			cnt = 6
+		end
+		
 		if turbo_settle_en == 1 then
 			x, y = fight_ongoing()
 			
@@ -1221,7 +1228,8 @@ function fight_settle()
 	
 	local ret, x_s, y_s, x_f, y_f
 	
-	ret = fight_turbo()
+	ret = fight_turbo(mode)
+	mSleep(1000)
 	x_s, y_s = fight_success()
 	x_f, y_f = fight_failed()
 	
@@ -1237,7 +1245,7 @@ function fight_settle()
 		elseif x_f > -1 then
 			return RET_OK, RET_OK, "Failed"
 		else
-			return RET_ERR, RET_ERR, "None"
+			return RET_ERR, RET_ERR, "Null"
 		end
 	end
 end

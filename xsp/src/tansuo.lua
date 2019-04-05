@@ -962,7 +962,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				break
 			end
 			-- 战斗胜利
-			x, y, ret = fight_settle()
+			x, y, ret = fight_settle("探索")
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				tansuo_time_cnt = 0
@@ -1224,7 +1224,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				break
 			end
 			-- 战斗胜利
-			x, y, ret = fight_settle()
+			x, y, ret = fight_settle("探索")
 			if (x > -1) then
 				tingyuan_time_cnt = 0
 				tansuo_time_cnt = 0
@@ -1466,7 +1466,7 @@ function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos,
 				break
 			end
 			-- 战斗胜利
-			x, y, ret = fight_settle()
+			x, y, ret = fight_settle("探索")
 			if (x > -1) then
 				tansuo_time_cnt = 0
 				tingyuan_time_cnt = 0
