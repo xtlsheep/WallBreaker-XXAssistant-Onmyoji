@@ -782,25 +782,25 @@ function baqidashe_UI()
 	end
 	
 	if (res_baqi.mark_delay == "0") then
-		mark_delay = 0
+		mark_delay_baqi = 0
 	elseif (res_baqi.mark_delay == "1") then
-		mark_delay = 100
+		mark_delay_baqi = 100
 	elseif (res_baqi.mark_delay == "2") then
-		mark_delay = 200
+		mark_delay_baqi = 200
 	elseif (res_baqi.mark_delay == "3") then
-		mark_delay = 300
+		mark_delay_baqi = 300
 	elseif (res_baqi.mark_delay == "4") then
-		mark_delay = 400
+		mark_delay_baqi = 400
 	elseif (res_baqi.mark_delay == "5") then
-		mark_delay = 500
+		mark_delay_baqi = 500
 	elseif (res_baqi.mark_delay == "6") then
-		mark_delay = 1000
+		mark_delay_baqi = 1000
 	elseif (res_baqi.mark_delay == "7") then
-		mark_delay = 1500
+		mark_delay_baqi = 1500
 	elseif (res_baqi.mark_delay == "8") then
-		mark_delay = 2000
+		mark_delay_baqi = 2000
 	elseif (res_baqi.mark_delay == "9") then
-		mark_delay = 3000
+		mark_delay_baqi = 3000
 	end
 	
 	local mark = {}
@@ -1314,18 +1314,20 @@ function juexing_UI()
 	UI:ComboBox(juexing_ui, "round", "3次,10次,20次,30次,50次,100次,无限次数","6",23,"700,380,280,50")
 	UI:Label(juexing_ui, "left", "0,0,0", 30, "标记 - ", "20,440,300,60")
 	UI:RadioGroup(juexing_ui, "mark", "随机小怪,麒麟Boss,无","2",30,"0,0,0","450,440,550,60")
-	UI:CheckBoxGroup(juexing_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,500,900,60")
-	UI:Line(juexing_ui, "line_common", "100,100,100", 2, 960, "20,560,960,2")
-	UI:Label(juexing_ui, "left", "0,0,0", 30, "队员设置 - ", "20,570,900,60")
-	UI:CheckBoxGroup(juexing_ui, "member_auto_group","接受自动组队","0",30,"0,0,0","20,630,900,60")
-	UI:CheckBoxGroup(juexing_ui, "fail_and_group","失败后重新寻找队伍","0",30,"0,0,0","20,690,900,60")
-	UI:CheckBoxGroup(juexing_ui, "member_to_captain","禁止队员接手队长","0",30,"0,0,0","20,750,900,60")
-	UI:Line(juexing_ui, "line_common", "100,100,100", 2, 960, "20,810,960,2")
-	UI:Label(juexing_ui, "left", "0,0,0", 30, "队长设置 - ", "20,820,900,60")
-	UI:CheckBoxGroup(juexing_ui, "captain_auto_group","开启自动组队","0",30,"0,0,0","20,880,900,60")
-	UI:CheckBoxGroup(juexing_ui, "captain_auto_invite","固定队伍自动邀请第一位","0",30,"0,0,0","20,940,500,60")
-	UI:ComboBox(juexing_ui, "auto_invite_zone", "本区好友,最近组队,跨区好友","0",23,"700,940,280,50")
-	UI:CheckBoxGroup(juexing_ui, "fail_and_recreate","失败后重新建立房间","0",30,"0,0,0","20,1000,900,60")
+	UI:Label(juexing_ui, "left", "0,0,0", 30, "标记延迟 - ", "20,500,300,60")
+	UI:ComboBox(juexing_ui, "mark_delay", "0 ms,100 ms,200 ms,300 ms,400 ms,500 ms,1000 ms,1500 ms,2000 ms,3000 ms","5",23,"700,500,280,50")
+	UI:CheckBoxGroup(juexing_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,560,900,60")
+	UI:Line(juexing_ui, "line_common", "100,100,100", 2, 960, "20,620,960,2")
+	UI:Label(juexing_ui, "left", "0,0,0", 30, "队员设置 - ", "20,630,900,60")
+	UI:CheckBoxGroup(juexing_ui, "member_auto_group","接受自动组队","0",30,"0,0,0","20,690,900,60")
+	UI:CheckBoxGroup(juexing_ui, "fail_and_group","失败后重新寻找队伍","0",30,"0,0,0","20,750,900,60")
+	UI:CheckBoxGroup(juexing_ui, "member_to_captain","禁止队员接手队长","0",30,"0,0,0","20,810,900,60")
+	UI:Line(juexing_ui, "line_common", "100,100,100", 2, 960, "20,870,960,2")
+	UI:Label(juexing_ui, "left", "0,0,0", 30, "队长设置 - ", "20,880,900,60")
+	UI:CheckBoxGroup(juexing_ui, "captain_auto_group","开启自动组队","0",30,"0,0,0","20,940,900,60")
+	UI:CheckBoxGroup(juexing_ui, "captain_auto_invite","固定队伍自动邀请第一位","0",30,"0,0,0","20,1000,500,60")
+	UI:ComboBox(juexing_ui, "auto_invite_zone", "本区好友,最近组队,跨区好友","0",23,"700,1000,280,50")
+	UI:CheckBoxGroup(juexing_ui, "fail_and_recreate","失败后重新建立房间","0",30,"0,0,0","20,1060,900,60")
 	UI:fit(juexing_ui)
 	
 	
@@ -1384,6 +1386,28 @@ function juexing_UI()
 		mark = "大怪"
 	elseif (res_juexing.mark == "2") then
 		mark = "无"
+	end
+	
+	if (res_juexing.mark_delay == "0") then
+		mark_delay_juexing = 0
+	elseif (res_juexing.mark_delay == "1") then
+		mark_delay_juexing = 100
+	elseif (res_juexing.mark_delay == "2") then
+		mark_delay_juexing = 200
+	elseif (res_juexing.mark_delay == "3") then
+		mark_delay_juexing = 300
+	elseif (res_juexing.mark_delay == "4") then
+		mark_delay_juexing = 400
+	elseif (res_juexing.mark_delay == "5") then
+		mark_delay_juexing = 500
+	elseif (res_juexing.mark_delay == "6") then
+		mark_delay_juexing = 1000
+	elseif (res_juexing.mark_delay == "7") then
+		mark_delay_juexing = 1500
+	elseif (res_juexing.mark_delay == "8") then
+		mark_delay_juexing = 2000
+	elseif (res_juexing.mark_delay == "9") then
+		mark_delay_juexing = 3000
 	end
 	
 	local level = tonumber(res_juexing.level) + 1

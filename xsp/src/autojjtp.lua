@@ -58,14 +58,14 @@ function yuhun_auto_jjtp(mode, role, group, mark, level, round, lock, member_aut
 	return RET_ERR
 end
 
-function juexing_auto_jjtp(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+function juexing_auto_jjtp(mode, role, group, element, mark, mark_delay, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
 	local ret = 0
 	local ret = 0
 	
 	while (1) do
 		auto_jjtp_time_stamp = mTime()
 		
-		juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+		juexing(mode, role, group, element, mark, mark_delay, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
 		mSleep(1000)
 		ret = lct_tingyuan_or_tansuo()
 		if ret == RET_ERR then

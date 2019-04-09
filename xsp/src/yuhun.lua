@@ -2,7 +2,7 @@ require "util"
 require "func"
 
 -- Config
-mark_delay = 500
+mark_delay_baqi = 500
 
 -- Util func
 function lct_yuhun()
@@ -27,7 +27,7 @@ end
 
 function yuhun_mark(position, round, level)
 	mSleep(700)
-	mSleep(mark_delay)
+	mSleep(mark_delay_baqi)
 	random_sleep(50)
 	
 	local cnt
@@ -75,7 +75,7 @@ end
 -- Main func
 function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate, limitation)
 	print(string.format("八岐大蛇 - 模式：%s，角色：%s，组队：%s，标记延迟 %d, 一层标记：%s 二层标记：%s 三层标记：%s，层数：%d，战斗次数：%d，锁定出战：%d",
-			mode, role, group, mark_delay, mark[1], mark[2], mark[3], level, round, lock))
+			mode, role, group, mark_delay_baqi, mark[1], mark[2], mark[3], level, round, lock))
 	print(string.format("队员自动组队：%d，失败重新组队：%d，队员接手队长：%d，队长自动组队：%d，队长自动邀请：%d, 自动邀请区域: %s, 失败重新建队：%d, 建房限制次数 %d",
 			member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate, limitation))
 	print_global_config()
