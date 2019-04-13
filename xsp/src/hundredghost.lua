@@ -8,7 +8,6 @@ function lct_hg()
 	x, y = findColor({33, 51, 35, 53},
 		"0|0|0xf0f5fb,59|536|0xefe9be,61|546|0xb1701d,70|542|0x271818,165|542|0xf2cd4a",
 		95, 0, 0, 0)
-	
 	return x, y
 end
 
@@ -17,9 +16,11 @@ function hg_portal_uninvited(invite)
 		"0|0|0xf4ebe0,18|-11|0x473a39,-16|12|0x473a39,618|-322|0xe8d4cf,-39|-113|0x6b1830",
 		95, 0, 0, 0)
 	if x > -1 then
-		if invite == 1 then
+		if invite == "auto" or invite == "manual" then
 			random_touch(0, x, y, 10, 10) -- 邀请
 			random_sleep(1000)
+		elseif invite == "none" then
+			random_touch(0, 825, 470, 20, 10) -- 进入
 		end
 	end
 	return x, y
@@ -59,7 +60,7 @@ function hg_invite(invite)
 	x, y = findColor({888, 144, 890, 146},
 		"0|0|0xb2a29e,-686|207|0xb7b7b2,-622|-22|0xe3758c,-42|-48|0xf5e0da",
 		95, 0, 0, 0)
-	if x > -1 and invite == 1 then
+	if x > -1 and invite == "auto" then
 		HUD_show_or_hide(HUD,hud_info,string.format("邀请第%d位好友", pos),20,"0xff000000","0xffffffff",0,100,0,300,32)
 		random_touch(0, x_[2 - pos%2], y_[math.floor((pos - 1)/2) + 1], 30, 10) -- 随机选择1-8
 		random_sleep(1000)
@@ -166,7 +167,7 @@ end
 
 -- Main func
 function hundredghost(round, num, invite)
-	print(string.format("次数 %d 豆子 %s 邀请 %d", round, num, invite))
+	print(string.format("次数 %d 豆子 %s 邀请 %s", round, num, invite))
 	print_global_config()
 	local ret
 	

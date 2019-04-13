@@ -1753,10 +1753,11 @@ function hundredghost_UI()
 	hundredghost_ui = UI:new("hundredghost.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 	UI:Label(hundredghost_ui, "center", "0,0,0", 30, "百鬼夜行", "20,20,960,55")
 	UI:Label(hundredghost_ui, "left", "0,0,0", 30, "战斗次数 - ", "20,100,300,60")
-	UI:ComboBox(hundredghost_ui, "round", "3次,5次,10次,20次,30次,50次","4",23,"650,100,330,50")
+	UI:ComboBox(hundredghost_ui, "round", "3次,5次,10次,20次,30次,50次,100次,无限次","4",23,"650,100,330,50")
 	UI:Label(hundredghost_ui, "left", "0,0,0", 30, "豆子数量 - ", "20,160,300,60")
 	UI:RadioGroup(hundredghost_ui, "num", "5 ~ 7,8 ~ 10","1",30,"0,0,0","650,160,330,60")
-	UI:CheckBoxGroup(hundredghost_ui, "invite","自动邀请好友","0",30,"0,0,0","20,220,900,60")
+	UI:Label(hundredghost_ui, "left", "0,0,0", 30, "好友邀请 - ", "20,220,300,60")
+	UI:ComboBox(hundredghost_ui, "invite", "自动邀请,不邀请,手动邀请","0",23,"650,220,330,50")
 	UI:fit(hundredghost_ui)
 	
 	ret_hundredghost, res_hundredghost = UI:show(hundredghost_ui)
@@ -1778,6 +1779,10 @@ function hundredghost_UI()
 		round = 30
 	elseif res_hundredghost.round == "5" then
 		round = 50
+	elseif res_hundredghost.round == "5" then
+		round = 100
+	elseif res_hundredghost.round == "5" then
+		round = 99999
 	end
 	
 	if res_hundredghost.num == "0" then
@@ -1787,9 +1792,11 @@ function hundredghost_UI()
 	end
 	
 	if res_hundredghost.invite == "0" then
-		invite = 1
-	else
-		invite = 0
+		invite = "auto"
+	elseif res_hundredghost.invite == "1" then
+		invite = "none"
+	elseif res_hundredghost.invite == "2" then
+		invite = "manual"
 	end
 	
 	local ret_global = global_UI()
