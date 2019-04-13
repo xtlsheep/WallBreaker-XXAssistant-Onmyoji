@@ -72,6 +72,19 @@ function lct_petfind()
 	return x, y
 end
 
+function spec_mech(level)
+	local x, y = -1, -1
+	if level == 11 then
+		x, y = findColor({982, 42, 984, 44},
+			"0|0|0x571614,19|13|0x5a5650,-8|6|0x616462,-63|216|0xcbb59c",
+			95, 0, 0, 0)
+		if x > -1 then
+			right_lower_click()
+		end
+	end
+	return x, y
+end
+
 -- Main func
 function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate, limitation)
 	print(string.format("八岐大蛇 - 模式：%s，角色：%s，组队：%s，标记延迟 %d, 一层标记：%s 二层标记：%s 三层标记：%s，层数：%d，战斗次数：%d，锁定出战：%d",
@@ -210,6 +223,8 @@ function yuhun_solo(mark, level, round, lock)
 			x, y = feed_paperman() if x > -1 then break end
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
+			-- 特殊机制
+			x, y = spec_mech(level) if x > -1 then break end
 			break
 		end
 	end
@@ -357,6 +372,8 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			x, y = feed_paperman() if x > -1 then break end
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
+			-- 特殊机制
+			x, y = spec_mech(level) if x > -1 then break end
 			break
 		end
 	end
@@ -502,6 +519,8 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = feed_paperman() if x > -1 then break end
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
+			-- 特殊机制
+			x, y = spec_mech(level) if x > -1 then break end
 			break
 		end
 	end
@@ -639,6 +658,8 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			x, y = feed_paperman() if x > -1 then break end
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
+			-- 特殊机制
+			x, y = spec_mech(level) if x > -1 then break end
 			break
 		end
 	end
@@ -848,6 +869,8 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			x, y = feed_paperman() if x > -1 then break end
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
+			-- 特殊机制
+			x, y = spec_mech(level) if x > -1 then break end
 			break
 		end
 	end
