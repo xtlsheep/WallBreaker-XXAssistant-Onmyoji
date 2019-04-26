@@ -124,9 +124,13 @@ function yqfy_(round, sel, mark)
 					elseif sel == "年兽" then
 						ran_wait = 10*60*60*1000 + math.random(1000, 5000)
 					else
-						ran_wait = math.random(500, 1000)
+						ran_wait = math.random(1000, 5000)
 					end
-					HUD_show_or_hide(HUD,hud_info,string.format("随机等待时间: %d s", ran_wait/1000),20,"0xff000000","0xffffffff",0,100,0,300,32)
+					if sel == "联动" or sel == "石距" or sel == "年兽" then
+						HUD_show_or_hide(HUD,hud_info,string.format("随机等待时间: %d s", ran_wait/1000),20,"0xff000000","0xffffffff",0,100,0,300,32)
+					else
+						HUD_show_or_hide(HUD,hud_info,string.format("随机等待时间: %d ms", ran_wait),20,"0xff000000","0xffffffff",0,100,0,300,32)
+					end
 					mSleep(ran_wait)
 				end
 				tingyuan_enter_zudui()
@@ -158,8 +162,12 @@ function yqfy_(round, sel, mark)
 					if linkage == "Enable" then
 						zudui_move_down()
 						random_touch(0, 220, 150, 50, 10) -- 妖气封印
+						random_sleep(500)
+						random_move(0, 430, 200, 430, 500, 50, 10)
 					elseif linkage == "Disable" then
 						random_touch(0, 220, 520, 50, 10) -- 妖气封印
+						random_sleep(500)
+						random_move(0, 430, 200, 430, 500, 50, 10)
 					end
 				end
 				random_sleep(1000)

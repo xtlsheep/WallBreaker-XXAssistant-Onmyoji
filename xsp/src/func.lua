@@ -982,8 +982,8 @@ end
 
 function round_one()
 	local x, y = findColor({547, 313, 549, 315},
-		"0|0|0x272420,-8|-1|0xdcba8b,-21|9|0x272420,-62|9|0x272420",
-		95, 0, 0, 0)
+		"0|0|0x272420,-58|11|0x272420,-59|4|0xdcc096,5|27|0x272420",
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"第一回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
@@ -993,7 +993,7 @@ end
 function round_two()
 	local x, y = findColor({547, 313, 549, 315},
 		"0|0|0x272420,-8|-1|0xdcba8b,-29|-5|0x272420,-17|20|0x272420",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"第二回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
@@ -1003,7 +1003,7 @@ end
 function round_three()
 	local x, y = findColor({547, 313, 549, 315},
 		"0|0|0x272420,-8|-1|0xdcba8b,-30|-7|0x272420,-17|27|0x272420",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"第三回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
@@ -1201,7 +1201,7 @@ function fight_settle(mode)
 	function fight_turbo(mode)
 		local x, y
 		local cnt
-
+		
 		if mode == "探索" then
 			cnt = 8
 		else

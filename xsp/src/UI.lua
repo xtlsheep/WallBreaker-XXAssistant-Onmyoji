@@ -56,7 +56,7 @@ function config_UI()
 	-- Config
 	config_ui = UI:new("config.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 	UI:Label(config_ui, "center", "0,0,0", 30, "高级选项", "20,20,960,55")
-	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,排队副本    ,百鬼夜行    ,组合任务    ,世界喊话    ,普通召唤    ,悬赏查询    ,自动斗技    ,自动剧情    ,自动樱饼    ,血月梦境","0",30,"0,0,0","30,150,960,300")
+	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,排队副本    ,百鬼夜行    ,组合任务    ,世界喊话    ,普通召唤    ,悬赏查询    ,自动斗技    ,自动剧情    ,自动樱饼    ,特殊活动","0",30,"0,0,0","30,150,960,300")
 	UI:fit(config_ui)
 	
 	ret_config, res_config = UI:show(config_ui)
@@ -66,7 +66,7 @@ function config_UI()
 	end
 	
 	-- 八岐大蛇
-	if (res_config.select == "0") 	   then baqidashe_UI()
+	if (res_config.select == "0")  then baqidashe_UI()
 		-- 探索
 	elseif (res_config.select == "1")  then	tansuo_UI()
 		-- 结界突破
@@ -96,10 +96,10 @@ function config_UI()
 		-- 自动樱饼
 	elseif (res_config.select == "14")  then autocake_UI()
 		-- 特殊活动
-	--elseif (res_config.select == "15")  then activityreserve_UI()
+	elseif (res_config.select == "15")  then activityreserve_UI()
 	--elseif (res_config.select == "15")  then LBSGhostDriving_UI()
 	--elseif (res_config.select == "15")  then SuperGhost_UI()
-	elseif (res_config.select == "15")  then BloodMoonDream_UI()
+	--elseif (res_config.select == "15")  then BloodMoonDream_UI()
 	end
 end
 
@@ -1779,9 +1779,9 @@ function hundredghost_UI()
 		round = 30
 	elseif res_hundredghost.round == "5" then
 		round = 50
-	elseif res_hundredghost.round == "5" then
+	elseif res_hundredghost.round == "6" then
 		round = 100
-	elseif res_hundredghost.round == "5" then
+	elseif res_hundredghost.round == "7" then
 		round = 99999
 	end
 	
@@ -1804,7 +1804,7 @@ function hundredghost_UI()
 		return
 	end
 	
-		hundredghost(round, num, invite)
+	hundredghost(round, num, invite)
 end
 
 function autocake_UI()
