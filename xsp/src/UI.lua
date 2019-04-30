@@ -15,6 +15,7 @@ require "autojjtp"
 require "LBSGhostDriving"
 require "SuperGhost"
 require "BloodMoonDream"
+require "YuXinDaoChang"
 
 -- UI init
 local width_UI = 1000
@@ -56,7 +57,7 @@ function config_UI()
 	-- Config
 	config_ui = UI:new("config.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 	UI:Label(config_ui, "center", "0,0,0", 30, "高级选项", "20,20,960,55")
-	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,排队副本    ,百鬼夜行    ,组合任务    ,世界喊话    ,普通召唤    ,悬赏查询    ,自动斗技    ,自动剧情    ,自动樱饼    ,特殊活动","0",30,"0,0,0","30,150,960,300")
+	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,排队副本    ,百鬼夜行    ,组合任务    ,世界喊话    ,普通召唤    ,悬赏查询    ,自动斗技    ,自动剧情    ,自动樱饼    ,御心道场","0",30,"0,0,0","30,150,960,300")
 	UI:fit(config_ui)
 	
 	ret_config, res_config = UI:show(config_ui)
@@ -96,10 +97,11 @@ function config_UI()
 		-- 自动樱饼
 	elseif (res_config.select == "14")  then autocake_UI()
 		-- 特殊活动
-	elseif (res_config.select == "15")  then activityreserve_UI()
+	--elseif (res_config.select == "15")  then activityreserve_UI()
 	--elseif (res_config.select == "15")  then LBSGhostDriving_UI()
 	--elseif (res_config.select == "15")  then SuperGhost_UI()
 	--elseif (res_config.select == "15")  then BloodMoonDream_UI()
+	elseif (res_config.select == "15")  then YuXinDaoChang_UI()
 	end
 end
 
@@ -2168,4 +2170,58 @@ function BloodMoonDream_UI()
 	end
 	
 	BloodMoonDream(level, round, round1, round2, round3)
+end
+
+function YuXinDaoChang_UI()
+	-- 御心道场
+	yxdc_ui = UI:new("yxdc.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
+	UI:Label(yxdc_ui, "center", "0,0,0", 30, "御心道场", "20,20,960,55")
+	UI:Label(yxdc_ui, "left", "0,0,0", 30, "Tips - ", "20,100,960,60")
+	UI:Label(yxdc_ui, "left", "0,0,0", 30, "请手动进入离岛后运行", "20,160,960,60")
+	UI:Line(yxdc_ui, "line_common", "100,100,100", 2, 960, "20,220,960,2")
+	UI:Label(yxdc_ui, "left", "0,0,0", 30, "道场选择 - ", "20,230,300,60")
+	UI:ComboBox(yxdc_ui, "sel", "经验,金币,觉醒","1",23,"700,230,280,50")
+	UI:Label(yxdc_ui, "left", "0,0,0", 30, "难度选择 - ", "20,290,300,60")
+	UI:ComboBox(yxdc_ui, "level", "简单,普通,困难","2",23,"700,290,280,50")
+	UI:Label(yxdc_ui, "left", "0,0,0", 30, "汤浴选择 - ", "20,350,300,60")
+	UI:ComboBox(yxdc_ui, "bath", "粗盐,薰草,露天","0",23,"700,350,280,50")
+	
+	ret_YXDC, res_YXDC = UI:show(yxdc_ui)
+	if (ret_YXDC == 0) then
+		config_UI()
+		return
+	end
+	
+	local sel, level, bath
+	
+	if res_YXDC.sel == "0" then
+		sel = "经验"
+	elseif res_YXDC.sel == "1" then
+		sel = "金币"
+	elseif res_YXDC.sel == "2" then
+		sel = "觉醒"
+	end
+	
+	if res_YXDC.level == "0" then
+		level =  "简单"
+	elseif res_YXDC.level == "1" then
+		level =  "普通"
+	elseif res_YXDC.level == "2" then
+		level =  "困难"
+	end
+	
+	if res_YXDC.bath == "0" then
+		bath =  "粗盐"
+	elseif res_YXDC.bath == "1" then
+		bath =  "薰草"
+	elseif res_YXDC.bath == "2" then
+		bath =  "露天"
+	end
+	
+	local ret_global = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
+	
+	YuXinDaoChang(sel, level, bath)
 end

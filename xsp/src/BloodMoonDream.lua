@@ -34,6 +34,7 @@ function BloodMoonDream(level, round, round1, round2, round3)
 	local x, y
 	local init = 0
 	local cnt = 0
+	local ret = RET_OK
 	
 	while (1) do
 		while (1) do
@@ -45,7 +46,7 @@ function BloodMoonDream(level, round, round1, round2, round3)
 			x, y = round_three() if (x > -1) then bmd_mark(round3) break end
 			mSleep(500)
 			-- 循环通用
-			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
+			loop_generic()
 			-- 战斗准备
 			x, y = fight_ready() if (x > -1) then break end
 			-- 战斗进行
