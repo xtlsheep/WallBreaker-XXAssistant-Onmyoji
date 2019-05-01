@@ -44,8 +44,8 @@ function bypass_click()
 end
 
 -- Main func
-function YuXinDaoChang(sel, level, bath)
-	print(string.format("道场 %s, 难度 %s，汤浴 %s", sel, level, bath))
+function YuXinDaoChang(sel, level, bath, buy)
+	print(string.format("道场 %s, 难度 %s, 汤浴 %s, 勾玉 %d", sel, level, bath, buy))
 	print_global_config()
 	
 	local x, y
@@ -68,6 +68,7 @@ function YuXinDaoChang(sel, level, bath)
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then
+				cnt = 0
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				break
@@ -129,7 +130,7 @@ function YuXinDaoChang(sel, level, bath)
 				end
 				bath_init = 0
 				random_touch(0, 960, 530, 20, 20) -- 泡浴
-				mSleep(3000)
+				mSleep(5000)
 				random_sleep(500)
 				right_lower_click()
 				random_sleep(1000)
@@ -147,8 +148,6 @@ function YuXinDaoChang(sel, level, bath)
 				random_sleep(1000)
 				break
 			end
-			-- 跳过
-			x, y = bypass_click() if x > -1 then break end
 			break
 		end
 	end

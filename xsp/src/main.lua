@@ -35,6 +35,8 @@ width, height = getScreenSize()
 dpi = getScreenDPI()
 screen_direct_init()
 appid = frontAppName()
+wid_div_dpi = width/dpi
+print(wid_div_dpi)
 width_dev = 640
 height_dev = 1136
 ratio = height_dev/height

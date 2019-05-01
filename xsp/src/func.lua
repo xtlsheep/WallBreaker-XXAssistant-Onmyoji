@@ -165,23 +165,23 @@ function game_disconn_reconn()
 	end
 	
 	function game_portal()
-		local x, y = findColor({556, 553, 558, 555},
-			"0|0|0xfffffa,26|-128|0xfffe8d,72|-65|0xf0eac6,-39|-48|0x5a3f57",
-			90, 0, 0, 0)
+		local x, y = findColor({494, 124, 496, 126},
+			"0|0|0xe0af86,119|-38|0xdc7746,140|151|0xf1d482,132|301|0xf9edac",
+			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"进入服务器",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			random_touch(0, x, y, 30, 10) -- 进入游戏
+			random_touch(0, 560, 550, 30, 10) -- 进入游戏
 		end
 		return x, y
 	end
 	
 	function game_load()
-		local x, y = findColor({549, 585, 551, 587},
-			"0|0|0x383855,-429|-114|0xc19a72,-412|-124|0x461710,-447|-148|0x211e2f",
-			90, 0, 0, 0)
+		local x, y = findColor({857, 566, 859, 568},
+			"0|0|0xe99e4f,-9|8|0xe4823f,-115|-49|0x690c2b,10|-164|0x76101b",
+			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"进入游戏",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			random_touch(0, x, y, 30, 10) -- 点击屏幕进入游戏
+			random_touch(0, 560, 550, 30, 10) -- 点击屏幕进入游戏
 		end
 		return x, y
 	end

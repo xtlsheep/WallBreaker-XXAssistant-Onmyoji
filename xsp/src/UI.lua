@@ -27,11 +27,15 @@ function portal_UI()
 	portal_ui = UI:new("portal.dat", width_UI, height_UI, "继续", "退出", "backGround.jpg")
 	UI:Image(portal_ui, "title.png", "30,0,940,80")
 	UI:Label(portal_ui, "left", "0,0,0", 30, "功能选择 - ", "30,90,300,55")
-	UI:RadioGroup(portal_ui, "select", "高级选项    ,数据统计","0",30,"0,0,0","500,90,450,55")
+	if wid_div_dpi > 2 then
+		UI:RadioGroup(portal_ui, "select", "高级选项,数据统计","0",30,"0,0,0","400,90,600,55")
+	else
+		UI:RadioGroup(portal_ui, "select", "高级选项    ,数据统计","0",30,"0,0,0","500,90,500,55")
+	end
 	UI:Label(portal_ui, "left", "0,0,0", 30, "实时公告 - ", "30,140,300,55")
 	UI:Image(portal_ui, "notice.png", "20,200,970,250")
 	-- 公告
-	local content, err = getCloudContent("WALL_BREAKER_ANNOUNCEMENT", "", "没有正确获取到公告信息")
+	local content, err = getCloudContent("WALL_BREAKER_ANNOUNCEMENT", "BDAB2A1E8229572B", "没有正确获取到公告信息")
 	if err == 0 then
 		UI:Label(portal_ui, "left", "0,0,0", 29, tostring(content), "110,250,800,180")
 	end
@@ -57,7 +61,11 @@ function config_UI()
 	-- Config
 	config_ui = UI:new("config.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 	UI:Label(config_ui, "center", "0,0,0", 30, "高级选项", "20,20,960,55")
-	UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,排队副本    ,百鬼夜行    ,组合任务    ,世界喊话    ,普通召唤    ,悬赏查询    ,自动斗技    ,自动剧情    ,自动樱饼    ,御心道场","0",30,"0,0,0","30,150,960,300")
+	if wid_div_dpi > 2 then
+		UI:RadioGroup(config_ui, "select", "八岐大蛇,探索章节,结界突破,觉醒麒麟,业原火		,御灵之境,排队副本,百鬼夜行,组合任务,世界喊话,普通召唤,悬赏查询,自动斗技,自动剧情,自动樱饼,御心道场","0",30,"0,0,0","30,150,960,300")
+	else
+		UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,排队副本    ,百鬼夜行    ,组合任务    ,世界喊话    ,普通召唤    ,悬赏查询    ,自动斗技    ,自动剧情    ,自动樱饼    ,御心道场","0",30,"0,0,0","30,150,960,300")
+	end
 	UI:fit(config_ui)
 	
 	ret_config, res_config = UI:show(config_ui)
@@ -83,7 +91,7 @@ function config_UI()
 		-- 百鬼夜行
 	elseif (res_config.select == "7")  then hundredghost_UI()
 		-- 组合任务
-	elseif (res_config.select == "8")  then autocake_UI()
+	elseif (res_config.select == "8")  then multimission_UI()
 		-- 世界喊话
 	elseif (res_config.select == "9")  then publicity_UI()
 		-- 普通召唤
@@ -97,10 +105,10 @@ function config_UI()
 		-- 自动樱饼
 	elseif (res_config.select == "14")  then autocake_UI()
 		-- 特殊活动
-	--elseif (res_config.select == "15")  then activityreserve_UI()
-	--elseif (res_config.select == "15")  then LBSGhostDriving_UI()
-	--elseif (res_config.select == "15")  then SuperGhost_UI()
-	--elseif (res_config.select == "15")  then BloodMoonDream_UI()
+		--elseif (res_config.select == "15")  then activityreserve_UI()
+		--elseif (res_config.select == "15")  then LBSGhostDriving_UI()
+		--elseif (res_config.select == "15")  then SuperGhost_UI()
+		--elseif (res_config.select == "15")  then BloodMoonDream_UI()
 	elseif (res_config.select == "15")  then YuXinDaoChang_UI()
 	end
 end
@@ -725,12 +733,18 @@ function baqidashe_UI()
 	UI:Label(bqds_ui, "left", "0,0,0", 30, "标记 - ", "20,420,300,60")
 	UI:Label(bqds_ui, "left", "0,0,0", 30, "标记延迟 - ", "20,480,300,60")
 	UI:ComboBox(bqds_ui, "mark_delay", "0 ms,100 ms,200 ms,300 ms,400 ms,500 ms,1000 ms,1500 ms,2000 ms,3000 ms","5",23,"700,480,280,50")
-	UI:Label(bqds_ui, "left", "0,0,0", 30, "第一回合 ~ ", "20,540,300,60")
-	UI:RadioGroup(bqds_ui, "round1", "左  ,中  ,右  ,无","3",30,"0,0,0","500,540,500,60")
-	UI:Label(bqds_ui, "left", "0,0,0", 30, "第二回合 ~ ", "20,600,300,60")
-	UI:RadioGroup(bqds_ui, "round2", "左  ,中  ,右  ,无","3",30,"0,0,0","500,600,500,60")
-	UI:Label(bqds_ui, "left", "0,0,0", 30, "第三回合 ~ ", "20,660,300,60")
-	UI:RadioGroup(bqds_ui, "round3", "左  ,中  ,右  ,无","3",30,"0,0,0","500,660,500,60")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "第一回合 ~ ", "20,540,170,60")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "第二回合 ~ ", "20,600,170,60")
+	UI:Label(bqds_ui, "left", "0,0,0", 30, "第三回合 ~ ", "20,660,170,60")
+	if wid_div_dpi > 2 then
+		UI:RadioGroup(bqds_ui, "round1", "左,中,右,无","3",30,"0,0,0","200,540,800,60")
+		UI:RadioGroup(bqds_ui, "round2", "左,中,右,无","3",30,"0,0,0","200,600,800,60")
+		UI:RadioGroup(bqds_ui, "round3", "左,中,右,无","3",30,"0,0,0","200,660,800,60")
+	else
+		UI:RadioGroup(bqds_ui, "round1", "左  ,中  ,右  ,无","3",30,"0,0,0","500,540,500,60")
+		UI:RadioGroup(bqds_ui, "round2", "左  ,中  ,右  ,无","3",30,"0,0,0","500,600,500,60")
+		UI:RadioGroup(bqds_ui, "round3", "左  ,中  ,右  ,无","3",30,"0,0,0","500,660,500,60")
+	end
 	UI:Line(bqds_ui, "line_common", "100,100,100", 2, 960, "20,720,960,2")
 	UI:Label(bqds_ui, "left", "0,0,0", 30, "队员设置 - ", "20,730,900,60")
 	UI:CheckBoxGroup(bqds_ui, "member_auto_group","接受自动组队","0",30,"0,0,0","20,790,900,60")
@@ -923,11 +937,11 @@ function baqidashe_UI()
 		return
 	end
 	
-		if (auto_jjtp_en == 1) then
-			yuhun_auto_jjtp(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate, limitation)
-		else
-			yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate, limitation)
-		end
+	if (auto_jjtp_en == 1) then
+		yuhun_auto_jjtp(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate, limitation)
+	else
+		yuhun(mode, role, group, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate, limitation)
+	end
 end
 
 function tansuo_UI()
@@ -936,14 +950,21 @@ function tansuo_UI()
 	UI:Label(tansuo_ui, "center", "0,0,0", 30, "探索章节", "20,20,960,55")
 	UI:ComboBox(tansuo_ui, "mode", "单人模式,组队 - 队长,组队 - 队员", "0", 30, "20,100,960,60")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "战斗设置 - ", "20,180,300,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "加成识别 : ", "20,240,300,60")
-	UI:CheckBoxGroup(tansuo_ui, "select","物品,金币,经验,Boss","2@3",30,"0,0,0","400,240,580,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动标记 - ", "20,300,300,60")
-	UI:RadioGroup(tansuo_ui, "mark", "随机小怪  ,中间大怪  ,无","2",30,"0,0,0","420,300,580,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "难度选择 - ", "20,360,300,60")
-	UI:RadioGroup(tansuo_ui, "hard", "普通                ,困难[队长强制]","1",30,"0,0,0","420,360,580,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "场景移动 - ", "20,420,300,60")
-	UI:RadioGroup(tansuo_ui, "scene_move", "2 - 3次  ,3 - 4次  ,4 - 5次","2",30,"0,0,0","420,420,580,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "加成识别 : ", "20,240,170,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "自动标记 - ", "20,300,170,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "难度选择 - ", "20,360,170,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "场景移动 - ", "20,420,170,60")
+	if wid_div_dpi > 2 then
+		UI:CheckBoxGroup(tansuo_ui, "select","物品,金币,经验,Boss","2@3",30,"0,0,0","200,240,800,60")
+		UI:RadioGroup(tansuo_ui, "mark", "随机小怪  ,中间大怪  ,无","2",30,"0,0,0","200,300,800,60")
+		UI:RadioGroup(tansuo_ui, "hard", "普通,困难[队长强制]","1",30,"0,0,0","200,360,800,60")
+		UI:RadioGroup(tansuo_ui, "scene_move", "2 - 3次,3 - 4次,4 - 5次","2",30,"0,0,0","200,420,800,60")
+	else
+		UI:CheckBoxGroup(tansuo_ui, "select","物品,金币,经验,Boss","2@3",30,"0,0,0","400,240,600,60")
+		UI:RadioGroup(tansuo_ui, "mark", "随机小怪  ,中间大怪  ,无","2",30,"0,0,0","420,300,600,60")
+		UI:RadioGroup(tansuo_ui, "hard", "普通                ,困难[队长强制]","1",30,"0,0,0","420,360,600,60")
+		UI:RadioGroup(tansuo_ui, "scene_move", "2 - 3次  ,3 - 4次  ,4 - 5次","2",30,"0,0,0","420,420,600,60")
+	end
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "目标章节 - ", "20,480,500,60")
 	UI:ComboBox(tansuo_ui, "section", "第28章,第27章,第26章,第25章,第24章,第23章,第22章,第21章,第20章,第19章,第18章,第17章,第16章,第15章,第14章,第13章,第12章,第11章,第10章,第9章,第8章,第7章,第6章,第5章,第4章,第3章,第2章,第1章,章节第一栏[手动调整位置],章节第四栏[手动调整位置]","29",23,"600,480,380,50")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "限定方式 - ", "20,540,500,60")
@@ -958,19 +979,22 @@ function tansuo_UI()
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮设置 : [自动更换狗粮必须设置为展开式神图鉴, 详情见末尾图片]", "20,790,960,60")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮队长 - ", "20,850,300,60")
 	UI:ComboBox(tansuo_ui, "captain_pos", "阴阳师左手边斜前方[第一排],阴阳师正左手边[第二排],无","0",23,"600,850,380,50")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮普攻 - ", "20,910,300,60")
-	UI:RadioGroup(tansuo_ui, "nor_attk", "开启            ,关闭","0",30,"0,0,0","600,910,400,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "满级操作 - ", "20,970,300,60")
-	UI:ComboBox(tansuo_ui, "full_exp", "铃声提醒,自动更换,无","1",23,"600,970,380,50")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "初始翻页 - ", "20,1030,300,60")
-	UI:ComboBox(tansuo_ui, "page_jump", "第一页,第五页,第十页,百分之10,百分之30,百分之50,百分之70,百分之90","4",23,"600,1030,380,50")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮类型 - ", "20,1090,300,60")
-	UI:RadioGroup(tansuo_ui, "df_type", "N卡             ,素材","0",30,"0,0,0","600,1090,400,60")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "素材类型[暂时无效] - ", "20,1150,300,60")
-	UI:CheckBoxGroup(tansuo_ui, "egg_color","红蛋,白蛋,蓝蛋,黑蛋","1@2",30,"0,0,0","400,1150,580,60")
-	UI:Line(tansuo_ui, "line_common", "100,100,100", 2, 960, "20,1210,960,2")
-	UI:Label(tansuo_ui, "left", "0,0,0", 30, "Tips -", "20,1220,900,60")
-	UI:Image(tansuo_ui, "tujianzhankai.jpg", "20,1280,960,540")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "满级操作 - ", "20,910,300,60")
+	UI:ComboBox(tansuo_ui, "full_exp", "铃声提醒,自动更换,无","1",23,"600,910,380,50")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "初始翻页 - ", "20,970,300,60")
+	UI:ComboBox(tansuo_ui, "page_jump", "第一页,第五页,第十页,百分之10,百分之30,百分之50,百分之70,百分之90","4",23,"600,970,380,50")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮普攻 - ", "20,1030,170,60")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮类型 - ", "20,1090,170,60")
+	if wid_div_dpi > 2 then
+		UI:RadioGroup(tansuo_ui, "df_type", "N卡,素材","0",30,"0,0,0","200,1090,800,60")
+		UI:RadioGroup(tansuo_ui, "nor_attk", "开启,关闭","0",30,"0,0,0","200,1030,800,60")
+	else
+		UI:RadioGroup(tansuo_ui, "df_type", "N卡             ,素材","0",30,"0,0,0","600,1090,400,60")
+		UI:RadioGroup(tansuo_ui, "nor_attk", "开启            ,关闭","0",30,"0,0,0","600,1030,400,60")
+	end
+	UI:Line(tansuo_ui, "line_common", "100,100,100", 2, 960, "20,1150,960,2")
+	UI:Label(tansuo_ui, "left", "0,0,0", 30, "Tips -", "20,1160,900,60")
+	UI:Image(tansuo_ui, "tujianzhankai.jpg", "20,1220,960,540")
 	UI:fit(tansuo_ui)
 	
 	ret_tansuo, res_tansuo = UI:show(tansuo_ui)
@@ -1091,7 +1115,7 @@ function tansuo_UI()
 		captain_auto_invite = "跨区"
 	end
 	
-	local captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color
+	local captain_pos, nor_attk, full_exp, page_jump, df_type
 	if res_tansuo.captain_pos == "0" then
 		captain_pos = "左前"
 	elseif res_tansuo.captain_pos == "1" then
@@ -1138,33 +1162,16 @@ function tansuo_UI()
 		df_type = "Egg"
 	end
 	
-	local egg_color_ = {}
-	local egg_color = {0, 0, 0, 0}
-	for w in string.gmatch(res_tansuo.egg_color,"([^'@']+)") do
-		table.insert(egg_color_,w)
-	end
-	for i = 1, table.getn(egg_color_), 1 do
-		if (egg_color_[i] == "0") then
-			egg_color[1] = 1
-		elseif (egg_color_[i] == "1") then
-			egg_color[2] = 1
-		elseif (egg_color_[i] == "2") then
-			egg_color[3] = 1
-		elseif (egg_color_[i] == "3") then
-			egg_color[4] = 1
-		end
-	end
-	
 	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
 	
-		if auto_jjtp_en == 1 then
-			tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
-		else
-			tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
-		end
+	if auto_jjtp_en == 1 then
+		tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type)
+	else
+		tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type)
+	end
 end
 
 function jjtp_UI()
@@ -1178,16 +1185,24 @@ function jjtp_UI()
 	UI:CheckBoxGroup(jjtp_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,300,900,60")
 	UI:Line(jjtp_ui, "line_common", "100,100,100", 2, 960, "20,360,960,2")
 	UI:Label(jjtp_ui, "left", "0,0,0", 30, "个人突破设置 - ", "20,370,300,60")
-	UI:Label(jjtp_ui, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,430,300,60")
-	UI:CheckBoxGroup(jjtp_ui, "whr_solo","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,430,670,60")
+	UI:Label(jjtp_ui, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,430,230,60")
+	if wid_div_dpi > 2 then
+		UI:CheckBoxGroup(jjtp_ui, "whr_solo","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","250,430,750,60")
+	else
+		UI:CheckBoxGroup(jjtp_ui, "whr_solo","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,430,670,60")
+	end
 	UI:Label(jjtp_ui, "left", "0,0,0", 30, "勋章选择 - ", "20,490,300,60")
 	UI:ComboBox(jjtp_ui, "solo_sel", "0 - 5 勋章,3 - 5 勋章,5 - 0 勋章,3 - 0 勋章,随机选择","2",23,"700,490,280,50")
 	UI:Label(jjtp_ui, "left", "0,0,0", 30, "胜场刷新 - ", "20,550,300,60")
 	UI:ComboBox(jjtp_ui, "refresh", "3次,6次,9次","0",23,"700,550,280,50")
 	UI:Line(jjtp_ui, "line_common", "100,100,100", 2, 960, "20,610,960,2")
 	UI:Label(jjtp_ui, "left", "0,0,0", 30, "阴阳寮突破设置 - ", "20,620,300,60")
-	UI:Label(jjtp_ui, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,680,300,60")
-	UI:CheckBoxGroup(jjtp_ui, "whr_pub","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,680,670,60")
+	UI:Label(jjtp_ui, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,680,230,60")
+	if wid_div_dpi > 2 then
+		UI:CheckBoxGroup(jjtp_ui, "whr_pub","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","250,680,750,60")
+	else
+		UI:CheckBoxGroup(jjtp_ui, "whr_pub","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,680,670,60")
+	end
 	UI:Label(jjtp_ui, "left", "0,0,0", 30, "勋章选择 - ", "20,740,300,60")
 	UI:ComboBox(jjtp_ui, "pub_sel", "5 - 0 勋章,4 - 0 勋章,3 - 0 勋章,2 - 0 勋章,1 - 0 勋章,0 - 0 勋章","0",23,"700,740,280,50")
 	UI:fit(jjtp_ui)
@@ -1317,8 +1332,12 @@ function juexing_UI()
 	UI:ComboBox(juexing_ui, "level", "一层,二层,三层,四层,五层,六层,七层,八层,九层,十层","9",23,"700,320,280,50")
 	UI:Label(juexing_ui, "left", "0,0,0", 30, "请选择战斗次数 - ", "20,380,300,60")
 	UI:ComboBox(juexing_ui, "round", "3次,10次,20次,30次,50次,100次,无限次数","6",23,"700,380,280,50")
-	UI:Label(juexing_ui, "left", "0,0,0", 30, "标记 - ", "20,440,300,60")
+	UI:Label(juexing_ui, "left", "0,0,0", 30, "战斗标记 - ", "20,440,170,60")
+	if wid_div_dpi > 2 then
+	UI:RadioGroup(juexing_ui, "mark", "随机小怪,麒麟Boss,无","2",30,"0,0,0","200,440,800,60")
+	else
 	UI:RadioGroup(juexing_ui, "mark", "随机小怪,麒麟Boss,无","2",30,"0,0,0","450,440,550,60")
+	end
 	UI:Label(juexing_ui, "left", "0,0,0", 30, "标记延迟 - ", "20,500,300,60")
 	UI:ComboBox(juexing_ui, "mark_delay", "0 ms,100 ms,200 ms,300 ms,400 ms,500 ms,1000 ms,1500 ms,2000 ms,3000 ms","5",23,"700,500,280,50")
 	UI:CheckBoxGroup(juexing_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,560,900,60")
@@ -1497,11 +1516,11 @@ function juexing_UI()
 		return
 	end
 	
-		if (auto_jjtp_en == 1) then
-			juexing_auto_jjtp(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
-		else
-			juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
-		end
+	if (auto_jjtp_en == 1) then
+		juexing_auto_jjtp(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+	else
+		juexing(mode, role, group, element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
+	end
 end
 
 function yeyuanhuo_UI()
@@ -1587,11 +1606,11 @@ function yeyuanhuo_UI()
 		return
 	end
 	
-		if auto_jjtp_en == 1 then
-			yeyuanhuo_auto_jjtp(round_tan, round_chen, round_chi, lock)
-		else
-			yeyuanhuo(round_tan, round_chen, round_chi, lock)
-		end
+	if auto_jjtp_en == 1 then
+		yeyuanhuo_auto_jjtp(round_tan, round_chen, round_chi, lock)
+	else
+		yeyuanhuo(round_tan, round_chen, round_chi, lock)
+	end
 end
 
 function yuling_UI()
@@ -1670,7 +1689,7 @@ function yuling_UI()
 		return
 	end
 	
-		yuling(sel, level, round, doll, lock)
+	yuling(sel, level, round, doll, lock)
 end
 
 function yqfy_UI()
@@ -1681,8 +1700,12 @@ function yqfy_UI()
 	UI:ComboBox(yqfy_ui, "sel", "石距,年兽,联动碎片,跳跳哥哥,椒图,骨女,饿鬼,二口女,海坊主,鬼使黑,小松丸,日和坊","8",23,"650,100,330,50")
 	UI:Label(yqfy_ui, "left", "0,0,0", 30, "战斗次数 - ", "20,160,300,60")
 	UI:ComboBox(yqfy_ui, "round", "3次,5次,10次,20次,30次,50次,无限次","2",23,"650,160,330,50")
-	UI:Label(yqfy_ui, "left", "0,0,0", 30, "战斗标记 - ", "20,220,300,60")
+	UI:Label(yqfy_ui, "left", "0,0,0", 30, "战斗标记 - ", "20,220,170,60")
+	if wid_div_dpi > 2 then
+	UI:RadioGroup(yqfy_ui, "mark", "随机小怪,中间大怪,无","2",30,"0,0,0","200,220,800,60")
+	else
 	UI:RadioGroup(yqfy_ui, "mark", "随机小怪,中间大怪,无","2",30,"0,0,0","450,220,550,60")
+	end
 	UI:fit(yqfy_ui)
 	
 	ret_yqfy, res_yqfy = UI:show(yqfy_ui)
@@ -1747,7 +1770,7 @@ function yqfy_UI()
 		return
 	end
 	
-		yqfy(round, sel, mark)
+	yqfy(round, sel, mark)
 end
 
 function hundredghost_UI()
@@ -1756,8 +1779,12 @@ function hundredghost_UI()
 	UI:Label(hundredghost_ui, "center", "0,0,0", 30, "百鬼夜行", "20,20,960,55")
 	UI:Label(hundredghost_ui, "left", "0,0,0", 30, "战斗次数 - ", "20,100,300,60")
 	UI:ComboBox(hundredghost_ui, "round", "3次,5次,10次,20次,30次,50次,100次,无限次","4",23,"650,100,330,50")
-	UI:Label(hundredghost_ui, "left", "0,0,0", 30, "豆子数量 - ", "20,160,300,60")
+	UI:Label(hundredghost_ui, "left", "0,0,0", 30, "豆子数量 - ", "20,160,170,60")
+	if wid_div_dpi > 2 then
+	UI:RadioGroup(hundredghost_ui, "num", "5 ~ 7,8 ~ 10","1",30,"0,0,0","200,160,800,60")
+	else
 	UI:RadioGroup(hundredghost_ui, "num", "5 ~ 7,8 ~ 10","1",30,"0,0,0","650,160,330,60")
+	end
 	UI:Label(hundredghost_ui, "left", "0,0,0", 30, "好友邀请 - ", "20,220,300,60")
 	UI:ComboBox(hundredghost_ui, "invite", "自动邀请,不邀请,手动邀请","0",23,"650,220,330,50")
 	UI:fit(hundredghost_ui)
@@ -1939,15 +1966,15 @@ function autobattle_UI()
 	autobattle_ui = UI:new("autobattle.dat", width_UI, height_UI, "继续", "返回", "backGround.jpg")
 	UI:Label(autobattle_ui, "center", "0,0,0", 30, "自动斗技", "20,20,960,55")
 	UI:Label(autobattle_ui, "left", "0,0,0", 30, "强制退出 - ", "20,100,300,60")
-	UI:RadioGroup(autobattle_ui, "force_quit", "否		,是","0",30,"0,0,0","650,100,330,60")
+	UI:ComboBox(autobattle_ui, "force_quit", "否,是","0",23,"650,100,330,50")
 	UI:Label(autobattle_ui, "left", "0,0,0", 30, "胜利次数 - ", "20,160,300,60")
 	UI:ComboBox(autobattle_ui, "round", "3次,5次,10次,无限次","3",23,"650,160,330,50")
 	UI:Label(autobattle_ui, "left", "0,0,0", 30, "战斗时间 - ", "20,220,300,60")
 	UI:ComboBox(autobattle_ui, "round_time", "5分钟,10分钟,无限制","2",23,"650,220,330,50")
 	UI:Label(autobattle_ui, "left", "0,0,0", 30, "标记己方式神[暂时无效] - ", "20,280,600,60")
-	UI:ComboBox(autobattle_ui, "mark_self", "无,正左,左前,正前,右前,正右","0",23,"650,280,330,50")
+	UI:ComboBox(autobattle_ui, "mark_self", "无,正前","0",23,"650,280,330,50")
 	UI:Label(autobattle_ui, "left", "0,0,0", 30, "标记敌方式神[暂时无效] - ", "20,340,600,60")
-	UI:RadioGroup(autobattle_ui, "mark", "否		,是","0",30,"0,0,0","650,340,330,60")
+	UI:ComboBox(autobattle_ui, "mark", "否,是","0",23,"650,340,330,50")
 	UI:fit(autobattle_ui)
 	
 	ret_autobattle, res_autobattle = UI:show(autobattle_ui)
@@ -1977,19 +2004,11 @@ function autobattle_UI()
 	elseif res_autobattle.round_time == "2" then
 		round_time = 99999
 	end
-		
+	
 	if res_autobattle.mark_self == "0" then
 		mark_self = "无"
 	elseif res_autobattle.mark_self == "1" then
-		mark_self = "正左"
-	elseif res_autobattle.mark_self == "2" then
-		mark_self = "左前"
-	elseif res_autobattle.mark_self == "3" then
 		mark_self = "正前"
-	elseif res_autobattle.mark_self == "4" then
-		mark_self = "右前"
-	elseif res_autobattle.mark_self == "5" then
-		mark_self = "正右"
 	end
 	
 	mark = tonumber(res_autobattle.mark)
@@ -2185,6 +2204,8 @@ function YuXinDaoChang_UI()
 	UI:ComboBox(yxdc_ui, "level", "简单,普通,困难","2",23,"700,290,280,50")
 	UI:Label(yxdc_ui, "left", "0,0,0", 30, "汤浴选择 - ", "20,350,300,60")
 	UI:ComboBox(yxdc_ui, "bath", "粗盐,薰草,露天","0",23,"700,350,280,50")
+	UI:Label(yxdc_ui, "left", "0,0,0", 30, "购买活力 - ", "20,410,300,60")
+	UI:ComboBox(yxdc_ui, "buy", "0次,1次,2次,3次,4次,5次","0",23,"700,410,280,50")
 	
 	ret_YXDC, res_YXDC = UI:show(yxdc_ui)
 	if (ret_YXDC == 0) then
@@ -2192,7 +2213,7 @@ function YuXinDaoChang_UI()
 		return
 	end
 	
-	local sel, level, bath
+	local sel, level, bath, buy
 	
 	if res_YXDC.sel == "0" then
 		sel = "经验"
@@ -2218,10 +2239,12 @@ function YuXinDaoChang_UI()
 		bath =  "露天"
 	end
 	
+	buy = tonumber(res_YXDC.buy)
+	
 	local ret_global = global_UI()
 	if (ret_global == RET_ERR) then
 		return
 	end
 	
-	YuXinDaoChang(sel, level, bath)
+	YuXinDaoChang(sel, level, bath, buy)
 end

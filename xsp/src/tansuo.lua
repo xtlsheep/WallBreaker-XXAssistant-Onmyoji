@@ -755,11 +755,11 @@ function treasure_box()
 end
 
 -- Main func
-function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type)
 	print(string.format("模式: %s, 选择: 物品-%d,金币-%d,经验-%d,Boss-%d, 标记: %s, 难度: %s, 移动: %s, 章节: %d, 限定: %s, 胜利: %s, 通关: %s, 邀请 %s",
 			mode, sel[1], sel[2], sel[3], sel[4], mark, scene_move, hard, section, count_mode, win_round, sec_round, captain_auto_invite))
-	print(string.format("狗粮普攻 %d, 队长位置 %s 满级操作 %s, 初始翻页 %s, 狗粮类型 %s, 素材类型(红蛋 %d, 白蛋 %d, 蓝蛋 %d, 黑蛋 %d)",
-			nor_attk, captain_pos, full_exp, page_jump, df_type, egg_color[1], egg_color[2], egg_color[3], egg_color[4]))
+	print(string.format("狗粮普攻 %d, 队长位置 %s 满级操作 %s, 初始翻页 %s, 狗粮类型 %s)",
+			nor_attk, captain_pos, full_exp, page_jump, df_type))
 	print_global_config()
 	
 	local ret = 0
@@ -778,11 +778,11 @@ function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_roun
 	
 	while (1) do
 		if mode == "单人" then
-			ret = tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+			ret = tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_pos, nor_attk, full_exp, page_jump, df_type)
 		elseif mode == "队长" then
-			ret = tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+			ret = tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type)
 		elseif mode == "队员" then
-			ret = tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+			ret = tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos, nor_attk, full_exp, page_jump, df_type)
 		end
 		
 		if ret ~= RET_RECONN then
@@ -793,7 +793,7 @@ function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_roun
 	return RET_ERR
 end
 
-function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_pos, nor_attk, full_exp, page_jump, df_type)
 	local move_total = get_scene_move(scene_move)
 	local move_cnt = 0
 	local quit_sce = 0
@@ -1036,7 +1036,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 	return RET_ERR
 end
 
-function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type)
 	local move_total = get_scene_move(scene_move)
 	local move_cnt = 0
 	local quit_sce = 0
@@ -1310,7 +1310,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 	return RET_ERR
 end
 
-function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos, nor_attk, full_exp, page_jump, df_type)
 	local unlock = 0
 	local ret = RET_ERR
 	local quit_sce = 0

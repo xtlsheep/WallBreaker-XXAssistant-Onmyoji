@@ -84,14 +84,14 @@ function juexing_auto_jjtp(mode, role, group, element, mark, mark_delay, level, 
 	return RET_ERR
 end
 
-function tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+function tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type)
 	local ret = 0
 	local ret = 0
 	
 	while (1) do
 		auto_jjtp_time_stamp = mTime()
 		
-		tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type, egg_color)
+		tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type)
 		mSleep(1000)
 		ret = lct_tingyuan_or_tansuo()
 		if ret == RET_ERR then
