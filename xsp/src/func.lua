@@ -623,18 +623,6 @@ function feed_paperman()
 	return x, y
 end
 
-function get_bonus()
-	local x, y = findColor({568, 380, 570, 382},
-		"0|0|0xd83847,14|12|0xc2aa8b,-5|35|0x3b4266,-34|22|0xe2d63c",
-		95, 0, 0, 0)
-	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,"领取胜场奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		jjtp_touch_blank()
-		mSleep(1000)
-	end
-	return x, y
-end
-
 -- Locate & Enter func
 function lct_tingyuan()
 	local x, y, x_, y_

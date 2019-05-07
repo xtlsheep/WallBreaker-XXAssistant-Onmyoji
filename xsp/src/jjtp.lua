@@ -187,15 +187,28 @@ function quit_jjtp()
 	random_touch(0, 1050, 50, 10, 10) -- 退出
 end
 
+function get_bonus()
+	local x, y = findColor({568, 380, 570, 382},
+		"0|0|0xd73847,19|18|0xcab497,101|76|0xd19118,35|83|0xbb3a1a,483|-320|0x746b68,-423|102|0x53290e",
+		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"领取胜场奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		jjtp_touch_blank()
+		mSleep(1000)
+	end
+	return x, y
+end
+
 function jjtp_mark_own(own)
 	if own == 1 then
-		random_touch(0, 110, 420, 10, 10) -- 最左式神
 		mSleep(500)
+		random_touch(0, 110, 420, 10, 10) -- 最左式神
 	end
 end
 
 function jjtp_mark_enemy(enemy)
 	if enemy == 1 then
+		mSleep(500)
 		pos = math.random(1, 5)
 		if pos == 1 then
 			random_touch(0, 275, 125, 10, 10)
@@ -723,7 +736,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, own, enemy, action)
 			print(string.format("winess %d, invalid %d, pos %d, found_target %d, action %s", winess, invalid, pos, found_target, action_solo))
 			
 			-- 战斗开始
-			x, y = round_fight() if x > -1 then mSleep(500) jjtp_mark_own(own) jjtp_mark_enemy(enemy) break end
+			x, y = round_fight() if x > -1 then jjtp_mark_own(own) jjtp_mark_enemy(enemy) break end
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end

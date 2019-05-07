@@ -76,6 +76,17 @@ function upgrade()
 	return x, y
 end
 
+function get_bonus()
+	local x, y = findColor({427, 541, 429, 543},
+		"0|0|0x3a82c9,10|12|0x81aada,72|12|0x70290b,78|11|0x360204",
+		90, 0, 0, 0)
+	if x > -1 then
+		right_lower_click()
+		mSleep(1000)
+	end
+	return x, y
+end
+
 -- Main func
 function autobattle(round, round_time, force_quit, mark_self, mark)
 	print(string.format("胜利次数 %d, 回合时间 %d, 强制退出 %d, 己方标记 %s, 敌方标记 %d", round, round_time, force_quit, mark_self, mark))
