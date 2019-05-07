@@ -26,7 +26,7 @@ function lct_8dashe()
 end
 
 function yuhun_mark(position, round, level)
-	mSleep(700)
+	mSleep(500)
 	mSleep(mark_delay_baqi)
 	random_sleep(50)
 	
@@ -143,6 +143,13 @@ function yuhun_solo(mark, level, round, lock)
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
 			mSleep(500)
+			-- 一回目
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1, level) break end
+			-- 二回目
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2, level) break end
+			-- 三回目
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
+			
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
@@ -254,6 +261,13 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
 			mSleep(500)
+			-- 一回目
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1, level) break end
+			-- 二回目
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2, level) break end
+			-- 三回目
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
+			
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
@@ -407,6 +421,13 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 				x, y = captain_room_start_with_2_members() if (x > -1) then break end
 			end
 			mSleep(500)
+			-- 一回目
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1, level) break end
+			-- 二回目
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2, level) break end
+			-- 三回目
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
+			
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
@@ -548,6 +569,13 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
 			mSleep(500)
+			-- 一回目
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1, level) break end
+			-- 二回目
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2, level) break end
+			-- 三回目
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
+			
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王
@@ -706,6 +734,13 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 				x, y = captain_room_start_with_2_members() if (x > -1) then invite = 0 time_cnt = 0 break end
 			end
 			mSleep(500)
+			-- 一回目
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1, level) break end
+			-- 二回目
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2, level) break end
+			-- 三回目
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
+			
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 超鬼王

@@ -732,7 +732,7 @@ function baqidashe_UI()
 	UI:CheckBoxGroup(bqds_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,360,900,60")
 	UI:Label(bqds_ui, "left", "0,0,0", 30, "标记 - ", "20,420,300,60")
 	UI:Label(bqds_ui, "left", "0,0,0", 30, "标记延迟 - ", "20,480,300,60")
-	UI:ComboBox(bqds_ui, "mark_delay", "0 ms,100 ms,200 ms,300 ms,400 ms,500 ms,1000 ms,1500 ms,2000 ms,3000 ms","5",23,"700,480,280,50")
+	UI:ComboBox(bqds_ui, "mark_delay", "0 ms,100 ms,200 ms,300 ms,400 ms,500 ms,600ms,700ms,800ms,900ms,1000 ms,1500 ms,2000 ms,3000 ms","5",23,"700,480,280,50")
 	UI:Label(bqds_ui, "left", "0,0,0", 30, "第一回合 ~ ", "20,540,170,60")
 	UI:Label(bqds_ui, "left", "0,0,0", 30, "第二回合 ~ ", "20,600,170,60")
 	UI:Label(bqds_ui, "left", "0,0,0", 30, "第三回合 ~ ", "20,660,170,60")
@@ -810,12 +810,20 @@ function baqidashe_UI()
 	elseif (res_baqi.mark_delay == "5") then
 		mark_delay_baqi = 500
 	elseif (res_baqi.mark_delay == "6") then
-		mark_delay_baqi = 1000
+		mark_delay_baqi = 600
 	elseif (res_baqi.mark_delay == "7") then
-		mark_delay_baqi = 1500
+		mark_delay_baqi = 700
 	elseif (res_baqi.mark_delay == "8") then
-		mark_delay_baqi = 2000
+		mark_delay_baqi = 800
 	elseif (res_baqi.mark_delay == "9") then
+		mark_delay_baqi = 900
+	elseif (res_baqi.mark_delay == "10") then
+		mark_delay_baqi = 1000
+	elseif (res_baqi.mark_delay == "11") then
+		mark_delay_baqi = 1500
+	elseif (res_baqi.mark_delay == "12") then
+		mark_delay_baqi = 2000
+	elseif (res_baqi.mark_delay == "13") then
 		mark_delay_baqi = 3000
 	end
 	
