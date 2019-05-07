@@ -240,7 +240,7 @@ function tansuo_mark(mark)
 		end
 	elseif mark == "Boss" then
 		for i = 1, cnt do
-			random_touch(0, 765, 60, 10, 10)
+			random_touch(0, 760, 90, 10, 10)
 		end
 	end
 	mSleep(1000)
@@ -258,7 +258,7 @@ function find_exp()
 	-- small
 	x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xded1aa,-13|8|0x8e2320,15|-1|0x921d1c,15|-9|0x286d7e",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"发现经验加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		return x, y
@@ -266,7 +266,7 @@ function find_exp()
 	-- normal
 	x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xb29773,-13|-4|0x2b6478,-7|8|0x831917",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"发现经验加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		return x, y
@@ -274,7 +274,7 @@ function find_exp()
 	-- big
 	x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xebdcb0,-22|12|0x871c1c,28|-3|0x891918,29|-17|0x21566e",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"发现经验加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		return x, y
@@ -287,7 +287,7 @@ function find_money()
 	-- small
 	x, y = findColor({0, 0, 1136, 640},
 		"0|0|0x713d2c,2|-12|0xd5bc62,-11|-7|0xdece77,10|15|0xecd41c",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"发现金币加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		return x, y
@@ -295,7 +295,7 @@ function find_money()
 	-- normal
 	x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xdacb6f,5|-11|0xdfd082,12|-2|0xdaca71",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"发现金币加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		return x, y
@@ -303,7 +303,7 @@ function find_money()
 	-- big
 	x, y = findColor({0, 0, 1136, 640},
 		"0|0|0x70412f,2|-18|0xdbc76c,-20|-10|0xdece76,16|28|0xedd817",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"发现金币加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		return x, y
@@ -316,7 +316,7 @@ function find_goods()
 	-- small
 	x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xd52a22,21|7|0xf9e219,14|8|0xfbf525,6|-13|0xf8f7e7",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"发现掉落加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		return x, y
@@ -324,7 +324,7 @@ function find_goods()
 	-- normal
 	x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xf6db12,-10|-9|0xd62e22,-21|-15|0xce4428",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"发现掉落加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		return x, y
@@ -332,7 +332,7 @@ function find_goods()
 	-- big
 	x, y = findColor({0, 0, 1136, 640},
 		"0|0|0xd62d24,25|13|0xfaf124,38|10|0xfce711,10|-26|0xfbfbeb",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"发现掉落加成小怪",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		return x, y
@@ -342,8 +342,8 @@ end
 
 function find_boss()
 	local x, y = findColor({0, 0, 1136, 640},
-		"0|0|0xf3e8e0,-11|-31|0xefb4bc,-26|-12|0x221108,-19|5|0xb63034",
-		95, 0, 0, 0)
+		"0|0|0xeba9b0,9|5|0xfffaf4,7|-1|0xb12c31,0|-15|0x221108,25|-6|0xfaede1,12|14|0x130904",
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"发现Boss",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
@@ -1030,6 +1030,8 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			x, y = mysterious_vender() if x > -1 then break end
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
+			-- 世界频道
+			x, y = lct_channel() if x > -1 then random_touch(0, x, y, 5, 5) mSleep(500) break end
 			break
 		end
 	end
@@ -1304,6 +1306,8 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			x, y = mysterious_vender() if x > -1 then break end
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
+			-- 世界频道
+			x, y = lct_channel() if x > -1 then random_touch(0, x, y, 5, 5) mSleep(500) break end
 			break
 		end
 	end
@@ -1524,6 +1528,8 @@ function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos,
 			x, y = mysterious_vender() if x > -1 then break end
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
+			-- 世界频道
+			x, y = lct_channel() if x > -1 then random_touch(0, x, y, 5, 5) mSleep(500) break end
 			break
 		end
 	end

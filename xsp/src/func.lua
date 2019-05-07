@@ -700,6 +700,14 @@ function lct_zudui()
 	return x, y
 end
 
+function lct_channel()
+	local x, y = findColorInRegionFuzzy(0xbfae8e, 95, 577, 316, 579, 318, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"世界频道",20,"0xff000000","0xffffffff",0,100,0,300,32)
+	end
+	return x, y
+end
+
 function tingyuan_enter_tansuo()
 	local x, y = findColor({230, 125, 1136, 175}, -- 探索灯笼
 		"0|0|0xffffec,0|-2|0xffffec,0|2|0xffffd2,-2|0|0xffffe6,2|0|0xfffff1",
@@ -936,21 +944,11 @@ end
 
 function fight_ready()
 	local x, y
-	-- 正式服
-	x, y = findColor({1035, 596, 1039, 599}, -- 准备的鼓的棒槌
-		"0|0|0xe5c288,-62|17|0xebd19e,61|18|0xf0d8a9",
-		95, 0, 0, 0)
-	if (x > -1) then
-		HUD_show_or_hide(HUD,hud_info,"战斗开始",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		random_touch(0, 1040, 493, 30, 30) -- 准备的鼓
-		return x, y
-	end
-	-- 体服
 	x, y = findColor({1036,486,1038,489},
 		"0|0|0xd4ae7a,8|7|0xfff4d7,-50|78|0xdaae71,-51|60|0x731208",
 		95, 0, 0, 0)
 	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,"战斗开始",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		HUD_show_or_hide(HUD,hud_info,"战斗准备",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		random_touch(0, 1040, 493, 30, 30) -- 准备的鼓
 		return x, y
 	end
@@ -983,7 +981,7 @@ end
 function round_one()
 	local x, y = findColor({547, 313, 549, 315},
 		"0|0|0x272420,-58|11|0x272420,-59|4|0xdcc096,5|27|0x272420",
-		80, 0, 0, 0)
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"第一回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
@@ -993,7 +991,7 @@ end
 function round_two()
 	local x, y = findColor({547, 313, 549, 315},
 		"0|0|0x272420,-8|-1|0xdcba8b,-29|-5|0x272420,-17|20|0x272420",
-		80, 0, 0, 0)
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"第二回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
@@ -1003,7 +1001,7 @@ end
 function round_three()
 	local x, y = findColor({547, 313, 549, 315},
 		"0|0|0x272420,-8|-1|0xdcba8b,-30|-7|0x272420,-17|27|0x272420",
-		80, 0, 0, 0)
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"第三回合",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
@@ -1013,7 +1011,7 @@ end
 function round_fight()
 	local x, y = findColor({574, 333, 576, 335},
 		"0|0|0xe6c89b,-47|-82|0x030303,45|-75|0x030303,61|54|0x030303",
-		80, 0, 0, 0)
+		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"战斗开始",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
@@ -1485,23 +1483,23 @@ function captain_room_invite_first(invite_zone)
 	if x > -1 then
 		if invite_zone == 1 then
 			x_, y_ = findColor({275, 69, 277, 71},
-				"0|0|0xea859c,41|53|0xa26b4e,127|53|0xa26b4e,172|440|0xdf6851",
+				"0|0|0xe9849a,43|52|0xa26b4e,128|53|0xa26b4e,172|441|0xdf6851",
 				95, 0, 0, 0)
 			if x_ > -1 then
 				random_touch(0, 360, 110, 30, 10)
 				mSleep(1000)
 			end
 		elseif invite_zone == 2 then
-			x_, y_ = findColor({276, 70, 518, 132},
-				"0|0|0xea859c,145|52|0xa26b4e,229|51|0xa26b4e,172|440|0xdf6851",
+			x_, y_ = findColor({275, 69, 277, 71},
+				"0|0|0xe9849a,145|53|0xa26b4e,232|53|0xa26b4e,172|441|0xdf6851",
 				95, 0, 0, 0)
 			if x_ > -1 then
 				random_touch(0, 460, 110, 30, 10)
 				mSleep(1000)
 			end
 		elseif invite_zone == 3 then
-			x_, y_ = findColor({276, 70, 518, 132},
-				"0|0|0xea859c,249|52|0xa26b4e,331|52|0xa26b4e,172|440|0xdf6851",
+			x_, y_ = findColor({275, 69, 277, 71},
+				"0|0|0xe9849a,248|53|0xa26b4e,334|53|0xa26b4e,172|441|0xdf6851",
 				95, 0, 0, 0)
 			if x_ > -1 then
 				random_touch(0, 560, 110, 30, 10)
