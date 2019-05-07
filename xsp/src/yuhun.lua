@@ -837,12 +837,13 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			-- 创建窗口
 			x, y = captain_room_create_window()
 			if x > -1 then
-				if create_cnt > limitation then
+				if create_cnt > limitation - 1 then
 					HUD_show_or_hide(HUD,hud_info,"创建次数超过限制",20,"0xff000000","0xffffffff",0,100,0,300,32)
 					random_touch(0, 355, 525, 20, 10) -- 取消
 					quit_end = 1
 					break
 				end
+				HUD_show_or_hide(HUD,hud_info,string.format("创建私人队伍 - %d次", create_cnt + 1),20,"0xff000000","0xffffffff",0,100,0,300,32)
 			end
 			-- 创建私人队伍
 			x, y = captain_room_create_private()
