@@ -89,6 +89,16 @@ function yuling_(sel, level, round, doll, lock)
 			-- 御灵
 			x, y = lct_yuling_entry()
 			if (x > -1) then
+				if quit == 1 then
+					random_touch(0, 930, 110, 5, 5)
+					lua_exit()
+				end
+				-- 智能突破Check
+				ret = auto_jjtp_time_check()
+				if ret == RET_VALID then
+					random_touch(0, 930, 110, 5, 5) -- 退出御灵
+					return RET_VALID
+				end
 				level_select(level, init, lock, "御灵")
 				init = 0
 				solo_start()
@@ -103,10 +113,6 @@ function yuling_(sel, level, round, doll, lock)
 			-- 御灵选择
 			x, y = lct_yuling_portal()
 			if (x > -1) then
-				if quit == 1 then
-					random_touch(0, 930, 110, 5, 5)
-					lua_exit()
-				end
 				if (sel == "神龙") then
 					random_touch(0, 230, 240, 20, 20)
 				elseif (sel == "白藏主") then

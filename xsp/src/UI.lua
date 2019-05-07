@@ -1697,7 +1697,11 @@ function yuling_UI()
 		return
 	end
 	
-	yuling(sel, level, round, doll, lock)
+	if (auto_jjtp_en == 1) then
+		yuling_auto_jjtp(sel, level, round, doll, lock)
+	else
+		yuling(sel, level, round, doll, lock)
+	end
 end
 
 function yqfy_UI()

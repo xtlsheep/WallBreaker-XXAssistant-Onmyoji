@@ -1,6 +1,10 @@
 require "util"
 require "func"
 require "yuhun"
+require "juexing"
+require "tansuo"
+require "yeyuanhuo"
+require "yuling"
 require "jjtp"
 
 -- 智能突破Global
@@ -60,7 +64,6 @@ end
 
 function juexing_auto_jjtp(mode, role, group, element, mark, mark_delay, level, round, lock, member_auto_group, fail_and_group, member_to_captain, captain_auto_group, captain_auto_invite, auto_invite_zone, fail_and_recreate)
 	local ret = 0
-	local ret = 0
 	
 	while (1) do
 		auto_jjtp_time_stamp = mTime()
@@ -85,7 +88,6 @@ function juexing_auto_jjtp(mode, role, group, element, mark, mark_delay, level, 
 end
 
 function tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode, win_round, sec_round, captain_auto_invite, captain_pos, nor_attk, full_exp, page_jump, df_type)
-	local ret = 0
 	local ret = 0
 	
 	while (1) do
@@ -112,12 +114,36 @@ end
 
 function yeyuanhuo_auto_jjtp(round_tan, round_chen, round_chi, lock)
 	local ret = 0
-	local ret = 0
 	
 	while (1) do
 		auto_jjtp_time_stamp = mTime()
 		
 		yeyuanhuo(round_tan, round_chen, round_chi, lock)
+		mSleep(1000)
+		ret = lct_tingyuan_or_tansuo()
+		if ret == RET_ERR then
+			HUD_show_or_hide(HUD,hud_info,"场景识别错误, 结束脚本",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			lua_exit()
+		end
+
+		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock)
+		mSleep(1000)
+		ret = lct_tingyuan_or_tansuo()
+		if ret == RET_ERR then
+			HUD_show_or_hide(HUD,hud_info,"场景识别错误, 结束脚本",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			lua_exit()
+		end
+	end
+	return RET_ERR
+end
+
+function yuling_auto_jjtp(sel, level, round, doll, lock)
+	local ret = 0
+	
+	while (1) do
+		auto_jjtp_time_stamp = mTime()
+		
+		yuling(sel, level, round, doll, lock)
 		mSleep(1000)
 		ret = lct_tingyuan_or_tansuo()
 		if ret == RET_ERR then
