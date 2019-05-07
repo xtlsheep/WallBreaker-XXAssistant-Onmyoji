@@ -187,6 +187,30 @@ function quit_jjtp()
 	random_touch(0, 1050, 50, 10, 10) -- 退出
 end
 
+function jjtp_mark_own(own)
+	if own == 1 then
+		random_touch(0, 110, 420, 10, 10) -- 最左式神
+		mSleep(500)
+	end
+end
+
+function jjtp_mark_enemy(enemy)
+	if enemy == 1 then
+		pos = math.random(1, 5)
+		if pos == 1 then
+			random_touch(0, 275, 125, 10, 10)
+		elseif pos == 2 then
+			random_touch(0, 405, 135, 10, 10)
+		elseif pos == 3 then
+			random_touch(0, 555, 145, 10, 10)
+		elseif pos == 4 then
+			random_touch(0, 705, 135, 10, 10)
+		elseif pos == 5 then
+			random_touch(0, 845, 125, 10, 10)
+		end
+	end
+end
+
 function jjtp_touch_blank()
 	random_touch(0, 1100, 500, 30, 50)
 end
@@ -616,8 +640,8 @@ function pub_to_solo()
 end
 
 -- Main func
-function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, lock)
-	print(string.format("模式：%s，战斗时间：%d，刷新：%d，个人突破：%s，阴阳寮突破：%d, 锁定: %d", mode, round_time, refresh, solo_sel, pub_sel, lock))
+function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, lock, own, enemy)
+	print(string.format("模式：%s，战斗时间：%d，刷新：%d，个人突破：%s，阴阳寮突破：%d, 锁定: %d, 己方 %d, 敌方 %d", mode, round_time, refresh, solo_sel, pub_sel, lock, own, enemy))
 	print(string.format("五花肉-个人：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)", whr_solo[1], whr_solo[2], whr_solo[3], whr_solo[4]))
 	print(string.format("五花肉-阴阳寮：(彼岸花 %d, 小僧 %d, 日和坊 %d, 御馔津 %d)", whr_pub[1], whr_pub[2], whr_pub[3], whr_pub[4]))
 	print_global_config()
@@ -628,14 +652,14 @@ function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, l
 	while (1) do
 		if (mode == "个人") then
 			action_solo = "Quit"
-			ret_solo = jjtp_solo(whr_solo, round_time, refresh, solo_sel, lock, action_solo)
+			ret_solo = jjtp_solo(whr_solo, round_time, refresh, solo_sel, lock, own, enemy, action_solo)
 			
 			if ret_solo == "Finish" then
 				return RET_OK
 			end
 		elseif (mode == "阴阳寮") then
 			action_pub = "Wait"
-			ret_pub = jjtp_pub(whr_pub, round_time, pub_sel, lock, action_pub)
+			ret_pub = jjtp_pub(whr_pub, round_time, pub_sel, lock, own, enemy, action_pub)
 			
 			if ret_pub == "Finish" then
 				return RET_OK
@@ -647,7 +671,7 @@ function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, l
 					return RET_OK
 				end
 				
-				ret_solo = jjtp_solo(whr_solo, round_time, refresh, solo_sel, lock, action_solo)
+				ret_solo = jjtp_solo(whr_solo, round_time, refresh, solo_sel, lock, own, enemy, action_solo)
 				if ret_solo == RET_RECONN then
 					break
 				end
@@ -657,7 +681,7 @@ function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, l
 					action_pub = "Switch"
 				end
 				
-				ret_pub = jjtp_pub(whr_pub, round_time, pub_sel, lock, action_pub)
+				ret_pub = jjtp_pub(whr_pub, round_time, pub_sel, lock, own, enemy, action_pub)
 				if ret_pub == RET_RECONN then
 					break
 				end
@@ -673,7 +697,7 @@ function jjtp(mode, whr_solo, whr_pub, round_time, refresh, solo_sel, pub_sel, l
 	return RET_ERR
 end
 
-function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
+function jjtp_solo(whr, round_time, refresh, solo_sel, lock, own, enemy, action)
 	local time_cnt = 0
 	local map = {}
 	local winess = -1
@@ -698,6 +722,8 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 			end
 			print(string.format("winess %d, invalid %d, pos %d, found_target %d, action %s", winess, invalid, pos, found_target, action_solo))
 			
+			-- 战斗开始
+			x, y = round_fight() if x > -1 then mSleep(500) jjtp_mark_own(own) jjtp_mark_enemy(enemy) break end
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
@@ -845,7 +871,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, action)
 	return RET_ERR
 end
 
-function jjtp_pub(whr, round_time, pub_sel, lock, action)
+function jjtp_pub(whr, round_time, pub_sel, lock, own, enemy, action)
 	local map = {}
 	local coor_map_x = {}
 	local coor_map_y = {}
@@ -870,6 +896,8 @@ function jjtp_pub(whr, round_time, pub_sel, lock, action)
 				print("Map is not created")
 			end
 			
+			-- 战斗开始
+			x, y = round_fight() if x > -1 then mSleep(500) jjtp_mark_own(own) jjtp_mark_enemy(enemy) break end
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end

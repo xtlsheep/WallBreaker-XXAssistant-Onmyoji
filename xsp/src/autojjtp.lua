@@ -15,6 +15,8 @@ auto_jjtp_whr_solo = {0, 0, 0, 0}
 auto_jjtp_whr_pub = {0, 0, 0, 0}
 auto_jjtp_round_time = 0
 auto_jjtp_lock = 0
+auto_jjtp_own = 0
+auto_jjtp_enemy = 0
 auto_jjtp_refresh = 0
 auto_jjtp_solo_sel = nil
 auto_jjtp_pub_sel = 0
@@ -51,7 +53,7 @@ function yuhun_auto_jjtp(mode, role, group, mark, level, round, lock, member_aut
 			lua_exit()
 		end
 		
-		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock)
+		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock, auto_jjtp_own, auto_jjtp_enemy)
 		mSleep(1000)
 		ret = lct_tingyuan_or_tansuo()
 		if ret == RET_ERR then
@@ -76,7 +78,7 @@ function juexing_auto_jjtp(mode, role, group, element, mark, mark_delay, level, 
 			lua_exit()
 		end
 		
-		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock)
+		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock, auto_jjtp_own, auto_jjtp_enemy)
 		mSleep(1000)
 		ret = lct_tingyuan_or_tansuo()
 		if ret == RET_ERR then
@@ -101,7 +103,7 @@ function tansuo_auto_jjtp(mode, sel, mark, hard, scene_move, section, count_mode
 			lua_exit()
 		end
 		
-		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock)
+		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock, auto_jjtp_own, auto_jjtp_enemy)
 		mSleep(1000)
 		ret = lct_tingyuan_or_tansuo()
 		if ret == RET_ERR then
@@ -126,7 +128,7 @@ function yeyuanhuo_auto_jjtp(round_tan, round_chen, round_chi, lock)
 			lua_exit()
 		end
 
-		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock)
+		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock, auto_jjtp_own, auto_jjtp_enemy)
 		mSleep(1000)
 		ret = lct_tingyuan_or_tansuo()
 		if ret == RET_ERR then
@@ -151,7 +153,7 @@ function yuling_auto_jjtp(sel, level, round, doll, lock)
 			lua_exit()
 		end
 
-		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock)
+		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock, auto_jjtp_own, auto_jjtp_enemy)
 		mSleep(1000)
 		ret = lct_tingyuan_or_tansuo()
 		if ret == RET_ERR then

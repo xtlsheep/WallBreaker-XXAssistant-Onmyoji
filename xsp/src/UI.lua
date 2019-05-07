@@ -235,24 +235,26 @@ function global_UI()
 	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "战斗限时 - ", "20,140,300,60")
 	UI:ComboBox(global_auto_jjtp_page, "auto_jjtp_round_time", "3分钟,5分钟,10分钟,不限时","1",23,"600,140,380,50")
 	UI:CheckBoxGroup(global_auto_jjtp_page, "auto_jjtp_lock","锁定出战阵容","0",30,"0,0,0","20,200,900,60")
-	UI:Line(global_auto_jjtp_page, "line_common", "100,100,100", 2, 960, "20,260,960,2")
-	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "个人突破设置 - ", "20,270,300,60")
-	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,330,300,60")
-	UI:CheckBoxGroup(global_auto_jjtp_page, "auto_jjtp_whr_solo","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,330,670,60")
-	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "勋章选择 - ", "20,390,300,60")
-	UI:ComboBox(global_auto_jjtp_page, "auto_jjtp_solo_sel", "0 - 5 勋章,3 - 5 勋章,5 - 0 勋章,3 - 0 勋章,随机选择","2",23,"700,390,280,50")
-	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "胜场刷新 - ", "20,450,300,60")
-	UI:ComboBox(global_auto_jjtp_page, "auto_jjtp_refresh", "3次,6次,9次","0",23,"700,450,280,50")
-	UI:Line(global_auto_jjtp_page, "line_common", "100,100,100", 2, 960, "20,510,960,2")
-	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "阴阳寮突破设置 - ", "20,520,300,60")
-	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,580,300,60")
-	UI:CheckBoxGroup(global_auto_jjtp_page, "auto_jjtp_whr_pub","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,580,670,60")
-	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "勋章选择 - ", "20,640,300,60")
-	UI:ComboBox(global_auto_jjtp_page, "auto_jjtp_pub_sel", "5 - 0 勋章,4 - 0 勋章,3 - 0 勋章,2 - 0 勋章,1 - 0 勋章,0勋章","0",23,"700,640,280,50")
-	UI:Line(global_auto_jjtp_page, "line_common", "100,100,100", 2, 960, "20,700,960,2")
-	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "Tips - ", "20,710,300,60")
-	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "适用于御魂/觉醒/探索/业原火的所有模式, 间隔时间后暂停活动清理突破", "20,770,960,60")
-	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "", "20,830,960,60")
+	UI:CheckBoxGroup(global_auto_jjtp_page, "auto_jjtp_own","标记己方最左式神","0",30,"0,0,0","20,260,900,60")
+	UI:CheckBoxGroup(global_auto_jjtp_page, "auto_jjtp_enemy","随机标记敌方式神","0",30,"0,0,0","20,320,900,60")
+	UI:Line(global_auto_jjtp_page, "line_common", "100,100,100", 2, 960, "20,380,960,2")
+	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "个人突破设置 - ", "20,390,300,60")
+	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,450,300,60")
+	UI:CheckBoxGroup(global_auto_jjtp_page, "auto_jjtp_whr_solo","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,450,670,60")
+	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "勋章选择 - ", "20,510,300,60")
+	UI:ComboBox(global_auto_jjtp_page, "auto_jjtp_solo_sel", "0 - 5 勋章,3 - 5 勋章,5 - 0 勋章,3 - 0 勋章,随机选择","2",23,"700,510,280,50")
+	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "胜场刷新 - ", "20,570,300,60")
+	UI:ComboBox(global_auto_jjtp_page, "auto_jjtp_refresh", "3次,6次,9次","0",23,"700,570,280,50")
+	UI:Line(global_auto_jjtp_page, "line_common", "100,100,100", 2, 960, "20,630,960,2")
+	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "阴阳寮突破设置 - ", "20,640,300,60")
+	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,700,300,60")
+	UI:CheckBoxGroup(global_auto_jjtp_page, "auto_jjtp_whr_pub","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,700,670,60")
+	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "勋章选择 - ", "20,760,300,60")
+	UI:ComboBox(global_auto_jjtp_page, "auto_jjtp_pub_sel", "5 - 0 勋章,4 - 0 勋章,3 - 0 勋章,2 - 0 勋章,1 - 0 勋章,0勋章","0",23,"700,760,280,50")
+	UI:Line(global_auto_jjtp_page, "line_common", "100,100,100", 2, 960, "20,820,960,2")
+	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "Tips - ", "20,830,300,60")
+	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "适用于御魂/觉醒/探索/业原火的所有模式, 间隔时间后暂停活动清理突破", "20,890,960,60")
+	UI:Label(global_auto_jjtp_page, "left", "0,0,0", 30, "", "20,890,960,60")
 	
 	--	global_super_ghost_page = UI:Page(global_ui, "超鬼王")
 	--	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "战斗标记 - ", "20,20,300,60")
@@ -475,6 +477,18 @@ function global_UI()
 		auto_jjtp_lock = 1
 	else
 		auto_jjtp_lock = 0
+	end
+	
+	if (res_global.auto_jjtp_own == "0") then
+		auto_jjtp_own = 1
+	else
+		auto_jjtp_own = 0
+	end
+	
+	if (res_global.auto_jjtp_enemy == "0") then
+		auto_jjtp_enemy = 1
+	else
+		auto_jjtp_enemy = 0
 	end
 	
 	if (res_global.auto_jjtp_refresh == "0") then
@@ -1191,28 +1205,30 @@ function jjtp_UI()
 	UI:Label(jjtp_ui, "left", "0,0,0", 30, "战斗限时 - ", "20,240,300,60")
 	UI:ComboBox(jjtp_ui, "round_time", "3分钟,5分钟,10分钟,不限时","1",23,"700,240,280,50")
 	UI:CheckBoxGroup(jjtp_ui, "lock","锁定出战阵容","0",30,"0,0,0","20,300,900,60")
-	UI:Line(jjtp_ui, "line_common", "100,100,100", 2, 960, "20,360,960,2")
-	UI:Label(jjtp_ui, "left", "0,0,0", 30, "个人突破设置 - ", "20,370,300,60")
-	UI:Label(jjtp_ui, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,430,230,60")
+	UI:CheckBoxGroup(jjtp_ui, "own","标记己方最左式神","",30,"0,0,0","20,360,900,60")
+	UI:CheckBoxGroup(jjtp_ui, "enemy","随机标记敌方式神","0",30,"0,0,0","20,420,900,60")
+	UI:Line(jjtp_ui, "line_common", "100,100,100", 2, 960, "20,480,960,2")
+	UI:Label(jjtp_ui, "left", "0,0,0", 30, "个人突破设置 - ", "20,490,300,60")
+	UI:Label(jjtp_ui, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,550,230,60")
 	if wid_div_dpi > 2 then
-		UI:CheckBoxGroup(jjtp_ui, "whr_solo","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","250,430,750,60")
+		UI:CheckBoxGroup(jjtp_ui, "whr_solo","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","250,550,750,60")
 	else
-		UI:CheckBoxGroup(jjtp_ui, "whr_solo","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,430,670,60")
+		UI:CheckBoxGroup(jjtp_ui, "whr_solo","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,550,670,60")
 	end
-	UI:Label(jjtp_ui, "left", "0,0,0", 30, "勋章选择 - ", "20,490,300,60")
-	UI:ComboBox(jjtp_ui, "solo_sel", "0 - 5 勋章,3 - 5 勋章,5 - 0 勋章,3 - 0 勋章,随机选择","2",23,"700,490,280,50")
-	UI:Label(jjtp_ui, "left", "0,0,0", 30, "胜场刷新 - ", "20,550,300,60")
-	UI:ComboBox(jjtp_ui, "refresh", "3次,6次,9次","0",23,"700,550,280,50")
-	UI:Line(jjtp_ui, "line_common", "100,100,100", 2, 960, "20,610,960,2")
-	UI:Label(jjtp_ui, "left", "0,0,0", 30, "阴阳寮突破设置 - ", "20,620,300,60")
-	UI:Label(jjtp_ui, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,680,230,60")
+	UI:Label(jjtp_ui, "left", "0,0,0", 30, "勋章选择 - ", "20,610,300,60")
+	UI:ComboBox(jjtp_ui, "solo_sel", "0 - 5 勋章,3 - 5 勋章,5 - 0 勋章,3 - 0 勋章,随机选择","2",23,"700,610,280,50")
+	UI:Label(jjtp_ui, "left", "0,0,0", 30, "胜场刷新 - ", "20,670,300,60")
+	UI:ComboBox(jjtp_ui, "refresh", "3次,6次,9次","0",23,"700,670,280,50")
+	UI:Line(jjtp_ui, "line_common", "100,100,100", 2, 960, "20,730,960,2")
+	UI:Label(jjtp_ui, "left", "0,0,0", 30, "阴阳寮突破设置 - ", "20,740,300,60")
+	UI:Label(jjtp_ui, "left", "0,0,0", 30, "跳过特殊式神 - ", "20,800,230,60")
 	if wid_div_dpi > 2 then
-		UI:CheckBoxGroup(jjtp_ui, "whr_pub","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","250,680,750,60")
+		UI:CheckBoxGroup(jjtp_ui, "whr_pub","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","250,800,750,60")
 	else
-		UI:CheckBoxGroup(jjtp_ui, "whr_pub","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,680,670,60")
+		UI:CheckBoxGroup(jjtp_ui, "whr_pub","彼岸花,小僧,日和坊,御馔津","0@1@2",30,"0,0,0","330,800,670,60")
 	end
-	UI:Label(jjtp_ui, "left", "0,0,0", 30, "勋章选择 - ", "20,740,300,60")
-	UI:ComboBox(jjtp_ui, "pub_sel", "5 - 0 勋章,4 - 0 勋章,3 - 0 勋章,2 - 0 勋章,1 - 0 勋章,0 - 0 勋章","0",23,"700,740,280,50")
+	UI:Label(jjtp_ui, "left", "0,0,0", 30, "勋章选择 - ", "20,860,300,60")
+	UI:ComboBox(jjtp_ui, "pub_sel", "5 - 0 勋章,4 - 0 勋章,3 - 0 勋章,2 - 0 勋章,1 - 0 勋章,0 - 0 勋章","0",23,"700,860,280,50")
 	UI:fit(jjtp_ui)
 	
 	ret_jjtp, res_jjtp = UI:show(jjtp_ui)
@@ -1228,6 +1244,37 @@ function jjtp_UI()
 		mode = "阴阳寮"
 	elseif (res_jjtp.mode == "2") then
 		mode = "个人+阴阳寮"
+	end
+	
+	local lock
+	if (res_jjtp.lock == "0") then
+		lock = 1
+	else
+		lock = 0
+	end
+	
+	local round_time
+	if (res_jjtp.round_time == "0") then
+		round_time = 3
+	elseif (res_jjtp.round_time == "1") then
+		round_time = 5
+	elseif (res_jjtp.round_time == "2") then
+		round_time = 10
+	elseif (res_jjtp.round_time == "3") then
+		round_time = 99999
+	end
+	
+	local own, enemy
+	if res_jjtp.own == "0" then
+		own = 1
+	else
+		own = 0
+	end
+	
+	if res_jjtp.enemy == "0" then
+		enemy = 1
+	else
+		enemy = 0
 	end
 	
 	local whr_solo_out = {0, 0, 0, 0}
@@ -1262,24 +1309,6 @@ function jjtp_UI()
 		elseif (whr_pub[i] == "3") then
 			whr_pub_out[4] = 1 -- 御馔津
 		end
-	end
-	
-	local round_time
-	if (res_jjtp.round_time == "0") then
-		round_time = 3
-	elseif (res_jjtp.round_time == "1") then
-		round_time = 5
-	elseif (res_jjtp.round_time == "2") then
-		round_time = 10
-	elseif (res_jjtp.round_time == "3") then
-		round_time = 99999
-	end
-	
-	local lock
-	if (res_jjtp.lock == "0") then
-		lock = 1
-	else
-		lock = 0
 	end
 	
 	local refresh
@@ -1326,7 +1355,7 @@ function jjtp_UI()
 	-- Disable
 	auto_jjtp_en = 0
 	
-	jjtp(mode, whr_solo_out, whr_pub_out, round_time, refresh, solo_sel, pub_sel, lock)
+	jjtp(mode, whr_solo_out, whr_pub_out, round_time, refresh, solo_sel, pub_sel, lock, own, enemy)
 end
 
 function juexing_UI()
