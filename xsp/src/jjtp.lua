@@ -187,26 +187,12 @@ function quit_jjtp()
 	random_touch(0, 1050, 50, 10, 10) -- 退出
 end
 
-function get_bonus()
-	local x, y = findColor({568, 380, 570, 382},
-		"0|0|0xd73847,19|18|0xcab497,101|76|0xd19118,35|83|0xbb3a1a,483|-320|0x746b68,-423|102|0x53290e",
-		95, 0, 0, 0)
-	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,"领取胜场奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		jjtp_touch_blank()
-		mSleep(1000)
-	end
-	return x, y
-end
-
-function jjtp_mark_own(own)
+function jjtp_mark(own, enemy)
 	if own == 1 then
 		mSleep(500)
 		random_touch(0, 110, 420, 10, 10) -- 最左式神
 	end
-end
-
-function jjtp_mark_enemy(enemy)
+	
 	if enemy == 1 then
 		mSleep(500)
 		pos = math.random(1, 5)
@@ -226,6 +212,18 @@ end
 
 function jjtp_touch_blank()
 	random_touch(0, 1100, 500, 30, 50)
+end
+
+function solo_get_bonus()
+	local x, y = findColor({568, 380, 570, 382},
+		"0|0|0xd73847,19|18|0xcab497,101|76|0xd19118,35|83|0xbb3a1a,483|-320|0x746b68,-423|102|0x53290e",
+		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"领取胜场奖励",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		jjtp_touch_blank()
+		mSleep(1000)
+	end
+	return x, y
 end
 
 function solo_analyse_map(solo_sel, map_)
@@ -726,17 +724,17 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, own, enemy, action)
 	while (1) do
 		while (1) do
 			-- Debug
-			if table.getn(map) == 0 then
-				print("Map is not created")
-			else
-				print(string.format("Map : %d - %d - %d", map[1], map[2], map[3]))
-				print(string.format("      %d - %d - %d", map[4], map[5], map[6]))
-				print(string.format("      %d - %d - %d", map[7], map[8], map[9]))
-			end
-			print(string.format("winess %d, invalid %d, pos %d, found_target %d, action %s", winess, invalid, pos, found_target, action_solo))
+--			if table.getn(map) == 0 then
+--				print("Map is not created")
+--			else
+--				print(string.format("Map : %d - %d - %d", map[1], map[2], map[3]))
+--				print(string.format("      %d - %d - %d", map[4], map[5], map[6]))
+--				print(string.format("      %d - %d - %d", map[7], map[8], map[9]))
+--			end
+--			print(string.format("winess %d, invalid %d, pos %d, found_target %d, action %s", winess, invalid, pos, found_target, action_solo))
 			
 			-- 战斗开始
-			x, y = round_fight() if x > -1 then jjtp_mark_own(own) jjtp_mark_enemy(enemy) break end
+			x, y = round_fight() if x > -1 then jjtp_mark(own, enemy) break end
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
@@ -747,9 +745,6 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, own, enemy, action)
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then
-				map[pos] = -1
-				pos = -1
-				found_target = -1
 				time_cnt = time_cnt + 1
 				if (time_cnt > round_time*60*2) then
 					random_touch(0, 35, 30, 5, 5) -- 左上退出
@@ -758,10 +753,13 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, own, enemy, action)
 				break
 			end
 			-- 获取奖励
-			x, y = get_bonus() if (x > -1) then break end
+			x, y = solo_get_bonus() if (x > -1) then break end
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then
+				map[pos] = -1
+				pos = -1
+				found_target = -1
 				time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
@@ -855,6 +853,9 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, own, enemy, action)
 			-- 战斗失败
 			x, y = fight_failed()
 			if (x > -1) then
+				map[pos] = -1
+				pos = -1
+				found_target = -1
 				time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
@@ -896,18 +897,18 @@ function jjtp_pub(whr, round_time, pub_sel, lock, own, enemy, action)
 	
 	while (1) do
 		while (1) do
-			if table.getn(map) > 0 then
-				print(string.format("map: %d - %d", map[1], map[2]))
-				print(string.format("	 %d - %d", map[3], map[4]))
-				print(string.format("	 %d - %d", map[5], map[6]))
-				print(string.format("	 %d - %d", map[7], map[8]))
-				print(string.format("    pos = %d, wait = %d, finish = %d", pos, wait, finish))
-			else
-				print("Map is not created")
-			end
+--			if table.getn(map) > 0 then
+--				print(string.format("map: %d - %d", map[1], map[2]))
+--				print(string.format("	 %d - %d", map[3], map[4]))
+--				print(string.format("	 %d - %d", map[5], map[6]))
+--				print(string.format("	 %d - %d", map[7], map[8]))
+--				print(string.format("    pos = %d, wait = %d, finish = %d", pos, wait, finish))
+--			else
+--				print("Map is not created")
+--			end
 			
 			-- 战斗开始
-			x, y = round_fight() if x > -1 then mSleep(500) jjtp_mark_own(own) jjtp_mark_enemy(enemy) break end
+			x, y = round_fight() if x > -1 then jjtp_mark(own, enemy) break end
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end

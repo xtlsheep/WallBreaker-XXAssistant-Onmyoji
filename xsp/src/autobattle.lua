@@ -76,7 +76,7 @@ function upgrade()
 	return x, y
 end
 
-function get_bonus()
+function battle_get_bonus()
 	local x, y = findColor({427, 541, 429, 543},
 		"0|0|0x3a82c9,10|12|0x81aada,72|12|0x70290b,78|11|0x360204",
 		90, 0, 0, 0)
@@ -135,7 +135,7 @@ function autobattle(round, round_time, force_quit, mark_self, mark)
 				break
 			end
 			-- 领取奖励
-			x, y = get_bonus() if x > -1 then break end
+			x, y = battle_get_bonus() if x > -1 then break end
 			-- 排名
 			x, y = lct_rank() if x > -1 then break end
 			-- 段位
