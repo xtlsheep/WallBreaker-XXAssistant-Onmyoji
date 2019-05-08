@@ -747,6 +747,9 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, own, enemy, action)
 			-- 战斗进行
 			x, y = fight_ongoing()
 			if (x > -1) then
+				map[pos] = -1
+				pos = -1
+				found_target = -1
 				time_cnt = time_cnt + 1
 				if (time_cnt > round_time*60*2) then
 					random_touch(0, 35, 30, 5, 5) -- 左上退出
@@ -759,9 +762,6 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, own, enemy, action)
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then
-				map[pos] = -1
-				pos = -1
-				found_target = -1
 				time_cnt = 0
 				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
@@ -855,9 +855,6 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, own, enemy, action)
 			-- 战斗失败
 			x, y = fight_failed()
 			if (x > -1) then
-				map[pos] = -1
-				pos = -1
-				found_target = -1
 				time_cnt = 0
 				fail_cnt.global = fail_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
@@ -931,10 +928,10 @@ function jjtp_pub(whr, round_time, pub_sel, lock, own, enemy, action)
 			-- 战斗胜利
 			x, y = fight_success()
 			if (x > -1) then
-				win_cnt.global = win_cnt.global + 1
 				time_cnt = 0
 				fight_cnt = 0
 				sel_cnt = 0
+				win_cnt.global = win_cnt.global + 1
 				show_win_fail(win_cnt.global, fail_cnt.global)
 				win_cnt.jjtp = win_cnt.jjtp + 1
 			end

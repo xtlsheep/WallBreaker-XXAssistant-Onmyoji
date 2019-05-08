@@ -997,8 +997,8 @@ function round_three()
 end
 
 function round_fight()
-	local x, y = findColor({574, 333, 576, 335},
-		"0|0|0xe6c89b,-47|-82|0x030303,45|-75|0x030303,61|54|0x030303",
+	local x, y = findColor({577, 341, 579, 343},
+		"0|0|0xe6cea4,-52|-94|0x030303,59|47|0x020202,75|107|0xb62511",
 		90, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"战斗开始",20,"0xff000000","0xffffffff",0,100,0,300,32)

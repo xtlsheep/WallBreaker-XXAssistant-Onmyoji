@@ -64,7 +64,7 @@ function config_UI()
 	if wid_div_dpi > 2 then
 		UI:RadioGroup(config_ui, "select", "八岐大蛇,探索章节,结界突破,觉醒麒麟,业原火		,御灵之境,排队副本,百鬼夜行,组合任务,世界喊话,普通召唤,悬赏查询,自动斗技,自动剧情,自动樱饼,御心道场","0",30,"0,0,0","30,150,960,300")
 	else
-		UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,排队副本    ,百鬼夜行    ,组合任务    ,世界喊话    ,普通召唤    ,悬赏查询    ,自动斗技    ,自动剧情    ,自动樱饼    ,御心道场","0",30,"0,0,0","30,150,960,300")
+		UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,排队副本    ,百鬼夜行    ,组合任务    ,世界喊话    ,普通召唤    ,悬赏查询    ,自动斗技    ,自动剧情    ,自动樱饼    ,特殊活动","0",30,"0,0,0","30,150,960,300")
 	end
 	UI:fit(config_ui)
 	
@@ -105,11 +105,11 @@ function config_UI()
 		-- 自动樱饼
 	elseif (res_config.select == "14")  then autocake_UI()
 		-- 特殊活动
-		--elseif (res_config.select == "15")  then activityreserve_UI()
+	elseif (res_config.select == "15")  then activityreserve_UI()
 		--elseif (res_config.select == "15")  then LBSGhostDriving_UI()
 		--elseif (res_config.select == "15")  then SuperGhost_UI()
 		--elseif (res_config.select == "15")  then BloodMoonDream_UI()
-	elseif (res_config.select == "15")  then YuXinDaoChang_UI()
+		--elseif (res_config.select == "15")  then YuXinDaoChang_UI()
 	end
 end
 
