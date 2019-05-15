@@ -16,6 +16,7 @@ require "LBSGhostDriving"
 require "SuperGhost"
 require "BloodMoonDream"
 require "YuXinDaoChang"
+require "WeiShenArrival"
 
 -- UI init
 local width_UI = 1000
@@ -64,7 +65,7 @@ function config_UI()
 	if wid_div_dpi > 2 then
 		UI:RadioGroup(config_ui, "select", "八岐大蛇,探索章节,结界突破,觉醒麒麟,业原火		,御灵之境,排队副本,百鬼夜行,组合任务,世界喊话,普通召唤,悬赏查询,自动斗技,自动剧情,自动樱饼,御心道场","0",30,"0,0,0","30,150,960,300")
 	else
-		UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,排队副本    ,百鬼夜行    ,组合任务    ,世界喊话    ,普通召唤    ,悬赏查询    ,自动斗技    ,自动剧情    ,自动樱饼    ,特殊活动","0",30,"0,0,0","30,150,960,300")
+		UI:RadioGroup(config_ui, "select", "八岐大蛇    ,探索章节    ,结界突破    ,觉醒麒麟    ,业原火        ,御灵之境    ,排队副本    ,百鬼夜行    ,组合任务    ,世界喊话    ,普通召唤    ,悬赏查询    ,自动斗技    ,自动剧情    ,自动樱饼    ,伪神降临","0",30,"0,0,0","30,150,960,300")
 	end
 	UI:fit(config_ui)
 	
@@ -76,40 +77,41 @@ function config_UI()
 	
 	-- 八岐大蛇
 	if (res_config.select == "0")  then baqidashe_UI()
-		-- 探索
+	-- 探索
 	elseif (res_config.select == "1")  then	tansuo_UI()
-		-- 结界突破
+	-- 结界突破
 	elseif (res_config.select == "2")  then jjtp_UI()
-		-- 觉醒麒麟
+	-- 觉醒麒麟
 	elseif (res_config.select == "3")  then juexing_UI()
-		-- 业原火
+	-- 业原火
 	elseif (res_config.select == "4")  then yeyuanhuo_UI()
-		-- 御灵之境
+	-- 御灵之境
 	elseif (res_config.select == "5")  then yuling_UI()
-		-- 妖气封印
+	-- 妖气封印
 	elseif (res_config.select == "6")  then yqfy_UI()
-		-- 百鬼夜行
+	-- 百鬼夜行
 	elseif (res_config.select == "7")  then hundredghost_UI()
-		-- 组合任务
+	-- 组合任务
 	elseif (res_config.select == "8")  then multimission_UI()
-		-- 世界喊话
+	-- 世界喊话
 	elseif (res_config.select == "9")  then publicity_UI()
-		-- 普通召唤
+	-- 普通召唤
 	elseif (res_config.select == "10")  then normalcall_UI()
-		-- 悬赏查询
+	-- 悬赏查询
 	elseif (res_config.select == "11")  then offerinquire_UI()
-		-- 自动斗技
+	-- 自动斗技
 	elseif (res_config.select == "12")  then autobattle_UI()
-		-- 自动剧情
+	-- 自动剧情
 	elseif (res_config.select == "13")  then autostory_UI()
-		-- 自动樱饼
+	-- 自动樱饼
 	elseif (res_config.select == "14")  then autocake_UI()
-		-- 特殊活动
-	elseif (res_config.select == "15")  then activityreserve_UI()
+	-- 特殊活动
+	--elseif (res_config.select == "15")  then activityreserve_UI()
 		--elseif (res_config.select == "15")  then LBSGhostDriving_UI()
 		--elseif (res_config.select == "15")  then SuperGhost_UI()
 		--elseif (res_config.select == "15")  then BloodMoonDream_UI()
 		--elseif (res_config.select == "15")  then YuXinDaoChang_UI()
+		elseif (res_config.select == "15")  then WeiShenArrival_UI()
 	end
 end
 
@@ -2288,4 +2290,25 @@ function YuXinDaoChang_UI()
 	end
 	
 	YuXinDaoChang(sel, level, bath, buy)
+end
+
+function WeiShenArrival_UI()
+	-- 活动预留
+	wsa_ui = UI:new("wsa_ui.dat", width_UI, height_UI, "退出", "返回", "backGround.jpg")
+	UI:Label(wsa_ui, "center", "0,0,0", 30, "伪神降临", "20,20,960,55")
+	UI:Label(wsa_ui, "left", "0,0,0", 30, "请手动选择战斗区域，进入挑战界面后运行脚本", "30,100,960,60")
+	UI:fit(wsa_ui)
+	
+	ret_WSA, res_WSA = UI:show(wsa_ui)
+	if (ret_WSA == 0) then
+		config_UI()
+		return
+	end
+	
+	local ret_global = global_UI()
+	if (ret_global == RET_ERR) then
+		return
+	end
+	
+	WeiShenArrival()
 end

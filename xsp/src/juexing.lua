@@ -82,6 +82,8 @@ function juexing(mode, role, group, element, mark, level, round, lock, member_au
 		buff_sel = {1, 0, 0, 0}
 	end
 	
+	turbo_settle = 0
+	
 	while (1) do
 		if (mode == "单人") then
 			ret = juexing_solo(element, mark, level, round, lock)

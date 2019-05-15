@@ -732,7 +732,7 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, own, enemy, action)
 --				print(string.format("      %d - %d - %d", map[7], map[8], map[9]))
 --			end
 --			print(string.format("winess %d, invalid %d, pos %d, found_target %d, action %s", winess, invalid, pos, found_target, action_solo))
-			
+
 			-- 战斗开始
 			x, y = round_fight() if x > -1 then jjtp_mark(own, enemy) break end
 			mSleep(500)
@@ -876,6 +876,8 @@ function jjtp_solo(whr, round_time, refresh, solo_sel, lock, own, enemy, action)
 			x, y = real_baqidashe() if x > -1 then break end
 			-- 神秘商人
 			x, y = mysterious_vender() if x > -1 then break end
+			-- 探索章节
+			x, y = lct_tansuo_portal() if x > -1 then random_touch(0, 930, 135, 5, 5) break end
 			break
 		end
 	end
@@ -1099,6 +1101,8 @@ function jjtp_pub(whr, round_time, pub_sel, lock, own, enemy, action)
 			x, y = real_baqidashe() if x > -1 then break end
 			-- 神秘商人
 			x, y = mysterious_vender() if x > -1 then break end
+			-- 探索章节
+			x, y = lct_tansuo_portal() if x > -1 then random_touch(0, 930, 135, 5, 5) break end
 			break
 		end
 	end

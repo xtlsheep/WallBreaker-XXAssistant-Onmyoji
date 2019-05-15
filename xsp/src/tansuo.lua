@@ -9,13 +9,6 @@ function lct_tansuo_scene()
 	return x, y
 end
 
-function lct_tansuo_portal()
-	local x, y = findColor({928, 132, 930, 134},
-		"0|0|0xe9d6d0,-41|-22|0x493625,-673|312|0x404359,-606|320|0xe0bd5f",
-		90, 0, 0, 0)
-	return x, y
-end
-
 function lct_tansuo_prepare()
 	local x, y = findColor({27, 35, 29, 37},
 		"0|0|0xd6c4a1,4|468|0x98335a,92|570|0xfefbe5,25|552|0xf6c990",
@@ -775,6 +768,8 @@ function tansuo(mode, sel, mark, hard, scene_move, section, count_mode, win_roun
 			buff_sel[4] = 1
 		end
 	end
+	
+	turbo_settle = 0
 	
 	while (1) do
 		if mode == "单人" then

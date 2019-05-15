@@ -696,6 +696,13 @@ function lct_channel()
 	return x, y
 end
 
+function lct_tansuo_portal()
+	local x, y = findColor({928, 132, 930, 134},
+		"0|0|0xe9d6d0,-41|-22|0x493625,-673|312|0x404359,-606|320|0xe0bd5f",
+		90, 0, 0, 0)
+	return x, y
+end
+
 function tingyuan_enter_tansuo()
 	local x, y = findColor({230, 125, 1136, 175}, -- 探索灯笼
 		"0|0|0xffffec,0|-2|0xffffec,0|2|0xffffd2,-2|0|0xffffe6,2|0|0xfffff1",
