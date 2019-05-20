@@ -435,7 +435,7 @@ function stop_buff()
 			end
 		end
 		right_lower_click()
-		mSleep(1000)
+		mSleep(3000)
 	end
 end
 

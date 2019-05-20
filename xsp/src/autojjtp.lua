@@ -32,8 +32,7 @@ function auto_jjtp_time_check()
 	local dura_time = curr_time_stamp - auto_jjtp_time_stamp
 	local dura_time_min = dura_time/(1000*60)
 	
---	if dura_time_min > auto_jjtp_interv then
-	if dura_time_min > 1 then
+	if dura_time_min > auto_jjtp_interv then
 		return RET_VALID
 	end
 	return RET_OK
