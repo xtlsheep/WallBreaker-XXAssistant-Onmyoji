@@ -153,8 +153,8 @@ function game_disconn_reconn()
 	
 	function game_notice()
 		local x, y = findColor({1080, 146, 1082, 148},
-			"0|0|0xe8d4cf,2|-77|0x470c15,-7|-96|0x69504c,-1|-52|0x5a5756",
-			90, 0, 0, 0)
+			"0|0|0xe8d4cf,-5|-127|0x655351,-7|-94|0x69514d,2|-74|0x4a0d17",
+			95, 0, 0, 0)
 		
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"关闭公告",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -165,8 +165,8 @@ function game_disconn_reconn()
 	end
 	
 	function game_portal()
-		local x, y = findColor({494, 124, 496, 126},
-			"0|0|0xe0af86,119|-38|0xdc7746,140|151|0xf1d482,132|301|0xf9edac",
+		local x, y = findColor({574, 512, 576, 514},
+			"0|0|0x472e24,313|-347|0x787394,312|-286|0xdac48d,294|-296|0x749c9d",
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"进入服务器",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -176,8 +176,8 @@ function game_disconn_reconn()
 	end
 	
 	function game_load()
-		local x, y = findColor({857, 566, 859, 568},
-			"0|0|0xe99e4f,-9|8|0xe4823f,-115|-49|0x690c2b,10|-164|0x76101b",
+		local x, y = findColor({778, 414, 780, 416},
+			"0|0|0xe3b920,-23|-1|0xaf654d,-38|208|0xb39ea6,-58|212|0xc8bd91",
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"进入游戏",20,"0xff000000","0xffffffff",0,100,0,300,32)
