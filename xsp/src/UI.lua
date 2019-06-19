@@ -1010,11 +1010,11 @@ function tansuo_UI()
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮普攻 - ", "20,1030,170,60")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "狗粮类型 - ", "20,1090,170,60")
 	if wid_div_dpi > 2 then
-		UI:RadioGroup(tansuo_ui, "df_type", "N卡,素材","0",30,"0,0,0","200,1090,800,60")
+		UI:RadioGroup(tansuo_ui, "df_type", "N卡,素材,R卡","0",30,"0,0,0","200,1090,800,60")
 		UI:RadioGroup(tansuo_ui, "nor_attk", "开启,关闭","0",30,"0,0,0","200,1030,800,60")
 	else
-		UI:RadioGroup(tansuo_ui, "df_type", "N卡             ,素材","0",30,"0,0,0","600,1090,400,60")
-		UI:RadioGroup(tansuo_ui, "nor_attk", "开启            ,关闭","0",30,"0,0,0","600,1030,400,60")
+		UI:RadioGroup(tansuo_ui, "df_type", "N卡  ,素材  ,R卡","0",30,"0,0,0","600,1090,400,60")
+		UI:RadioGroup(tansuo_ui, "nor_attk", "开启                  ,关闭","0",30,"0,0,0","600,1030,400,60")
 	end
 	UI:Line(tansuo_ui, "line_common", "100,100,100", 2, 960, "20,1150,960,2")
 	UI:Label(tansuo_ui, "left", "0,0,0", 30, "Tips -", "20,1160,900,60")
@@ -1184,6 +1184,8 @@ function tansuo_UI()
 		df_type = "N"
 	elseif res_tansuo.df_type == "1" then
 		df_type = "Egg"
+	elseif res_tansuo.df_type == "2" then
+		df_type = "R"
 	end
 	
 	local ret_global = global_UI()

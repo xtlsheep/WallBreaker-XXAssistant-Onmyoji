@@ -570,6 +570,13 @@ function skkm_change_egg()
 	return x, y
 end
 
+function skkm_change_R()
+	local x, y = findColor({65, 596, 67, 598},
+		"0|0|0x30a5eb,-14|0|0x31abf2,-11|-21|0x0d5cb0,-5|-15|0x202f22",
+		95, 0, 0, 0)
+	return x, y
+end
+
 function skkm_change_sel()
 	local x, y = findColor({78, 282, 80, 284},
 		"0|0|0x48b0cf,69|7|0x7e7d81,152|51|0x0e5eb2,218|121|0x8d13c5,269|206|0xe9732e,287|298|0xfd2639",
@@ -868,6 +875,8 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 							random_touch(0, 155, 300, 5, 5) -- N
 						elseif df_type == "Egg" then
 							random_touch(0, 60, 285, 5, 5) -- 素材
+						elseif df_type == "R" then
+							random_touch(0, 240, 345, 5, 5) -- R
 						end
 						random_sleep(750)
 						break
@@ -887,6 +896,19 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 					end
 					-- 素材
 					x, y = skkm_change_egg()
+					if x > -1 then
+						if top_left == 1 or top_right == 1 or top_mid == 1 then
+							skkm_change_scroll(page_jump)
+						end
+						skkm_change_switch(top_left, top_mid, top_right, 0, 0)
+						fight_ready()
+						top_left = 0
+						top_mid = 0
+						top_right = 0
+						break
+					end
+					-- R
+					x, y = skkm_change_R()
 					if x > -1 then
 						if top_left == 1 or top_right == 1 or top_mid == 1 then
 							skkm_change_scroll(page_jump)
@@ -1135,6 +1157,8 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 							random_touch(0, 155, 300, 5, 5) -- N
 						elseif df_type == "Egg" then
 							random_touch(0, 60, 285, 5, 5) -- 素材
+						elseif df_type == "R" then
+							random_touch(0, 240, 345, 5, 5) -- R
 						end
 						random_sleep(750)
 						break
@@ -1161,6 +1185,19 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 						fight_ready()
 						bot_right = 0
 						bot_left = 0
+						break
+					end
+					-- R
+					x, y = skkm_change_R()
+					if x > -1 then
+						if top_left == 1 or top_right == 1 or top_mid == 1 then
+							skkm_change_scroll(page_jump)
+						end
+						skkm_change_switch(top_left, top_mid, top_right, 0, 0)
+						fight_ready()
+						top_left = 0
+						top_mid = 0
+						top_right = 0
 						break
 					end
 				end
@@ -1413,6 +1450,8 @@ function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos,
 						random_touch(0, 155, 300, 5, 5) -- N
 					elseif df_type == "Egg" then
 						random_touch(0, 60, 285, 5, 5) -- 素材
+					elseif df_type == "R" then
+						random_touch(0, 240, 345, 5, 5) -- R
 					end
 					random_sleep(750)
 					break
@@ -1432,6 +1471,19 @@ function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos,
 				end
 				-- 素材
 				x, y = skkm_change_egg()
+				if x > -1 then
+					if top_left == 1 or top_right == 1 or top_mid == 1 then
+						skkm_change_scroll(page_jump)
+					end
+					skkm_change_switch(top_left, top_mid, top_right, 0, 0)
+					fight_ready()
+					top_left = 0
+					top_mid = 0
+					top_right = 0
+					break
+				end
+				-- R
+				x, y = skkm_change_R()
 				if x > -1 then
 					if top_left == 1 or top_right == 1 or top_mid == 1 then
 						skkm_change_scroll(page_jump)
