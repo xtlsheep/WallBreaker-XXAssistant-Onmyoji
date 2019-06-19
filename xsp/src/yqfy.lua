@@ -3,9 +3,9 @@ require "func"
 
 -- Util func
 function lct_yqfy()
-	x, y = findColor({349, 144, 351, 146},
-		"0|0|0xfdc165,161|0|0xffc96e,52|-36|0x600a0a,72|-32|0xf8f3e0",
-		90, 0, 0, 0)
+	local x, y = findColor({851, 100, 853, 102},
+		"0|0|0xe97c2c,-78|1|0xe87b2a,-471|15|0x4d0c0c,-415|457|0xf3b25e,-483|15|0xf7f2df",
+		95, 0, 0, 0)
 	return x, y
 end
 
@@ -50,11 +50,11 @@ function deny_quit()
 end
 
 function enter_queue()
-	local x, y = findColor({682, 558, 684, 560},
-		"0|0|0xf3b25e,244|-3|0xb0a9a1,91|-457|0xe87b2a,172|-459|0xea7d2b,53|-51|0xc7bdb4",
-		90, 0, 0, 0)
+	local x, y = findColor({851, 100, 853, 102},
+		"0|0|0xe97c2c,-78|1|0xe87b2a,-473|16|0x430a0a,-483|15|0xf7f2df,-168|456|0xf3b25e",
+		95, 0, 0, 0)
 	if x > -1 then
-		random_touch(0, x, y, 20, 10)
+		random_touch(0, 685, 560, 20, 10)
 		mSleep(1000)
 	end
 	return x, y
@@ -165,6 +165,7 @@ function yqfy_(round, sel, mark)
 						random_sleep(500)
 						random_move(0, 430, 200, 430, 500, 50, 10)
 					elseif linkage == "Disable" then
+						zudui_move_up()
 						random_touch(0, 220, 520, 50, 10) -- 妖气封印
 						random_sleep(500)
 						random_move(0, 430, 200, 430, 500, 50, 10)

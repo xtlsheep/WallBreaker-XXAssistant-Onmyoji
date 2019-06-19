@@ -41,7 +41,8 @@ height_dev = 1136
 ratio = height_dev/height
 s = (height*0.050)*(ratio)
 setScreenScale(width_dev, height_dev) -- iPhone 5s
-linkage, linkage_err = getCloudContent("WALL_BREAKER_LINKAGE", "BDAB2A1E8229572B", "0")
+-- linkage, linkage_err = getCloudContent("WALL_BREAKER_LINKAGE", "BDAB2A1E8229572B", "0")
+linkage = "Disable"
 math.randomseed(os.time())
 math.random(1,10000)
 setTimer(5*60*1000, garbage_collect)
