@@ -327,29 +327,29 @@ end
 
 function start_buff()
 	function juexing_buff()
-		local x, y = findColor({345, 120, 365, 400},
+		local x, y = findColor({345, 120, 365, 500},
 			"0|0|0x341e02,1|-8|0xf48204,17|11|0xe77600,0|15|0x321b01,334|4|0xb10b30",
 			90, 0, 0, 0)
 		return x, y
 	end
 	
 	function yuhun_buff()
-		local x, y = findColor({345, 120, 365, 400},
+		local x, y = findColor({345, 120, 365, 500},
 			"0|0|0x023131,-7|15|0x01d7e5,-2|-10|0x00d6e5,-8|5|0x023131,331|2|0xb10b30",
 			90, 0, 0, 0)
 		return x, y
 	end
 	
 	function money_buff()
-		local x, y = findColor({345, 120, 365, 400},
+		local x, y = findColor({345, 120, 365, 500},
 			"0|0|0xdeb74d,-14|5|0xcfc2b8,11|-8|0xebd7aa,5|8|0xf8e93b,330|1|0xb10b30",
 			90, 0, 0, 0)
 		return x, y
 	end
 	
 	function exp_buff()
-		local x, y = findColor({345, 120, 365, 400},
-			"0|0|0xa3c0e4,-5|-14|0xbfdbf1,11|-18|0xbfdbf1,13|6|0xf7e733,338|-2|0xb10b30",
+		local x, y = findColor({345, 100, 365, 500},
+			"0|0|0x99bae3,-19|-6|0xbfdaf1,322|-3|0xb00d29,393|-4|0xc44017",
 			90, 0, 0, 0)
 		return x, y
 	end
@@ -385,9 +385,16 @@ function start_buff()
 		end
 		-- 金币
 		if buff_sel[3] == 1 then
+			-- 1st
 			x_, y_ = money_buff()
 			if x_ > -1 then
 				HUD_show_or_hide(HUD,hud_info,"开启金币Buff",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				random_touch(0, x_ + x_len, y_, 5, 20)
+				mSleep(3000)
+			end
+			-- 2nd
+			x_, y_ = money_buff()
+			if x_ > -1 then
 				random_touch(0, x_ + x_len, y_, 5, 20)
 				mSleep(1000)
 			end
@@ -405,6 +412,7 @@ function start_buff()
 			x_, y_ = exp_buff()
 			if x_ > -1 then
 				random_touch(0, x_ + x_len, y_, 5, 20)
+				mSleep(1000)
 			end
 		end
 		right_lower_click()
