@@ -13,15 +13,15 @@ sg_low = {0, 0, 0, 0, 0, 0} -- 低血量操作
 
 -- Def
 -- 3个横排区域中心勾玉范围 x1,y1,x2,y2
-mgt_find_x1 = {115, 115, 115}
-mgt_find_y1 = {310, 425, 540}
-mgt_find_x2 = {135, 135, 135}
-mgt_find_y2 = {320, 435, 550}
+mgt_find_x1 = {95, 95, 95}
+mgt_find_y1 = {264, 382, 500}
+mgt_find_x2 = {115, 115, 115}
+mgt_find_y2 = {268, 386, 504}
 -- 3个横排区域50%找色范围
-target_bar_50_x1 = {269, 269, 269}
-target_bar_50_y1 = {329, 444, 559}
-target_bar_50_x2 = {271, 271, 271}
-target_bar_50_y2 = {331, 446, 561}
+target_bar_50_x1 = {73, 73, 73}
+target_bar_50_y1 = {295, 413, 531}
+target_bar_50_x2 = {75, 75, 75}
+target_bar_50_y2 = {297, 415, 533}
 
 -- Util func
 function lct_sg_window()
@@ -31,7 +31,7 @@ function lct_sg_window()
 	
 	if ver == "iOS" then
 		x, y = findColor({24, 200, 26, 450}, -- 弹窗箭头
-			"0|0|0xcf8d43,26|1|0x846e5c,273|-10|0xd3755c,354|-75|0x13100e,407|-30|0xe1dad1",
+			"0|0|0xc88337,20|-21|0x856e5c,402|-26|0xe1d9d0,387|-30|0x120504",
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"发现超鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -43,7 +43,7 @@ function lct_sg_window()
 	
 	if ver == "android" then
 		x, y = findColor({24, 200, 26, 450}, -- 弹窗箭头
-			"0|0|0xcd8b40,23|1|0xb4a593,352|-75|0x121210,403|-9|0xdfd7ce,268|-11|0xd57259",
+			"0|0|0xc7853b,20|-21|0xb4a593,389|-31|0x120805,406|-12|0xe0d8cf,392|109|0xc8af96,4|-2|0xc58238",
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"发现超鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -55,18 +55,29 @@ function lct_sg_window()
 	return x, y
 end
 
-function lct_sg_page()
+function lct_sg_zhengfa()
+	local x, y = findColor({24, 41, 26, 43},
+		"0|0|0xc2cbe3,104|36|0x6f0606,202|-12|0xe4c359,1050|234|0xd8d0ca",
+		95, 0, 0, 0)
+	if x > -1 then
+		random_touch(0, 1100, 365, 10, 10)
+		random_sleep(500)
+	end
+	return x, y
+end
+
+function lct_sg_tuizhi()
 	-- 识别超鬼王页面
-	local x, y = findColor({922, 9, 924, 11},
-		"0|0|0xc4dbed,-492|19|0x47211f,-542|126|0xcd9f45,-869|47|0xf0f5fb",
+	local x, y = findColor({24, 41, 26, 43},
+		"0|0|0xc2cbe3,112|43|0x700505,876|-28|0xcbdfee,1031|306|0xd7cfc6",
 		95, 0, 0, 0)
 	return x, y
 end
 
 function lct_sg_group()
 	-- 识别集结页面
-	local x, y = findColor({844, 57, 846, 59},
-		"0|0|0xf6dfd8,-573|12|0xe2758c,-408|-32|0x1c0c0c,27|483|0x625641,-791|-3|0x636567",
+	local x, y = findColor({843, 56, 845, 58},
+		"0|0|0xf9e0d7,-572|11|0xe5748d,-156|457|0xf4b25f,-536|32|0xd5bcac",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -74,7 +85,7 @@ end
 function find_sg_6(index)
 	-- 识别6星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf49e33,33|0|0xf49d32,-22|0|0xf49e33,-16|25|0xf8f3e0,224|-55|0xa79894,224|5|0xa79894",
+		"0|0|0xf5a432,-11|0|0xf5a432,11|0|0xf5a432,-22|0|0xf5a432,22|0|0xf5a432,-33|0|0xf5a432",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -82,7 +93,7 @@ end
 function find_sg_5(index)
 	-- 识别5星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf5a332,22|0|0xf5a433,-22|0|0xf5a432,-22|25|0xf8f3e0,218|-55|0xa79894,218|5|0xa79894",
+		"0|0|0xf5a432,-11|0|0xf5a432,11|0|0xf5a432,-22|0|0xf5a432,22|0|0xf5a432",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -90,7 +101,7 @@ end
 function find_sg_4(index)
 	-- 识别4星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf49e33,22|0|0xf49d32,-11|0|0xf49e33,-16|25|0xf8f3e0,224|-55|0xa79894,224|5|0xa79894",
+		"0|0|0xf5a432,-11|0|0xf5a432,11|0|0xf5a432,-22|0|0xf5a432",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -98,7 +109,7 @@ end
 function find_sg_3(index)
 	-- 识别3星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf5a332,11|0|0xf5a432,-11|0|0xf5a432,-22|25|0xf8f3e0,218|-55|0xa79894,218|5|0xa79894",
+		"0|0|0xf5a432,-11|0|0xf5a432,11|0|0xf5a432",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -106,7 +117,7 @@ end
 function find_sg_2(index)
 	-- 识别2星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf49e33,11|0|0xf49e33,224|-55|0xa79894,224|5|0xa79894",
+		"0|0|0xf5a432,-11|0|0xf5a432",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -114,7 +125,7 @@ end
 function find_sg_1(index)
 	-- 识别1星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf5a332,-1|1|0xf69f31,218|-55|0xa79894,218|5|0xa79894",
+		"0|0|0xf5a432",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -123,35 +134,40 @@ function find_sg_mgt(index)
 	-- 识别当前区域星级
 	local x = -1
 	local y = -1
-	x, y = find_sg_6(index)
-	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,string.format("区域%d发现6星鬼王", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
-		return x, y, 6
-	end
-	x, y = find_sg_5(index)
-	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,string.format("区域%d发现5星鬼王", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
-		return x, y, 5
-	end
-	x, y = find_sg_4(index)
-	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,string.format("区域%d发现4星鬼王", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
-		return x, y, 4
-	end
-	x, y = find_sg_3(index)
-	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,string.format("区域%d发现3星鬼王", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
-		return x, y, 3
-	end
-	x, y = find_sg_2(index)
-	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,string.format("区域%d发现2星鬼王", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
-		return x, y, 2
-	end
-	x, y = find_sg_1(index)
-	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,string.format("区域%d发现1星鬼王", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
-		return x, y, 1
+	local x_, y_
+	
+	x_, y_ = lct_sg_tuizhi()
+	if x_ > -1 then
+		x, y = find_sg_6(index)
+		if x > -1 then
+			HUD_show_or_hide(HUD,hud_info,string.format("区域%d发现6星鬼王", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
+			return x, y, 6
+		end
+		x, y = find_sg_5(index)
+		if x > -1 then
+			HUD_show_or_hide(HUD,hud_info,string.format("区域%d发现5星鬼王", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
+			return x, y, 5
+		end
+		x, y = find_sg_4(index)
+		if x > -1 then
+			HUD_show_or_hide(HUD,hud_info,string.format("区域%d发现4星鬼王", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
+			return x, y, 4
+		end
+		x, y = find_sg_3(index)
+		if x > -1 then
+			HUD_show_or_hide(HUD,hud_info,string.format("区域%d发现3星鬼王", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
+			return x, y, 3
+		end
+		x, y = find_sg_2(index)
+		if x > -1 then
+			HUD_show_or_hide(HUD,hud_info,string.format("区域%d发现2星鬼王", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
+			return x, y, 2
+		end
+		x, y = find_sg_1(index)
+		if x > -1 then
+			HUD_show_or_hide(HUD,hud_info,string.format("区域%d发现1星鬼王", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
+			return x, y, 1
+		end
 	end
 	return x, y, 0
 end
@@ -159,7 +175,7 @@ end
 function find_sg_50(index)
 	-- 识别50%刻度血条
 	local x, y = findColor({target_bar_50_x1[index], target_bar_50_y1[index], target_bar_50_x2[index], target_bar_50_y2[index]},
-		"0|0|0xe35f30,-100|-15|0xa89a96,185|-15|0xa69793",
+		"0|0|0xf8f3e0,-1|-20|0x74727d,180|1|0xe4602f",
 		95, 0, 0, 0)
 	if x > -1 then
 		return RET_OK
@@ -244,8 +260,8 @@ end
 
 function sg_start()
 	-- 挑战识别
-	local x, y = findColor({1028, 534, 1030, 536},
-		"0|0|0xe5c089,-37|5|0xd1e3f1,-32|12|0xe07c52,-19|23|0xccdfee",
+	local x, y = findColor({1065, 565, 1067, 567},
+		"0|0|0xe6cca0,-26|8|0xccddee,-165|-552|0xcbdfee,-1042|-523|0xc2cbe3",
 		95, 0, 0, 0)
 	if x > -1 then
 		return RET_OK
@@ -256,28 +272,28 @@ end
 function sg_switch_mode(mgt)
 	-- 普通追击、强力追击切换
 	local x, y
-	x, y = findColor({524, 499, 526, 501}, -- 普通追击
-		"0|0|0xffffff,1|-16|0x4051c6,6|-7|0xfcfcfe,10|-2|0x4152c9",
+	x, y = findColor({512, 551, 514, 553}, -- 普通追击
+		"0|0|0xffffff,0|-11|0x4b5ce8,166|-8|0x402f0e,95|-48|0x940818",
 		95, 0, 0, 0)
 	if x > -1 then
 		if mgt >= sg_force then
-			random_touch(0, 705, 495, 10, 10) -- 选择强力
+			random_touch(0, 680, 545, 10, 10) -- 选择强力
 			return
 		end
 	end
-	x, y = findColor({703, 499, 705, 501}, -- 强力追击
-		"0|0|0xffffff,1|-16|0x4051c6,7|-7|0xfafbfd,11|-3|0x4152c8",
+	x, y = findColor({676, 551, 678, 553}, -- 强力追击
+		"0|0|0xffffff,1|-12|0x4b5ce5,-161|-9|0x402f0e,-69|-48|0x940818",
 		95, 0, 0, 0)
 	if x > -1 then
 		if mgt < sg_force then
-			random_touch(0, 525, 495, 10, 10) -- 选择普通
+			random_touch(0, 515, 545, 10, 10) -- 选择普通
 			return
 		end
 	end
 	return
 end
 
-function sg_tired_detect()
+function sg_tired_detect() --
 	-- 识别疲劳窗口
 	local x, y = findColor({565, 418, 568, 420},
 		"0|0|0xf3b25e,-94|-92|0xecf693,-106|-96|0x8dd229,265|-247|0xe8d4cf",
@@ -289,10 +305,10 @@ function sg_tired_detect()
 end
 
 function sg_group_check()
-	-- 识别集结窗口
-	local x, y = findColor({876, 554, 878, 556},
-		"0|0|0xe6c385,-5|-14|0xeed29e,-19|-16|0x251717,18|-9|0xcb9354",
-		80, 0, 0, 0)
+	-- 识别集结按钮
+	local x, y = findColor({944, 558, 946, 560},
+		"0|0|0x783f70,20|1|0xdabf77,-15|-1|0xdab878,-6|21|0xa34961",
+		95, 0, 0, 0)
 	if x > -1 then
 		return RET_OK
 	end
@@ -315,14 +331,14 @@ function sg_group_invite()
 	random_touch(0, 690, 510, 20, 10) -- 邀请
 end
 
-function sg_group_public()
+function sg_group_public() --
 	-- 5/6星鬼王公开
 	random_touch(0, 450, 510, 20, 10) -- 公开
 	random_sleep(500)
 	random_touch(0, 670, 375, 30, 10) -- 确认
 end
 
-function sg_bonus_extra()
+function sg_bonus_extra() --
 	-- 识别妖灵溢出
 	local x, y = findColor({567, 420, 569, 422},
 		"0|0|0xf3b25e,-174|-258|0xe9ab53,-166|-256|0xb54f3c,173|55|0xe9ab53,163|52|0xb34c39",
@@ -333,7 +349,7 @@ function sg_bonus_extra()
 	return x, y
 end
 
-function sg_bonus_get()
+function sg_bonus_get() --
 	-- 识别低星鬼王自动领取奖励
 	local x, y = findColor({440, 100, 445, 250},
 		"0|0|0xf2e5ad,248|17|0xf2e5b4,-138|104|0xad9f9a,392|104|0xaea09b,1|258|0x500c19",
@@ -344,7 +360,7 @@ function sg_bonus_get()
 	return x, y
 end
 
-function sg_bonus_exit()
+function sg_bonus_exit() --
 	-- 退出超鬼王领赏
 	local x, y = findColor({991, 111, 993, 113},
 		"0|0|0xe8d4cf,-877|459|0xf4d4a5,-890|446|0x281918,-756|6|0x790606",
@@ -377,7 +393,7 @@ function SuperGhost()
 	
 	-- 超鬼王弹窗/页面识别
 	x, y = lct_sg_window() if x > -1 then sg_window = 1 end
-	x, y = lct_sg_page() if x > -1 then sg_page = 1 end
+	x, y = lct_sg_tuizhi() if x > -1 then sg_page = 1 end
 	if (sg_window == 0) and (sg_page == 0) then
 		return RET_ERR
 	end
@@ -402,26 +418,26 @@ function SuperGhost()
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行
 			x, y = fight_ongoing() if (x > -1) then last_mark = sg_mark(last_mark) mSleep(3000) break end -- 三秒钟Check一次标记
-			-- 疲劳溢出
-			x, y = sg_tired_detect()
-			if x > -1 then
-				tired_op = sg_tired[sg_curr] -- 获得当前星级的疲劳操作
-				if tired_op == "喝茶" then
-					HUD_show_or_hide(HUD,hud_info,"购买 茶 - 58勾",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					random_touch(0, x, y , 30, 10) -- 58勾
-					tired_op = nil
-				elseif tired_op == "等待" then
-					random_touch(0, 830, 175, 5, 5) -- 关闭
-					HUD_show_or_hide(HUD,hud_info,"等待5分钟",20,"0xff000000","0xffffffff",0,100,0,300,32)
-					mSleep(5*60*1000) -- 等待5分钟
-					tired_op = nil
-				elseif tired_op == "集结" then
-					random_touch(0, 830, 175, 5, 5) -- 关闭
-				elseif tired_op == "响铃" then
-					alarm("exit") -- 提醒后退出脚本
-				end
-				break
-			end
+			--			-- 疲劳溢出
+			--			x, y = sg_tired_detect()
+			--			if x > -1 then
+			--				tired_op = sg_tired[sg_curr] -- 获得当前星级的疲劳操作
+			--				if tired_op == "喝茶" then
+			--					HUD_show_or_hide(HUD,hud_info,"购买 茶 - 58勾",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			--					random_touch(0, x, y , 30, 10) -- 58勾
+			--					tired_op = nil
+			--				elseif tired_op == "等待" then
+			--					random_touch(0, 830, 175, 5, 5) -- 关闭
+			--					HUD_show_or_hide(HUD,hud_info,"等待5分钟",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			--					mSleep(5*60*1000) -- 等待5分钟
+			--					tired_op = nil
+			--				elseif tired_op == "集结" then
+			--					random_touch(0, 830, 175, 5, 5) -- 关闭
+			--				elseif tired_op == "响铃" then
+			--					alarm("exit") -- 提醒后退出脚本
+			--				end
+			--				break
+			--			end
 			-- 集结好友
 			x, y = lct_sg_group()
 			if x > -1 then
@@ -436,14 +452,14 @@ function SuperGhost()
 				break
 			end
 			-- 超鬼王页面
-			x, y = lct_sg_page()
+			x, y = lct_sg_tuizhi()
 			random_sleep(1000)
 			if x > -1 then
 				-- 进入集结
 				if (tired_op == "集结") then
 					ret = sg_group_check() -- Check是否可以集结
 					if ret == RET_OK then
-						random_touch(0, 880, 550, 10, 10) -- 集结
+						random_touch(0, 950, 570, 10, 10) -- 集结
 					else
 						HUD_show_or_hide(HUD,hud_info,"等待5分钟",20,"0xff000000","0xffffffff",0,100,0,300,32)
 						mSleep(5*60*1000) -- 等待5分钟
@@ -480,7 +496,7 @@ function SuperGhost()
 							end
 							random_sleep(500)
 							sg_switch_mode(sg_curr) -- 切换战斗模式
-							random_touch(0, 1030, 540, 20, 20) -- 挑战
+							random_touch(0, 1070, 560, 20, 20) -- 挑战
 							break
 						else
 							HUD_show_or_hide(HUD,hud_info,string.format("区域%d鬼王已经结算", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -504,11 +520,11 @@ function SuperGhost()
 				if (sg_curr == 0) then
 					if sg_keep == 1 then
 						-- 超鬼王Portal进入时保持超鬼王函数持续运行
-						HUD_show_or_hide(HUD,hud_info,"等待3分钟",20,"0xff000000","0xffffffff",0,100,0,300,32)
-						mSleep(3*60*1000)
+						HUD_show_or_hide(HUD,hud_info,"等待5分钟",20,"0xff000000","0xffffffff",0,100,0,300,32)
+						mSleep(5*60*1000)
 					else
 						-- No valid超鬼王, 退出函数
-						random_touch(0, 60, 55, 10, 10) -- 左上退出
+						random_touch(0, 35, 40, 10, 10) -- 左上退出
 						return RET_OK
 					end
 				end
@@ -534,6 +550,8 @@ function SuperGhost()
 			x, y = sg_bonus_get() if x > -1 then break end
 			-- 退出奖励
 			x, y = sg_bonus_exit() if x > -1 then break end
+			-- 征伐切换
+			x, y = lct_sg_zhengfa() if x > -1 then break end
 			break
 		end
 	end

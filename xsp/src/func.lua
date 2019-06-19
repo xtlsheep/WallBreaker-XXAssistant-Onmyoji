@@ -947,8 +947,8 @@ end
 
 function fight_ready()
 	local x, y
-	x, y = findColor({1036,486,1038,489},
-		"0|0|0xd4ae7a,8|7|0xfff4d7,-50|78|0xdaae71,-51|60|0x731208",
+	x, y = findColor({1036, 465, 1038, 487},
+		"0|0|0xd3ae7b,-48|103|0xf0d8a9,49|79|0xdbaf73,48|67|0xc32912",
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"战斗准备",20,"0xff000000","0xffffffff",0,100,0,300,32)
