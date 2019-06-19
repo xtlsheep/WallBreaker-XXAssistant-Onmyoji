@@ -112,6 +112,11 @@ function yqfy_(round, sel, mark)
 			-- 庭院
 			x, y = lct_tingyuan()
 			if (x > -1) then
+				-- 智能突破Check
+				ret = auto_jjtp_time_check()
+				if ret == RET_VALID then
+					return RET_VALID
+				end
 				if quit == 1 then
 					lua_exit()
 				end
@@ -162,12 +167,12 @@ function yqfy_(round, sel, mark)
 					if linkage == "Enable" then
 						zudui_move_down()
 						random_touch(0, 220, 150, 50, 10) -- 妖气封印
-						random_sleep(500)
+						random_sleep(1000)
 						random_move(0, 430, 200, 430, 500, 50, 10)
 					elseif linkage == "Disable" then
 						zudui_move_up()
 						random_touch(0, 220, 520, 50, 10) -- 妖气封印
-						random_sleep(500)
+						random_sleep(1000)
 						random_move(0, 430, 200, 430, 500, 50, 10)
 					end
 				end
@@ -238,6 +243,8 @@ function yqfy_(round, sel, mark)
 			x, y = deny_quit() if x > -1 then break end
 			-- 退出个人资料
 			x, y = member_user_profile() if x > -1 then break end
+			-- 探索
+			x, y = lct_tansuo() if (x > -1) then random_touch(0, 50, 50, 10, 10) break end
 			break
 		end
 	end

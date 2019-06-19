@@ -163,3 +163,28 @@ function yuling_auto_jjtp(sel, level, round, doll, lock)
 	end
 	return RET_ERR
 end
+
+function yqfy_auto_jjtp(round, sel, mark)
+	local ret = 0
+	
+	while (1) do
+		auto_jjtp_time_stamp = mTime()
+		
+		yqfy(round, sel, mark)
+		mSleep(1000)
+		ret = lct_tingyuan_or_tansuo()
+		if ret == RET_ERR then
+			HUD_show_or_hide(HUD,hud_info,"场景识别错误, 结束脚本",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			lua_exit()
+		end
+
+		jjtp(auto_jjtp_mode, auto_jjtp_whr_solo, auto_jjtp_whr_pub, auto_jjtp_round_time, auto_jjtp_refresh, auto_jjtp_solo_sel, auto_jjtp_pub_sel, auto_jjtp_lock, auto_jjtp_own, auto_jjtp_enemy)
+		mSleep(1000)
+		ret = lct_tingyuan_or_tansuo()
+		if ret == RET_ERR then
+			HUD_show_or_hide(HUD,hud_info,"场景识别错误, 结束脚本",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			lua_exit()
+		end
+	end
+	return RET_ERR
+end

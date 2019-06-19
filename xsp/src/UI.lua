@@ -1813,7 +1813,11 @@ function yqfy_UI()
 		return
 	end
 	
-	yqfy(round, sel, mark)
+	if auto_jjtp_en == 1 then
+		yqfy_auto_jjtp(round, sel, mark)
+	else
+		yqfy(round, sel, mark)
+	end
 end
 
 function hundredghost_UI()
