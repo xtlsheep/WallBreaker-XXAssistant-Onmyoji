@@ -56,8 +56,8 @@ function lct_sg_window()
 end
 
 function lct_sg_zhengfa()
-	local x, y = findColor({24, 41, 26, 43},
-		"0|0|0xc2cbe3,104|36|0x6f0606,202|-12|0xe4c359,1050|234|0xd8d0ca",
+	local x, y = findColor({1058, 262, 1060, 264}, -- 战斗征伐
+		"0|0|0xdcd1d5,-1034|-221|0xc2cbe3,-833|-215|0xd19c36,-960|-155|0x660606",
 		95, 0, 0, 0)
 	if x > -1 then
 		random_touch(0, 1100, 365, 10, 10)
@@ -371,6 +371,27 @@ function sg_bonus_exit() --
 	return x, y
 end
 
+function sg_fight_success()
+	function success_drum()
+		local x, y = findColor({421, 75, 430, 145},
+			"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
+			95, 0, 0, 0)
+		return x, y
+	end
+	
+	local x, y = success_drum()
+	local cnt = math.random(8, 10)
+	
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		for i = 1, cnt do
+			loop_generic()
+			right_lower_click()
+			random_sleep(25)
+		end
+	end
+	return x, y
+end
 -- Main func
 function SuperGhost()
 	if sg_en == 0 then
@@ -418,26 +439,26 @@ function SuperGhost()
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行
 			x, y = fight_ongoing() if (x > -1) then last_mark = sg_mark(last_mark) mSleep(3000) break end -- 三秒钟Check一次标记
-			--			-- 疲劳溢出
-			--			x, y = sg_tired_detect()
-			--			if x > -1 then
-			--				tired_op = sg_tired[sg_curr] -- 获得当前星级的疲劳操作
-			--				if tired_op == "喝茶" then
-			--					HUD_show_or_hide(HUD,hud_info,"购买 茶 - 58勾",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			--					random_touch(0, x, y , 30, 10) -- 58勾
-			--					tired_op = nil
-			--				elseif tired_op == "等待" then
-			--					random_touch(0, 830, 175, 5, 5) -- 关闭
-			--					HUD_show_or_hide(HUD,hud_info,"等待5分钟",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			--					mSleep(5*60*1000) -- 等待5分钟
-			--					tired_op = nil
-			--				elseif tired_op == "集结" then
-			--					random_touch(0, 830, 175, 5, 5) -- 关闭
-			--				elseif tired_op == "响铃" then
-			--					alarm("exit") -- 提醒后退出脚本
-			--				end
-			--				break
-			--			end
+			-- 疲劳溢出
+			x, y = sg_tired_detect()
+			if x > -1 then
+				tired_op = sg_tired[sg_curr] -- 获得当前星级的疲劳操作
+				if tired_op == "喝茶" then
+					HUD_show_or_hide(HUD,hud_info,"购买 茶 - 58勾",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					random_touch(0, x, y , 30, 10) -- 58勾
+					tired_op = nil
+				elseif tired_op == "等待" then
+					random_touch(0, 830, 175, 5, 5) -- 关闭
+					HUD_show_or_hide(HUD,hud_info,"等待5分钟",20,"0xff000000","0xffffffff",0,100,0,300,32)
+					mSleep(5*60*1000) -- 等待5分钟
+					tired_op = nil
+				elseif tired_op == "集结" then
+					random_touch(0, 830, 175, 5, 5) -- 关闭
+				elseif tired_op == "响铃" then
+					alarm("exit") -- 提醒后退出脚本
+				end
+				break
+			end
 			-- 集结好友
 			x, y = lct_sg_group()
 			if x > -1 then
@@ -451,6 +472,8 @@ function SuperGhost()
 				tired_op = nil
 				break
 			end
+			-- 征伐切换
+			x, y = lct_sg_zhengfa() if x > -1 then break end
 			-- 超鬼王页面
 			x, y = lct_sg_tuizhi()
 			random_sleep(1000)
@@ -543,15 +566,13 @@ function SuperGhost()
 			-- 战斗失败
 			x, y = fight_failed() if (x > -1) then break end
 			-- 战斗胜利
-			x, y = fight_success() if (x > -1) then break end
+			x, y = sg_fight_success() if (x > -1) then break end
 			-- 妖灵溢出
 			x, y = sg_bonus_extra() if x > -1 then break end
 			-- 领取奖励
 			x, y = sg_bonus_get() if x > -1 then break end
 			-- 退出奖励
 			x, y = sg_bonus_exit() if x > -1 then break end
-			-- 征伐切换
-			x, y = lct_sg_zhengfa() if x > -1 then break end
 			break
 		end
 	end

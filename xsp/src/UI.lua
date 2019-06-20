@@ -530,6 +530,7 @@ function global_UI()
 	-- sg_en = 0
 	if res_global.sg_en == "0" then
 		sg_en = 1
+		turbo_settle_en = 0
 	else
 		sg_en = 0
 	end
