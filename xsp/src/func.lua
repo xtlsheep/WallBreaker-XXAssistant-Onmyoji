@@ -32,6 +32,48 @@ function onBeforeUserExit()
 	end
 end
 
+function garbage_collect()
+	local count
+	
+	collectgarbage("collect")
+	count = collectgarbage("count")
+	print(string.format("Execute collectgarbage, memory cost  - %d kb", count))
+	setTimer(5*60*1000, garbage_collect)
+end
+
+function alarm(op)
+	local touchCount = 2
+	local x_range, y_range
+	
+	x_range = width - math.floor(width/3)
+	y_range = height - math.floor(height/3)
+	
+	for i = 1, 5 do
+		playAudio("alarm.mp3")
+		mSleep(500)
+		stopAudio()
+		mSleep(500)
+	end
+	if op == "pause" then
+		while (1) do
+			HUD_show_or_hide(HUD,hud_info,"暂停ing, 双击右上角继续",20,"0xff000000","0xffffffff",0,100,0,300,32)
+			results = catchTouchPoint(touchCount)
+			for i = 1, #results do
+				sysLog("第"..i.."个坐标为:"..i..",x="..results[i].x..",y="..results[i].y)
+			end
+			if results[1].x > x_range and results[2].x > x_range and results[1].y > y_range and results[2].y > y_range then
+				HUD_show_or_hide(HUD,hud_info,"继续运行",20,"0xff000000","0xffffffff",0,100,0,300,32)
+				mSleep(1000)
+				return RET_OK
+			end
+		end
+	elseif op == "exit" then
+		lua_exit()
+	end
+	
+	return RET_ERR
+end
+
 function show_win_fail(win_cnt, fail_cnt)
 	HUD_show_or_hide(HUD,hud_info,string.format("战斗胜利 %d次 - 失败 %d次", win_cnt, fail_cnt),20,"0xff000000","0xffffffff",0,100,0,300,32)
 end
@@ -579,54 +621,24 @@ function stats_write()
 	end
 end
 
-function alarm(op)
-	local touchCount = 2
-	local x_range, y_range
-	
-	x_range = width - math.floor(width/3)
-	y_range = height - math.floor(height/3)
-	
-	for i = 1, 5 do
-		playAudio("alarm.mp3")
-		mSleep(500)
-		stopAudio()
-		mSleep(500)
-	end
-	if op == "pause" then
-		while (1) do
-			HUD_show_or_hide(HUD,hud_info,"暂停ing, 双击右上角继续",20,"0xff000000","0xffffffff",0,100,0,300,32)
-			results = catchTouchPoint(touchCount)
-			for i = 1, #results do
-				sysLog("第"..i.."个坐标为:"..i..",x="..results[i].x..",y="..results[i].y)
-			end
-			if results[1].x > x_range and results[2].x > x_range and results[1].y > y_range and results[2].y > y_range then
-				HUD_show_or_hide(HUD,hud_info,"继续运行",20,"0xff000000","0xffffffff",0,100,0,300,32)
-				mSleep(1000)
-				return RET_OK
-			end
-		end
-	elseif op == "exit" then
-		lua_exit()
-	end
-	
-	return RET_ERR
-end
-
-function garbage_collect()
-	local count
-	
-	collectgarbage("collect")
-	count = collectgarbage("count")
-	print(string.format("Execute collectgarbage, memory cost  - %d kb", count))
-	setTimer(5*60*1000, garbage_collect)
-end
-
 function feed_paperman()
 	local x, y = findColor({708, 422, 710, 424},
 		"0|0|0xdabc69,-175|-14|0xfef3e6,-177|-19|0x93b464,-180|-29|0xfed5dc",
 		95, 0, 0, 0)
 	if x > -1 then
 		right_lower_click()
+	end
+	return x, y
+end
+
+function exit_channel()
+	local x, y = findColor({578, 316, 580, 318},
+		"0|0|0xbfaf8e,-6|-12|0x473626,-34|-224|0xfef297,-34|-157|0xd5344b",
+		95, 0, 0, 0)
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"退出频道",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		random_touch(0, x, y, 5, 5)
+		mSleep(500)
 	end
 	return x, y
 end
@@ -692,14 +704,6 @@ function lct_zudui()
 		95, 0, 0, 0)
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"组队",20,"0xff000000","0xffffffff",0,100,0,300,32)
-	end
-	return x, y
-end
-
-function lct_channel()
-	local x, y = findColorInRegionFuzzy(0xbfae8e, 95, 577, 316, 579, 318, 0, 0)
-	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,"世界频道",20,"0xff000000","0xffffffff",0,100,0,300,32)
 	end
 	return x, y
 end

@@ -830,10 +830,10 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
-			-- 超鬼王
-			SuperGhost()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
+			-- 超鬼王
+			SuperGhost()
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then
@@ -1048,7 +1048,7 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
 			-- 世界频道
-			x, y = lct_channel() if x > -1 then random_touch(0, x, y, 5, 5) mSleep(500) break end
+			x, y = exit_channel() if x > -1 then break end
 			break
 		end
 	end
@@ -1339,7 +1339,7 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
 			-- 世界频道
-			x, y = lct_channel() if x > -1 then random_touch(0, x, y, 5, 5) mSleep(500) break end
+			x, y = exit_channel() if x > -1 then break end
 			break
 		end
 	end
@@ -1576,7 +1576,7 @@ function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos,
 			-- 体力不足
 			x, y = out_of_sushi() if x > -1 then break end
 			-- 世界频道
-			x, y = lct_channel() if x > -1 then random_touch(0, x, y, 5, 5) mSleep(500) break end
+			x, y = exit_channel() if x > -1 then break end
 			break
 		end
 	end

@@ -31,7 +31,7 @@ function lct_sg_window()
 	
 	if ver == "iOS" then
 		x, y = findColor({24, 200, 26, 450}, -- 弹窗箭头
-			"0|0|0xc88337,20|-21|0x856e5c,402|-26|0xe1d9d0,387|-30|0x120504",
+			"0|0|0xc68237,15|0|0x856e5c,404|-32|0xe1dad1,385|-32|0x110d08",
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"发现超鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -43,7 +43,7 @@ function lct_sg_window()
 	
 	if ver == "android" then
 		x, y = findColor({24, 200, 26, 450}, -- 弹窗箭头
-			"0|0|0xc7853b,20|-21|0xb4a593,389|-31|0x120805,406|-12|0xe0d8cf,392|109|0xc8af96,4|-2|0xc58238",
+			"0|0|0xc8863b,15|0|0xb4a593,404|-31|0xe1dad1,385|-31|0x110d08",
 			95, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"发现超鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32)
