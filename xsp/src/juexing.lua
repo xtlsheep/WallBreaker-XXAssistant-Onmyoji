@@ -71,10 +71,12 @@ function juexing(mode, role, group, element, mark, level, round, lock, member_au
 	print_global_config()
 	
 	local ret = 0
+	local win_invite = 1
 	
 	if sg_en == 1 then
 		member_auto_group = 0
 		captain_auto_group = 0
+		win_invite = 0
 	end
 	
 	if buff_start == 1 then
@@ -90,11 +92,11 @@ function juexing(mode, role, group, element, mark, level, round, lock, member_au
 		elseif (mode == "组队" and role == "队员" and group == "野队") then
 			ret = juexing_group_wild_member(element, mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
 		elseif (mode == "组队" and role == "队长" and (group == "野队2人" or group == "野队3人")) then
-			ret = juexing_group_wild_captain(element, mark, level, round, lock, captain_auto_group, fail_and_recreate, group)
+			ret = juexing_group_wild_captain(element, mark, level, round, lock, captain_auto_group, fail_and_recreate, group, win_invite)
 		elseif (mode == "组队" and role == "队员" and group == "固定队") then
 			ret = juexing_group_fix_member(element, mark, level, round, member_auto_group, member_to_captain)
 		elseif (mode == "组队" and role == "队长" and (group == "固定队2人" or group == "固定队3人")) then
-			ret = juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
+			ret = juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group, win_invite)
 		end
 		
 		if ret ~= RET_RECONN then
@@ -115,7 +117,7 @@ function juexing_solo(element, mark, level, round, lock)
 	while (1) do
 		while (1) do
 			-- 战
-			x, y = round_fight() if (x > -1) then print("!!!")juexing_mark(mark) break end
+			x, y = round_fight() if (x > -1) then juexing_mark(mark) break end
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
@@ -346,7 +348,7 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 	return RET_ERR
 end
 
-function juexing_group_wild_captain(element, mark, level, round, lock, captain_auto_group, fail_and_recreate, group)
+function juexing_group_wild_captain(element, mark, level, round, lock, captain_auto_group, fail_and_recreate, group, win_invite)
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
 	local quit_end = 0
@@ -431,7 +433,7 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			end
 			-- 胜利邀请
 			x, y = captain_team_win_invite()
-			if (x > -1) then
+			if (x > -1 and win_invite == 1) then
 				if quit_end == 1 or quit_con == 1 then
 					random_touch(0, 460, 385, 20, 10)
 				else
@@ -622,7 +624,7 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 	return RET_ERR
 end
 
-function juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group)
+function juexing_group_fix_captain(element, mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group, win_invite)
 	local time_cnt = 0
 	local invite = 1
 	local tingyuan_time_cnt = 0
@@ -711,7 +713,7 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			end
 			-- 胜利邀请
 			x, y = captain_team_win_invite()
-			if (x > -1) then
+			if (x > -1 and win_invite == 1) then
 				if quit_end == 1 then
 					random_touch(0, 460, 385, 20, 10)
 				else
