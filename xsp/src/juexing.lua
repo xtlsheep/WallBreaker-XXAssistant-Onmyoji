@@ -119,8 +119,6 @@ function juexing_solo(element, mark, level, round, lock)
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
-			-- 超鬼王
-			SuperGhost()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -146,6 +144,8 @@ function juexing_solo(element, mark, level, round, lock)
 				end
 				break
 			end
+			-- 超鬼王
+			SuperGhost()
 			-- 觉醒材料
 			x, y = lct_juexingelement()
 			if (x > -1) then
@@ -223,10 +223,10 @@ function juexing_group_wild_member(element, mark, level, round, lock, member_aut
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
-			-- 超鬼王
-			SuperGhost()
 			-- 拒绝邀请
 			if (wait_invite == 0) then x, y = member_team_refuse_invite() if (x > -1) then mSleep(1000) break end end
+			-- 超鬼王
+			ret = SuperGhost() if ret == RET_OK then wait_invite = 0 end
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then
@@ -371,8 +371,6 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
-			-- 超鬼王
-			SuperGhost()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗进行
@@ -447,6 +445,8 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			x, y = captain_room_create_public() if (x > -1) then break end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
+			-- 超鬼王
+			SuperGhost()
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then
@@ -506,13 +506,12 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
-			-- 超鬼王
-			SuperGhost()
-			-- 接受邀请
+			-- 邀请
 			if wait_invite == 1 then
+				-- 接收
 				x, y, auto_grouped = member_team_accept_invite(member_auto_group) if (x > -1) then break end
 			else
-				-- 拒绝邀请
+				-- 拒绝
 				x, y = member_team_refuse_invite() if (x > -1) then mSleep(1000) break end
 			end
 			-- 战斗准备
@@ -568,6 +567,8 @@ function juexing_group_fix_member(element, mark, level, round, member_auto_group
 			x, y = member_room_find_start() if (x > -1) then random_touch(0, 205, 535, 20, 10) break end -- 离开队伍
 			-- 离开确认
 			x, y = member_room_quit() if (x > -1) then break end
+			-- 超鬼王
+			SuperGhost()
 			-- 庭院
 			x, y = lct_tingyuan()
 			if x > -1 then
@@ -744,6 +745,8 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
+			-- 超鬼王
+			SuperGhost()
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then

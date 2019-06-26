@@ -32,7 +32,7 @@ function lct_sg_window()
 	if ver == "iOS" then
 		x, y = findColor({24, 200, 26, 450}, -- 弹窗箭头
 			"0|0|0xc68237,15|0|0x856e5c,404|-32|0xe1dad1,385|-32|0x110d08",
-			95, 0, 0, 0)
+			90, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"发现超鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			random_touch(0, x + 200, y, 50, 20) -- 点击弹窗
@@ -44,7 +44,7 @@ function lct_sg_window()
 	if ver == "android" then
 		x, y = findColor({24, 200, 26, 450}, -- 弹窗箭头
 			"0|0|0xc8863b,15|0|0xb4a593,404|-31|0xe1dad1,385|-31|0x110d08",
-			95, 0, 0, 0)
+			90, 0, 0, 0)
 		if x > -1 then
 			HUD_show_or_hide(HUD,hud_info,"发现超鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32)
 			random_touch(0, x + 200, y, 50, 20) -- 点击弹窗
@@ -293,7 +293,8 @@ function sg_switch_mode(mgt)
 	return
 end
 
-function sg_tired_detect() --
+--
+function sg_tired_detect()
 	-- 识别疲劳窗口
 	local x, y = findColor({565, 418, 568, 420},
 		"0|0|0xf3b25e,-94|-92|0xecf693,-106|-96|0x8dd229,265|-247|0xe8d4cf",
@@ -331,44 +332,45 @@ function sg_group_invite()
 	random_touch(0, 690, 510, 20, 10) -- 邀请
 end
 
-function sg_group_public() --
+--
+function sg_group_public()
 	-- 5/6星鬼王公开
 	random_touch(0, 450, 510, 20, 10) -- 公开
 	random_sleep(500)
 	random_touch(0, 670, 375, 30, 10) -- 确认
 end
 
-function sg_bonus_extra() --
-	-- 识别妖灵溢出
-	local x, y = findColor({567, 420, 569, 422},
-		"0|0|0xf3b25e,-174|-258|0xe9ab53,-166|-256|0xb54f3c,173|55|0xe9ab53,163|52|0xb34c39",
-		95, 0, 0, 0)
-	if x > -1 then
-		random_touch(0, x, y, 30, 10)
-	end
-	return x, y
+function sg_bonus_extra()
+--	-- 识别妖灵溢出
+--	local x, y = findColor({567, 420, 569, 422},
+--		"0|0|0xf3b25e,-174|-258|0xe9ab53,-166|-256|0xb54f3c,173|55|0xe9ab53,163|52|0xb34c39",
+--		95, 0, 0, 0)
+--	if x > -1 then
+--		random_touch(0, x, y, 30, 10)
+--	end
+--	return x, y
 end
 
-function sg_bonus_get() --
-	-- 识别低星鬼王自动领取奖励
-	local x, y = findColor({440, 100, 445, 250},
-		"0|0|0xf2e5ad,248|17|0xf2e5b4,-138|104|0xad9f9a,392|104|0xaea09b,1|258|0x500c19",
-		95, 0, 0, 0)
-	if x > -1 then
-		right_lower_click()
-	end
-	return x, y
+function sg_bonus_get()
+--	-- 识别低星鬼王自动领取奖励
+--	local x, y = findColor({440, 100, 445, 250},
+--		"0|0|0xf2e5ad,248|17|0xf2e5b4,-138|104|0xad9f9a,392|104|0xaea09b,1|258|0x500c19",
+--		95, 0, 0, 0)
+--	if x > -1 then
+--		right_lower_click()
+--	end
+--	return x, y
 end
 
-function sg_bonus_exit() --
-	-- 退出超鬼王领赏
-	local x, y = findColor({991, 111, 993, 113},
-		"0|0|0xe8d4cf,-877|459|0xf4d4a5,-890|446|0x281918,-756|6|0x790606",
-		95, 0, 0, 0)
-	if x > -1 then
-		random_touch(0, x, y, 5, 5)
-	end
-	return x, y
+function sg_bonus_exit()
+--	-- 退出超鬼王领赏
+--	local x, y = findColor({991, 111, 993, 113},
+--		"0|0|0xe8d4cf,-877|459|0xf4d4a5,-890|446|0x281918,-756|6|0x790606",
+--		95, 0, 0, 0)
+--	if x > -1 then
+--		random_touch(0, x, y, 5, 5)
+--	end
+--	return x, y
 end
 
 function sg_fight_success()
@@ -392,6 +394,7 @@ function sg_fight_success()
 	end
 	return x, y
 end
+
 -- Main func
 function SuperGhost()
 	if sg_en == 0 then
@@ -567,12 +570,12 @@ function SuperGhost()
 			x, y = fight_failed() if (x > -1) then break end
 			-- 战斗胜利
 			x, y = sg_fight_success() if (x > -1) then break end
-			-- 妖灵溢出
-			x, y = sg_bonus_extra() if x > -1 then break end
-			-- 领取奖励
-			x, y = sg_bonus_get() if x > -1 then break end
-			-- 退出奖励
-			x, y = sg_bonus_exit() if x > -1 then break end
+--			-- 妖灵溢出
+--			x, y = sg_bonus_extra() if x > -1 then break end
+--			-- 领取奖励
+--			x, y = sg_bonus_get() if x > -1 then break end
+--			-- 退出奖励
+--			x, y = sg_bonus_exit() if x > -1 then break end
 			break
 		end
 	end

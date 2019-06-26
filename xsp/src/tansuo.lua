@@ -832,15 +832,13 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
-			-- 超鬼王
-			SuperGhost()
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then
-				x_, y_ = treasure_box()
-				if x_ > -1 then
-					break
-				end
+--				x_, y_ = treasure_box()
+--				if x_ > -1 then
+--					break
+--				end
 				if quit_end == 1 then
 					stop_buff()
 					lua_exit()
@@ -1013,6 +1011,8 @@ function tansuo_solo(sel, mark, hard, scene_move, section, count_mode, win_round
 				end
 				break
 			end
+			-- 超鬼王
+			SuperGhost()
 			-- 探索章节
 			x, y = lct_tansuo_portal()
 			if x > -1 then
@@ -1098,8 +1098,6 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
-			-- 超鬼王
-			SuperGhost()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 继续邀请
@@ -1119,10 +1117,10 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then
-				x_, y_ = treasure_box()
-				if x_ > -1 then
-					break
-				end
+--				x_, y_ = treasure_box()
+--				if x_ > -1 then
+--					break
+--				end
 				if quit_end == 1 then
 					stop_buff()
 					lua_exit()
@@ -1295,6 +1293,8 @@ function tansuo_captain(sel, mark, hard, scene_move, section, count_mode, win_ro
 				end
 				break
 			end
+			-- 超鬼王
+			SuperGhost()
 			-- 探索章节
 			x, y = lct_tansuo_portal()
 			if x > -1 then
@@ -1378,8 +1378,6 @@ function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos,
 			mSleep(500)
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
-			-- 超鬼王
-			SuperGhost()
 			-- 拒绝邀请
 			if quit_con == 1 or quit_end == 1 then
 				x, y = member_team_refuse_invite() if (x > -1) then mSleep(1000) break end
@@ -1409,13 +1407,15 @@ function tansuo_member(sel, mark, count_mode, win_round, sec_round, captain_pos,
 				end
 				break
 			end
+			-- 超鬼王
+			SuperGhost()
 			-- 探索
 			x, y = lct_tansuo()
 			if x > -1 then
-				x_, y_ = treasure_box()
-				if x_ > -1 then
-					break
-				end
+--				x_, y_ = treasure_box()
+--				if x_ > -1 then
+--					break
+--				end
 				if quit_end == 1 then
 					stop_buff()
 					lua_exit()

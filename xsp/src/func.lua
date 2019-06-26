@@ -950,8 +950,7 @@ function group_start()
 end
 
 function fight_ready()
-	local x, y
-	x, y = findColor({1036, 465, 1038, 487},
+	local x, y = findColor({1036, 465, 1038, 487},
 		"0|0|0xd3ae7b,-48|103|0xf0d8a9,49|79|0xdbaf73,48|67|0xc32912",
 		95, 0, 0, 0)
 	if x > -1 then
@@ -963,13 +962,13 @@ function fight_ready()
 end
 
 function fight_preset(index)
-	local x, y = findColor({1035, 596, 1039, 599}, -- 准备的鼓的棒槌
-		"0|0|0xe5c288,-62|17|0xebd19e,61|18|0xf0d8a9",
+	local x, y = findColor({1036, 465, 1038, 487},
+		"0|0|0xd3ae7b,-48|103|0xf0d8a9,49|79|0xdbaf73,48|67|0xc32912",
 		95, 0, 0, 0)
 	if (x > -1) then
 		HUD_show_or_hide(HUD,hud_info,string.format("使用预设队伍%d", index),20,"0xff000000","0xffffffff",0,100,0,300,32)
 		random_touch(0, 55, 610, 5, 5) -- 预设
-		random_sleep(250)
+		random_sleep(500)
 		if index == 1 then
 			random_touch(0, 230, 275, 50, 20) -- 队伍1
 		elseif index == 2 then
@@ -977,7 +976,7 @@ function fight_preset(index)
 		elseif index == 3 then
 			random_touch(0, 230, 485, 50, 20) -- 队伍3
 		end
-		random_sleep(250)
+		random_sleep(500)
 		random_touch(0, 230, 610, 20, 10) -- 出战
 		random_sleep(1000)
 		random_touch(0, 1040, 493, 30, 30) -- 准备的鼓

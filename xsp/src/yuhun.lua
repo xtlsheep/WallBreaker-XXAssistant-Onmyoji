@@ -145,17 +145,8 @@ function yuhun_solo(mark, level, round, lock)
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
 			mSleep(500)
-			-- 一回目
-			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1, level) break end
-			-- 二回目
-			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2, level) break end
-			-- 三回目
-			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
-			
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
-			-- 超鬼王
-			SuperGhost()
 			-- 拒绝组队
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -180,6 +171,8 @@ function yuhun_solo(mark, level, round, lock)
 				end
 				break
 			end
+			-- 超鬼王
+			SuperGhost()
 			-- 八岐大蛇
 			x, y = lct_8dashe()
 			if (x > -1) then
@@ -265,19 +258,12 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
 			mSleep(500)
-			-- 一回目
-			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1, level) break end
-			-- 二回目
-			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2, level) break end
-			-- 三回目
-			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
-			
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
-			-- 超鬼王
-			SuperGhost()
 			-- 拒绝邀请
 			if (wait_invite == 0) then x, y = member_team_refuse_invite() if (x > -1) then mSleep(1000) break end end
+			-- 超鬼王
+			ret = SuperGhost() if ret == RET_OK then wait_invite = 0 end
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then
@@ -427,17 +413,8 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 				x, y = captain_room_start_with_2_members() if (x > -1) then break end
 			end
 			mSleep(500)
-			-- 一回目
-			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1, level) break end
-			-- 二回目
-			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2, level) break end
-			-- 三回目
-			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
-			
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
-			-- 超鬼王
-			SuperGhost()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -511,6 +488,8 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = captain_room_create_public() if (x > -1) then break end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
+			-- 超鬼王
+			SuperGhost()
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then
@@ -577,17 +556,8 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
 			mSleep(500)
-			-- 一回目
-			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1, level) break end
-			-- 二回目
-			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2, level) break end
-			-- 三回目
-			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
-			
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
-			-- 超鬼王
-			SuperGhost()
 			-- 接受邀请
 			if wait_invite == 1 then
 				x, y, auto_grouped = member_team_accept_invite(member_auto_group) if (x > -1) then break end
@@ -648,6 +618,8 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			x, y = member_room_find_start() if (x > -1) then random_touch(0, 205, 535, 20, 10) break end -- 离开队伍
 			-- 离开确认
 			x, y = member_room_quit() if (x > -1) then break end
+			-- 超鬼王
+			SuperGhost()
 			-- 庭院
 			x, y = lct_tingyuan()
 			if x > -1 then
@@ -743,18 +715,8 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			if group == "固定队3人" then
 				x, y = captain_room_start_with_2_members() if (x > -1) then invite = 0 time_cnt = 0 break end
 			end
-			mSleep(500)
-			-- 一回目
-			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1, level) break end
-			-- 二回目
-			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2, level) break end
-			-- 三回目
-			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
-			
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
-			-- 超鬼王
-			SuperGhost()
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -870,6 +832,8 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			end
 			-- 庭院
 			x, y = lct_tingyuan() if (x > -1) then tingyuan_enter_tansuo() tingyuan_time_cnt = idle_at_tingyuan(tingyuan_time_cnt) break end
+			-- 超鬼王
+			SuperGhost()
 			-- 探索
 			x, y = lct_tansuo()
 			if (x > -1) then
