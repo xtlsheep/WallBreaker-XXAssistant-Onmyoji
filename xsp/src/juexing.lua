@@ -433,8 +433,8 @@ function juexing_group_wild_captain(element, mark, level, round, lock, captain_a
 			end
 			-- 胜利邀请
 			x, y = captain_team_win_invite()
-			if (x > -1 and win_invite == 1) then
-				if quit_end == 1 or quit_con == 1 then
+			if (x > -1) then
+				if quit_end == 1 or quit_con == 1 or win_invite == 0 then
 					random_touch(0, 460, 385, 20, 10)
 				else
 					random_touch(0, 674, 385, 20, 10)
@@ -713,8 +713,8 @@ function juexing_group_fix_captain(element, mark, level, round, lock, captain_au
 			end
 			-- 胜利邀请
 			x, y = captain_team_win_invite()
-			if (x > -1 and win_invite == 1) then
-				if quit_end == 1 then
+			if (x > -1) then
+				if quit_end == 1 or win_invite == 0 then
 					random_touch(0, 460, 385, 20, 10)
 				else
 					random_touch(0, 674, 385, 20, 10)

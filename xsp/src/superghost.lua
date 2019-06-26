@@ -275,7 +275,6 @@ function sg_switch_mode(mgt)
 	return
 end
 
---
 function sg_tired_detect()
 	-- 识别疲劳窗口
 	local x, y = findColor({565, 418, 568, 420},
@@ -457,8 +456,6 @@ function SuperGhost()
 				tired_op = nil
 				break
 			end
-			-- 征伐切换
-			x, y = lct_sg_zhengfa() if x > -1 then break end
 			-- 超鬼王页面
 			x, y = lct_sg_tuizhi()
 			random_sleep(1000)
@@ -552,12 +549,14 @@ function SuperGhost()
 			x, y = fight_failed() if (x > -1) then break end
 			-- 战斗胜利
 			x, y = sg_fight_success() if (x > -1) then break end
-			--			-- 妖灵溢出
-			--			x, y = sg_bonus_extra() if x > -1 then break end
-			--			-- 领取奖励
-			--			x, y = sg_bonus_get() if x > -1 then break end
-			--			-- 退出奖励
-			--			x, y = sg_bonus_exit() if x > -1 then break end
+			-- 征伐切换
+			x, y = lct_sg_zhengfa() if x > -1 then break end
+--			-- 妖灵溢出
+--			x, y = sg_bonus_extra() if x > -1 then break end
+--			-- 领取奖励
+--			x, y = sg_bonus_get() if x > -1 then break end
+--			-- 退出奖励
+--			x, y = sg_bonus_exit() if x > -1 then break end
 			break
 		end
 	end

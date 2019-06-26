@@ -476,8 +476,8 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			end
 			-- 胜利邀请
 			x, y = captain_team_win_invite()
-			if (x > -1 and win_invite == 1) then
-				if quit_end == 1 or quit_con == 1 then
+			if (x > -1) then
+				if quit_end == 1 or quit_con == 1 or win_invite == 0 then
 					random_touch(0, 460, 385, 20, 10)
 				else
 					random_touch(0, 674, 385, 20, 10)
@@ -770,8 +770,8 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			end
 			-- 胜利邀请
 			x, y = captain_team_win_invite()
-			if (x > -1 and win_invite == 1) then
-				if quit_end == 1 or quit_con == 1 then
+			if (x > -1) then
+				if quit_end == 1 or quit_con == 1 or win_invite == 0 then
 					random_touch(0, 460, 385, 20, 10)
 				else
 					random_touch(0, 674, 385, 20, 10)
