@@ -26,9 +26,9 @@ target_bar_50_y2 = {297, 415, 533}
 -- Util func
 function lct_sg_window()
 	-- 识别弹窗右侧固定图案
-	local x, y = findColor({335, 231, 337, 233},
+	local x, y = findColor({330, 200, 340, 450},
 		"0|0|0xd56349,37|-56|0x0b0a09,80|-27|0x15120a,90|-21|0xe0d8cf",
-		95, 0, 0, 0)
+		90, 0, 0, 0)
 	if x > -1 then
 		mSleep(500)
 		HUD_show_or_hide(HUD,hud_info,"发现超鬼王",20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -67,48 +67,48 @@ end
 function find_sg_6(index)
 	-- 识别6星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf5a432,-11|0|0xf5a432,11|0|0xf5a432,-22|0|0xf5a432,22|0|0xf5a432,-33|0|0xf5a432",
-		95, 0, 0, 0)
+		"0|0|0xf5a331,-11|0|0xf5a331,11|0|0xf5a331,-22|0|0xf5a331,22|0|0xf5a331,-33|0|0xf5a331",
+		80, 0, 0, 0)
 	return x, y
 end
 
 function find_sg_5(index)
 	-- 识别5星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf5a432,-11|0|0xf5a432,11|0|0xf5a432,-22|0|0xf5a432,22|0|0xf5a432",
-		95, 0, 0, 0)
+		"0|0|0xf5a331,-11|0|0xf5a331,11|0|0xf5a331,-22|0|0xf5a331,22|0|0xf5a331",
+		80, 0, 0, 0)
 	return x, y
 end
 
 function find_sg_4(index)
 	-- 识别4星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf5a432,-11|0|0xf5a432,11|0|0xf5a432,-22|0|0xf5a432",
-		95, 0, 0, 0)
+		"0|0|0xf5a331,-11|0|0xf5a331,11|0|0xf5a331,-22|0|0xf5a331",
+		80, 0, 0, 0)
 	return x, y
 end
 
 function find_sg_3(index)
 	-- 识别3星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf5a432,-11|0|0xf5a432,11|0|0xf5a432",
-		95, 0, 0, 0)
+		"0|0|0xf5a331,-11|0|0xf5a331,11|0|0xf5a331",
+		80, 0, 0, 0)
 	return x, y
 end
 
 function find_sg_2(index)
 	-- 识别2星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf5a432,-11|0|0xf5a432",
-		95, 0, 0, 0)
+		"0|0|0xf5a331,-11|0|0xf5a331",
+		80, 0, 0, 0)
 	return x, y
 end
 
 function find_sg_1(index)
 	-- 识别1星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf5a432",
-		95, 0, 0, 0)
+		"0|0|0xf5a331",
+		80, 0, 0, 0)
 	return x, y
 end
 
@@ -158,7 +158,7 @@ function find_sg_50(index)
 	-- 识别50%刻度血条
 	local x, y = findColor({target_bar_50_x1[index], target_bar_50_y1[index], target_bar_50_x2[index], target_bar_50_y2[index]},
 		"0|0|0xf8f3e0,-1|-20|0x74727d,180|1|0xe4602f",
-		95, 0, 0, 0)
+		80, 0, 0, 0)
 	if x > -1 then
 		return RET_OK
 	end
@@ -197,7 +197,7 @@ function sg_mark(last_mark)
 		return "Boss"
 	elseif sg_mark_sel[1] == 0 and sg_mark_sel[2] == 1 then
 		x, y = findColor({600, 190, 605, 220}, -- 丑女血条
-			"0|0|0xaf0d0a,2|0|0xb10e0b,4|0|0xb30e0b,-569|-168|0xd6c4a1,-582|-176|0x211b0f",
+			"0|0|0xa80f0f,1|0|0xa80f0f,2|0|0xa80f0f,3|0|0xa80f0f,4|0|0xa80f0f",
 			80, 0, 0, 0)
 		if x > -1 then
 			x_, y_ = findColor({610, 140, 660, 170}, -- 箭头
@@ -219,7 +219,7 @@ function sg_mark(last_mark)
 			return "草人"
 		end
 		x, y = findColor({600, 190, 605, 220}, -- 丑女血条
-			"0|0|0xaf0d0a,2|0|0xb10e0b,4|0|0xb30e0b,-569|-168|0xd6c4a1,-582|-176|0x211b0f",
+			"0|0|0xa80f0f,1|0|0xa80f0f,2|0|0xa80f0f,3|0|0xa80f0f,4|0|0xa80f0f",
 			80, 0, 0, 0)
 		if x > -1 and last_mark ~= "草人" then
 			for i = 1, cnt do
@@ -362,12 +362,17 @@ function sg_fight_success()
 		return x, y
 	end
 	
+	local x_, y_
 	local x, y = success_drum()
 	local cnt = math.random(8, 10)
 	
 	if x > -1 then
 		HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
 		for i = 1, cnt do
+			x_, y_ = success_drum()
+			if x_ == -1 then
+				return x, y
+			end
 			loop_generic()
 			right_lower_click()
 			random_sleep(25)
@@ -415,8 +420,6 @@ function SuperGhost()
 			mSleep(500)
 			-- 循环通用
 			loop_generic()
-			-- 断线结束战斗
-			disconn_dur_fight()
 			-- 弹窗
 			x, y = lct_sg_window() if x > -1 then break end
 			-- 拒绝组队
@@ -525,8 +528,8 @@ function SuperGhost()
 				if (sg_curr == 0) then
 					if sg_keep == 1 then
 						-- 超鬼王Portal进入时保持超鬼王函数持续运行
-						HUD_show_or_hide(HUD,hud_info,"等待5分钟",20,"0xff000000","0xffffffff",0,100,0,300,32)
-						mSleep(5*60*1000)
+						HUD_show_or_hide(HUD,hud_info,"等待1分钟",20,"0xff000000","0xffffffff",0,100,0,300,32)
+						mSleep(60*1000)
 					else
 						-- No valid超鬼王, 退出函数
 						random_touch(0, 35, 40, 10, 10) -- 左上退出
@@ -551,12 +554,12 @@ function SuperGhost()
 			x, y = sg_fight_success() if (x > -1) then break end
 			-- 征伐切换
 			x, y = lct_sg_zhengfa() if x > -1 then break end
---			-- 妖灵溢出
---			x, y = sg_bonus_extra() if x > -1 then break end
---			-- 领取奖励
---			x, y = sg_bonus_get() if x > -1 then break end
---			-- 退出奖励
---			x, y = sg_bonus_exit() if x > -1 then break end
+			--			-- 妖灵溢出
+			--			x, y = sg_bonus_extra() if x > -1 then break end
+			--			-- 领取奖励
+			--			x, y = sg_bonus_get() if x > -1 then break end
+			--			-- 退出奖励
+			--			x, y = sg_bonus_exit() if x > -1 then break end
 			break
 		end
 	end

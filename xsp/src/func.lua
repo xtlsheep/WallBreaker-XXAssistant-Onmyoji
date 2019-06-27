@@ -1054,28 +1054,28 @@ function fight_ongoing()
 	local function fight_6p()
 		local x, y = findColor({27, 36, 29, 38},
 			"0|0|0xd6c4a1,450|596|0xffffff,452|589|0x03b9ea,466|586|0x281918",
-			95, 0, 0, 0)
+			80, 0, 0, 0)
 		return x
 	end
 	
 	local function fight_4p()
 		local x, y = findColor({27, 36, 29, 38},
 			"0|0|0xd6c4a1,652|596|0xffffff,655|589|0x03b8e9,669|586|0x281918",
-			95, 0, 0, 0)
+			80, 0, 0, 0)
 		return x
 	end
 	
 	local function fight_3p()
 		local x, y = findColor({27, 36, 29, 38},
 			"0|0|0xd6c4a1,754|596|0xffffff,756|589|0x03b9e9,769|586|0x281918",
-			95, 0, 0, 0)
+			80, 0, 0, 0)
 		return x
 	end
 	
 	local function fight_2p()
 		local x, y = findColor({27, 36, 29, 38},
 			"0|0|0xd6c4a1,855|596|0xffffff,857|589|0x03b9e9,870|586|0x281918",
-			95, 0, 0, 0)
+			80, 0, 0, 0)
 		return x
 	end
 	
@@ -1094,7 +1094,7 @@ function fight_ongoing()
 		end
 		local x, y = findColor({35, 514, 37, 516}, -- 指南针
 			"0|0|0x29211b,-6|3|0xd3ad6a,-3|8|0x9c652b,6|-6|0xa97534,0|-6|0xd8b773",
-			95, 0, 0, 0)
+			90, 0, 0, 0)
 		if (x > -1) then
 			random_touch(0, x, y, 10, 10) -- 指南针
 		end

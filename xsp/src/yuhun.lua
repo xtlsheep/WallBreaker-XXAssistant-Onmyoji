@@ -94,12 +94,10 @@ function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, f
 	print_global_config()
 	
 	local ret = 0
-	local win_invite = 1
 	
 	if sg_en == 1 then
 		member_auto_group = 0
 		captain_auto_group = 0
-		win_invite = 0
 	end
 	
 	if buff_start == 1 then
@@ -115,11 +113,11 @@ function yuhun(mode, role, group, mark, level, round, lock, member_auto_group, f
 		elseif (mode == "组队" and role == "队员" and group == "野队") then
 			ret = yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fail_and_group, member_to_captain)
 		elseif (mode == "组队" and role == "队长" and (group == "野队2人" or group == "野队3人")) then
-			ret = yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, fail_and_recreate, group, win_invite)
+			ret = yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, fail_and_recreate, group)
 		elseif (mode == "组队" and role == "队员" and group == "固定队") then
 			ret = yuhun_group_fix_member(mark, level, round, member_auto_group, member_to_captain)
 		elseif (mode == "组队" and role == "队长" and (group == "固定队2人" or group == "固定队3人")) then
-			ret = yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group, limitation, win_invite)
+			ret = yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group, limitation)
 		end
 		
 		if ret ~= RET_RECONN then
@@ -147,6 +145,13 @@ function yuhun_solo(mark, level, round, lock)
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
 			mSleep(500)
+			-- 一回目
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1, level) break end
+			-- 二回目
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2, level) break end
+			-- 三回目
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
+			
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 拒绝组队
@@ -260,6 +265,13 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
 			mSleep(500)
+			-- 一回目
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1, level) break end
+			-- 二回目
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2, level) break end
+			-- 三回目
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
+			
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 拒绝邀请
@@ -388,7 +400,7 @@ function yuhun_group_wild_member(mark, level, round, lock, member_auto_group, fa
 	return RET_ERR
 end
 
-function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, fail_and_recreate, group, win_invite)
+function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, fail_and_recreate, group)
 	local tingyuan_time_cnt = 0
 	local tansuo_time_cnt = 0
 	local quit_end = 0
@@ -407,6 +419,15 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2, level) break end
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
+			mSleep(500)
+			-- 一回目
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1, level) break end
+			-- 二回目
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2, level) break end
+			-- 三回目
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
+			-- 循环通用
+			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 开始战斗
 			if group == "野队2人" then
 				x, y = captain_room_start_with_1_members() if (x > -1) then break end
@@ -414,9 +435,6 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			if group == "野队3人" then
 				x, y = captain_room_start_with_2_members() if (x > -1) then break end
 			end
-			mSleep(500)
-			-- 循环通用
-			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -477,7 +495,7 @@ function yuhun_group_wild_captain(mark, level, round, lock, captain_auto_group, 
 			-- 胜利邀请
 			x, y = captain_team_win_invite()
 			if (x > -1) then
-				if quit_end == 1 or quit_con == 1 or win_invite == 0 then
+				if quit_end == 1 or quit_con == 1 then
 					random_touch(0, 460, 385, 20, 10)
 				else
 					random_touch(0, 674, 385, 20, 10)
@@ -558,6 +576,13 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
 			mSleep(500)
+			-- 一回目
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1, level) break end
+			-- 二回目
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2, level) break end
+			-- 三回目
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
+			
 			-- 循环通用
 			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 接受邀请
@@ -678,7 +703,7 @@ function yuhun_group_fix_member(mark, level, round, member_auto_group, member_to
 	return RET_ERR
 end
 
-function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group, limitation, win_invite)
+function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, captain_auto_invite, auto_invite_zone, group, limitation)
 	local time_cnt = 0
 	local invite = 1
 	local tingyuan_time_cnt = 0
@@ -710,6 +735,16 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2, level) break end
 			-- 三回目
 			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
+			mSleep(500)
+			-- 一回目
+			x, y = round_one() if (x > -1) then yuhun_mark(mark[1], 1, level) break end
+			-- 二回目
+			x, y = round_two() if (x > -1) then yuhun_mark(mark[2], 2, level) break end
+			-- 三回目
+			x, y = round_three() if (x > -1) then yuhun_mark(mark[3], 3, level) break end
+			
+			-- 循环通用
+			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 开始战斗
 			if group == "固定队2人" then
 				x, y = captain_room_start_with_1_members() if (x > -1) then invite = 0 time_cnt = 0 break end
@@ -717,8 +752,6 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			if group == "固定队3人" then
 				x, y = captain_room_start_with_2_members() if (x > -1) then invite = 0 time_cnt = 0 break end
 			end
-			-- 循环通用
-			ret = loop_generic() if ret == RET_RECONN then return RET_RECONN end
 			-- 拒绝邀请
 			x, y = member_team_refuse_invite() if (x > -1) then break end
 			-- 战斗准备
@@ -771,7 +804,7 @@ function yuhun_group_fix_captain(mark, level, round, lock, captain_auto_group, c
 			-- 胜利邀请
 			x, y = captain_team_win_invite()
 			if (x > -1) then
-				if quit_end == 1 or quit_con == 1 or win_invite == 0 then
+				if quit_end == 1 or quit_con == 1 then
 					random_touch(0, 460, 385, 20, 10)
 				else
 					random_touch(0, 674, 385, 20, 10)
