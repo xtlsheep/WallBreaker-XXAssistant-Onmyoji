@@ -265,49 +265,49 @@ function global_UI()
 	UI:ComboBox(global_super_ghost_page, "sg_force", ">= 1星,>= 2星,>= 3星,>= 4星,>= 5星,      6星,不开启","4",23,"600,80,380,50")
 	-- 6星
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "6星设置 - ", "20,140,140,60")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>50%", "160,140,160,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>40%", "160,140,160,60")
 	UI:ComboBox(global_super_ghost_page, "sg_high_6", "默认,①队,②队,③队,响铃,公开","0",23,"330,140,150,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<50%", "470,140,100,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<40%", "470,140,100,60")
 	UI:ComboBox(global_super_ghost_page, "sg_low_6", "默认,①队,②队,③队,响铃,公开","0",23,"570,140,150,50")
 	UI:Label(global_super_ghost_page, "center", "0,0,0", 30, "]   疲劳", "720,140,100,60")
 	UI:ComboBox(global_super_ghost_page, "sg_tired_6", "公开,等待,喝茶,响铃","2",23,"820,140,150,50")
 	-- 5星
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "5星设置 - ", "20,200,140,60")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>50%", "160,200,160,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>40%", "160,200,160,60")
 	UI:ComboBox(global_super_ghost_page, "sg_high_5", "默认,①队,②队,③队,响铃,公开","0",23,"330,200,150,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<50%", "470,200,100,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<40%", "470,200,100,60")
 	UI:ComboBox(global_super_ghost_page, "sg_low_5", "默认,①队,②队,③队,响铃,公开","0",23,"570,200,150,50")
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "720,200,100,60")
 	UI:ComboBox(global_super_ghost_page, "sg_tired_5", "公开,等待,喝茶,响铃","2",23,"820,200,150,50")
 	-- 4星
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "4星设置 - ", "20,260,140,60")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>50%", "160,260,160,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>40%", "160,260,160,60")
 	UI:ComboBox(global_super_ghost_page, "sg_high_4", "默认,①队,②队,③队,响铃,集结","0",23,"330,260,150,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<50%", "470,260,100,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<40%", "470,260,100,60")
 	UI:ComboBox(global_super_ghost_page, "sg_low_4", "默认,①队,②队,③队,响铃,集结","0",23,"570,260,150,50")
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "720,260,100,60")
 	UI:ComboBox(global_super_ghost_page, "sg_tired_4", "集结,等待,喝茶,响铃","0",23,"820,260,150,50")
 	-- 3星
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "3星设置 - ", "20,320,140,60")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>50%", "160,320,160,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>40%", "160,320,160,60")
 	UI:ComboBox(global_super_ghost_page, "sg_high_3", "默认,①队,②队,③队,响铃,集结","0",23,"330,320,150,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<50%", "470,320,100,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<40%", "470,320,100,60")
 	UI:ComboBox(global_super_ghost_page, "sg_low_3", "默认,①队,②队,③队,响铃,集结","0",23,"570,320,150,50")
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "720,320,100,60")
 	UI:ComboBox(global_super_ghost_page, "sg_tired_3", "集结,等待,喝茶,响铃","0",23,"820,320,150,50")
 	-- 2星
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "2星设置 - ", "20,380,140,60")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>50%", "160,380,160,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>40%", "160,380,160,60")
 	UI:ComboBox(global_super_ghost_page, "sg_high_2", "默认,①队,②队,③队,响铃,集结","0",23,"330,380,150,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<50%", "470,380,100,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<40%", "470,380,100,60")
 	UI:ComboBox(global_super_ghost_page, "sg_low_2", "默认,①队,②队,③队,响铃,集结","0",23,"570,380,150,50")
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "720,380,100,60")
 	UI:ComboBox(global_super_ghost_page, "sg_tired_2", "集结,等待,喝茶,响铃","1",23,"820,380,150,50")
 	-- 1星
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "1星设置 - ", "20,440,140,60")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>50%", "160,440,160,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "血量[>40%", "160,440,160,60")
 	UI:ComboBox(global_super_ghost_page, "sg_high_1", "默认,①队,②队,③队,响铃,集结","0",23,"330,440,150,50")
-	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<50%", "470,440,100,60")
+	UI:Label(global_super_ghost_page, "right", "0,0,0", 30, "<40%", "470,440,100,60")
 	UI:ComboBox(global_super_ghost_page, "sg_low_1", "默认,①队,②队,③队,响铃,集结","0",23,"570,440,150,50")
 	UI:Label(global_super_ghost_page, "left", "0,0,0", 30, "]   疲劳", "720,440,100,60")
 	UI:ComboBox(global_super_ghost_page, "sg_tired_1", "集结,等待,喝茶,响铃","1",23,"820,440,150,50")
@@ -552,7 +552,7 @@ function global_UI()
 		end
 	end
 	
-	-- >50%
+	-- >40%
 	if res_global.sg_high_6 == "0" then sg_high[6] = "默认"
 	elseif res_global.sg_high_6 == "1" then sg_high[6] = "预设1"
 	elseif res_global.sg_high_6 == "2" then sg_high[6] = "预设2"
@@ -595,7 +595,7 @@ function global_UI()
 	elseif res_global.sg_high_1 == "4" then sg_high[1] = "响铃"
 	elseif res_global.sg_high_1 == "5" then sg_high[1] = "集结" end
 	
-	-- <50%
+	-- <40%
 	if res_global.sg_low_6 == "0" then sg_low[6] = "默认"
 	elseif res_global.sg_low_6 == "1" then sg_low[6] = "预设1"
 	elseif res_global.sg_low_6 == "2" then sg_low[6] = "预设2"

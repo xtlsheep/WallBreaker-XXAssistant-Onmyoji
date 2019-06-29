@@ -13,15 +13,15 @@ sg_low = {0, 0, 0, 0, 0, 0} -- 低血量操作
 
 -- Def
 -- 3个横排区域中心勾玉范围 x1,y1,x2,y2
-mgt_find_x1 = {95, 95, 95}
-mgt_find_y1 = {264, 382, 500}
-mgt_find_x2 = {115, 115, 115}
-mgt_find_y2 = {268, 386, 504}
+mgt_find_x1 = {100, 100, 100}
+mgt_find_y1 = {255, 375, 395}
+mgt_find_x2 = {120, 120, 120}
+mgt_find_y2 = {270, 390, 410}
 -- 3个横排区域50%找色范围
-target_bar_50_x1 = {73, 73, 73}
-target_bar_50_y1 = {295, 413, 531}
-target_bar_50_x2 = {75, 75, 75}
-target_bar_50_y2 = {297, 415, 533}
+target_bar_50_x1 = {72, 72, 72}
+target_bar_50_y1 = {290, 410, 530}
+target_bar_50_x2 = {76, 76, 76}
+target_bar_50_y2 = {300, 420, 540}
 
 -- Util func
 function lct_sg_window()
@@ -59,7 +59,7 @@ end
 function lct_sg_group()
 	-- 识别集结页面
 	local x, y = findColor({843, 56, 845, 58},
-		"0|0|0xf9e0d7,-572|11|0xe5748d,-156|457|0xf4b25f,-536|32|0xd5bcac",
+		"0|0|0xf9ded1,-573|12|0xe16f88,-527|17|0xeac89e,-157|456|0xf3b25e",
 		95, 0, 0, 0)
 	return x, y
 end
@@ -67,48 +67,48 @@ end
 function find_sg_6(index)
 	-- 识别6星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf5a331,-11|0|0xf5a331,11|0|0xf5a331,-22|0|0xf5a331,22|0|0xf5a331,-33|0|0xf5a331",
-		80, 0, 0, 0)
+		"0|0|0xf46638,-5|0|0xd64038,-11|0|0xf46638,-16|0|0xd64038,11|0|0xf46638,6|0|0xd64038,-22|0|0xf46638,-27|0|0xd64038,22|0|0xf46638,17|0|0xd64038,-33|0|0xf46638,-38|0|0xd64038",
+		90, 0, 0, 0)
 	return x, y
 end
 
 function find_sg_5(index)
 	-- 识别5星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf5a331,-11|0|0xf5a331,11|0|0xf5a331,-22|0|0xf5a331,22|0|0xf5a331",
-		80, 0, 0, 0)
+		"0|0|0xf46638,-5|0|0xd64038,-11|0|0xf46638,-16|0|0xd64038,11|0|0xf46638,6|0|0xd64038,-22|0|0xf46638,-27|0|0xd64038,22|0|0xf46638,17|0|0xd64038",
+		90, 0, 0, 0)
 	return x, y
 end
 
 function find_sg_4(index)
 	-- 识别4星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf5a331,-11|0|0xf5a331,11|0|0xf5a331,-22|0|0xf5a331",
-		80, 0, 0, 0)
+		"0|0|0xf46638,-5|0|0xd64038,-11|0|0xf46638,-16|0|0xd64038,11|0|0xf46638,6|0|0xd64038,-22|0|0xf46638,-27|0|0xd64038",
+		90, 0, 0, 0)
 	return x, y
 end
 
 function find_sg_3(index)
 	-- 识别3星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf5a331,-11|0|0xf5a331,11|0|0xf5a331",
-		80, 0, 0, 0)
+		"0|0|0xf46638,-5|0|0xd64038,-11|0|0xf46638,-16|0|0xd64038,11|0|0xf46638,6|0|0xd64038",
+		90, 0, 0, 0)
 	return x, y
 end
 
 function find_sg_2(index)
 	-- 识别2星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf5a331,-11|0|0xf5a331",
-		80, 0, 0, 0)
+		"0|0|0xf46638,-5|0|0xd64038,-11|0|0xf46638,-16|0|0xd64038",
+		90, 0, 0, 0)
 	return x, y
 end
 
 function find_sg_1(index)
 	-- 识别1星
 	local x, y = findColor({mgt_find_x1[index], mgt_find_y1[index], mgt_find_x2[index], mgt_find_y2[index]},
-		"0|0|0xf5a331",
-		80, 0, 0, 0)
+		"0|0|0xf76936,-5|0|0xd54038",
+		90, 0, 0, 0)
 	return x, y
 end
 
@@ -154,11 +154,11 @@ function find_sg_mgt(index)
 	return x, y, 0
 end
 
-function find_sg_50(index)
-	-- 识别50%刻度血条
+function find_sg_40(index)
+	-- 识别40%刻度血条
 	local x, y = findColor({target_bar_50_x1[index], target_bar_50_y1[index], target_bar_50_x2[index], target_bar_50_y2[index]},
-		"0|0|0xf8f3e0,-1|-20|0x74727d,180|1|0xe4602f",
-		80, 0, 0, 0)
+		"0|0|0xf8f3e0,6|-5|0xd54129,140|2|0xdd5732",
+		90, 0, 0, 0)
 	if x > -1 then
 		return RET_OK
 	end
@@ -168,7 +168,7 @@ end
 function find_sg_tb(index, sg_curr)
 	-- 判断高/低血量, 返回操作string
 	local ret_50
-	ret_50 = find_sg_50(index)
+	ret_50 = find_sg_40(index)
 	
 	if ret_50 == RET_OK then
 		HUD_show_or_hide(HUD,hud_info,string.format("高血量 - 执行 %s", sg_high[sg_curr]),20,"0xff000000","0xffffffff",0,100,0,300,32)
@@ -313,12 +313,38 @@ function sg_group_invite()
 	random_touch(0, 690, 510, 20, 10) -- 邀请
 end
 
---
 function sg_group_public()
 	-- 5/6星鬼王公开
 	random_touch(0, 450, 510, 20, 10) -- 公开
 	random_sleep(500)
 	random_touch(0, 670, 375, 30, 10) -- 确认
+end
+
+function sg_fight_success()
+	function success_drum()
+		local x, y = findColor({421, 75, 430, 145},
+			"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
+			95, 0, 0, 0)
+		return x, y
+	end
+	
+	local x_, y_
+	local x, y = success_drum()
+	local cnt = math.random(8, 10)
+	
+	if x > -1 then
+		HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
+		for i = 1, cnt do
+			x_, y_ = success_drum()
+			if x_ == -1 then
+				return x, y
+			end
+			loop_generic()
+			right_lower_click()
+			random_sleep(25)
+		end
+	end
+	return x, y
 end
 
 function sg_bonus_extra()
@@ -352,33 +378,6 @@ function sg_bonus_exit()
 	--		random_touch(0, x, y, 5, 5)
 	--	end
 	--	return x, y
-end
-
-function sg_fight_success()
-	function success_drum()
-		local x, y = findColor({421, 75, 430, 145},
-			"0|0|0x821c12,-24|43|0x9c1c12,27|40|0x9a1c12,297|26|0xd6be8d",
-			95, 0, 0, 0)
-		return x, y
-	end
-	
-	local x_, y_
-	local x, y = success_drum()
-	local cnt = math.random(8, 10)
-	
-	if x > -1 then
-		HUD_show_or_hide(HUD,hud_info,"战斗胜利",20,"0xff000000","0xffffffff",0,100,0,300,32)
-		for i = 1, cnt do
-			x_, y_ = success_drum()
-			if x_ == -1 then
-				return x, y
-			end
-			loop_generic()
-			right_lower_click()
-			random_sleep(25)
-		end
-	end
-	return x, y
 end
 
 -- Main func
@@ -554,12 +553,12 @@ function SuperGhost()
 			x, y = sg_fight_success() if (x > -1) then break end
 			-- 征伐切换
 			x, y = lct_sg_zhengfa() if x > -1 then break end
-			--			-- 妖灵溢出
-			--			x, y = sg_bonus_extra() if x > -1 then break end
-			--			-- 领取奖励
-			--			x, y = sg_bonus_get() if x > -1 then break end
-			--			-- 退出奖励
-			--			x, y = sg_bonus_exit() if x > -1 then break end
+			-- 妖灵溢出
+			--x, y = sg_bonus_extra() if x > -1 then break end
+			-- 领取奖励
+			--x, y = sg_bonus_get() if x > -1 then break end
+			-- 退出奖励
+			--x, y = sg_bonus_exit() if x > -1 then break end
 			break
 		end
 	end
